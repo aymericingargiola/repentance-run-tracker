@@ -1,0 +1,346 @@
+{
+    "curses": [
+        {
+            "id": "Curse of the Labyrinth!"
+        },
+        {
+            "id": "Curse of the Lost!"
+        },
+        {
+            "id": "Curse of Darkness!"
+        },
+        {
+            "id": "Curse of Maze"
+        },
+        {
+            "id": "Curse of Blind"
+        },
+        {
+            "id": "Curse of the Unknown"
+        }
+    ],
+    "stages": [
+        {
+            "id": "1.0",
+            "igId": "1",
+            "name": "Basement 1",
+            "group": "basement",
+            "shortName": "B1"
+        },
+        {
+            "id": "1.1",
+            "igId": "1a",
+            "name": "Cellar 1",
+            "group": "cellar",
+            "shortName": "B1[CE]"
+        },
+        {
+            "id": "1.2",
+            "igId": "1b",
+            "name": "Burning Basement 1",
+            "group": "burning basement",
+            "shortName": "B1[BB]"
+        },
+        {
+            "id": "1.4",
+            "igId": "1c",
+            "name": "Downpour 1",
+            "group": "downpour",
+            "shortName": "B1[DP]"
+        },
+        {
+            "id": "1.5",
+            "igId": "1d",
+            "name": "Dross 1",
+            "group": "dross",
+            "shortName": "B1[DR]"
+        },
+        {
+            "id": "2.0",
+            "igId": "2",
+            "name": "Basement 2",
+            "group": "basement",
+            "shortName": "B2"
+        },
+        {
+            "id": "2.1",
+            "igId": "2a",
+            "name": "Cellar 2",
+            "group": "cellar",
+            "shortName": "B2[CE]"
+        },
+        {
+            "id": "2.2",
+            "igId": "2b",
+            "name": "Burning Basement 2",
+            "group": "burning basement",
+            "shortName": "B2[BB]"
+        },
+        {
+            "id": "2.4",
+            "igId": "2c",
+            "name": "Downpour 2",
+            "group": "downpour",
+            "shortName": "B2[DP]"
+        },
+        {
+            "id": "2.5",
+            "igId": "2d",
+            "name": "Dross 2",
+            "group": "dross",
+            "shortName": "B2[DR]"
+        },
+        {
+            "id": "3.0",
+            "igId": "3",
+            "name": "Caves 1",
+            "group": "caves",
+            "shortName": "C1"
+        },
+        {
+            "id": "3.1",
+            "igId": "3a",
+            "name": "Catacombs 1",
+            "group": "catacombs",
+            "shortName": "C1[CC]"
+        },
+        {
+            "id": "3.2",
+            "igId": "3b",
+            "name": "Flooded Caves 1",
+            "group": "flooded caves",
+            "shortName": "C1[FC]"
+        },
+        {
+            "id": "3.4",
+            "igId": "3c",
+            "name": "Mines 1",
+            "group": "mines",
+            "shortName": "C1[MI]"
+        },
+        {
+            "id": "3.5",
+            "igId": "3d",
+            "name": "Ashpit 1",
+            "group": "ashpit",
+            "shortName": "C1[AS]"
+        },
+        {
+            "id": "4.0",
+            "igId": "4",
+            "name": "Caves 2",
+            "group": "caves",
+            "shortName": "C2"
+        },
+        {
+            "id": "4.1",
+            "igId": "4a",
+            "name": "Catacombs 2",
+            "group": "catacombs",
+            "shortName": "C2[CC]"
+        },
+        {
+            "id": "4.2",
+            "igId": "4b",
+            "name": "Flooded Caves 2",
+            "group": "flooded caves",
+            "shortName": "C2[FC]"
+        },
+        {
+            "id": "4.4",
+            "igId": "4c",
+            "name": "Mines 2",
+            "group": "mines",
+            "shortName": "C2[MI]"
+        },
+        {
+            "id": "4.5",
+            "igId": "4d",
+            "name": "Ashpit 2",
+            "group": "ashpit",
+            "shortName": "C2[AS]"
+        },
+        {
+            "id": "5.0",
+            "igId": "5",
+            "name": "Depths 1",
+            "group": "depths",
+            "shortName": "D1"
+        },
+        {
+            "id": "5.1",
+            "igId": "5a",
+            "name": "Necropolis 1",
+            "group": "necropolis",
+            "shortName": "D1[NE]"
+        },
+        {
+            "id": "5.2",
+            "igId": "5b",
+            "name": "Dank Depths 1",
+            "group": "dank depths",
+            "shortName": "D1[DP]"
+        },
+        {
+            "id": "5.4",
+            "igId": "5c",
+            "name": "Mausoleum 1",
+            "group": "mausoleum",
+            "shortName": "D1[MA]"
+        },
+        {
+            "id": "5.5",
+            "igId": "5d",
+            "name": "Gehenna 1",
+            "group": "gehenna",
+            "shortName": "D1[GE]"
+        },
+        {
+            "id": "6.0",
+            "igId": "6",
+            "name": "Depths 2",
+            "group": "depths",
+            "shortName": "D2"
+        },
+        {
+            "id": "6.1",
+            "igId": "6a",
+            "name": "Necropolis 2",
+            "group": "necropolis",
+            "shortName": "D2[NE]"
+        },
+        {
+            "id": "6.2",
+            "igId": "6b",
+            "name": "Dank Depths 2",
+            "group": "dank depths",
+            "shortName": "D2[DP]"
+        },
+        {
+            "id": "6.4",
+            "igId": "6c",
+            "name": "Mausoleum 2",
+            "group": "mausoleum",
+            "shortName": "D2[MA]"
+        },
+        {
+            "id": "6.5",
+            "igId": "6d",
+            "name": "Gehenna 1",
+            "group": "gehenna",
+            "shortName": "D2[GE]"
+        },
+        {
+            "id": "7.0",
+            "igId": "7",
+            "name": "Womb 1",
+            "group": "womb",
+            "shortName": "W1"
+        },
+        {
+            "id": "7.1",
+            "igId": "7a",
+            "name": "Utero 1",
+            "group": "utero",
+            "shortName": "W1[UT]"
+        },
+        {
+            "id": "7.2",
+            "igId": "7b",
+            "name": "Scarred Womb 1",
+            "group": "scarred womb",
+            "shortName": "W1[SW]"
+        },
+        {
+            "id": "7.4",
+            "igId": "7c",
+            "name": "Corpse 1",
+            "group": "corpse",
+            "shortName": "W1[CO]"
+        },
+        {
+            "id": "8.0",
+            "igId": "8",
+            "name": "Womb 2",
+            "group": "womb",
+            "shortName": "W2"
+        },
+        {
+            "id": "8.1",
+            "igId": "8a",
+            "name": "Utero 2",
+            "group": "utero",
+            "shortName": "W2[UT]"
+        },
+        {
+            "id": "8.2",
+            "igId": "8b",
+            "name": "Scarred Womb 2",
+            "group": "scarred womb",
+            "shortName": "W2[SW]"
+        },
+        {
+            "id": "8.4",
+            "igId": "8c",
+            "name": "Corpse 2",
+            "group": "corpse",
+            "shortName": "W2[CO]"
+        },
+        {
+            "id": "9.0",
+            "igId": "9",
+            "name": "Hush",
+            "group": "hush",
+            "shortName": "H"
+        },
+        {
+            "id": "10.0",
+            "igId": "10",
+            "name": "Sheol",
+            "group": "sheol",
+            "shortName": "SH"
+        },
+        {
+            "id": "10.1",
+            "igId": "10a",
+            "name": "Cathedral",
+            "group": "cathedral",
+            "shortName": "CT"
+        },
+        {
+            "id": "11.0",
+            "igId": "11",
+            "name": "Dark Room",
+            "group": "dark room",
+            "shortName": "DR"
+        },
+        {
+            "id": "11.1",
+            "igId": "11a",
+            "name": "Chest",
+            "group": "chest",
+            "shortName": "CH"
+        },
+        {
+            "id": "12.0",
+            "igId": "12",
+            "name": "The Void",
+            "group": "the void",
+            "shortName": "VO"
+        },
+        {
+            "id": "13.0",
+            "igId": "13",
+            "name": "Home",
+            "group": "home",
+            "shortName": "HO"
+        },
+        {
+            "id": "13.1",
+            "igId": "13a",
+            "name": "Home",
+            "group": "home",
+            "shortName": "HO"
+        }
+    ]
+}
