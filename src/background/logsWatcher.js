@@ -96,13 +96,15 @@ function isSameRun(seed) {
     //if (!firstInit) firstInit = true
     //if (backToMenu) backToMenu = false
     return runs.find(function(run, i) {
-        console.log(`compare run ${run.seed} with current ${seed} : [${run.gameState} <-> ${currentGameState}] -> [${run.floors[0].name} <-> ${currentFloor.name}] -> [${run.floors[0].curse} <-> ${currentFloor.curse}] -> [compare ${run.character.name} <-> ${currentCharater.name}], run end: ${run.runEnd.date}`)
+        console.log(`compare run ${run.seed} id with current ${seed} id : compare run ${run.id} with current ${currentRun.id}`)
+        if (currentRun.id === run.id) {
+            return true
+        }
+        console.log(`compare run ${run.seed} with current ${seed} : [${run.gameState} <-> ${currentGameState}] -> [compare ${run.character.name} <-> ${currentCharater.name}], run end: ${run.runEnd.date}`)
         if (
             run.runEnd.date === null &&
             run.seed === seed &&
             run.gameState === currentGameState &&
-            run.floors[0].name === currentFloor.name &&
-            run.floors[0].curse === currentFloor.curse &&
             run.character.name === currentCharater.name
             ) {
                 console.log("Same run")
@@ -120,6 +122,7 @@ async function updateRun(params = {}) {
         console.log('Seed exists, check...')
         if(sameRun.runEnd.date === null) {
             console.log('Update current run...')
+            if(currentRun.id === undefined) currentRun.id = sameRun.id
             switch (params.trigger) {
                 case 'level init':
                     sameRun.floors.push(currentFloor)
@@ -165,8 +168,9 @@ async function updateRun(params = {}) {
 
     else {
         console.log('Create a run...')
+        currentRun.id = `${currentRun.seed} ${moment().unix()}`
         const run = {
-            id:`${currentRun.seed} ${moment().unix()}`,
+            id: currentRun.id,
             customName: null,
             seed: currentRun.seed,
             gameState: currentGameState,
