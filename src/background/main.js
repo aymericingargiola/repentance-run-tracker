@@ -84,6 +84,11 @@ async function createWindow() {
     win.loadURL('app://./index.html')
   }
 
+  win.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });
+
   startLogsWatch(win)
 }
 
