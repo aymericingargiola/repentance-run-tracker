@@ -2,7 +2,7 @@
     <div class="taskbar">
         <div class="background"></div>
         <div class="drag"></div>
-        <div class="logo">run tracker</div>
+        <div class="logo">repentance run tracker</div>
         <div class="menu center-menu">
         </div>
         <div class="menu right-menu" v-if="$isElectron">
