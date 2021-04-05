@@ -1,7 +1,7 @@
 <template>
     <section class="section runs">
-        <span class="logs" style="font-size:8px">{{this.allRunsMostRecentFirst}}</span>
-        <div></div>
+        <!-- <span class="logs" style="font-size:8px">{{this.allRunsMostRecentFirst}}</span> -->
+        <!-- <div></div> -->
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, idx) in allRuns">
                 <li :class="['run', 'run-group-transition-item', run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished']" :data-id="run.id" :key="idx">
@@ -26,16 +26,15 @@
                                         <div class="floor-wrapper">
                                             <div class="floor-name">{{floor.name}}</div>
                                             <transition-group name="item-group-transition" tag="ul" class="items">
-                                                <div class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="idx + fidx + tidx">
-                                                    <li class="item">
-                                                        <div class="name">
-                                                            {{item.title}}
-                                                        </div>
-                                                        <a :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                                                            <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div>
-                                                        </a>
-                                                    </li>
-                                                </div>
+                                                <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="idx + fidx + tidx">
+                                                    <div class="name">
+                                                        {{item.title}}
+                                                    </div>
+                                                    <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                                        <img :src="`img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png`">
+                                                        <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div> -->
+                                                    </a>
+                                                </li>
                                             </transition-group>
                                         </div>
                                     </div>
@@ -99,13 +98,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/styles/scss/vars/_colors";
 .section.runs {
     padding: 20px;
 }
 .run {
     position: relative;
-    padding: 24px;
-    padding-bottom: 32px;
     margin-bottom: 0px;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
     transition: 0.5s ease;
@@ -149,6 +147,17 @@ export default {
         right: 0px;
         top: 0px;
         transform: translateX(14.25px);
+        &::before {
+            content: "";
+            position: absolute;
+            height: 85%;
+            width: 30px;
+            background: linear-gradient(to left, $paper-white-darker 20%, transparent 100%);
+            right: 0px;
+            top: calc(50% - 6px);
+            opacity: 1;
+            transform: translateX(-15px) translateY(-50%);
+        }
     }
     > .mid {
         height: 100%;
@@ -162,6 +171,9 @@ export default {
         z-index: 1;
         position: relative;
         display: flex;
+        padding: 24px;
+        padding-bottom: 32px;
+        overflow: hidden;
         .character {
             margin-right: 16px;
             display: flex;
@@ -169,7 +181,9 @@ export default {
             justify-content: center;
             align-items: center;
             width: 100px;
+            height: 100px;
             flex-shrink: 0;
+            //flex-grow: 1;
             padding: 16px;
             background-size: 100% 100%;
             background-repeat: no-repeat;
@@ -187,6 +201,7 @@ export default {
                 left: unset;
                 top: 0px;
                 transform: translate(-8px, -4px);
+                z-index: 2;
             }
             > * {
                 transform: rotate(-3deg);
@@ -227,6 +242,7 @@ export default {
                         position: absolute;
                         left: 0px;
                         top: 0px;
+                        z-index: 2;
                         .icon {
                             background-position: center;
                             background-repeat: no-repeat;
@@ -255,35 +271,63 @@ export default {
                             position: absolute;
                             left: 10px;
                             top: 10px;
-                            opacity: 0.5;
+                            opacity: 0.4;
+                            mix-blend-mode: soft-light;
+                            white-space: nowrap;
                         }
                         .items {
+                            padding: 10px;
                             position: relative;
                             z-index: 1;
+                            display: flex;
+                            flex-wrap: wrap;
+                            overflow-x: hidden;
+                            width: 100%;
+                            height: 100%;
                             .item-group-transition-item {
-                                height: 100%;
-                                min-width: 0;
-                                .item {
-                                    height: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    transition: 0.5s ease;
-                                    .name {
-                                        display: none;
-                                    }
-                                    .item-image {
-                                        width: 50px;
-                                        height: 70px;
-                                        background-position: center;
-                                        background-size: 100%;
-                                        background-repeat: no-repeat;
+                                // flex: 1;
+                                //height: 40px;
+                                // min-width: 25px;
+                                position: relative;
+                                flex: 1;
+                                display: flex;
+                                align-items: center;
+                                justify-items: center;
+                                //padding: 5px;
+                                margin: 10px;
+                                max-width: 50px;
+                                min-width: 5px;
+                                min-height: 5px;
+                                transition: 0.5s ease;
+                                overflow: visible;
+                                .name {
+                                    display: none;
+                                }
+                                .item-image {
+                                    // width: 100%;
+                                    // height: 40px;
+                                    // position: absolute;
+                                    // left: 50%;
+                                    // transform: translateX(-50%);
+                                    // transition: 1s;
+                                    width: 50px;
+                                    z-index: 0;
+                                    position: absolute;
+                                    left: 50%;
+                                    top: 50%;
+                                    transform: translate(-50%, -50%);
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
                                         transition: 1s;
                                     }
-                                    &:hover {
-                                        transform: scale(1.2);
-                                        cursor: pointer;
-                                        .item-image {
-                                            transform: rotate(-10deg);
+                                }
+                                &:hover {
+                                    cursor: pointer;
+                                    .item-image {
+                                        img {
+                                            z-index: 1;
+                                            transform: scale(1.1) rotate(-10deg) translateY(-10px);
                                         }
                                     }
                                 }
@@ -300,7 +344,10 @@ export default {
                                 &.item-group-transition-item {
                                     transition: all 0.7s;
                                     display: inline-block;
-                                    margin: 0 5px;
+                                    //margin: 0 5px;
+                                }
+                                &:hover {
+                                    flex-grow: 2;
                                 }
                             }
                         }
