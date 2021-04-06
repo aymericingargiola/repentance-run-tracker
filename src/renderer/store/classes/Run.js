@@ -8,11 +8,13 @@ export default class Run extends Model {
             customName: this.string(null),
             seed: this.string(null),
             gameState: this.string(null),
+            gameMode: this.string(null),
             runStart: this.number(null),
-            runUpdate: this.string(null),
-            runEnd: this.attr(null),
-            character: this.attr(null),
-            floors: this.attr(null)
+            runUpdate: this.number(null),
+            runEnd: this.number(null),
+            characters: this.attr(null),
+            floors: this.attr(null),
+            toRemove: this.attr(false)
         }
     }
 }
