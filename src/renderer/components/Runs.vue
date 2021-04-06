@@ -3,7 +3,7 @@
         <!-- <span class="logs" style="font-size:8px">{{this.allRunsMostRecentFirst}}</span> -->
         <!-- <div></div> -->
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
-            <template v-for="(run, idx) in allRuns">
+            <template v-for="(run, idx) in allRunsMostRecentFirst">
                 <li :class="['run', 'run-group-transition-item', run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished']" :data-id="run.id" :key="idx">
                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
@@ -54,6 +54,8 @@ import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
 export default {
     name: "Runs",
+    canUpdateRun: true,
+    tempUpdateRun: null,
     data() {
         return {
 
@@ -63,10 +65,22 @@ export default {
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
             console.log(response)
             this.runRepo.insert(response.run)
+            this.canUpdateRun = false
+            setTimeout(() => {
+                if(this.tempUpdateRun != null) {
+                    this.updateRun = this.tempUpdateRun
+                    this.tempUpdateRun = null
+                }
+                this.canUpdateRun = true
+            }, 1500);
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
             console.log(response)
-            this.updateRun = response.run
+            if(!this.canUpdateRun) {
+                this.tempUpdateRun = response.run
+            } else {
+                this.updateRun = response.run
+            }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
             console.log(response)
@@ -81,7 +95,8 @@ export default {
             return this.runRepo.all()
         },
         allRunsMostRecentFirst() {
-            return this.allRuns.map(run => { return run }).sort((a, b)=>{if(a.runUpdate < b.runUpdate) {return 1} else if(a.runUpdate > b.runUpdate) {return -1}})
+            //return this.allRuns.map(run => { return run }).sort((a, b)=>{if(a.runUpdate < b.runUpdate) {return 1} else if(a.runUpdate > b.runUpdate) {return -1}})
+            return this.runRepo.orderBy('runUpdate', 'desc').get()
         },
         updateRun: {
             get: function(run) {
@@ -106,7 +121,7 @@ export default {
     position: relative;
     margin-bottom: 0px;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
-    transition: 0.5s ease;
+    transition: 1.5s ease;
     // cursor: pointer;
     &:not(:first-child) {
         margin-top: 12px;
@@ -120,10 +135,10 @@ export default {
         width: 100%;
     }
     &.run-group-transition-move {
-        transition: transform 0.7s ease;
+        transition: transform 1.5s ease;
     }
     &.run-group-transition-item {
-        transition: all 0.7s ease;
+        transition: all 1.5s ease;
         display: block;
     }
     > .before, .after, .mid {
@@ -147,11 +162,12 @@ export default {
         right: 0px;
         top: 0px;
         transform: translateX(14.25px);
+        z-index: 2;
         &::before {
             content: "";
             position: absolute;
             height: 85%;
-            width: 30px;
+            width: 100px;
             background: linear-gradient(to left, $paper-white-darker 20%, transparent 100%);
             right: 0px;
             top: calc(50% - 6px);
@@ -294,7 +310,7 @@ export default {
                                 align-items: center;
                                 justify-items: center;
                                 //padding: 5px;
-                                margin: 10px;
+                                padding: 10px;
                                 max-width: 50px;
                                 min-width: 5px;
                                 min-height: 5px;
@@ -304,12 +320,6 @@ export default {
                                     display: none;
                                 }
                                 .item-image {
-                                    // width: 100%;
-                                    // height: 40px;
-                                    // position: absolute;
-                                    // left: 50%;
-                                    // transform: translateX(-50%);
-                                    // transition: 1s;
                                     width: 50px;
                                     z-index: 0;
                                     position: absolute;
@@ -317,6 +327,7 @@ export default {
                                     top: 50%;
                                     transform: translate(-50%, -50%);
                                     img {
+                                        pointer-events: none;
                                         width: 100%;
                                         height: 100%;
                                         transition: 1s;
