@@ -13,11 +13,11 @@ const splitLines = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
 const runsJsonPath = `${dataFolder}\\runs.json`
-let runs, repentanceLogs, currentRun, currentRunInit, currentCharater, currentFloor, currentCurse, currentGameState, logsLastReadLines, win
+let runs, repentanceLogs, currentRun, currentRunInit, currentCharater, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
 let repentanceIsLaunched = false
 let inRun = false
 // let backToMenu = false
-// let firstInit = false
+let firstInit = false
 
 function getCharater(string) {
     return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
@@ -93,7 +93,6 @@ function checkPreviousRuns() {
 
 function isSameRun(seed) {
     if (!inRun) inRun = true
-    //if (!firstInit) firstInit = true
     //if (backToMenu) backToMenu = false
     return runs.find(function(run, i) {
         console.log(`compare run ${run.seed} id with current ${seed} id : compare run ${run.id} with current ${currentRun.id}`)
@@ -114,7 +113,7 @@ function isSameRun(seed) {
     })
 }
 
-async function updateRun(params = {}) { 
+async function updateRun(params = {}) {
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
     const sameRun = isSameRun(currentRun.seed)
@@ -126,6 +125,12 @@ async function updateRun(params = {}) {
             switch (params.trigger) {
                 case 'level init':
                     sameRun.floors.push(currentFloor)
+                    break
+                case 'game mode':
+                    if (!sameRun.gameMode) {
+                        const gameMode = params.log.includes("copy") ? "greed" : "normal"
+                        sameRun.gameMode = gameMode
+                    }
                     break
                 case 'adding collectible':
                     if (sameRun.floors[sameRun.floors.length - 1].itemsCollected === undefined) {
@@ -165,7 +170,6 @@ async function updateRun(params = {}) {
             console.log('Run is over')
         }
     }
-
     else {
         console.log('Create a run...')
         currentRun.id = `${currentRun.seed} ${moment().unix()}`
@@ -174,6 +178,7 @@ async function updateRun(params = {}) {
             customName: null,
             seed: currentRun.seed,
             gameState: currentGameState,
+            gameMode: currentGameMode,
             runStart: moment().unix(),
             runUpdate: moment().unix(),
             runEnd: {
@@ -223,6 +228,10 @@ function parseLogs(newLogs, logArray) {
                 updateRun({trigger: "generated rooms"})
             }
         }
+        if(log.split(' ')[2] === "Room") {
+            console.log(log)
+            updateRun({trigger: "game mode", log: log})
+        }
         if(log.includes("Adding collectible")) {
             console.log(log)
             updateRun({trigger: "adding collectible", collectible: getCollectible(log)})
@@ -252,6 +261,7 @@ function parseLogs(newLogs, logArray) {
             currentCharater = null
             currentFloor = null
             currentCurse = null
+            currentGameMode = null
         }
     })
 }
@@ -277,6 +287,7 @@ function unWatchRepentanceLogs() {
 }
 
 async function init() {
+    firstInit = true
     const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
     runs = JSON.parse(fs.readFileSync(loadRuns))
     currentRunInit = false
@@ -288,13 +299,10 @@ async function init() {
     if (seedsList[seedsList.length - 1] != undefined) {
         console.log("Seeds exist in current logs, checking...")
         const lastLogs = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, seedsList[seedsList.length - 1]), repentanceLogsArray.length - 1)
-        console.log(lastLogs)
         inRun = lastLogs.filter(v=>v.includes("Menu Game Init")).length < 1 && lastLogs.filter(v=>v.includes("Game Over")).length < 1 && lastLogs.filter(v=>v.includes("playing cutscene")).length < 1
         console.log("Currently in run :", inRun)
         if (inRun) {
             parseLogs(lastLogs, repentanceLogsArray)
-            // const checkRun = isSameRun(getSeed(seedsList[seedsList.length - 1]).seed)
-            // if (checkRun) currentRun = {seed: checkRun.seed, runId: checkRun.id }
         }
     }
     
@@ -326,7 +334,7 @@ module.exports = {
                     repentanceIsLaunched = true
                     setTimeout(() => {
                         console.log("Watching logs")
-                        init()
+                        if(!firstInit) init()
                         watchRepentanceLogs()
                         syncApp(win,{trigger: "logs watch status", watching: true})
                     }, 10000)
