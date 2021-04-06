@@ -1,23 +1,27 @@
 <template>
     <section class="section runs">
-        <!-- <span class="logs" style="font-size:8px">{{this.allRunsMostRecentFirst}}</span> -->
-        <!-- <div></div> -->
+        <!-- <span class="logs" style="font-size:8px">{{this.allRunsToRemoveAlert}}</span> -->
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
-            <template v-for="(run, idx) in allRunsMostRecentFirst">
-                <li :class="['run', 'run-group-transition-item', run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished']" :data-id="run.id" :key="idx">
+            <template v-for="(run, ridx) in allRunsMostRecentFirst">
+                <li :class="
+                [
+                'run', 'run-group-transition-item',
+                run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished',
+                run.toRemove.status === true && run.toRemove.checkedByUser === false ? 'run-to-remove-unchecked' : run.toRemove.status === true && run.toRemove.checkedByUser === true ?'run-to-remove-checked' : ''
+                ]" :data-id="run.id + ridx" :key="run.id">
                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"></div>
                     <div class="run-content">
-                        <div class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}" :data-character="run.character.name">
+                        <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-                            <div class="name">{{run.character.name}}</div>
-                            <div class="image" :style="{backgroundImage:`url('img/characters/${run.character.name}.png')`}"></div>
+                            <div class="name">{{run.characters[0].name}}</div>
+                            <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].name}.png')`}"></div>
                         </div>
                         <transition-group name="floors-group-transition" tag="ul" class="floors">
                             <template v-for="(floor, fidx) in run.floors">
-                                <li :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="idx + fidx">
+                                <li :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
                                     <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors/${floor.group}-ground.png')`}">
                                         <div class="top-info">
                                             <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
@@ -26,7 +30,7 @@
                                         <div class="floor-wrapper">
                                             <div class="floor-name">{{floor.name}}</div>
                                             <transition-group name="item-group-transition" tag="ul" class="items">
-                                                <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="idx + fidx + tidx">
+                                                <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="item.title + tidx">
                                                     <div class="name">
                                                         {{item.title}}
                                                     </div>
@@ -84,7 +88,11 @@ export default {
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
             console.log(response)
-            this.runRepo.destroy(response.run.id)
+            this.runRepo.destroy(response.run)
+        })
+        window.ipc.on('SYNC_ASK_REMOVE_RUN', (response) => {
+            console.log(response)
+            this.updateRun = response.run
         })
     },
     computed: {
@@ -95,7 +103,6 @@ export default {
             return this.runRepo.all()
         },
         allRunsMostRecentFirst() {
-            //return this.allRuns.map(run => { return run }).sort((a, b)=>{if(a.runUpdate < b.runUpdate) {return 1} else if(a.runUpdate > b.runUpdate) {return -1}})
             return this.runRepo.orderBy('runUpdate', 'desc').get()
         },
         updateRun: {
@@ -116,19 +123,29 @@ export default {
 @import "../assets/styles/scss/vars/_colors";
 .section.runs {
     padding: 20px;
+    position: relative;
+}
+.runs-container {
+    position: relative;
 }
 .run {
     position: relative;
     margin-bottom: 0px;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
     transition: 1.5s ease;
+    width: 100%;
     // cursor: pointer;
     &:not(:first-child) {
         margin-top: 12px;
     }
-    &.run-group-transition-enter, &.run-group-transition-leave-to {
+    &.run-group-transition-enter{
         opacity: 0;
-        transform: translateX(100%);
+        transform: translateY(100%);
+    }
+    &.run-group-transition-leave-to {
+        opacity: 0;
+        transform: translateY(50px);
+        filter: grayscale(100)
     }
     &.run-group-transition-leave-active {
         position: absolute;
@@ -139,7 +156,7 @@ export default {
     }
     &.run-group-transition-item {
         transition: all 1.5s ease;
-        display: block;
+        //display: block;
     }
     > .before, .after, .mid {
         z-index: 0;
@@ -190,6 +207,7 @@ export default {
         padding: 24px;
         padding-bottom: 32px;
         overflow: hidden;
+        width: 100%;
         .character {
             margin-right: 16px;
             display: flex;
@@ -236,6 +254,7 @@ export default {
         }
         .floors {
             display: flex;
+            width: 100%;
             .floor {
                 height: 100%;
                 &:not(:first-child) {
