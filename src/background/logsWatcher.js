@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
+const { fileResolve } = require('./tools/fileSystem')
 const {isRunning, cloneFrom, findLastIndex } = require('./tools/methods')
 const syncApp = require('./sync').syncApp
 const dataFolder = path.resolve(process.cwd(), 'datas')
@@ -12,8 +13,7 @@ const splitLines = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
 const runsJsonPath = `${dataFolder}\\runs.json`
-let runs = JSON.parse(fs.readFileSync(runsJsonPath))
-let repentanceLogs, currentRun, currentRunInit, currentCharater, currentFloor, currentCurse, currentGameState, logsLastReadLines, win
+let runs, repentanceLogs, currentRun, currentRunInit, currentCharater, currentFloor, currentCurse, currentGameState, logsLastReadLines, win
 let repentanceIsLaunched = false
 let inRun = false
 // let backToMenu = false
@@ -276,7 +276,9 @@ function unWatchRepentanceLogs() {
     fs.unwatchFile(repentanceLogsFile)
 }
 
-function init() {
+async function init() {
+    const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
+    runs = JSON.parse(fs.readFileSync(loadRuns))
     currentRunInit = false
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8")
     repentanceLogsArray = repentanceLogs.split(splitLines)

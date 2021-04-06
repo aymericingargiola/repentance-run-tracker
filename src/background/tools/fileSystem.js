@@ -15,6 +15,7 @@ module.exports = {
         recursive: true
       });
     }
+    return dir
   },
   writeFileAsync: async function(dir, fileName, datas) {
     console.time(`Write "${dir}\\${fileName}" in `)
@@ -26,7 +27,11 @@ module.exports = {
       return false
     }
     console.timeEnd(`Write "${dir}\\${fileName}" in `)
-    return true
+    return `${dir}\\${fileName}`
+  },
+  fileResolve: async function(path, file, defaultDatas) {
+    if(!module.exports.dirExist(`${path}\\${file}`)) await module.exports.writeFileAsync(path, file, defaultDatas)
+    return `${path}\\${file}`
   },
   readFileAsync: async function(dir, fileName) {
     console.time(`Read "${dir}\\${fileName}" in `)
