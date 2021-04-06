@@ -91,6 +91,7 @@ export default {
         background-image: url("../../public/img/menuoverlay.png");
         background-repeat: no-repeat;
         background-size: cover;
+        z-index: 100;
       }
       &::after {
         pointer-events: none;
@@ -104,6 +105,7 @@ export default {
         background-repeat: no-repeat;
         background-size: contain;
         background-position: bottom;
+        z-index: 100;
       }
       #app {
         width: 100%;
