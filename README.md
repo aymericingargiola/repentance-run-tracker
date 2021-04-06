@@ -16,7 +16,7 @@ More to add...
 # Contribute
 ## Project setup
 Environment : Windows 10 x64\
-Backend : [NodeJS](https://nodejs.org/en/download/) v15, [Electron](https://www.electronjs.org/) v11.4.2\
+Backend : [NodeJS](https://nodejs.org/en/download/) v12.18.3, [Electron](https://www.electronjs.org/) v11.4.2\
 Frontend : [VueJS](https://vuejs.org/) v2.6.11, [Vue Router](https://router.vuejs.org/), [Vuex ORM Next](https://next.vuex-orm.org/)
 ```
 npm install

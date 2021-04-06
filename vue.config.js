@@ -5,13 +5,13 @@ module.exports = {
     configureWebpack: config => {
         config.entry.app = '/src/renderer/main.js'
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                PACKAGE_VERSION: '"' + version + '"'
-            }
-        })
-    ],
+    // plugins: [
+    //     new webpack.DefinePlugin({
+    //         'process.env': {
+    //             PACKAGE_VERSION: '"' + version + '"'
+    //         }
+    //     })
+    // ],
     pluginOptions: {
         electronBuilder: {
             mainProcessFile: 'src/background/main.js',
