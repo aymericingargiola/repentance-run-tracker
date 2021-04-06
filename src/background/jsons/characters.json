@@ -2,16 +2,329 @@
     {
         "id":"0",
         "variant":"0",
-        "name":"Isaac"
+        "name":"Isaac",
+        "trueName":"Isaac",
+        "version":"Normal",
+        "ignore":false
     },
     {
         "id":"1",
         "variant":"0",
-        "name":"Magdalene"
+        "name":"Magdalene",
+        "trueName":"Magdalene",
+        "version":"Normal",
+        "ignore":false
     },
     {
         "id":"2",
         "variant":"0",
-        "name":"Magdalene"
+        "name":"Cain",
+        "trueName":"Cain",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"3",
+        "variant":"0",
+        "name":"Judas",
+        "trueName":"Judas",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"4",
+        "variant":"0",
+        "name":"Blue Baby",
+        "trueName":"Blue Baby",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"5",
+        "variant":"0",
+        "name":"Eve",
+        "trueName":"Eve",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"6",
+        "variant":"0",
+        "name":"Samson",
+        "trueName":"Samson",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"7",
+        "variant":"0",
+        "name":"Azazel",
+        "trueName":"Azazel",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"8",
+        "variant":"0",
+        "name":"Lazarus",
+        "trueName":"Lazarus",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"9",
+        "variant":"0",
+        "name":"Eden",
+        "trueName":"Eden",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"10",
+        "variant":"0",
+        "name":"The Lost",
+        "trueName":"The Lost",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"11",
+        "variant":"0",
+        "name":"Lazarus II",
+        "trueName":"Lazarus",
+        "version":"Normal",
+        "ignore":true
+    },
+    {
+        "id":"12",
+        "variant":"0",
+        "name":"Dark Judas",
+        "trueName":"Judas",
+        "version":"Normal",
+        "ignore":true
+    },
+    {
+        "id":"13",
+        "variant":"0",
+        "name":"Lilith",
+        "trueName":"Lilith",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"14",
+        "variant":"0",
+        "name":"Keeper",
+        "trueName":"Keeper",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"15",
+        "variant":"0",
+        "name":"Appollyon",
+        "trueName":"Appollyon",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"16",
+        "variant":"0",
+        "name":"The Forgotten",
+        "trueName":"The Forgotten",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"17",
+        "variant":"0",
+        "name":"The Soul",
+        "trueName":"The Forgotten",
+        "version":"Normal",
+        "ignore":true
+    },
+    {
+        "id":"18",
+        "variant":"0",
+        "name":"Bethany",
+        "trueName":"Bethany",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"19",
+        "variant":"0",
+        "name":"Jacob",
+        "trueName":"Jacob and Esau",
+        "version":"Normal",
+        "ignore":false
+    },
+    {
+        "id":"20",
+        "variant":"0",
+        "name":"Esau",
+        "trueName":"Jacob and Esau",
+        "version":"Normal",
+        "ignore":true
+    },
+    {
+        "id":"21",
+        "variant":"0",
+        "name":"Isaac",
+        "trueName":"Isaac",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"22",
+        "variant":"0",
+        "name":"Magdalene",
+        "trueName":"Magdalene",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"23",
+        "variant":"0",
+        "name":"Cain",
+        "trueName":"Cain",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"24",
+        "variant":"0",
+        "name":"Judas",
+        "trueName":"Judas",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"25",
+        "variant":"0",
+        "name":"Blue Baby",
+        "trueName":"Blue Baby",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"26",
+        "variant":"0",
+        "name":"Eve",
+        "trueName":"Eve",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"27",
+        "variant":"0",
+        "name":"Samson",
+        "trueName":"Samson",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"28",
+        "variant":"0",
+        "name":"Azazel",
+        "trueName":"Azazel",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"29",
+        "variant":"0",
+        "name":"Lazarus",
+        "trueName":"Lazarus",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"30",
+        "variant":"0",
+        "name":"Eden",
+        "trueName":"Eden",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"31",
+        "variant":"0",
+        "name":"The Lost",
+        "trueName":"The Lost",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"32",
+        "variant":"0",
+        "name":"Lilith",
+        "trueName":"Lilith",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"33",
+        "variant":"0",
+        "name":"Keeper",
+        "trueName":"Keeper",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"34",
+        "variant":"0",
+        "name":"Apollyon",
+        "trueName":"Apollyon",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"35",
+        "variant":"0",
+        "name":"The Forgotten",
+        "trueName":"The Forgotten",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"36",
+        "variant":"0",
+        "name":"Bethany",
+        "trueName":"Bethany",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"37",
+        "variant":"0",
+        "name":"Jacob",
+        "trueName":"Jacob",
+        "version":"Alternate",
+        "ignore":false
+    },
+    {
+        "id":"38",
+        "variant":"0",
+        "name":"Lazarus",
+        "trueName":"Lazarus",
+        "version":"Alternate",
+        "ignore":true
+    },
+    {
+        "id":"39",
+        "variant":"0",
+        "name":"Jacob",
+        "trueName":"Jacob",
+        "version":"Alternate",
+        "ignore":true
+    },
+    {
+        "id":"40",
+        "variant":"0",
+        "name":"The Soul",
+        "trueName":"The Forgotten",
+        "version":"Alternate",
+        "ignore":true
     }
 ]
