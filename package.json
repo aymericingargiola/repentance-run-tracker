@@ -19,10 +19,10 @@
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "swiper": "^6.5.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
     "vue-signature-pad": "^2.0.2",
+    "vuescroll": "^4.17.3",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.3"
   },
