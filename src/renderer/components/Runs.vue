@@ -19,7 +19,7 @@
                             <div class="name">{{run.characters[0].name}}</div>
                             <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].name}.png')`}"></div>
                         </div>
-                        <vue-scroll :ops="ops" :class="['custom-scroll']" :ref="ridx === 0 ? 'firstRunFloorsScroller' : 'null'" :data-ref="`${ridx}`">
+                        <vue-scroll :ops="opsFloors" :class="['custom-scroll-floors']" :ref="ridx === 0 ? 'firstRunFloorsScroller' : ''">
                             <transition-group name="floors-group-transition" tag="ul" class="floors">
                                 <template v-for="(floor, fidx) in run.floors">
                                     <li :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
@@ -30,17 +30,17 @@
                                             </div>
                                             <div class="floor-wrapper">
                                                 <div class="floor-name">{{floor.name}}</div>
-                                                <transition-group name="item-group-transition" tag="ul" class="items">
-                                                    <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="item.title + tidx">
-                                                        <div class="name">
-                                                            {{item.title}}
-                                                        </div>
-                                                        <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                                                            <img :src="`img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png`">
-                                                            <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div> -->
-                                                        </a>
-                                                    </li>
-                                                </transition-group>
+                                                    <transition-group name="item-group-transition" tag="ul" class="items">
+                                                        <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="item.title + tidx">
+                                                            <div class="name">
+                                                                {{item.title}}
+                                                            </div>
+                                                            <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                                                <img :src="`img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png`">
+                                                                <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div> -->
+                                                            </a>
+                                                        </li>
+                                                    </transition-group>
                                             </div>
                                         </div>
                                     </li>
@@ -64,7 +64,7 @@ export default {
         return {
             canUpdateRun: true,
             tempUpdateRun: null,
-            ops: {
+            opsFloors: {
                 vuescroll: {
                     mode: 'slide',
                     detectResize: true,
@@ -74,7 +74,9 @@ export default {
                         speedMultiplier: 0.5,
                     }
                 },
-                scrollPanel: {},
+                scrollPanel: {
+                    scrollingY: false,
+                },
                 rail: {
                     opacity: 0,
                     size: '0px'
@@ -297,7 +299,7 @@ export default {
                 background-size: contain;
             }
         }
-        .custom-scroll {
+        .custom-scroll-floors {
             height: unset !important;
             overflow: visible !important;
             .__panel {
@@ -341,15 +343,16 @@ export default {
                     background-position: left;
                     background-size: contain;
                     background-repeat: repeat;
-                    box-shadow: inset 0px 0px 10px rgba(0,0,0,1);
-                    min-width: 200px;
+                    box-shadow: inset 0px 10px 40px rgba(0, 0, 0, 1);
+                    width: 200px;
                     .top-info {
                         display: flex;
                         transform: translateY(-8px);
                         position: absolute;
                         left: 0px;
                         top: 0px;
-                        z-index: 2;
+                        z-index: 3;
+                        pointer-events: none;
                         .icon {
                             background-position: center;
                             background-repeat: no-repeat;
@@ -370,7 +373,19 @@ export default {
                         position: relative;
                         overflow: hidden;
                         height: 100%;
+                        width: 100%;
                         display: flex;
+                        &::before {
+                            content: "";
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            box-shadow: inset 0px 0px 10px rgba(0,0,0,0.15);
+                            pointer-events: none;
+                            z-index: 2;
+                        }
                         .floor-name {
                             z-index: 0;
                             font-family: "Up Heaval", sans-serif;
@@ -382,15 +397,24 @@ export default {
                             mix-blend-mode: soft-light;
                             white-space: nowrap;
                         }
+                        .custom-scroll-items {
+                            height: unset !important;
+                            overflow: visible !important;
+                            .__panel {
+                                overflow: visible!important;
+                            }
+                        }
                         .items {
                             padding: 10px;
                             position: relative;
                             z-index: 1;
                             display: flex;
                             flex-wrap: wrap;
+                            min-height: 100%;
+                            min-width: calc(100% + 50px);
+                            padding-right: 60px;
                             overflow-x: hidden;
-                            width: 100%;
-                            height: 100%;
+                            overflow-y: overlay;
                             .item-group-transition-item {
                                 // flex: 1;
                                 //height: 40px;
@@ -465,8 +489,8 @@ export default {
                     .floor {
                         &:last-child {
                             .floor-content {
-                                outline: 6px dashed rgba(0,0,0,0.2);
-                                outline-offset: 4px;
+                                outline: 6px dashed rgba(0,0,0,0.1);
+                                outline-offset: 0px;
                                 animation-name: outline-zooming;
                                 animation-iteration-count: infinite;
                                 animation-duration: 1s;
@@ -476,11 +500,11 @@ export default {
                                         outline: 6px dashed rgba(0,0,0,0.1);
                                     }
                                     25% {
-                                        outline-offset: 4px;
+                                        outline-offset: 3px;
                                         outline: 6px dashed rgba(0,0,0,0.3);
                                     }
                                     50% {
-                                        outline-offset: 4px;
+                                        outline-offset: 3px;
                                         outline: 6px dashed rgba(0,0,0,0.3);
                                     }
                                     100% {
