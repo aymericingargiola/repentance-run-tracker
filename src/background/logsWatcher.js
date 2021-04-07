@@ -157,7 +157,7 @@ function updateRun(params = {}) {
                     if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) {
                         sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
                         sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
-                    } 
+                    }
                     else {
                         const foundItem = sameRun.floors.map((floor, index) => {
                             const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
@@ -169,7 +169,6 @@ function updateRun(params = {}) {
                                 itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
                             }
                         }).filter(item => item.itemIndex > -1)
-                        console.log(foundItem[foundItem.length - 1])
                         if (foundItem.length > 0) {
                             if (foundItem[foundItem.length - 1].itemRemoved === true) {
                                 sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number = 1
@@ -195,7 +194,6 @@ function updateRun(params = {}) {
                             itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
                         }
                     }).filter(item => item.itemIndex > -1)
-                    console.log(foundItem[foundItem.length - 1])
                     if (foundItem.length > 0) {
                         if (foundItem[foundItem.length - 1].itemRemoved === false && foundItem[foundItem.length - 1].itemsNumber > 0) {
                             if(foundItem[foundItem.length - 1].itemsNumber === 1) {
@@ -209,12 +207,12 @@ function updateRun(params = {}) {
                     break
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
-                        const runEnd = getRunEnd(params.log)
-                        sameRun.runEnd.date = runEnd.date
-                        sameRun.runEnd.win = runEnd.win
-                        sameRun.runEnd.killedBy = runEnd.killedBy
-                        sameRun.runEnd.spawnedBy = runEnd.spawnedBy
-                        sameRun.runEnd.damageFlags = runEnd.damageFlags
+                        const runEndInfo = getRunEnd(params.log)
+                        sameRun.runEnd.date = runEndInfo.date
+                        sameRun.runEnd.win = runEndInfo.win
+                        sameRun.runEnd.killedBy = runEndInfo.killedBy
+                        sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
+                        sameRun.runEnd.damageFlags = runEndInfo.damageFlags
                         if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     }
                     break

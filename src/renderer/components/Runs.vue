@@ -19,32 +19,34 @@
                             <div class="name">{{run.characters[0].name}}</div>
                             <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].name}.png')`}"></div>
                         </div>
-                        <transition-group name="floors-group-transition" tag="ul" class="floors">
-                            <template v-for="(floor, fidx) in run.floors">
-                                <li :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
-                                    <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors/${floor.group}-ground.png')`}">
-                                        <div class="top-info">
-                                            <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
-                                            <div class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
+                        <vue-scroll :ops="ops" :class="['custom-scroll']" :ref="ridx === 0 ? 'firstRunFloorsScroller' : 'null'" :data-ref="`${ridx}`">
+                            <transition-group name="floors-group-transition" tag="ul" class="floors">
+                                <template v-for="(floor, fidx) in run.floors">
+                                    <li :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
+                                        <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors/${floor.group}-ground.png')`}">
+                                            <div class="top-info">
+                                                <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
+                                                <div class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
+                                            </div>
+                                            <div class="floor-wrapper">
+                                                <div class="floor-name">{{floor.name}}</div>
+                                                <transition-group name="item-group-transition" tag="ul" class="items">
+                                                    <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="item.title + tidx">
+                                                        <div class="name">
+                                                            {{item.title}}
+                                                        </div>
+                                                        <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                                            <img :src="`img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png`">
+                                                            <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div> -->
+                                                        </a>
+                                                    </li>
+                                                </transition-group>
+                                            </div>
                                         </div>
-                                        <div class="floor-wrapper">
-                                            <div class="floor-name">{{floor.name}}</div>
-                                            <transition-group name="item-group-transition" tag="ul" class="items">
-                                                <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="item.title + tidx">
-                                                    <div class="name">
-                                                        {{item.title}}
-                                                    </div>
-                                                    <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                                                        <img :src="`img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png`">
-                                                        <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div> -->
-                                                    </a>
-                                                </li>
-                                            </transition-group>
-                                        </div>
-                                    </div>
-                                </li>
-                            </template>
-                        </transition-group>
+                                    </li>
+                                </template>
+                            </transition-group>
+                        </vue-scroll>
                     </div>
                 </li>
             </template>
@@ -58,11 +60,29 @@ import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
 export default {
     name: "Runs",
-    canUpdateRun: true,
-    tempUpdateRun: null,
     data() {
         return {
-
+            canUpdateRun: true,
+            tempUpdateRun: null,
+            ops: {
+                vuescroll: {
+                    mode: 'slide',
+                    detectResize: true,
+                    wheelScrollDuration: 0,
+                    zooming: false,
+                    scroller: {
+                        speedMultiplier: 0.5,
+                    }
+                },
+                scrollPanel: {},
+                rail: {
+                    opacity: 0,
+                    size: '0px'
+                },
+                bar: {
+                    disable: true
+                }
+            }
         }
     },
     mounted() {
@@ -84,6 +104,13 @@ export default {
                 this.tempUpdateRun = response.run
             } else {
                 this.updateRun = response.run
+                this.$refs.firstRunFloorsScroller[0].scrollTo({x:"100%"}, 1500)
+                setTimeout(() => {
+                    this.$refs.firstRunFloorsScroller[0].refresh()
+                }, 1500);
+                setTimeout(() => {
+                    this.$refs.firstRunFloorsScroller[0].scrollTo({x:"100%"}, 1500)
+                }, 1500);
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
@@ -110,6 +137,7 @@ export default {
                 return this.runRepo.query().where('id', run.id).get()
             },
             set: function (run) {
+                console.log(run)
                 this.runRepo.update(run)
             }
         },
@@ -180,17 +208,6 @@ export default {
         top: 0px;
         transform: translateX(14.25px);
         z-index: 2;
-        &::before {
-            content: "";
-            position: absolute;
-            height: 85%;
-            width: 100px;
-            background: linear-gradient(to left, $paper-white-darker 20%, transparent 100%);
-            right: 0px;
-            top: calc(50% - 6px);
-            opacity: 1;
-            transform: translateX(-15px) translateY(-50%);
-        }
     }
     > .mid {
         height: 100%;
@@ -208,8 +225,35 @@ export default {
         padding-bottom: 32px;
         overflow: hidden;
         width: 100%;
+        z-index: 1;
+        &::before {
+            content: "";
+            position: absolute;
+            height: 85%;
+            width: 140px;
+            background: linear-gradient(to right, $paper-white-darker 70%, transparent 100%);
+            //background: black;
+            left: 0px;
+            top: calc(50% - 6px);
+            opacity: 1;
+            transform: translateX(0px) translateY(-50%);
+            z-index: 2;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            height: 85%;
+            width: 50px;
+            background: linear-gradient(to left, $paper-white-darker 20%, transparent 100%);
+            right: 0px;
+            top: calc(50% - 6px);
+            opacity: 1;
+            transform: translateX(0px) translateY(-50%);
+            z-index: 2;
+        }
         .character {
-            margin-right: 16px;
+            z-index: 2;
+            margin-right: 28px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -222,6 +266,7 @@ export default {
             background-size: 100% 100%;
             background-repeat: no-repeat;
             position: relative;
+            transform: scale(1.3);
             .before, .after {
                 position: absolute;
                 left: 0px;
@@ -252,13 +297,42 @@ export default {
                 background-size: contain;
             }
         }
+        .custom-scroll {
+            height: unset !important;
+            overflow: visible !important;
+            .__panel {
+                overflow: visible!important;
+            }
+        }
         .floors {
+            position: absolute;
             display: flex;
             width: 100%;
+            height: 100%;
+            z-index: 0;
+            transition: 0.7s ease;
             .floor {
                 height: 100%;
+                transition: 1s ease;
                 &:not(:first-child) {
                     margin-left: 24px;
+                }
+                &.floors-group-transition-enter{
+                    transform: translateX(-100%);
+                }
+                &.floors-group-transition-leave-to {
+                    transform: translateX(100%);
+                }
+                &.floors-group-transition-leave-active {
+                    position: absolute;
+                    //width: 100%;
+                }
+                &.floors-group-transition-move {
+                    transition: transform 1s ease;
+                }
+                &.floors-group-transition-item {
+                    transition: all 1s ease;
+                    display: block;
                 }
                 .floor-content {
                     position: relative;
@@ -268,8 +342,6 @@ export default {
                     background-size: contain;
                     background-repeat: repeat;
                     box-shadow: inset 0px 0px 10px rgba(0,0,0,1);
-                    outline: 6px dashed rgba(0,0,0,0.2);
-                    outline-offset: 4px;
                     min-width: 200px;
                     .top-info {
                         display: flex;
@@ -378,6 +450,43 @@ export default {
                                 }
                                 &:hover {
                                     flex-grow: 2;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.run-unfinished {
+        &:first-child {
+            .run-content {
+                .floors {
+                    .floor {
+                        &:last-child {
+                            .floor-content {
+                                outline: 6px dashed rgba(0,0,0,0.2);
+                                outline-offset: 4px;
+                                animation-name: outline-zooming;
+                                animation-iteration-count: infinite;
+                                animation-duration: 1s;
+                                @keyframes outline-zooming {
+                                    0% {
+                                        outline-offset: 0px;
+                                        outline: 6px dashed rgba(0,0,0,0.1);
+                                    }
+                                    25% {
+                                        outline-offset: 4px;
+                                        outline: 6px dashed rgba(0,0,0,0.3);
+                                    }
+                                    50% {
+                                        outline-offset: 4px;
+                                        outline: 6px dashed rgba(0,0,0,0.3);
+                                    }
+                                    100% {
+                                        outline-offset: 0px;
+                                        outline: 6px dashed rgba(0,0,0,0.1);
+                                    }
                                 }
                             }
                         }

@@ -2,7 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/store'
 import router from './router/router'
-import 'swiper/swiper.scss';
+import vuescroll from 'vuescroll'
+
+Vue.use(vuescroll, {
+  ops: {
+    // The global config
+  },
+})
 
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
 

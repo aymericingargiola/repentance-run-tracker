@@ -11,7 +11,7 @@ export default class Run extends Model {
             gameMode: this.string(null),
             runStart: this.number(null),
             runUpdate: this.number(null),
-            runEnd: this.number(null),
+            runEnd: this.attr(null),
             characters: this.attr(null),
             floors: this.attr(null),
             toRemove: this.attr(false)
