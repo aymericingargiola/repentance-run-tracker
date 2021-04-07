@@ -151,36 +151,61 @@ function updateRun(params = {}) {
                     }
                     break
                 case 'init other player':
-                    if (params.character.ignore != true) sameRun.characters.push(params.character)
+                    if (!params.character.ignore) sameRun.characters.push(params.character)
                     break
                 case 'adding collectible':
-                    if (sameRun.floors[sameRun.floors.length - 1].itemsCollected === undefined) {
+                    if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) {
                         sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
                         sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
                     } 
                     else {
-                        // console.log(sameRun.floors[sameRun.floors.length - 1])
-                        // let itemExist = sameRun.floors[sameRun.floors.length - 1].itemsCollected.findIndex(item => item.id === params.collectible.id)
-                        // if (itemExist != -1) sameRun.floors[sameRun.floors.length - 1].itemsCollected[itemExist].removed = false
-                        // else if (itemExist == -1) sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
                         const foundItem = sameRun.floors.map((floor, index) => {
+                            const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
                             return {
                                 floorIndex: index,
-                                itemIndex: floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
+                                itemIndex: itemIndex,
+                                itemType: itemIndex >= 0 ? floor.itemsCollected[itemIndex].itemType : null,
+                                itemRemoved: itemIndex >= 0 ? floor.itemsCollected[itemIndex].removed : null,
+                                itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
                             }
                         }).filter(item => item.itemIndex > -1)
-                        if (foundItem.length > 0) sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].removed = true
-                        else sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
+                        console.log(foundItem[foundItem.length - 1])
+                        if (foundItem.length > 0) {
+                            if (foundItem[foundItem.length - 1].itemRemoved === true) {
+                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number = 1
+                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].removed = false
+                            } else {
+                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += 1
+                            }
+                        }
+                        else {
+                            params.collectible.number = 1
+                            sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
+                        }
                     }
                     break
                 case 'removing collectible':
                     const foundItem = sameRun.floors.map((floor, index) => {
+                        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
                         return {
                             floorIndex: index,
-                            itemIndex: floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
+                            itemIndex: itemIndex,
+                            itemType: itemIndex >= 0 ? floor.itemsCollected[itemIndex].itemType : null,
+                            itemRemoved: itemIndex >= 0 ? floor.itemsCollected[itemIndex].removed : null,
+                            itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
                         }
                     }).filter(item => item.itemIndex > -1)
-                    if (foundItem.length > 0) sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].removed = true
+                    console.log(foundItem[foundItem.length - 1])
+                    if (foundItem.length > 0) {
+                        if (foundItem[foundItem.length - 1].itemRemoved === false && foundItem[foundItem.length - 1].itemsNumber > 0) {
+                            if(foundItem[foundItem.length - 1].itemsNumber === 1) {
+                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number = 0
+                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].removed = true
+                            } else if (foundItem[foundItem.length - 1].itemsNumber > 1) {
+                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += -1
+                            }
+                        }
+                    }
                     break
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
@@ -334,7 +359,6 @@ function unWatchRepentanceLogs() {
 }
 
 async function init() {
-    firstInit = true
     const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
     runs = JSON.parse(fs.readFileSync(loadRuns))
     currentRunInit = false
@@ -354,7 +378,7 @@ async function init() {
     }
     
     logsLastReadLines = repentanceLogsArray.filter(v=>v!='').length
-    
+    if(!firstInit) firstInit = true
     //console.log('init values : ', currentRun, currentCharater, currentFloor)
 }
 
@@ -383,7 +407,7 @@ module.exports = {
                     repentanceIsLaunched = true
                     setTimeout(() => {
                         console.log("Watching logs")
-                        if(!firstInit) init()
+                        init()
                         watchRepentanceLogs()
                         syncApp(win,{trigger: "logs watch status", watching: true})
                     }, 10000)
