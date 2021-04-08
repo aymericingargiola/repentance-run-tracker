@@ -106,13 +106,13 @@ export default {
                 this.tempUpdateRun = response.run
             } else {
                 this.updateRun = response.run
-                this.$refs.firstRunFloorsScroller[0].scrollTo({x:"100%"}, 1500)
+                this.$refs.firstRunFloorsScroller[0].scrollTo({x:"100%"}, 1000)
                 setTimeout(() => {
                     this.$refs.firstRunFloorsScroller[0].refresh()
-                }, 1500);
+                }, 1000);
                 setTimeout(() => {
-                    this.$refs.firstRunFloorsScroller[0].scrollTo({x:"100%"}, 1500)
-                }, 1500);
+                    this.$refs.firstRunFloorsScroller[0].scrollTo({x:"100%"}, 1000)
+                }, 1000);
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
@@ -260,28 +260,28 @@ export default {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100px;
-            height: 100px;
+            width: 140px;
+            height: 137px;
             flex-shrink: 0;
             //flex-grow: 1;
             padding: 16px;
             background-size: 100% 100%;
             background-repeat: no-repeat;
             position: relative;
-            transform: scale(1.3);
+            transform: translateY(-2px) scale(1.25);
             .before, .after {
                 position: absolute;
                 left: 0px;
                 top: 0px;
                 height: 20px;
                 width: 20px;
-                transform: translate(4px, -2px);
+                transform: translate(4px, 13px);
             }
             .after {
                 right: 0px;
                 left: unset;
                 top: 0px;
-                transform: translate(-8px, -4px);
+                transform: translate(-9px, 6px);
                 z-index: 2;
             }
             > * {
@@ -304,6 +304,7 @@ export default {
             overflow: visible !important;
             .__panel {
                 overflow: visible!important;
+                height: 137px;
             }
         }
         .floors {
@@ -312,7 +313,7 @@ export default {
             width: 100%;
             height: 100%;
             z-index: 0;
-            transition: 0.7s ease;
+            transition: 1s ease;
             .floor {
                 height: 100%;
                 transition: 1s ease;
@@ -320,9 +321,25 @@ export default {
                     margin-left: 24px;
                 }
                 &.floors-group-transition-enter{
+                    opacity: 0;
                     transform: translateX(-100%);
+                    .floor-content {
+                        .top-info {
+                            .icon {
+                                &.floor {
+                                    width: 100%;
+                                    height: 100%;
+                                    transform: translate(0px, 0px);
+                                }
+                                &.curse {
+                                    opacity: 0;
+                                }
+                            }
+                        }
+                    }
                 }
                 &.floors-group-transition-leave-to {
+                    opacity: 0;
                     transform: translateX(100%);
                 }
                 &.floors-group-transition-leave-active {
@@ -345,27 +362,35 @@ export default {
                     background-repeat: repeat;
                     box-shadow: inset 0px 10px 40px rgba(0, 0, 0, 1);
                     width: 200px;
+                    border-radius: 20px;
                     .top-info {
                         display: flex;
-                        transform: translateY(-8px);
                         position: absolute;
                         left: 0px;
                         top: 0px;
                         z-index: 3;
                         pointer-events: none;
+                        width: 100%;
+                        height: 100%;
                         .icon {
                             background-position: center;
                             background-repeat: no-repeat;
                             background-size: contain;
-                            transform: scale(2);
+                            //transform: scale(2);
                             &.floor {
-                                width: 28px;
-                                height: 16px;
+                                transition-delay: 1s;
+                                width: 48px;
+                                height: 32px;
+                                transform: translate(-12px, -12px);
                             }
                             &.curse {
-                                width: 15px;
-                                height: 15px;
-                                transform: translateY(3px) scale(2);
+                                opacity: 1;
+                                width: 30px;
+                                height: 30px;
+                                position: absolute;
+                                transform: translate(16px);
+                                transition: 1s ease;
+                                transition-delay: 2s;
                             }
                         }
                     }
@@ -375,6 +400,7 @@ export default {
                         height: 100%;
                         width: 100%;
                         display: flex;
+                        border-radius: 20px;
                         &::before {
                             content: "";
                             width: 100%;
