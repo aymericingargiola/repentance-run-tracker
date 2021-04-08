@@ -151,6 +151,66 @@ function isSameRun(seed) {
     })
 }
 
+function collectibleManager(sameRun, collectible, status) {
+    const playerContext = collectible.player
+
+    // add itemsCollected key on last floor if doesn't exist
+    if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
+
+    // add activables key to context player if doesn't exist and if current collectible is an activable
+    if (collectible.itemType === "Active" && !sameRun.characters[playerContext].activables) sameRun.characters[playerContext].activables = []
+
+    // return a filtered array with matching item
+    const foundItem = sameRun.floors.map((floor, index) => {
+        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === collectible.id) : -1
+        return {
+            floorIndex: index,
+            itemIndex: itemIndex,
+            itemPlayer: itemIndex >= 0 ? floor.itemsCollected[itemIndex].player : null,
+            itemType: itemIndex >= 0 ? floor.itemsCollected[itemIndex].itemType : null,
+            itemRemoved: itemIndex >= 0 ? floor.itemsCollected[itemIndex].removed : null,
+            itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
+        }
+    }).filter(item => item.itemIndex > -1)
+
+    // check if at least one item is matching
+    if (foundItem.length > 0) {
+        const lastFoundItem = foundItem[foundItem.length - 1]
+        switch (status) {
+            case 'add':
+                if (lastFoundItem.itemRemoved === true) {
+                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 1
+                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = false
+                } else {
+                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
+                }
+                if (lastFoundItem.itemType === "Active") {
+                    sameRun.characters[playerContext].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
+                }
+            case 'remove':
+                if (lastFoundItem.itemRemoved === false && lastFoundItem.itemsNumber > 0) {
+                    if(lastFoundItem.itemsNumber === 1) {
+                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 0
+                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = true
+                    } else if (lastFoundItem.itemsNumber > 1) {
+                        sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += -1
+                    }
+                    if (lastFoundItem.itemType === "Active") {
+                        const itemToRemoveIndex = sameRun.characters[playerContext].activables.findIndex(item => item.id === collectible.id)
+                        sameRun.characters[playerContext].activables.splice(itemToRemoveIndex, 1)
+                    }
+                }
+        }
+    }
+
+    // if no item found, create a new one if the status is on "add"
+    else if (status === 'add') {
+        collectible.number = 1
+        sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(collectible)
+        if (collectible.itemType === "Active") sameRun.characters[playerContext].activables.push(collectible)
+    }
+}
+
 function updateRun(params = {}) {
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
@@ -174,56 +234,10 @@ function updateRun(params = {}) {
                     if (!params.character.ignore) sameRun.characters.push(params.character)
                     break
                 case 'adding collectible':
-                    if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) {
-                        sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
-                        sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
-                    }
-                    else {
-                        const foundItem = sameRun.floors.map((floor, index) => {
-                            const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
-                            return {
-                                floorIndex: index,
-                                itemIndex: itemIndex,
-                                itemType: itemIndex >= 0 ? floor.itemsCollected[itemIndex].itemType : null,
-                                itemRemoved: itemIndex >= 0 ? floor.itemsCollected[itemIndex].removed : null,
-                                itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
-                            }
-                        }).filter(item => item.itemIndex > -1)
-                        if (foundItem.length > 0) {
-                            if (foundItem[foundItem.length - 1].itemRemoved === true) {
-                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number = 1
-                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].removed = false
-                            } else {
-                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += 1
-                            }
-                        }
-                        else {
-                            params.collectible.number = 1
-                            sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(params.collectible)
-                        }
-                    }
+                    collectibleManager(sameRun, params.collectible, "add")
                     break
                 case 'removing collectible':
-                    const foundItem = sameRun.floors.map((floor, index) => {
-                        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === params.collectible.id) : -1
-                        return {
-                            floorIndex: index,
-                            itemIndex: itemIndex,
-                            itemType: itemIndex >= 0 ? floor.itemsCollected[itemIndex].itemType : null,
-                            itemRemoved: itemIndex >= 0 ? floor.itemsCollected[itemIndex].removed : null,
-                            itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
-                        }
-                    }).filter(item => item.itemIndex > -1)
-                    if (foundItem.length > 0) {
-                        if (foundItem[foundItem.length - 1].itemRemoved === false && foundItem[foundItem.length - 1].itemsNumber > 0) {
-                            if(foundItem[foundItem.length - 1].itemsNumber === 1) {
-                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number = 0
-                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].removed = true
-                            } else if (foundItem[foundItem.length - 1].itemsNumber > 1) {
-                                sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += -1
-                            }
-                        }
-                    }
+                    collectibleManager(sameRun, params.collectible, "remove")
                     break
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
