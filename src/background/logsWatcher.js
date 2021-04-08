@@ -37,12 +37,32 @@ function getGameState(string) {
     return string.split(" ")[4]
 }
 
-function getCollectible(string, splitValue) {
+function getPlayer(string) {
+    return string.split(" ")[string.split(" ").findIndex(value => value === "player") + 1]
+}
+
+function getTrinket(string, splitValue) {
+    const id = parseInt(string.split(" ")[splitValue])
+    const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
     return {
-        id: parseInt(string.split(" ")[splitValue]),
-        title: items.collectibles.find(collectible => collectible.itemID === parseInt(string.split(" ")[splitValue])).title,
-        itemType: items.collectibles.find(collectible => collectible.itemID === parseInt(string.split(" ")[splitValue])).itemType,
-        category: items.collectibles.find(collectible => collectible.itemID === parseInt(string.split(" ")[splitValue])).category,
+        id: id,
+        title: matchingTrinket.title,
+        category: matchingTrinket.category,
+        player: getPlayer(string),
+        removed: false,
+        smelted: false
+    }
+}
+
+function getCollectible(string, splitValue) {
+    const id = parseInt(string.split(" ")[splitValue])
+    const matchingItem = items.collectibles.find(collectible => collectible.itemID === id)
+    return {
+        id: id,
+        title: matchingItem.title,
+        itemType: matchingItem.itemType,
+        category: matchingItem.category,
+        player: getPlayer(string),
         removed: false
     }
 }
@@ -284,11 +304,6 @@ function parseLogs(newLogs, logArray) {
             if (currentCurse) currentFloor.curse = currentCurse
             updateRun({trigger: "level init"})
         }
-        // if(log.includes("Curse")) {
-        //     currentCurse = logArray[logArray.lastIndexOf(log) + 1].split(" ").slice(2).join(" ")
-        //     currentFloor.curse = currentCurse
-        //     updateRun({trigger: "curse"})
-        // }
         if(log.includes("generated rooms")) {
             if (!currentRunInit) {
                 console.log(log)
@@ -311,6 +326,16 @@ function parseLogs(newLogs, logArray) {
             console.log(log)
             updateRun({trigger: "removing collectible", collectible: getCollectible(log, 5)})
             saveRunsToDisk()
+        }
+        if(log.includes("Adding trinket")) {
+            console.log(log)
+            //updateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
+            //saveRunsToDisk()
+        }
+        if(log.includes("Adding smelted trinket")) {
+            console.log(log)
+            //updateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
+            //saveRunsToDisk()
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log(log)
