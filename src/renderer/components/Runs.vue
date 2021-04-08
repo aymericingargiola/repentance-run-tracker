@@ -320,9 +320,14 @@ export default {
                 &:not(:first-child) {
                     margin-left: 24px;
                 }
+                &:last-child {
+                    .floor-content {
+                        margin-right: 224px;
+                    }
+                }
                 &.floors-group-transition-enter{
                     opacity: 0;
-                    transform: translateX(-100%);
+                    transform: translateX(100%);
                     .floor-content {
                         .top-info {
                             .icon {
@@ -340,7 +345,7 @@ export default {
                 }
                 &.floors-group-transition-leave-to {
                     opacity: 0;
-                    transform: translateX(100%);
+                    transform: translateX(200%);
                 }
                 &.floors-group-transition-leave-active {
                     position: absolute;
