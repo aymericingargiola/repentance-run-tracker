@@ -1,6 +1,6 @@
 <template>
     <section class="section runs">
-        <!-- <span class="logs" style="font-size:8px">{{this.allRunsToRemoveAlert}}</span> -->
+        <span class="logs" style="font-size:8px">{{this.allRunsMostRecentFirst}}</span>
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, ridx) in allRunsMostRecentFirst">
                 <li :class="
@@ -362,9 +362,9 @@ export default {
                     position: relative;
                     //width: 1200px;
                     height: 100%;
-                    background-position: left;
-                    background-size: contain;
-                    background-repeat: repeat;
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
                     box-shadow: inset 0px 10px 40px rgba(0, 0, 0, 1);
                     width: 200px;
                     border-radius: 20px;
@@ -420,13 +420,13 @@ export default {
                         .floor-name {
                             z-index: 0;
                             font-family: "Up Heaval", sans-serif;
-                            font-size: 36px;
+                            font-size: 30px;
                             position: absolute;
                             left: 10px;
                             top: 10px;
-                            opacity: 0.4;
-                            mix-blend-mode: soft-light;
-                            white-space: nowrap;
+                            opacity: 0.6;
+                            mix-blend-mode: screen;
+                            text-align: left;
                         }
                         .custom-scroll-items {
                             height: unset !important;
@@ -520,7 +520,7 @@ export default {
                     .floor {
                         &:last-child {
                             .floor-content {
-                                outline: 6px dashed rgba(0,0,0,0.1);
+                                outline: 5px dashed rgba(0,0,0,0.1);
                                 outline-offset: 0px;
                                 animation-name: outline-zooming;
                                 animation-iteration-count: infinite;
@@ -528,19 +528,19 @@ export default {
                                 @keyframes outline-zooming {
                                     0% {
                                         outline-offset: 0px;
-                                        outline: 6px dashed rgba(0,0,0,0.1);
+                                        outline: 5px dashed rgba(0,0,0,0.1);
                                     }
                                     25% {
                                         outline-offset: 3px;
-                                        outline: 6px dashed rgba(0,0,0,0.3);
+                                        outline: 5px dashed rgba(0,0,0,0.3);
                                     }
                                     50% {
                                         outline-offset: 3px;
-                                        outline: 6px dashed rgba(0,0,0,0.3);
+                                        outline: 5px dashed rgba(0,0,0,0.3);
                                     }
                                     100% {
                                         outline-offset: 0px;
-                                        outline: 6px dashed rgba(0,0,0,0.1);
+                                        outline: 5px dashed rgba(0,0,0,0.1);
                                     }
                                 }
                             }

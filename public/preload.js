@@ -9,6 +9,7 @@ const validChannels = [
   'HIDE_APP', 
   'CLOSE_APP', 
   'FULLSCREEN_APP',
+  'IS_APP_READY',
   'SAVE_STORE',
   'SYNC_WATCH_STATUS',
   'SYNC_CREATE_RUN',

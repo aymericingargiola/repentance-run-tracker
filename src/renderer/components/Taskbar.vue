@@ -2,7 +2,7 @@
     <div class="taskbar">
         <div class="background"></div>
         <div class="drag"></div>
-        <div class="logo">repentance run tracker</div>
+        <div class="logo">repentance run tracker <div class="app-version">{{appVersion}}</div></div>
         <div class="menu center-menu">
         </div>
         <div class="menu right-menu" v-if="$isElectron">
@@ -21,6 +21,7 @@ export default {
     name: "Taskbar",
     data() {
         return {
+            appVersion: process.env.VERSION
         }
     },
     mounted() {
@@ -100,6 +101,14 @@ export default {
         pointer-events: none;
         -webkit-app-region: drag;
         transform: translateY(-4px);
+        .app-version {
+            font-size: 10px;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 0;
+            display: inline-block;
+            height: 0px;
+        }
     }
     .menu {
         pointer-events: all;

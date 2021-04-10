@@ -26,4 +26,4 @@ pnpm-debug.log*
 /dist_electron
 
 # datas
-/datas
+/datas/*.json

@@ -19,7 +19,7 @@
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../../store/classes/Run'
 export default {
-    name: "AskRemoveRuns",
+    name: "BrokenRuns",
     data() {
         return {
             anyBrokenRun: []

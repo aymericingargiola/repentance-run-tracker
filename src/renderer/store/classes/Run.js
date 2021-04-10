@@ -14,7 +14,8 @@ export default class Run extends Model {
             runEnd: this.attr(null),
             characters: this.attr(null),
             floors: this.attr(null),
-            toRemove: this.attr(false)
+            toRemove: this.attr(null),
+            extendedSaveMode: this.boolean(false)
         }
     }
 }

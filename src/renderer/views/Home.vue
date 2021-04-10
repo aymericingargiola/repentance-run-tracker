@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <AskRemoveRuns/>
     <Runs/>
+    <BrokenRuns/>
   </div>
 </template>
 
 <script>
 //import moment from 'moment'
 import Runs from '../components/Runs.vue'
-import AskRemoveRuns from '../components/Pops/AskRemoveRuns.vue'
+import BrokenRuns from '../components/Pops/BrokenRuns.vue'
 export default {
   components: {
     Runs,
-    AskRemoveRuns
+    BrokenRuns
   },
   name: "Home",
   data() {

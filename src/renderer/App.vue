@@ -4,11 +4,13 @@
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">
-      <div class="overlay-watch-status" v-if="!watchStatus">
-        <div class="image-1 animated" :style="{backgroundImage:loadingImage1}"></div>
-        <div class="image-2 animated" :style="{backgroundImage:loadingImage2}"></div>
-      </div>
-      <router-view />
+        <transition name="fade">
+          <div class="overlay-watch-status" v-if="!watchStatus">
+              <div class="image-1 animated" :style="{backgroundImage:loadingImage1}"></div>
+              <div class="image-2 animated" :style="{backgroundImage:loadingImage2}"></div>
+          </div>
+        </transition>
+        <router-view />
     </div>
   </div>
 </template>
@@ -26,7 +28,6 @@ export default {
     return {
       watchStatus: false,
       loading: false,
-      askRemoveRun: false,
       loadingImage1: "url('img/loadimages/loadimages-001.png')",
       loadingImage2: "url('img/loadimages/loadimages-002_2.png')"
     }
@@ -35,31 +36,28 @@ export default {
   }),
   mounted () {
     this.randomLoadingImages()
+    window?.ipc?.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
         console.log(response)
         if(response.watching === false) this.randomLoadingImages()
         this.watchStatus = response.watching
     })
-    window.ipc.on('SYNC_ASK_REMOVE_RUN', (response) => {
-        console.log(response)
-        this.askRemoveRun = true
-        //this.runRepo.destroy(response.run.id)
-    })
   },
   methods: {
     randomLoadingImages() {
+      //Random images for loader
       let nb = Math.floor(Math.random()*(56-1+1)+1);
       if (nb < 10) nb = `00${nb}`
       else if (nb < 100) nb = `0${nb}`
       this.loadingImage1 = loadingImagesStringTemplate.replace('#', nb)
       this.loadingImage2 = loadingImagesStringTemplate.replace('#', `${nb}_2`)
-      console.log(nb)
     }
   }
 }
 </script>
 
 <style lang="scss">
+  @import "assets/styles/scss/vars/_animations";
   @import "assets/styles/scss/vars/_colors";
   @import "assets/styles/scss/vars/_fonts";
 
@@ -164,7 +162,7 @@ export default {
 
   //Overlay watch status
   .overlay-watch-status {
-    display: none;
+    //display: none;
     background: black;
     position: fixed;
     width: 100%;
@@ -187,23 +185,16 @@ export default {
         animation-duration: 0.20s;
         animation-direction: alternate;
       }
-      @keyframes alternate {
-        0% {
-          opacity: 1;
-        }
-        49% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
+
     }
     .image-2 {
       animation-delay: 0.20s;
+    }
+    &.fade-enter-active, &.fade-leave-active {
+      transition: opacity .5s;
+    }
+    &.fade-enter, &.fade-leave-to {
+      opacity: 0;
     }
   }
 </style>
