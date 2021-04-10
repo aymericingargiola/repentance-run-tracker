@@ -3,8 +3,8 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { writeFileAsync } from './tools/fileSystem'
-import { startLogsWatch } from './logsWatcher'
-import moment from 'moment'
+import { startLogsWatch } from './runs-watcher'
+import { startModWatch } from './mod-watcher'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
@@ -12,7 +12,7 @@ const fs = require('fs')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 let win
 
-console.log("electron", process.versions.electron)
+// console.log("electron", process.versions.electron)
 
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
@@ -90,6 +90,7 @@ async function createWindow() {
   });
 
   startLogsWatch(win)
+  //startModWatch(win, isDevelopment, dataFolder)
 }
 
 // Quit when all windows are closed.

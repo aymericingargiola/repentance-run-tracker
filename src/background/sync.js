@@ -2,6 +2,7 @@
 //const remote = require ("electron").remote
 module.exports = {
     syncApp: function(win, params) {
+        if (!win) return
         switch (params.trigger) {
             case 'logs watch status':
                 win.webContents.send('SYNC_WATCH_STATUS', params)

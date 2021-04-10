@@ -1,98 +1,22 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { fileResolve } = require('./tools/fileSystem')
-const {isRunning, cloneFrom, findLastIndex } = require('./tools/methods')
-const syncApp = require('./sync').syncApp
+const { getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, saveRunsToDisk, removeRun } = require('./helpers')
+const { fileResolve } = require('../tools/fileSystem')
+const { isRunning, findLastIndex } = require('../tools/methods')
+const { syncApp } = require('../sync')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 const moment = require('moment')
-const characters = require('./jsons/characters.json')
-const items = require('./jsons/items.json')
-const floors = require('./jsons/floors.json')
 const splitLines = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
 const runsJsonPath = `${dataFolder}\\runs.json`
-let runs, repentanceLogs, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
+let extendedSaveMode = false //This variable can be used later to save more informations (Stats, bombs, coins, time...), with the help of a mod or game memory reading
+let watchingLogs, runs, repentanceLogs, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
 let repentanceIsLaunched = false
 let inRun = false
-// let backToMenu = false
 let firstInit = false
-
-function getCharater(string) {
-    return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
-}
-
-function getSeed(string) {
-    return {
-        seed: `${string.split(" ")[5]} ${string.split(" ")[6]}`
-    }
-}
-
-function getFloor(string) {
-    return cloneFrom(floors.stages.find(floor => floor.id === `${string.split(" ")[4].match(/\d+/)[0]}.${string.split(" ")[6]}`))
-}
-
-function getGameState(string) {
-    return string.split(" ")[4]
-}
-
-function getPlayer(string) {
-    return string.split(" ")[string.split(" ").findIndex(value => value === "player") + 1]
-}
-
-function getTrinket(string, splitValue) {
-    const id = parseInt(string.split(" ")[splitValue])
-    const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
-    return {
-        id: id,
-        title: matchingTrinket.title,
-        category: matchingTrinket.category,
-        player: getPlayer(string),
-        removed: false,
-        smelted: false
-    }
-}
-
-function getCollectible(string, splitValue) {
-    const id = parseInt(string.split(" ")[splitValue])
-    const matchingItem = items.collectibles.find(collectible => collectible.itemID === id)
-    return {
-        id: id,
-        title: matchingItem.title,
-        itemType: matchingItem.itemType,
-        category: matchingItem.category,
-        player: getPlayer(string),
-        removed: false
-    }
-}
-
-function getRunEnd(string) {
-    return {
-        date: moment().unix(),
-        win: string.includes("Game Over") ? false : true,
-        killedBy: string.includes("Game Over") ? string.split(" ")[6].slice(1,-1) : null,
-        spawnedBy: string.includes("Game Over") ? string.split(" ")[9].slice(1,-1) : null,
-        damageFlags: string.includes("Game Over") ? string.split(" ")[12].slice(1,-1) : null
-    }
-}
-
-function saveRunsToDisk() {
-    fs.writeFile(runsJsonPath, JSON.stringify(runs), 'utf8', (err) => {if (err) throw err})
-}
-
-function removeRun(runId) {
-    console.log(`Removing run : ${runId}...`)
-    runIndex = runs.findIndex(run => run.id === runId)
-    if(runIndex != -1) {
-        syncApp(win,{trigger: "remove run", run: runs[runIndex].id})
-        runs.splice(runIndex, 1)
-        console.log(`Run : ${runId} was removed`)
-        saveRunsToDisk()
-    } else {
-        console.log(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
-    }
-}
+// let backToMenu = false
 
 function checkPreviousRuns() {
     let deleted = false
@@ -107,6 +31,9 @@ function checkPreviousRuns() {
             console.log("Current run was generated from a direct reset, remove previous run")
             syncApp(win,{trigger: "remove run", run: runs[1].id})
             runs.splice(1, 1)
+            currentCharater = null
+            currentFloor = null
+            currentCurse = null
             deleted = true
         } else console.log("Run was not directly generated, check if same game state...")
         if (!deleted && runs[1].gameState === currentGameState) {
@@ -131,7 +58,6 @@ function checkPreviousRuns() {
 
 function isSameRun(seed) {
     if (!inRun) inRun = true
-    //if (backToMenu) backToMenu = false
     return runs.find(function(run, i) {
         console.log(`compare run ${run.seed} id with current ${seed} id : compare run ${run.id} with current ${currentRun.id}`)
         if (currentRun.id === run.id) {
@@ -166,10 +92,10 @@ function collectibleManager(sameRun, collectible, status) {
         return {
             floorIndex: index,
             itemIndex: itemIndex,
-            itemPlayer: itemIndex >= 0 ? floor.itemsCollected[itemIndex].player : null,
-            itemType: itemIndex >= 0 ? floor.itemsCollected[itemIndex].itemType : null,
-            itemRemoved: itemIndex >= 0 ? floor.itemsCollected[itemIndex].removed : null,
-            itemsNumber: itemIndex >= 0 ? floor.itemsCollected[itemIndex].number : 0
+            itemPlayer: itemIndex > -1 ? floor.itemsCollected[itemIndex].player : null,
+            itemType: itemIndex > -1 ? floor.itemsCollected[itemIndex].itemType : null,
+            itemRemoved: itemIndex > -1 ? floor.itemsCollected[itemIndex].removed : null,
+            itemsNumber: itemIndex > -1 ? floor.itemsCollected[itemIndex].number : 0
         }
     }).filter(item => item.itemIndex > -1)
 
@@ -211,7 +137,7 @@ function collectibleManager(sameRun, collectible, status) {
     }
 }
 
-function updateRun(params = {}) {
+function updateOrCreateRun(params = {}) {
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
     const sameRun = isSameRun(currentRun.seed)
@@ -229,9 +155,10 @@ function updateRun(params = {}) {
                         const gameMode = params.log.includes("copy") ? "greed" : "normal"
                         sameRun.gameMode = gameMode
                     }
+                    currentGameMode = sameRun.gameMode
                     break
                 case 'init other player':
-                    if (!params.character.ignore) sameRun.characters.push(params.character)
+                    if (params.character && !params.character.ignore) sameRun.characters.push(params.character)
                     break
                 case 'adding collectible':
                     collectibleManager(sameRun, params.collectible, "add")
@@ -283,7 +210,8 @@ function updateRun(params = {}) {
             toRemove: {
                 status: false,
                 checkedByUser: false
-            }
+            },
+            extendedSaveMode: extendedSaveMode
         }
         console.log(run)
         runs.unshift(run)
@@ -293,6 +221,7 @@ function updateRun(params = {}) {
     }
 }
 
+//Parse Repentance logs file
 function parseLogs(newLogs, logArray) {
     newLogs.forEach(log => {
         if(log.includes("Loading GameState")) {
@@ -303,7 +232,7 @@ function parseLogs(newLogs, logArray) {
             console.log(log)
             if(!currentCharater && !currentRunInit) currentCharater = getCharater(log)
             else if (currentRunInit) {
-                updateRun({trigger: "init other player", character: getCharater(log)})
+                updateOrCreateRun({trigger: "init other player", character: getCharater(log)})
             }
         }
         if(log.includes("RNG Start Seed")) {
@@ -316,50 +245,51 @@ function parseLogs(newLogs, logArray) {
             currentCurse = logArray[logArray.lastIndexOf(log) + 1].includes("Curse") ? logArray[logArray.lastIndexOf(log) + 1].split(" ").slice(2).join(" ") : null
             currentFloor = getFloor(log)
             if (currentCurse) currentFloor.curse = currentCurse
-            updateRun({trigger: "level init"})
+            updateOrCreateRun({trigger: "level init"})
         }
         if(log.includes("generated rooms")) {
             if (!currentRunInit) {
                 console.log(log)
                 currentRunInit = true
-                updateRun({trigger: "generated rooms"})
+                updateOrCreateRun({trigger: "generated rooms"})
             }
         }
         if(log.split(' ')[2] === "Room") {
             if (!currentGameMode) {
                 console.log(log)
-                updateRun({trigger: "game mode", log: log})
+                updateOrCreateRun({trigger: "game mode", log: log})
             }
         }
         if(log.includes("Adding collectible")) {
             console.log(log)
-            updateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
-            saveRunsToDisk()
+            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
+            saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Removing voided collectible")) {
             console.log(log)
-            updateRun({trigger: "removing collectible", collectible: getCollectible(log, 5)})
-            saveRunsToDisk()
+            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, 5)})
+            saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding trinket")) {
             console.log(log)
-            //updateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
-            //saveRunsToDisk()
+            //updateOrCreateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
+            //saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding smelted trinket")) {
             console.log(log)
-            //updateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
-            //saveRunsToDisk()
+            //updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
+            //saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log(log)
-            updateRun({trigger: "run end", log: log})
+            updateOrCreateRun({trigger: "run end", log: log})
             currentRunInit = false
             currentRun = null
             currentCharater = null
             currentFloor = null
             currentCurse = null
-            saveRunsToDisk()
+            currentGameMode = null
+            saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Menu Game Init")) {
             console.log(log)
@@ -371,6 +301,13 @@ function parseLogs(newLogs, logArray) {
             currentFloor = null
             currentCurse = null
             currentGameMode = null
+        }
+        //If "Repentance Run Tracker Extended" mod is loaded, parse extra logs lines
+        if (extendedSaveMode) {
+            if(log.includes("[RRTE EXTEND LOGS] Player updated")) {
+                console.log(log)
+
+            }
         }
     })
 }
@@ -396,11 +333,12 @@ function unWatchRepentanceLogs() {
 }
 
 async function init() {
-    const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
-    runs = JSON.parse(fs.readFileSync(loadRuns))
-    currentRunInit = false
-    repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8")
-    repentanceLogsArray = repentanceLogs.split(splitLines)
+    const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
+    runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
+    currentRunInit = false //Lock update possibilities until a run is launched
+    repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
+    repentanceLogsArray = repentanceLogs.split(splitLines) //Split line by line
+    extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("Loading GameState")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
     let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
     let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
@@ -419,37 +357,52 @@ async function init() {
     //console.log('init values : ', currentRun, currentCharater, currentFloor)
 }
 
+
+ipcMain.on('IS_APP_READY', (event, payload) => {
+    console.log(payload)
+    syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
+})
+
+//Frontend event, trigger if a run is edited
 ipcMain.on('USER_EDIT_RUN', (event, payload) => {
     console.log(payload)
 })
 
+//Frontend event, trigger if a run is removed
 ipcMain.on('USER_REMOVE_RUN', (event, payload) => {
     console.log(`User wants to remove run : ${payload}`)
-    removeRun(payload)
+    removeRun(payload, runs, runsJsonPath, win)
 })
 
 module.exports = {
     startLogsWatch: function(window) {
         win = window
+        let wait = false
         setInterval(() => {
-            isRunning('isaac-ng.exe', (status) => {
-                if (!status && repentanceIsLaunched) {
-                    console.log("unwatch logs")
-                    repentanceIsLaunched = false
-                    unWatchRepentanceLogs()
-                    saveRunsToDisk()
-                    syncApp(win,{trigger: "logs watch status", watching: false})
-                } else if (status && !repentanceIsLaunched) {
-                    console.log("Waiting for logs...")
-                    repentanceIsLaunched = true
-                    setTimeout(() => {
-                        console.log("Watching logs")
-                        init()
-                        watchRepentanceLogs()
-                        syncApp(win,{trigger: "logs watch status", watching: true})
-                    }, 10000)
-                }
-            })
+            if(!wait) {
+                wait = true
+                isRunning('isaac-ng.exe', (status) => {
+                    if (!status && repentanceIsLaunched) {
+                        console.log("unwatch logs")
+                        repentanceIsLaunched = false
+                        unWatchRepentanceLogs()
+                        saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+                        syncApp(win,{trigger: "logs watch status", watching: false})
+                        wait = false
+                    } else if (status && !repentanceIsLaunched) {
+                        console.log("Waiting for logs...")
+                        repentanceIsLaunched = true
+                        setTimeout(() => {
+                            watchingLogs = true
+                            console.log("Watching logs")
+                            init()
+                            watchRepentanceLogs()
+                            syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
+                            wait = false
+                        }, 10000)
+                    }
+                })
+            }
         }, 1000)
     }
 }
