@@ -1,0 +1,229 @@
+[
+    {
+        "id":"900",
+        "name":"Reap Creep",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"901",
+        "name":"Lil Blub",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"902",
+        "name":"Rainmaker",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"903",
+        "name":"The Visage",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "903.1",
+                "name": "The Visage mask"
+            },
+            {
+                "id": "903.10",
+                "name": "The Visage chain"
+            },
+            {
+                "id": "903.20",
+                "name": "The Visage plasma"
+            }
+        ]
+    },
+    {
+        "id":"904",
+        "name":"Siren",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "904.1",
+                "name": "Siren's skull"
+            },
+            {
+                "id": "904.10",
+                "name": "Siren helper projectile"
+            }
+        ]
+    },
+    {
+        "id":"905",
+        "name":"The Heretic",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"906",
+        "name":"Hornfel",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "906.1",
+                "name": "Hornfel decoy"
+            }
+        ]
+    },
+    {
+        "id":"907",
+        "name":"Great Gideon",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "907.0.1",
+                "name": "Great Gideon (defeated)"
+            }
+        ]
+    },
+    {
+        "id":"908",
+        "name":"Baby Plum",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"908",
+        "name":"Baby Plum",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"909",
+        "name":"The Scourge",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "910.10",
+                "name": "The Scourge (chain)"
+            }
+        ]
+    },
+    {
+        "id":"910",
+        "name":"Chimera",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "910.1",
+                "name": "Chimera body"
+            },
+            {
+                "id": "910.2",
+                "name": "Chimera head"
+            }
+        ]
+    },
+    {
+        "id":"911",
+        "name":"Rotgut",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "911.1",
+                "name": "Rotgut maggot"
+            },
+            {
+                "id": "911.2",
+                "name": "Rotgut balls"
+            }
+        ]
+    },
+    {
+        "id":"912",
+        "name":"Mother",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "912.10",
+                "name": "Mother 2"
+            },
+            {
+                "id": "912.20",
+                "name": "Dead Isaac"
+            },
+            {
+                "id": "912.30",
+                "name": "Mother worm"
+            },
+            {
+                "id": "912.100",
+                "name": "Mother ball",
+                "related": [
+                    {
+                        "id": "912.100.1",
+                        "name": "Mother ball (medium)"
+                    },
+                    {
+                        "id": "912.100.1",
+                        "name": "Mother ball (small)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"913",
+        "name":"Min Min",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"914",
+        "name":"Clog",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"915",
+        "name":"Singe",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id": "915.1",
+                "name": "Singe's ball"
+            }
+        ]
+    },
+    {
+        "id":"917",
+        "name":"Colostomia",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"918",
+        "name":"Turdlet",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[]
+    },
+    {
+        "id":"919",
+        "name":"Raglich",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id":"919",
+                "name":"Raglich arm"
+            }
+        ]
+    },
+    {
+        "id":"920",
+        "name":"Horny Boys"
+    },
+    {
+        "id":"921",
+        "name":"Horny Boys",
+        "category": "RPEPENTANCE_BOSS",
+        "related":[
+            {
+                "id":"921.1",
+                "name":"Clutch Orbital"
+            }
+        ]
+    }
+]
