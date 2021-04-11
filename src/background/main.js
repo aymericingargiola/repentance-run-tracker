@@ -2,6 +2,7 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { autoUpdater } from 'electron-updater'
 import { writeFileAsync } from './tools/fileSystem'
 import { startLogsWatch } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
@@ -44,9 +45,9 @@ ipcMain.on('SAVE_STORE', async (event, payload) => {
   await writeFileAsync(dataFolder, 'store.json', payload)
 });
 
-ipcMain.on('SAVE_STORE', async (event, payload) => {
-  await writeFileAsync(dataFolder, 'store.json', payload)
-});
+ipcMain.on('APP_VERSION', (event) => {
+  event.reply('APP_VERSION', { appVersion: app.getVersion() })
+})
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -56,8 +57,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     minWidth: 800,
     minHeight: 600,
     autoHideMenuBar: true,
@@ -84,10 +85,15 @@ async function createWindow() {
     win.loadURL('app://./index.html')
   }
 
+  //Check for app updates
+  win.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify()
+  })
+
   win.webContents.on('new-window', function(e, url) {
     e.preventDefault();
-    require('electron').shell.openExternal(url);
-  });
+    require('electron').shell.openExternal(url)
+  })
 
   startLogsWatch(win)
   //startModWatch(win, isDevelopment, dataFolder)
@@ -137,3 +143,16 @@ if (isDevelopment) {
     })
   }
 }
+
+//Notify updates
+autoUpdater.on('update-available', () => {
+  win.webContents.send('UPDATE_AVAILABLE')
+})
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
+  win.webContents.send('UPDATE_DOWNLOADED')
+})
+
+ipcMain.on('RESTART_APP', () => {
+  autoUpdater.quitAndInstall()
+})

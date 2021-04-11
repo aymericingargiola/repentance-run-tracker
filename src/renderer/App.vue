@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <Taskbar/>
+    <Taskbar :app-version="appVersion"/>
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">
+        <div v-if="updateAvailable">{{updateAvailable}}</div>
+        <div v-if="updateDownloaded">{{updateDownloaded}}</div>
         <transition name="fade">
           <div class="overlay-watch-status" v-if="!watchStatus">
               <div class="image-1 animated" :style="{backgroundImage:loadingImage1}"></div>
@@ -26,6 +28,9 @@ export default {
   },
   data() {
     return {
+      appVersion: null,
+      updateAvailable: false,
+      updateDownloaded: false,
       watchStatus: false,
       loading: false,
       loadingImage1: "url('img/loadimages/loadimages-001.png')",
@@ -36,14 +41,33 @@ export default {
   }),
   mounted () {
     this.randomLoadingImages()
-    window?.ipc?.send('IS_APP_READY')
+    window.ipc.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
         console.log(response)
         if(response.watching === false) this.randomLoadingImages()
         this.watchStatus = response.watching
     })
+
+    //Get app version
+    if (!this.appVersion) window.ipc.send('APP_VERSION');
+    window.ipc.on('APP_VERSION', (response) => {
+      console.log(response)
+      this.appVersion = response.appVersion
+    })
+
+    window.ipc.on('UPDATE_AVAILABLE', () => {
+      console.log("app update available")
+      this.updateAvailable = true
+    })
+    window.ipc.on('UPDATE_DOWNLOADED', (response) => {
+      console.log("app update downloaded", response)
+      this.updateDownloaded = true
+    })
   },
   methods: {
+    restartApp() {
+      window.ipc.send('RESTART_APP')
+    },
     randomLoadingImages() {
       //Random images for loader
       let nb = Math.floor(Math.random()*(56-1+1)+1);

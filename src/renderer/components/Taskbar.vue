@@ -19,9 +19,11 @@
 <script>
 export default {
     name: "Taskbar",
+    props: {
+        appVersion: String
+    },
     data() {
         return {
-            appVersion: process.env.VERSION
         }
     },
     mounted() {

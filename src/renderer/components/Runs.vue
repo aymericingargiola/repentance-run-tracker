@@ -1,6 +1,6 @@
 <template>
-    <section class="section runs">
-        <span class="logs" style="font-size:8px">{{this.allRunsMostRecentFirst}}</span>
+    <section class="section runs" v-if="this.allRunsMostRecentFirst">
+        <!-- <span class="logs" style="font-size:12px">{{this.allRunsMostRecentFirst}}</span> -->
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, ridx) in allRunsMostRecentFirst">
                 <li :class="
