@@ -400,6 +400,8 @@ module.exports = {
                             syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
                             wait = false
                         }, 10000)
+                    } else {
+                        wait = false
                     }
                 })
             }
