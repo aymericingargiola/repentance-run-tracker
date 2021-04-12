@@ -1,28 +1,29 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, saveRunsToDisk, removeRun } = require('./helpers')
+const { getOptions, getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, saveRunsToDisk, removeRun } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 const moment = require('moment')
-const splitLines = /[\r\n]+/g
+const splitFormat = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
+const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 const runsJsonPath = `${dataFolder}\\runs.json`
-let extendedSaveMode = false //This variable can be used later to save more informations (Stats, bombs, coins, time...), with the help of a mod or game memory reading
-let watchingLogs, runs, repentanceLogs, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
+let watchingLogs, runs, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
 // let backToMenu = false
+let extendedSaveMode = false //This variable can be used later to save more informations (Stats, bombs, coins, time...), with the help of a mod or game memory reading
 
 function checkPreviousRuns() {
     let deleted = false
     let sameGameStateAlreadyChecked = false
     const repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8")
-    const repentanceLogsArray = repentanceLogs.split(splitLines)
+    const repentanceLogsArray = repentanceLogs.split(splitFormat)
     let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
     const currentRunIndex = repentanceLogsArray.findIndex(line => line === seedsList[seedsList.length - 1])
     if ((runs[1] != undefined && runs[1].runEnd.date === null && runs[1].toRemove.checkedByUser === false)) {
@@ -196,6 +197,7 @@ function updateOrCreateRun(params = {}) {
             seed: currentRun.seed,
             gameState: currentGameState,
             gameMode: currentGameMode,
+            gameOptions: repentanceOptions,
             runStart: moment().unix(),
             runUpdate: moment().unix(),
             runEnd: {
@@ -316,7 +318,7 @@ function watchRepentanceLogs() {
     fs.watchFile(repentanceLogsFile,{interval: 500},
         () => {
             const log = fs.readFileSync(repentanceLogsFile, "utf8")
-            const logArray = log.split(splitLines)
+            const logArray = log.split(splitFormat)
             const lines = logArray.filter(v=>v!='').length
             const diff = lines - logsLastReadLines
             if (diff <= 0) return
@@ -337,7 +339,7 @@ async function init() {
     runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
-    repentanceLogsArray = repentanceLogs.split(splitLines) //Split line by line
+    repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
     extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("Loading GameState")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
     let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
@@ -359,7 +361,6 @@ async function init() {
 
 
 ipcMain.on('IS_APP_READY', (event, payload) => {
-    console.log(payload)
     syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
 })
 
@@ -384,6 +385,7 @@ module.exports = {
                 isRunning('isaac-ng.exe', (status) => {
                     if (!status && repentanceIsLaunched) {
                         console.log("unwatch logs")
+                        watchingLogs = false
                         repentanceIsLaunched = false
                         unWatchRepentanceLogs()
                         saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
@@ -393,11 +395,13 @@ module.exports = {
                         console.log("Waiting for logs...")
                         repentanceIsLaunched = true
                         setTimeout(() => {
-                            watchingLogs = true
                             console.log("Watching logs")
-                            init()
+                            watchingLogs = true
                             watchRepentanceLogs()
-                            syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
+                            init()
+                            repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+                            console.log(repentanceOptions)
+                            syncApp(win,{trigger: "logs watch status", watching: true})
                             wait = false
                         }, 10000)
                     } else {

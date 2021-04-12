@@ -17,7 +17,7 @@
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="name">{{run.characters[0].name}}</div>
-                            <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].name}.png')`}"></div>
+                            <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].trueName} ${parseInt(run.characters[0].id) > 20 ? `Alt` : ``}.png')`}"></div>
                         </div>
                         <vue-scroll :ops="opsFloors" :class="['custom-scroll-floors']" :ref="ridx === 0 ? 'firstRunFloorsScroller' : ''">
                             <transition-group name="floors-group-transition" tag="ul" class="floors">

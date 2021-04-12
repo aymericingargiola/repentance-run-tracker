@@ -7,7 +7,7 @@
         <div v-if="updateAvailable">{{updateAvailable}}</div>
         <div v-if="updateDownloaded">{{updateDownloaded}}</div>
         <transition name="fade">
-          <div class="overlay-watch-status" v-if="!watchStatus">
+          <div class="overlay-watch-status" v-if="!watchStatus || loading">
               <div class="image-1 animated" :style="{backgroundImage:loadingImage1}"></div>
               <div class="image-2 animated" :style="{backgroundImage:loadingImage2}"></div>
           </div>
@@ -33,6 +33,7 @@ export default {
       updateDownloaded: false,
       watchStatus: false,
       loading: false,
+      loadingSignature: null,
       loadingImage1: "url('img/loadimages/loadimages-001.png')",
       loadingImage2: "url('img/loadimages/loadimages-002_2.png')"
     }
@@ -41,6 +42,7 @@ export default {
   }),
   mounted () {
     this.randomLoadingImages()
+
     window.ipc.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
         console.log(response)
@@ -51,7 +53,6 @@ export default {
     //Get app version
     if (!this.appVersion) window.ipc.send('APP_VERSION');
     window.ipc.on('APP_VERSION', (response) => {
-      console.log(response)
       this.appVersion = response.appVersion
     })
 

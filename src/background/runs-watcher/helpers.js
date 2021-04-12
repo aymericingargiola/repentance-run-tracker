@@ -6,6 +6,14 @@ const items = require('../jsons/items.json')
 const floors = require('../jsons/floors.json')
 const moment = require('moment')
 module.exports = {
+    getOptions: (path, splitFormat) => {
+        const options = fs.readFileSync(path, "utf8")
+        const optionsArray = options.split(splitFormat)
+        return {
+            EnableDebugConsole: optionsArray.find(option => option.includes("EnableDebugConsole")).split("=")[1] === "0" ? false : true,
+            EnableMods: optionsArray.find(option => option.includes("EnableMods")).split("=")[1] === "0" ? false : true
+        }
+    },
     getCharater: (string) => {
         //Return matching character from logs
         return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))

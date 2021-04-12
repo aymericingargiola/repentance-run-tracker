@@ -155,7 +155,7 @@
         "id":"19",
         "variant":"0",
         "name":"Jacob",
-        "trueName":"Jacob and Esau",
+        "trueName":"Jacob & Esau",
         "version":"Normal",
         "ignore":false
     },
@@ -163,7 +163,7 @@
         "id":"20",
         "variant":"0",
         "name":"Esau",
-        "trueName":"Jacob and Esau",
+        "trueName":"Jacob & Esau",
         "version":"Normal",
         "ignore":true
     },

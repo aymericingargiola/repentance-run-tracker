@@ -9,6 +9,7 @@ export default class Run extends Model {
             seed: this.string(null),
             gameState: this.string(null),
             gameMode: this.string(null),
+            gameOptions: this.string(null),
             runStart: this.number(null),
             runUpdate: this.number(null),
             runEnd: this.attr(null),
