@@ -72,6 +72,11 @@ module.exports = {
             damageFlags: string.includes("Game Over") ? string.split(" ")[12].slice(1,-1) : null
         }
     },
+    getRunDuration: (end, start) => {
+        const ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"))
+        const duration = moment.duration(ms)
+        return `${Math.floor(duration.asHours()) < 10 ? `0${Math.floor(duration.asHours())}` : Math.floor(duration.asHours())}${moment.utc(ms).format(":mm:ss")}`
+    },
     saveRunsToDisk: (path, datas) => {
         //Update runs json file
         fs.writeFile(path, datas, 'utf8', (err) => {if (err) throw err})

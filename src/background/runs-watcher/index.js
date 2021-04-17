@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, saveRunsToDisk, removeRun } = require('./helpers')
+const { getOptions, getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveRunsToDisk, removeRun } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
@@ -175,6 +175,7 @@ function updateOrCreateRun(params = {}) {
                         sameRun.runEnd.killedBy = runEndInfo.killedBy
                         sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
                         sameRun.runEnd.damageFlags = runEndInfo.damageFlags
+                        sameRun.runDuration = getRunDuration(moment.unix(runEndInfo.date), moment.unix(sameRun.runStart))
                         if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     }
                     break
@@ -200,6 +201,7 @@ function updateOrCreateRun(params = {}) {
             gameOptions: repentanceOptions,
             runStart: moment().unix(),
             runUpdate: moment().unix(),
+            runUserUpdate: null,
             runEnd: {
                 date: null,
                 win: null,
@@ -207,6 +209,7 @@ function updateOrCreateRun(params = {}) {
                 spawnedBy: null,
                 damageFlags: null
             },
+            runDuration: null,
             characters: [currentCharater],
             floors: [currentFloor],
             toRemove: {
@@ -340,7 +343,7 @@ async function init() {
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
-    extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("Loading GameState")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
+    extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("RRTE")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
     let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
     let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
