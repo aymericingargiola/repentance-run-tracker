@@ -6,6 +6,8 @@ import { autoUpdater } from 'electron-updater'
 import { writeFileAsync } from './tools/fileSystem'
 import { startLogsWatch } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
+import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
+import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
@@ -94,9 +96,8 @@ async function createWindow() {
     e.preventDefault();
     require('electron').shell.openExternal(url)
   })
-
   startLogsWatch(win)
-  //startModWatch(win, isDevelopment, dataFolder)
+  startModWatch(win, isDevelopment, modFile.default, modMetadata.default)
 }
 
 // Quit when all windows are closed.

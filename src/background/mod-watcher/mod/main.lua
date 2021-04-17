@@ -1,6 +1,3 @@
--- [v] 0.1.0
--- [n] Repentance_Run_Tracker_Extended
--- test23
 RRTE = RegisterMod("Repentance Run Tracker Extended", 1)
 RRTE.GameVersion = "rep"
 local enableDebug = true

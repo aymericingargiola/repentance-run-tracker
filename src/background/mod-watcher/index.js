@@ -1,34 +1,66 @@
-const { watch, copyFile, unlinkSync } = require('fs')
+const { watch, unlinkSync } = require('fs')
 const path = require('path')
-const { fileResolve, dirExist } = require('../tools/fileSystem')
+const compareVersions = require('compare-versions')
+const convert = require('xml-js')
+const { dirExist, fileResolve, writeFileAsync, readFileAsync } = require('../tools/fileSystem')
 const modName = 'Repentance_Run_Tracker_Extended'
 const IsaacModFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Afterbirth+ Mods`
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
-const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
-let modDevFile, modDevBuffer
+//const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
+let modFile, modMetadata, modDevFolder, modDevFile, modDevMetadataFile
 
 async function watchMod() {
-    fileResolve(`${IsaacModFolderPath}\\${modName}`, 'main.lua', '')
-    watch(modDevFile, (eventType, filename) => {
+    await fileResolve(`${IsaacModFolderPath}\\${modName}`, 'main.lua', '')
+    await fileResolve(`${IsaacModFolderPath}\\${modName}`, 'metadata.xml', '')
+    watch(modDevFile, async (eventType, filename) => {
         if (eventType === 'change') {
-            copyFile(modDevFile, `${IsaacModFolderPath}\\${modName}\\main.lua`, (err) => {
-                if (err) {
-                    console.log("Error Found:", err);
-                }
-                else {
-                    if (dirExist(repentanceOptionsFile)) unlinkSync(repentanceOptionsFile)
-                    console.log("Mod file updated")
-                }
-            })
+            let newContent = await readFileAsync(modDevFolder, 'main.lua', false)
+            await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'main.lua', newContent, false)
+            console.log("Mod file updated")
+        }
+    })
+    watch(modDevMetadataFile, async (eventType, filename) => {
+        if (eventType === 'change') {
+            let newContent = await readFileAsync(modDevFolder, 'metadata.xml', false)
+            await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'metadata.xml', newContent, false)
+            console.log("Mod metadata file updated")
         }
     })
 }
 
+async function checkMod() {
+    console.log("Checking mod...")
+    if(!dirExist(`${IsaacModFolderPath}\\${modName}`)) {
+        console.log("Mod does not exist, create files...")
+        console.log(modMetadata)
+        await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'main.lua', modFile)
+        await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'metadata.xml', modMetadata)
+        await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'disable.it', '')
+        console.log("Mod files created")
+        return
+    }
+    const currentModMetadataFile = await readFileAsync(`${IsaacModFolderPath}\\${modName}`, `metadata.xml`)
+    const currentModVersion = JSON.parse(convert.xml2json(currentModMetadataFile, {compact: true, spaces: 4})).metadata.version._text
+    const appModVersion = JSON.parse(convert.xml2json(modMetadata, {compact: true, spaces: 4})).metadata.version._text
+    if(compareVersions(currentModVersion, appModVersion) === -1) {
+        console.log("Current mod version is older, update...")
+        await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'main.lua', modFile)
+        await writeFileAsync(`${IsaacModFolderPath}\\${modName}`, 'metadata.xml', modMetadata)
+        console.log("Mod updated")
+    }
+}
+
 module.exports = {
-    startModWatch: function(window, isDevelopment, dataFolder) {
-        if(!isDevelopment) return
-        modDevFile = `${dataFolder}\\mod\\main.lua`
-        console.log("Watching mod file...", modDevFile)
-        watchMod()
+    startModWatch: function(window, isDevelopment, modFileContent, modeMetadataContent) {
+        if(isDevelopment) {
+            modDevFolder = `${__dirname}/../src/background/mod-watcher/mod`
+            modDevFile = `${__dirname}/../src/background/mod-watcher/mod/main.lua`
+            modDevMetadataFile = `${__dirname}/../src/background/mod-watcher/mod/metadata.xml`
+            watchMod()
+        } else if (modFileContent && modeMetadataContent) {
+            modFile = modFileContent
+            modMetadata = modeMetadataContent
+            checkMod()
+        }
     }
 }
