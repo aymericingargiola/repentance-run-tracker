@@ -1,8 +1,8 @@
 <template>
     <section class="section runs" v-if="this.allRunsMostRecentFirst">
-        <!-- <span class="logs" style="font-size:12px">{{this.allRunsMostRecentFirst}}</span> -->
+        <!-- <span class="logs" style="font-size:12px">{{this.filteredRuns}}</span> -->
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
-            <template v-for="(run, ridx) in allRunsMostRecentFirst">
+            <template v-for="(run, ridx) in filteredRuns">
                 <li :class="
                 [
                 'run', 'run-group-transition-item',
@@ -51,6 +51,13 @@
                 </li>
             </template>
       </transition-group>
+        {{filterOffset}}
+        <div v-if="filterOffset > 0 || filteredRunsNext && filteredRunsNext.length > 0" class="navigation-container">
+            <div class="navigation">
+                <div v-if="filterOffset > 0" v-on:click="filterOffset = filterOffset-(filterLimit+1)">PREV</div>
+                <div v-if="filteredRunsNext && filteredRunsNext.length > 0" v-on:click="filterOffset = filterOffset+(filterLimit+1)">NEXT</div>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -84,7 +91,17 @@ export default {
                 bar: {
                     disable: true
                 }
-            }
+            },
+            filterLimit: 10,
+            filterOffset: 0,
+            filterOrder: 'desc',
+            filterText: '',
+            filterCharacter: '',
+            filterCharacterVersion: '',
+            filterGameState: 0,
+            filterWiNOrDeath: '',
+            filterDateFrom: 0,
+            filterDateTo: 0
         }
     },
     mounted() {
@@ -134,17 +151,42 @@ export default {
         allRunsMostRecentFirst() {
             return this.runRepo.orderBy('runUpdate', 'desc').get()
         },
+        filteredRuns() {
+            return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).limit(this.filterLimit).offset(this.filterOffset).get())
+        },
+        filteredRunsNext() {
+            return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).limit(this.filterLimit).offset(this.filterOffset+this.filterLimit+1).get())
+        },
         updateRun: {
             get: function(run) {
                 return this.runRepo.query().where('id', run.id).get()
             },
             set: function (run) {
-                console.log(run)
                 this.runRepo.update(run)
             }
         },
     },
     methods: {
+        filter(runs) {
+            let filteredRuns = runs
+
+            //Text filter
+            if(this.filterText !== "") {
+                const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
+                filteredRuns = filteredRuns.filter((run) => {
+                    const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
+                    const customRunName = run.customName.normalize('NFC').toLowerCase()
+                    const seed = run.seed.normalize('NFC').toLowerCase()
+                    if (
+                        characterName.includes(textSearchValue) ||
+                        customRunName.includes(textSearchValue) ||
+                        seed.includes(textSearchValue)
+                        ) return run
+                })
+            }
+            
+            return filteredRuns
+        }
     },
 };
 </script>

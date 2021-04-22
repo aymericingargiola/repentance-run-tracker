@@ -187,7 +187,7 @@ export default {
 
   //Overlay watch status
   .overlay-watch-status {
-    //display: none;
+    display: none;
     background: black;
     position: fixed;
     width: 100%;
