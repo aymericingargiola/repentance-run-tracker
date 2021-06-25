@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveRunsToDisk, removeRun } = require('./helpers')
+const { getOptions, getModPath, getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
@@ -12,12 +12,14 @@ const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\B
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
 const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 const runsJsonPath = `${dataFolder}\\runs.json`
-let watchingLogs, runs, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
+const configJsonPath = `${dataFolder}\\config.json`
+let watchingLogs, config, runs, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
 // let backToMenu = false
 let extendedSaveMode = false //This variable can be used later to save more informations (Stats, bombs, coins, time...), with the help of a mod or game memory reading
+let otherModLoaded = false
 
 function checkPreviousRuns() {
     let deleted = false
@@ -216,7 +218,8 @@ function updateOrCreateRun(params = {}) {
                 status: false,
                 checkedByUser: false
             },
-            extendedSaveMode: extendedSaveMode
+            extendedSaveMode: extendedSaveMode,
+            otherModLoaded: otherModLoaded
         }
         console.log(run)
         runs.unshift(run)
@@ -268,22 +271,22 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Adding collectible")) {
             console.log(log)
             updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
-            saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Removing voided collectible")) {
             console.log(log)
             updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, 5)})
-            saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding trinket")) {
             console.log(log)
             //updateOrCreateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
-            //saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding smelted trinket")) {
             console.log(log)
             //updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
-            //saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log(log)
@@ -294,7 +297,7 @@ function parseLogs(newLogs, logArray) {
             currentFloor = null
             currentCurse = null
             currentGameMode = null
-            saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Menu Game Init")) {
             console.log(log)
@@ -308,10 +311,31 @@ function parseLogs(newLogs, logArray) {
             currentGameMode = null
         }
         //If "Repentance Run Tracker Extended" mod is loaded, parse extra logs lines
-        if (extendedSaveMode) {
-            if(log.includes("[RRTE EXTEND LOGS] Player updated")) {
-                console.log(log)
-
+        if(log.includes("Lua is resetting!")) {
+            console.log(log)
+            extendedSaveMode = false
+            otherModLoaded = false
+            otherModLoaded = false
+        }
+        if(log.includes("Running Lua Script") && !log.includes("resources/scripts/")) {
+            console.log(log)
+            if (!config.isaacModFolderPath || config.isaacModFolderPath === "") {
+                config.isaacModFolderPath = getModPath(log)
+                saveFileToDisk(configJsonPath, JSON.stringify(config))
+            }
+            if (log.includes("/mods/repentance_run_tracker_extended")) {
+                extendedSaveMode = true
+            } else {
+                otherModLoaded = true
+            }
+        }
+        if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
+            console.log(log)
+            let playerStats = log.split(" ")[9].replaceAll("=", ":")
+            playerStats.replace(/(\w+)\s*:\s*('[^']*'|"[^"]*"|)/gi, (match, match2) => status = status.replace(match2, `"${match2}"`))
+            console.log(playerStats)
+            if (!extendedSaveMode) {
+                extendedSaveMode = true
             }
         }
     })
@@ -340,6 +364,8 @@ function unWatchRepentanceLogs() {
 async function init() {
     const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
     runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
+    const loadConfig = await fileResolve(dataFolder, 'config.json', '{}')
+    config = JSON.parse(fs.readFileSync(loadConfig))
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
@@ -347,6 +373,7 @@ async function init() {
     let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
     let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
+    let gameInit = repentanceLogsArray.filter(v=>v.includes("Menu Game Init"))
     if (seedsList[seedsList.length - 1] != undefined) {
         console.log("Seeds exist in current logs, checking...")
         const lastLogs = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, seedsList[seedsList.length - 1]), repentanceLogsArray.length - 1)
@@ -354,7 +381,12 @@ async function init() {
         console.log("Currently in run :", inRun)
         if (inRun) {
             parseLogs(lastLogs, repentanceLogsArray)
+        } else {
+            const lastLogsOver = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, gameInit[gameInit.length - 1]), repentanceLogsArray.length - 1)
+            parseLogs(lastLogsOver, repentanceLogsArray)
         }
+    } else {
+        parseLogs(repentanceLogsArray, repentanceLogsArray)
     }
     
     logsLastReadLines = repentanceLogsArray.filter(v=>v!='').length
@@ -391,7 +423,7 @@ module.exports = {
                         watchingLogs = false
                         repentanceIsLaunched = false
                         unWatchRepentanceLogs()
-                        saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+                        saveFileToDisk(runsJsonPath, JSON.stringify(runs))
                         syncApp(win,{trigger: "logs watch status", watching: false})
                         wait = false
                     } else if (status && !repentanceIsLaunched) {

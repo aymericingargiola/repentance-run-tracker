@@ -14,6 +14,9 @@ module.exports = {
             EnableMods: optionsArray.find(option => option.includes("EnableMods")).split("=")[1] === "0" ? false : true
         }
     },
+    getModPath: (string) => {
+        return string.split(" ")[5].replace("The", "The Binding of Isaac Rebirth\\mods");
+    },
     getCharater: (string) => {
         //Return matching character from logs
         return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
@@ -77,8 +80,8 @@ module.exports = {
         const duration = moment.duration(ms)
         return `${Math.floor(duration.asHours()) < 10 ? `0${Math.floor(duration.asHours())}` : Math.floor(duration.asHours())}${moment.utc(ms).format(":mm:ss")}`
     },
-    saveRunsToDisk: (path, datas) => {
-        //Update runs json file
+    saveFileToDisk: (path, datas) => {
+        //Update file
         fs.writeFile(path, datas, 'utf8', (err) => {if (err) throw err})
     },
     removeRun: (runId, runs, runsJsonPath, window) => {
@@ -89,7 +92,7 @@ module.exports = {
             syncApp(window,{trigger: "remove run", run: runs[runIndex].id}) //Remove matching run on frontend
             runs.splice(runIndex, 1) //Remove matching run on saved runs json file
             console.log(`Run : ${runId} was removed`)
-            module.exports.saveRunsToDisk(runsJsonPath, JSON.stringify(runs))
+            module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
             return true
         } else {
             console.log(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)

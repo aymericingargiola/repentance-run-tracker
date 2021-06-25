@@ -1,13 +1,15 @@
+const fs = require('fs')
 const { watch, unlinkSync } = require('fs')
 const path = require('path')
 const compareVersions = require('compare-versions')
 const convert = require('xml-js')
 const { dirExist, fileResolve, writeFileAsync, readFileAsync } = require('../tools/fileSystem')
+const dataFolder = path.resolve(process.cwd(), 'datas')
 const modName = 'Repentance_Run_Tracker_Extended'
-const IsaacModFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Afterbirth+ Mods`
-const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
+//const IsaacModFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Afterbirth+ Mods`
+//const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 //const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
-let modFile, modMetadata, modDevFolder, modDevFile, modDevMetadataFile
+let modFile, modMetadata, modDevFolder, modDevFile, modDevMetadataFile, config, IsaacModFolderPath
 
 async function watchMod() {
     await fileResolve(`${IsaacModFolderPath}\\${modName}`, 'main.lua', '')
@@ -51,13 +53,17 @@ async function checkMod() {
 }
 
 module.exports = {
-    startModWatch: function(window, isDevelopment, modFileContent, modeMetadataContent) {
-        if(isDevelopment) {
+    startModWatch: async function(window, isDevelopment, modFileContent, modeMetadataContent) {
+        const loadConfig = await fileResolve(dataFolder, 'config.json', '{}')
+        config = JSON.parse(fs.readFileSync(loadConfig))
+        if(isDevelopment && config.isaacModFolderPath && config.isaacModFolderPath != "") {
+            IsaacModFolderPath = config.isaacModFolderPath
             modDevFolder = `${__dirname}/../src/background/mod-watcher/mod`
             modDevFile = `${__dirname}/../src/background/mod-watcher/mod/main.lua`
             modDevMetadataFile = `${__dirname}/../src/background/mod-watcher/mod/metadata.xml`
             watchMod()
-        } else if (modFileContent && modeMetadataContent) {
+        } else if (modFileContent && modeMetadataContent && config.isaacModFolderPath && config.isaacModFolderPath != "") {
+            IsaacModFolderPath = config.isaacModFolderPath
             modFile = modFileContent
             modMetadata = modeMetadataContent
             checkMod()

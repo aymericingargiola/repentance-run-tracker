@@ -1,8 +1,7 @@
 RRTE = RegisterMod("Repentance Run Tracker Extended", 1)
-RRTE.GameVersion = "rep"
 local enableDebug = true
 
-Isaac.DebugString("[RRTE EXTEND LOGS] Repentance Run Tracker Extended loaded")
+Isaac.DebugString("[RRTEEXTENDLOGS] Repentance Run Tracker Extended loaded")
 
 function table.val_to_str(v)
     if "string" == type(v) then
@@ -65,7 +64,7 @@ function RRTE:playerInit(Player)
         ["bombs"] = Player:GetNumBombs(),
         ["keys"] = Player:GetNumKeys()
     }
-    Isaac.DebugString("[RRTE EXTEND LOGS] Player init :" .. table.tostring(Player:GetData()))
+    Isaac.DebugString("[RRTEEXTENDLOGS] Player init : " .. table.tostring(Player:GetData()))
 end
 
 function RRTE:playerUpdate(Player)
@@ -90,7 +89,7 @@ function RRTE:playerUpdate(Player)
             ["tearFallingSpeed"] = Player.TearFallingSpeed,
             ["tearHeight"] = Player.TearHeight
         }
-        Isaac.DebugString("[RRTE EXTEND LOGS] Player updated [stats] :" .. table.tostring(Player:GetData()))
+        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [stats] : " .. table.tostring(Player:GetData()))
     end
 
     -- Update player life infos
@@ -102,7 +101,7 @@ function RRTE:playerUpdate(Player)
             ["soulHearts"] = Player:GetSoulHearts(),
             ["blackHearts"] = Player:GetBlackHearts()
         }
-        Isaac.DebugString("[RRTE EXTEND LOGS] Player updated [life] :" .. table.tostring(Player:GetData()))
+        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [life] : " .. table.tostring(Player:GetData()))
     end
 
     -- Update player usables infos
@@ -114,7 +113,7 @@ function RRTE:playerUpdate(Player)
             ["bombs"] = Player:GetNumBombs(),
             ["keys"] = Player:GetNumKeys()
         }
-        Isaac.DebugString("[RRTE EXTEND LOGS] Player updated [usable] :" .. table.tostring(Player:GetData()))
+        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [usable] : " .. table.tostring(Player:GetData()))
     end
 end
 
