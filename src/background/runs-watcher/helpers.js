@@ -21,6 +21,12 @@ module.exports = {
         //Return matching character from logs
         return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
     },
+    getCharaterStats: (string) => {
+        //Return character stats from RRTE mod converted to json
+        let playerStats = string.split(" ")[9].replaceAll("=", ":")
+        playerStats.replace(/(\w+)\s*:\s*('[^']*'|"[^"]*"|)/gi, (match, match2) => playerStats = playerStats.replace(match2, `"${match2}"`))
+        return JSON.parse(playerStats)
+    },
     getSeed: (string) => {
         //Return seed from logs
         return {

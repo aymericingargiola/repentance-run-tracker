@@ -48,16 +48,20 @@ function RRTE:playerInit(Player)
         ["luck"] = Player.Luck,
         ["damage"] = Player.Damage,
         ["maxFireDelay"] = Player.MaxFireDelay,
-        ["fireDelay"] = Player.FireDelay,
+        -- ["fireDelay"] = Player.FireDelay,
+        ["currentFireDelay"] = math.ceil((30/(Player.MaxFireDelay + 1)) * 10^2) / 10^2,
         ["shotSpeed"] = Player.ShotSpeed,
         ["tearFallingAcceleration"] = Player.TearFallingAcceleration,
         ["tearFallingSpeed"] = Player.TearFallingSpeed,
-        ["tearHeight"] = Player.TearHeight
+        ["tearHeight"] = Player.TearHeight,
     }
     Player:GetData()["life"] = {
         ["hearts"] = Player:GetHearts(),
+        ["rottenHearts"] = Player:GetRottenHearts(),
+        ["boneHearts"] = Player:GetBoneHearts(),
         ["soulHearts"] = Player:GetSoulHearts(),
-        ["blackHearts"] = Player:GetBlackHearts()
+        ["blackHearts"] = Player:GetBlackHearts(),
+        ["extraLives"] = Player:GetExtraLives()
     }
     Player:GetData()["usables"] = {
         ["coins"] = Player:GetNumCoins(),
@@ -68,12 +72,13 @@ function RRTE:playerInit(Player)
 end
 
 function RRTE:playerUpdate(Player)
+
     -- Update player stats infos
     if Player:GetData()["stats"]["moveSpeed"] ~= Player.MoveSpeed or
     Player:GetData()["stats"]["luck"] ~= Player.Luck or
     Player:GetData()["stats"]["damage"] ~= Player.Damage or
     Player:GetData()["stats"]["maxFireDelay"] ~= Player.MaxFireDelay or
-    Player:GetData()["stats"]["fireDelay"] ~= Player.FireDelay or
+    -- Player:GetData()["stats"]["fireDelay"] ~= Player.FireDelay or
     Player:GetData()["stats"]["shotSpeed"] ~= Player.ShotSpeed or
     Player:GetData()["stats"]["tearFallingAcceleration"] ~= Player.TearFallingAcceleration or
     Player:GetData()["stats"]["tearFallingSpeed"] ~= Player.TearFallingSpeed or
@@ -83,7 +88,8 @@ function RRTE:playerUpdate(Player)
             ["luck"] = Player.Luck,
             ["damage"] = Player.Damage,
             ["maxFireDelay"] = Player.MaxFireDelay,
-            ["fireDelay"] = Player.FireDelay,
+            -- ["fireDelay"] = Player.FireDelay,
+            ["currentFireDelay"] = math.ceil((30/(Player.MaxFireDelay + 1)) * 10^2) / 10^2,
             ["shotSpeed"] = Player.ShotSpeed,
             ["tearFallingAcceleration"] = Player.TearFallingAcceleration,
             ["tearFallingSpeed"] = Player.TearFallingSpeed,
@@ -94,12 +100,18 @@ function RRTE:playerUpdate(Player)
 
     -- Update player life infos
     if Player:GetData()["life"]["hearts"] ~= Player:GetHearts() or
+    Player:GetData()["life"]["rottenHearts"] ~= Player:GetRottenHearts() or
+    Player:GetData()["life"]["boneHearts"] ~= Player:GetBoneHearts() or
     Player:GetData()["life"]["soulHearts"] ~= Player:GetSoulHearts() or
-    Player:GetData()["life"]["blackHearts"] ~= Player:GetBlackHearts() then
+    Player:GetData()["life"]["blackHearts"] ~= Player:GetBlackHearts() or
+    Player:GetData()["life"]["extraLives"] ~= Player:GetExtraLives() then
         Player:GetData()["life"] = {
             ["hearts"] = Player:GetHearts(),
+            ["rottenHearts"] = Player:GetRottenHearts(),
+            ["boneHearts"] = Player:GetBoneHearts(),
             ["soulHearts"] = Player:GetSoulHearts(),
-            ["blackHearts"] = Player:GetBlackHearts()
+            ["blackHearts"] = Player:GetBlackHearts(),
+            ["extraLives"] = Player:GetExtraLives()
         }
         Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [life] : " .. table.tostring(Player:GetData()))
     end

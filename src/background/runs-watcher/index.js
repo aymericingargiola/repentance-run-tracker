@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
+const { getOptions, getModPath, getCharater, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
@@ -181,6 +181,14 @@ function updateOrCreateRun(params = {}) {
                         if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     }
                     break
+                case 'player updated':
+                    const playerStats = params.stats
+                    // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
+                    if(playerStats.infos.subtype === 20) sameRun.characters[playerStats.infos.index].statsSecondary = playerStats
+                    // Default case
+                    else sameRun.characters[playerStats.infos.index].stats = playerStats
+                    if(!sameRun.extendedSaveMode) sameRun.extendedSaveMode = true
+                    break
                 default:
                     return false
             }
@@ -331,12 +339,8 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
             console.log(log)
-            let playerStats = log.split(" ")[9].replaceAll("=", ":")
-            playerStats.replace(/(\w+)\s*:\s*('[^']*'|"[^"]*"|)/gi, (match, match2) => status = status.replace(match2, `"${match2}"`))
-            console.log(playerStats)
-            if (!extendedSaveMode) {
-                extendedSaveMode = true
-            }
+            updateOrCreateRun({trigger: "player updated", stats: getCharaterStats(log)})
+            if (!extendedSaveMode) extendedSaveMode = true
         }
     })
 }
@@ -369,12 +373,13 @@ async function init() {
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
-    extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("RRTE")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
+    extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("RRTEEXTENDLOGS")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
     let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
     let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
     let gameInit = repentanceLogsArray.filter(v=>v.includes("Menu Game Init"))
-    if (seedsList[seedsList.length - 1] != undefined) {
+    let isShutdown = repentanceLogsArray.filter(v=>v.includes("Isaac has shut down successfully")).length > 0
+    if (seedsList[seedsList.length - 1] != undefined && !isShutdown) {
         console.log("Seeds exist in current logs, checking...")
         const lastLogs = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, seedsList[seedsList.length - 1]), repentanceLogsArray.length - 1)
         inRun = lastLogs.filter(v=>v.includes("Menu Game Init")).length < 1 && lastLogs.filter(v=>v.includes("Game Over")).length < 1 && lastLogs.filter(v=>v.includes("playing cutscene")).length < 1
@@ -385,7 +390,7 @@ async function init() {
             const lastLogsOver = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, gameInit[gameInit.length - 1]), repentanceLogsArray.length - 1)
             parseLogs(lastLogsOver, repentanceLogsArray)
         }
-    } else {
+    } else if (!isShutdown) {
         parseLogs(repentanceLogsArray, repentanceLogsArray)
     }
     
