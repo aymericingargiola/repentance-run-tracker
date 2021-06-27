@@ -56,6 +56,8 @@ function RRTE:playerInit(Player)
         ["tearHeight"] = Player.TearHeight,
     }
     Player:GetData()["life"] = {
+        ["maxHearts"] = Player:GetMaxHearts(),
+        ["brokenHearts"] = Player:GetBrokenHearts(),
         ["hearts"] = Player:GetHearts(),
         ["rottenHearts"] = Player:GetRottenHearts(),
         ["boneHearts"] = Player:GetBoneHearts(),
@@ -99,13 +101,17 @@ function RRTE:playerUpdate(Player)
     end
 
     -- Update player life infos
-    if Player:GetData()["life"]["hearts"] ~= Player:GetHearts() or
+    if Player:GetData()["life"]["maxHearts"] ~= Player:GetMaxHearts() or
+    Player:GetData()["life"]["brokenHearts"] ~= Player:GetBrokenHearts() or
+    Player:GetData()["life"]["hearts"] ~= Player:GetHearts() or
     Player:GetData()["life"]["rottenHearts"] ~= Player:GetRottenHearts() or
     Player:GetData()["life"]["boneHearts"] ~= Player:GetBoneHearts() or
     Player:GetData()["life"]["soulHearts"] ~= Player:GetSoulHearts() or
     Player:GetData()["life"]["blackHearts"] ~= Player:GetBlackHearts() or
     Player:GetData()["life"]["extraLives"] ~= Player:GetExtraLives() then
         Player:GetData()["life"] = {
+            ["maxHearts"] = Player:GetMaxHearts(),
+            ["brokenHearts"] = Player:GetBrokenHearts(),
             ["hearts"] = Player:GetHearts(),
             ["rottenHearts"] = Player:GetRottenHearts(),
             ["boneHearts"] = Player:GetBoneHearts(),

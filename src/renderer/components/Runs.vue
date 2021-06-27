@@ -16,6 +16,18 @@
                         <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
+                            <div v-if="run.characters[0].stats" :class="['hearts']">
+                                <template v-for="rhidx in run.characters[0].stats.life.maxHearts / 2">
+                                    <div class="heart-container red-heart" style="display:inline-block" :key="`red-heart-${rhidx}`">
+                                        <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${run.characters[0].stats.life.hearts > run.characters[0].stats.life.maxHearts ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                                    </div>
+                                </template>
+                                <template v-for="bhidx in run.characters[0].stats.life.boneHearts">
+                                    <div class="heart-container bone-heart" style="display:inline-block" :key="`bone-heart-${bhidx}`">
+                                        <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/bone-heart-${(run.characters[0].stats.life.hearts - run.characters[0].stats.life.maxHearts) - (bhidx - 1) * 2 > 1 ? `full` : (run.characters[0].stats.life.hearts - run.characters[0].stats.life.maxHearts) - (bhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                                    </div>
+                                </template>
+                            </div>
                             <div class="name">{{run.characters[0].trueName}}</div>
                             <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].trueName}${parseInt(run.characters[0].id) > 20 ? ` Alt` : ``}.png')`}"></div>
                         </div>
@@ -339,6 +351,15 @@ export default {
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: contain;
+            }
+            .hearts {
+                .heart-container {
+                    width: 12px;
+                    .heart {
+                        width: 17px;
+                        height: 16px;
+                    }
+                }
             }
         }
         .custom-scroll-floors {
