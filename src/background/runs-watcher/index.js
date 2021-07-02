@@ -182,6 +182,7 @@ function updateOrCreateRun(params = {}) {
                     }
                     break
                 case 'player updated':
+                    console.log("stats",sameRun)
                     const playerStats = params.stats
                     // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
                     if(playerStats.infos.subtype === 20) sameRun.characters[playerStats.infos.index].statsSecondary = playerStats
@@ -246,7 +247,7 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Initialized player")) {
             console.log(log)
-            if(!currentCharater && !currentRunInit) currentCharater = getCharater(log)
+            if(!currentCharater) currentCharater = getCharater(log)
             else if (currentRunInit) {
                 updateOrCreateRun({trigger: "init other player", character: getCharater(log)})
             }

@@ -16,15 +16,34 @@
                         <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-                            <div v-if="run.characters[0].stats" :class="['hearts']">
+                            <div v-if="run.characters[0].stats && run.characters[0].id != 10 && parseInt(run.characters[0].id) != 14" :class="['hearts']">
                                 <template v-for="rhidx in run.characters[0].stats.life.maxHearts / 2">
-                                    <div class="heart-container red-heart" style="display:inline-block" :key="`red-heart-${rhidx}`">
+                                    <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
                                         <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${run.characters[0].stats.life.hearts > run.characters[0].stats.life.maxHearts ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
                                     </div>
                                 </template>
                                 <template v-for="bhidx in run.characters[0].stats.life.boneHearts">
-                                    <div class="heart-container bone-heart" style="display:inline-block" :key="`bone-heart-${bhidx}`">
+                                    <div class="heart-container bone-heart" :key="`bone-heart-${bhidx}`">
                                         <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/bone-heart-${(run.characters[0].stats.life.hearts - run.characters[0].stats.life.maxHearts) - (bhidx - 1) * 2 > 1 ? `full` : (run.characters[0].stats.life.hearts - run.characters[0].stats.life.maxHearts) - (bhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                                    </div>
+                                </template>
+                                <template v-for="shidx in Math.ceil(run.characters[0].stats.life.soulHearts / 2)">
+                                    <div class="heart-container soul-heart" :key="`soul-heart-${shidx}`">
+                                        <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/soul-heart-${run.characters[0].stats.life.soulHearts - (shidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
+                                    </div>
+                                </template>
+                                <!-- There is an issue to calculate black heart, if you have blue hearts between black hearts it will count as black heart so i only show blue hearts for the moment (it includes black heart also) -->
+                                <!-- <template v-for="blhidx in calcBlackHeart(run.characters[0].stats.life.blackHearts)">
+                                    {{calcBlackHeart(run.characters[0].stats.life.blackHearts)}}
+                                    <div class="heart-container black-heart" :key="`black-heart-${blhidx}`">
+                                        <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/black-heart-${calcBlackHeart(run.characters[0].stats.life.blackHearts)*2 - (blhidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
+                                    </div>
+                                </template> -->
+                            </div>
+                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) === 14" :class="['hearts']">
+                                <template v-for="chidx in run.characters[0].stats.life.maxHearts / 2">
+                                    <div class="heart-container coin-heart" :key="`red-heart-${chidx}`">
+                                        <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/coin-heart-${run.characters[0].stats.life.hearts - (chidx - 1) * 2 > 1 ? `full` : `empty`}.png')`}"></div>
                                     </div>
                                 </template>
                             </div>
@@ -198,7 +217,18 @@ export default {
             }
             
             return filteredRuns
-        }
+        },
+        // calcBlackHeart(nb) {
+        //     if (nb === 3) return 2
+        //     if (nb === 1) return 1
+        //     let i = 0
+        //     let n = nb - 1
+        //     while (n > 1) {
+        //         n = n / 2;
+        //         i++
+        //     }
+        //     return i
+        // }
     },
 };
 </script>
@@ -353,8 +383,15 @@ export default {
                 background-size: contain;
             }
             .hearts {
+                position: absolute;
+                display: flex;
+                flex-wrap: wrap;
+                width: calc(12*6px);
+                top: 10px;
+                left: 30px;
                 .heart-container {
                     width: 12px;
+                    height: 9px;
                     .heart {
                         width: 17px;
                         height: 16px;
