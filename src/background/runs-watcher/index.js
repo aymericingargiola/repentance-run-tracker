@@ -163,6 +163,8 @@ function updateOrCreateRun(params = {}) {
                 case 'init other player':
                     if (params.character && !params.character.ignore) sameRun.characters.push(params.character)
                     break
+                case 'spawn entity':
+                    console.log("boss",params.entity)
                 case 'adding collectible':
                     collectibleManager(sameRun, params.collectible, "add")
                     break
@@ -270,6 +272,10 @@ function parseLogs(newLogs, logArray) {
                 currentRunInit = true
                 updateOrCreateRun({trigger: "generated rooms"})
             }
+        }
+        if(log.includes("Spawn Entity")) {
+            console.log(log)
+            updateOrCreateRun({trigger: "spawn entity", entity: getEntity(log)})
         }
         if(log.split(' ')[2] === "Room") {
             if (!currentGameMode) {

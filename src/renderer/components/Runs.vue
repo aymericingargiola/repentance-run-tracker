@@ -74,7 +74,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            {{`url('img/characters/${run.characters[0].trueName}${parseInt(run.characters[0].id) > 20 ? ` Alt` : ``}.png')`}}
                             <!-- <div class="name">{{run.characters[0].trueName}}</div> -->
                             <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].trueName}${parseInt(run.characters[0].id) > 20 ? ` Alt` : ``}.png')`}"></div>
                             <div v-if="run.characters[0].stats" class="stats">
