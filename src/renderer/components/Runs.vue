@@ -1,5 +1,5 @@
 <template>
-    <section class="section runs" v-if="this.allRunsMostRecentFirst">
+    <section class="section runs" v-if="this.filteredRuns">
         <!-- <span class="logs" style="font-size:12px">{{this.filteredRuns}}</span> -->
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, ridx) in filteredRuns">
@@ -16,7 +16,7 @@
                         <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-                            <div v-if="run.characters[0].stats && run.characters[0].id != 10 && parseInt(run.characters[0].id) != 14" :class="['hearts']">
+                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) != 10 && parseInt(run.characters[0].id) != 14 && (run.floors[run.floors.length - 1].curse != 'Curse of the Unknown' || run.runEnd.date != null)" class="hearts">
                                 <template v-for="rhidx in run.characters[0].stats.life.maxHearts / 2">
                                     <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
                                         <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${run.characters[0].stats.life.hearts > run.characters[0].stats.life.maxHearts ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
@@ -40,15 +40,83 @@
                                     </div>
                                 </template> -->
                             </div>
-                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) === 14" :class="['hearts']">
+                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) === 14 && (run.floors[run.floors.length - 1].curse != 'Curse of the Unknown' || run.runEnd.date != null)" class="hearts">
                                 <template v-for="chidx in run.characters[0].stats.life.maxHearts / 2">
                                     <div class="heart-container coin-heart" :key="`red-heart-${chidx}`">
                                         <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/coin-heart-${run.characters[0].stats.life.hearts - (chidx - 1) * 2 > 1 ? `full` : `empty`}.png')`}"></div>
                                     </div>
                                 </template>
                             </div>
-                            <div class="name">{{run.characters[0].trueName}}</div>
+                            <div v-if="run.characters[0].stats && run.floors[run.floors.length - 1].curse === 'Curse of the Unknown'" class="hearts">
+                                <div class="heart-container unknow-heart">
+                                    <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/unknow-heart.png')`}"></div>
+                                </div>
+                            </div>
+                            <div v-if="run.characters[0].stats" class="usables">
+                                <ul>
+                                    <li class="coins">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/hud/coin.png')`}"></div>
+                                        <span class="value">
+                                            {{(`0${run.characters[0].stats.usables.coins}`).slice(-2)}}
+                                        </span>
+                                    </li>
+                                    <li class="bombs">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/hud/bomb.png')`}"></div>
+                                        <span class="value">
+                                            {{(`0${run.characters[0].stats.usables.bombs}`).slice(-2)}}
+                                        </span>
+                                    </li>
+                                    <li class="keys">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/hud/key.png')`}"></div>
+                                        <span class="value">
+                                            {{(`0${run.characters[0].stats.usables.keys}`).slice(-2)}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            {{`url('img/characters/${run.characters[0].trueName}${parseInt(run.characters[0].id) > 20 ? ` Alt` : ``}.png')`}}
+                            <!-- <div class="name">{{run.characters[0].trueName}}</div> -->
                             <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].trueName}${parseInt(run.characters[0].id) > 20 ? ` Alt` : ``}.png')`}"></div>
+                            <div v-if="run.characters[0].stats" class="stats">
+                                <ul>
+                                    <li class="speed">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/stats/speed.png')`}"></div>
+                                        <span class="value">
+                                            {{(Math.round(run.characters[0].stats.stats.moveSpeed * 100) / 100).toFixed(2)}}
+                                        </span>
+                                        <span class="value-small">
+                                            {{(Math.round(run.characters[0].stats.stats.moveSpeed * 100) / 100).toFixed(1)}}
+                                        </span>
+                                    </li>
+                                    <li class="tear-rate">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/stats/tearrate.png')`}"></div>
+                                        <span class="value">
+                                            {{(Math.round(run.characters[0].stats.stats.currentFireDelay * 100) / 100).toFixed(2)}}
+                                        </span>
+                                        <span class="value-small">
+                                            {{(Math.round(run.characters[0].stats.stats.currentFireDelay * 100) / 100).toFixed(1)}}
+                                        </span>
+                                    </li>
+                                    <li class="damage">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/stats/damage.png')`}"></div>
+                                        <span class="value">
+                                            {{(Math.round(run.characters[0].stats.stats.damage * 100) / 100).toFixed(2)}}
+                                        </span>
+                                        <span class="value-small">
+                                            {{(Math.round(run.characters[0].stats.stats.damage * 100) / 100).toFixed(1)}}
+                                        </span>
+                                    </li>
+                                    <li class="luck">
+                                        <div class="image" :style="{backgroundImage:`url('img/icons/stats/luck.png')`}"></div>
+                                        <span class="value">
+                                            {{(Math.round(run.characters[0].stats.stats.luck * 100) / 100).toFixed(2)}}
+                                        </span>
+                                        <span class="value-small">
+                                            {{(Math.round(run.characters[0].stats.stats.luck * 100) / 100).toFixed(1)}}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <vue-scroll :ops="opsFloors" :class="['custom-scroll-floors']" :ref="ridx === 0 ? 'firstRunFloorsScroller' : ''">
                             <transition-group name="floors-group-transition" tag="ul" class="floors">
@@ -67,8 +135,8 @@
                                                                 {{item.title}}
                                                             </div>
                                                             <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                                                                <img :src="`img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png`">
-                                                                <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${item.id < 10 ? `00${item.id}` : item.id < 100 ? `0${item.id}` : item.id }.png')`}"></div> -->
+                                                                <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+                                                                <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`}"></div> -->
                                                             </a>
                                                         </li>
                                                     </transition-group>
@@ -82,11 +150,11 @@
                 </li>
             </template>
       </transition-group>
-        {{filterOffset}}
-        <div v-if="filterOffset > 0 || filteredRunsNext && filteredRunsNext.length > 0" class="navigation-container">
+        <div v-if="Math.ceil(filteredRunsTotal.length / filterLimit) > 1" class="navigation-container">
             <div class="navigation">
-                <div v-if="filterOffset > 0" v-on:click="filterOffset = filterOffset-(filterLimit+1)">PREV</div>
-                <div v-if="filteredRunsNext && filteredRunsNext.length > 0" v-on:click="filterOffset = filterOffset+(filterLimit+1)">NEXT</div>
+                <template v-for="page in Math.ceil(filteredRunsTotal.length / filterLimit)">
+                    <div :class="[filterOffset === filterLimit * (page - 1) ? 'active' : '']" v-on:click="filterOffset = filterLimit * (page - 1)" :key="`page-${page}`">{{page}}</div>
+                </template>
             </div>
         </div>
     </section>
@@ -123,7 +191,7 @@ export default {
                     disable: true
                 }
             },
-            filterLimit: 10,
+            filterLimit: 3,
             filterOffset: 0,
             filterOrder: 'desc',
             filterText: '',
@@ -179,14 +247,11 @@ export default {
         allRuns() {
             return this.runRepo.all()
         },
-        allRunsMostRecentFirst() {
-            return this.runRepo.orderBy('runUpdate', 'desc').get()
+        filteredRunsTotal() {
+            return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).get())
         },
         filteredRuns() {
-            return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).limit(this.filterLimit).offset(this.filterOffset).get())
-        },
-        filteredRunsNext() {
-            return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).limit(this.filterLimit).offset(this.filterOffset+this.filterLimit+1).get())
+            return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimit+this.filterOffset)
         },
         updateRun: {
             get: function(run) {
@@ -309,6 +374,7 @@ export default {
         display: flex;
         padding: 24px;
         padding-bottom: 32px;
+        padding-top: 56px;
         overflow: hidden;
         width: 100%;
         z-index: 1;
@@ -396,6 +462,84 @@ export default {
                         width: 17px;
                         height: 16px;
                     }
+                }
+            }
+            .stats {
+                position: absolute;
+                width: 100%;
+                bottom: 16px;
+                left: 0px;
+                transform: scale(0.8) rotate(-3deg);
+                ul {
+                    display: flex;
+                    justify-content: space-between;
+                    &:hover {
+                        li {
+                            opacity: 0.1;
+                        }
+                    }
+                    li {
+                        transition: 0.25s ease;
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+                        .image {
+                            width: 16px;
+                            height: 16px;
+                        }
+                        .value, .value-small {
+                            transition: 0.25s ease;
+                            font-size: 12px;
+                            pointer-events: none;
+                            cursor: default;
+                        }
+                        .value {
+                            opacity: 0;
+                            position: absolute;
+                            left: 16px;
+                        }
+                        &:not(:first-child) {
+                            margin-left: 3px;
+                        }
+                        &:hover {
+                            transform: scale(1.5);
+                            opacity: 1;
+                            .value {
+                                opacity: 1;
+                            }
+                            .value-small {
+                                opacity: 0;
+                            }
+                            &:last-child {
+                                transform: scale(1.5) translateX(-10px);
+                            }
+                        }
+                    }
+                }
+            }
+            .usables {
+                transition: 0.25s ease;
+                position: absolute;
+                top: 24px;
+                left: 4px;
+                transform: scale(0.7) rotate(-3deg);
+                ul {
+                    li {
+                        display: flex;
+                        align-items: center;
+                        height: 16px;
+                        pointer-events: none;
+                        .image {
+                            width: 18px;
+                            height: 18px;
+                        }
+                        .value {
+
+                        }
+                    }
+                }
+                &:hover {
+                    transform: scale(1) rotate(-3deg) translate(5px, 5px);
                 }
             }
         }

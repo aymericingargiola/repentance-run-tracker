@@ -136,6 +136,7 @@ function RRTE:playerUpdate(Player)
 end
 
 RRTE:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, RRTE.playerUpdate)
+RRTE:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, RRTE.playerUpdate)
 RRTE:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, RRTE.playerInit)
 
 -- function RRTE:entityTakeDamage(TookDamage, DamageAmount, DamageFlag, DamageSource, DamageCountdownFrames)
