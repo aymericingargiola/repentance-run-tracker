@@ -164,7 +164,11 @@ function updateOrCreateRun(params = {}) {
                     if (params.character && !params.character.ignore) sameRun.characters.push(params.character)
                     break
                 case 'spawn entity':
-                    console.log("boss",params.entity)
+                    if(params.entity) {
+                        console.log("Entity : ",params.entity)
+                        if(!sameRun.floors[sameRun.floors.length - 1].bosses) sameRun.floors[sameRun.floors.length - 1].bosses = [params.entity] 
+                        else if (sameRun.floors[sameRun.floors.length - 1].bosses.filter(boss => boss.name === params.entity.name).length < 1) sameRun.floors[sameRun.floors.length - 1].bosses.push(params.entity)
+                    }
                     break
                 case 'adding collectible':
                     collectibleManager(sameRun, params.collectible, "add")
@@ -185,7 +189,6 @@ function updateOrCreateRun(params = {}) {
                     }
                     break
                 case 'player updated':
-                    console.log("stats",sameRun)
                     const playerStats = params.stats
                     // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
                     if(playerStats.infos.subtype === 20) sameRun.characters[playerStats.infos.index].statsSecondary = playerStats
@@ -352,6 +355,11 @@ function parseLogs(newLogs, logArray) {
         }
     })
 }
+
+setInterval(() => {
+    // avoid writing errors if multiple writings happens
+    if (watchingLogs && runsJsonPath && runs) saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+}, 5000);
 
 function watchRepentanceLogs() {
     fs.watchFile(repentanceLogsFile,{interval: 500},

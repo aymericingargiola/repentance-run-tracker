@@ -3,7 +3,7 @@ const path = require('path')
 const { cloneFrom } = require('../tools/methods')
 const { syncApp } = require('../sync')
 const characters = require('../jsons/characters.json')
-const bosses = require('../jsons/bosses.json')
+const entities = require('../jsons/entitiesFiltered.json')
 const items = require('../jsons/items.json')
 const floors = require('../jsons/floors.json')
 const moment = require('moment')
@@ -26,10 +26,10 @@ module.exports = {
         return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
     },
     getEntity: (string) => {
-        //Return matching entity from logs (actually boss only)
+        //Return matching entity from logs (actually bosses only)
         const entityId = string.split(" ")[5].match(/(\d+)/)[0]
         const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
-        return cloneFrom(bosses.find(boss => boss.id === entityId && boss.variant === entityVariant))
+        return cloneFrom(entities.find(entity => entity.id === entityId && entity.variant === entityVariant && entity.boss === "1"))
     },
     getCharaterStats: (string) => {
         //Return character stats from RRTE mod converted to json
