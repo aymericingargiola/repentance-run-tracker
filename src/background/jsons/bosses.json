@@ -1,697 +1,977 @@
 [
-    {
-      "id": "19",
-      "name": "Larry Jr.",
-      "variant": "0"
-    },
-    {
-      "id": "19",
-      "name": "The Hollow",
-      "variant": "1"
-    },
-    {
-      "id": "20",
-      "name": "Monstro",
-      "variant": "0"
-    },
-    {
-      "id": "28",
-      "name": "Chub",
-      "variant": "0"
-    },
-    {
-      "id": "28",
-      "name": "C.H.A.D.",
-      "variant": "1"
-    },
-    {
-      "id": "28",
-      "name": "The Carrion Queen",
-      "variant": "2"
-    },
-    {
-      "id": "36",
-      "name": "Gurdy",
-      "variant": "0"
-    },
-    {
-      "id": "38",
-      "name": "Ultra Pride Baby",
-      "variant": "2"
-    },
-    {
-      "id": "43",
-      "name": "Monstro II",
-      "variant": "0"
-    },
-    {
-      "id": "43",
-      "name": "Gish",
-      "variant": "1"
-    },
-    {
-      "id": "45",
-      "name": "Mom",
-      "variant": "0"
-    },
-    {
-      "id": "45",
-      "name": "Mom Stomp",
-      "variant": "10"
-    },
-    {
-      "id": "46",
-      "name": "Sloth",
-      "variant": "0"
-    },
-    {
-      "id": "46",
-      "name": "Super Sloth",
-      "variant": "1"
-    },
-    {
-      "id": "46",
-      "name": "Ultra Pride",
-      "variant": "2"
-    },
-    {
-      "id": "47",
-      "name": "Lust",
-      "variant": "0"
-    },
-    {
-      "id": "47",
-      "name": "Super Lust",
-      "variant": "1"
-    },
-    {
-      "id": "48",
-      "name": "Wrath",
-      "variant": "0"
-    },
-    {
-      "id": "48",
-      "name": "Super Wrath",
-      "variant": "1"
-    },
-    {
-      "id": "49",
-      "name": "Gluttony",
-      "variant": "0"
-    },
-    {
-      "id": "49",
-      "name": "Super Gluttony",
-      "variant": "1"
-    },
-    {
-      "id": "50",
-      "name": "Greed",
-      "variant": "0"
-    },
-    {
-      "id": "50",
-      "name": "Super Greed",
-      "variant": "1"
-    },
-    {
-      "id": "51",
-      "name": "Envy",
-      "variant": "0"
-    },
-    {
-      "id": "51",
-      "name": "Envy (big)",
-      "variant": "10"
-    },
-    {
-      "id": "51",
-      "name": "Envy (medium)",
-      "variant": "20"
-    },
-    {
-      "id": "51",
-      "name": "Envy (small)",
-      "variant": "30"
-    },
-    {
-      "id": "51",
-      "name": "Super Envy",
-      "variant": "1"
-    },
-    {
-      "id": "51",
-      "name": "Super Envy (big)",
-      "variant": "11"
-    },
-    {
-      "id": "51",
-      "name": "Super Envy (medium)",
-      "variant": "21"
-    },
-    {
-      "id": "51",
-      "name": "Super Envy (small)",
-      "variant": "31"
-    },
-    {
-      "id": "52",
-      "name": "Pride",
-      "variant": "0"
-    },
-    {
-      "id": "52",
-      "name": "Super Pride",
-      "variant": "1"
-    },
-    {
-      "id": "62",
-      "name": "Pin",
-      "variant": "0"
-    },
-    {
-      "id": "62",
-      "name": "Scolex",
-      "variant": "1"
-    },
-    {
-      "id": "62",
-      "name": "The Frail",
-      "variant": "2"
-    },
-    {
-      "id": "63",
-      "name": "Famine",
-      "variant": "0"
-    },
-    {
-      "id": "64",
-      "name": "Pestilence",
-      "variant": "0"
-    },
-    {
-      "id": "65",
-      "name": "War",
-      "variant": "0"
-    },
-    {
-      "id": "65",
-      "name": "Conquest",
-      "variant": "1"
-    },
-    {
-      "id": "65",
-      "name": "War without horse",
-      "variant": "10"
-    },
-    {
-      "id": "66",
-      "name": "Death",
-      "variant": "0"
-    },
-    {
-      "id": "66",
-      "name": "Death Horse",
-      "variant": "20"
-    },
-    {
-      "id": "66",
-      "name": "Death without horse",
-      "variant": "30"
-    },
-    {
-      "id": "67",
-      "name": "The Duke of Flies",
-      "variant": "0"
-    },
-    {
-      "id": "67",
-      "name": "The Husk",
-      "variant": "1"
-    },
-    {
-      "id": "68",
-      "name": "Peep",
-      "variant": "0"
-    },
-    {
-      "id": "68",
-      "name": "The Bloat",
-      "variant": "1"
-    },
-    {
-      "id": "69",
-      "name": "Loki",
-      "variant": "0"
-    },
-    {
-      "id": "69",
-      "name": "Lokii",
-      "variant": "1"
-    },
-    {
-      "id": "71",
-      "name": "Fistula",
-      "variant": "0"
-    },
-    {
-      "id": "71",
-      "name": "Teratoma",
-      "variant": "1"
-    },
-    {
-      "id": "72",
-      "name": "Fistula Medium",
-      "variant": "0"
-    },
-    {
-      "id": "72",
-      "name": "Teratoma Medium",
-      "variant": "1"
-    },
-    {
-      "id": "73",
-      "name": "Fistula Small",
-      "variant": "0"
-    },
-    {
-      "id": "73",
-      "name": "Teratoma Small",
-      "variant": "1"
-    },
-    {
-      "id": "74",
-      "name": "Blastocyst",
-      "variant": "0"
-    },
-    {
-      "id": "75",
-      "name": "Blastocyst Medium",
-      "variant": "0"
-    },
-    {
-      "id": "76",
-      "name": "Blastocyst Small",
-      "variant": "0"
-    },
-    {
-      "id": "78",
-      "name": "Mom's Heart",
-      "variant": "0"
-    },
-    {
-      "id": "78",
-      "name": "It Lives",
-      "variant": "1"
-    },
-    {
-      "id": "79",
-      "name": "Gemini",
-      "variant": "0"
-    },
-    {
-      "id": "79",
-      "name": "Steven",
-      "variant": "1"
-    },
-    {
-      "id": "79",
-      "name": "The Blighted Ovum",
-      "variant": "2"
-    },
-    {
-      "id": "79",
-      "name": "Gemini Baby",
-      "variant": "10"
-    },
-    {
-      "id": "79",
-      "name": "Steven Baby",
-      "variant": "11"
-    },
-    {
-      "id": "79",
-      "name": "The Blighted Ovum Baby",
-      "variant": "12"
-    },
-    {
-      "id": "81",
-      "name": "The Fallen",
-      "variant": "0"
-    },
-    {
-      "id": "81",
-      "name": "Krampus",
-      "variant": "1"
-    },
-    {
-      "id": "82",
-      "name": "Headless Horseman",
-      "variant": "0"
-    },
-    {
-      "id": "83",
-      "name": "Headless Horsemans Head",
-      "variant": "0"
-    },
-    {
-      "id": "84",
-      "name": "Satan",
-      "variant": "0"
-    },
-    {
-      "id": "84",
-      "name": "Satan Stomp",
-      "variant": "10"
-    },
-    {
-      "id": "97",
-      "name": "Mask of Infamy",
-      "variant": "0"
-    },
-    {
-      "id": "98",
-      "name": "Heart of Infamy",
-      "variant": "0"
-    },
-    {
-      "id": "99",
-      "name": "Gurdy Jr.",
-      "variant": "0"
-    },
-    {
-      "id": "100",
-      "name": "Widow",
-      "variant": "0"
-    },
-    {
-      "id": "100",
-      "name": "The Wretched",
-      "variant": "1"
-    },
-    {
-      "id": "101",
-      "name": "Daddy Long Legs",
-      "variant": "0"
-    },
-    {
-      "id": "101",
-      "name": "Triachnid",
-      "variant": "1"
-    },
-    {
-      "id": "102",
-      "name": "Isaac",
-      "variant": "0"
-    },
-    {
-      "id": "102",
-      "name": "???",
-      "variant": "1"
-    },
-    {
-      "id": "102",
-      "name": "??? (Alt)",
-      "variant": "2"
-    },
-    {
-      "id": "237",
-      "name": "Gurgling (boss)",
-      "variant": "1"
-    },
-    {
-      "id": "237",
-      "name": "Turdling",
-      "variant": "2"
-    },
-    {
-      "id": "260",
-      "name": "Haunt",
-      "variant": "0"
-    },
-    {
-      "id": "261",
-      "name": "Dingle",
-      "variant": "0"
-    },
-    {
-      "id": "261",
-      "name": "Dangle",
-      "variant": "1"
-    },
-    {
-      "id": "262",
-      "name": "Mega Maw",
-      "variant": "0"
-    },
-    {
-      "id": "263",
-      "name": "The Gate",
-      "variant": "0"
-    },
-    {
-      "id": "264",
-      "name": "Mega Fatty",
-      "variant": "0"
-    },
-    {
-      "id": "265",
-      "name": "The Cage",
-      "variant": "0"
-    },
-    {
-      "id": "266",
-      "name": "Mama Gurdy",
-      "variant": "0"
-    },
-    {
-      "id": "266",
-      "name": "Mama Gurdy Left Hand",
-      "variant": "1"
-    },
-    {
-      "id": "266",
-      "name": "Mama Gurdy Right Hand",
-      "variant": "2"
-    },
-    {
-      "id": "267",
-      "name": "Dark One",
-      "variant": "0"
-    },
-    {
-      "id": "268",
-      "name": "The Adversary",
-      "variant": "0"
-    },
-    {
-      "id": "269",
-      "name": "Polycephalus",
-      "variant": "0"
-    },
-    {
-      "id": "270",
-      "name": "Mr. Fred",
-      "variant": "0"
-    },
-    {
-      "id": "271",
-      "name": "Uriel",
-      "variant": "0"
-    },
-    {
-      "id": "271",
-      "name": "Fallen Uriel",
-      "variant": "1"
-    },
-    {
-      "id": "272",
-      "name": "Gabriel",
-      "variant": "0"
-    },
-    {
-      "id": "272",
-      "name": "Fallen Gabriel",
-      "variant": "1"
-    },
-    {
-      "id": "273",
-      "name": "The Lamb",
-      "variant": "0"
-    },
-    {
-      "id": "273",
-      "name": "Lamb Body",
-      "variant": "10"
-    },
-    {
-      "id": "274",
-      "name": "Mega Satan",
-      "variant": "0"
-    },
-    {
-      "id": "274",
-      "name": "Mega Satan's Right Hand",
-      "variant": "1"
-    },
-    {
-      "id": "274",
-      "name": "Mega Satan's Left Hand",
-      "variant": "2"
-    },
-    {
-      "id": "275",
-      "name": "Mega Satan 2",
-      "variant": "0"
-    },
-    {
-      "id": "275",
-      "name": "Mega Satan 2's Right Hand",
-      "variant": "1"
-    },
-    {
-      "id": "275",
-      "name": "Mega Satan 2's Left Hand",
-      "variant": "2"
-    },
-    {
-      "id": "294",
-      "name": "Ultra Greed Door",
-      "variant": "0"
-    },
-    {
-      "id": "401",
-      "name": "The Stain",
-      "variant": "0"
-    },
-    {
-      "id": "402",
-      "name": "Brownie",
-      "variant": "0"
-    },
-    {
-      "id": "403",
-      "name": "The Forsaken",
-      "variant": "0"
-    },
-    {
-      "id": "404",
-      "name": "Little Horn",
-      "variant": "0"
-    },
-    {
-      "id": "405",
-      "name": "Rag Man",
-      "variant": "0"
-    },
-    {
-      "id": "406",
-      "name": "Ultra Greed",
-      "variant": "0"
-    },
-    {
-      "id": "406",
-      "name": "Ultra Greedier",
-      "variant": "1"
-    },
-    {
-      "id": "407",
-      "name": "Hush",
-      "variant": "0"
-    },
-    {
-      "id": "408",
-      "name": "Hush (Skinless)",
-      "variant": "0"
-    },
-    {
-      "id": "409",
-      "name": "Rag Mega",
-      "variant": "0"
-    },
-    {
-      "id": "410",
-      "name": "Sisters Vis",
-      "variant": "0"
-    },
-    {
-      "id": "411",
-      "name": "Big Horn",
-      "variant": "0"
-    },
-    {
-      "id": "411",
-      "name": "Small Hole",
-      "variant": "1"
-    },
-    {
-      "id": "411",
-      "name": "Big Hole",
-      "variant": "2"
-    },
-    {
-      "id": "412",
-      "name": "Delirium",
-      "variant": "0"
-    },
-    {
-      "id": "413",
-      "name": "The Matriarch",
-      "variant": "0"
-    },
-    {
-      "id": "1000",
-      "name": "Crack The Sky",
-      "variant": "19"
-    },
-    {
-      "id": "1000",
-      "name": "Monstros Tooth",
-      "variant": "28"
-    },
-    {
-      "id": "1000",
-      "name": "Mom Foot Stomp",
-      "variant": "29"
-    },
-    {
-      "id": "1000",
-      "name": "Tooth Particle",
-      "variant": "35"
-    },
-    {
-      "id": "1000",
-      "name": "Heaven Door",
-      "variant": "39"
-    },
-    {
-      "id": "1000",
-      "name": "Trinity Shield",
-      "variant": "47"
-    },
-    {
-      "id": "1000",
-      "name": "Diamond Particle",
-      "variant": "85"
-    },
-    {
-      "id": "1000",
-      "name": "Nail Particle",
-      "variant": "86"
-    },
-    {
-      "id": "1000",
-      "name": "Hush Laser",
-      "variant": "96"
-    },
-    {
-      "id": "1000",
-      "name": "Hush Laser Up",
-      "variant": "101"
-    },
-    {
-      "id": "1000",
-      "name": "BlackHoleRay",
-      "variant": "107"
-    }
-  ]
+  {
+    "id": "19",
+    "name": "Larry Jr.",
+    "variant": "0"
+  },
+  {
+    "id": "19",
+    "name": "The Hollow",
+    "variant": "1"
+  },
+  {
+    "id": "20",
+    "name": "Monstro",
+    "variant": "0"
+  },
+  {
+    "id": "28",
+    "name": "Chub",
+    "variant": "0"
+  },
+  {
+    "id": "28",
+    "name": "C.H.A.D.",
+    "variant": "1"
+  },
+  {
+    "id": "28",
+    "name": "The Carrion Queen",
+    "variant": "2"
+  },
+  {
+    "id": "36",
+    "name": "Gurdy",
+    "variant": "0"
+  },
+  {
+    "id": "38",
+    "name": "Ultra Pride Baby",
+    "variant": "2"
+  },
+  {
+    "id": "43",
+    "name": "Monstro II",
+    "variant": "0"
+  },
+  {
+    "id": "43",
+    "name": "Gish",
+    "variant": "1"
+  },
+  {
+    "id": "45",
+    "name": "Mom",
+    "variant": "0"
+  },
+  {
+    "id": "45",
+    "name": "Mom Stomp",
+    "variant": "10"
+  },
+  {
+    "id": "46",
+    "name": "Sloth",
+    "variant": "0"
+  },
+  {
+    "id": "46",
+    "name": "Super Sloth",
+    "variant": "1"
+  },
+  {
+    "id": "46",
+    "name": "Ultra Pride",
+    "variant": "2"
+  },
+  {
+    "id": "47",
+    "name": "Lust",
+    "variant": "0"
+  },
+  {
+    "id": "47",
+    "name": "Super Lust",
+    "variant": "1"
+  },
+  {
+    "id": "48",
+    "name": "Wrath",
+    "variant": "0"
+  },
+  {
+    "id": "48",
+    "name": "Super Wrath",
+    "variant": "1"
+  },
+  {
+    "id": "49",
+    "name": "Gluttony",
+    "variant": "0"
+  },
+  {
+    "id": "49",
+    "name": "Super Gluttony",
+    "variant": "1"
+  },
+  {
+    "id": "50",
+    "name": "Greed",
+    "variant": "0"
+  },
+  {
+    "id": "50",
+    "name": "Super Greed",
+    "variant": "1"
+  },
+  {
+    "id": "51",
+    "name": "Envy",
+    "variant": "0"
+  },
+  {
+    "id": "51",
+    "name": "Envy (big)",
+    "variant": "10"
+  },
+  {
+    "id": "51",
+    "name": "Envy (medium)",
+    "variant": "20"
+  },
+  {
+    "id": "51",
+    "name": "Envy (small)",
+    "variant": "30"
+  },
+  {
+    "id": "51",
+    "name": "Super Envy",
+    "variant": "1"
+  },
+  {
+    "id": "51",
+    "name": "Super Envy (big)",
+    "variant": "11"
+  },
+  {
+    "id": "51",
+    "name": "Super Envy (medium)",
+    "variant": "21"
+  },
+  {
+    "id": "51",
+    "name": "Super Envy (small)",
+    "variant": "31"
+  },
+  {
+    "id": "52",
+    "name": "Pride",
+    "variant": "0"
+  },
+  {
+    "id": "52",
+    "name": "Super Pride",
+    "variant": "1"
+  },
+  {
+    "id": "62",
+    "name": "Pin",
+    "variant": "0"
+  },
+  {
+    "id": "62",
+    "name": "Scolex",
+    "variant": "1"
+  },
+  {
+    "id": "62",
+    "name": "The Frail",
+    "variant": "2"
+  },
+  {
+    "id": "63",
+    "name": "Famine",
+    "variant": "0"
+  },
+  {
+    "id": "64",
+    "name": "Pestilence",
+    "variant": "0"
+  },
+  {
+    "id": "65",
+    "name": "War",
+    "variant": "0"
+  },
+  {
+    "id": "65",
+    "name": "Conquest",
+    "variant": "1"
+  },
+  {
+    "id": "65",
+    "name": "War without horse",
+    "variant": "10"
+  },
+  {
+    "id": "66",
+    "name": "Death",
+    "variant": "0"
+  },
+  {
+    "id": "66",
+    "name": "Death Horse",
+    "variant": "20"
+  },
+  {
+    "id": "66",
+    "name": "Death without horse",
+    "variant": "30"
+  },
+  {
+    "id": "67",
+    "name": "The Duke of Flies",
+    "variant": "0"
+  },
+  {
+    "id": "67",
+    "name": "The Husk",
+    "variant": "1"
+  },
+  {
+    "id": "68",
+    "name": "Peep",
+    "variant": "0"
+  },
+  {
+    "id": "68",
+    "name": "The Bloat",
+    "variant": "1"
+  },
+  {
+    "id": "69",
+    "name": "Loki",
+    "variant": "0"
+  },
+  {
+    "id": "69",
+    "name": "Lokii",
+    "variant": "1"
+  },
+  {
+    "id": "71",
+    "name": "Fistula",
+    "variant": "0"
+  },
+  {
+    "id": "71",
+    "name": "Teratoma",
+    "variant": "1"
+  },
+  {
+    "id": "72",
+    "name": "Fistula Medium",
+    "variant": "0"
+  },
+  {
+    "id": "72",
+    "name": "Teratoma Medium",
+    "variant": "1"
+  },
+  {
+    "id": "73",
+    "name": "Fistula Small",
+    "variant": "0"
+  },
+  {
+    "id": "73",
+    "name": "Teratoma Small",
+    "variant": "1"
+  },
+  {
+    "id": "74",
+    "name": "Blastocyst",
+    "variant": "0"
+  },
+  {
+    "id": "75",
+    "name": "Blastocyst Medium",
+    "variant": "0"
+  },
+  {
+    "id": "76",
+    "name": "Blastocyst Small",
+    "variant": "0"
+  },
+  {
+    "id": "78",
+    "name": "Mom's Heart",
+    "variant": "0"
+  },
+  {
+    "id": "78",
+    "name": "It Lives",
+    "variant": "1"
+  },
+  {
+    "id": "79",
+    "name": "Gemini",
+    "variant": "0"
+  },
+  {
+    "id": "79",
+    "name": "Steven",
+    "variant": "1"
+  },
+  {
+    "id": "79",
+    "name": "The Blighted Ovum",
+    "variant": "2"
+  },
+  {
+    "id": "79",
+    "name": "Gemini Baby",
+    "variant": "10"
+  },
+  {
+    "id": "79",
+    "name": "Steven Baby",
+    "variant": "11"
+  },
+  {
+    "id": "79",
+    "name": "The Blighted Ovum Baby",
+    "variant": "12"
+  },
+  {
+    "id": "81",
+    "name": "The Fallen",
+    "variant": "0"
+  },
+  {
+    "id": "81",
+    "name": "Krampus",
+    "variant": "1"
+  },
+  {
+    "id": "82",
+    "name": "Headless Horseman",
+    "variant": "0"
+  },
+  {
+    "id": "83",
+    "name": "Headless Horsemans Head",
+    "variant": "0"
+  },
+  {
+    "id": "84",
+    "name": "Satan",
+    "variant": "0"
+  },
+  {
+    "id": "84",
+    "name": "Satan Stomp",
+    "variant": "10"
+  },
+  {
+    "id": "97",
+    "name": "Mask of Infamy",
+    "variant": "0"
+  },
+  {
+    "id": "98",
+    "name": "Heart of Infamy",
+    "variant": "0"
+  },
+  {
+    "id": "99",
+    "name": "Gurdy Jr.",
+    "variant": "0"
+  },
+  {
+    "id": "100",
+    "name": "Widow",
+    "variant": "0"
+  },
+  {
+    "id": "100",
+    "name": "The Wretched",
+    "variant": "1"
+  },
+  {
+    "id": "101",
+    "name": "Daddy Long Legs",
+    "variant": "0"
+  },
+  {
+    "id": "101",
+    "name": "Triachnid",
+    "variant": "1"
+  },
+  {
+    "id": "102",
+    "name": "Isaac",
+    "variant": "0"
+  },
+  {
+    "id": "102",
+    "name": "???",
+    "variant": "1"
+  },
+  {
+    "id": "102",
+    "name": "??? (Alt)",
+    "variant": "2"
+  },
+  {
+    "id": "237",
+    "name": "Gurgling (boss)",
+    "variant": "1"
+  },
+  {
+    "id": "237",
+    "name": "Turdling",
+    "variant": "2"
+  },
+  {
+    "id": "260",
+    "name": "Haunt",
+    "variant": "0"
+  },
+  {
+    "id": "261",
+    "name": "Dingle",
+    "variant": "0"
+  },
+  {
+    "id": "261",
+    "name": "Dangle",
+    "variant": "1"
+  },
+  {
+    "id": "262",
+    "name": "Mega Maw",
+    "variant": "0"
+  },
+  {
+    "id": "263",
+    "name": "The Gate",
+    "variant": "0"
+  },
+  {
+    "id": "264",
+    "name": "Mega Fatty",
+    "variant": "0"
+  },
+  {
+    "id": "265",
+    "name": "The Cage",
+    "variant": "0"
+  },
+  {
+    "id": "266",
+    "name": "Mama Gurdy",
+    "variant": "0"
+  },
+  {
+    "id": "266",
+    "name": "Mama Gurdy Left Hand",
+    "variant": "1"
+  },
+  {
+    "id": "266",
+    "name": "Mama Gurdy Right Hand",
+    "variant": "2"
+  },
+  {
+    "id": "267",
+    "name": "Dark One",
+    "variant": "0"
+  },
+  {
+    "id": "268",
+    "name": "The Adversary",
+    "variant": "0"
+  },
+  {
+    "id": "269",
+    "name": "Polycephalus",
+    "variant": "0"
+  },
+  {
+    "id": "270",
+    "name": "Mr. Fred",
+    "variant": "0"
+  },
+  {
+    "id": "271",
+    "name": "Uriel",
+    "variant": "0"
+  },
+  {
+    "id": "271",
+    "name": "Fallen Uriel",
+    "variant": "1"
+  },
+  {
+    "id": "272",
+    "name": "Gabriel",
+    "variant": "0"
+  },
+  {
+    "id": "272",
+    "name": "Fallen Gabriel",
+    "variant": "1"
+  },
+  {
+    "id": "273",
+    "name": "The Lamb",
+    "variant": "0"
+  },
+  {
+    "id": "273",
+    "name": "Lamb Body",
+    "variant": "10"
+  },
+  {
+    "id": "274",
+    "name": "Mega Satan",
+    "variant": "0"
+  },
+  {
+    "id": "274",
+    "name": "Mega Satan's Right Hand",
+    "variant": "1"
+  },
+  {
+    "id": "274",
+    "name": "Mega Satan's Left Hand",
+    "variant": "2"
+  },
+  {
+    "id": "275",
+    "name": "Mega Satan 2",
+    "variant": "0"
+  },
+  {
+    "id": "275",
+    "name": "Mega Satan 2's Right Hand",
+    "variant": "1"
+  },
+  {
+    "id": "275",
+    "name": "Mega Satan 2's Left Hand",
+    "variant": "2"
+  },
+  {
+    "id": "294",
+    "name": "Ultra Greed Door",
+    "variant": "0"
+  },
+  {
+    "id": "401",
+    "name": "The Stain",
+    "variant": "0"
+  },
+  {
+    "id": "402",
+    "name": "Brownie",
+    "variant": "0"
+  },
+  {
+    "id": "403",
+    "name": "The Forsaken",
+    "variant": "0"
+  },
+  {
+    "id": "404",
+    "name": "Little Horn",
+    "variant": "0"
+  },
+  {
+    "id": "405",
+    "name": "Rag Man",
+    "variant": "0"
+  },
+  {
+    "id": "406",
+    "name": "Ultra Greed",
+    "variant": "0"
+  },
+  {
+    "id": "406",
+    "name": "Ultra Greedier",
+    "variant": "1"
+  },
+  {
+    "id": "407",
+    "name": "Hush",
+    "variant": "0"
+  },
+  {
+    "id": "408",
+    "name": "Hush (Skinless)",
+    "variant": "0"
+  },
+  {
+    "id": "409",
+    "name": "Rag Mega",
+    "variant": "0"
+  },
+  {
+    "id": "410",
+    "name": "Sisters Vis",
+    "variant": "0"
+  },
+  {
+    "id": "411",
+    "name": "Big Horn",
+    "variant": "0"
+  },
+  {
+    "id": "411",
+    "name": "Small Hole",
+    "variant": "1"
+  },
+  {
+    "id": "411",
+    "name": "Big Hole",
+    "variant": "2"
+  },
+  {
+    "id": "412",
+    "name": "Delirium",
+    "variant": "0"
+  },
+  {
+    "id": "413",
+    "name": "The Matriarch",
+    "variant": "0"
+  },
+  {
+    "id": "1000",
+    "name": "Crack The Sky",
+    "variant": "19"
+  },
+  {
+    "id": "1000",
+    "name": "Monstros Tooth",
+    "variant": "28"
+  },
+  {
+    "id": "1000",
+    "name": "Mom Foot Stomp",
+    "variant": "29"
+  },
+  {
+    "id": "1000",
+    "name": "Tooth Particle",
+    "variant": "35"
+  },
+  {
+    "id": "1000",
+    "name": "Heaven Door",
+    "variant": "39"
+  },
+  {
+    "id": "1000",
+    "name": "Trinity Shield",
+    "variant": "47"
+  },
+  {
+    "id": "1000",
+    "name": "Diamond Particle",
+    "variant": "85"
+  },
+  {
+    "id": "1000",
+    "name": "Nail Particle",
+    "variant": "86"
+  },
+  {
+    "id": "1000",
+    "name": "Hush Laser",
+    "variant": "96"
+  },
+  {
+    "id": "1000",
+    "name": "Hush Laser Up",
+    "variant": "101"
+  },
+  {
+    "id": "1000",
+    "name": "BlackHoleRay",
+    "variant": "107"
+  },
+  {
+    "id": "19",
+    "name": "Tuff Twin",
+    "variant": "2"
+  },
+  {
+    "id": "19",
+    "name": "The Shell",
+    "variant": "3"
+  },
+  {
+    "id": "62",
+    "name": "Wormwood",
+    "variant": "3"
+  },
+  {
+    "id": "269",
+    "name": "The Pile",
+    "variant": "1"
+  },
+  {
+    "id": "866",
+    "name": "Dark Esau",
+    "variant": "0"
+  },
+  {
+    "id": "867",
+    "name": "Mother's Shadow",
+    "variant": "0"
+  },
+  {
+    "id": "900",
+    "name": "Reap Creep",
+    "variant": "0"
+  },
+  {
+    "id": "901",
+    "name": "Lil Blub",
+    "variant": "0"
+  },
+  {
+    "id": "902",
+    "name": "Rainmaker",
+    "variant": "0"
+  },
+  {
+    "id": "903",
+    "name": "The Visage",
+    "variant": "0"
+  },
+  {
+    "id": "903",
+    "name": "Visage Mask",
+    "variant": "1"
+  },
+  {
+    "id": "904",
+    "name": "Siren",
+    "variant": "0"
+  },
+  {
+    "id": "905",
+    "name": "The Heretic",
+    "variant": "0"
+  },
+  {
+    "id": "906",
+    "name": "Hornfel",
+    "variant": "0"
+  },
+  {
+    "id": "906",
+    "name": "Hornfel Decoy",
+    "variant": "1"
+  },
+  {
+    "id": "907",
+    "name": "Great Gideon",
+    "variant": "0"
+  },
+  {
+    "id": "907",
+    "name": "Great Gideon (defeated)",
+    "variant": "0"
+  },
+  {
+    "id": "908",
+    "name": "Baby Plum",
+    "variant": "0"
+  },
+  {
+    "id": "909",
+    "name": "The Scourge",
+    "variant": "0"
+  },
+  {
+    "id": "910",
+    "name": "Chimera",
+    "variant": "0"
+  },
+  {
+    "id": "910",
+    "name": "Chimera (body)",
+    "variant": "1"
+  },
+  {
+    "id": "910",
+    "name": "Chimera (head)",
+    "variant": "2"
+  },
+  {
+    "id": "911",
+    "name": "Rotgut",
+    "variant": "0"
+  },
+  {
+    "id": "911",
+    "name": "Rotgut (maggot)",
+    "variant": "1"
+  },
+  {
+    "id": "911",
+    "name": "Rotgut (heart)",
+    "variant": "2"
+  },
+  {
+    "id": "912",
+    "name": "Mother",
+    "variant": "0"
+  },
+  {
+    "id": "912",
+    "name": "Mother 2",
+    "variant": "10"
+  },
+  {
+    "id": "912",
+    "name": "Mother Worm",
+    "variant": "30"
+  },
+  {
+    "id": "912",
+    "name": "Mother Ball",
+    "variant": "100"
+  },
+  {
+    "id": "912",
+    "name": "Mother Ball (Medium)",
+    "variant": "100"
+  },
+  {
+    "id": "912",
+    "name": "Mother Ball (Small)",
+    "variant": "100"
+  },
+  {
+    "id": "913",
+    "name": "Min Min",
+    "variant": "0"
+  },
+  {
+    "id": "914",
+    "name": "Clog",
+    "variant": "0"
+  },
+  {
+    "id": "915",
+    "name": "Singe",
+    "variant": "0"
+  },
+  {
+    "id": "916",
+    "name": "Bumbino",
+    "variant": "0"
+  },
+  {
+    "id": "917",
+    "name": "Colostomia",
+    "variant": "0"
+  },
+  {
+    "id": "918",
+    "name": "Turdlet",
+    "variant": "0"
+  },
+  {
+    "id": "919",
+    "name": "Raglich",
+    "variant": "0"
+  },
+  {
+    "id": "919",
+    "name": "Raglich Arm",
+    "variant": "1"
+  },
+  {
+    "id": "920",
+    "name": "Horny Boys",
+    "variant": "0"
+  },
+  {
+    "id": "921",
+    "name": "Clutch",
+    "variant": "0"
+  },
+  {
+    "id": "950",
+    "name": "Dogma",
+    "variant": "0"
+  },
+  {
+    "id": "950",
+    "name": "Dogma's TV",
+    "variant": "1"
+  },
+  {
+    "id": "950",
+    "name": "Dogma Angel",
+    "variant": "2"
+  },
+  {
+    "id": "951",
+    "name": "Ultra Famine",
+    "variant": "10"
+  },
+  {
+    "id": "951",
+    "name": "Ultra Pestilence",
+    "variant": "20"
+  },
+  {
+    "id": "951",
+    "name": "Ultra War",
+    "variant": "30"
+  },
+  {
+    "id": "951",
+    "name": "Ultra Death",
+    "variant": "40"
+  },
+  {
+    "id": "951",
+    "name": "The Beast",
+    "variant": "0"
+  },
+  {
+    "id": "951",
+    "name": "Background (Beast)",
+    "variant": "100"
+  },
+  {
+    "id": "951",
+    "name": "Background (Famine)",
+    "variant": "101"
+  },
+  {
+    "id": "951",
+    "name": "Background (Pestilence)",
+    "variant": "102"
+  },
+  {
+    "id": "951",
+    "name": "Background (War)",
+    "variant": "103"
+  },
+  {
+    "id": "951",
+    "name": "Background (Death)",
+    "variant": "104"
+  },
+  {
+    "id": "964",
+    "name": "Dummy",
+    "variant": "0"
+  },
+  {
+    "id": "1000",
+    "name": "Moonlight",
+    "variant": "39"
+  }
+]
