@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const { cloneFrom } = require('../tools/methods')
 const { syncApp } = require('../sync')
 const characters = require('../jsons/characters.json')
@@ -16,7 +17,9 @@ module.exports = {
         }
     },
     getModPath: (string) => {
-        return string.split(" ")[5].replace("The", "The Binding of Isaac Rebirth\\mods");
+        const modPath = string.replace("[INFO] - Running Lua Script: ", "")
+        const modPathIndex = modPath.indexOf("/mods/")
+        return path.normalize(`${modPath.slice(0,modPathIndex)}\\mods`)
     },
     getCharater: (string) => {
         //Return matching character from logs
@@ -24,8 +27,9 @@ module.exports = {
     },
     getEntity: (string) => {
         //Return matching entity from logs (actually boss only)
-        let bossId = string.split(" ")[5].replace(/^\D+/g, '')
-        return cloneFrom(bosses.find(boss => boss.id === bossId))
+        const entityId = string.split(" ")[5].match(/(\d+)/)[0]
+        const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
+        return cloneFrom(bosses.find(boss => boss.id === entityId && boss.variant === entityVariant))
     },
     getCharaterStats: (string) => {
         //Return character stats from RRTE mod converted to json

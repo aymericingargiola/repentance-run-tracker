@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
+const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
@@ -165,6 +165,7 @@ function updateOrCreateRun(params = {}) {
                     break
                 case 'spawn entity':
                     console.log("boss",params.entity)
+                    break
                 case 'adding collectible':
                     collectibleManager(sameRun, params.collectible, "add")
                     break
