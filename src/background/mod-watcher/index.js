@@ -54,7 +54,7 @@ async function checkMod() {
 
 module.exports = {
     startModWatch: async function(window, isDevelopment, modFileContent, modeMetadataContent) {
-        const loadConfig = await fileResolve(dataFolder, 'config.json', '{}')
+        const loadConfig = await fileResolve(dataFolder, 'config.json', '{fields:[]}')
         config = JSON.parse(fs.readFileSync(loadConfig))
         if(isDevelopment && config.isaacModFolderPath && config.isaacModFolderPath != "") {
             IsaacModFolderPath = config.isaacModFolderPath

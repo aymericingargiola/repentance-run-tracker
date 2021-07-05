@@ -338,14 +338,18 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Running Lua Script") && !log.includes("resources/scripts/")) {
             console.log(log)
-            if (!config.isaacModFolderPath || config.isaacModFolderPath === "") {
-                config.isaacModFolderPath = getModPath(log)
+            const modPath = getModPath(log)
+            const field = config.fields.filter(field => field.id === "isaacModFolderPath");
+            if (field.length === 0 || !config.isaacModFolderPath || config.isaacModFolderPath === "") {
+                if (field.length === 0) config.fields.push({"id":"isaacModFolderPath","name":"Isaac mods folder","type":"text"})
+                if (!config.isaacModFolderPath || config.isaacModFolderPath === "") config.isaacModFolderPath = modPath
                 saveFileToDisk(configJsonPath, JSON.stringify(config))
             }
             if (log.includes("/mods/repentance_run_tracker_extended")) {
                 extendedSaveMode = true
             } else {
                 otherModLoaded = true
+                if (currentRun && currentRun.otherModLoaded === false) currentRun.otherModLoaded = true
             }
         }
         if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
@@ -384,7 +388,7 @@ function unWatchRepentanceLogs() {
 async function init() {
     const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
     runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
-    const loadConfig = await fileResolve(dataFolder, 'config.json', '{}')
+    const loadConfig = await fileResolve(dataFolder, 'config.json', '{fields:[]}')
     config = JSON.parse(fs.readFileSync(loadConfig))
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs

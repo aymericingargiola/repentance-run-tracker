@@ -12,11 +12,14 @@ export default class Run extends Model {
             gameOptions: this.string(null),
             runStart: this.number(null),
             runUpdate: this.number(null),
+            runUserUpdate: this.number(null),
             runEnd: this.attr(null),
+            runDuration: this.number(null),
             characters: this.attr(null),
             floors: this.attr(null),
             toRemove: this.attr(null),
-            extendedSaveMode: this.boolean(false)
+            extendedSaveMode: this.boolean(false),
+            otherModLoaded: this.boolean(false)
         }
     }
 }
