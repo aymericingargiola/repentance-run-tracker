@@ -53,11 +53,11 @@ async function checkMod() {
 }
 
 module.exports = {
-    startModWatch: async function(window, isDevelopment, modFileContent, modeMetadataContent) {
-        const loadConfig = await fileResolve(dataFolder, 'config.json', '{fields:[]}')
-        config = JSON.parse(fs.readFileSync(loadConfig))
-        if(isDevelopment && config.isaacModFolderPath && config.isaacModFolderPath != "") {
-            IsaacModFolderPath = config.isaacModFolderPath
+    startModWatch: async function(window, isDevelopment, modFileContent, modeMetadataContent, conf) {
+        config = conf
+        const IsaacModFolderPathField = config.filter(field => field.id === "isaacModFolderPath")[0]
+        if(isDevelopment && IsaacModFolderPathField && IsaacModFolderPathField.value != "") {
+            IsaacModFolderPath = IsaacModFolderPathField.value
             modDevFolder = `${__dirname}/../src/background/mod-watcher/mod`
             modDevFile = `${__dirname}/../src/background/mod-watcher/mod/main.lua`
             modDevMetadataFile = `${__dirname}/../src/background/mod-watcher/mod/metadata.xml`

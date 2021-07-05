@@ -16,7 +16,7 @@
                         <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) != 10 && parseInt(run.characters[0].id) != 14 && (run.floors[run.floors.length - 1].curse != 'Curse of the Unknown' || run.runEnd.date != null)" class="hearts">
+                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) != 10 && parseInt(run.characters[0].id) != 14 && (run.floors[run.floors.length - 1] && run.floors[run.floors.length - 1].curse != 'Curse of the Unknown' || run.runEnd.date != null)" class="hearts">
                                 <template v-for="rhidx in run.characters[0].stats.life.maxHearts / 2">
                                     <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
                                         <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${run.characters[0].stats.life.hearts > run.characters[0].stats.life.maxHearts ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : run.characters[0].stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
@@ -40,14 +40,14 @@
                                     </div>
                                 </template> -->
                             </div>
-                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) === 14 && (run.floors[run.floors.length - 1].curse != 'Curse of the Unknown' || run.runEnd.date != null)" class="hearts">
+                            <div v-if="run.characters[0].stats && parseInt(run.characters[0].id) === 14 && (run.floors[run.floors.length - 1] && run.floors[run.floors.length - 1].curse != 'Curse of the Unknown' || run.runEnd.date != null)" class="hearts">
                                 <template v-for="chidx in run.characters[0].stats.life.maxHearts / 2">
                                     <div class="heart-container coin-heart" :key="`red-heart-${chidx}`">
                                         <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/coin-heart-${run.characters[0].stats.life.hearts - (chidx - 1) * 2 > 1 ? `full` : `empty`}.png')`}"></div>
                                     </div>
                                 </template>
                             </div>
-                            <div v-if="run.characters[0].stats && run.floors[run.floors.length - 1].curse === 'Curse of the Unknown'" class="hearts">
+                            <div v-if="run.characters[0].stats && run.floors[run.floors.length - 1] && run.floors[run.floors.length - 1].curse === 'Curse of the Unknown'" class="hearts">
                                 <div class="heart-container unknow-heart">
                                     <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/unknow-heart.png')`}"></div>
                                 </div>
@@ -120,7 +120,7 @@
                         <vue-scroll :ops="opsFloors" :class="['custom-scroll-floors']" :ref="ridx === 0 ? 'firstRunFloorsScroller' : ''">
                             <transition-group name="floors-group-transition" tag="ul" class="floors">
                                 <template v-for="(floor, fidx) in run.floors">
-                                    <li :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
+                                    <li v-if="floor" :class="['floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
                                         <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors/${floor.group}-ground.png')`}">
                                             <div class="top-info">
                                                 <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>

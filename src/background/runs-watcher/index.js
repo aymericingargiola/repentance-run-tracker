@@ -5,6 +5,7 @@ const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSee
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
+const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 const moment = require('moment')
 const splitFormat = /[\r\n]+/g
@@ -66,12 +67,12 @@ function isSameRun(seed) {
         if (currentRun.id === run.id) {
             return true
         }
-        console.log(`compare run ${run.seed} with current ${seed} : [${run.gameState} <-> ${currentGameState}] -> [compare ${run.characters[0].name} <-> ${currentCharater.name}], run end: ${run.runEnd.date}`)
+        console.log(run.runEnd.date === null,run.seed === seed,run.gameState === currentGameState,run.gameState === currentGameState)
+        console.log(`compare run ${run.seed} with current ${seed} : [${run.gameState} <-> ${currentGameState}], run end: ${run.runEnd.date}`)
         if (
             run.runEnd.date === null &&
             run.seed === seed &&
-            run.gameState === currentGameState &&
-            run.characters[0].name === currentCharater.name
+            run.gameState === currentGameState
             ) {
                 console.log("Same run")
                 return true
@@ -81,6 +82,8 @@ function isSameRun(seed) {
 }
 
 function collectibleManager(sameRun, collectible, status) {
+    if (!sameRun.floors[sameRun.floors.length - 1]) return
+
     const playerContext = collectible.player
 
     // add itemsCollected key on last floor if doesn't exist
@@ -208,6 +211,7 @@ function updateOrCreateRun(params = {}) {
     }
     else {
         console.log('Create a run...')
+        if(!currentFloor) return console.log("Can't generate a run if the run is not new and was not started with the app launched ! Please start a new run.")
         currentRun.id = `${currentRun.seed} ${moment().unix()}`
         const run = {
             id: currentRun.id,
@@ -334,15 +338,18 @@ function parseLogs(newLogs, logArray) {
             console.log(log)
             extendedSaveMode = false
             otherModLoaded = false
-            otherModLoaded = false
         }
         if(log.includes("Running Lua Script") && !log.includes("resources/scripts/")) {
             console.log(log)
             const modPath = getModPath(log)
-            const field = config.fields.filter(field => field.id === "isaacModFolderPath");
-            if (field.length === 0 || !config.isaacModFolderPath || config.isaacModFolderPath === "") {
-                if (field.length === 0) config.fields.push({"id":"isaacModFolderPath","name":"Isaac mods folder","type":"text"})
-                if (!config.isaacModFolderPath || config.isaacModFolderPath === "") config.isaacModFolderPath = modPath
+            const field = config.filter(field => field.id === "isaacModFolderPath")[0]
+            if (!field || field.value != modPath) {
+                if (!field) {
+                    let isaacModFolderPathTemplate = configTemplate.filter(field => field.id === "isaacModFolderPath")[0]
+                    isaacModFolderPathTemplate.value = modPath
+                    config.push(isaacModFolderPathTemplate)
+                }
+                else if (field.value != modPath) field.value = modPath
                 saveFileToDisk(configJsonPath, JSON.stringify(config))
             }
             if (log.includes("/mods/repentance_run_tracker_extended")) {
@@ -388,8 +395,6 @@ function unWatchRepentanceLogs() {
 async function init() {
     const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
     runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
-    const loadConfig = await fileResolve(dataFolder, 'config.json', '{fields:[]}')
-    config = JSON.parse(fs.readFileSync(loadConfig))
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
@@ -436,8 +441,9 @@ ipcMain.on('USER_REMOVE_RUN', (event, payload) => {
 })
 
 module.exports = {
-    startLogsWatch: function(window) {
+    startLogsWatch: function(window, conf) {
         win = window
+        config = conf
         let wait = false
         setInterval(() => {
             if(!wait) {

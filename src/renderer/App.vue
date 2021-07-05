@@ -14,17 +14,20 @@
         </transition>
         <router-view />
     </div>
+    <Settings/>
   </div>
 </template>
 
 <script>
 import Taskbar from './components/Taskbar.vue'
+import Settings from './components/Pops/Settings.vue'
 import { mapRepos } from '@vuex-orm/core'
 const loadingImagesStringTemplate = "url('img/loadimages/loadimages-#.png')"
 export default {
   name: 'App',
   components: {
-    Taskbar
+    Taskbar,
+    Settings
   },
   data() {
     return {

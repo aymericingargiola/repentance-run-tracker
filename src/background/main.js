@@ -3,7 +3,7 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { autoUpdater } from 'electron-updater'
-import { writeFileAsync } from './tools/fileSystem'
+import { writeFileAsync, fileResolve } from './tools/fileSystem'
 import { startLogsWatch } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
@@ -13,7 +13,8 @@ const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const dataFolder = path.resolve(process.cwd(), 'datas')
-let win, winTracker
+const configTemplate = require('./jsons/configTemplate.json')
+let win, winTracker, config
 
 // console.log("electron", process.versions.electron)
 
@@ -57,6 +58,9 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 async function createWindow() {
+  // Load app config file
+  const loadConfig = await fileResolve(dataFolder, 'config.json', JSON.stringify(configTemplate))
+  config = JSON.parse(fs.readFileSync(loadConfig))
   // Create the browser window.
   win = new BrowserWindow({
     title: "Repentance Run Tracker",
@@ -97,8 +101,9 @@ async function createWindow() {
     e.preventDefault()
     require('electron').shell.openExternal(url)
   })
-  startLogsWatch(win)
-  startModWatch(win, isDevelopment, modFile.default, modMetadata.default)
+
+  startLogsWatch(win, config)
+  startModWatch(win, isDevelopment, modFile.default, modMetadata.default, config)
 
   winTracker = new BrowserWindow({
     title: "Live Tracker",

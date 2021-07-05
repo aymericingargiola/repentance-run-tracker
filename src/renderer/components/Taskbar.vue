@@ -6,6 +6,9 @@
         <div class="menu center-menu">
         </div>
         <div class="menu right-menu" v-if="$isElectron">
+            <span class="action-btn settings" v-on:click="openOrCloseSettings()">
+                s
+            </span>
             <span class="action-btn minimize-app" v-on:click="minimizeApp()">
             </span>
             <span class="action-btn fullscreen-app" v-on:click="fullscreenApp()">
@@ -40,6 +43,9 @@ export default {
         closeApp() {
             window?.ipc?.send('CLOSE_APP', localStorage.vuex);
         },
+        openOrCloseSettings() {
+            this.$root.$emit('OPEN_SETTINGS')
+        }
     },
 };
 </script>
