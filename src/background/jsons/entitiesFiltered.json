@@ -1,4151 +1,3692 @@
 [
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Frowning Gaper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Gaper",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Flaming Gaper",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "11",
-      "name": "Gusher",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "11",
-      "name": "Pacer",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "12",
-      "name": "Horf",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "15",
-      "name": "Clotty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "15",
-      "name": "Clot",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "15",
-      "name": "I.Blob",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "18",
-      "name": "Attack Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "19",
-      "name": "Larry Jr.",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "19",
-      "name": "The Hollow",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "20",
-      "name": "Monstro",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "21",
-      "name": "Maggot",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "23",
-      "name": "Charger",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "23",
-      "name": "My Shadow",
-      "subtype": "1",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "23",
-      "name": "Drowned Charger",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "23",
-      "name": "Dank Charger",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "24",
-      "name": "Globin",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "24",
-      "name": "Gazing Globin",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "24",
-      "name": "Dank Globin",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Boom Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Red Boom Fly",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Drowned Boom Fly",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "26",
-      "name": "Maw",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "26",
-      "name": "Red Maw",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "26",
-      "name": "Psychic Maw",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "28",
-      "name": "Chub",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "28",
-      "name": "C.H.A.D.",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "28",
-      "name": "The Carrion Queen",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "29",
-      "name": "Hopper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "29",
-      "name": "Trite",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "31",
-      "name": "Spitty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "32",
-      "name": "Brain",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "34",
-      "name": "Leaper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "35",
-      "name": "Mr. Maw",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "35",
-      "name": "Mr. Maw Head",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "35",
-      "name": "Mr. Red Maw",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "35",
-      "name": "Mr. Red Maw Head",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "36",
-      "name": "Gurdy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "38",
-      "name": "Baby",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "38",
-      "name": "Angelic Baby",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "38",
-      "name": "Ultra Pride Baby",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "39",
-      "name": "Vis",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "39",
-      "name": "Double Vis",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "39",
-      "name": "Chubber",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "39",
-      "name": "Chubber Projectile",
-      "subtype": "0",
-      "variant": "22"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "39",
-      "name": "Scarred Double Vis",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "40",
-      "name": "Guts",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "40",
-      "name": "Scarred Guts",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "41",
-      "name": "Knight",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "41",
-      "name": "Selfless Knight",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "43",
-      "name": "Monstro II",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "43",
-      "name": "Gish",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "45",
-      "name": "Mom",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "46",
-      "name": "Sloth",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "46",
-      "name": "Super Sloth",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "46",
-      "name": "Ultra Pride",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "47",
-      "name": "Lust",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "47",
-      "name": "Super Lust",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "48",
-      "name": "Wrath",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "48",
-      "name": "Super Wrath",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "49",
-      "name": "Gluttony",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "49",
-      "name": "Super Gluttony",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "50",
-      "name": "Greed",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "50",
-      "name": "Super Greed",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Envy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Envy (big)",
-      "subtype": "0",
-      "variant": "10"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Envy (medium)",
-      "subtype": "0",
-      "variant": "20"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Envy (small)",
-      "subtype": "0",
-      "variant": "30"
-    },
-    {
-      "boss": "1",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Super Envy",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Super Envy (big)",
-      "subtype": "0",
-      "variant": "11"
-    },
-    {
-      "boss": "1",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Super Envy (medium)",
-      "subtype": "0",
-      "variant": "21"
-    },
-    {
-      "boss": "1",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "51",
-      "name": "Super Envy (small)",
-      "subtype": "0",
-      "variant": "31"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "52",
-      "name": "Pride",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "52",
-      "name": "Super Pride",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "54",
-      "name": "Flaming Hopper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "55",
-      "name": "Leech",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "55",
-      "name": "Kamikaze Leech",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "55",
-      "name": "Holy Leech",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "56",
-      "name": "Lump",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "57",
-      "name": "MemBrain",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "57",
-      "name": "Mama Guts",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "58",
-      "name": "Para-Bite",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "58",
-      "name": "Scarred Para-Bite",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "59",
-      "name": "Fred",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "60",
-      "name": "Eye",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "60",
-      "name": "Bloodshot Eye",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "61",
-      "name": "Sucker",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "61",
-      "name": "Spit",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "61",
-      "name": "Soul Sucker",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "62",
-      "name": "Pin",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "62",
-      "name": "Scolex",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "62",
-      "name": "The Frail",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "63",
-      "name": "Famine",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "64",
-      "name": "Pestilence",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "65",
-      "name": "War",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "65",
-      "name": "Conquest",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "65",
-      "name": "War without horse",
-      "subtype": "0",
-      "variant": "10"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "66",
-      "name": "Death",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "66",
-      "name": "Death without horse",
-      "subtype": "0",
-      "variant": "30"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "67",
-      "name": "The Duke of Flies",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "67",
-      "name": "The Husk",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "68",
-      "name": "Peep",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "68",
-      "name": "The Bloat",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "69",
-      "name": "Loki",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "69",
-      "name": "Lokii",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "71",
-      "name": "Fistula",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "71",
-      "name": "Teratoma",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "72",
-      "name": "Fistula Medium",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "72",
-      "name": "Teratoma Medium",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "73",
-      "name": "Fistula Small",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "73",
-      "name": "Teratoma Small",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "74",
-      "name": "Blastocyst",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "75",
-      "name": "Blastocyst Medium",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "76",
-      "name": "Blastocyst Small",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "77",
-      "name": "Embryo",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "79",
-      "name": "Gemini",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "79",
-      "name": "Steven",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "79",
-      "name": "The Blighted Ovum",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "79",
-      "name": "Gemini Baby",
-      "subtype": "0",
-      "variant": "10"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "79",
-      "name": "Steven Baby",
-      "subtype": "0",
-      "variant": "11"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "79",
-      "name": "The Blighted Ovum Baby",
-      "subtype": "0",
-      "variant": "12"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "80",
-      "name": "Moter",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "81",
-      "name": "The Fallen",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "81",
-      "name": "Krampus",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "82",
-      "name": "Headless Horseman",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "83",
-      "name": "Headless Horsemans Head",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "84",
-      "name": "Satan",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "85",
-      "name": "Spider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "86",
-      "name": "Keeper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "87",
-      "name": "Gurgle",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "88",
-      "name": "Walking Boil",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "88",
-      "name": "Walking Gut",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "88",
-      "name": "Walking Sack",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "89",
-      "name": "Buttlicker",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "93",
-      "name": "Mask",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "94",
-      "name": "Big Spider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "97",
-      "name": "Mask of Infamy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "98",
-      "name": "Heart of Infamy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "99",
-      "name": "Gurdy Jr.",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "100",
-      "name": "Widow",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "100",
-      "name": "The Wretched",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "101",
-      "name": "Daddy Long Legs",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "101",
-      "name": "Triachnid",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "102",
-      "name": "Isaac",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "102",
-      "name": "???",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "102",
-      "name": "??? (Alt)",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "204",
-      "name": "Mobile Host",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "206",
-      "name": "Baby Long Legs",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "206",
-      "name": "Small Baby Long Legs",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "207",
-      "name": "Crazy Long Legs",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "207",
-      "name": "Small Crazy Long Legs",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "208",
-      "name": "Fatty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "208",
-      "name": "Pale Fatty",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "208",
-      "name": "Flaming Fatty",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "209",
-      "name": "Fat Sack",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "210",
-      "name": "Blubber",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "211",
-      "name": "Half Sack",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "212",
-      "name": "Dank Death's Head",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "213",
-      "name": "Mom's Hand",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "214",
-      "name": "Level 2 Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "215",
-      "name": "Level 2 Spider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "216",
-      "name": "Swinger",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "216",
-      "name": "Swinger Head",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "217",
-      "name": "Dip",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "217",
-      "name": "Corn",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "217",
-      "name": "Brownie Corn",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "219",
-      "name": "Wizoob",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "220",
-      "name": "Squirt",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "220",
-      "name": "Dank Squirt",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "221",
-      "name": "Cod Worm",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "222",
-      "name": "Ring Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "223",
-      "name": "Dinga",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "224",
-      "name": "Oob",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "225",
-      "name": "Black Maw",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "226",
-      "name": "Skinny",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "226",
-      "name": "Rotty",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "226",
-      "name": "Crispy",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "227",
-      "name": "Bony",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "228",
-      "name": "Homunculus",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "229",
-      "name": "Tumor",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "230",
-      "name": "Camillo Jr.",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "231",
-      "name": "Nerve Ending",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "231",
-      "name": "Nerve Ending 2",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "234",
-      "name": "One Tooth",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "237",
-      "name": "Gurgling",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "237",
-      "name": "Gurgling (boss)",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "237",
-      "name": "Turdling",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "238",
-      "name": "Splasher",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "239",
-      "name": "Grub",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "240",
-      "name": "Wall Creep",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "241",
-      "name": "Rage Creep",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "242",
-      "name": "Blind Creep",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "243",
-      "name": "Conjoined Spitty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "244",
-      "name": "Round Worm",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "244",
-      "name": "Tube Worm",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "246",
-      "name": "Ragling",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "246",
-      "name": "Rag Man's Ragling",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "247",
-      "name": "Flesh Mobile Host",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "248",
-      "name": "Psychic Horf",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "249",
-      "name": "Full Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "250",
-      "name": "Ticking Spider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "251",
-      "name": "Begotten",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "252",
-      "name": "Nulls",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "253",
-      "name": "Psy Tumor",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "254",
-      "name": "Floating Knight",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "255",
-      "name": "Night Crawler",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "256",
-      "name": "Dart Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "257",
-      "name": "Conjoined Fatty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "257",
-      "name": "Blue Conjoined Fatty",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "258",
-      "name": "Fat Bat",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "259",
-      "name": "Imp",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "260",
-      "name": "Haunt",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "260",
-      "name": "Lil' Haunt",
-      "subtype": "0",
-      "variant": "10"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "261",
-      "name": "Dingle",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "261",
-      "name": "Dangle",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "262",
-      "name": "Mega Maw",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "263",
-      "name": "The Gate",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "264",
-      "name": "Mega Fatty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "265",
-      "name": "The Cage",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "266",
-      "name": "Mama Gurdy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "267",
-      "name": "Dark One",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "268",
-      "name": "The Adversary",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "269",
-      "name": "Polycephalus",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "270",
-      "name": "Mr. Fred",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "271",
-      "name": "Uriel",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "271",
-      "name": "Fallen Uriel",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "272",
-      "name": "Gabriel",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "272",
-      "name": "Fallen Gabriel",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "273",
-      "name": "The Lamb",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "274",
-      "name": "Mega Satan",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "275",
-      "name": "Mega Satan 2",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "276",
-      "name": "Roundy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "277",
-      "name": "Black Bony",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "278",
-      "name": "Black Globin",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "279",
-      "name": "Black Globin's Head",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "280",
-      "name": "Black Globin's Body",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "281",
-      "name": "Swarm",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "282",
-      "name": "Mega Clotty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "283",
-      "name": "Bone Knight",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "284",
-      "name": "Cyclopia",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "285",
-      "name": "Red Ghost",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "287",
-      "name": "Mom's Dead Hand",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "288",
-      "name": "Dukie",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "289",
-      "name": "Ulcer",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "290",
-      "name": "Meatball",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "296",
-      "name": "Hush Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "297",
-      "name": "Blue Gaper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "299",
-      "name": "Greed Gaper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "300",
-      "name": "Mushroom",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "301",
-      "name": "Poison Mind",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "303",
-      "name": "Blister",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "304",
-      "name": "The Thing",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "305",
-      "name": "Ministro",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "307",
-      "name": "Tar Boy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "308",
-      "name": "Fistuloid",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "310",
-      "name": "Leper (stage 2)",
-      "subtype": "1",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "310",
-      "name": "Leper (stage 3)",
-      "subtype": "2",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "310",
-      "name": "Leper (stage 4)",
-      "subtype": "3",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "310",
-      "name": "Leper Flesh",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "311",
-      "name": "Mr. Mine",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "401",
-      "name": "The Stain",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "402",
-      "name": "Brownie",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "403",
-      "name": "The Forsaken",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "404",
-      "name": "Little Horn",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "404",
-      "name": "Dark Ball",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "405",
-      "name": "Rag Man",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "406",
-      "name": "Ultra Greed",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "406",
-      "name": "Ultra Greedier",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "407",
-      "name": "Hush",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "408",
-      "name": "Hush (Skinless)",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "409",
-      "name": "Rag Mega",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "410",
-      "name": "Sisters Vis",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "411",
-      "name": "Big Horn",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "412",
-      "name": "Delirium",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "413",
-      "name": "The Matriarch",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "3.5",
-      "id": "3",
-      "name": "Tinytoma",
-      "subtype": "0",
-      "variant": "216"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "3.5",
-      "id": "3",
-      "name": "Tinytoma (small)",
-      "subtype": "0",
-      "variant": "217"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Rotten Gaper",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Rotten Gaper",
-      "subtype": "1",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Rotten Gaper",
-      "subtype": "2",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Rotten Gaper",
-      "subtype": "3",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Rotten Gaper",
-      "subtype": "4",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "10",
-      "name": "Rotten Gaper",
-      "subtype": "5",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "15",
-      "name": "Grilled Clotty",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "19",
-      "name": "Tuff Twin",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "19",
-      "name": "The Shell",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "23",
-      "name": "Carrion Princess",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "24",
-      "name": "Cursed Globin",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Dragon Fly",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Dragon Fly X",
-      "subtype": "1",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Bone Fly",
-      "subtype": "0",
-      "variant": "4"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "25",
-      "name": "Sick Boom Fly",
-      "subtype": "0",
-      "variant": "5"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "25",
-      "name": "Tainted Boom Fly",
-      "subtype": "0",
-      "variant": "6"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "27",
-      "name": "Hard Host",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "29",
-      "name": "Eggy",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "29",
-      "name": "Tainted Hopper",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "31",
-      "name": "Tainted Spitty",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "34",
-      "name": "Sticky Leaper",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "38",
-      "name": "Angelic Baby (small)",
-      "subtype": "1",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "38",
-      "name": "Wrinkly Baby",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "60",
-      "name": "Holy Eye",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "87",
-      "name": "Crackle",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "227",
-      "name": "Holy Bony",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "229",
-      "name": "Planetoid",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "244",
-      "name": "Tainted Round Worm",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "244",
-      "name": "Tainted Tube Worm",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "40",
-      "name": "Slog",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "41",
-      "name": "Loose Knight",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "41",
-      "name": "Black Knight",
-      "subtype": "0",
-      "variant": "4"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "61",
-      "name": "Ink",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "57",
-      "name": "Dead Meat",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "61",
-      "name": "Mama Fly",
-      "subtype": "0",
-      "variant": "4"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "62",
-      "name": "Wormwood",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "93",
-      "name": "Mask II",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "239",
-      "name": "Corpse Eater",
-      "subtype": "0",
-      "variant": "100"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "239",
-      "name": "Carrion Rider",
-      "subtype": "0",
-      "variant": "101"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "240",
-      "name": "Soy Creep",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "240",
-      "name": "Rag Creep",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "240",
-      "name": "Tainted Soy Creep",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "241",
-      "name": "Split Rage Creep",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "269",
-      "name": "The Pile",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "803",
-      "name": "Blind Bat",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "805",
-      "name": "Bishop",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "806",
-      "name": "Bubbles",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "807",
-      "name": "Wraith",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "810",
-      "name": "Small Leech",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "1",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "2",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "3",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "4",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "5",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "811",
-      "name": "Deep Gaper",
-      "subtype": "6",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "812",
-      "name": "Sub Horf",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "812",
-      "name": "Tainted Sub Horf",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "813",
-      "name": "Blurb",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "814",
-      "name": "Strider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "816",
-      "name": "Polty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "816",
-      "name": "Kineti",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Rock Spider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Rock Spider",
-      "subtype": "1",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Rock Spider",
-      "subtype": "2",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Rock Spider",
-      "subtype": "3",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Tinted Rock Spider",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Tinted Rock Spider",
-      "subtype": "1",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Tinted Rock Spider",
-      "subtype": "2",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Tinted Rock Spider",
-      "subtype": "3",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Coal Spider",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Coal Spider",
-      "subtype": "1",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Coal Spider",
-      "subtype": "2",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "818",
-      "name": "Coal Spider",
-      "subtype": "3",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "819",
-      "name": "Fly Bomb",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "819",
-      "name": "Eternal Fly Bomb",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "820",
-      "name": "Danny",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "820",
-      "name": "Coal Boy",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "821",
-      "name": "Blaster",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "822",
-      "name": "Bouncer",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "823",
-      "name": "Quakey",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "824",
-      "name": "Gyro",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "824",
-      "name": "Grilled Gyro",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "825",
-      "name": "Fire Worm",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "826",
-      "name": "Hardy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "827",
-      "name": "Faceless",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "827",
-      "name": "Tainted Faceless",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "828",
-      "name": "Necro",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "829",
-      "name": "Mole",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "829",
-      "name": "Tainted Mole",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "830",
-      "name": "Big Bony",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "831",
-      "name": "Gutted Fatty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "831",
-      "name": "Festering Guts",
-      "subtype": "0",
-      "variant": "20"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "832",
-      "name": "Exorcist",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "832",
-      "name": "Fanatic",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "833",
-      "name": "Candler",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "834",
-      "name": "Whipper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "834",
-      "name": "Snapper",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "834",
-      "name": "Flagellant",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "835",
-      "name": "Peeping Fatty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "836",
-      "name": "Vis Versa",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "837",
-      "name": "Henry",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "838",
-      "name": "Level 2 Willo",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "839",
-      "name": "Strifer",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "840",
-      "name": "Pon",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "841",
-      "name": "Revenant",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "841",
-      "name": "Quad Revenant",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "843",
-      "name": "Canary",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "843",
-      "name": "Foreigner",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "844",
-      "name": "Bombgagger",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "850",
-      "name": "Level 2 Gaper",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "850",
-      "name": "Level 2 Horf",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "850",
-      "name": "Level 2 Gusher",
-      "subtype": "0",
-      "variant": "2"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "851",
-      "name": "Twitchy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "853",
-      "name": "Small Maggot",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "854",
-      "name": "Adult Leech",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "855",
-      "name": "Level 2 Charger",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "855",
-      "name": "Elleech",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "856",
-      "name": "Gasbag",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "857",
-      "name": "Cohort",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "858",
-      "name": "Vessel",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "859",
-      "name": "Floating Host",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "860",
-      "name": "Unborn",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "862",
-      "name": "Cyst",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "2",
-      "id": "863",
-      "name": "Morningstar",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "865",
-      "name": "Evis",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "868",
-      "name": "Army Fly",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "869",
-      "name": "Migraine",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "870",
-      "name": "Drip",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "871",
-      "name": "Splurt",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "872",
-      "name": "Cloggy",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "873",
-      "name": "Fly Trap",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "217",
-      "name": "Big Corn",
-      "subtype": "0",
-      "variant": "3"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "875",
-      "name": "Poot Mine",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "876",
-      "name": "Dump",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "876",
-      "name": "Dump Head",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "878",
-      "name": "Butt Slicker",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "879",
-      "name": "Bloaty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "880",
-      "name": "Flesh Maiden",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "881",
-      "name": "Needle",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "881",
-      "name": "Pasty",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "882",
-      "name": "Dust",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "883",
-      "name": "Baby Begotten",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "884",
-      "name": "Swarm Spider",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "885",
-      "name": "Cultist",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "885",
-      "name": "Blood Cultist",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "886",
-      "name": "Vis Fatty",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "886",
-      "name": "Fetal Demon",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "888",
-      "name": "Shady",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "889",
-      "name": "Clickety Clack",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "890",
-      "name": "Maze Roamer",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "890",
-      "name": "Maze Roamer",
-      "subtype": "1",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "891",
-      "name": "Goat",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "0",
-      "champion": "1",
-      "collisionDamage": "1",
-      "id": "891",
-      "name": "Black Goat",
-      "subtype": "0",
-      "variant": "1"
-    },
-    {
-      "boss": "0",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "892",
-      "name": "Poofer",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "900",
-      "name": "Reap Creep",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "901",
-      "name": "Lil Blub",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "902",
-      "name": "Rainmaker",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "903",
-      "name": "The Visage",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "904",
-      "name": "Siren",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "905",
-      "name": "The Heretic",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "2",
-      "id": "906",
-      "name": "Hornfel",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "908",
-      "name": "Baby Plum",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "909",
-      "name": "The Scourge",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "910",
-      "name": "Chimera",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "911",
-      "name": "Rotgut",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "912",
-      "name": "Mother",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "913",
-      "name": "Min Min",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "914",
-      "name": "Clog",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "915",
-      "name": "Singe",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "916",
-      "name": "Bumbino",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "917",
-      "name": "Colostomia",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "918",
-      "name": "Turdlet",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "919",
-      "name": "Raglich",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "920",
-      "name": "Horny Boys",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "921",
-      "name": "Clutch",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "950",
-      "name": "Dogma",
-      "subtype": "0",
-      "variant": "0"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "951",
-      "name": "Ultra Famine",
-      "subtype": "0",
-      "variant": "10"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "951",
-      "name": "Ultra Pestilence",
-      "subtype": "0",
-      "variant": "20"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "951",
-      "name": "Ultra War",
-      "subtype": "0",
-      "variant": "30"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "951",
-      "name": "Ultra Death",
-      "subtype": "0",
-      "variant": "40"
-    },
-    {
-      "boss": "1",
-      "champion": "0",
-      "collisionDamage": "1",
-      "id": "951",
-      "name": "The Beast",
-      "subtype": "0",
-      "variant": "0"
-    }
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Frowning Gaper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Gaper",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Flaming Gaper",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "11",
+    "name": "Gusher",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "11",
+    "name": "Pacer",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "12",
+    "name": "Horf",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "15",
+    "name": "Clotty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "15",
+    "name": "Clot",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "15",
+    "name": "I.Blob",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "18",
+    "name": "Attack Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "19",
+    "name": "Larry Jr.",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "19",
+    "name": "The Hollow",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "20",
+    "name": "Monstro",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "21",
+    "name": "Maggot",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "23",
+    "name": "Charger",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "23",
+    "name": "My Shadow",
+    "subtype": "1",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "23",
+    "name": "Drowned Charger",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "23",
+    "name": "Dank Charger",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "24",
+    "name": "Globin",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "24",
+    "name": "Gazing Globin",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "24",
+    "name": "Dank Globin",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Boom Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Red Boom Fly",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Drowned Boom Fly",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "26",
+    "name": "Maw",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "26",
+    "name": "Red Maw",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "26",
+    "name": "Psychic Maw",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "28",
+    "name": "Chub",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "28",
+    "name": "C.H.A.D.",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "28",
+    "name": "The Carrion Queen",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "29",
+    "name": "Hopper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "29",
+    "name": "Trite",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "31",
+    "name": "Spitty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "32",
+    "name": "Brain",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "34",
+    "name": "Leaper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "35",
+    "name": "Mr. Maw",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "35",
+    "name": "Mr. Maw Head",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "35",
+    "name": "Mr. Red Maw",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "35",
+    "name": "Mr. Red Maw Head",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "36",
+    "name": "Gurdy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "38",
+    "name": "Baby",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "38",
+    "name": "Angelic Baby",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "38",
+    "name": "Ultra Pride Baby",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "39",
+    "name": "Vis",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "39",
+    "name": "Double Vis",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "39",
+    "name": "Chubber",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "39",
+    "name": "Chubber Projectile",
+    "subtype": "0",
+    "variant": "22"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "39",
+    "name": "Scarred Double Vis",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "40",
+    "name": "Guts",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "40",
+    "name": "Scarred Guts",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "41",
+    "name": "Knight",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "41",
+    "name": "Selfless Knight",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "43",
+    "name": "Monstro II",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "43",
+    "name": "Gish",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "45",
+    "name": "Mom",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "46",
+    "name": "Sloth",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "46",
+    "name": "Super Sloth",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "46",
+    "name": "Ultra Pride",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "47",
+    "name": "Lust",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "47",
+    "name": "Super Lust",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "48",
+    "name": "Wrath",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "48",
+    "name": "Super Wrath",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "49",
+    "name": "Gluttony",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "49",
+    "name": "Super Gluttony",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "50",
+    "name": "Greed",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "50",
+    "name": "Super Greed",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "51",
+    "name": "Envy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "51",
+    "name": "Envy (big)",
+    "subtype": "0",
+    "variant": "10"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "51",
+    "name": "Envy (medium)",
+    "subtype": "0",
+    "variant": "20"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "51",
+    "name": "Envy (small)",
+    "subtype": "0",
+    "variant": "30"
+  },
+  {
+    "boss": "1",
+    "champion": "1",
+    "id": "51",
+    "name": "Super Envy",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "1",
+    "id": "51",
+    "name": "Super Envy (big)",
+    "subtype": "0",
+    "variant": "11"
+  },
+  {
+    "boss": "1",
+    "champion": "1",
+    "id": "51",
+    "name": "Super Envy (medium)",
+    "subtype": "0",
+    "variant": "21"
+  },
+  {
+    "boss": "1",
+    "champion": "1",
+    "id": "51",
+    "name": "Super Envy (small)",
+    "subtype": "0",
+    "variant": "31"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "52",
+    "name": "Pride",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "52",
+    "name": "Super Pride",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "54",
+    "name": "Flaming Hopper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "55",
+    "name": "Leech",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "55",
+    "name": "Kamikaze Leech",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "55",
+    "name": "Holy Leech",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "56",
+    "name": "Lump",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "57",
+    "name": "MemBrain",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "57",
+    "name": "Mama Guts",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "58",
+    "name": "Para-Bite",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "58",
+    "name": "Scarred Para-Bite",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "59",
+    "name": "Fred",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "60",
+    "name": "Eye",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "60",
+    "name": "Bloodshot Eye",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "61",
+    "name": "Sucker",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "61",
+    "name": "Spit",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "61",
+    "name": "Soul Sucker",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "62",
+    "name": "Pin",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "62",
+    "name": "Scolex",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "62",
+    "name": "The Frail",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "63",
+    "name": "Famine",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "64",
+    "name": "Pestilence",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "65",
+    "name": "War",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "65",
+    "name": "Conquest",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "65",
+    "name": "War without horse",
+    "subtype": "0",
+    "variant": "10"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "66",
+    "name": "Death",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "66",
+    "name": "Death without horse",
+    "subtype": "0",
+    "variant": "30"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "67",
+    "name": "The Duke of Flies",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "67",
+    "name": "The Husk",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "68",
+    "name": "Peep",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "68",
+    "name": "The Bloat",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "69",
+    "name": "Loki",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "69",
+    "name": "Lokii",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "71",
+    "name": "Fistula",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "71",
+    "name": "Teratoma",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "72",
+    "name": "Fistula Medium",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "72",
+    "name": "Teratoma Medium",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "73",
+    "name": "Fistula Small",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "73",
+    "name": "Teratoma Small",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "74",
+    "name": "Blastocyst",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "75",
+    "name": "Blastocyst Medium",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "76",
+    "name": "Blastocyst Small",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "77",
+    "name": "Embryo",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "79",
+    "name": "Gemini",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "79",
+    "name": "Steven",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "79",
+    "name": "The Blighted Ovum",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "79",
+    "name": "Gemini Baby",
+    "subtype": "0",
+    "variant": "10"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "79",
+    "name": "Steven Baby",
+    "subtype": "0",
+    "variant": "11"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "79",
+    "name": "The Blighted Ovum Baby",
+    "subtype": "0",
+    "variant": "12"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "80",
+    "name": "Moter",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "81",
+    "name": "The Fallen",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "81",
+    "name": "Krampus",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "82",
+    "name": "Headless Horseman",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "83",
+    "name": "Headless Horsemans Head",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "84",
+    "name": "Satan",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "85",
+    "name": "Spider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "86",
+    "name": "Keeper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "87",
+    "name": "Gurgle",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "88",
+    "name": "Walking Boil",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "88",
+    "name": "Walking Gut",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "88",
+    "name": "Walking Sack",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "89",
+    "name": "Buttlicker",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "93",
+    "name": "Mask",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "94",
+    "name": "Big Spider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "97",
+    "name": "Mask of Infamy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "98",
+    "name": "Heart of Infamy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "99",
+    "name": "Gurdy Jr.",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "100",
+    "name": "Widow",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "100",
+    "name": "The Wretched",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "101",
+    "name": "Daddy Long Legs",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "101",
+    "name": "Triachnid",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "102",
+    "name": "Isaac",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "102",
+    "name": "???",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "102",
+    "name": "??? (Alt)",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "204",
+    "name": "Mobile Host",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "206",
+    "name": "Baby Long Legs",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "206",
+    "name": "Small Baby Long Legs",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "207",
+    "name": "Crazy Long Legs",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "207",
+    "name": "Small Crazy Long Legs",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "208",
+    "name": "Fatty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "208",
+    "name": "Pale Fatty",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "208",
+    "name": "Flaming Fatty",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "209",
+    "name": "Fat Sack",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "210",
+    "name": "Blubber",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "211",
+    "name": "Half Sack",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "212",
+    "name": "Dank Death's Head",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "213",
+    "name": "Mom's Hand",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "214",
+    "name": "Level 2 Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "215",
+    "name": "Level 2 Spider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "216",
+    "name": "Swinger",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "216",
+    "name": "Swinger Head",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "217",
+    "name": "Dip",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "217",
+    "name": "Corn",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "217",
+    "name": "Brownie Corn",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "219",
+    "name": "Wizoob",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "220",
+    "name": "Squirt",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "220",
+    "name": "Dank Squirt",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "221",
+    "name": "Cod Worm",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "222",
+    "name": "Ring Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "223",
+    "name": "Dinga",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "224",
+    "name": "Oob",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "225",
+    "name": "Black Maw",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "226",
+    "name": "Skinny",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "226",
+    "name": "Rotty",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "226",
+    "name": "Crispy",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "227",
+    "name": "Bony",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "228",
+    "name": "Homunculus",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "229",
+    "name": "Tumor",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "230",
+    "name": "Camillo Jr.",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "231",
+    "name": "Nerve Ending",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "231",
+    "name": "Nerve Ending 2",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "234",
+    "name": "One Tooth",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "237",
+    "name": "Gurgling",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "237",
+    "name": "Gurgling (boss)",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "237",
+    "name": "Turdling",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "238",
+    "name": "Splasher",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "239",
+    "name": "Grub",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "240",
+    "name": "Wall Creep",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "241",
+    "name": "Rage Creep",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "242",
+    "name": "Blind Creep",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "243",
+    "name": "Conjoined Spitty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "244",
+    "name": "Round Worm",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "244",
+    "name": "Tube Worm",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "246",
+    "name": "Ragling",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "246",
+    "name": "Rag Man's Ragling",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "247",
+    "name": "Flesh Mobile Host",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "248",
+    "name": "Psychic Horf",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "249",
+    "name": "Full Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "250",
+    "name": "Ticking Spider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "251",
+    "name": "Begotten",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "252",
+    "name": "Nulls",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "253",
+    "name": "Psy Tumor",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "254",
+    "name": "Floating Knight",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "255",
+    "name": "Night Crawler",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "256",
+    "name": "Dart Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "257",
+    "name": "Conjoined Fatty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "257",
+    "name": "Blue Conjoined Fatty",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "258",
+    "name": "Fat Bat",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "259",
+    "name": "Imp",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "260",
+    "name": "Haunt",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "260",
+    "name": "Lil' Haunt",
+    "subtype": "0",
+    "variant": "10"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "261",
+    "name": "Dingle",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "261",
+    "name": "Dangle",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "262",
+    "name": "Mega Maw",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "263",
+    "name": "The Gate",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "264",
+    "name": "Mega Fatty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "265",
+    "name": "The Cage",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "266",
+    "name": "Mama Gurdy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "267",
+    "name": "Dark One",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "268",
+    "name": "The Adversary",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "269",
+    "name": "Polycephalus",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "270",
+    "name": "Mr. Fred",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "271",
+    "name": "Uriel",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "271",
+    "name": "Fallen Uriel",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "272",
+    "name": "Gabriel",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "272",
+    "name": "Fallen Gabriel",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "273",
+    "name": "The Lamb",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "274",
+    "name": "Mega Satan",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "275",
+    "name": "Mega Satan 2",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "276",
+    "name": "Roundy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "277",
+    "name": "Black Bony",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "278",
+    "name": "Black Globin",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "279",
+    "name": "Black Globin's Head",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "280",
+    "name": "Black Globin's Body",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "281",
+    "name": "Swarm",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "282",
+    "name": "Mega Clotty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "283",
+    "name": "Bone Knight",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "284",
+    "name": "Cyclopia",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "285",
+    "name": "Red Ghost",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "287",
+    "name": "Mom's Dead Hand",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "288",
+    "name": "Dukie",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "289",
+    "name": "Ulcer",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "290",
+    "name": "Meatball",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "296",
+    "name": "Hush Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "297",
+    "name": "Blue Gaper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "299",
+    "name": "Greed Gaper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "300",
+    "name": "Mushroom",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "301",
+    "name": "Poison Mind",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "303",
+    "name": "Blister",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "304",
+    "name": "The Thing",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "305",
+    "name": "Ministro",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "307",
+    "name": "Tar Boy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "308",
+    "name": "Fistuloid",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "310",
+    "name": "Leper (stage 2)",
+    "subtype": "1",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "310",
+    "name": "Leper (stage 3)",
+    "subtype": "2",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "310",
+    "name": "Leper (stage 4)",
+    "subtype": "3",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "310",
+    "name": "Leper Flesh",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "311",
+    "name": "Mr. Mine",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "401",
+    "name": "The Stain",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "402",
+    "name": "Brownie",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "403",
+    "name": "The Forsaken",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "404",
+    "name": "Little Horn",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "404",
+    "name": "Dark Ball",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "405",
+    "name": "Rag Man",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "406",
+    "name": "Ultra Greed",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "406",
+    "name": "Ultra Greedier",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "407",
+    "name": "Hush",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "408",
+    "name": "Hush (Skinless)",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "409",
+    "name": "Rag Mega",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "410",
+    "name": "Sisters Vis",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "411",
+    "name": "Big Horn",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "412",
+    "name": "Delirium",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "413",
+    "name": "The Matriarch",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "collisionDamage": "3.5",
+    "id": "3",
+    "name": "Tinytoma",
+    "subtype": "0",
+    "variant": "216"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "collisionDamage": "3.5",
+    "id": "3",
+    "name": "Tinytoma (small)",
+    "subtype": "0",
+    "variant": "217"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Rotten Gaper",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Rotten Gaper",
+    "subtype": "1",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Rotten Gaper",
+    "subtype": "2",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Rotten Gaper",
+    "subtype": "3",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Rotten Gaper",
+    "subtype": "4",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "10",
+    "name": "Rotten Gaper",
+    "subtype": "5",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "15",
+    "name": "Grilled Clotty",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "19",
+    "name": "Tuff Twin",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "19",
+    "name": "The Shell",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "23",
+    "name": "Carrion Princess",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "24",
+    "name": "Cursed Globin",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Dragon Fly",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Dragon Fly X",
+    "subtype": "1",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Bone Fly",
+    "subtype": "0",
+    "variant": "4"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "25",
+    "name": "Sick Boom Fly",
+    "subtype": "0",
+    "variant": "5"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "25",
+    "name": "Tainted Boom Fly",
+    "subtype": "0",
+    "variant": "6"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "27",
+    "name": "Hard Host",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "29",
+    "name": "Eggy",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "29",
+    "name": "Tainted Hopper",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "31",
+    "name": "Tainted Spitty",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "34",
+    "name": "Sticky Leaper",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "38",
+    "name": "Angelic Baby (small)",
+    "subtype": "1",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "38",
+    "name": "Wrinkly Baby",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "60",
+    "name": "Holy Eye",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "87",
+    "name": "Crackle",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "227",
+    "name": "Holy Bony",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "229",
+    "name": "Planetoid",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "244",
+    "name": "Tainted Round Worm",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "244",
+    "name": "Tainted Tube Worm",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "40",
+    "name": "Slog",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "41",
+    "name": "Loose Knight",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "41",
+    "name": "Black Knight",
+    "subtype": "0",
+    "variant": "4"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "61",
+    "name": "Ink",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "57",
+    "name": "Dead Meat",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "61",
+    "name": "Mama Fly",
+    "subtype": "0",
+    "variant": "4"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "62",
+    "name": "Wormwood",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "93",
+    "name": "Mask II",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "239",
+    "name": "Corpse Eater",
+    "subtype": "0",
+    "variant": "100"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "239",
+    "name": "Carrion Rider",
+    "subtype": "0",
+    "variant": "101"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "240",
+    "name": "Soy Creep",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "240",
+    "name": "Rag Creep",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "240",
+    "name": "Tainted Soy Creep",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "241",
+    "name": "Split Rage Creep",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "269",
+    "name": "The Pile",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "803",
+    "name": "Blind Bat",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "805",
+    "name": "Bishop",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "806",
+    "name": "Bubbles",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "807",
+    "name": "Wraith",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "810",
+    "name": "Small Leech",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "1",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "2",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "3",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "4",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "5",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "811",
+    "name": "Deep Gaper",
+    "subtype": "6",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "812",
+    "name": "Sub Horf",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "812",
+    "name": "Tainted Sub Horf",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "813",
+    "name": "Blurb",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "814",
+    "name": "Strider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "816",
+    "name": "Polty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "816",
+    "name": "Kineti",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Rock Spider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Rock Spider",
+    "subtype": "1",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Rock Spider",
+    "subtype": "2",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Rock Spider",
+    "subtype": "3",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Tinted Rock Spider",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Tinted Rock Spider",
+    "subtype": "1",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Tinted Rock Spider",
+    "subtype": "2",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Tinted Rock Spider",
+    "subtype": "3",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Coal Spider",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Coal Spider",
+    "subtype": "1",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Coal Spider",
+    "subtype": "2",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "818",
+    "name": "Coal Spider",
+    "subtype": "3",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "819",
+    "name": "Fly Bomb",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "819",
+    "name": "Eternal Fly Bomb",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "820",
+    "name": "Danny",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "820",
+    "name": "Coal Boy",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "821",
+    "name": "Blaster",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "822",
+    "name": "Bouncer",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "823",
+    "name": "Quakey",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "824",
+    "name": "Gyro",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "824",
+    "name": "Grilled Gyro",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "825",
+    "name": "Fire Worm",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "826",
+    "name": "Hardy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "827",
+    "name": "Faceless",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "827",
+    "name": "Tainted Faceless",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "828",
+    "name": "Necro",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "829",
+    "name": "Mole",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "829",
+    "name": "Tainted Mole",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "830",
+    "name": "Big Bony",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "831",
+    "name": "Gutted Fatty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "831",
+    "name": "Festering Guts",
+    "subtype": "0",
+    "variant": "20"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "832",
+    "name": "Exorcist",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "832",
+    "name": "Fanatic",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "833",
+    "name": "Candler",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "834",
+    "name": "Whipper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "834",
+    "name": "Snapper",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "834",
+    "name": "Flagellant",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "835",
+    "name": "Peeping Fatty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "836",
+    "name": "Vis Versa",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "837",
+    "name": "Henry",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "838",
+    "name": "Level 2 Willo",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "839",
+    "name": "Strifer",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "840",
+    "name": "Pon",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "841",
+    "name": "Revenant",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "841",
+    "name": "Quad Revenant",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "843",
+    "name": "Canary",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "843",
+    "name": "Foreigner",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "844",
+    "name": "Bombgagger",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "850",
+    "name": "Level 2 Gaper",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "850",
+    "name": "Level 2 Horf",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "850",
+    "name": "Level 2 Gusher",
+    "subtype": "0",
+    "variant": "2"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "851",
+    "name": "Twitchy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "853",
+    "name": "Small Maggot",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "854",
+    "name": "Adult Leech",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "855",
+    "name": "Level 2 Charger",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "855",
+    "name": "Elleech",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "856",
+    "name": "Gasbag",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "857",
+    "name": "Cohort",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "858",
+    "name": "Vessel",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "859",
+    "name": "Floating Host",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "860",
+    "name": "Unborn",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "862",
+    "name": "Cyst",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "863",
+    "name": "Morningstar",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "865",
+    "name": "Evis",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "868",
+    "name": "Army Fly",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "869",
+    "name": "Migraine",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "870",
+    "name": "Drip",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "871",
+    "name": "Splurt",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "872",
+    "name": "Cloggy",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "873",
+    "name": "Fly Trap",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "217",
+    "name": "Big Corn",
+    "subtype": "0",
+    "variant": "3"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "875",
+    "name": "Poot Mine",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "876",
+    "name": "Dump",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "876",
+    "name": "Dump Head",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "878",
+    "name": "Butt Slicker",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "879",
+    "name": "Bloaty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "880",
+    "name": "Flesh Maiden",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "881",
+    "name": "Needle",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "881",
+    "name": "Pasty",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "882",
+    "name": "Dust",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "883",
+    "name": "Baby Begotten",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "884",
+    "name": "Swarm Spider",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "885",
+    "name": "Cultist",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "885",
+    "name": "Blood Cultist",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "886",
+    "name": "Vis Fatty",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "886",
+    "name": "Fetal Demon",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "888",
+    "name": "Shady",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "889",
+    "name": "Clickety Clack",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "890",
+    "name": "Maze Roamer",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "890",
+    "name": "Maze Roamer",
+    "subtype": "1",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "891",
+    "name": "Goat",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "0",
+    "champion": "1",
+    "id": "891",
+    "name": "Black Goat",
+    "subtype": "0",
+    "variant": "1"
+  },
+  {
+    "boss": "0",
+    "champion": "0",
+    "id": "892",
+    "name": "Poofer",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "900",
+    "name": "Reap Creep",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "901",
+    "name": "Lil Blub",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "902",
+    "name": "Rainmaker",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "903",
+    "name": "The Visage",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "904",
+    "name": "Siren",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "905",
+    "name": "The Heretic",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "906",
+    "name": "Hornfel",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "908",
+    "name": "Baby Plum",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "909",
+    "name": "The Scourge",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "910",
+    "name": "Chimera",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "911",
+    "name": "Rotgut",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "912",
+    "name": "Mother",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "913",
+    "name": "Min Min",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "914",
+    "name": "Clog",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "915",
+    "name": "Singe",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "916",
+    "name": "Bumbino",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "917",
+    "name": "Colostomia",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "918",
+    "name": "Turdlet",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "919",
+    "name": "Raglich",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "920",
+    "name": "Horny Boys",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "921",
+    "name": "Clutch",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "950",
+    "name": "Dogma",
+    "subtype": "0",
+    "variant": "0"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "951",
+    "name": "Ultra Famine",
+    "subtype": "0",
+    "variant": "10"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "951",
+    "name": "Ultra Pestilence",
+    "subtype": "0",
+    "variant": "20"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "951",
+    "name": "Ultra War",
+    "subtype": "0",
+    "variant": "30"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "951",
+    "name": "Ultra Death",
+    "subtype": "0",
+    "variant": "40"
+  },
+  {
+    "boss": "1",
+    "champion": "0",
+    "id": "951",
+    "name": "The Beast",
+    "subtype": "0",
+    "variant": "0"
+  }
 ]

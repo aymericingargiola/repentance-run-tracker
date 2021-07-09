@@ -26,10 +26,10 @@ module.exports = {
         return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
     },
     getEntity: (string) => {
-        //Return matching entity from logs (actually bosses only)
+        //Return matching entity from logs
         const entityId = string.split(" ")[5].match(/(\d+)/)[0]
         const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
-        return cloneFrom(entities.find(entity => entity.id === entityId && entity.variant === entityVariant && entity.boss === "1"))
+        return cloneFrom(entities.find(entity => entity.id === entityId && entity.variant === entityVariant))
     },
     getCharaterStats: (string) => {
         //Return character stats from RRTE mod converted to json

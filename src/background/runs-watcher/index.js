@@ -81,7 +81,7 @@ function isSameRun(seed) {
     })
 }
 
-function collectibleManager(sameRun, collectible, status) {
+function collectiblesManager(sameRun, collectible, status) {
     if (!sameRun.floors[sameRun.floors.length - 1]) return
 
     const playerContext = collectible.player
@@ -143,6 +143,19 @@ function collectibleManager(sameRun, collectible, status) {
     }
 }
 
+function entitiesManager(sameRun, entity) {
+    entity.number = 1
+    const sameRunLastFloor = sameRun.floors[sameRun.floors.length - 1]
+
+    // add entities key on last floor if doesn't exist
+    if (!sameRunLastFloor.entities) sameRunLastFloor.entities = []
+
+    const sameRunSameEntity = sameRunLastFloor.entities[sameRunLastFloor.entities.findIndex(ent => ent.name === entity.name)]
+
+    if (!sameRunSameEntity) sameRunLastFloor.entities.push(entity)
+    else sameRunSameEntity.number += 1
+}
+
 function updateOrCreateRun(params = {}) {
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
@@ -169,15 +182,14 @@ function updateOrCreateRun(params = {}) {
                 case 'spawn entity':
                     if(params.entity) {
                         console.log("Entity : ",params.entity)
-                        if(!sameRun.floors[sameRun.floors.length - 1].bosses) sameRun.floors[sameRun.floors.length - 1].bosses = [params.entity] 
-                        else if (sameRun.floors[sameRun.floors.length - 1].bosses.filter(boss => boss.name === params.entity.name).length < 1) sameRun.floors[sameRun.floors.length - 1].bosses.push(params.entity)
+                        entitiesManager(sameRun, params.entity)
                     }
                     break
                 case 'adding collectible':
-                    collectibleManager(sameRun, params.collectible, "add")
+                    collectiblesManager(sameRun, params.collectible, "add")
                     break
                 case 'removing collectible':
-                    collectibleManager(sameRun, params.collectible, "remove")
+                    collectiblesManager(sameRun, params.collectible, "remove")
                     break
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
@@ -219,7 +231,6 @@ function updateOrCreateRun(params = {}) {
             seed: currentRun.seed,
             gameState: currentGameState,
             gameMode: currentGameMode,
-            gameOptions: repentanceOptions,
             runStart: moment().unix(),
             runUpdate: moment().unix(),
             runUserUpdate: null,
@@ -233,12 +244,17 @@ function updateOrCreateRun(params = {}) {
             runDuration: null,
             characters: [currentCharater],
             floors: [currentFloor],
+            extendedSaveMode: extendedSaveMode,
+            otherModLoaded: otherModLoaded,
+            gameOptions: repentanceOptions,
             toRemove: {
                 status: false,
                 checkedByUser: false
             },
-            extendedSaveMode: extendedSaveMode,
-            otherModLoaded: otherModLoaded
+            backup: {
+                status: false,
+                date: null
+            }
         }
         console.log(run)
         runs.unshift(run)
@@ -286,8 +302,8 @@ function parseLogs(newLogs, logArray) {
             updateOrCreateRun({trigger: "spawn entity", entity: getEntity(log)})
         }
         if(log.split(' ')[2] === "Room") {
+            console.log(log)
             if (!currentGameMode) {
-                console.log(log)
                 updateOrCreateRun({trigger: "game mode", log: log})
             }
         }

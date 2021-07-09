@@ -1,6 +1,10 @@
 <template>
     <section class="section runs" v-if="this.filteredRuns">
-        <!-- <span class="logs" style="font-size:12px">{{this.filteredRuns}}</span> -->
+        <div class="filters">
+            <div class="search">
+                <input v-model="filterText" placeholder="Search runs">
+            </div>
+        </div>
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, ridx) in filteredRuns">
                 <li :class="
@@ -13,6 +17,34 @@
                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"></div>
                     <div class="run-content">
+                        <div class="infos">
+                            <ul>
+                                <li class="info status">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        <div class="icon" :style="{backgroundImage:`url('img/icons/hud/${run.runEnd.win === true ? `crown` : run.runEnd.win === false ? `dead` : `race`}.png')`}"></div>
+                                    </div>
+                                </li>
+                                <li class="info character-name">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        {{run.characters[0].trueName}}
+                                    </div>
+                                </li>
+                                <li class="info seed">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        {{run.seed}}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                         <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
                             <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
                             <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
@@ -266,7 +298,7 @@ export default {
             let filteredRuns = runs
 
             //Text filter
-            if(this.filterText !== "") {
+            if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
                 filteredRuns = filteredRuns.filter((run) => {
                     const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
@@ -372,8 +404,8 @@ export default {
         position: relative;
         display: flex;
         padding: 24px;
-        padding-bottom: 32px;
-        padding-top: 56px;
+        padding-bottom: 56px;
+        padding-top: 72px;
         overflow: hidden;
         width: 100%;
         z-index: 1;
@@ -401,6 +433,68 @@ export default {
             opacity: 1;
             transform: translateX(0px) translateY(-50%);
             z-index: 2;
+        }
+        .infos {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            ul {
+                display: flex;
+                li {
+                    position: relative;
+                    padding: 5px 10px 10px 10px;
+                    z-index: 2;
+                    > .before, .after, .mid {
+                        z-index: 0;
+                        position: absolute;
+                        background-repeat: no-repeat;
+                        background-size: 100% 100%;
+                        pointer-events: none;
+                    }
+                    > .before {
+                        content: "";
+                        height: 100%;
+                        width: 8px;
+                        left: 0px;
+                        top: 0px;
+                        transform: translateX(-8px);
+                    }
+                    > .after {
+                        height: 100%;
+                        width: 12px;
+                        right: 0px;
+                        top: 0px;
+                        transform: translateX(12px);
+                        z-index: 2;
+                    }
+                    > .mid {
+                        height: 100%;
+                        width: 100%;
+                        left: 0px;
+                        top: 0px;
+                        background-size: contain;
+                        background-repeat: repeat-x;
+                    }
+                    .content {
+                        position: relative;
+                        z-index: 2;
+                    }
+                    &:not(:first-child) {
+                        margin-left: 20px;
+                    }
+                    .icon {
+                        position: absolute;
+                        width: 20px;
+                        height: 20px;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%);
+                        background-size: contain;
+                    }
+                }
+            }
         }
         .character {
             z-index: 2;
@@ -538,7 +632,7 @@ export default {
                     }
                 }
                 &:hover {
-                    transform: scale(1) rotate(-3deg) translate(5px, 5px);
+                    transform: scale(1) rotate(-3deg) translate(5px, 10px);
                 }
             }
         }
@@ -789,6 +883,16 @@ export default {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    &.run-death {
+        .run-content {
+            .character {
+                .hearts {
+                    filter: grayscale(1);
+                    opacity: 0.5;
                 }
             }
         }
