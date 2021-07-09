@@ -1,8 +1,40 @@
 [
     {
+        "id":"dateFormat",
+        "value":{"name":"Month/Day/Year","value":"MM/DD/YY"},
+        "choices":[{"name":"Month/Day/Year","value":"MM/DD/YY"},{"name":"Day/Month/Year","value":"DD/MM/YY"}],
+        "name":"Date format",
+        "hint":"",
+        "type":"select"
+    },
+    {
+        "id":"hourFormat",
+        "value":[{"name":"12 Hours","value":"hh:mm a"}],
+        "choices":[{"name":"12 Hours","value":"hh:mm a"},{"name":"24 Hours","value":"hh:mm"}],
+        "name":"Hour format",
+        "hint":"",
+        "type":"select"
+    },
+    {
+        "id":"showActiveItems",
+        "value":true,
+        "name":"Show active items",
+        "hint":"",
+        "type":"checkbox"
+    },
+    {
         "id":"isaacModFolderPath",
         "value":"",
         "name":"Isaac mods folder",
+        "hint":"",
         "type":"text"
+    },
+    {
+        "id":"streakingWebsiteToken",
+        "value":"",
+        "name":"Streaking Website Token",
+        "hint":"",
+        "type":"text",
+        "disabled":true
     }
 ]

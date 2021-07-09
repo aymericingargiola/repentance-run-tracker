@@ -7,6 +7,9 @@ module.exports = {
             case 'logs watch status':
                 win.webContents.send('SYNC_WATCH_STATUS', params)
                 break
+            case 'send runs':
+                win.webContents.send('SYNC_SEND_RUNS', params)
+                break
             case 'create run':
                 win.webContents.send('SYNC_CREATE_RUN', params)
                 break

@@ -45,7 +45,7 @@ export default {
   }),
   mounted () {
     this.randomLoadingImages()
-
+    window.ipc.send('ASK_RUNS')
     window.ipc.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
         console.log(response)

@@ -43,6 +43,22 @@
                                         {{run.seed}}
                                     </div>
                                 </li>
+                                <li class="info date">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        {{getDate(run.runStart, 'MM/DD/YY')}}
+                                    </div>
+                                </li>
+                                <li class="info hour">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        {{getDate(run.runStart, 'hh:mm a')}}
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div v-if="run.characters[0]" class="character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
@@ -195,6 +211,7 @@
 // import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
+import moment from 'moment'
 export default {
     name: "Runs",
     data() {
@@ -235,6 +252,10 @@ export default {
         }
     },
     mounted() {
+        window.ipc.on('SYNC_SEND_RUNS', (response) => {
+            console.log(response)
+            this.runRepo.fresh(response.runs)
+        })
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
             console.log(response)
             this.runRepo.insert(response.run)
@@ -314,6 +335,9 @@ export default {
             
             return filteredRuns
         },
+        getDate(unixDate, format) {
+            return moment.unix(unixDate).format(format)
+        }
         // calcBlackHeart(nb) {
         //     if (nb === 3) return 2
         //     if (nb === 1) return 1

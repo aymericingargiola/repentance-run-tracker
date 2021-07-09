@@ -409,8 +409,10 @@ function unWatchRepentanceLogs() {
 }
 
 async function init() {
-    const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
-    runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
+    if (!runs) {
+        const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
+        runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
+    }
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
@@ -443,6 +445,15 @@ async function init() {
 
 ipcMain.on('IS_APP_READY', (event, payload) => {
     syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
+})
+
+ipcMain.on('ASK_RUNS', async (event, payload) => {
+    if (!runs) {
+        const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
+        runs = JSON.parse(fs.readFileSync(loadRuns))
+    }
+    console.log("asking runs",runs)
+    syncApp(win,{trigger: "send runs", runs: runs})
 })
 
 //Frontend event, trigger if a run is edited
