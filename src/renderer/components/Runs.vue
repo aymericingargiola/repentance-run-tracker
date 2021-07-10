@@ -19,12 +19,21 @@
                     <div class="run-content">
                         <div class="infos">
                             <ul>
-                                <li class="info status">
+                                <li class="info status" title="Run status">
                                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                                     <div class="content">
                                         <div class="icon" :style="{backgroundImage:`url('img/icons/hud/${run.runEnd.win === true ? `crown` : run.runEnd.win === false ? `dead` : `race`}.png')`}"></div>
+                                    </div>
+                                </li>
+                                <li class="info game-state" title="Save file">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        <div class="icon" :style="{backgroundImage:`url('img/icons/hud/gamestate.png')`}"></div>
+                                        <div class="text-icon">{{run.gameState}}</div>
                                     </div>
                                 </li>
                                 <li class="info character-name">
@@ -35,7 +44,7 @@
                                         {{run.characters[0].trueName}}
                                     </div>
                                 </li>
-                                <li class="info seed">
+                                <li class="info seed" title="Seed">
                                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
@@ -43,20 +52,28 @@
                                         {{run.seed}}
                                     </div>
                                 </li>
-                                <li class="info date">
+                                <li class="info date" title="Run start date">
                                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                                     <div class="content">
-                                        {{getDate(run.runStart, 'MM/DD/YY')}}
+                                        {{getDate(run.runStart, getConfig("dateFormat") ? getConfig("dateFormat").value : 'MM/DD/YY')}}
                                     </div>
                                 </li>
-                                <li class="info hour">
+                                <li class="info hour" title="Run start hour">
                                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                                     <div class="content">
-                                        {{getDate(run.runStart, 'hh:mm a')}}
+                                        {{getDate(run.runStart, getConfig("hourFormat") ? getConfig("hourFormat").value : 'hh:mm a')}}
+                                    </div>
+                                </li>
+                                <li class="info edit" @click="openOrCloseEditRun(run.id)">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        <div class="icon" :style="{backgroundImage:`url('img/icons/config.png')`}"></div>
                                     </div>
                                 </li>
                             </ul>
@@ -211,6 +228,7 @@
 // import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
+import Config from '../store/classes/Config'
 import moment from 'moment'
 export default {
     name: "Runs",
@@ -294,7 +312,8 @@ export default {
     },
     computed: {
         ...mapRepos({
-            runRepo: Run
+            runRepo: Run,
+            configRepo: Config
         }),
         allRuns() {
             return this.runRepo.all()
@@ -312,7 +331,7 @@ export default {
             set: function (run) {
                 this.runRepo.update(run)
             }
-        },
+        }
     },
     methods: {
         filter(runs) {
@@ -324,19 +343,25 @@ export default {
                 filteredRuns = filteredRuns.filter((run) => {
                     const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
                     const customRunName = run.customName.normalize('NFC').toLowerCase()
-                    const seed = run.seed.normalize('NFC').toLowerCase()
+                    const id = run.id.normalize('NFC').toLowerCase()
                     if (
                         characterName.includes(textSearchValue) ||
                         customRunName.includes(textSearchValue) ||
-                        seed.includes(textSearchValue)
+                        id.includes(textSearchValue)
                         ) return run
                 })
             }
             
             return filteredRuns
         },
+        openOrCloseEditRun(id) {
+            this.$root.$emit('OPEN_EDITRUN', id)
+        },
         getDate(unixDate, format) {
             return moment.unix(unixDate).format(format)
+        },
+        getConfig(id) {
+            return this.configRepo.query().where('id', id).get()[0]
         }
         // calcBlackHeart(nb) {
         //     if (nb === 3) return 2
@@ -462,8 +487,11 @@ export default {
             position: absolute;
             top: 14px;
             left: 14px;
+            width: calc(100% - 22px);
+            z-index: 3;
             ul {
                 display: flex;
+                width: 100%;
                 li {
                     position: relative;
                     padding: 5px 10px 10px 10px;
@@ -502,9 +530,16 @@ export default {
                     .content {
                         position: relative;
                         z-index: 2;
+                        min-height: 18px;
+                        pointer-events: none;
                     }
                     &:not(:first-child) {
                         margin-left: 20px;
+                    }
+                    &:last-child {
+                        margin-left: auto;
+                        pointer-events: all;
+                        cursor: pointer;
                     }
                     .icon {
                         position: absolute;
@@ -512,10 +547,14 @@ export default {
                         height: 20px;
                         background-repeat: no-repeat;
                         background-position: center;
-                        left: 50%;
+                        left: 0;
                         top: 50%;
-                        transform: translate(-50%);
+                        transform: translate(-50%, -50%);
                         background-size: contain;
+                    }
+                    .text-icon {
+                        padding-left: 16px;
+                        transform: scale(1.5) translate(-2px, -1px);
                     }
                 }
             }

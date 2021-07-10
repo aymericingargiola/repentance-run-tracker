@@ -6,8 +6,7 @@
         <div class="menu center-menu">
         </div>
         <div class="menu right-menu" v-if="$isElectron">
-            <span class="action-btn settings" v-on:click="openOrCloseSettings()">
-                s
+            <span class="action-btn config" v-on:click="openOrCloseSettings()">
             </span>
             <span class="action-btn minimize-app" v-on:click="minimizeApp()">
             </span>
@@ -170,6 +169,16 @@ export default {
                 }
                 &.minimize-app {
                     background-image: url("../../../public/img/icons/minimize.png");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    transform: scale(0.55);
+                    &:hover {
+                        opacity: 0.5;
+                        transform: scale(0.65) rotate(-10deg);
+                    }
+                }
+                &.config {
+                    background-image: url("../../../public/img/icons/config.png");
                     background-repeat: no-repeat;
                     background-size: cover;
                     transform: scale(0.55);

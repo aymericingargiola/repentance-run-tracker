@@ -27,3 +27,9 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+  .home {
+    max-width: 1600px;
+    margin: auto;
+  }
+</style>

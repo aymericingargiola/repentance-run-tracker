@@ -14,20 +14,24 @@
         </transition>
         <router-view />
     </div>
-    <Settings/>
+    <ConfigScreen/>
+    <EditRun/>
   </div>
 </template>
 
 <script>
 import Taskbar from './components/Taskbar.vue'
-import Settings from './components/Pops/Settings.vue'
+import ConfigScreen from './components/Pops/ConfigScreen.vue'
+import EditRun from './components/Pops/EditRun.vue'
 import { mapRepos } from '@vuex-orm/core'
+import Config from './store/classes/Config'
 const loadingImagesStringTemplate = "url('img/loadimages/loadimages-#.png')"
 export default {
   name: 'App',
   components: {
     Taskbar,
-    Settings
+    ConfigScreen,
+    EditRun
   },
   data() {
     return {
@@ -41,19 +45,29 @@ export default {
       loadingImage2: "url('img/loadimages/loadimages-002_2.png')"
     }
   },
-  computed: mapRepos({
-  }),
+  computed: {
+    ...mapRepos({
+        configRepo: Config
+    })
+  },
   mounted () {
     this.randomLoadingImages()
+
+    window.ipc.send('ASK_CONFIG')
     window.ipc.send('ASK_RUNS')
     window.ipc.send('IS_APP_READY')
+
+    window.ipc.on('SYNC_SEND_CONFIG', (response) => {
+        console.log(response)
+        this.configRepo.fresh(response.config)
+    })
+
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
         console.log(response)
         if(response.watching === false) this.randomLoadingImages()
         this.watchStatus = response.watching
     })
 
-    //Get app version
     if (!this.appVersion) window.ipc.send('APP_VERSION');
     window.ipc.on('APP_VERSION', (response) => {
       this.appVersion = response.appVersion
@@ -63,10 +77,12 @@ export default {
       console.log("app update available")
       this.updateAvailable = true
     })
+
     window.ipc.on('UPDATE_DOWNLOADED', (response) => {
       console.log("app update downloaded", response)
       this.updateDownloaded = true
     })
+
   },
   methods: {
     restartApp() {
@@ -97,7 +113,7 @@ export default {
     overflow: hidden;
     body {
       padding: 0;
-      padding-top: 45px;
+      padding-top: 30px;
       margin: 0;
       background-color: $paper-white-dark;
       background-image: url("../../public/img/emptyscreen.png");

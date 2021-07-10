@@ -55,7 +55,6 @@ async function checkMod() {
 module.exports = {
     startModWatch: async function(window, isDevelopment, modFileContent, modeMetadataContent, conf) {
         config = conf
-        console.log(config)
         const IsaacModFolderPathField = config.filter(field => field.id === "isaacModFolderPath")[0]
         if(isDevelopment && IsaacModFolderPathField && IsaacModFolderPathField.value != "") {
             IsaacModFolderPath = IsaacModFolderPathField.value

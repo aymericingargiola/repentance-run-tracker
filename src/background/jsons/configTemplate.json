@@ -1,33 +1,37 @@
 [
     {
         "id":"dateFormat",
-        "value":{"name":"Month/Day/Year","value":"MM/DD/YY"},
+        "value":"MM/DD/YY",
         "choices":[{"name":"Month/Day/Year","value":"MM/DD/YY"},{"name":"Day/Month/Year","value":"DD/MM/YY"}],
         "name":"Date format",
         "hint":"",
-        "type":"select"
+        "type":"select",
+        "disabled":false
     },
     {
         "id":"hourFormat",
-        "value":[{"name":"12 Hours","value":"hh:mm a"}],
-        "choices":[{"name":"12 Hours","value":"hh:mm a"},{"name":"24 Hours","value":"hh:mm"}],
+        "value":"hh:mm a",
+        "choices":[{"name":"12 Hours","value":"hh:mm a"},{"name":"24 Hours","value":"HH:mm"}],
         "name":"Hour format",
         "hint":"",
-        "type":"select"
+        "type":"select",
+        "disabled":false
     },
     {
-        "id":"showActiveItems",
-        "value":true,
-        "name":"Show active items",
-        "hint":"",
-        "type":"checkbox"
+        "id":"hideActiveItems",
+        "value":false,
+        "name":"Hide active items",
+        "hint":"Hide active items in floor's items list",
+        "type":"checkbox",
+        "disabled":false
     },
     {
         "id":"isaacModFolderPath",
         "value":"",
         "name":"Isaac mods folder",
         "hint":"",
-        "type":"text"
+        "type":"text",
+        "disabled":false
     },
     {
         "id":"streakingWebsiteToken",

@@ -452,7 +452,6 @@ ipcMain.on('ASK_RUNS', async (event, payload) => {
         const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
         runs = JSON.parse(fs.readFileSync(loadRuns))
     }
-    console.log("asking runs",runs)
     syncApp(win,{trigger: "send runs", runs: runs})
 })
 

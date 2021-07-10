@@ -12,35 +12,47 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
+const { syncApp } = require('./sync')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 const configTemplate = require('./jsons/configTemplate.json')
 let win, winTracker, config
 
 // console.log("electron", process.versions.electron)
 
+ipcMain.on('ASK_CONFIG', async (event, payload) => {
+  if (!config) config = await initConfig()
+  syncApp(win,{trigger: "send config", config: config})
+})
+
+ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
+  if (!config) config = await initConfig()
+  config.find(configItem => configItem.id === payload.id).value = payload.value
+  await writeFileAsync(dataFolder, 'config.json', JSON.stringify(config))
+})
+
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
-  event.reply('READ_FILE', { content });
+  event.reply('READ_FILE', { content })
 });
 
 ipcMain.on('MINIMIZE_APP', (event, payload) => {
-  win.minimize();
+  win.minimize()
 });
 
 ipcMain.on('HIDE_APP', (event, payload) => {
-  win.hide();
+  win.hide()
 });
 
 ipcMain.on('CLOSE_APP', async (event, payload) => {
   await writeFileAsync(dataFolder, 'store.json', payload)
-  app.exit();
+  app.exit()
 });
 
 ipcMain.on('FULLSCREEN_APP', (event, payload) => {
   if (win.isNormal()) {
-    win.maximize();
+    win.maximize()
   } else {
-    win.unmaximize();
+    win.unmaximize()
   }
 });
 
@@ -57,10 +69,24 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function createWindow() {
+async function initConfig() {
   // Load app config file
   const loadConfig = await fileResolve(dataFolder, 'config.json', JSON.stringify(configTemplate))
-  config = JSON.parse(fs.readFileSync(loadConfig))
+  let tempConfig = JSON.parse(fs.readFileSync(loadConfig))
+  tempConfig.forEach((field) => {
+    const template = configTemplate.find(configItem => configItem.id === field.id)
+    if(field.choices != template.choices) field.choices = template.choices
+    if(field.name != template.name) field.name = template.name
+    if(field.hint != template.hint) field.hint = template.hint
+    if(field.type != template.type) field.type = template.type
+    if(field.disabled != template.disabled) field.disabled = template.disabled
+  })
+  await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
+  return tempConfig
+}
+
+async function createWindow() {
+  if(!config) config = await initConfig()
   // Create the browser window.
   win = new BrowserWindow({
     title: "Repentance Run Tracker",
