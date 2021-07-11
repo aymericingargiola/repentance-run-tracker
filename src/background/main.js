@@ -73,13 +73,14 @@ async function initConfig() {
   // Load app config file
   const loadConfig = await fileResolve(dataFolder, 'config.json', JSON.stringify(configTemplate))
   let tempConfig = JSON.parse(fs.readFileSync(loadConfig))
-  tempConfig.forEach((field) => {
-    const template = configTemplate.find(configItem => configItem.id === field.id)
-    if(field.choices != template.choices) field.choices = template.choices
-    if(field.name != template.name) field.name = template.name
-    if(field.hint != template.hint) field.hint = template.hint
-    if(field.type != template.type) field.type = template.type
-    if(field.disabled != template.disabled) field.disabled = template.disabled
+  configTemplate.forEach((field) => {
+    const tempConfigField = tempConfig.find(configItem => configItem.id === field.id)
+    if(!tempConfigField) tempConfig.push(field)
+    if(tempConfigField.choices != field.choices) tempConfigField.choices = field.choices
+    if(tempConfigField.name != field.name) tempConfigField.name = field.name
+    if(tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
+    if(tempConfigField.type != field.type) tempConfigField.type = field.type
+    if(tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled
   })
   await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
   return tempConfig
