@@ -14,7 +14,7 @@ const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
 const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 const runsJsonPath = `${dataFolder}\\runs.json`
 const configJsonPath = `${dataFolder}\\config.json`
-let watchingLogs, config, runs, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win
+let watchingLogs, config, runs, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
@@ -34,6 +34,7 @@ function checkPreviousRuns() {
         if (repentanceLogsArray[currentRunIndex - 2].includes("CPU time")) {
             console.log("Current run was generated from a direct reset, remove previous run")
             syncApp(win,{trigger: "remove run", run: runs[1].id})
+            if(winTracker) syncApp(winTracker,{trigger: "remove run", run: runs[1].id})
             runs.splice(1, 1)
             currentCharater = null
             currentFloor = null
@@ -217,6 +218,7 @@ function updateOrCreateRun(params = {}) {
             sameRun.runUpdate = moment().unix()
             runs[sameRun.id] = sameRun
             syncApp(win,{trigger: "update run", run: sameRun})
+            if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
         } else {
             console.log('Run is over')
         }
@@ -259,6 +261,7 @@ function updateOrCreateRun(params = {}) {
         console.log(run)
         runs.unshift(run)
         syncApp(win,{trigger: "create run", run: run})
+        if(winTracker) syncApp(winTracker,{trigger: "create run", run: run})
         console.log("New run generated checking previous runs...")
         checkPreviousRuns()
     }
@@ -455,7 +458,7 @@ ipcMain.on('USER_EDIT_RUN', (event, payload) => {
 //Frontend event, trigger if a run is removed
 ipcMain.on('USER_REMOVE_RUN', (event, payload) => {
     console.log(`User wants to remove run : ${payload}`)
-    removeRun(payload, runs, runsJsonPath, win)
+    removeRun(payload, runs, runsJsonPath, win, winTracker)
 })
 
 module.exports = {
@@ -495,5 +498,8 @@ module.exports = {
                 })
             }
         }, 1000)
+    },
+    liveTrackerWindowState: function (window) {
+        winTracker = window
     }
 }

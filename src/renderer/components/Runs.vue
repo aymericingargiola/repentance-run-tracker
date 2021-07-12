@@ -189,7 +189,7 @@
                                         <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors/${floor.group}-ground.png')`}">
                                             <div class="top-info">
                                                 <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
-                                                <div class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
+                                                <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
                                             </div>
                                             <div class="floor-wrapper">
                                                 <div class="floor-name">{{floor.name}}</div>

@@ -9,8 +9,23 @@
       :style="{top:`${this.top}px`,left:`${this.left}px`}"
       />
       <div v-if="getLiveTrackerBackground" :class="['background', showPicker ? 'on-top' : '']" :style="{backgroundColor:`rgba(${showPicker ? color.red : getLiveTrackerBackground.value.red},${showPicker ? color.green : getLiveTrackerBackground.value.green},${showPicker ? color.blue : getLiveTrackerBackground.value.blue},${showPicker ? color.alpha : getLiveTrackerBackground.value.alpha})`}" @click="changeShowPickerState($event)"></div>
-      TEST
-      {{getLiveTrackerBackground}}
+      <ul v-if="currentRun" class="current-run">
+        <template v-for="(floor, fidx) in currentRun.floors">
+          <li class="floor" :key="floor.id + fidx">
+            <div class="top-info">
+                <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
+                <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
+            </div>
+          </li>
+          <template v-for="(item, itdx) in floor.itemsCollected">
+            <li class="item" :key="item.id + itdx">
+              <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                  <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+              </a>
+            </li>
+          </template>
+        </template>
+      </ul>
   </div>
 </template>
 
@@ -18,12 +33,14 @@
 //import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../store/classes/Config'
+import Run from '../store/classes/Run'
 export default {
   components: {
   },
   name: "Tracker",
   data() {
     return {
+      filterOrder: 'desc',
       showPicker: false,
       color: {red: 0,green: 255,blue: 0,alpha: 1},
       top: 0,
@@ -37,14 +54,43 @@ export default {
     window.ipc.on('SYNC_SEND_CONFIG', (response) => {
         console.log(response)
         this.configRepo.fresh(response.config)
+    }),
+    window.ipc.send('ASK_RUNS', ({window:"liveTracker"}))
+    window.ipc.on('SYNC_SEND_RUNS', (response) => {
+        console.log(response)
+        this.runRepo.fresh(response.runs)
+    }),
+    window.ipc.on('SYNC_CREATE_RUN', (response) => {
+        console.log(response)
+        this.runRepo.insert(response.run)
+    }),
+    window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+        console.log(response)
+        this.updateRun = response.run
+    })
+    window.ipc.on('SYNC_REMOVE_RUN', (response) => {
+        console.log(response)
+        this.runRepo.destroy(response.run)
     })
   },
   computed: {
     ...mapRepos({
-        configRepo: Config
+        configRepo: Config,
+        runRepo: Run
     }),
     getLiveTrackerBackground() {
         return this.configRepo.find('liveTrackerBackgroundColor')
+    },
+    currentRun() {
+        return this.runRepo.orderBy('runUpdate', this.filterOrder).first()
+    },
+    updateRun: {
+        get: function(run) {
+            return this.runRepo.query().where('id', run.id).get()
+        },
+        set: function (run) {
+            this.runRepo.update(run)
+        }
     }
   },
   methods: {
@@ -98,6 +144,11 @@ html {
     height: 100%;
     z-index: 0;
   }
+}
+
+.current-run {
+  position: relative;
+  width: 100%;
 }
 
 // Color picker

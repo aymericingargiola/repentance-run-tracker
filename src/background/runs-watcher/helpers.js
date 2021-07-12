@@ -100,12 +100,13 @@ module.exports = {
         //Update file
         fs.writeFile(path, datas, 'utf8', (err) => {if (err) throw err})
     },
-    removeRun: (runId, runs, runsJsonPath, window) => {
+    removeRun: (runId, runs, runsJsonPath, window, windowTracker) => {
         //From user action, if the runid is found remove a run on frontend and backend
         console.log(`Removing run : ${runId}...`)
         runIndex = runs.findIndex(run => run.id === runId)
         if(runIndex != -1) {
             syncApp(window,{trigger: "remove run", run: runs[runIndex].id}) //Remove matching run on frontend
+            if(windowTracker) syncApp(windowTracker,{trigger: "remove run", run: runs[runIndex].id})
             runs.splice(runIndex, 1) //Remove matching run on saved runs json file
             console.log(`Run : ${runId} was removed`)
             module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))

@@ -4,7 +4,7 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { autoUpdater } from 'electron-updater'
 import { writeFileAsync, fileResolve } from './tools/fileSystem'
-import { startLogsWatch } from './runs-watcher'
+import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
@@ -26,8 +26,9 @@ ipcMain.on('ASK_CONFIG', async (event, payload) => {
 })
 
 ipcMain.on('ASK_RUNS', async (event, payload) => {
+  const window = payload && payload.window === "liveTracker" ? winTracker : win
   if (!runs) runs = await initRuns()
-  syncApp(win,{trigger: "send runs", runs: runs})
+  syncApp(window,{trigger: "send runs", runs: runs})
 })
 
 ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
@@ -143,6 +144,8 @@ async function openLiveTracker() {
     winTracker.destroy()
     winTracker = undefined
   })
+
+  liveTrackerWindowState(winTracker)
 }
 
 async function createWindow() {
