@@ -447,14 +447,6 @@ ipcMain.on('IS_APP_READY', (event, payload) => {
     syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
 })
 
-ipcMain.on('ASK_RUNS', async (event, payload) => {
-    if (!runs) {
-        const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
-        runs = JSON.parse(fs.readFileSync(loadRuns))
-    }
-    syncApp(win,{trigger: "send runs", runs: runs})
-})
-
 //Frontend event, trigger if a run is edited
 ipcMain.on('USER_EDIT_RUN', (event, payload) => {
     console.log(payload)
@@ -467,9 +459,10 @@ ipcMain.on('USER_REMOVE_RUN', (event, payload) => {
 })
 
 module.exports = {
-    startLogsWatch: function(window, conf) {
+    startLogsWatch: function(window, conf, rns) {
         win = window
         config = conf
+        runs = rns
         let wait = false
         setInterval(() => {
             if(!wait) {

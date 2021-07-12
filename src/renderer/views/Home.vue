@@ -2,6 +2,8 @@
   <div class="home">
     <Runs/>
     <BrokenRuns/>
+    <EditRun/>
+    <ConfigScreen/>
   </div>
 </template>
 
@@ -9,10 +11,14 @@
 //import moment from 'moment'
 import Runs from '../components/Runs.vue'
 import BrokenRuns from '../components/Pops/BrokenRuns.vue'
+import EditRun from '../components/Pops/EditRun.vue'
+import ConfigScreen from '../components/Pops/ConfigScreen.vue'
 export default {
   components: {
     Runs,
-    BrokenRuns
+    BrokenRuns,
+    EditRun,
+    ConfigScreen
   },
   name: "Home",
   data() {

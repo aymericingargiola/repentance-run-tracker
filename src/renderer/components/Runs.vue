@@ -270,6 +270,7 @@ export default {
         }
     },
     mounted() {
+        window.ipc.send('ASK_RUNS')
         window.ipc.on('SYNC_SEND_RUNS', (response) => {
             console.log(response)
             this.runRepo.fresh(response.runs)

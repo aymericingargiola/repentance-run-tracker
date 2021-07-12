@@ -1,13 +1,13 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 const validChannels = [
-  'READ_FILE', 
-  'WRITE_FILE', 
-  'COPY_FILE', 
-  'REMOVE_FILE', 
-  'MINIMIZE_APP', 
-  'HIDE_APP', 
-  'CLOSE_APP', 
+  'READ_FILE',
+  'WRITE_FILE',
+  'COPY_FILE',
+  'REMOVE_FILE',
+  'MINIMIZE_APP',
+  'HIDE_APP',
+  'CLOSE_APP',
   'FULLSCREEN_APP',
   'APP_VERSION',
   'UPDATE_AVAILABLE',
@@ -15,6 +15,7 @@ const validChannels = [
   'RESTART_APP',
   'IS_APP_READY',
   'SAVE_STORE',
+  'OPEN_LIVETRACKER',
   'ASK_CONFIG',
   'SYNC_SEND_CONFIG',
   'SYNC_UPDATE_CONFIG',

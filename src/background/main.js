@@ -15,13 +15,18 @@ const fs = require('fs')
 const { syncApp } = require('./sync')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 const configTemplate = require('./jsons/configTemplate.json')
-let win, winTracker, config
+let win, winTracker, config, runs
 
 // console.log("electron", process.versions.electron)
 
 ipcMain.on('ASK_CONFIG', async (event, payload) => {
   if (!config) config = await initConfig()
   syncApp(win,{trigger: "send config", config: config})
+})
+
+ipcMain.on('ASK_RUNS', async (event, payload) => {
+  if (!runs) runs = await initRuns()
+  syncApp(win,{trigger: "send runs", runs: runs})
 })
 
 ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
@@ -33,20 +38,20 @@ ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
   event.reply('READ_FILE', { content })
-});
+})
 
 ipcMain.on('MINIMIZE_APP', (event, payload) => {
   win.minimize()
-});
+})
 
 ipcMain.on('HIDE_APP', (event, payload) => {
   win.hide()
-});
+})
 
 ipcMain.on('CLOSE_APP', async (event, payload) => {
   await writeFileAsync(dataFolder, 'store.json', payload)
   app.exit()
-});
+})
 
 ipcMain.on('FULLSCREEN_APP', (event, payload) => {
   if (win.isNormal()) {
@@ -54,14 +59,18 @@ ipcMain.on('FULLSCREEN_APP', (event, payload) => {
   } else {
     win.unmaximize()
   }
-});
+})
 
 ipcMain.on('SAVE_STORE', async (event, payload) => {
   await writeFileAsync(dataFolder, 'store.json', payload)
-});
+})
 
 ipcMain.on('APP_VERSION', (event) => {
   event.reply('APP_VERSION', { appVersion: app.getVersion() })
+})
+
+ipcMain.on('OPEN_LIVETRACKER', async (event, payload) => {
+  openLiveTracker()
 })
 
 // Scheme must be registered before the app is ready
@@ -86,8 +95,58 @@ async function initConfig() {
   return tempConfig
 }
 
+async function initRuns() {
+  // Load runs
+  const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
+  return JSON.parse(fs.readFileSync(loadRuns))
+}
+
+async function openLiveTracker() {
+  if (winTracker) return
+  winTracker = new BrowserWindow({
+    title: "Live Tracker",
+    width: 1000,
+    height: 400,
+    minWidth: 200,
+    minHeight: 100,
+    autoHideMenuBar: true,
+    titleBarStyle: 'default',
+    frame: true,
+    darkTheme: true,
+    webPreferences: {
+      // Use pluginOptions.nodeIntegration, leave this alone
+      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+      contextIsolation: true,
+      enableRemoteModule: false,
+      preload: path.resolve(__static, 'preload.js')
+    }
+  })
+
+  if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // Load the url of the dev server if in development mode
+    await winTracker.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/tracker`)
+    if (!process.env.IS_TEST) winTracker.webContents.openDevTools()
+  } else {
+    // Load the index.html when not in development
+    winTracker.loadURL('app://./index.html/#/tracker')
+  }
+
+  winTracker.webContents.on('new-window', function(e, url) {
+    e.preventDefault()
+    require('electron').shell.openExternal(url)
+  })
+
+  winTracker.on('close', function(e) { 
+    e.preventDefault()
+    winTracker.destroy()
+    winTracker = undefined
+  })
+}
+
 async function createWindow() {
   if(!config) config = await initConfig()
+  if(!runs) runs = await initRuns()
   // Create the browser window.
   win = new BrowserWindow({
     title: "Repentance Run Tracker",
@@ -129,47 +188,8 @@ async function createWindow() {
     require('electron').shell.openExternal(url)
   })
 
-  startLogsWatch(win, config)
+  startLogsWatch(win, config, runs)
   startModWatch(win, isDevelopment, modFile.default, modMetadata.default, config)
-
-  winTracker = new BrowserWindow({
-    title: "Live Tracker",
-    width: 1000,
-    height: 400,
-    minWidth: 200,
-    minHeight: 100,
-    autoHideMenuBar: true,
-    titleBarStyle: 'default',
-    frame: true,
-    darkTheme: true,
-    webPreferences: {
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: true,
-      enableRemoteModule: false,
-      preload: path.resolve(__static, 'preload.js')
-    }
-  })
-
-  if (process.env.WEBPACK_DEV_SERVER_URL) {
-    // Load the url of the dev server if in development mode
-    await winTracker.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/tracker`)
-    if (!process.env.IS_TEST) winTracker.webContents.openDevTools()
-  } else {
-    // Load the index.html when not in development
-    winTracker.loadURL('app://./index.html/#/tracker')
-  }
-
-  winTracker.webContents.on('new-window', function(e, url) {
-    e.preventDefault()
-    require('electron').shell.openExternal(url)
-  })
-
-  winTracker.on('close', function(e) { 
-    e.preventDefault();
-    winTracker.destroy();
-  })
 }
 
 // Quit when all windows are closed.

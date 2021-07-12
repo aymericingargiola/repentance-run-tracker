@@ -43,6 +43,11 @@ export default {
         }
     },
     mounted() {
+        window.ipc.send('ASK_CONFIG')
+        window.ipc.on('SYNC_SEND_CONFIG', (response) => {
+            console.log(response)
+            this.configRepo.fresh(response.config)
+        })
         this.$root.$on('OPEN_SETTINGS', () => {
             this.isOpen = !this.isOpen
         })

@@ -14,24 +14,18 @@
         </transition>
         <router-view />
     </div>
-    <ConfigScreen/>
-    <EditRun/>
   </div>
 </template>
 
 <script>
 import Taskbar from './components/Taskbar.vue'
-import ConfigScreen from './components/Pops/ConfigScreen.vue'
-import EditRun from './components/Pops/EditRun.vue'
 import { mapRepos } from '@vuex-orm/core'
 import Config from './store/classes/Config'
 const loadingImagesStringTemplate = "url('img/loadimages/loadimages-#.png')"
 export default {
   name: 'App',
   components: {
-    Taskbar,
-    ConfigScreen,
-    EditRun
+    Taskbar
   },
   data() {
     return {
@@ -53,15 +47,7 @@ export default {
   mounted () {
     this.randomLoadingImages()
 
-    window.ipc.send('ASK_CONFIG')
-    window.ipc.send('ASK_RUNS')
-    window.ipc.send('IS_APP_READY')
-
-    window.ipc.on('SYNC_SEND_CONFIG', (response) => {
-        console.log(response)
-        this.configRepo.fresh(response.config)
-    })
-
+    if (!this.watchStatus) window.ipc.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
         console.log(response)
         if(response.watching === false) this.randomLoadingImages()
@@ -70,6 +56,7 @@ export default {
 
     if (!this.appVersion) window.ipc.send('APP_VERSION');
     window.ipc.on('APP_VERSION', (response) => {
+      console.log(response)
       this.appVersion = response.appVersion
     })
 
