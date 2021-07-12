@@ -27,6 +27,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "vue": "^2.6.11",
+    "vue-color-gradient-picker": "^0.1.2",
     "vue-router": "^3.5.1",
     "vue-signature-pad": "^2.0.2",
     "vuescroll": "^4.17.3",

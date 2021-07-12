@@ -40,5 +40,13 @@
         "hint":"",
         "type":"text",
         "disabled":true
+    },
+    {
+        "id":"liveTrackerBackgroundColor",
+        "value":{"red": 0,"green": 0,"blue": 0,"alpha": 0},
+        "name":"Change Live Tracker Background",
+        "hint":"",
+        "type":"object",
+        "disabled":true
     }
 ]

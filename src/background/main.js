@@ -20,8 +20,9 @@ let win, winTracker, config, runs
 // console.log("electron", process.versions.electron)
 
 ipcMain.on('ASK_CONFIG', async (event, payload) => {
+  const window = payload && payload.window === "liveTracker" ? winTracker : win
   if (!config) config = await initConfig()
-  syncApp(win,{trigger: "send config", config: config})
+  syncApp(window,{trigger: "send config", config: config})
 })
 
 ipcMain.on('ASK_RUNS', async (event, payload) => {
@@ -85,11 +86,11 @@ async function initConfig() {
   configTemplate.forEach((field) => {
     const tempConfigField = tempConfig.find(configItem => configItem.id === field.id)
     if(!tempConfigField) tempConfig.push(field)
-    if(tempConfigField.choices != field.choices) tempConfigField.choices = field.choices
-    if(tempConfigField.name != field.name) tempConfigField.name = field.name
-    if(tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
-    if(tempConfigField.type != field.type) tempConfigField.type = field.type
-    if(tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled
+    if(tempConfigField && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices
+    if(tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name
+    if(tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
+    if(tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type
+    if(tempConfigField && tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled
   })
   await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
   return tempConfig
