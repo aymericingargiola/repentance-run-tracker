@@ -143,6 +143,7 @@ async function openLiveTracker() {
     e.preventDefault()
     winTracker.destroy()
     winTracker = undefined
+    liveTrackerWindowState(winTracker)
   })
 
   liveTrackerWindowState(winTracker)

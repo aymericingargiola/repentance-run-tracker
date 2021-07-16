@@ -217,7 +217,8 @@
         <div v-if="Math.ceil(filteredRunsTotal.length / filterLimit) > 1" class="navigation-container">
             <div class="navigation">
                 <template v-for="page in Math.ceil(filteredRunsTotal.length / filterLimit)">
-                    <div :class="[filterOffset === filterLimit * (page - 1) ? 'active' : '']" v-on:click="filterOffset = filterLimit * (page - 1)" :key="`page-${page}`">{{page}}</div>
+                    <div v-if="page === 1 || page === Math.ceil(filteredRunsTotal.length / filterLimit) || [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2].includes(page)" :class="['page',currentPage === page ? 'active' : '']" v-on:click="filterOffset = filterLimit * (page - 1); currentPage = page" :key="`page-${page}`">{{page}}</div>
+                    <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal.length / filterLimit)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal.length / filterLimit)-4)" class="page-offset" :key="`page-${page}`">...</div>
                 </template>
             </div>
         </div>
@@ -257,7 +258,8 @@ export default {
                     disable: true
                 }
             },
-            filterLimit: 3,
+            currentPage: 1,
+            filterLimit: 6,
             filterOffset: 0,
             filterOrder: 'desc',
             filterText: '',
@@ -353,6 +355,9 @@ export default {
                 })
             }
             
+            this.currentPage = 1
+            this.filterOffset = 0
+
             return filteredRuns
         },
         openOrCloseEditRun(id) {
@@ -958,6 +963,31 @@ export default {
                     filter: grayscale(1);
                     opacity: 0.5;
                 }
+            }
+        }
+    }
+}
+.navigation-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 0;
+    .navigation {
+        display: flex;
+        .page, .page-offset {
+            padding: 8px;
+        }
+        .page {
+            opacity: 0.7;
+            cursor: pointer;
+            transition: 0.5s ease;
+            &.active {
+                opacity: 1;
+                transform: scale(2);
+            }
+            &-offset {
+                pointer-events: none;
+                cursor: default;
             }
         }
     }
