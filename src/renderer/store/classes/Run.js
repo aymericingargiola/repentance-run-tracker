@@ -14,7 +14,7 @@ export default class Run extends Model {
             runUpdate: this.number(null),
             runUserUpdate: this.number(null),
             runEnd: this.attr(null),
-            runDuration: this.number(null),
+            runDuration: this.attr(null),
             characters: this.attr(null),
             floors: this.attr(null),
             toRemove: this.attr(null),

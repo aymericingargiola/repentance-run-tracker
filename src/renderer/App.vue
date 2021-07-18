@@ -180,6 +180,28 @@ export default {
     }
   }
 
+  //vue time picker
+  .vue__time-picker.time-picker {
+    .dropdown {
+      height: 5em;
+      border-radius: 10px;
+      top: 2.2em;
+      .select-list {
+        height: 5em;
+        ul {
+          li {
+            border-radius: 10px;
+            &:not([disabled]) {
+              &.active {
+                background-color: $paper-white-dark;
+              }
+            }
+          }
+        } 
+      }
+    }
+  }
+
   //Scrollbar styling
   ::-webkit-scrollbar {
     width: 16px;
@@ -190,21 +212,21 @@ export default {
   }
   ::-webkit-scrollbar-thumb {
     min-height: 40px;
-    background-color: $dark-background;
-    outline: 2px solid $darker-background;
+    background-color: rgba($color: #FFF, $alpha: 0.3);
+    outline: 0px solid $text-dark;
     outline-offset: -6px;
     &:hover {
-      outline: 3px solid $darker-background;
+      outline: 0px solid $text-dark;
       outline-offset: -4px;
     }
   }
   ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track {
     border: 4px solid transparent;
     background-clip: padding-box;
-    border-radius: 0px;
+    border-radius: 10px;
   }
   ::-webkit-scrollbar-track {
-    background-color: $darker-background;
+    background-color: $text-dark;
   }
   ::-webkit-scrollbar-corner {
     background-color: transparent;

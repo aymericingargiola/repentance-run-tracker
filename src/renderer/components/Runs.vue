@@ -33,7 +33,7 @@
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                                     <div class="content">
                                         <div class="icon" :style="{backgroundImage:`url('img/icons/hud/gamestate.png')`}"></div>
-                                        <div class="text-icon">{{run.gameState}}</div>
+                                        <div class="text-icon big">{{run.gameState}}</div>
                                     </div>
                                 </li>
                                 <li class="info character-name">
@@ -58,6 +58,15 @@
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                                     <div class="content">
                                         {{getDate(run.runStart, getConfig("dateFormat") ? getConfig("dateFormat").value : 'MM/DD/YY')}} - {{getDate(run.runStart, getConfig("hourFormat") ? getConfig("hourFormat").value : 'hh:mm a')}}
+                                    </div>
+                                </li>
+                                <li v-if="run.runEnd.date" class="info date" title="Run duration">
+                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                    <div class="content">
+                                        <div class="icon" :style="{backgroundImage:`url('img/icons/hud/time.png')`}"></div>
+                                        <div class="text-icon">{{run.runDuration}}</div>
                                     </div>
                                 </li>
                                 <li class="info edit" @click="openOrCloseEditRun(run.id)">
@@ -403,6 +412,9 @@ export default {
     position: relative;
     padding: 0px 24px;
 }
+.filters {
+    margin-bottom: 16px;
+}
 .run {
     position: relative;
     margin-bottom: 0px;
@@ -570,7 +582,9 @@ export default {
                     }
                     .text-icon {
                         padding-left: 16px;
-                        transform: scale(1.5) translate(-2px, -1px);
+                        &.big {
+                            transform: scale(1.5) translate(-2px, -1px);
+                        }
                     }
                 }
             }

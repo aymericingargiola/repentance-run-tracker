@@ -3,6 +3,8 @@ import App from './App.vue'
 import store from './store/store'
 import router from './router/router'
 import vuescroll from 'vuescroll'
+import VueTimepicker from 'vue2-timepicker'
+import 'vue2-timepicker/dist/VueTimepicker.css'
 import { ColorPicker } from 'vue-color-gradient-picker'
 import 'vue-color-gradient-picker/dist/index.css'
 
@@ -11,6 +13,8 @@ Vue.use(vuescroll, {
     // The global config
   },
 })
+
+Vue.component("vue-timepicker", VueTimepicker)
 
 Vue.component("ColorPicker", ColorPicker)
 

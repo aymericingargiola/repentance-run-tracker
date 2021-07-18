@@ -27,7 +27,7 @@ const validChannels = [
   'SYNC_UPDATE_RUN',
   'SYNC_REMOVE_RUN',
   'SYNC_ASK_REMOVE_RUN',
-  'USER_EDIT_RUN',
+  'USER_UPDATE_RUN',
   'USER_REMOVE_RUN'
 ];
 contextBridge.exposeInMainWorld(

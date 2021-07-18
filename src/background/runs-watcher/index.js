@@ -450,12 +450,13 @@ ipcMain.on('IS_APP_READY', (event, payload) => {
     syncApp(win,{trigger: "logs watch status", watching: watchingLogs})
 })
 
-//Frontend event, trigger if a run is edited
-ipcMain.on('USER_EDIT_RUN', (event, payload) => {
-    console.log(payload)
+//Frontend event, trigger if a run is edited by user
+ipcMain.on('USER_UPDATE_RUN', async (event, payload) => {
+    runs.find(run => run.id === payload.id)[payload.property] = payload.value
+    saveFileToDisk(runsJsonPath, JSON.stringify(runs))
 })
 
-//Frontend event, trigger if a run is removed
+//Frontend event, trigger if a run is removed by user
 ipcMain.on('USER_REMOVE_RUN', (event, payload) => {
     console.log(`User wants to remove run : ${payload}`)
     removeRun(payload, runs, runsJsonPath, win, winTracker)
