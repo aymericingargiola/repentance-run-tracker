@@ -111,6 +111,7 @@ export default {
         position: relative;
         z-index: 1;
         height: 100%;
+        padding: 36px 36px 56px 28px;
         > .mid {
             z-index: 0;
             position: absolute;
@@ -130,7 +131,6 @@ export default {
             overflow: auto;
             position: relative;
             z-index: 1;
-            padding: 36px 36px 56px 28px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -144,10 +144,14 @@ export default {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
             width: 100%;
             .title {
                 margin-right: 12px;
                 pointer-events: none;
+                &::after {
+                    content: " :";
+                }
             }
             .hint {
                 width: 100%;

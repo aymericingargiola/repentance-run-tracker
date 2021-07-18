@@ -57,15 +57,7 @@
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                                     <div class="content">
-                                        {{getDate(run.runStart, getConfig("dateFormat") ? getConfig("dateFormat").value : 'MM/DD/YY')}}
-                                    </div>
-                                </li>
-                                <li class="info hour" title="Run start hour">
-                                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                                    <div class="content">
-                                        {{getDate(run.runStart, getConfig("hourFormat") ? getConfig("hourFormat").value : 'hh:mm a')}}
+                                        {{getDate(run.runStart, getConfig("dateFormat") ? getConfig("dateFormat").value : 'MM/DD/YY')}} - {{getDate(run.runStart, getConfig("hourFormat") ? getConfig("hourFormat").value : 'hh:mm a')}}
                                     </div>
                                 </li>
                                 <li class="info edit" @click="openOrCloseEditRun(run.id)">
@@ -139,7 +131,18 @@
                                     </li>
                                 </ul>
                             </div>
-                            <!-- <div class="name">{{run.characters[0].trueName}}</div> -->
+                            <ul class="active-items">
+                                <template v-for="(item, ctidx) in run.characters[0].activables">
+                                    <li class="item" :key="item.title + ctidx">
+                                        <div class="name">
+                                            {{item.title}}
+                                        </div>
+                                        <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                            <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+                                        </a>
+                                    </li>
+                                </template>
+                            </ul>
                             <div class="image" :style="{backgroundImage:`url('img/characters/${run.characters[0].trueName}${parseInt(run.characters[0].id) > 20 ? ` Alt` : ``}.png')`}"></div>
                             <div v-if="run.characters[0].stats" class="stats">
                                 <ul>
@@ -193,8 +196,9 @@
                                             </div>
                                             <div class="floor-wrapper">
                                                 <div class="floor-name">{{floor.name}}</div>
-                                                    <transition-group name="item-group-transition" tag="ul" class="items">
-                                                        <li class="item-group-transition-item" v-for="(item, tidx) in floor.itemsCollected" :key="item.title + tidx">
+                                                <transition-group name="item-group-transition" tag="ul" class="items">
+                                                    <template v-for="(item, tidx) in floor.itemsCollected">
+                                                        <li v-if="!hideActiveItems || !hideActiveItems.value || (hideActiveItems.value && item.itemType != 'Active')" class="item-group-transition-item" :key="item.title + tidx">
                                                             <div class="name">
                                                                 {{item.title}}
                                                             </div>
@@ -203,7 +207,8 @@
                                                                 <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`}"></div> -->
                                                             </a>
                                                         </li>
-                                                    </transition-group>
+                                                    </template>
+                                                </transition-group>
                                             </div>
                                         </div>
                                     </li>
@@ -214,11 +219,11 @@
                 </li>
             </template>
       </transition-group>
-        <div v-if="Math.ceil(filteredRunsTotal.length / filterLimit) > 1" class="navigation-container">
+        <div v-if="Math.ceil(filteredRunsTotal.length / filterLimitPerPage) > 1" class="navigation-container">
             <div class="navigation">
-                <template v-for="page in Math.ceil(filteredRunsTotal.length / filterLimit)">
-                    <div v-if="page === 1 || page === Math.ceil(filteredRunsTotal.length / filterLimit) || [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2].includes(page)" :class="['page',currentPage === page ? 'active' : '']" v-on:click="filterOffset = filterLimit * (page - 1); currentPage = page" :key="`page-${page}`">{{page}}</div>
-                    <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal.length / filterLimit)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal.length / filterLimit)-4)" class="page-offset" :key="`page-${page}`">...</div>
+                <template v-for="page in Math.ceil(filteredRunsTotal.length / filterLimitPerPage)">
+                    <div v-if="page === 1 || page === Math.ceil(filteredRunsTotal.length / filterLimitPerPage) || [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2].includes(page)" :class="['page',currentPage === page ? 'active' : '']" v-on:click="filterOffset = filterLimitPerPage * (page - 1); currentPage = page" :key="`page-${page}`">{{page}}</div>
+                    <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal.length / filterLimitPerPage)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal.length / filterLimitPerPage)-4)" class="page-offset" :key="`page-${page}`">...</div>
                 </template>
             </div>
         </div>
@@ -259,11 +264,11 @@ export default {
                 }
             },
             currentPage: 1,
-            filterLimit: 6,
+            filterLimitPerPage: 6,
             filterOffset: 0,
             filterOrder: 'desc',
             filterText: '',
-            filterCharacter: '',
+            filterCharacter: [],
             filterCharacterVersion: '',
             filterGameState: 0,
             filterWiNOrDeath: '',
@@ -325,7 +330,10 @@ export default {
             return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).get())
         },
         filteredRuns() {
-            return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimit+this.filterOffset)
+            return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage+this.filterOffset)
+        },
+        hideActiveItems() {
+            return this.configRepo.find('hideActiveItems')
         },
         updateRun: {
             get: function(run) {
@@ -340,7 +348,7 @@ export default {
         filter(runs) {
             let filteredRuns = runs
 
-            //Text filter
+            // Text filter
             if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
                 filteredRuns = filteredRuns.filter((run) => {
@@ -355,6 +363,7 @@ export default {
                 })
             }
             
+            // Reset pagination
             this.currentPage = 1
             this.filterOffset = 0
 
@@ -392,6 +401,7 @@ export default {
 }
 .runs-container {
     position: relative;
+    padding: 0px 24px;
 }
 .run {
     position: relative;
@@ -704,6 +714,16 @@ export default {
                     transform: scale(1) rotate(-3deg) translate(5px, 10px);
                 }
             }
+            .active-items {
+                position: absolute;
+                right: 20px;
+                top: 24px;
+                .item {
+                    .name {
+                        display: none;
+                    }
+                }
+            }
         }
         .custom-scroll-floors {
             height: unset !important;
@@ -974,6 +994,7 @@ export default {
     z-index: 0;
     .navigation {
         display: flex;
+        align-items: center;
         .page, .page-offset {
             padding: 8px;
         }
@@ -983,7 +1004,7 @@ export default {
             transition: 0.5s ease;
             &.active {
                 opacity: 1;
-                transform: scale(2);
+                font-size: 170%;
             }
             &-offset {
                 pointer-events: none;

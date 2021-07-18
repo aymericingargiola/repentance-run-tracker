@@ -1,5 +1,5 @@
 <template>
-  <div class="tracker">
+  <div class="tracker" @contextmenu="handler($event)">
       <ColorPicker
       v-if="showPicker && getLiveTrackerBackground"
       :color="color"
@@ -8,7 +8,7 @@
       :onEndChange="color => onChange(color, 'end')"
       :style="{top:`${this.top}px`,left:`${this.left}px`}"
       />
-      <div v-if="getLiveTrackerBackground" :class="['background', showPicker ? 'on-top' : '']" :style="{backgroundColor:`rgba(${showPicker ? color.red : getLiveTrackerBackground.value.red},${showPicker ? color.green : getLiveTrackerBackground.value.green},${showPicker ? color.blue : getLiveTrackerBackground.value.blue},${showPicker ? color.alpha : getLiveTrackerBackground.value.alpha})`}" @click="changeShowPickerState($event)"></div>
+      <div v-if="getLiveTrackerBackground" :class="['background', showPicker ? 'on-top' : '']" :style="{backgroundColor:`rgba(${showPicker ? color.red : getLiveTrackerBackground.value.red},${showPicker ? color.green : getLiveTrackerBackground.value.green},${showPicker ? color.blue : getLiveTrackerBackground.value.blue},${showPicker ? color.alpha : getLiveTrackerBackground.value.alpha})`}"></div>
       <ul v-if="currentRun" class="current-run">
         <template v-for="(floor, fidx) in currentRun.floors">
           <li class="floor" :key="floor.id + fidx">
@@ -18,7 +18,7 @@
             </div>
           </li>
           <template v-for="(item, itdx) in floor.itemsCollected">
-            <li class="item" :key="item.id + itdx">
+            <li v-if="!hideActiveItems || !hideActiveItems.value || (hideActiveItems.value && item.itemType != 'Active')" class="item" :key="item.id + itdx">
               <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
                   <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
               </a>
@@ -84,6 +84,9 @@ export default {
     currentRun() {
         return this.runRepo.orderBy('runUpdate', this.filterOrder).first()
     },
+    hideActiveItems() {
+        return this.configRepo.find('hideActiveItems')
+    },
     updateRun: {
         get: function(run) {
             return this.runRepo.query().where('id', run.id).get()
@@ -94,6 +97,10 @@ export default {
     }
   },
   methods: {
+    handler(e) {
+        e.preventDefault()
+        this.changeShowPickerState(e)
+    },
     saveConfig(config) {
         window?.ipc?.send('USER_UPDATE_CONFIG', config)
     },
@@ -129,6 +136,9 @@ html {
     }
   }
 }
+.main {
+  overflow: auto !important;
+}
 .taskbar {
     display: none;
 }
@@ -136,6 +146,7 @@ html {
   width: 100%;
   height: 100%;
   position: relative;
+  outline: 5px dashed;
   .background {
     position: absolute;
     left: 0;
@@ -156,6 +167,7 @@ html {
   position: absolute;
   z-index: 1;
   border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba($color: #000, $alpha: 0.3);
   .picker-area {
     padding-top: 16px;
   }

@@ -21,7 +21,7 @@
         "id":"hideActiveItems",
         "value":false,
         "name":"Hide active items",
-        "hint":"Hide active items in floor's items list",
+        "hint":"Hide active items from floor's items list",
         "type":"checkbox",
         "disabled":false
     },

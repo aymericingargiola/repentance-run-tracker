@@ -161,6 +161,25 @@ export default {
     }
   }
 
+  input, select {
+    transition: 0.25s ease;
+    font-family: "Baby Doll", sans-serif;
+    border: 0;
+    padding: 8px;
+    border-radius: 8px;
+    &:focus {
+      outline: none;
+      box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.2);
+    }
+  }
+
+  input {
+    &[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   //Scrollbar styling
   ::-webkit-scrollbar {
     width: 16px;
