@@ -5,21 +5,25 @@ export default class Run extends Model {
     static fields() {
         return {
             id: this.attr(null),
-            customName: this.string(null),
-            seed: this.string(null),
-            gameState: this.string(null),
-            gameMode: this.string(null),
-            gameOptions: this.string(null),
-            runStart: this.number(null),
-            runUpdate: this.number(null),
-            runUserUpdate: this.number(null),
+            customName: this.string(''),
+            videoLink: this.string(''),
+            videoHighlights: this.attr(null),
+            tags: this.attr(null),
+            seed: this.string(''),
+            gameState: this.string(''),
+            gameMode: this.string(''),
+            gameOptions: this.attr(null),
+            runStart: this.attr(null),
+            runUpdate: this.attr(null),
+            runUserUpdate: this.attr(null),
             runEnd: this.attr(null),
-            runDuration: this.attr(null),
+            runDuration: this.string(''),
             characters: this.attr(null),
             floors: this.attr(null),
             toRemove: this.attr(null),
             extendedSaveMode: this.boolean(false),
-            otherModLoaded: this.boolean(false)
+            otherModLoaded: this.boolean(false),
+            backup: this.attr(null)
         }
     }
 }

@@ -157,7 +157,7 @@ async function createWindow() {
     title: "Repentance Run Tracker",
     width: 1000,
     height: 800,
-    minWidth: 800,
+    minWidth: 900,
     minHeight: 600,
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',

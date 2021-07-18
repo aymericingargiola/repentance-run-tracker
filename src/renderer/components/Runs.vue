@@ -2,7 +2,7 @@
     <section class="section runs" v-if="this.filteredRuns">
         <div class="filters">
             <div class="search">
-                <input v-model="filterText" placeholder="Search runs">
+                <input v-model="filterText" @input="resetPagination" placeholder="Search runs">
             </div>
         </div>
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
@@ -354,6 +354,10 @@ export default {
         }
     },
     methods: {
+        resetPagination() {
+            this.currentPage = this.currentPage === 1 ? this.currentPage : 1
+            this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
+        },
         filter(runs) {
             let filteredRuns = runs
 
@@ -371,10 +375,6 @@ export default {
                         ) return run
                 })
             }
-            
-            // Reset pagination
-            this.currentPage = 1
-            this.filterOffset = 0
 
             return filteredRuns
         },

@@ -7,8 +7,16 @@
                 <div class="content">
                     <div class="heading">Edit Run</div>
                     <div class="config-item">
+                        <div class="title">Run title</div>
+                        <input type="texte" v-model="customName" @change="updateCustomName">
+                    </div>
+                    <div class="config-item">
                         <div class="title">Run duration</div>
                         <vue-timepicker v-model="runDuration" @change="updateRunDuration" format="HH:mm:ss"></vue-timepicker>
+                    </div>
+                    <div class="config-item">
+                        <div class="title">Video link</div>
+                        <input type="texte" v-model="videoLink" @change="updateVideoLink">
                     </div>
                 </div>
             </div>
@@ -43,6 +51,14 @@ export default {
         currentRun() {
             return this.runRepo.query().where('id', this.id).first()
         },
+        customName: {
+            get: function() {
+                return this.currentRun.customName
+            },
+            set: function (value) {
+                this.runRepo.update({ id: this.currentRun.id, customName: value })
+            }
+        },
         runDuration: {
             get: function() {
                 return this.currentRun.runDuration
@@ -50,16 +66,28 @@ export default {
             set: function (value) {
                 this.runRepo.update({ id: this.currentRun.id, runDuration: value })
             }
+        },
+        videoLink: {
+            get: function() {
+                return this.currentRun.videoLink
+            },
+            set: function (value) {
+                this.runRepo.update({ id: this.currentRun.id, videoLink: value })
+            }
         }
     },
     methods: {
         openOrCloseEditRun() {
             this.$root.$emit('OPEN_EDITRUN')
         },
+        updateCustomName(e) {
+            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'customName', value: e.target.value })
+        },
         updateRunDuration(e) {
-            console.log(e)
-            this.runDuration = e.displayTime
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'runDuration', value: e.displayTime })
+        },
+        updateVideoLink(e) {
+            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoLink', value: e.target.value })
         }
     },
 }

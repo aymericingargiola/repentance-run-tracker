@@ -229,7 +229,10 @@ function updateOrCreateRun(params = {}) {
         currentRun.id = `${currentRun.seed} ${moment().unix()}`
         const run = {
             id: currentRun.id,
-            customName: null,
+            customName: '',
+            videoLink: '',
+            videoHighlights: [],
+            tags: [],
             seed: currentRun.seed,
             gameState: currentGameState,
             gameMode: currentGameMode,
@@ -243,7 +246,7 @@ function updateOrCreateRun(params = {}) {
                 spawnedBy: null,
                 damageFlags: null
             },
-            runDuration: null,
+            runDuration: '',
             characters: [currentCharater],
             floors: [currentFloor],
             extendedSaveMode: extendedSaveMode,
