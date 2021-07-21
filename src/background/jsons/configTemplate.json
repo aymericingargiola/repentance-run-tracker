@@ -42,6 +42,14 @@
         "disabled":true
     },
     {
+        "id":"tagsList",
+        "value":[],
+        "name":"Store existing tags",
+        "hint":"",
+        "type":"array",
+        "disabled":true
+    },
+    {
         "id":"liveTrackerBackgroundColor",
         "value":{"red": 0,"green": 0,"blue": 0,"alpha": 0},
         "name":"Change Live Tracker Background",

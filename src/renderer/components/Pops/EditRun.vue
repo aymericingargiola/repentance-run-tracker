@@ -18,6 +18,14 @@
                         <div class="title">Video link</div>
                         <input type="texte" v-model="videoLink" @change="updateVideoLink">
                     </div>
+                    <div class="config-item">
+                        <div class="title">Video Highlights</div>
+                        <Tags :tags="videoHighlights" :type="'time'" :video-link="videoLink" @addItem="addVideoHighlight" @removeItem="removeVideoHighlight"></Tags>
+                    </div>
+                    <div class="config-item">
+                        <div class="title">Tags</div>
+                        <Tags :tags="tags" :type="'string'" @addItem="addTag" @removeItem="removeTag"></Tags>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,8 +36,12 @@
 // import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../../store/classes/Run'
+import Tags from '../Tools/Tags.vue'
 export default {
     name: "EditRun",
+    components: {
+        Tags
+    },
     data() {
         return {
             isOpen: false,
@@ -74,6 +86,22 @@ export default {
             set: function (value) {
                 this.runRepo.update({ id: this.currentRun.id, videoLink: value })
             }
+        },
+        videoHighlights: {
+            get: function() {
+                return this.currentRun.videoHighlights
+            },
+            set: function (value) {
+                this.runRepo.update({ id: this.currentRun.id, videoHighlights: value })
+            }
+        },
+        tags: {
+            get: function() {
+                return this.currentRun.tags
+            },
+            set: function (value) {
+                this.runRepo.update({ id: this.currentRun.id, tags: value })
+            }
         }
     },
     methods: {
@@ -88,6 +116,22 @@ export default {
         },
         updateVideoLink(e) {
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoLink', value: e.target.value })
+        },
+        addVideoHighlight(value) {
+            this.videoHighlights = value
+            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoHighlights', value: value })
+        },
+        removeVideoHighlight(value) {
+            this.videoHighlights = value
+            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoHighlights', value: value })
+        },
+        addTag(value) {
+            this.tags = value
+            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'tags', value: value })
+        },
+        removeTag(value) {
+            this.tags = value
+            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'tags', value: value })
         }
     },
 }
