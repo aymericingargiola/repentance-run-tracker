@@ -4,8 +4,6 @@
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">
-        <div v-if="updateAvailable">{{updateAvailable}}</div>
-        <div v-if="updateDownloaded">{{updateDownloaded}}</div>
         <transition name="fade">
           <div class="overlay-watch-status" v-if="!watchStatus || loading">
               <div class="image-1 animated" :style="{backgroundImage:loadingImage1}"></div>
@@ -30,8 +28,6 @@ export default {
   data() {
     return {
       appVersion: null,
-      updateAvailable: false,
-      updateDownloaded: false,
       watchStatus: false,
       loading: false,
       loadingSignature: null,
@@ -44,7 +40,7 @@ export default {
         configRepo: Config
     })
   },
-  mounted () {
+  mounted() {
     this.randomLoadingImages()
 
     if (!this.watchStatus) window.ipc.send('IS_APP_READY')
@@ -59,24 +55,12 @@ export default {
       console.log(response)
       this.appVersion = response.appVersion
     })
-
-    window.ipc.on('UPDATE_AVAILABLE', () => {
-      console.log("app update available")
-      this.updateAvailable = true
-    })
-
-    window.ipc.on('UPDATE_DOWNLOADED', (response) => {
-      console.log("app update downloaded", response)
-      this.updateDownloaded = true
-    })
-
   },
   methods: {
     restartApp() {
       window.ipc.send('RESTART_APP')
     },
     randomLoadingImages() {
-      //Random images for loader
       let nb = Math.floor(Math.random()*(56-1+1)+1);
       if (nb < 10) nb = `00${nb}`
       else if (nb < 100) nb = `0${nb}`
@@ -262,12 +246,13 @@ export default {
     .image-2 {
       animation-delay: 0.20s;
     }
-    &.fade-enter-active, &.fade-leave-active {
-      transition: opacity .5s;
-    }
-    &.fade-enter, &.fade-leave-to {
-      opacity: 0;
-    }
   }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 </style>

@@ -24,8 +24,7 @@ module.exports = {
                     provider: "github",
                     owner: "aymericingargiola",
                     repo: "repentance-run-tracker",
-                    releaseType: "draft",
-                    token: ""
+                    releaseType: "draft"
                   }
                 ]
             }

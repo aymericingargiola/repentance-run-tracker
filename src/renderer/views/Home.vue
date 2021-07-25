@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <!-- <div>available : {{updateAvailable}}</div>
+    <div>downloaded : {{updateDownloaded}}</div>
+    <div>status : {{updateStatus}}</div> -->
+    <UpdateApp/>
     <Runs/>
     <BrokenRuns/>
     <EditRun/>
@@ -9,12 +13,14 @@
 
 <script>
 //import moment from 'moment'
+import UpdateApp from '../components/Pops/UpdateApp.vue'
 import Runs from '../components/Runs.vue'
 import BrokenRuns from '../components/Pops/BrokenRuns.vue'
 import EditRun from '../components/Pops/EditRun.vue'
 import ConfigScreen from '../components/Pops/ConfigScreen.vue'
 export default {
   components: {
+    UpdateApp,
     Runs,
     BrokenRuns,
     EditRun,
@@ -28,6 +34,8 @@ export default {
   async created() {
   },
   computed: {
+  },
+  mounted() {
   },
   methods: {
   }

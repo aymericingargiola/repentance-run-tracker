@@ -8,6 +8,7 @@ import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
+const log = require('electron-log')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
@@ -16,6 +17,21 @@ const { syncApp } = require('./sync')
 const dataFolder = path.resolve(process.cwd(), 'datas')
 const configTemplate = require('./jsons/configTemplate.json')
 let win, winTracker, config, runs
+
+if(!isDevelopment && !process.env.IS_TEST) {
+  autoUpdater.logger = log
+  autoUpdater.logger["transports"].file.level = "info"
+  
+  autoUpdater.autoDownload = true
+  autoUpdater.autoInstallOnAppQuit = false
+  
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    repo: 'repentance-run-tracker',
+    owner: 'aymericingargiola',
+    private: false,
+  })
+}
 
 // console.log("electron", process.versions.electron)
 
@@ -185,7 +201,9 @@ async function createWindow() {
 
   //Check for app updates
   win.once('ready-to-show', () => {
-    autoUpdater.checkForUpdatesAndNotify()
+    if(!isDevelopment && !process.env.IS_TEST) {
+      autoUpdater.checkForUpdates()
+    }
   })
 
   win.webContents.on('new-window', function(e, url) {
@@ -241,11 +259,6 @@ if (isDevelopment) {
     })
   }
 }
-
-//Notify updates
-autoUpdater.on('update-available', () => {
-  win.webContents.send('UPDATE_AVAILABLE')
-})
 
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
   win.webContents.send('UPDATE_DOWNLOADED')
