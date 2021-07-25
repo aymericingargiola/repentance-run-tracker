@@ -14,7 +14,7 @@ const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const { syncApp } = require('./sync')
-const dataFolder = path.resolve(process.cwd(), 'datas')
+const dataFolder = app.getPath("userData")
 const configTemplate = require('./jsons/configTemplate.json')
 let win, winTracker, config, runs
 

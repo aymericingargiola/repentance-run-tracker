@@ -1,10 +1,11 @@
 const fs = require('fs')
+const { app } = require('electron')
 const { watch, unlinkSync } = require('fs')
 const path = require('path')
 const compareVersions = require('compare-versions')
 const convert = require('xml-js')
 const { dirExist, fileResolve, writeFileAsync, readFileAsync } = require('../tools/fileSystem')
-const dataFolder = path.resolve(process.cwd(), 'datas')
+const dataFolder = app.getPath("userData")
 const modName = 'Repentance_Run_Tracker_Extended'
 //const IsaacModFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Afterbirth+ Mods`
 //const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`

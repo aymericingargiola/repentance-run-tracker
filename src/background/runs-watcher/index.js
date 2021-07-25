@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { app } = require('electron')
 const path = require('path')
 const { ipcMain } = require('electron')
 const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
@@ -6,7 +7,7 @@ const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../sync')
 const configTemplate = require('../jsons/configTemplate.json')
-const dataFolder = path.resolve(process.cwd(), 'datas')
+const dataFolder = app.getPath("userData")
 const moment = require('moment')
 const splitFormat = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
