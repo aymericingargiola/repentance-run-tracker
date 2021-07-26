@@ -1,6 +1,6 @@
 <template>
-    <section class="section runs" v-if="this.filteredRuns">
-        <div class="filters">
+    <section class="section runs">
+        <div v-if="this.filteredRuns && this.filteredRuns.length > 0" class="filters">
             <div class="search">
                 <input v-model="filterText" @input="resetPagination" placeholder="Search runs">
             </div>
@@ -235,6 +235,10 @@
                     <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal.length / filterLimitPerPage)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal.length / filterLimitPerPage)-4)" class="page-offset" :key="`page-${page}`">...</div>
                 </template>
             </div>
+        </div>
+        <div v-if="this.filteredRuns && this.filteredRuns.length === 0" class="empty-runs">
+            <div class="image-1 animated" style="background-image:url('img/loadimages/loadimages-001.png')"></div>
+            <div class="image-2 animated" style="background-image:url('img/loadimages/loadimages-001_2.png')"></div>
         </div>
     </section>
 </template>
@@ -1025,6 +1029,31 @@ export default {
                 cursor: default;
             }
         }
+    }
+}
+.empty-runs {
+    position: relative;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+    .image-1, .image-2 {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      height: 100%;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: scale(2);
+      &.animated {
+        animation-name: alternate;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: 0.20s;
+        animation-direction: alternate;
+      }
+    }
+    .image-2 {
+      animation-delay: 0.20s;
     }
 }
 </style>

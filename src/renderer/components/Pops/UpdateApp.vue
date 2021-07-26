@@ -2,9 +2,9 @@
     <transition name="fade">
         <div v-if="updateDownloaded" class="pop-up update-app" @click="update">
             <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-            <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-            <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-            <div class="title">Update available, click here to update</div>
+            <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
+            <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
+            <div class="title">Update available, click here to update and restart</div>
         </div>
     </transition>
 </template>
@@ -40,7 +40,7 @@ export default {
     top: 40px;
     right: 30px;
     z-index: 10;
-    max-width: 200px;
+    max-width: 240px;
     cursor: pointer;
     padding: 8px 8px 16px 8px;
     > .before, .after, .mid {
