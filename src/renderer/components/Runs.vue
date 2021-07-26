@@ -1,6 +1,6 @@
 <template>
     <section class="section runs">
-        <div v-if="this.filteredRuns && this.filteredRuns.length > 0" class="filters">
+        <div v-if="this.allRuns && this.allRuns.length > 0" class="filters">
             <div class="search">
                 <input v-model="filterText" @input="resetPagination" placeholder="Search runs">
             </div>
@@ -239,6 +239,10 @@
         <div v-if="this.filteredRuns && this.filteredRuns.length === 0" class="empty-runs">
             <div class="image-1 animated" style="background-image:url('img/loadimages/loadimages-001.png')"></div>
             <div class="image-2 animated" style="background-image:url('img/loadimages/loadimages-001_2.png')"></div>
+            <div class="message">
+                <span v-if="this.allRuns && this.allRuns.length === 0">Start your first run !</span>
+                <span v-if="this.filteredRuns && this.filteredRuns.length === 0 && this.allRuns && this.allRuns.length > 0">No runs found</span>
+            </div>
         </div>
     </section>
 </template>
@@ -436,17 +440,16 @@ export default {
     &.run-group-transition-leave-to {
         opacity: 0;
         transform: translateY(50px);
-        filter: grayscale(100)
     }
     &.run-group-transition-leave-active {
         position: absolute;
-        width: 100%;
+        width: calc(100% - 48px);
     }
     &.run-group-transition-move {
-        transition: transform 1.5s ease;
+        transition: transform 1s ease;
     }
     &.run-group-transition-item {
-        transition: all 1.5s ease;
+        transition: transform 1s ease, opacity 1s ease;
         //display: block;
     }
     > .before, .after, .mid {
@@ -938,12 +941,13 @@ export default {
                                 }
                                 &.item-group-transition-leave-active {
                                     position: absolute;
+                                    height: 100%;
                                 }
                                 &.item-group-transition-move {
                                     transition: transform 0.7s ease;
                                 }
                                 &.item-group-transition-item {
-                                    transition: all 0.7s;
+                                    transition: transform 0.7s ease;
                                     display: inline-block;
                                     //margin: 0 5px;
                                 }

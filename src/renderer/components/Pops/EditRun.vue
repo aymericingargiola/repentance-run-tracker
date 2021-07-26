@@ -24,7 +24,7 @@
                     </div>
                     <div class="config-item">
                         <div class="title">Tags</div>
-                        <Tags :tags="tags" :type="'string'" @addItem="addTag" @removeItem="removeTag"></Tags>
+                        <Tags :disabled="true" :type="'string'" @addItem="addTag" @removeItem="removeTag"></Tags>
                     </div>
                 </div>
             </div>

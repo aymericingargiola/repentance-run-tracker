@@ -11,16 +11,17 @@
                     <div class="action remove-tag" @click="removeItem(idx)">(x)</div>
                 </li>
             </template>
-            <li v-if="!addingItem" class="tag new-tag">
+            <li v-if="!addingItem && !disabled" class="tag new-tag">
                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                 <div class="action solo new-tag" @click="createNewTag" contenteditable="false">(+)</div>
             </li>
+            <li v-if="!addingItem && disabled"> /!\ Under construction /!\ </li>
             <li v-if="addingItem" class="tag new-tag edit">
                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
+                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
                 <div v-if="type === 'string'" class="tag-name edit"><input type="text" v-model="tempVal" placeholder="Tag name"></div>
                 <vue-timepicker v-if="type === 'time'" v-model="tempVal" format="HH:mm:ss"></vue-timepicker>
                 <div class="action add-tag" @click="addItem">(v)</div>
@@ -34,6 +35,7 @@
 export default {
     name: "Tags",
     props: {
+        disabled: Boolean,
         tags: Array,
         type: String,
         videoLink: String
