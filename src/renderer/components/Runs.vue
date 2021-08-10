@@ -251,6 +251,7 @@
 // import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
+import Tag from '../store/classes/Tag'
 import Config from '../store/classes/Config'
 import moment from 'moment'
 export default {
@@ -299,6 +300,11 @@ export default {
             console.log(response)
             this.runRepo.fresh(response.runs)
         })
+        window.ipc.send('ASK_TAGS')
+        window.ipc.on('SYNC_SEND_TAGS', (response) => {
+            console.log(response)
+            this.tagRepo.fresh(response.tags)
+        })
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
             console.log(response)
             this.runRepo.insert(response.run)
@@ -338,6 +344,7 @@ export default {
     computed: {
         ...mapRepos({
             runRepo: Run,
+            tagRepo: Tag,
             configRepo: Config
         }),
         allRuns() {
@@ -354,10 +361,10 @@ export default {
         },
         updateRun: {
             get: function(run) {
-                return this.runRepo.query().where('id', run.id).get()
+                return this.runRepo.query().where('id', run.id).get().first()
             },
             set: function (run) {
-                this.runRepo.update(run)
+                this.runRepo.where('id', run.id).update(run)
             }
         }
     },

@@ -19,7 +19,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "@vuex-orm/core": "^1.0.0-draft.9",
+    "@vuex-orm/core": "^1.0.0-draft.14",
     "@vuex-orm/plugin-axios": "^0.9.4",
     "compare-versions": "^3.6.0",
     "core-js": "^3.6.5",

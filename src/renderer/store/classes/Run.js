@@ -1,4 +1,5 @@
 import { Model } from '@vuex-orm/core'
+import Tag from './Tag'
 
 export default class Run extends Model {
     static entity = 'runs'
@@ -7,8 +8,9 @@ export default class Run extends Model {
             id: this.attr(null),
             customName: this.string(''),
             videoLink: this.string(''),
-            videoHighlights: this.attr(null),
-            tags: this.attr(null),
+            videoHighlights: this.attr([]),
+            tags_ids: this.attr([]),
+            tags: this.hasManyBy(Tag, 'tags_ids'),
             seed: this.string(''),
             gameState: this.string(''),
             gameMode: this.string(''),

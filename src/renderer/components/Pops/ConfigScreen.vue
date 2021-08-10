@@ -70,7 +70,7 @@ export default {
             window?.ipc?.send('USER_UPDATE_CONFIG', config)
         },
         updateConfig(config) {
-            this.configRepo.update({id: config.id, value: config.value})
+            this.configRepo.where('id', config.id).update({value: config.value})
         },
         onChange(e, id, type) {
             const config = {id: id, value: type === "checkbox" ? e.target.checked : e.target.value}

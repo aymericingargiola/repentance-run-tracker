@@ -168,17 +168,26 @@ export default {
   .vue__time-picker.time-picker {
     .dropdown {
       height: 5em;
-      border-radius: 10px;
+      border-radius: 5px;
       top: 2.2em;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(3px);
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
       .select-list {
         height: 5em;
+        padding: 4px;
         ul {
+          border: none;
           li {
             border-radius: 10px;
             &:not([disabled]) {
               &.active {
                 background-color: $paper-white-dark;
               }
+            }
+            &.hint {
+              opacity: 1;
+              color: $text-dark;
             }
           }
         } 

@@ -16,7 +16,7 @@ const fs = require('fs')
 const { syncApp } = require('./sync')
 const dataFolder = app.getPath("userData")
 const configTemplate = require('./jsons/configTemplate.json')
-let win, winTracker, config, runs
+let win, winTracker, config, winStreak, tags, runs
 
 if(!isDevelopment && !process.env.IS_TEST) {
   autoUpdater.logger = log
@@ -41,16 +41,74 @@ ipcMain.on('ASK_CONFIG', async (event, payload) => {
   syncApp(window,{trigger: "send config", config: config})
 })
 
-ipcMain.on('ASK_RUNS', async (event, payload) => {
-  const window = payload && payload.window === "liveTracker" ? winTracker : win
-  if (!runs) runs = await initRuns()
-  syncApp(window,{trigger: "send runs", runs: runs})
-})
-
 ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
   if (!config) config = await initConfig()
   config.find(configItem => configItem.id === payload.id).value = payload.value
   await writeFileAsync(dataFolder, 'config.json', JSON.stringify(config))
+})
+
+ipcMain.on('ASK_WINSTREAK', async (event, payload) => {
+  const window = payload && payload.window === "liveTracker" ? winTracker : win
+  if (!winStreak) winStreak = await initWinStreak()
+  syncApp(window,{trigger: "send winstreak", winStreak: winStreak})
+})
+
+ipcMain.on('USER_CREATE_WINSTREAK', async (event, payload) => {
+  if (!winStreak) winStreak = await initWinStreak()
+  winStreak.push(payload)
+  await writeFileAsync(dataFolder, 'winstreak.json', JSON.stringify(winStreak))
+})
+
+ipcMain.on('USER_REMOVE_WINSTREAK', async (event, payload) => {
+  if (!winStreak) winStreak = await initWinStreak()
+  const winStreakIndex = winStreak.findIndex(winStreakItem => winStreakItem.id === payload)
+  if(winStreakIndex != -1) {
+      winStreak.splice(winStreakIndex, 1)
+      await writeFileAsync(dataFolder, 'winstreak.json', JSON.stringify(winStreak))
+  } else {
+      console.log(`Impossible to find : ${payload}, this winstreak doesn't exist on the backend ! (Sync issue ?)`)
+  }
+})
+
+ipcMain.on('USER_UPDATE_WINSTREAK', async (event, payload) => {
+  if (!winStreak) winStreak = await initWinstreak()
+  winStreak.find(winStreakItem => winStreakItem.id === payload.id)[payload.property] = payload.value
+  await writeFileAsync(dataFolder, 'winstreak.json', JSON.stringify(winStreak))
+})
+
+ipcMain.on('ASK_TAGS', async (event, payload) => {
+  const window = payload && payload.window === "liveTracker" ? winTracker : win
+  if (!tags) tags = await initTags()
+  syncApp(window,{trigger: "send tags", tags: tags})
+})
+
+ipcMain.on('USER_CREATE_TAGS', async (event, payload) => {
+  if (!tags) tags = await initTags()
+  tags.push(payload)
+  await writeFileAsync(dataFolder, 'tags.json', JSON.stringify(tags))
+})
+
+ipcMain.on('USER_REMOVE_TAGS', async (event, payload) => {
+  if (!tags) tags = await initTags()
+  const tagsIndex = tags.findIndex(tag => tag.value === payload)
+  if(tagsIndex != -1) {
+      tags.splice(tagsIndex, 1)
+      await writeFileAsync(dataFolder, 'tags.json', JSON.stringify(tags))
+  } else {
+      console.log(`Impossible to find : ${payload}, this tag doesn't exist on the backend ! (Sync issue ?)`)
+  }
+})
+
+ipcMain.on('USER_UPDATE_TAGS', async (event, payload) => {
+  if (!tags) tags = await initTags()
+  tags.find(tag => tag.id === payload.id)[payload.property] = payload.value
+  await writeFileAsync(dataFolder, 'tags.json', JSON.stringify(tags))
+})
+
+ipcMain.on('ASK_RUNS', async (event, payload) => {
+  const window = payload && payload.window === "liveTracker" ? winTracker : win
+  if (!runs) runs = await initRuns()
+  syncApp(window,{trigger: "send runs", runs: runs})
 })
 
 ipcMain.on('READ_FILE', (event, payload) => {
@@ -111,6 +169,18 @@ async function initConfig() {
   })
   await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
   return tempConfig
+}
+
+async function initWinStreak() {
+  // Load winstreak
+  const loadWinstreak = await fileResolve(dataFolder, 'winstreak.json', '[]')
+  return JSON.parse(fs.readFileSync(loadWinstreak))
+}
+
+async function initTags() {
+  // Load tags
+  const loadTags = await fileResolve(dataFolder, 'tags.json', '[]')
+  return JSON.parse(fs.readFileSync(loadTags))
 }
 
 async function initRuns() {

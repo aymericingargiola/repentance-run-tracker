@@ -1,6 +1,6 @@
 <template>
     <transition name="open">
-        <div v-if="isOpen" class="config-popup edit-run-popup">
+        <div v-if="isOpen && this.runRepo" class="config-popup edit-run-popup">
             <div class="overlay" v-on:click="openOrCloseEditRun()"></div>
             <div class="config-items edit-run">
                 <div class="mid" :style="{backgroundImage:`url('img/cards/big-frame.png')`}"></div>
@@ -20,11 +20,11 @@
                     </div>
                     <div class="config-item">
                         <div class="title">Video Highlights</div>
-                        <Tags :tags="videoHighlights" :type="'time'" :video-link="videoLink" @addItem="addVideoHighlight" @removeItem="removeVideoHighlight"></Tags>
+                        <Tags :run-id="this.currentRun.id" :type="'time'" :video-link="videoLink"></Tags>
                     </div>
                     <div class="config-item">
                         <div class="title">Tags</div>
-                        <Tags :disabled="true" :type="'string'" @addItem="addTag" @removeItem="removeTag"></Tags>
+                        <Tags :run-id="this.currentRun.id" :type="'string'"></Tags>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@ export default {
                 return this.currentRun.customName
             },
             set: function (value) {
-                this.runRepo.update({ id: this.currentRun.id, customName: value })
+                this.runRepo.where('id', this.currentRun.id).update({ customName: value })
             }
         },
         runDuration: {
@@ -76,7 +76,7 @@ export default {
                 return this.currentRun.runDuration
             },
             set: function (value) {
-                this.runRepo.update({ id: this.currentRun.id, runDuration: value })
+                this.runRepo.where('id', this.currentRun.id).update({ runDuration: value })
             }
         },
         videoLink: {
@@ -84,23 +84,7 @@ export default {
                 return this.currentRun.videoLink
             },
             set: function (value) {
-                this.runRepo.update({ id: this.currentRun.id, videoLink: value })
-            }
-        },
-        videoHighlights: {
-            get: function() {
-                return this.currentRun.videoHighlights
-            },
-            set: function (value) {
-                this.runRepo.update({ id: this.currentRun.id, videoHighlights: value })
-            }
-        },
-        tags: {
-            get: function() {
-                return this.currentRun.tags
-            },
-            set: function (value) {
-                this.runRepo.update({ id: this.currentRun.id, tags: value })
+                this.runRepo.where('id', this.currentRun.id).update({ videoLink: value })
             }
         }
     },
@@ -116,22 +100,6 @@ export default {
         },
         updateVideoLink(e) {
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoLink', value: e.target.value })
-        },
-        addVideoHighlight(value) {
-            this.videoHighlights = value
-            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoHighlights', value: value })
-        },
-        removeVideoHighlight(value) {
-            this.videoHighlights = value
-            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoHighlights', value: value })
-        },
-        addTag(value) {
-            this.tags = value
-            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'tags', value: value })
-        },
-        removeTag(value) {
-            this.tags = value
-            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'tags', value: value })
         }
     },
 }
