@@ -1,14 +1,16 @@
 import { Model } from '@vuex-orm/core'
 
 export default class WinStreak extends Model {
-    static entity = 'winStreak'
+    static entity = 'winStreaks'
     static fields() {
         return {
             id: this.uid(),
             gameState: this.number(0),
-            randomCharacters: this.boolean(false),
+            randomNormal: this.boolean(false),
+            randomAlt: this.boolean(false),
             characters: this.attr(null),
-            bosses: this.attr(null)
+            boss: this.attr(null),
+            adjustNumber: this.number(0)
         }
     }
 }

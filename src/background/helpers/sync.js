@@ -1,6 +1,6 @@
 module.exports = {
     syncApp: function(win, params) {
-        if (!win) return console.log(`[syncApp()] Window parameter is ${win} !`, params)
+        if (!win) return console.log(`[syncApp()] Window parameter is ${win} !`)
         switch (params.trigger) {
             case 'logs watch status':
                 win.webContents.send('SYNC_WATCH_STATUS', params)
@@ -11,8 +11,14 @@ module.exports = {
             case 'update config':
                 win.webContents.send('SYNC_UPDATE_CONFIG', params)
                 break
-            case 'send winstreak':
-                win.webContents.send('SYNC_SEND_WINSTREAK', params)
+            case 'send entities':
+                win.webContents.send('SYNC_SEND_ENTITIES', params)
+                break
+            case 'send characters':
+                win.webContents.send('SYNC_SEND_CHARACTERS', params)
+                break
+            case 'send winstreaks':
+                win.webContents.send('SYNC_SEND_WINSTREAKS', params)
                 break
             case 'send tags':
                 win.webContents.send('SYNC_SEND_TAGS', params)

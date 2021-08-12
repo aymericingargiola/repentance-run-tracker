@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { cloneFrom } = require('../tools/methods')
-const { syncApp } = require('../sync')
+const { syncApp } = require('../helpers/sync')
 const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const items = require('../jsons/items.json')

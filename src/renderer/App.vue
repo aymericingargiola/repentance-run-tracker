@@ -106,20 +106,20 @@ export default {
         background-size: cover;
         z-index: 100;
       }
-      &::after {
-        pointer-events: none;
-        content: "";
-        position: absolute;
-        width: 800px;
-        height: 800px;
-        left: 0px;
-        bottom: 0px;
-        background-image: url("../../public/img/menushadow.png");
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: bottom;
-        z-index: 100;
-      }
+      // &::after {
+      //   pointer-events: none;
+      //   content: "";
+      //   position: absolute;
+      //   width: 800px;
+      //   height: 800px;
+      //   left: 0px;
+      //   bottom: 0px;
+      //   background-image: url("../../public/img/menushadow.png");
+      //   background-repeat: no-repeat;
+      //   background-size: contain;
+      //   background-position: bottom;
+      //   z-index: 100;
+      // }
       #app {
         width: 100%;
         height: 100%;
@@ -173,6 +173,7 @@ export default {
       background: rgba(255,255,255,0.5);
       backdrop-filter: blur(3px);
       box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+      font-family: "Baby Doll", sans-serif;
       .select-list {
         height: 5em;
         padding: 4px;

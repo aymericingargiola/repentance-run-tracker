@@ -167,7 +167,10 @@ html {
   position: absolute;
   z-index: 1;
   border-radius: 10px;
-  box-shadow: 0px 0px 15px rgba($color: #000, $alpha: 0.3);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(3px);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+
   .picker-area {
     padding-top: 16px;
   }

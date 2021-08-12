@@ -6,6 +6,7 @@ import { autoUpdater } from 'electron-updater'
 import { writeFileAsync, fileResolve } from './tools/fileSystem'
 import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
+import { readyToSync, initConfig, initRuns } from './helpers/readyToSync'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 const log = require('electron-log')
@@ -13,10 +14,8 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const { syncApp } = require('./sync')
 const dataFolder = app.getPath("userData")
-const configTemplate = require('./jsons/configTemplate.json')
-let win, winTracker, config, winStreak, tags, runs
+let win, winTracker, config, runs
 
 if(!isDevelopment && !process.env.IS_TEST) {
   autoUpdater.logger = log
@@ -34,82 +33,6 @@ if(!isDevelopment && !process.env.IS_TEST) {
 }
 
 // console.log("electron", process.versions.electron)
-
-ipcMain.on('ASK_CONFIG', async (event, payload) => {
-  const window = payload && payload.window === "liveTracker" ? winTracker : win
-  if (!config) config = await initConfig()
-  syncApp(window,{trigger: "send config", config: config})
-})
-
-ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
-  if (!config) config = await initConfig()
-  config.find(configItem => configItem.id === payload.id).value = payload.value
-  await writeFileAsync(dataFolder, 'config.json', JSON.stringify(config))
-})
-
-ipcMain.on('ASK_WINSTREAK', async (event, payload) => {
-  const window = payload && payload.window === "liveTracker" ? winTracker : win
-  if (!winStreak) winStreak = await initWinStreak()
-  syncApp(window,{trigger: "send winstreak", winStreak: winStreak})
-})
-
-ipcMain.on('USER_CREATE_WINSTREAK', async (event, payload) => {
-  if (!winStreak) winStreak = await initWinStreak()
-  winStreak.push(payload)
-  await writeFileAsync(dataFolder, 'winstreak.json', JSON.stringify(winStreak))
-})
-
-ipcMain.on('USER_REMOVE_WINSTREAK', async (event, payload) => {
-  if (!winStreak) winStreak = await initWinStreak()
-  const winStreakIndex = winStreak.findIndex(winStreakItem => winStreakItem.id === payload)
-  if(winStreakIndex != -1) {
-      winStreak.splice(winStreakIndex, 1)
-      await writeFileAsync(dataFolder, 'winstreak.json', JSON.stringify(winStreak))
-  } else {
-      console.log(`Impossible to find : ${payload}, this winstreak doesn't exist on the backend ! (Sync issue ?)`)
-  }
-})
-
-ipcMain.on('USER_UPDATE_WINSTREAK', async (event, payload) => {
-  if (!winStreak) winStreak = await initWinstreak()
-  winStreak.find(winStreakItem => winStreakItem.id === payload.id)[payload.property] = payload.value
-  await writeFileAsync(dataFolder, 'winstreak.json', JSON.stringify(winStreak))
-})
-
-ipcMain.on('ASK_TAGS', async (event, payload) => {
-  const window = payload && payload.window === "liveTracker" ? winTracker : win
-  if (!tags) tags = await initTags()
-  syncApp(window,{trigger: "send tags", tags: tags})
-})
-
-ipcMain.on('USER_CREATE_TAGS', async (event, payload) => {
-  if (!tags) tags = await initTags()
-  tags.push(payload)
-  await writeFileAsync(dataFolder, 'tags.json', JSON.stringify(tags))
-})
-
-ipcMain.on('USER_REMOVE_TAGS', async (event, payload) => {
-  if (!tags) tags = await initTags()
-  const tagsIndex = tags.findIndex(tag => tag.value === payload)
-  if(tagsIndex != -1) {
-      tags.splice(tagsIndex, 1)
-      await writeFileAsync(dataFolder, 'tags.json', JSON.stringify(tags))
-  } else {
-      console.log(`Impossible to find : ${payload}, this tag doesn't exist on the backend ! (Sync issue ?)`)
-  }
-})
-
-ipcMain.on('USER_UPDATE_TAGS', async (event, payload) => {
-  if (!tags) tags = await initTags()
-  tags.find(tag => tag.id === payload.id)[payload.property] = payload.value
-  await writeFileAsync(dataFolder, 'tags.json', JSON.stringify(tags))
-})
-
-ipcMain.on('ASK_RUNS', async (event, payload) => {
-  const window = payload && payload.window === "liveTracker" ? winTracker : win
-  if (!runs) runs = await initRuns()
-  syncApp(window,{trigger: "send runs", runs: runs})
-})
 
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
@@ -154,41 +77,6 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function initConfig() {
-  // Load app config file
-  const loadConfig = await fileResolve(dataFolder, 'config.json', JSON.stringify(configTemplate))
-  let tempConfig = JSON.parse(fs.readFileSync(loadConfig))
-  configTemplate.forEach((field) => {
-    const tempConfigField = tempConfig.find(configItem => configItem.id === field.id)
-    if(!tempConfigField) tempConfig.push(field)
-    if(tempConfigField && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices
-    if(tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name
-    if(tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
-    if(tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type
-    if(tempConfigField && tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled
-  })
-  await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
-  return tempConfig
-}
-
-async function initWinStreak() {
-  // Load winstreak
-  const loadWinstreak = await fileResolve(dataFolder, 'winstreak.json', '[]')
-  return JSON.parse(fs.readFileSync(loadWinstreak))
-}
-
-async function initTags() {
-  // Load tags
-  const loadTags = await fileResolve(dataFolder, 'tags.json', '[]')
-  return JSON.parse(fs.readFileSync(loadTags))
-}
-
-async function initRuns() {
-  // Load runs
-  const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
-  return JSON.parse(fs.readFileSync(loadRuns))
-}
-
 async function openLiveTracker() {
   if (winTracker) return
   winTracker = new BrowserWindow({
@@ -211,6 +99,8 @@ async function openLiveTracker() {
     }
   })
 
+  readyToSync(false, winTracker)
+
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await winTracker.loadURL(`${process.env.WEBPACK_DEV_SERVER_URL}#/tracker`)
@@ -229,6 +119,7 @@ async function openLiveTracker() {
     e.preventDefault()
     winTracker.destroy()
     winTracker = undefined
+    readyToSync(false, winTracker)
     liveTrackerWindowState(winTracker)
   })
 
@@ -258,6 +149,8 @@ async function createWindow() {
       preload: path.resolve(__static, 'preload.js')
     }
   })
+
+  readyToSync(win, false)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode

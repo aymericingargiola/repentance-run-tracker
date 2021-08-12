@@ -287,6 +287,7 @@ export default {
             filterOrder: 'desc',
             filterText: '',
             filterCharacter: [],
+            filterTags: [],
             filterCharacterVersion: '',
             filterGameState: 0,
             filterWiNOrDeath: '',
@@ -351,17 +352,17 @@ export default {
             return this.runRepo.all()
         },
         filteredRunsTotal() {
-            return this.runRepo.orderBy('runUpdate', this.filterOrder).where((run) => { return this.filter(run) }).get()
+            return this.runRepo.where((run) => { return this.filter(run) }).orderBy('runUpdate', this.filterOrder).get()
         },
         filteredRuns() {
-            return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage+this.filterOffset)
+            return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
         },
         hideActiveItems() {
             return this.configRepo.find('hideActiveItems')
         },
         updateRun: {
-            get: function(run) {
-                return this.runRepo.query().where('id', run.id).get().first()
+            get: function (run) {
+                return this.runRepo.query().where('id', run.id).first()
             },
             set: function (run) {
                 this.runRepo.where('id', run.id).update(run)
@@ -374,7 +375,9 @@ export default {
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
         },
         filter(run) {
-            // Text filter
+            // tags filter
+            if (this.filterTags.length > 0 && !this.filterTags.some(tag => run.tags_ids.includes(tag))) return
+            // text filter
             if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
                 const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
@@ -386,7 +389,6 @@ export default {
                     !id.includes(textSearchValue)
                     ) return
             }
-
             return run
         },
         openOrCloseEditRun(id) {
