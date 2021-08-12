@@ -351,7 +351,7 @@ export default {
             return this.runRepo.all()
         },
         filteredRunsTotal() {
-            return this.filter(this.runRepo.orderBy('runUpdate', this.filterOrder).get())
+            return this.runRepo.orderBy('runUpdate', this.filterOrder).where((run) => { return this.filter(run) }).get()
         },
         filteredRuns() {
             return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage+this.filterOffset)
@@ -373,25 +373,21 @@ export default {
             this.currentPage = this.currentPage === 1 ? this.currentPage : 1
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
         },
-        filter(runs) {
-            let filteredRuns = runs
-
+        filter(run) {
             // Text filter
             if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
-                filteredRuns = filteredRuns.filter((run) => {
-                    const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
-                    const customRunName = run.customName.normalize('NFC').toLowerCase()
-                    const id = run.id.normalize('NFC').toLowerCase()
-                    if (
-                        characterName.includes(textSearchValue) ||
-                        customRunName.includes(textSearchValue) ||
-                        id.includes(textSearchValue)
-                        ) return run
-                })
+                const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
+                const customRunName = run.customName.normalize('NFC').toLowerCase()
+                const id = run.id.normalize('NFC').toLowerCase()
+                if (
+                    !characterName.includes(textSearchValue) &&
+                    !customRunName.includes(textSearchValue) ||
+                    !id.includes(textSearchValue)
+                    ) return
             }
 
-            return filteredRuns
+            return run
         },
         openOrCloseEditRun(id) {
             this.$root.$emit('OPEN_EDITRUN', id)
