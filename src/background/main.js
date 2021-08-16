@@ -7,6 +7,7 @@ import { writeFileAsync, fileResolve } from './tools/fileSystem'
 import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import { readyToSync, initConfig, initRuns } from './helpers/readyToSync'
+import { buildJsons } from './helpers/jsonBuilder'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 const log = require('electron-log')
@@ -127,6 +128,7 @@ async function openLiveTracker() {
 }
 
 async function createWindow() {
+  if(isDevelopment) await buildJsons()
   if(!config) config = await initConfig()
   if(!runs) runs = await initRuns()
   // Create the browser window.

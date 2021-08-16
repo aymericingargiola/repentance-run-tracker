@@ -29,7 +29,7 @@ module.exports = {
         //Return matching entity from logs
         const entityId = string.split(" ")[5].match(/(\d+)/)[0]
         const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
-        return cloneFrom(entities.find(entity => entity.id === entityId && entity.variant === entityVariant))
+        return cloneFrom(entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`)))
     },
     getCharaterStats: (string) => {
         //Return character stats from RRTE mod converted to json
