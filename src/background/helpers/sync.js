@@ -14,6 +14,9 @@ module.exports = {
             case 'send entities':
                 win.webContents.send('SYNC_SEND_ENTITIES', params)
                 break
+            case 'send floors':
+                win.webContents.send('SYNC_SEND_FLOORS', params)
+                break
             case 'send characters':
                 win.webContents.send('SYNC_SEND_CHARACTERS', params)
                 break

@@ -6,6 +6,7 @@ const dataFolder = app.getPath("userData")
 const { writeFileAsync, fileResolve } = require('../tools/fileSystem')
 const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
+const floors = require('../jsons/floors.json')
 const configTemplate = require('../jsons/configTemplate.json')
 let win, trackerWin, config, winStreaks, tags, runs
 
@@ -24,6 +25,11 @@ ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
 ipcMain.on('ASK_ENTITIES', async (event, payload) => {
 	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
 	syncApp(window, { trigger: 'send entities', entities: entities });
+});
+
+ipcMain.on('ASK_FLOORS', async (event, payload) => {
+	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	syncApp(window, { trigger: 'send floors', floors: floors.stages });
 });
 
 ipcMain.on('ASK_CHARACTERS', async (event, payload) => {
