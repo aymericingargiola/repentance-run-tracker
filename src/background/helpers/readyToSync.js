@@ -1,7 +1,6 @@
 const fs = require('fs')
 const { ipcMain } = require('electron')
 const { syncApp } = require('./sync')
-const isDevelopment = process.env.NODE_ENV !== 'production'
 const { app } = require('electron')
 const dataFolder = app.getPath("userData")
 const { writeFileAsync, fileResolve } = require('../tools/fileSystem')
