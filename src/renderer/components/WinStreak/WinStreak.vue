@@ -3,6 +3,9 @@
         <div v-if="allWinStreaks.length > 0 && runs.all().length > 0 && entities.all().length > 0 && characters.all().length > 0">
             <template v-for="winStreak in allWinStreaks">
                 <div class="win-streak-item" :key="winStreak.id">
+                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-ws-left_01.png')`}"></div>
+                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-ws-mid_01.png')`}"></div>
+                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"></div>
                     <div class="number">
                         {{getRuns(winStreak).length + winStreak.adjustNumber}}
                     </div>
@@ -80,13 +83,13 @@ export default {
 
             // check if random normal characters
             if (winStreak.randomNormal) {
-                const notNormalCharacterIndex = checkRuns.findIndex(run => parseInt(run.characters[0].id) < 21)
+                const notNormalCharacterIndex = checkRuns.findIndex(run => parseInt(run.characters[0].id) > 20)
                 checkRuns = notNormalCharacterIndex > -1 ? checkRuns.slice(0,notNormalCharacterIndex) : checkRuns
             }
 
             // check if alt (tainted) characters
             if (winStreak.randomAlt) {
-                const notAltCharacterIndex = checkRuns.findIndex(run => parseInt(run.characters[0].id) > 20)
+                const notAltCharacterIndex = checkRuns.findIndex(run => parseInt(run.characters[0].id) < 21)
                 checkRuns = notAltCharacterIndex > -1 ? checkRuns.slice(0,notAltCharacterIndex) : checkRuns
             }
 
@@ -181,5 +184,46 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
-
+.win-streak-container {
+    display: flex;
+    flex-direction: row;
+    .win-streak-item {
+        position: relative;
+        > .before, .after, .mid {
+            z-index: 0;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            pointer-events: none;
+        }
+        > .before {
+            content: "";
+            height: 100%;
+            width: 8px;
+            left: 0px;
+            top: 0px;
+            transform: translateX(-8px);
+        }
+        > .after {
+            height: 100%;
+            width: 12px;
+            right: 0px;
+            top: 0px;
+            transform: translateX(12px);
+            z-index: 2;
+        }
+        > .mid {
+            height: 100%;
+            width: 100%;
+            left: 0px;
+            top: 0px;
+            background-size: contain;
+            background-repeat: repeat-x;
+        }
+        .content {
+            z-index: 1;
+            position: relative;
+        }
+    }
+}
 </style>
