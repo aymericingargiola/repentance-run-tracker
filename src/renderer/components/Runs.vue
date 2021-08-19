@@ -383,9 +383,10 @@ export default {
                 const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
                 const customRunName = run.customName.normalize('NFC').toLowerCase()
                 const id = run.id.normalize('NFC').toLowerCase()
+                console.log(textSearchValue, characterName)
                 if (
                     !characterName.includes(textSearchValue) &&
-                    !customRunName.includes(textSearchValue) ||
+                    !customRunName.includes(textSearchValue) &&
                     !id.includes(textSearchValue)
                     ) return
             }

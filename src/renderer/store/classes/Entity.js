@@ -10,7 +10,7 @@ export default class Entity extends Model {
             boss: this.boolean(false),
             bossId: this.number(0),
             lastBoss: this.boolean(false),
-            floor_ids: this.attr(null),
+            floors_ids: this.attr(null),
             floors: this.hasManyBy(Floor, 'floors_ids'),
             portrait: this.number(0)
         }

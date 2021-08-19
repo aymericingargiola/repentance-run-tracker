@@ -12,7 +12,7 @@ export default class Run extends Model {
             tags_ids: this.attr([]),
             tags: this.hasManyBy(Tag, 'tags_ids'),
             seed: this.string(''),
-            gameState: this.string(''),
+            gameState: this.number(0),
             gameMode: this.string(''),
             gameOptions: this.attr(null),
             runStart: this.attr(null),
