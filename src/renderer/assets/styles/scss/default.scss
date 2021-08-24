@@ -67,6 +67,15 @@ button {
     }
 }
 
+.icon {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
 //Scrollbar styling
 ::-webkit-scrollbar {
 	width: 16px;

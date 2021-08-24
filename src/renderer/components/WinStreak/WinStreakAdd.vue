@@ -25,14 +25,17 @@
                 </span>
                 <ul>
                     <li :class="['character', randomNormal ? 'selected' : '']" v-on:click="randomSelected('normal')">
-                        Random normal
+                        <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
+                        <span class="name">Random normal</span>
                     </li>
                     <li :class="['character', randomAlternate ? 'selected' : '']" v-on:click="randomSelected('alternate')">
-                        Random tainted
+                        <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
+                        <span class="name">Random tainted</span>
                     </li>
                     <template v-for="character in allCharacters">
                         <li :class="['character', characters.includes(character.id) ? 'selected' : '']" :key="character.id" v-on:click="characterSelected(character.id)">
-                            {{character.trueName}} ({{character.version === "Alternate" ? "Tainted" : "Normal"}}) {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}
+                            <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/${character.id}.png')`}"></span>
+                            <span class="name">{{character.trueName}} ({{character.version === "Alternate" ? "Tainted" : "Normal"}}) {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}</span>
                         </li>
                     </template>
                 </ul>
@@ -46,7 +49,8 @@
                 </span>
                 <template v-for="boss in lastBosses">
                     <li :class="['boss', bosses.includes(boss.id) ? 'selected' : '']" :key="boss.id" v-on:click="bossSelected(boss.id)">
-                        {{boss.name}} {{bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : ''}}
+                        <span class="small-portrait boss image" :style="{backgroundImage:`url('img/entities/small portraits/${boss.portrait}.png')`}"></span>
+                        <span class="name">{{boss.name}} {{bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : ''}}</span>
                     </li>
                 </template>
             </div>
@@ -234,13 +238,14 @@ export default {
         li {
             transition: 0.25s ease;
             cursor: pointer;
-            opacity: 0.8;
+            opacity: 0.6;
             &.selected {
                 opacity: 1;
-                font-weight: bold;
-                transform: scale(1) translateX(10px);
+                //font-weight: bold;
+                //transform: scale(1) translateX(10px);
+                transform: translateX(15%) scale(1.3);
                 &::before {
-                    content: "▶";
+                    //content: "▶";
                 }
             }
         }

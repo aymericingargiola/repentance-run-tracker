@@ -76,6 +76,7 @@ export default {
   @import "assets/styles/scss/vars/_colors";
   @import "assets/styles/scss/vars/_fonts";
   @import "assets/styles/scss/default";
+  @import "assets/styles/scss/small-portrait";
   @import "assets/styles/scss/overwrite/vuetimepicker";
 
   html {

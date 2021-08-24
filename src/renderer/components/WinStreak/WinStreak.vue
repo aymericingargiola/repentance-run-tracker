@@ -12,7 +12,7 @@
                                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                                <span>Win Streak (save {{winStreak.gameState}})</span>
+                                <span>Win streak save {{winStreak.gameState}}</span>
                             </div>
                             <div class="characters">
                                 <span class="title">
@@ -24,12 +24,14 @@
                                 <div v-if="!winStreak.randomNormal && !winStreak.randomAlt">
                                     <template v-for="(character, index) in winStreak.characters_ids" tag="ul">
                                         <li :class="['character', getRuns(winStreak).number % winStreak.characters_ids.length === index ? 'current' : 'not-current']" :key="winStreak.id+character">
-                                            {{getCharacter(character).name}}
+                                            <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/${character}.png')`}"></span>
+                                            <span class="name">{{getCharacter(character).name}}</span>
                                         </li>
                                     </template>
                                 </div>
                                 <div v-if="winStreak.randomNormal || winStreak.randomAlt">
-                                    {{winStreak.randomNormal ? 'Random normal' : 'Random tainted'}}
+                                    <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
+                                    <span class="name">{{winStreak.randomNormal ? 'Random normal' : 'Random tainted'}}</span>
                                 </div>
                             </div>
                             <div class="bosses">
@@ -42,7 +44,8 @@
                                 <div>
                                     <template v-for="(boss, index) in winStreak.bosses_ids" tag="ul">
                                         <li :class="['boss', getRuns(winStreak).number % winStreak.bosses_ids.length === index ? 'current' : 'not-current']" :key="winStreak.id+boss">
-                                            {{getBoss(boss).name}}
+                                            <span class="small-portrait boss image" :style="{backgroundImage:`url('img/entities/small portraits/${getBoss(boss).portrait}.png')`}"></span>
+                                            <span class="name">{{getBoss(boss).name}}</span>
                                         </li>
                                     </template>
                                 </div>
@@ -52,7 +55,8 @@
                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
                                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
                                 <div class="pin" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-                                <span>Streak : {{getRuns(winStreak).number}}</span>
+                                <span class="icon small" :style="{backgroundImage:`url('img/icons/hud/crown.png')`}"></span>
+                                <span class="wins">{{getRuns(winStreak).number}}</span>
                             </div>
                             <div class="buttons">
                                 <div class="remove">
@@ -284,10 +288,11 @@ export default {
             z-index: 0;
             font-size: 26px;
             font-weight: bold;
-            padding: 0px 4px 4px 4px;
+            padding: 4px 4px 8px 4px;
             margin-left: 8px;
             margin-top: 16px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             //transform: rotate(-12deg);
             // bottom: -14px;
             // right: -8px;
@@ -329,6 +334,9 @@ export default {
                 top: -3px;
                 transform: translateX(50%);
             }
+            .icon {
+                margin-right: 8px;
+            }
             span {
                 z-index: 1;
                 position: relative;
@@ -339,17 +347,19 @@ export default {
             position: relative;
             text-align: left;
             li {
+                display: flex;
+                align-items: center;
                 &:not(:only-child) {
                     transition: 0.25s ease;
                     &.not-current {
-                        opacity: 0.8;
-                        transform: scale(1) translateX(0px);
+                        opacity: 0.6;
+                        //transform: scale(1) translateX(0px);
                     }
                     &.current {
-                        transform: scale(1) translateX(10px);
-                        font-weight: bold;
+                        transform: translateX(15%) scale(1.3);
+                        //font-weight: bold;
                         &::before {
-                            content: "▶";
+                            //content: "▶";
                         }
                     }
                 }
