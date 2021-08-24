@@ -299,9 +299,12 @@ export default {
                     height: auto;
                     background: transparent;
                     border: none;
+                    border-radius: 0;
                     text-align: center;
+                    box-shadow: none;
                     &:focus {
                         box-shadow: none;
+                        transform: none;
                     }
                 }
                 .controls {
@@ -325,9 +328,12 @@ export default {
                     background-color: transparent;
                     padding: 0;
                     border-radius: 0px;
+                    border: none;
                     width: 100px;
+                    box-shadow: none;
                     &:focus {
                         box-shadow: none;
+                        transform: none;
                     }
                 }
             }

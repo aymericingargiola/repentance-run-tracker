@@ -75,6 +75,8 @@ export default {
   @import "assets/styles/scss/vars/_animations";
   @import "assets/styles/scss/vars/_colors";
   @import "assets/styles/scss/vars/_fonts";
+  @import "assets/styles/scss/default";
+  @import "assets/styles/scss/overwrite/vuetimepicker";
 
   html {
     font-family: "Baby Doll", sans-serif;
@@ -130,100 +132,6 @@ export default {
         }
       }
     }
-  }
-
-  //Reset
-  * {
-    box-sizing: border-box;
-    image-rendering: pixelated;
-    & ul {
-      padding: 0;
-      margin: 0;
-    }
-    & li {
-      list-style: none;
-    }
-  }
-
-  input, select {
-    transition: 0.25s ease;
-    font-family: "Baby Doll", sans-serif;
-    border: 0;
-    padding: 8px;
-    border-radius: 8px;
-    &:focus {
-      outline: none;
-      box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.2);
-    }
-  }
-
-  input {
-    &[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  //vue time picker
-  .vue__time-picker.time-picker {
-    .dropdown {
-      height: 5em;
-      border-radius: 5px;
-      top: 2.2em;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(3px);
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
-      font-family: "Baby Doll", sans-serif;
-      .select-list {
-        height: 5em;
-        padding: 4px;
-        ul {
-          border: none;
-          li {
-            border-radius: 10px;
-            &:not([disabled]) {
-              &.active {
-                background-color: $paper-white-dark;
-              }
-            }
-            &.hint {
-              opacity: 1;
-              color: $text-dark;
-            }
-          }
-        } 
-      }
-    }
-  }
-
-  //Scrollbar styling
-  ::-webkit-scrollbar {
-    width: 16px;
-    height: 16px;
-  }
-  ::-webkit-scrollbar-track {
-    margin-bottom: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    min-height: 40px;
-    background-color: rgba($color: #FFF, $alpha: 0.3);
-    outline: 0px solid $text-dark;
-    outline-offset: -6px;
-    &:hover {
-      outline: 0px solid $text-dark;
-      outline-offset: -4px;
-    }
-  }
-  ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track {
-    border: 4px solid transparent;
-    background-clip: padding-box;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: $text-dark;
-  }
-  ::-webkit-scrollbar-corner {
-    background-color: transparent;
   }
 
   //Overlay watch status

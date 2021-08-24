@@ -4,7 +4,7 @@ export default class Character extends Model {
     static entity = 'characters'
     static fields() {
         return {
-            id: this.number(0),
+            id: this.string(''),
             variant: this.number(0),
             name: this.string(''),
             trueName: this.string(''),
