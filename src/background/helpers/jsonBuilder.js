@@ -17,7 +17,7 @@ module.exports = {
         const convertEntitiesXml = await module.exports.convertToJson(cleanEntitiesXml)
         const entitiesJson = convertEntitiesXml.entities.entity.map(entity => {
             const entityId = `${entity._attributes.id}.${entity._attributes.variant ? entity._attributes.variant : 0}.${entity._attributes.subtype ? entity._attributes.subtype : 0}`
-            if (!ignoreEntities.includes(entityId) && entity._attributes.baseHP && parseInt(entity._attributes.baseHP) > 0 && entity._attributes.collisionDamage && parseInt(entity._attributes.collisionDamage) > 0) {
+            if (!ignoreEntities.includes(entityId) && entity._attributes.baseHP && parseInt(entity._attributes.baseHP) > 0 && entity._attributes.collisionDamage && parseInt(entity._attributes.collisionDamage) > 0 || entity._attributes.boss === "1") {
                 return {
                     id: entityId,
                     name: entity._attributes.name,

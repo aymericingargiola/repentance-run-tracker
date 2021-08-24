@@ -178,11 +178,12 @@ export default {
             position: relative;
             transition: 0.5s ease;
             overflow: hidden;
-            opacity: 0.2;
+            opacity: 0.4;
+            transform: scale(0.9);
             &::after {
                 content: "";
                 position: absolute;
-                height: 50px;
+                height: 80px;
                 width: 100%;
                 background: linear-gradient(to top, $paper-white-darker 20%, transparent 100%);
                 bottom: 0px;
@@ -193,8 +194,9 @@ export default {
                 transition: 0.25s ease;
             }
             &.expended {
-              max-height: 480px;
+              max-height: 500px;
               opacity: 1;
+              transform: scale(1);
               &::after {
                   opacity: 0;
               }
@@ -209,7 +211,7 @@ export default {
             font-size: 56px;
             backdrop-filter: blur(2px);
             z-index: 1;
-            transform: translateY(10px);
+            transform: translateY(10px) scale(1);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -225,6 +227,7 @@ export default {
             }
             &.hidden {
                 opacity: 0;
+                transform: translateY(10px) scale(0.7);
                 pointer-events: none;
             }
         }

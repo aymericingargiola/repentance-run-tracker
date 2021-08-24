@@ -86,6 +86,7 @@ export default {
 .config-popup {
     position: fixed;
     top: 30px;
+    left: 0px;
     width: 100%;
     height: calc(100% - 30px);
     z-index: 2;
