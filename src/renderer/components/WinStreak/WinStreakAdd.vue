@@ -28,11 +28,11 @@
                         Random normal
                     </li>
                     <li :class="['character', randomAlternate ? 'selected' : '']" v-on:click="randomSelected('alternate')">
-                        Random alternate
+                        Random tainted
                     </li>
                     <template v-for="character in allCharacters">
                         <li :class="['character', characters.includes(character.id) ? 'selected' : '']" :key="character.id" v-on:click="characterSelected(character.id)">
-                            {{character.trueName}} ({{character.version}}) {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}
+                            {{character.trueName}} ({{character.version === "Alternate" ? "Tainted" : "Normal"}}) {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}
                         </li>
                     </template>
                 </ul>
@@ -136,6 +136,8 @@ export default {
                 bosses_ids: this.bosses,
                 adjustNumber: this.adjustNumber
             })
+            window?.ipc?.send('USER_CREATE_WINSTREAK', this.winStreakRepo.query().all().slice(-1)[0])
+            this.cancel()
         },
         bossSelected(id) {
             this.bosses.includes(id) ? this.bosses = this.bosses.filter((bossId) => bossId !== id) : this.bosses.push(id)
@@ -167,7 +169,6 @@ export default {
         transition: 0.5s ease;
         &.short {
             opacity: 0.7;
-            transform: scale(0.90);
             &:hover {
                 opacity: 1;
             }
@@ -230,7 +231,7 @@ export default {
         li {
             transition: 0.25s ease;
             cursor: pointer;
-            opacity: 0.5;
+            opacity: 0.8;
             &.selected {
                 opacity: 1;
                 font-weight: bold;

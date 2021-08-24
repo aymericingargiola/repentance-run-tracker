@@ -56,7 +56,7 @@
                             </div>
                             <div class="buttons">
                                 <div class="remove">
-                                    <button v-on:click="remove()">Remove</button>
+                                    <button v-on:click="remove(winStreak.id)">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +107,9 @@ export default {
         }
     },
     methods: {
-        remove() {
-            console.log("remove")
+        remove(winstreakId) {
+            this.winStreakRepo.where("id", winstreakId).delete()
+            window?.ipc?.send('USER_REMOVE_WINSTREAK', winstreakId)
         },
         check(runs, winStreak) {
             let checkRuns = runs
@@ -341,7 +342,7 @@ export default {
                 &:not(:only-child) {
                     transition: 0.25s ease;
                     &.not-current {
-                        opacity: 0.7;
+                        opacity: 0.8;
                         transform: scale(1) translateX(0px);
                     }
                     &.current {

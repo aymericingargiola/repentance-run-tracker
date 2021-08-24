@@ -428,6 +428,8 @@ export default {
 }
 .filters {
     margin-bottom: 16px;
+    text-align: left;
+    padding: 0px 12px;
 }
 .run {
     position: relative;

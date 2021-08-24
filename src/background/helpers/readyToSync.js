@@ -43,13 +43,13 @@ ipcMain.on('ASK_WINSTREAKS', async (event, payload) => {
 	syncApp(window, { trigger: 'send winstreaks', winStreaks: winStreaks });
 });
 
-ipcMain.on('USER_CREATE_WINSTREAKS', async (event, payload) => {
+ipcMain.on('USER_CREATE_WINSTREAK', async (event, payload) => {
 	if (!winStreaks) winStreaks = await module.exports.initwinStreaks();
 	winStreaks.push(payload);
 	await writeFileAsync(dataFolder, 'winStreaks.json', JSON.stringify(winStreaks));
 });
 
-ipcMain.on('USER_REMOVE_WINSTREAKS', async (event, payload) => {
+ipcMain.on('USER_REMOVE_WINSTREAK', async (event, payload) => {
 	if (!winStreaks) winStreaks = await module.exports.initwinStreaks();
 	const winStreaksIndex = winStreaks.findIndex((winStreaksItem) => winStreaksItem.id === payload);
 	if (winStreaksIndex != -1) {
@@ -60,7 +60,7 @@ ipcMain.on('USER_REMOVE_WINSTREAKS', async (event, payload) => {
 	}
 });
 
-ipcMain.on('USER_UPDATE_WINSTREAKS', async (event, payload) => {
+ipcMain.on('USER_UPDATE_WINSTREAK', async (event, payload) => {
 	if (!winStreaks) winStreaks = await initwinStreaks();
 	winStreaks.find((winStreaksItem) => winStreaksItem.id === payload.id)[payload.property] = payload.value;
 	await writeFileAsync(dataFolder, 'winStreaks.json', JSON.stringify(winStreaks));
