@@ -2,7 +2,6 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { autoUpdater } from 'electron-updater'
 import { writeFileAsync, fileResolve } from './tools/fileSystem'
 import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
@@ -10,30 +9,13 @@ import { readyToSync, initConfig, initRuns } from './helpers/readyToSync'
 import { buildJsons } from './helpers/jsonBuilder'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
-const log = require('electron-log')
+import { checkForUpdate } from './helpers/updater'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs
-
-if(!isDevelopment && !process.env.IS_TEST) {
-  autoUpdater.logger = log
-  autoUpdater.logger["transports"].file.level = "info"
-  
-  autoUpdater.autoDownload = true
-  autoUpdater.autoInstallOnAppQuit = false
-  
-  autoUpdater.setFeedURL({
-    provider: 'github',
-    repo: 'repentance-run-tracker',
-    owner: 'aymericingargiola',
-    private: false,
-  })
-}
-
-// console.log("electron", process.versions.electron)
 
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
@@ -167,7 +149,7 @@ async function createWindow() {
   //Check for app updates
   win.once('ready-to-show', () => {
     if(!isDevelopment && !process.env.IS_TEST) {
-      autoUpdater.checkForUpdates()
+      checkForUpdate(win)
     }
   })
 
@@ -224,11 +206,3 @@ if (isDevelopment) {
     })
   }
 }
-
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-  win.webContents.send('UPDATE_DOWNLOADED')
-})
-
-ipcMain.on('RESTART_APP', () => {
-  autoUpdater.quitAndInstall()
-})

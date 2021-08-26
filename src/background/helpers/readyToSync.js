@@ -133,4 +133,4 @@ module.exports = {
         const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]');
         return JSON.parse(fs.readFileSync(loadRuns));
     }
-};
+}
