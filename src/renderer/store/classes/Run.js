@@ -1,18 +1,31 @@
 import { Model } from '@vuex-orm/core'
+import Tag from './Tag'
 
 export default class Run extends Model {
     static entity = 'runs'
     static fields() {
         return {
             id: this.attr(null),
-            customName: this.string(null),
-            seed: this.string(null),
-            gameState: this.string(null),
-            runStart: this.number(null),
-            runUpdate: this.string(null),
+            customName: this.string(''),
+            videoLink: this.string(''),
+            videoHighlights: this.attr([]),
+            tags_ids: this.attr([]),
+            tags: this.hasManyBy(Tag, 'tags_ids'),
+            seed: this.string(''),
+            gameState: this.number(0),
+            gameMode: this.string(''),
+            gameOptions: this.attr(null),
+            runStart: this.attr(null),
+            runUpdate: this.attr(null),
+            runUserUpdate: this.attr(null),
             runEnd: this.attr(null),
-            character: this.attr(null),
-            floors: this.attr(null)
+            runDuration: this.string(''),
+            characters: this.attr(null),
+            floors: this.attr(null),
+            toRemove: this.attr(null),
+            extendedSaveMode: this.boolean(false),
+            otherModLoaded: this.boolean(false),
+            backup: this.attr(null)
         }
     }
 }

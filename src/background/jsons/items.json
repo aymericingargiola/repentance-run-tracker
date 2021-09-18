@@ -952,7 +952,7 @@
     },
     {
       "itemID": 40,
-      "title": "Kamikaze",
+      "title": "Kamikaze!",
       "pickup": "Become the bomb!",
       "effects": [
         "Causes an explosion near Isaac which takes away half a heart and does 40 damage all enemies in close proximity."
@@ -969,7 +969,7 @@
         "clock",
         "red"
       ],
-      "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Kamikaze",
+      "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Kamikaze!",
       "category": "REBIRTH_ITEM"
     },
     {
@@ -13346,7 +13346,7 @@
       "category": "REPENTANCE_ITEM"
     },
     {
-      "itemID": 1053,
+      "itemID": 606,
       "title": "Ocular Rift",
       "pickup": "Stare into the abyss",
       "effects": [

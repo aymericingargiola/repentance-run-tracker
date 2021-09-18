@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const database = new VuexORM.Database()
 
 const store = new Vuex.Store({
-    plugins: [VuexORM.install(database), createPersistedState()]
+    plugins: [VuexORM.install(database), createPersistedState({paths: ['empty']})]
 })
 
 export default store

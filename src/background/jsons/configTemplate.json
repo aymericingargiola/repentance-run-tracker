@@ -1,0 +1,60 @@
+[
+    {
+        "id":"dateFormat",
+        "value":"MM/DD/YY",
+        "choices":[{"name":"Month/Day/Year","value":"MM/DD/YY"},{"name":"Day/Month/Year","value":"DD/MM/YY"}],
+        "name":"Date format",
+        "hint":"",
+        "type":"select",
+        "disabled":false
+    },
+    {
+        "id":"hourFormat",
+        "value":"hh:mm a",
+        "choices":[{"name":"12 Hours","value":"hh:mm a"},{"name":"24 Hours","value":"HH:mm"}],
+        "name":"Hour format",
+        "hint":"",
+        "type":"select",
+        "disabled":false
+    },
+    {
+        "id":"hideActiveItems",
+        "value":false,
+        "name":"Hide active items",
+        "hint":"Hide active items from floor's items list",
+        "type":"checkbox",
+        "disabled":false
+    },
+    {
+        "id":"isaacModFolderPath",
+        "value":"",
+        "name":"Isaac mods folder",
+        "hint":"",
+        "type":"text",
+        "disabled":false
+    },
+    {
+        "id":"streakingWebsiteToken",
+        "value":"",
+        "name":"Streaking Website Token",
+        "hint":"",
+        "type":"text",
+        "disabled":true
+    },
+    {
+        "id":"tagsList",
+        "value":[],
+        "name":"Store existing tags",
+        "hint":"",
+        "type":"array",
+        "disabled":true
+    },
+    {
+        "id":"liveTrackerBackgroundColor",
+        "value":{"red": 0,"green": 255,"blue": 0,"alpha": 1},
+        "name":"Change Live Tracker Background",
+        "hint":"",
+        "type":"object",
+        "disabled":true
+    }
+]

@@ -2,16 +2,15 @@
     <div class="taskbar">
         <div class="background"></div>
         <div class="drag"></div>
-        <div class="logo">run tracker</div>
+        <div class="logo">repentance run tracker <div class="app-version">{{appVersion}}</div></div>
         <div class="menu center-menu">
         </div>
         <div class="menu right-menu" v-if="$isElectron">
-            <span class="action-btn minimize-app" v-on:click="minimizeApp()">
-            </span>
-            <span class="action-btn fullscreen-app" v-on:click="fullscreenApp()">
-            </span>
-            <span class="action-btn close-app" v-on:click="closeApp()">
-            </span>
+            <span class="action-btn live-tracker" v-on:click="openLiveTracker()"></span>
+            <span class="action-btn config" v-on:click="openOrCloseSettings()"></span>
+            <span class="action-btn minimize-app" v-on:click="minimizeApp()"></span>
+            <span class="action-btn fullscreen-app" v-on:click="fullscreenApp()"></span>
+            <span class="action-btn close-app" v-on:click="closeApp()"></span>
         </div>
     </div>
 </template>
@@ -19,6 +18,9 @@
 <script>
 export default {
     name: "Taskbar",
+    props: {
+        appVersion: String
+    },
     data() {
         return {
         }
@@ -37,6 +39,12 @@ export default {
         closeApp() {
             window?.ipc?.send('CLOSE_APP', localStorage.vuex);
         },
+        openOrCloseSettings() {
+            this.$root.$emit('OPEN_SETTINGS')
+        },
+        openLiveTracker() {
+            window?.ipc?.send('OPEN_LIVETRACKER');
+        }
     },
 };
 </script>
@@ -100,6 +108,14 @@ export default {
         pointer-events: none;
         -webkit-app-region: drag;
         transform: translateY(-4px);
+        .app-version {
+            font-size: 10px;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 0;
+            display: inline-block;
+            height: 0px;
+        }
     }
     .menu {
         pointer-events: all;
@@ -153,6 +169,26 @@ export default {
                 }
                 &.minimize-app {
                     background-image: url("../../../public/img/icons/minimize.png");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    transform: scale(0.55);
+                    &:hover {
+                        opacity: 0.5;
+                        transform: scale(0.65) rotate(-10deg);
+                    }
+                }
+                &.config {
+                    background-image: url("../../../public/img/icons/config.png");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    transform: scale(0.55);
+                    &:hover {
+                        opacity: 0.5;
+                        transform: scale(0.65) rotate(-10deg);
+                    }
+                }
+                &.live-tracker {
+                    background-image: url("../../../public/img/icons/play.png");
                     background-repeat: no-repeat;
                     background-size: cover;
                     transform: scale(0.55);

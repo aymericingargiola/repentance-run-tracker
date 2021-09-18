@@ -2,7 +2,21 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/store'
 import router from './router/router'
-import 'swiper/swiper.scss';
+import vuescroll from 'vuescroll'
+import VueTimepicker from 'vue2-timepicker'
+import 'vue2-timepicker/dist/VueTimepicker.css'
+import { ColorPicker } from 'vue-color-gradient-picker'
+import 'vue-color-gradient-picker/dist/index.css'
+
+Vue.use(vuescroll, {
+  ops: {
+    // The global config
+  },
+})
+
+Vue.component("vue-timepicker", VueTimepicker)
+
+Vue.component("ColorPicker", ColorPicker)
 
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
 
