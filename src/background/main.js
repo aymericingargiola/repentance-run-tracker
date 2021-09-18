@@ -10,6 +10,7 @@ import { buildJsons } from './helpers/jsonBuilder'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 import { checkForUpdate } from './helpers/updater'
+import { backupDatas } from './helpers/backupDatas'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
@@ -31,7 +32,7 @@ ipcMain.on('HIDE_APP', (event, payload) => {
 })
 
 ipcMain.on('CLOSE_APP', async (event, payload) => {
-  await writeFileAsync(dataFolder, 'store.json', payload)
+  await backupDatas(dataFolder)
   app.exit()
 })
 
