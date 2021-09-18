@@ -16,6 +16,8 @@ More to add...
 # Usage
 
 ## Settings
+
+![Settings](/doc/img/settings.jpg)
 ### Date format
 Change the date format for :
 - Day / Month / Year
@@ -30,12 +32,11 @@ It will hide active items from floors in run cards to have more room.
 This is important to have extra runs informations like all the character infos (life, bombs, keys, coins, stats) that are not in the logs. The app will add a mod (Repentance Run Tracker) and it will add extra lines to the logs.
 The mod folder is in the game folder, from steam right click on the game then click on "Manage" then "Browse local files", open the "mods" folder and copy the full path.
 For exemple : ``C:\Program Files (x86)\Steam\steamapps\common\The Binding of Isaac Rebirth\mods``
-
-![Settings](/doc/img/settings.jpg)
 ## Winstreaks
-You can build custom winstreaks rules for each saves (1, 2 or 3) and it will analyze your runs to validate each streak, if you add multi characters (exemple : Isaac THEN Cain THEN Judas) and/or multi bosses you must respect the order to validate the rule. The rule will show you wich character you have to play and wich boss you have to beat.
 
 ![Winstreaks](/doc/img/winstreaks.jpg)
+
+You can build custom winstreaks rules for each saves (1, 2 or 3) and it will analyze your runs to validate each streak, if you add multi characters (exemple : Isaac THEN Cain THEN Judas) and/or multi bosses you must respect the order to validate the rule. The rule will show you wich character you have to play and wich boss you have to beat.
 
 ## Customize runs
 
