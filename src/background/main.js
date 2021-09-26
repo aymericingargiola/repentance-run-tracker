@@ -5,7 +5,7 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { writeFileAsync, fileResolve } from './tools/fileSystem'
 import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
-import { readyToSync, initConfig, initRuns } from './helpers/readyToSync'
+import { readyToSync, initConfig, initRuns, initTrash } from './helpers/readyToSync'
 import { buildJsons } from './helpers/jsonBuilder'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
@@ -16,7 +16,7 @@ const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const dataFolder = app.getPath("userData")
-let win, winTracker, config, runs
+let win, winTracker, config, runs, trash
 
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
@@ -64,7 +64,7 @@ protocol.registerSchemesAsPrivileged([
 async function openLiveTracker() {
   if (winTracker) return
   winTracker = new BrowserWindow({
-    title: "Live Tracker",
+    title: "Item Tracker",
     width: 1000,
     height: 400,
     minWidth: 200,
@@ -114,6 +114,7 @@ async function createWindow() {
   if(isDevelopment) await buildJsons()
   if(!config) config = await initConfig()
   if(!runs) runs = await initRuns()
+  if(!trash) trash = await initTrash()
   // Create the browser window.
   win = new BrowserWindow({
     title: "Repentance Run Tracker",
@@ -159,7 +160,7 @@ async function createWindow() {
     require('electron').shell.openExternal(url)
   })
 
-  startLogsWatch(win, config, runs)
+  startLogsWatch(win, config, runs, trash)
   startModWatch(win, isDevelopment, modFile.default, modMetadata.default, config)
 }
 

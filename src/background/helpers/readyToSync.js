@@ -132,5 +132,9 @@ module.exports = {
     initRuns: async function() {
         const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]');
         return JSON.parse(fs.readFileSync(loadRuns));
+    },
+	initTrash: async function() {
+        const loadTrash = await fileResolve(dataFolder, 'trash.json', '[]');
+        return JSON.parse(fs.readFileSync(loadTrash));
     }
 }

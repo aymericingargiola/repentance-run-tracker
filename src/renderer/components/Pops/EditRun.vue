@@ -26,6 +26,9 @@
                         <div class="title">Tags</div>
                         <Tags :run-id="this.currentRun.id" :type="'string'"></Tags>
                     </div>
+                    <div class="config-item">
+                        <button class="warning" v-on:click="removeRun()">Remove run</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,6 +103,10 @@ export default {
         },
         updateVideoLink(e) {
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoLink', value: e.target.value })
+        },
+        removeRun() {
+            window?.ipc?.send('USER_REMOVE_RUN', this.id)
+            this.openOrCloseEditRun()
         }
     },
 }

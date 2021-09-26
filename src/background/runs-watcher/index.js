@@ -14,8 +14,9 @@ const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\B
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
 const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 const runsJsonPath = `${dataFolder}\\runs.json`
+const trashJsonPath = `${dataFolder}\\trash.json`
 const configJsonPath = `${dataFolder}\\config.json`
-let watchingLogs, config, runs, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win, winTracker
+let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
@@ -417,8 +418,12 @@ function unWatchRepentanceLogs() {
 
 async function init() {
     if (!runs) {
-        const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]') //Load if exist, or creat empty runs.json file
-        runs = JSON.parse(fs.readFileSync(loadRuns)) //Set "runs" variable filled with runs.json items
+        const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
+        runs = JSON.parse(fs.readFileSync(loadRuns))
+    }
+    if (!trash) {
+        const loadTrash = await fileResolve(dataFolder, 'trash.json', '[]')
+        trash = JSON.parse(fs.readFileSync(loadTrash))
     }
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
@@ -463,14 +468,33 @@ ipcMain.on('USER_UPDATE_RUN', async (event, payload) => {
 //Frontend event, trigger if a run is removed by user
 ipcMain.on('USER_REMOVE_RUN', (event, payload) => {
     console.log(`User wants to remove run : ${payload}`)
-    removeRun(payload, runs, runsJsonPath, win, winTracker)
+    removeRun(payload, runs, runsJsonPath, win, winTracker, true, trash, trashJsonPath)
+})
+
+ipcMain.on('USER_REMOVE_RUNS_FROM_TRASH', (event, payload) => {
+    console.log(`User wants to remove runs from trash : ${payload}`)
+    removeRunsFromTrash(payload, win, winTracker, trash, trashJsonPath)
+})
+
+ipcMain.on('USER_RESTORE_RUNS_FROM_TRASH', (event, payload) => {
+    console.log(`User wants to restore runs from trash : ${payload}`)
+    restoreRunsFromTrash(payload, runs, runsJsonPath, win, winTracker, trash, trashJsonPath)
+})
+
+ipcMain.on('USER_EMPTY_TRASH', (event) => {
+    console.log(`User wants to empty trash`)
+    trash = []
+    syncApp(window,{trigger: "empty trash"})
+    if(windowTracker) syncApp(windowTracker,{trigger: "empty trash"})
+    saveFileToDisk(trashJsonPath, JSON.stringify(trash))
 })
 
 module.exports = {
-    startLogsWatch: function(window, conf, rns) {
+    startLogsWatch: function(window, conf, rns, trsh) {
         win = window
         config = conf
         runs = rns
+        trash = trsh
         let wait = false
         setInterval(() => {
             if(!wait) {
