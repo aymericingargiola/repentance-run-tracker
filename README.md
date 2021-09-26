@@ -1,15 +1,11 @@
 # Repentance Run Tracker project
-Repentance Run Tracker is an [Electron](https://www.electronjs.org/) app to record your runs in [The Binding Of Isaac: Repentance](https://store.steampowered.com/app/1426300/The_Binding_of_Isaac_Repentance/) (not supporting older version of the game). This project was inspired by [RebirthItemTracker](https://github.com/Rchardon/RebirthItemTracker) project wich reads and parse the ``log.txt`` to track what is happening during the game.
+Repentance Run Tracker is an [Electron](https://www.electronjs.org/) app to record your runs in [The Binding Of Isaac: Repentance](https://store.steampowered.com/app/1426300/The_Binding_of_Isaac_Repentance/) (not supporting older version of the game). This project was inspired by [RebirthItemTracker](https://github.com/Rchardon/RebirthItemTracker) project wich reads and parse the ``log.txt`` to track what is happening during the game, and also and also The [Finding of Items](https://moddingofisaac.com/mod/900/the-finding-of-items).
 
 The project is in his very early state but here is the functionality ToDo list :
-- [x] Show and save all runs informations
-- [x] Show current run with live updates while playing
-- [x] Automatically remove last generated run if reset button is pressed
-- [x] Edit runs from the ui (custom name, add a video link...)
-- [x] Add winstreak rules builder
-- [ ] Add more filters options
+- [ ] Add more runs filters options
+- [ ] Add remove runs with trash system
 - [ ] Add compact current run "item tracker" view component
-- [ ] Add stats
+- [ ] Add stats\
 And more...
 
 # Usage
