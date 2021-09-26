@@ -5,6 +5,7 @@ module.exports = {
 	backupDatas: async function(dataFolder) {
         let zip = new AdmZip()
         zip.addLocalFile(`${dataFolder}/runs.json`)
+        zip.addLocalFile(`${dataFolder}/trash.json`)
         zip.addLocalFile(`${dataFolder}/tags.json`)
         zip.addLocalFile(`${dataFolder}/config.json`)
         zip.addLocalFile(`${dataFolder}/winStreaks.json`)

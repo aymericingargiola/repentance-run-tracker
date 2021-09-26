@@ -65,6 +65,10 @@ button {
         box-shadow: 3px 3px 0px rgba($color: #000000, $alpha: 0.0);
         transform: translate(2px, 2px);
     }
+    &.warning {
+        background-color: $red-a3;
+        color: white;
+    }
 }
 
 .icon {

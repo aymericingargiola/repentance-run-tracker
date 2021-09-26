@@ -38,14 +38,14 @@ module.exports = {
         return JSON.parse(playerStats)
     },
     getSeed: (string) => {
-        //Return seed from logs
         return {
-            seed: `${string.split(" ")[5]} ${string.split(" ")[6]}`
+            'seed': `${string.split(" ")[5]} ${string.split(" ")[6]}`
         }
     },
     getFloor: (string) => {
-        //Return matching floor from logs
-        return cloneFrom(floors.stages.find(floor => floor.id === `${string.split(" ")[4].match(/\d+/)[0]}.${string.split(" ")[6]}`))
+        const match1 = string.split(" ")[4].match(/\d+/)[0]
+        const match2 = string.split(" ")[6]
+        return cloneFrom(floors.stages.find(floor => floor.id === `${match1}.${match2}`))
     },
     getGameState: function(string) {
         //Return game save state from logs
@@ -94,19 +94,28 @@ module.exports = {
     getRunDuration: (end, start) => {
         const ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"))
         const duration = moment.duration(ms)
-        return `${Math.floor(duration.asHours()) < 10 ? `0${Math.floor(duration.asHours())}` : Math.floor(duration.asHours())}${moment.utc(ms).format(":mm:ss")}`
+        const hours = `0${Math.floor(duration.asHours())}`.slice(-2)
+        return `${hours}${moment.utc(ms).format(":mm:ss")}`
     },
     saveFileToDisk: (path, datas) => {
         //Update file
         fs.writeFile(path, datas, 'utf8', (err) => {if (err) throw err})
     },
-    removeRun: (runId, runs, runsJsonPath, window, windowTracker) => {
+    removeRun: (runId, runs, runsJsonPath, window, windowTracker, saveIntrash, trash, trashJsonPath) => {
         //From user action, if the runid is found remove a run on frontend and backend
         console.log(`Removing run : ${runId}...`)
-        runIndex = runs.findIndex(run => run.id === runId)
-        if(runIndex != -1) {
+        const runIndex = runs.findIndex(run => run.id === runId)
+        if (runIndex != -1) {
+            if (saveIntrash) {
+                const run = runs.find(run => run.id === runId)
+                syncApp(window,{trigger: "add run to trash", run: run})
+                if(windowTracker) syncApp(windowTracker,{trigger: "add run to trash", run: run})
+                trash.push(run)
+                module.exports.saveFileToDisk(trashJsonPath, JSON.stringify(trash))
+                console.log(`Run : ${runId} was save in trash bin`)
+            }
             syncApp(window,{trigger: "remove run", run: runs[runIndex].id}) //Remove matching run on frontend
-            if(windowTracker) syncApp(windowTracker,{trigger: "remove run", run: runs[runIndex].id})
+            if(windowTracker) { syncApp(windowTracker,{trigger: "remove run", run: runs[runIndex].id}) }
             runs.splice(runIndex, 1) //Remove matching run on saved runs json file
             console.log(`Run : ${runId} was removed`)
             module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
@@ -114,6 +123,55 @@ module.exports = {
         } else {
             console.log(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
             return false
+        }
+    },
+    removeRunsFromTrash: (runsToRemove, window, windowTracker, trash, trashJsonPath) => {
+        const removedRuns = []
+        runsToRemove.forEach(run => {
+            const runId = run
+            const runIndex = trash.findIndex(run => run.id === runId)
+            if (runIndex != -1) {
+                trash.splice(runIndex, 1)
+                removedRuns.push(runId)
+            } else {
+                console.log(`Impossible to find : ${runId} in trash, this run doesn't exist on the backend ! (Sync issue ?)`)
+            }
+        })
+        if (removedRuns.length > 0) {
+            module.exports.saveFileToDisk(trashJsonPath, JSON.stringify(trash))
+            syncApp(window,{trigger: "remove runs from trash", runs: removedRuns})
+            if(windowTracker) { syncApp(windowTracker,{trigger: "remove runs from trash", runs: removedRuns}) }
+            console.log(`Runs : ${removedRuns} was removed from trash`)
+        }
+    },
+    addRuns: (runsToAdd, window, windowTracker, runs, runsJsonPath) => {
+        const addedRuns = []
+        runsToAdd.forEach(run => {
+            addedRuns.push(run.id)
+            runs.push(run)
+            syncApp(window,{trigger: "create run", run: run})
+            if(windowTracker) { syncApp(windowTracker,{trigger: "create run", runs: run}) }
+        })
+        module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+        console.log(`Runs : ${addedRuns} was added`)
+    },
+    restoreRunsFromTrash: (runsToRestore, runs, runsJsonPath, win, winTracker, trash, trashJsonPath) => {
+        const restoredRuns = []
+        const restoredRunsItems = []
+        runsToRestore.forEach(run => {
+            const runId = run
+            const runIndex = trash.findIndex(run => run.id === runId)
+            if (runIndex != -1) {
+                const runToRestore = trash.find(run => run.id === runId)
+                restoredRuns.push(runToRestore.id)
+                restoredRunsItems.push(runToRestore)
+            } else {
+                console.log(`Impossible to find : ${runId} in trash, this run doesn't exist on the backend ! (Sync issue ?)`)
+            }
+        })
+        if (restoredRuns.length > 0) {
+            module.exports.removeRunsFromTrash(restoredRuns, win, winTracker, trash, trashJsonPath)
+            module.exports.addRuns(restoredRunsItems, win, winTracker, runs, runsJsonPath)
         }
     }
 }

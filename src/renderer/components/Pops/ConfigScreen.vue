@@ -113,6 +113,7 @@ export default {
         z-index: 1;
         height: 100%;
         padding: 36px 36px 56px 28px;
+        display: flex;
         > .mid {
             z-index: 0;
             position: absolute;
@@ -128,13 +129,17 @@ export default {
             background-repeat: no-repeat;
         }
         .content {
-            height: 100%;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-left: 16px;
+            margin-right: 16px;
+            width: 100%;
+            max-height: 100%;
             overflow: auto;
             position: relative;
             z-index: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
         .heading {
             font-size: 80px;
@@ -165,6 +170,9 @@ export default {
             }
             &:not(:first-child) {
                 margin-top: 16px;
+            }
+            &:last-child {
+                padding-bottom: 16px;
             }
             &:hover {
                 .hint {
