@@ -5,6 +5,7 @@
     <div>status : {{updateStatus}}</div> -->
     <UpdateApp/>
     <WinStreak/>
+    <Trash/>
     <Runs/>
     <BrokenRuns/>
     <EditRun/>
@@ -20,6 +21,7 @@ import Runs from '../components/Runs.vue'
 import BrokenRuns from '../components/Pops/BrokenRuns.vue'
 import EditRun from '../components/Pops/EditRun.vue'
 import ConfigScreen from '../components/Pops/ConfigScreen.vue'
+import Trash from '../components/Trash/Trash.vue'
 export default {
   components: {
     UpdateApp,
@@ -27,7 +29,8 @@ export default {
     Runs,
     BrokenRuns,
     EditRun,
-    ConfigScreen
+    ConfigScreen,
+    Trash
   },
   name: "Home",
   data() {

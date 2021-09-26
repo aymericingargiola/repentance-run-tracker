@@ -2,7 +2,7 @@ const fs = require('fs')
 const { app } = require('electron')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun } = require('./helpers')
+const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
@@ -484,8 +484,8 @@ ipcMain.on('USER_RESTORE_RUNS_FROM_TRASH', (event, payload) => {
 ipcMain.on('USER_EMPTY_TRASH', (event) => {
     console.log(`User wants to empty trash`)
     trash = []
-    syncApp(window,{trigger: "empty trash"})
-    if(windowTracker) syncApp(windowTracker,{trigger: "empty trash"})
+    syncApp(win,{trigger: "empty trash"})
+    if(winTracker) syncApp(winTracker,{trigger: "empty trash"})
     saveFileToDisk(trashJsonPath, JSON.stringify(trash))
 })
 

@@ -1,6 +1,6 @@
 module.exports = {
     syncApp: function(win, params) {
-        if (!win) return console.log(`[syncApp()] Window parameter is ${win} !`)
+        if (!win) return console.log(`[syncApp()] Window parameter is ${win} ! Trigger : ${params.trigger}`)
         switch (params.trigger) {
             case 'logs watch status':
                 win.webContents.send('SYNC_WATCH_STATUS', params)
@@ -40,6 +40,9 @@ module.exports = {
                 break
             case 'ask remove run':
                 win.webContents.send('SYNC_ASK_REMOVE_RUN', params)
+                break
+            case 'send trash':
+                win.webContents.send('SYNC_SEND_TRASH', params)
                 break
             case 'add run to trash':
                 win.webContents.send('SYNC_ADD_RUN_TO_TRASH', params)
