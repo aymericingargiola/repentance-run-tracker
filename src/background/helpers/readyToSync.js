@@ -8,7 +8,7 @@ const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const floors = require('../jsons/floors.json')
 const configTemplate = require('../jsons/configTemplate.json')
-let win, trackerWin, config, winStreaks, tags, runs
+let win, trackerWin, config, winStreaks, tags, runs, trash
 
 ipcMain.on('ASK_CONFIG', async (event, payload) => {
 	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
@@ -99,6 +99,12 @@ ipcMain.on('ASK_RUNS', async (event, payload) => {
 	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
 	if (!runs) runs = await module.exports.initRuns();
 	syncApp(window, { trigger: 'send runs', runs: runs });
+});
+
+ipcMain.on('ASK_TRASH', async (event, payload) => {
+	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	if (!trash) trash = await module.exports.initTrash();
+	syncApp(window, { trigger: 'send trash', trash: trash });
 });
 
 module.exports = {
