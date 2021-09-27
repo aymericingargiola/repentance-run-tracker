@@ -164,6 +164,7 @@ export default {
         height: 20px;
         width: 20px;
         transform: translate(4px, 13px);
+        background-repeat: no-repeat;
     }
     .after {
         right: 0px;
