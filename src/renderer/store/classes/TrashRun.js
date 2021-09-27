@@ -17,6 +17,7 @@ export default class Run extends Model {
             runDuration: this.string(''),
             characters: this.attr(null),
             floors: this.attr(null),
+            toRemove: this.attr(null)
         }
     }
 }
