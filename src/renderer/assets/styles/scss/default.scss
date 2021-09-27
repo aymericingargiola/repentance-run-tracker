@@ -60,10 +60,17 @@ button {
             transform: translate(2px, 2px);
         }
     }
+    &.warning {
+        &:not(:disabled) {
+            background-color: $red-a3;
+            color: white;
+        }
+    }
     &:disabled {
         cursor: not-allowed;
         box-shadow: 3px 3px 0px rgba($color: #000000, $alpha: 0.0);
         transform: translate(2px, 2px);
+        filter: grayscale(100);
     }
 }
 

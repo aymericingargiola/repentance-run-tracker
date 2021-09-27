@@ -7,6 +7,7 @@
         </div>
         <div class="menu right-menu" v-if="$isElectron">
             <span class="action-btn live-tracker" v-on:click="openLiveTracker()"></span>
+            <span class="action-btn open-trash" v-on:click="openOrCloseTrash()"></span>
             <span class="action-btn config" v-on:click="openOrCloseSettings()"></span>
             <span class="action-btn minimize-app" v-on:click="minimizeApp()"></span>
             <span class="action-btn fullscreen-app" v-on:click="fullscreenApp()"></span>
@@ -41,6 +42,9 @@ export default {
         },
         openOrCloseSettings() {
             this.$root.$emit('OPEN_SETTINGS')
+        },
+        openOrCloseTrash() {
+            this.$root.$emit('OPEN_TRASH')
         },
         openLiveTracker() {
             window?.ipc?.send('OPEN_LIVETRACKER');
@@ -179,6 +183,16 @@ export default {
                 }
                 &.config {
                     background-image: url("../../../public/img/icons/config.png");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    transform: scale(0.55);
+                    &:hover {
+                        opacity: 0.5;
+                        transform: scale(0.65) rotate(-10deg);
+                    }
+                }
+                &.open-trash {
+                    background-image: url("../../../public/img/icons/trash.png");
                     background-repeat: no-repeat;
                     background-size: cover;
                     transform: scale(0.55);
