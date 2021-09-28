@@ -133,7 +133,6 @@ export default {
     height: 45vh;
     z-index: 10;
     box-shadow: 0px -20px 20px rgba(0, 0, 0, 0.5);
-    padding: 30px;
     transition: 0.5s ease;
     &.open-trash-enter-active, &.open-trash-leave-active {
     }
@@ -204,6 +203,7 @@ export default {
             align-items: baseline;
             position: relative;
             z-index: 1;
+            padding: 50px 0px 16px 0px;
             .run {
                 width: auto;
                 box-shadow: none;
