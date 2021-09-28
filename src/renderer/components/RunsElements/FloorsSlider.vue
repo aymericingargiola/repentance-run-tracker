@@ -60,7 +60,7 @@ export default {
         },
     },
     mounted() {
-        if (this.index === 0) {
+        if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
             console.log("YES")
             window.ipc.on('SYNC_CREATE_RUN', () => {
                 this.canUpdateRun = false
@@ -69,7 +69,8 @@ export default {
                 }, 1500);
             })
             window.ipc.on('SYNC_UPDATE_RUN', () => {
-                if(this.canUpdateRun) {
+                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"]) {
+                    console.log("refs",this.$refs["firstRunFloorsScroller"])
                     this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
                     setTimeout(() => {
                         this.$refs["firstRunFloorsScroller"].refresh()
