@@ -135,8 +135,18 @@ function RRTE:playerUpdate(Player)
     end
 end
 
+function RRTE:runStart()
+    Isaac.DebugString("[RRTEEXTENDLOGS] Run Start [seed] : " .. Game():GetSeeds():GetStartSeedString())
+end
+
+function RRTE:runEnd()
+    Isaac.DebugString("[RRTEEXTENDLOGS] Run End [time] : " .. (Game().TimeCounter) / 30)
+end
+
 RRTE:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, RRTE.playerUpdate)
 RRTE:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, RRTE.playerInit)
+RRTE:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, RRTE.runStart)
+RRTE:AddCallback(ModCallbacks.MC_POST_GAME_END, RRTE.runEnd)
 
 -- function RRTE:entityTakeDamage(TookDamage, DamageAmount, DamageFlag, DamageSource, DamageCountdownFrames)
 --     Isaac.DebugString("[RRTE EXTEND LOGS] Damage : "..DamageAmount)
