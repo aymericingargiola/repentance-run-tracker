@@ -1,5 +1,7 @@
 {
   "name": "repentance-run-tracker",
+  "author": "Aymeric Ingargiola",
+  "description": "App to track The Binding of Isaac game's run",
   "version": "0.5.4",
   "private": true,
   "repository": {

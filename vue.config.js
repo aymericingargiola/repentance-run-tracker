@@ -19,6 +19,13 @@ module.exports = {
             mainProcessFile: 'src/background/main.js',
             rendererProcessFile: 'src/renderer/main.js',
             builderOptions: {
+                appId: "com.repentanceruntracker.app",
+                productName: "Repentance Run Tracker",
+                win: {
+                    target: [
+                        "nsis"
+                    ]
+                },
                 publish: [
                   {
                     provider: "github",
