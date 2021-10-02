@@ -2,7 +2,7 @@ const fs = require('fs')
 const { app } = require('electron')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
+const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
@@ -65,22 +65,23 @@ function checkPreviousRuns() {
 
 function isSameRun(seed) {
     if (!inRun) inRun = true
-    return runs.find(function(run, i) {
-        console.log(`compare run ${run.seed} id with current ${seed} id : compare run ${run.id} with current ${currentRun.id}`)
-        if (currentRun.id === run.id) {
-            return true
-        }
-        console.log(run.runEnd.date === null,run.seed === seed,run.gameState === currentGameState,run.gameState === currentGameState)
-        console.log(`compare run ${run.seed} with current ${seed} : [${run.gameState} <-> ${currentGameState}], run end: ${run.runEnd.date}`)
-        if (
-            run.runEnd.date === null &&
-            run.seed === seed &&
-            run.gameState === currentGameState
-            ) {
-                console.log("Same run")
+    return runs.filter(run => run.runEnd.date === null).find(function(run, i) {
+        if (currentRun.id) {
+            console.log(`compare run ${run.seed} id with current ${seed} id : compare run ${run.id} with current ${currentRun.id}`)
+            if (currentRun.id === run.id) {
                 return true
             }
-        return false
+        } else {
+            console.log(`compare run ${run.seed} with current ${seed} : [${run.gameState} <-> ${currentGameState}]`)
+            if (
+                run.seed === seed &&
+                run.gameState === currentGameState
+                ) {
+                    console.log("Possible same run")
+                    return true
+                }
+            return false
+        }
     })
 }
 
@@ -197,7 +198,7 @@ function updateOrCreateRun(params = {}) {
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
                         const runEndInfo = getRunEnd(params.log)
-                        sameRun.runEnd.date = runEndInfo.date
+                        sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : null
                         sameRun.runEnd.win = runEndInfo.win
                         sameRun.runEnd.killedBy = runEndInfo.killedBy
                         sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
@@ -206,6 +207,10 @@ function updateOrCreateRun(params = {}) {
                         if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     }
                     break
+                case 'run end ext':
+                    sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
+                    sameRun.runEnd.date = moment().unix()
+                break
                 case 'player updated':
                     const playerStats = params.stats
                     // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
@@ -263,7 +268,7 @@ function updateOrCreateRun(params = {}) {
                 date: null
             }
         }
-        console.log(run)
+        console.log(`Run ${run.id} created`)
         runs.unshift(run)
         syncApp(win,{trigger: "create run", run: run})
         if(winTracker) syncApp(winTracker,{trigger: "create run", run: run})
@@ -338,13 +343,15 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log(log)
             updateOrCreateRun({trigger: "run end", log: log})
-            currentRunInit = false
-            currentRun = null
-            currentCharater = null
-            currentFloor = null
-            currentCurse = null
-            currentGameMode = null
-            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+            if (!extendedSaveMode) {
+                currentRunInit = false
+                currentRun = null
+                currentCharater = null
+                currentFloor = null
+                currentCurse = null
+                currentGameMode = null
+                saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+            }
         }
         if(log.includes("Menu Game Init")) {
             console.log(log)
@@ -387,6 +394,18 @@ function parseLogs(newLogs, logArray) {
             console.log(log)
             updateOrCreateRun({trigger: "player updated", stats: getCharaterStats(log)})
             if (!extendedSaveMode) extendedSaveMode = true
+        }
+        if(log.includes("[RRTEEXTENDLOGS] Run End")) {
+            console.log(log)
+            updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
+            if (!extendedSaveMode) extendedSaveMode = true
+            currentRunInit = false
+            currentRun = null
+            currentCharater = null
+            currentFloor = null
+            currentCurse = null
+            currentGameMode = null
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
     })
 }

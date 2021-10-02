@@ -97,6 +97,12 @@ module.exports = {
         const hours = `0${Math.floor(duration.asHours())}`.slice(-2)
         return `${hours}${moment.utc(ms).format(":mm:ss")}`
     },
+    getRealRunDuration: (string) => {
+        const s = parseInt(string.split(" ")[9])
+        const duration = moment.duration(s,'seconds')
+        const hours = `0${Math.floor(duration.asHours())}`.slice(-2)
+        return `${hours}${moment.utc(duration.asMilliseconds()).format(":mm:ss")}`
+    },
     saveFileToDisk: (path, datas) => {
         //Update file
         fs.writeFile(path, datas, 'utf8', (err) => {if (err) throw err})
