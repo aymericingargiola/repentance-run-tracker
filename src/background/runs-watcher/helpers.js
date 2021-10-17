@@ -28,7 +28,7 @@ module.exports = {
         if (character) return cloneFrom(character)
         const logMessage = `Character was not found, undefined character returned. [log string : ${string} | split value : ${9}]`
         console.log(logMessage)
-        console.error(logMessage)
+        log.error(logMessage)
         return cloneFrom(characters.find(character => character.id === "999999999999"))
     },
     getEntity: (string) => {
@@ -39,7 +39,7 @@ module.exports = {
         if (entity) return cloneFrom(entity)
         const logMessage = `Entity was not found. [log string : ${string} | split value : ID-${entityId}-${5} Variant-${entityVariant}-${6}]`
         console.log(logMessage)
-        console.warn(logMessage)
+        log.warn(logMessage)
         return null
     },
     getCharaterStats: (string) => {
