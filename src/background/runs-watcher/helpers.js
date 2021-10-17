@@ -7,6 +7,7 @@ const entities = require('../jsons/entitiesFiltered.json')
 const items = require('../jsons/items.json')
 const floors = require('../jsons/floors.json')
 const moment = require('moment')
+const log = require('electron-log')
 module.exports = {
     getOptions: (path, splitFormat) => {
         const options = fs.readFileSync(path, "utf8")
@@ -23,13 +24,23 @@ module.exports = {
     },
     getCharater: (string) => {
         //Return matching character from logs
-        return cloneFrom(characters.find(character => character.id === string.split(" ")[9]))
+        const character = characters.find(character => character.id === string.split(" ")[9])
+        if (character) return cloneFrom(character)
+        const logMessage = `Character was not found, undefined character returned. [log string : ${string} | split value : ${9}]`
+        console.log(logMessage)
+        console.error(logMessage)
+        return cloneFrom(characters.find(character => character.id === "999999999999"))
     },
     getEntity: (string) => {
         //Return matching entity from logs
         const entityId = string.split(" ")[5].match(/(\d+)/)[0]
         const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
-        return cloneFrom(entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`)))
+        const entity = entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`))
+        if (entity) return cloneFrom(entity)
+        const logMessage = `Entity was not found. [log string : ${string} | split value : ID-${entityId}-${5} Variant-${entityVariant}-${6}]`
+        console.log(logMessage)
+        console.warn(logMessage)
+        return null
     },
     getCharaterStats: (string) => {
         //Return character stats from RRTE mod converted to json
@@ -59,27 +70,39 @@ module.exports = {
         //Return matching collectible from logs
         const id = parseInt(string.split(" ")[splitValue])
         const matchingItem = items.collectibles.find(collectible => collectible.itemID === id)
-        return {
-            id: id,
-            title: matchingItem.title,
-            itemType: matchingItem.itemType,
-            category: matchingItem.category,
-            player: module.exports.getPlayer(string),
-            removed: false
+        if (matchingItem) {
+            return {
+                id: id,
+                title: matchingItem.title,
+                itemType: matchingItem.itemType,
+                category: matchingItem.category,
+                player: module.exports.getPlayer(string),
+                removed: false
+            }
         }
+        const logMessage = `Item with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`
+        console.log(logMessage)
+        log.warn(logMessage)
+        return null
     },
     getTrinket: (string, splitValue) => {
         //Return matching trinket from logs
         const id = parseInt(string.split(" ")[splitValue])
         const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
-        return {
-            id: id,
-            title: matchingTrinket.title,
-            category: matchingTrinket.category,
-            player: module.exports.getPlayer(string),
-            removed: false,
-            smelted: false
+        if (matchingTrinket) {
+            return {
+                id: id,
+                title: matchingTrinket.title,
+                category: matchingTrinket.category,
+                player: module.exports.getPlayer(string),
+                removed: false,
+                smelted: false
+            }
         }
+        const logMessage = `Trinket with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`
+        console.log(logMessage)
+        log.warn(logMessage)
+        return null
     },
     getRunEnd: (string) => {
         //Return game over from logs
@@ -127,7 +150,9 @@ module.exports = {
             module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
             return true
         } else {
-            console.log(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
+            const logMessage = `Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`
+            console.log(logMessage)
+            log.warn(logMessage)
             return false
         }
     },
@@ -140,7 +165,9 @@ module.exports = {
                 trash.splice(runIndex, 1)
                 removedRuns.push(runId)
             } else {
-                console.log(`Impossible to find : ${runId} in trash, this run doesn't exist on the backend ! (Sync issue ?)`)
+                const logMessage = `Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`
+                console.log(logMessage)
+                log.warn(logMessage)
             }
         })
         if (removedRuns.length > 0) {
@@ -172,7 +199,9 @@ module.exports = {
                 restoredRuns.push(runToRestore.id)
                 restoredRunsItems.push(runToRestore)
             } else {
-                console.log(`Impossible to find : ${runId} in trash, this run doesn't exist on the backend ! (Sync issue ?)`)
+                const logMessage = `Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`
+                console.log(logMessage)
+                log.warn(logMessage)
             }
         })
         if (restoredRuns.length > 0) {
