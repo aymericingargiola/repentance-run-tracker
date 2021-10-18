@@ -1,5 +1,6 @@
 const fs = require('fs')
-const path = require('path');
+const fsPromises = fs.promises
+const path = require('path')
 const { ipcMain } = require('electron')
 const { syncApp } = require('./sync')
 const { app } = require('electron')
@@ -111,23 +112,25 @@ ipcMain.on('ASK_TRASH', async (event, payload) => {
 
 module.exports = {
 	checkOldFolder: async function(oldFolderPath, dataFolder) {
-		console.time(`Old folder check`)
+		console.log(`Old folder check...`)
+		console.time('Old folder check')
 		const filesToRestore = ["runs.json", "tags.json", "trash.json", "winStreaks.json", "config.json"]
 		if (dirExist(oldFolderPath)) {
 			await asyncForEach(filesToRestore, async (file) => {
 				const sourceFilePath = path.normalize(`${oldFolderPath}\\${file}`)
 				const destFilePath = path.normalize(`${dataFolder}\\${file}`)
-				fs.copyFile(sourceFilePath, destFilePath, (err) => {
+				const copyFile = await fsPromises.copyFile(sourceFilePath, destFilePath, (err) => {
 					if (err) throw err
 				})
-				return console.log(`${file} was restored from ${oldFolderPath}`)
+				console.log(`${file} was restored from ${oldFolderPath}`)
+				return copyFile
 			})
-			fs.rename(oldFolderPath, `${oldFolderPath}-backup`, function(err) {
+			await fsPromises.rename(oldFolderPath, `${oldFolderPath}-backup`, function(err) {
 				if (err) throw err
-				console.log(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
 			})
+			console.log(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
 		}
-		return console.timeEnd(`Old folder check`)
+		return console.timeEnd('Old folder check')
 	},
 	readyToSync: function(window, trackerWindow) {
 		win = window ? window : win;
