@@ -38,7 +38,7 @@ export default {
             window?.ipc?.send('FULLSCREEN_APP');
         },
         closeApp() {
-            window?.ipc?.send('CLOSE_APP', localStorage.vuex);
+            window?.ipc?.send('CLOSE_APP');
         },
         openOrCloseSettings() {
             this.$root.$emit('OPEN_SETTINGS')

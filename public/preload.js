@@ -14,7 +14,6 @@ const validChannels = [
   'UPDATE_DOWNLOADED',
   'RESTART_APP',
   'IS_APP_READY',
-  'SAVE_STORE',
   'OPEN_LIVETRACKER',
   'ASK_CONFIG',
   'SYNC_SEND_CONFIG',

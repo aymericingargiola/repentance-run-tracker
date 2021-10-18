@@ -2,7 +2,7 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { writeFileAsync, fileResolve } from './tools/fileSystem'
+import { writeFileAsync } from './tools/fileSystem'
 import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import { readyToSync, initConfig, initRuns, initTrash } from './helpers/readyToSync'
@@ -42,10 +42,6 @@ ipcMain.on('FULLSCREEN_APP', (event, payload) => {
   } else {
     win.unmaximize()
   }
-})
-
-ipcMain.on('SAVE_STORE', async (event, payload) => {
-  await writeFileAsync(dataFolder, 'store.json', payload)
 })
 
 ipcMain.on('APP_VERSION', (event) => {
