@@ -5,7 +5,7 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { writeFileAsync } from './tools/fileSystem'
 import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
-import { readyToSync, initConfig, initRuns, initTrash } from './helpers/readyToSync'
+import { checkOldFolder, readyToSync, initConfig, initRuns, initTrash } from './helpers/readyToSync'
 import { buildJsons } from './helpers/jsonBuilder'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
@@ -15,6 +15,9 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
+const appDataFolder = process.env.APPDATA
+const oldFolderName = "repentance-run-tracker"
+const oldFolderPath = path.normalize(`${appDataFolder}\\${oldFolderName}`)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
@@ -107,6 +110,7 @@ async function openLiveTracker() {
 }
 
 async function createWindow() {
+  await checkOldFolder(oldFolderPath, dataFolder)
   if(isDevelopment) await buildJsons()
   if(!config) config = await initConfig()
   if(!runs) runs = await initRuns()

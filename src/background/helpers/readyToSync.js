@@ -1,9 +1,11 @@
 const fs = require('fs')
+const path = require('path');
 const { ipcMain } = require('electron')
 const { syncApp } = require('./sync')
 const { app } = require('electron')
 const dataFolder = app.getPath("userData")
-const { writeFileAsync, fileResolve } = require('../tools/fileSystem')
+const { writeFileAsync, fileResolve, dirExist } = require('../tools/fileSystem')
+const { asyncForEach } = require('../tools/methods')
 const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const floors = require('../jsons/floors.json')
@@ -108,6 +110,25 @@ ipcMain.on('ASK_TRASH', async (event, payload) => {
 });
 
 module.exports = {
+	checkOldFolder: async function(oldFolderPath, dataFolder) {
+		console.time(`Old folder check`)
+		const filesToRestore = ["runs.json", "tags.json", "trash.json", "winStreaks.json", "config.json"]
+		if (dirExist(oldFolderPath)) {
+			await asyncForEach(filesToRestore, async (file) => {
+				const sourceFilePath = path.normalize(`${oldFolderPath}\\${file}`)
+				const destFilePath = path.normalize(`${dataFolder}\\${file}`)
+				fs.copyFile(sourceFilePath, destFilePath, (err) => {
+					if (err) throw err
+				})
+				return console.log(`${file} was restored from ${oldFolderPath}`)
+			})
+			fs.rename(oldFolderPath, `${oldFolderPath}-backup`, function(err) {
+				if (err) throw err
+				console.log(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
+			})
+		}
+		return console.timeEnd(`Old folder check`)
+	},
 	readyToSync: function(window, trackerWindow) {
 		win = window ? window : win;
 		trackerWin = trackerWindow ? trackerWindow : trackerWin;
