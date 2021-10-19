@@ -3,7 +3,6 @@ Repentance Run Tracker is an [Electron](https://www.electronjs.org/) app to reco
 
 The project is in his very early state but here is the functionality ToDo list :
 - [ ] Add more runs filters options
-- [ ] Add remove runs with trash system
 - [ ] Add compact current run "item tracker" view component
 - [ ] Add stats\
 And more...
@@ -55,7 +54,7 @@ You can add tags used for filtering (tags filter available later).
 # Contribute
 ## Project setup
 Environment : Windows 10 x64\
-Backend : [NodeJS](https://nodejs.org/en/download/) v12.18.3, [Electron](https://www.electronjs.org/) v11.4.2\
+Backend : [NodeJS](https://nodejs.org/en/download/) v12.18.3, [Electron](https://www.electronjs.org/) v11.5.0\
 Frontend : [VueJS](https://vuejs.org/) v2.6.11, [Vue Router](https://router.vuejs.org/), [Vuex ORM Next](https://next.vuex-orm.org/)
 ```
 npm install -g node-gyp
@@ -70,5 +69,4 @@ npm run electron:serve
 # Not working
 Since logs doesn't gives all the ingame informations, some issues can happen :
 - It is not possible to make a difference between 2 seeded runs with the same seed on the same save slot if the first run isn't over
-- I Didn't find a way to get ingame run duration
 - Black hearts appears as blue hearts
