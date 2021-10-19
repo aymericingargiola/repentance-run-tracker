@@ -1,6 +1,8 @@
 {
-  "name": "repentance-run-tracker",
-  "version": "0.5.4",
+  "name": "repentanceruntracker",
+  "author": "Aymeric Ingargiola",
+  "description": "App to track The Binding of Isaac game's run",
+  "version": "0.5.5",
   "private": true,
   "repository": {
     "type": "git",
@@ -26,16 +28,13 @@
     "core-js": "^3.6.5",
     "electron-log": "^4.4.0",
     "electron-updater": "^4.3.8",
-    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "vue": "^2.6.11",
     "vue-color-gradient-picker": "^0.1.2",
     "vue-router": "^3.5.1",
-    "vue-signature-pad": "^2.0.2",
     "vue2-timepicker": "^1.1.6",
     "vuescroll": "^4.17.3",
     "vuex": "^3.6.2",
-    "vuex-persistedstate": "^4.0.0-beta.3",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
@@ -46,6 +45,7 @@
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "electron": "^11.0.0",
+    "electron-builder": "~22.10.5",
     "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",

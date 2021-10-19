@@ -10824,6 +10824,22 @@
       "category": "AFTERBIRTHPLUS_ITEM"
     },
     {
+      "itemID": 474,
+      "title": "Broken Glass Cannon",
+      "pickup": "Be gentle...",
+      "effects": [
+        "This item is acquired when Isaac takes damage while holding Glass Cannon Glass Cannon. It begins with no charges.",
+        "Once fully charged, it automatically turns back into Glass Cannon."
+      ],
+      "itemType": "Active",
+      "itemPool": "Item Room, Greed Mode Item Room",
+      "tags": [
+        "silver"
+      ],
+      "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Broken_Glass_Cannon",
+      "category": "REPENTANCE_ITEM"
+    },
+    {
       "itemID": 475,
       "title": "Plan C",
       "pickup": "Use with caution",

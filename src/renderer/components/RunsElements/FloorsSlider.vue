@@ -12,7 +12,7 @@
                             <div class="floor-name">{{floor.name}}</div>
                             <transition-group name="item-group-transition" tag="ul" class="items">
                                 <template v-for="(item, tidx) in floor.itemsCollected">
-                                    <li v-if="!hideActiveItems || !hideActiveItems.value || (hideActiveItems.value && item.itemType != 'Active')" class="item-group-transition-item" :key="item.title + tidx">
+                                    <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
                                         <div class="name">
                                             {{item.title}}
                                         </div>
@@ -55,12 +55,12 @@ export default {
         })
     },
     methods: {
-        hideActiveItems() {
-            return this.configRepo.find('hideActiveItems')
-        },
+        getConfig(id) {
+            return this.configRepo.query().where('id', id).get()[0]
+        }
     },
     mounted() {
-        if (this.index === 0) {
+        if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
             console.log("YES")
             window.ipc.on('SYNC_CREATE_RUN', () => {
                 this.canUpdateRun = false
@@ -69,7 +69,8 @@ export default {
                 }, 1500);
             })
             window.ipc.on('SYNC_UPDATE_RUN', () => {
-                if(this.canUpdateRun) {
+                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"]) {
+                    console.log("refs",this.$refs["firstRunFloorsScroller"])
                     this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
                     setTimeout(() => {
                         this.$refs["firstRunFloorsScroller"].refresh()

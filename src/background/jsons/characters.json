@@ -326,5 +326,13 @@
         "trueName":"The Forgotten",
         "version":"Alternate",
         "ignore":true
+    },
+    {
+        "id":"999999999999",
+        "variant":"0",
+        "name":"Undefined",
+        "trueName":"Undefined",
+        "version":"Normal",
+        "ignore":true
     }
 ]
