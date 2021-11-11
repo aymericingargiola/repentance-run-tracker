@@ -49,8 +49,10 @@ module.exports = {
         return JSON.parse(playerStats)
     },
     getSeed: (string) => {
+        const splitValuePart1 = string.includes("Pool") ? 15 : 5
+        const splitValuePart2 = string.includes("Pool") ? 16 : 6
         return {
-            'seed': `${string.split(" ")[5]} ${string.split(" ")[6]}`
+            'seed': `${string.split(" ")[splitValuePart1]} ${string.split(" ")[splitValuePart2]}`
         }
     },
     getFloor: (string) => {
@@ -83,7 +85,14 @@ module.exports = {
         const logMessage = `Item with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`
         console.log(logMessage)
         log.warn(logMessage)
-        return null
+        return {
+            id: id,
+            title: "unknow item",
+            itemType: "unknow type",
+            category: "unknow category",
+            player: module.exports.getPlayer(string),
+            removed: false
+        }
     },
     getTrinket: (string, splitValue) => {
         //Return matching trinket from logs

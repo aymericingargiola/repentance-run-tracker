@@ -17,7 +17,7 @@ const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 const runsJsonPath = `${dataFolder}\\runs.json`
 const trashJsonPath = `${dataFolder}\\trash.json`
 const configJsonPath = `${dataFolder}\\config.json`
-let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win, winTracker
+let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
@@ -48,7 +48,7 @@ function checkPreviousRuns() {
             console.log("Current run was generated over an unfinished run on the same game state, ask user if he wants to remove it")
             runs[1].toRemove.status = true
             sameGameStateAlreadyChecked = true
-            syncApp(win,{trigger: "ask remove run", run: [runs[1]]})
+            syncApp(win,{trigger: "ask remove run", run: runs[1]})
         } else console.log("Previous run is not from the same game state")
         if (!sameGameStateAlreadyChecked) {
             console.log("Check saved runs matching the current game state...")
@@ -289,23 +289,25 @@ function updateOrCreateRun(params = {}) {
 function parseLogs(newLogs, logArray) {
     newLogs.forEach(log => {
         if(log.includes("Loading GameState")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             currentGameState = getGameState(log)
         }
         if(log.includes("Initialized player")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             if(!currentCharater) currentCharater = getCharater(log)
             else if (currentRunInit) {
                 updateOrCreateRun({trigger: "init other player", character: getCharater(log)})
             }
         }
-        if(log.includes("RNG Start Seed")) {
-            console.log(log)
+        if(log.includes("Start Seed")) {
+            console.log("\x1b[35m", log, "\x1b[0m")
             currentRunInit = false
             currentRun = getSeed(log)
+            continueRun = log.includes("Continue")
+            newRun = log.includes("New")
         }
         if(log.includes("Level::Init")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             currentCurse = logArray[logArray.lastIndexOf(log) + 1].includes("Curse") ? logArray[logArray.lastIndexOf(log) + 1].split(" ").slice(2).join(" ") : null
             currentFloor = getFloor(log)
             if (currentCurse) currentFloor.curse = currentCurse
@@ -313,43 +315,43 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("generated rooms")) {
             if (!currentRunInit) {
-                console.log(log)
+                console.log("\x1b[35m", log, "\x1b[0m")
                 currentRunInit = true
                 updateOrCreateRun({trigger: "generated rooms"})
             }
         }
         if(log.includes("Spawn Entity")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "spawn entity", entity: getEntity(log)})
         }
         if(log.split(' ')[2] === "Room") {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             if (!currentGameMode) {
                 updateOrCreateRun({trigger: "game mode", log: log})
             }
         }
         if(log.includes("Adding collectible")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Removing voided collectible")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, 5)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding trinket")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             //updateOrCreateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
             //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding smelted trinket")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             //updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
             //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end", log: log})
             if (!extendedSaveMode) {
                 currentRunInit = false
@@ -358,11 +360,13 @@ function parseLogs(newLogs, logArray) {
                 currentFloor = null
                 currentCurse = null
                 currentGameMode = null
+                continueRun = null
+                newRun = null
                 saveFileToDisk(runsJsonPath, JSON.stringify(runs))
             }
         }
         if(log.includes("Menu Game Init")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             inRun = false
             //backToMenu = true
             currentRunInit = false
@@ -374,12 +378,12 @@ function parseLogs(newLogs, logArray) {
         }
         //If "Repentance Run Tracker Extended" mod is loaded, parse extra logs lines
         if(log.includes("Lua is resetting!")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             extendedSaveMode = false
             otherModLoaded = false
         }
         if(log.includes("Running Lua Script") && !log.includes("resources/scripts/")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             const modPath = getModPath(log)
             const field = config.filter(field => field.id === "isaacModFolderPath")[0]
             if (!field || field.value != modPath) {
@@ -399,12 +403,12 @@ function parseLogs(newLogs, logArray) {
             }
         }
         if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "player updated", stats: getCharaterStats(log)})
             if (!extendedSaveMode) extendedSaveMode = true
         }
         if(log.includes("[RRTEEXTENDLOGS] Run End")) {
-            console.log(log)
+            console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
             if (!extendedSaveMode) extendedSaveMode = true
             currentRunInit = false
@@ -459,7 +463,7 @@ async function init() {
     let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
     let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
-    let gameInit = repentanceLogsArray.filter(v=>v.includes("Menu Game Init"))
+    // let gameInit = repentanceLogsArray.filter(v=>v.includes("Menu Game Init"))
     let isShutdown = repentanceLogsArray.filter(v=>v.includes("Isaac has shut down successfully")).length > 0
     if (seedsList[seedsList.length - 1] != undefined && !isShutdown) {
         console.log("Seeds exist in current logs, checking...")
@@ -467,18 +471,18 @@ async function init() {
         inRun = lastLogs.filter(v=>v.includes("Menu Game Init")).length < 1 && lastLogs.filter(v=>v.includes("Game Over")).length < 1 && lastLogs.filter(v=>v.includes("playing cutscene")).length < 1
         console.log("Currently in run :", inRun)
         if (inRun) {
-            parseLogs(lastLogs, repentanceLogsArray)
-        } else {
-            const lastLogsOver = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, gameInit[gameInit.length - 1]), repentanceLogsArray.length - 1)
-            parseLogs(lastLogsOver, repentanceLogsArray)
+            parseLogs(lastLogs.filter(v=>v.includes("Start Seed") || v.includes("generated rooms")), repentanceLogsArray)
         }
+        // else {
+        //     const lastLogsOver = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, gameInit[gameInit.length - 1]), repentanceLogsArray.length - 1)
+        //     parseLogs(lastLogsOver, repentanceLogsArray)
+        // }
     } else if (!isShutdown) {
         parseLogs(repentanceLogsArray, repentanceLogsArray)
     }
     
     logsLastReadLines = repentanceLogsArray.filter(v=>v!='').length
     if(!firstInit) firstInit = true
-    //console.log('init values : ', currentRun, currentCharater, currentFloor)
 }
 
 
