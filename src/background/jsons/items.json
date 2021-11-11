@@ -15285,6 +15285,56 @@
       ],
       "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Decap_Attack",
       "category": "REPENTANCE_ITEM"
+    },
+    {
+      "itemID": 730,
+      "title": "Glass Eye",
+      "pickup": "DMG + luck up",
+      "effects": [
+        "+0.75 damage",
+        "+1 luck."
+      ],
+      "itemType": "Passive",
+      "itemPool": "",
+      "tags": [
+        ","
+      ],
+      "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Glass_Eye",
+      "category": "REPENTANCE_ITEM"
+    },
+    {
+      "itemID": 731,
+      "title": "Stye",
+      "pickup": "DMG + range up",
+      "effects": [
+        "+28% damage on Isaac's right eye.",
+        "+7 range on Isaac's right eye.",
+        "-0.3 Shot Speed on Isaac's right eye."
+      ],
+      "itemType": "Passive",
+      "itemPool": "",
+      "tags": [
+        ","
+      ],
+      "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Stye",
+      "category": "REPENTANCE_ITEM"
+    },
+    {
+      "itemID": 732,
+      "title": "Mom's Ring",
+      "pickup": "DMG up",
+      "effects": [
+        "+1 damage.",
+        "Drops a random rune or soul stone upon pickup.",
+        "This item belongs to the Yes Mother? set. Collecting three items from this set will transform Isaac into his mother."
+      ],
+      "itemType": "Passive",
+      "itemPool": "",
+      "tags": [
+        ","
+      ],
+      "wikiUrl": "https://bindingofisaacrebirth.fandom.com/wiki/Mom%27s_Ring",
+      "category": "REPENTANCE_ITEM"
     }
   ],
   "trinkets": [

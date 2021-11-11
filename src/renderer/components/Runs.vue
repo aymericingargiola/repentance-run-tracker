@@ -132,10 +132,6 @@ export default {
             console.log(response)
             this.runRepo.destroy(response.run)
         })
-        window.ipc.on('SYNC_ASK_REMOVE_RUN', (response) => {
-            console.log(response)
-            this.updateRun = response.run
-        })
     },
     computed: {
         ...mapRepos({

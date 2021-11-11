@@ -44,7 +44,7 @@ export default {
                 return this.runRepo.query().where('id', run.id).get()
             },
             set: function (run) {
-                this.runRepo.update(run)
+                this.runRepo.where('id', run.id).update(run)
             }
         },
     },
