@@ -199,7 +199,7 @@ function updateOrCreateRun(params = {}) {
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
                         const runEndInfo = getRunEnd(params.log)
-                        sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : null
+                        sameRun.runEnd.date = runEndInfo.date
                         sameRun.runEnd.win = runEndInfo.win
                         sameRun.runEnd.killedBy = runEndInfo.killedBy
                         sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
@@ -353,7 +353,6 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end", log: log})
-            if (!extendedSaveMode) {
                 currentRunInit = false
                 currentRun = null
                 currentCharater = null
@@ -363,7 +362,6 @@ function parseLogs(newLogs, logArray) {
                 continueRun = null
                 newRun = null
                 saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-            }
         }
         if(log.includes("Menu Game Init")) {
             console.log("\x1b[35m", log, "\x1b[0m")

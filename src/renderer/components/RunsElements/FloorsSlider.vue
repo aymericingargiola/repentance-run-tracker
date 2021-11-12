@@ -61,7 +61,6 @@ export default {
     },
     mounted() {
         if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
-            console.log("YES")
             window.ipc.on('SYNC_CREATE_RUN', () => {
                 this.canUpdateRun = false
                 setTimeout(() => {
@@ -70,7 +69,6 @@ export default {
             })
             window.ipc.on('SYNC_UPDATE_RUN', () => {
                 if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"]) {
-                    console.log("refs",this.$refs["firstRunFloorsScroller"])
                     this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
                     setTimeout(() => {
                         this.$refs["firstRunFloorsScroller"].refresh()
@@ -87,6 +85,7 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+@import "../../assets/styles/scss/vars/_animations";
 .run-el.custom-scroll-floors {
     height: unset !important;
     overflow: visible !important;
@@ -171,6 +170,7 @@ export default {
                     background-size: contain;
                     //transform: scale(2);
                     &.floor {
+                        transition: 1s ease;
                         transition-delay: 1s;
                         width: 48px;
                         height: 32px;
