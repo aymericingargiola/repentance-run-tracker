@@ -3,7 +3,7 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { writeFileAsync } from './tools/fileSystem'
-import { startLogsWatch, liveTrackerWindowState } from './runs-watcher'
+import { startLogsWatch, itemTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import { checkOldFolder, readyToSync, initConfig, initRuns, initTrash } from './helpers/readyToSync'
 import { buildJsons } from './helpers/jsonBuilder'
@@ -51,8 +51,8 @@ ipcMain.on('APP_VERSION', (event) => {
   event.reply('APP_VERSION', { appVersion: app.getVersion() })
 })
 
-ipcMain.on('OPEN_LIVETRACKER', async (event, payload) => {
-  openLiveTracker()
+ipcMain.on('OPEN_ITEMTRACKER', async (event, payload) => {
+  openItemTracker()
 })
 
 // Scheme must be registered before the app is ready
@@ -60,7 +60,7 @@ protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-async function openLiveTracker() {
+async function openItemTracker() {
   if (winTracker) return
   winTracker = new BrowserWindow({
     title: "Item Tracker",
@@ -103,10 +103,10 @@ async function openLiveTracker() {
     winTracker.destroy()
     winTracker = undefined
     readyToSync(false, winTracker)
-    liveTrackerWindowState(winTracker)
+    itemTrackerWindowState(winTracker)
   })
 
-  liveTrackerWindowState(winTracker)
+  itemTrackerWindowState(winTracker)
 }
 
 async function createWindow() {

@@ -14,7 +14,7 @@ const configTemplate = require('../jsons/configTemplate.json')
 let win, trackerWin, config, winStreaks, tags, runs, trash
 
 ipcMain.on('ASK_CONFIG', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	if (!config) config = await module.exports.initConfig();
 	syncApp(window, { trigger: 'send config', config: config });
 });
@@ -26,22 +26,22 @@ ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
 });
 
 ipcMain.on('ASK_ENTITIES', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	syncApp(window, { trigger: 'send entities', entities: entities });
 });
 
 ipcMain.on('ASK_FLOORS', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	syncApp(window, { trigger: 'send floors', floors: floors.stages });
 });
 
 ipcMain.on('ASK_CHARACTERS', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	syncApp(window, { trigger: 'send characters', characters: characters });
 });
 
 ipcMain.on('ASK_WINSTREAKS', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	if (!winStreaks) winStreaks = await module.exports.initwinStreaks();
 	syncApp(window, { trigger: 'send winstreaks', winStreaks: winStreaks });
 });
@@ -70,7 +70,7 @@ ipcMain.on('USER_UPDATE_WINSTREAK', async (event, payload) => {
 });
 
 ipcMain.on('ASK_TAGS', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	if (!tags) tags = await module.exports.initTags();
 	syncApp(window, { trigger: 'send tags', tags: tags });
 });
@@ -99,13 +99,13 @@ ipcMain.on('USER_UPDATE_TAGS', async (event, payload) => {
 });
 
 ipcMain.on('ASK_RUNS', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	if (!runs) runs = await module.exports.initRuns();
 	syncApp(window, { trigger: 'send runs', runs: runs });
 });
 
 ipcMain.on('ASK_TRASH', async (event, payload) => {
-	const window = payload && payload.window === 'liveTracker' ? trackerWin : win;
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win;
 	if (!trash) trash = await module.exports.initTrash();
 	syncApp(window, { trigger: 'send trash', trash: trash });
 });

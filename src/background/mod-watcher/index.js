@@ -2,6 +2,7 @@ const fs = require('fs')
 const { app } = require('electron')
 const { watch, unlinkSync } = require('fs')
 const path = require('path')
+const log = require('electron-log')
 const compareVersions = require('compare-versions')
 const convert = require('xml-js')
 const { dirExist, fileResolve, writeFileAsync, readFileAsync } = require('../tools/fileSystem')
@@ -40,6 +41,7 @@ async function checkMod() {
         await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'metadata.xml', modMetadata)
         await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'disable.it', '')
         console.log("Mod files created")
+        log.info(`Extended logs mod's files was missing, created in ${isaacModFolderPath}\\${modName}`)
         return
     }
     const currentModMetadataFile = await readFileAsync(`${isaacModFolderPath}\\${modName}`, `metadata.xml`)
@@ -50,6 +52,7 @@ async function checkMod() {
         await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'main.lua', modFile)
         await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'metadata.xml', modMetadata)
         console.log("Mod updated")
+        log.info(`Extended logs mod version is different ! [current = ${currentModVersion} | new = ${appModVersion}], updated in ${isaacModFolderPath}\\${modName}`)
     }
 }
 

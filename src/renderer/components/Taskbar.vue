@@ -6,7 +6,7 @@
         <div class="menu center-menu">
         </div>
         <div class="menu right-menu" v-if="$isElectron">
-            <span class="action-btn live-tracker" v-on:click="openLiveTracker()"></span>
+            <!-- <span class="action-btn item-tracker" v-on:click="openItemTracker()"></span> -->
             <span class="action-btn open-trash" v-on:click="openOrCloseTrash()"></span>
             <span class="action-btn config" v-on:click="openOrCloseSettings()"></span>
             <span class="action-btn minimize-app" v-on:click="minimizeApp()"></span>
@@ -46,8 +46,8 @@ export default {
         openOrCloseTrash() {
             this.$root.$emit('OPEN_TRASH')
         },
-        openLiveTracker() {
-            window?.ipc?.send('OPEN_LIVETRACKER');
+        openItemTracker() {
+            window?.ipc?.send('OPEN_ITEMTRACKER');
         }
     },
 };
@@ -201,7 +201,7 @@ export default {
                         transform: scale(0.65) rotate(-10deg);
                     }
                 }
-                &.live-tracker {
+                &.item-tracker {
                     background-image: url("../../../public/img/icons/play.png");
                     background-repeat: no-repeat;
                     background-size: cover;
