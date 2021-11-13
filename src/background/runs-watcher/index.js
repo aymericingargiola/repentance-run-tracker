@@ -199,7 +199,7 @@ function updateOrCreateRun(params = {}) {
                 case 'run end':
                     if (sameRun.runEnd.date === null) {
                         const runEndInfo = getRunEnd(params.log)
-                        sameRun.runEnd.date = runEndInfo.date
+                        sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : null
                         sameRun.runEnd.win = runEndInfo.win
                         sameRun.runEnd.killedBy = runEndInfo.killedBy
                         sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
@@ -302,6 +302,10 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Start Seed")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             currentRunInit = false
+            currentCharater = null
+            currentFloor = null
+            currentCurse = null
+            currentGameMode = null
             currentRun = getSeed(log)
             continueRun = log.includes("Continue")
             newRun = log.includes("New")
@@ -353,26 +357,12 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end", log: log})
-                currentRunInit = false
-                currentRun = null
-                currentCharater = null
-                currentFloor = null
-                currentCurse = null
-                currentGameMode = null
-                continueRun = null
-                newRun = null
-                saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Menu Game Init")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             inRun = false
-            //backToMenu = true
-            currentRunInit = false
-            currentRun = null
-            currentCharater = null
-            currentFloor = null
-            currentCurse = null
-            currentGameMode = null
+            backToMenu = true
         }
         //If "Repentance Run Tracker Extended" mod is loaded, parse extra logs lines
         if(log.includes("Lua is resetting!")) {
@@ -409,12 +399,6 @@ function parseLogs(newLogs, logArray) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
             if (!extendedSaveMode) extendedSaveMode = true
-            currentRunInit = false
-            currentRun = null
-            currentCharater = null
-            currentFloor = null
-            currentCurse = null
-            currentGameMode = null
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
     })
