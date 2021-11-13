@@ -339,9 +339,9 @@ function parseLogs(newLogs, logArray) {
             updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
-        if(log.includes("Removing voided collectible")) {
+        if(log.includes("Removing voided collectible") || log.includes("Removing collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, 5)})
+            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Adding trinket")) {
