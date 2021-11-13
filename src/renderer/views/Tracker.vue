@@ -50,12 +50,12 @@ export default {
   async created() {
   },
   mounted() {
-    window.ipc.send('ASK_CONFIG', ({window:"liveTracker"}))
+    window.ipc.send('ASK_CONFIG', ({window:"itemTracker"}))
     window.ipc.on('SYNC_SEND_CONFIG', (response) => {
         console.log(response)
         this.configRepo.fresh(response.config)
     }),
-    window.ipc.send('ASK_RUNS', ({window:"liveTracker"}))
+    window.ipc.send('ASK_RUNS', ({window:"itemTracker"}))
     window.ipc.on('SYNC_SEND_RUNS', (response) => {
         console.log(response)
         this.runRepo.fresh(response.runs)
@@ -79,7 +79,7 @@ export default {
         runRepo: Run
     }),
     getLiveTrackerBackground() {
-        return this.configRepo.find('liveTrackerBackgroundColor')
+        return this.configRepo.find('itemTrackerBackgroundColor')
     },
     currentRun() {
         return this.runRepo.orderBy('runUpdate', this.filterOrder).first()
@@ -110,7 +110,7 @@ export default {
     onChange(attrs, name) {
       this.color = { ...attrs }
       if (name === 'end') {
-        const config = {id: 'liveTrackerBackgroundColor', value: this.color}
+        const config = {id: 'itemTrackerBackgroundColor', value: this.color}
         this.updateLiveTrackerBackground(config)
         this.saveConfig(config)
       }

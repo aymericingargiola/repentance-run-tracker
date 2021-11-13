@@ -541,7 +541,7 @@ module.exports = {
             }
         }, 1000)
     },
-    liveTrackerWindowState: function (window) {
+    itemTrackerWindowState: function (window) {
         winTracker = window
     }
 }
