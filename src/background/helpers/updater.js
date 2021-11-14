@@ -17,8 +17,16 @@ if(!isDevelopment && !process.env.IS_TEST) {
     })
 }
 
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-    win.webContents.send('UPDATE_DOWNLOADED')
+autoUpdater.on('update-available', (infos) => {
+    win.webContents.send('UPDATE_AVAILABLE', infos)
+})
+
+autoUpdater.on('download-progress', (progress) => {
+    win.webContents.send('UPDATE_PROGRESS', progress)
+})
+
+autoUpdater.on('update-downloaded', (infos) => {
+    win.webContents.send('UPDATE_DOWNLOADED', infos)
 })
 
 ipcMain.on('RESTART_APP', () => {
