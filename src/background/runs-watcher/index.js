@@ -66,7 +66,7 @@ function checkPreviousRuns() {
 
 function isSameRun(seed) {
     if (!inRun) inRun = true
-    return runs.filter(run => run.runEnd.date === null).find(function(run, i) {
+    return runs.filter(run => run.runEnd.date === null || run.runEnd.win === null).find(function(run, i) {
         if (currentRun.id) {
             console.log(`compare run ${run.seed} id with current ${seed} id : compare run ${run.id} with current ${currentRun.id}`)
             if (currentRun.id === run.id) {
@@ -167,7 +167,7 @@ function updateOrCreateRun(params = {}) {
     const sameRun = isSameRun(currentRun.seed)
     if (sameRun) {
         console.log('Seed exists, check...')
-        if(sameRun.runEnd.date === null) {
+        if(sameRun.runEnd.date === null || sameRun.runEnd.win === null) {
             console.log('Update current run...')
             if(currentRun.id === undefined) currentRun.id = sameRun.id
             switch (params.trigger) {
@@ -197,17 +197,15 @@ function updateOrCreateRun(params = {}) {
                     if (params.collectible) collectiblesManager(sameRun, params.collectible, "remove")
                     break
                 case 'run end':
-                    if (sameRun.runEnd.date === null) {
-                        const runEndInfo = getRunEnd(params.log)
-                        sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : null
-                        sameRun.runEnd.win = runEndInfo.win
-                        sameRun.runEnd.killedBy = runEndInfo.killedBy
-                        sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
-                        sameRun.runEnd.damageFlags = runEndInfo.damageFlags
-                        sameRun.runDuration = getRunDuration(moment.unix(runEndInfo.date), moment.unix(sameRun.runStart))
-                        if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
-                        log.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
-                    }
+                    const runEndInfo = getRunEnd(params.log)
+                    sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : sameRun.runEnd.date
+                    sameRun.runEnd.win = runEndInfo.win
+                    sameRun.runEnd.killedBy = runEndInfo.killedBy
+                    sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
+                    sameRun.runEnd.damageFlags = runEndInfo.damageFlags
+                    sameRun.runDuration = getRunDuration(moment.unix(runEndInfo.date), moment.unix(sameRun.runStart))
+                    if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
+                    log.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     break
                 case 'run end ext':
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
