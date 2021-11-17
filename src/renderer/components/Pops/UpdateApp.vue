@@ -1,10 +1,11 @@
 <template>
     <transition name="fade">
-        <div v-if="updateDownloaded" class="pop-up update-app" @click="update">
+        <div v-if="updateDownloaded || updateProgress" class="pop-up update-app" @click="update">
             <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
             <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
             <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-            <div class="title">Update available, click here to update and restart</div>
+            <div v-if="updateProgress" class="title">Update {{updateVersion}} downloading: {{Math.round(updateProgressInfos.percent)}}%</div>
+            <div v-if="updateDownloaded" class="title">Update {{updateVersion}} downloaded, click here to update and restart</div>
         </div>
     </transition>
 </template>
@@ -14,20 +15,48 @@ export default {
     name: "UpdateApp",
     data() {
         return {
+            updateAvailable: false,
+            updateAvailableInfos: null,
+            updateProgress: false,
+            updateProgressInfos: null,
             updateDownloaded: false,
+            updateDownloadedInfos: null,
         }
     },
     mounted() {
-        window.ipc.on('UPDATE_DOWNLOADED', () => {
+        window.ipc.on('UPDATE_AVAILABLE', (infos) => {
+            this.updateAvailable = true
+            this.updateAvailableInfos = infos
+        })
+        window.ipc.on('UPDATE_PROGRESS', (progress) => {
+            this.updateProgress = true
+            this.updateProgressInfos = progress
+        })
+        window.ipc.on('UPDATE_DOWNLOADED', (infos) => {
+            this.updateProgress = false
             this.updateDownloaded = true
+            this.updateDownloadedInfos = infos
         })
     },
     computed: {
+        updateVersion() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.version : null
+        },
+        updateSize() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.size : null
+        },
+        updateName() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.releaseName : null
+        },
+        updateNotes() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.releaseNotes : null
+        }
     },
     methods: {
         update() {
-            this.clicked = true
-            window?.ipc?.send('RESTART_APP')
+            if (this.updateDownloaded) {
+                window?.ipc?.send('RESTART_APP')
+            }
         }
     }
 };
@@ -40,7 +69,7 @@ export default {
     top: 40px;
     right: 30px;
     z-index: 10;
-    max-width: 240px;
+    width: 300px;
     cursor: pointer;
     padding: 8px 8px 16px 8px;
     > .before, .after, .mid {

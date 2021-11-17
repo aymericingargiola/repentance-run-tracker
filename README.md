@@ -54,7 +54,7 @@ You can add tags used for filtering (tags filter available later).
 # Contribute
 ## Project setup
 Environment : Windows 10 x64\
-Backend : [NodeJS](https://nodejs.org/en/download/) v12.18.3, [Electron](https://www.electronjs.org/) v11.5.0\
+Backend : [NodeJS](https://nodejs.org/en/download/) v12.18.3, [Electron](https://www.electronjs.org/) v15.3.0\
 Frontend : [VueJS](https://vuejs.org/) v2.6.11, [Vue Router](https://router.vuejs.org/), [Vuex ORM Next](https://next.vuex-orm.org/)
 ```
 npm install -g node-gyp
