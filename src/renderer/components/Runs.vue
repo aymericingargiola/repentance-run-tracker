@@ -16,10 +16,18 @@
                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"></div>
-                    <div class="run-content">
+                    <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '']">
                         <RunInfos :id="run.id" :gameState="run.gameState" :seed="run.seed" :characters="run.characters" :floors="run.floors" :run-start="run.runStart" :run-end="run.runEnd" :run-duration="run.runDuration"/>
                         <RunCharacter :characters="run.characters" :floors="run.floors" :run-end="run.runEnd"/>
                         <RunFloorsSlider :ops="opsFloors" :index="ridx" :floors="run.floors"/>
+                        <div class="run-custom-name" v-if="run.customName != ''">
+                            <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                            <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                            <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                            <div class="content" :title="run.customName">
+                                {{run.customName}}
+                            </div>
+                        </div>
                     </div>
                 </li>
             </template>
@@ -279,6 +287,9 @@ export default {
         overflow: hidden;
         width: 100%;
         z-index: 1;
+        &.has-custom-name {
+            padding-bottom: 82px;
+        }
         &::before {
             content: "";
             position: absolute;
@@ -303,6 +314,58 @@ export default {
             opacity: 1;
             transform: translateX(0px) translateY(-50%);
             z-index: 2;
+        }
+        .run-custom-name {
+            display: block;
+            position: absolute;
+            bottom: 30px;
+            left: 15px;
+            z-index: 3;
+            padding: 5px 10px 10px 10px;
+            max-width: 95%;
+            > .before, .after, .mid {
+                z-index: 0;
+                position: absolute;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                pointer-events: none;
+            }
+            > .before {
+                content: "";
+                height: 100%;
+                width: 8px;
+                left: 0px;
+                top: 0px;
+                transform: translateX(-8px);
+            }
+            > .after {
+                height: 100%;
+                width: 12px;
+                right: 0px;
+                top: 0px;
+                transform: translateX(12px);
+                z-index: 2;
+            }
+            > .mid {
+                height: 100%;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+                background-size: contain;
+                background-repeat: repeat-x;
+            }
+            .content {
+                position: relative;
+                z-index: 2;
+                min-height: 18px;
+                text-align: left;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &:hover {
+                    cursor: default;
+                }
+            }
         }
     }
     &.run-unfinished {
