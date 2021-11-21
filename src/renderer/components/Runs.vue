@@ -1,8 +1,14 @@
 <template>
     <section class="section runs">
-        <div v-if="this.allRuns && this.allRuns.length > 0" class="filters">
+        <div v-if="allRuns && allRuns.length > 0" class="filters">
             <div class="search">
                 <input v-model="filterText" @input="resetPagination" placeholder="Search runs">
+                <!-- <select name="tags" @change="onTagChange($event)">
+                    <template v-for="tag in tagsWithRuns">
+                        <option :value="tag.id" :key="tag.id">{{tag.value}}</option>
+                    </template>
+                </select> -->
+                <CustomSelect v-if="allTags" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="No tags selected" @updateSelect="onUpdateTagsMultiSelect"/>
             </div>
         </div>
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
@@ -59,12 +65,14 @@ import Tag from '../store/classes/Tag'
 import RunInfos from '../components/RunsElements/Infos.vue'
 import RunCharacter from '../components/RunsElements/Character.vue'
 import RunFloorsSlider from '../components/RunsElements/FloorsSlider.vue'
+import CustomSelect from './Tools/CustomSelect.vue'
 export default {
     name: "Runs",
     components: {
         RunInfos,
         RunCharacter,
-        RunFloorsSlider
+        RunFloorsSlider,
+        CustomSelect
     },
     data() {
         return {
@@ -146,6 +154,12 @@ export default {
             runRepo: Run,
             tagRepo: Tag
         }),
+        allTags() {
+            return this.tagRepo.all()
+        },
+        tagsWithRuns() {
+            return this.tagRepo.where((tag) => { return this.checkTagRuns(tag) }).orderBy('value', 'desc').get()
+        },
         allRuns() {
             return this.runRepo.all()
         },
@@ -169,9 +183,16 @@ export default {
             this.currentPage = this.currentPage === 1 ? this.currentPage : 1
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
         },
+        onUpdateTagsMultiSelect(selected) {
+            console.log(selected)
+            this.filterTags = selected
+        },
+        checkTagRuns(tag) {
+            if (tag.runs_ids.filter(runId => !!this.runRepo.where('id', runId).first()).length > 0) return tag
+        },
         filter(run) {
             // tags filter
-            if (this.filterTags.length > 0 && !this.filterTags.some(tag => run.tags_ids.includes(tag))) return
+            if (this.filterTags.length > 0 && !this.filterTags.some(tag => run.tags_ids.includes(tag.id))) return
             // text filter
             if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()

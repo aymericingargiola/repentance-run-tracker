@@ -64,6 +64,7 @@ export default {
     },
     data() {
         return {
+            clean: false,
             addingItem: false,
             tempVal: this.type === 'time' ? { HH:"00", mm:"00", ss:"00" } : '',
             tempCurrentTag: ''
@@ -213,7 +214,7 @@ export default {
             if(this.type === 'string') this.checkTagRemove()
             else this.removeVideoHighlights = tagValue
         }
-    },
+    }
 };
 </script>
 

@@ -12,12 +12,14 @@
 }
 
 input,
-select {
+select,
+.select-content {
 	transition: 0.25s ease;
 	font-family: "Baby Doll", sans-serif;
 	border-width: 2px;
     border-style: outset;
 	padding: 8px;
+    border-color: grey;
 	border-radius: 8px;
     background-color: $paper-white-accent;
     box-shadow: 3px 3px 0px rgba($color: #000000, $alpha: 0.3);
