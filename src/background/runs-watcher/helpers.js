@@ -24,9 +24,10 @@ module.exports = {
     },
     getCharater: (string) => {
         //Return matching character from logs
-        const character = characters.find(character => character.id === string.split(" ")[9])
+        const splitValue = string.includes("Pool") ? 19 : 9
+        const character = characters.find(character => character.id === string.split(" ")[splitValue])
         if (character) return cloneFrom(character)
-        const logMessage = `Character was not found, undefined character returned. [log string : ${string} | split value : ${9}]`
+        const logMessage = `Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}]`
         console.log(logMessage)
         log.error(logMessage)
         return cloneFrom(characters.find(character => character.id === "999999999999"))
