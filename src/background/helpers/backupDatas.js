@@ -31,9 +31,10 @@ module.exports = {
       console.timeEnd("Datas restored in")
       return false
     }
+    backupZips = backupZips.map(function (fileName) { return { name: fileName, time: fs.statSync(`${dataFolder}/backups/${fileName}`).mtime.getTime() } }).sort(function (a, b) { return b.time - a.time }).map(function (f) { return f.name })
     await asyncForEach(filesToRestore, async (fileName) => {
       let fileRestored
-      await asyncForEach(backupZips.reverse(), async (backupZip) => {
+      await asyncForEach(backupZips, async (backupZip) => {
         if (fileRestored) return
         const zip = new AdmZip(`${dataFolder}/backups/${backupZip}`)
         const fileEntry = zip.getEntry(fileName)
