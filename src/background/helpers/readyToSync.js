@@ -138,15 +138,11 @@ module.exports = {
 			await asyncForEach(filesToRestore, async (file) => {
 				const sourceFilePath = path.normalize(`${oldFolderPath}\\${file}`)
 				const destFilePath = path.normalize(`${dataFolder}\\${file}`)
-				const copyFile = await fsPromises.copyFile(sourceFilePath, destFilePath, (err) => {
-					if (err) throw err
-				})
+				const copyFile = await fsPromises.copyFile(sourceFilePath, destFilePath)
 				console.log(`${file} was restored from ${oldFolderPath}`)
 				return copyFile
 			})
-			await fsPromises.rename(oldFolderPath, `${oldFolderPath}-backup`, function(err) {
-				if (err) throw err
-			})
+			await fsPromises.rename(oldFolderPath, `${oldFolderPath}-backup`)
 			console.log(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
 		}
 		return console.timeEnd('Old folder check')
