@@ -3,13 +3,8 @@
         <div v-if="allRuns && allRuns.length > 0" class="filters">
             <div class="search">
                 <input v-model="filterText" @input="resetPagination" placeholder="Search runs">
-                <!-- <select name="tags" @change="onTagChange($event)">
-                    <template v-for="tag in tagsWithRuns">
-                        <option :value="tag.id" :key="tag.id">{{tag.value}}</option>
-                    </template>
-                </select> -->
-                <CustomSelect v-if="allTags" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="No tags selected" @updateSelect="onUpdateTagsMultiSelect"/>
             </div>
+            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="No tags selected" @updateSelect="onUpdateTagsMultiSelect"/>
         </div>
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, ridx) in filteredRuns">
@@ -184,7 +179,6 @@ export default {
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
         },
         onUpdateTagsMultiSelect(selected) {
-            console.log(selected)
             this.filterTags = selected
         },
         checkTagRuns(tag) {
@@ -237,6 +231,13 @@ export default {
     margin-bottom: 16px;
     text-align: left;
     padding: 0px 12px;
+    display: flex;
+    margin-left: -8px;
+    margin-right: -8px;
+    > div {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 }
 .run {
     position: relative;
