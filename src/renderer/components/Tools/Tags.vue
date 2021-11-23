@@ -31,7 +31,7 @@
                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
                 <div v-if="type === 'string'" class="tag-name edit">
-                    <input type="text" v-model="tempVal" placeholder="Tag name">
+                    <input type="text" class="size-auto" v-model="tempVal" placeholder="Tag name">
                     <div v-if="tempVal != '' && getMatchingTags && getMatchingTags.length > 0" class="tags-suggestions">
                         <ul>
                             <template v-for="tag in getMatchingTags">
@@ -64,6 +64,7 @@ export default {
     },
     data() {
         return {
+            clean: false,
             addingItem: false,
             tempVal: this.type === 'time' ? { HH:"00", mm:"00", ss:"00" } : '',
             tempCurrentTag: ''
@@ -213,7 +214,7 @@ export default {
             if(this.type === 'string') this.checkTagRemove()
             else this.removeVideoHighlights = tagValue
         }
-    },
+    }
 };
 </script>
 

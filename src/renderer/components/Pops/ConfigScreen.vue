@@ -89,7 +89,7 @@ export default {
     left: 0px;
     width: 100%;
     height: calc(100% - 30px);
-    z-index: 2;
+    z-index: 3;
     padding: 48px;
     > .overlay {
         content: "";

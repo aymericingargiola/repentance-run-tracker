@@ -11,8 +11,10 @@ import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 import { checkForUpdate } from './helpers/updater'
 import { backupDatas } from './helpers/backupDatas'
+const { syncApp } = require('./helpers/sync')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
+const elog = require('electron-log')
 const path = require('path')
 const fs = require('fs')
 const appDataFolder = process.env.APPDATA
@@ -20,6 +22,22 @@ const oldFolderName = "repentance-run-tracker"
 const oldFolderPath = path.normalize(`${appDataFolder}\\${oldFolderName}`)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
+
+process.on('unhandledRejection', (error, p) => {
+  if (!errorMessage) errorMessage = []
+  errorMessage.push(error)
+  console.log(error)
+  elog.error(error)
+  if (win) syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack} })
+})
+
+process.on('uncaughtException', (error) => {
+  if (!errorMessage) errorMessage = []
+  errorMessage.push(error)
+  console.log(error)
+  elog.error(error)
+  if (win) syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
+})
 
 ipcMain.on('READ_FILE', (event, payload) => {
   const content = fs.readFileSync(payload.path);
@@ -36,6 +54,12 @@ ipcMain.on('HIDE_APP', (event, payload) => {
 
 ipcMain.on('CLOSE_APP', async (event, payload) => {
   await backupDatas(dataFolder)
+  app.exit()
+})
+
+ipcMain.on('RESTART_APP', async (event, payload) => {
+  await backupDatas(dataFolder)
+  app.relaunch()
   app.exit()
 })
 
@@ -159,7 +183,7 @@ async function createWindow() {
     e.preventDefault()
     require('electron').shell.openExternal(url)
   })
-
+  
   startLogsWatch(win, config, runs, trash)
   startModWatch(win, isDevelopment, modFile.default, modMetadata.default, config)
 }

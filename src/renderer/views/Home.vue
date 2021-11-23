@@ -10,6 +10,7 @@
     <BrokenRuns/>
     <EditRun/>
     <ConfigScreen/>
+    <AppError/>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import BrokenRuns from '../components/Pops/BrokenRuns.vue'
 import EditRun from '../components/Pops/EditRun.vue'
 import ConfigScreen from '../components/Pops/ConfigScreen.vue'
 import Trash from '../components/Trash/Trash.vue'
+import AppError from '../components/Pops/AppError.vue'
 export default {
   components: {
     UpdateApp,
@@ -30,7 +32,8 @@ export default {
     BrokenRuns,
     EditRun,
     ConfigScreen,
-    Trash
+    Trash,
+    AppError
   },
   name: "Home",
   data() {

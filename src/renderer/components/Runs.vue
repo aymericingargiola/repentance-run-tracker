@@ -1,10 +1,6 @@
 <template>
     <section class="section runs">
-        <div v-if="this.allRuns && this.allRuns.length > 0" class="filters">
-            <div class="search">
-                <input v-model="filterText" @input="resetPagination" placeholder="Search runs">
-            </div>
-        </div>
+        <RunsFilters :filter-offset="filterOffset" :filter-limit-per-page="filterLimitPerPage" :filter-order="filterOrder" @filteredRunsTotal="onUpdateFilteredRunsTotal" @filteredRuns="onUpdateFilteredRuns" @resetPagination="resetPagination"/>
         <transition-group name="run-group-transition" tag="ul" class="runs-container">
             <template v-for="(run, ridx) in filteredRuns">
                 <li :class="
@@ -32,11 +28,11 @@
                 </li>
             </template>
       </transition-group>
-        <div v-if="Math.ceil(filteredRunsTotal.length / filterLimitPerPage) > 1" class="navigation-container">
+        <div v-if="Math.ceil(filteredRunsTotal / filterLimitPerPage) > 1" class="navigation-container">
             <div class="navigation">
-                <template v-for="page in Math.ceil(filteredRunsTotal.length / filterLimitPerPage)">
-                    <div v-if="page === 1 || page === Math.ceil(filteredRunsTotal.length / filterLimitPerPage) || [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2].includes(page)" :class="['page',currentPage === page ? 'active' : '']" v-on:click="filterOffset = filterLimitPerPage * (page - 1); currentPage = page" :key="`page-${page}`">{{page}}</div>
-                    <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal.length / filterLimitPerPage)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal.length / filterLimitPerPage)-4)" class="page-offset" :key="`page-${page}`">...</div>
+                <template v-for="page in Math.ceil(filteredRunsTotal / filterLimitPerPage)">
+                    <div v-if="page === 1 || page === Math.ceil(filteredRunsTotal / filterLimitPerPage) || [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2].includes(page)" :class="['page',currentPage === page ? 'active' : '']" v-on:click="filterOffset = filterLimitPerPage * (page - 1); currentPage = page" :key="`page-${page}`">{{page}}</div>
+                    <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal / filterLimitPerPage)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal / filterLimitPerPage)-4)" class="page-offset" :key="`page-${page}`">...</div>
                 </template>
             </div>
         </div>
@@ -55,16 +51,17 @@
 // import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
-import Tag from '../store/classes/Tag'
 import RunInfos from '../components/RunsElements/Infos.vue'
 import RunCharacter from '../components/RunsElements/Character.vue'
 import RunFloorsSlider from '../components/RunsElements/FloorsSlider.vue'
+import RunsFilters from './RunsFilters.vue'
 export default {
     name: "Runs",
     components: {
         RunInfos,
         RunCharacter,
-        RunFloorsSlider
+        RunFloorsSlider,
+        RunsFilters
     },
     data() {
         return {
@@ -91,18 +88,12 @@ export default {
                     disable: true
                 }
             },
+            filteredRunsTotal: 0,
+            filteredRuns: [],
             currentPage: 1,
             filterLimitPerPage: 6,
             filterOffset: 0,
-            filterOrder: 'desc',
-            filterText: '',
-            filterCharacter: [],
-            filterTags: [],
-            filterCharacterVersion: '',
-            filterGameState: 0,
-            filterWiNOrDeath: '',
-            filterDateFrom: 0,
-            filterDateTo: 0
+            filterOrder: 'desc'
         }
     },
     mounted() {
@@ -110,11 +101,6 @@ export default {
         window.ipc.on('SYNC_SEND_RUNS', (response) => {
             console.log(response)
             this.runRepo.fresh(response.runs)
-        })
-        window.ipc.send('ASK_TAGS')
-        window.ipc.on('SYNC_SEND_TAGS', (response) => {
-            console.log(response)
-            this.tagRepo.fresh(response.tags)
         })
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
             console.log(response)
@@ -143,17 +129,10 @@ export default {
     },
     computed: {
         ...mapRepos({
-            runRepo: Run,
-            tagRepo: Tag
+            runRepo: Run
         }),
         allRuns() {
             return this.runRepo.all()
-        },
-        filteredRunsTotal() {
-            return this.runRepo.where((run) => { return this.filter(run) }).orderBy('runUpdate', this.filterOrder).get()
-        },
-        filteredRuns() {
-            return this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
         },
         updateRun: {
             get: function (run) {
@@ -169,35 +148,12 @@ export default {
             this.currentPage = this.currentPage === 1 ? this.currentPage : 1
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
         },
-        filter(run) {
-            // tags filter
-            if (this.filterTags.length > 0 && !this.filterTags.some(tag => run.tags_ids.includes(tag))) return
-            // text filter
-            if(this.filterText.length > 3) {
-                const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
-                const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
-                const customRunName = run.customName.normalize('NFC').toLowerCase()
-                const id = run.id.normalize('NFC').toLowerCase()
-                console.log(textSearchValue, characterName)
-                if (
-                    !characterName.includes(textSearchValue) &&
-                    !customRunName.includes(textSearchValue) &&
-                    !id.includes(textSearchValue)
-                    ) return
-            }
-            return run
+        onUpdateFilteredRunsTotal(total) {
+            this.filteredRunsTotal = total.length
+        },
+        onUpdateFilteredRuns(total) {
+            this.filteredRuns = total
         }
-        // calcBlackHeart(nb) {
-        //     if (nb === 3) return 2
-        //     if (nb === 1) return 1
-        //     let i = 0
-        //     let n = nb - 1
-        //     while (n > 1) {
-        //         n = n / 2;
-        //         i++
-        //     }
-        //     return i
-        // }
     },
 };
 </script>
@@ -211,11 +167,6 @@ export default {
 .runs-container {
     position: relative;
     padding: 0px 24px;
-}
-.filters {
-    margin-bottom: 16px;
-    text-align: left;
-    padding: 0px 12px;
 }
 .run {
     position: relative;

@@ -5,16 +5,11 @@
         <div class="after" :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"></div>
         <div :class="['content', editing ? 'expended' : '']">
             <div v-if="usedGameStates">
-                Save : 
-                <select v-model="gameState" name="game state" id="gameState">
-                    <template v-for="(option, idx) in availableGameStates">
-                        <option :value="option" :key="`option-${idx}`">{{option}}</option>
-                    </template>
-                </select>
+                <CustomSelect type="single" :items="availableGameStatesSelectOptions" label="Save" emptyMessage="No save selected" @updateSelect="onUpdateSaveSelect"/>
             </div>
             <div class="adjust-number">
                 Adjust number :
-                <input type="number" id="adjustNumber" name="adjust number" v-model="adjustNumber">
+                <input type="number" id="adjustNumber" name="adjust number" class="size-auto" v-model="adjustNumber">
             </div>
             <div v-if="allCharacters" class="characters">
                 <span class="title">
@@ -77,8 +72,12 @@ import { mapRepos } from '@vuex-orm/core'
 import WinStreak from '../../store/classes/WinStreak'
 import Entity from '../../store/classes/Entity'
 import Character from '../../store/classes/Character'
+import CustomSelect from '../Tools/CustomSelect.vue'
 export default {
     name: "winStreaksAdd",
+    components: {
+        CustomSelect
+    },
     data() {
         return {
             gameStateOptions: [1, 2, 3],
@@ -110,6 +109,9 @@ export default {
         },
         availableGameStates() {
             return this.gameStateOptions.filter(gState => !this.usedGameStates.includes(gState))
+        },
+        availableGameStatesSelectOptions() {
+            return this.availableGameStates.map(option => ({"id":option,"value":option}))
         },
         allCharacters() {
             return this.characterRepo.where('ignore', false).get()
@@ -159,6 +161,9 @@ export default {
             this.randomAlternate = type === 'alternate' ? !this.randomAlternate : this.randomAlternate ? !this.randomAlternate : this.randomAlternate
 
             this.characters = []
+        },
+        onUpdateSaveSelect(selected) {
+            this.gameState = selected.length > 0 ? selected[0].value : null
         }
     },
     mounted() {
@@ -235,7 +240,7 @@ export default {
                 pointer-events: none;
             }
         }
-        li {
+        li:not(.item) {
             transition: 0.25s ease;
             cursor: pointer;
             opacity: 0.6;

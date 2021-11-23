@@ -9,7 +9,7 @@ const { syncApp } = require('../helpers/sync')
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
 const moment = require('moment')
-const log = require('electron-log')
+const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
@@ -205,7 +205,7 @@ function updateOrCreateRun(params = {}) {
                     sameRun.runEnd.damageFlags = runEndInfo.damageFlags
                     sameRun.runDuration = getRunDuration(moment.unix(runEndInfo.date), moment.unix(sameRun.runStart))
                     if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
-                    log.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
+                    elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     break
                 case 'run end ext':
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
@@ -235,7 +235,7 @@ function updateOrCreateRun(params = {}) {
         if(!currentFloor) {
             const errorMessage = "Can't generate a run if the run is not new and was not started with the app launched ! Please start a new run."
             console.log(errorMessage)
-            log.error(errorMessage)
+            elog.error(errorMessage)
             return
         }
         currentRun.id = `${currentRun.seed} ${moment().unix()}`
@@ -274,7 +274,7 @@ function updateOrCreateRun(params = {}) {
             }
         }
         console.log(`Run ${run.id} created`)
-        log.info(`Run ${run.id} created`)
+        elog.info(`Run ${run.id} created`)
         runs.unshift(run)
         syncApp(win,{trigger: "create run", run: run})
         if(winTracker) syncApp(winTracker,{trigger: "create run", run: run})
@@ -370,6 +370,7 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Running Lua Script") && !log.includes("resources/scripts/")) {
             console.log("\x1b[35m", log, "\x1b[0m")
+            elog.info(log)
             const modPath = getModPath(log)
             const field = config.filter(field => field.id === "isaacModFolderPath")[0]
             if (!field || field.value != modPath) {

@@ -12,23 +12,38 @@
 }
 
 input,
-select {
+select,
+.select-content {
+    font-size: 14px;
+    position: relative;
 	transition: 0.25s ease;
 	font-family: "Baby Doll", sans-serif;
 	border-width: 2px;
     border-style: outset;
 	padding: 8px;
+    border-color: grey;
 	border-radius: 8px;
     background-color: $paper-white-accent;
     box-shadow: 3px 3px 0px rgba($color: #000000, $alpha: 0.3);
     &:focus {
         outline: none;
     }
+    &:not([type="checkbox"]) {
+        min-width: 200px;
+        max-width: 300px;
+    }
     &:not([type="checkbox"]):not(select) {
         &:focus {
             box-shadow: 3px 3px 0px rgba($color: #000000, $alpha: 0.0);
             transform: translate(2px, 2px);
         }
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &.size-auto {
+        width: auto;
+        min-width: unset;
     }
 }
 
@@ -113,3 +128,5 @@ button {
 ::-webkit-scrollbar-corner {
 	background-color: transparent;
 }
+
+@import "list";
