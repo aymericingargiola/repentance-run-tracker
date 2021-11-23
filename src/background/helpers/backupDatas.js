@@ -1,11 +1,18 @@
 const fs = require('fs')
 const path = require('path')
 const fsPromises = fs.promises
+const { app, ipcMain } = require('electron')
 const { asyncForEach } = require('../tools/methods')
 const { writeFileAsync } = require('../tools/fileSystem')
 const moment = require('moment')
 const AdmZip = require("adm-zip")
 const log = require('electron-log')
+const dataFolder = app.getPath("userData")
+
+ipcMain.on('ASK_ERROR_ZIP', async (event) => {
+  const zipBuffer = await module.exports.generateErrorZip()
+  event.reply('ASK_ERROR_ZIP', {datas:zipBuffer,fileName:`repentance_run_tracker_error_dump-${moment().format('MM-D-YY-hhmmssa')}.zip`})
+})
 
 module.exports = {
   backupDatas: async function(dataFolder) {
@@ -53,5 +60,15 @@ module.exports = {
     })
     console.timeEnd("Datas restored in")
     return filesRestored == filesToRestore.length
+  },
+  generateErrorZip: async function() {
+    let zip = new AdmZip()
+    zip.addLocalFile(`${dataFolder}/runs.json`)
+    zip.addLocalFile(`${dataFolder}/trash.json`)
+    zip.addLocalFile(`${dataFolder}/tags.json`)
+    zip.addLocalFile(`${dataFolder}/config.json`)
+    zip.addLocalFile(`${dataFolder}/winStreaks.json`)
+    zip.addLocalFile(`${dataFolder}/logs/main.log`)
+    return zip.toBuffer()
   }
 }

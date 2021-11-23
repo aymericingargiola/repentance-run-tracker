@@ -2,6 +2,9 @@ module.exports = {
     syncApp: function(win, params) {
         if (!win) return console.log(`[syncApp()] Window parameter is ${win} ! Trigger : ${params.trigger}`)
         switch (params.trigger) {
+            case 'send app error':
+                win.webContents.send('SYNC_SEND_APP_ERROR', params)
+                break
             case 'logs watch status':
                 win.webContents.send('SYNC_WATCH_STATUS', params)
                 break
