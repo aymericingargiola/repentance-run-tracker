@@ -14,9 +14,9 @@
             <transition name="list-overflow">
                 <div v-if="show" class="list-overflow big">
                     <ul class="items">
-                        <template v-for="(item, idx) in items">
-                            <li :title="item.value" :class="['item', selectedIds.includes(item.id) ? 'selected' : '']" :key="idx" v-on:click="itemSelected({id:item.id,value:item.value})">
-                                <span class="name">{{item.value}}</span>
+                        <template v-for="(item, idx) in sortedItems">
+                            <li :title="item[itemValue]" :class="['item', selectedIds.includes(item.id) ? 'selected' : '']" :key="idx" v-on:click="itemSelected({id:item.id,value:item[itemValue]})">
+                                <span class="name">{{item[itemValue]}}</span>
                             </li>
                         </template>
                     </ul>
@@ -31,10 +31,12 @@ export default {
     name: "CustomSelect",
     props: {
         type: String,
+        customValue: String,
         items: Array,
         maxItems: Number,
         label: String,
-        emptyMessage: String
+        emptyMessage: String,
+        order: String
     },
     data() {
         return {
@@ -43,6 +45,13 @@ export default {
         }
     },
     computed: {
+        itemValue() {
+            return this.customValue ? this.customValue : 'value'
+        },
+        sortedItems() {
+            const localItems = this.items
+            return !this.order || this.order === 'asc' ? localItems.sort((a, b) => a[this.itemValue].localeCompare(b[this.itemValue])) : localItems.sort((a, b) => b[this.itemValue].localeCompare(a[this.itemValue])) 
+        },
         selectedIds() {
             return this.selected.length > 0 ? this.selected.map((itemSelected) => itemSelected.id) : this.selected
         }
