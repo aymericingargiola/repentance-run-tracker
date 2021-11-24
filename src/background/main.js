@@ -24,19 +24,25 @@ const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
 process.on('unhandledRejection', (error, p) => {
-  if (!errorMessage) errorMessage = []
-  errorMessage.push(error)
   console.log(error)
   elog.error(error)
-  if (win) syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack} })
+  if (win) {
+    syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack} })
+    win.setAlwaysOnTop(true)
+    win.show()
+    win.focus()
+  }
 })
 
 process.on('uncaughtException', (error) => {
-  if (!errorMessage) errorMessage = []
-  errorMessage.push(error)
   console.log(error)
   elog.error(error)
-  if (win) syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
+  if (win) {
+    syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
+    win.setAlwaysOnTop(true)
+    win.show()
+    win.focus()
+  }
 })
 
 ipcMain.on('READ_FILE', (event, payload) => {
@@ -159,7 +165,6 @@ async function createWindow() {
       preload: path.resolve(__static, 'preload.js')
     }
   })
-
   readyToSync(win, false)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
