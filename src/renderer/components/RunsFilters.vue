@@ -5,6 +5,7 @@
             </div>
             <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="No tag selected" @updateSelect="onUpdateTagsMultiSelect"/>
             <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="No character selected" @updateSelect="onUpdateCharactersMultiSelect"/>
+            <CustomSelect v-if="gameStateOptions.length > 0" type="single" :items="gameStateWithRuns" label="Save" emptyMessage="No save slot selected" @updateSelect="onUpdateGameStateMultiSelect"/>
         </div>
 </template>
 
@@ -26,11 +27,11 @@ export default {
     },
     data() {
         return {
+            gameStateOptions: [1,2,3],
             filterText: '',
             filterCharacters: [],
             filterTags: [],
-            filterCharacterVersion: '',
-            filterGameState: 0,
+            filterGameStates: [],
             filterWiNOrDeath: '',
             filterDateFrom: 0,
             filterDateTo: 0,
@@ -50,6 +51,9 @@ export default {
             characterRepo: Character,
             runRepo: Run
         }),
+        gameStateWithRuns() {
+            return this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
+        },
         allTags() {
             return this.tagRepo.all()
         },
@@ -77,6 +81,10 @@ export default {
         },
     },
     methods: {
+        onUpdateGameStateMultiSelect(selected) {
+            this.filterGameStates = selected
+            this.$emit('resetPagination')
+        },
         onUpdateTagsMultiSelect(selected) {
             this.filterTags = selected
             this.$emit('resetPagination')
@@ -88,18 +96,49 @@ export default {
         resetPaginationFromInput() {
             if (this.filterText.length > 3 || this.filterText.length === 0) this.$emit('resetPagination')
         },
+        checkFilters(runsToCheck, from) {
+            // Check all filters based on other filters
+            let runs = runsToCheck
+
+            // Check if runs has gamestate
+            if (this.filterGameStates.length > 0 && from != "gameStates") {
+                runs = runs.where((run) => this.filterGameStates.includes(run.gameState))
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            // Check if runs has filtered tags
+            if (this.filterTags.length > 0 && from != "tags") {
+                runs = runs.where((run) => run.tags_ids.some(tag => this.filterTags.map(filterTag => filterTag.id).includes(tag)))
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            // Check if runs has filtered characters
+            if (this.filterCharacters.length > 0 && from != "characters") {
+                runs = runs.where((run) => this.filterCharacters.map(filterCharacter => filterCharacter.id).includes(run.characters[0].id))
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            return runs.get()
+        },
+        checkGameState(gameState) {
+            let runs
+
+            // Init Check if runs has save
+            runs = this.runRepo.where((run) => run.gameState === gameState)
+            if (runs.get().length < 1) return
+
+            if(this.checkFilters(runs, "gameStates").length < 1) return
+
+            return gameState
+        },
         checkTags(tag) {
             let runs
 
-            // Check if runs has tag
+            // Init Check if runs has tag
             runs = this.runRepo.where((run) => run.tags_ids.includes(tag.id))
             if (runs.get().length < 1) return
 
-            // Check if runs has filtered characters
-            if (this.filterCharacters.length > 0) {
-                runs = runs.where((run) => this.filterCharacters.map(filterCharacter => filterCharacter.id).includes(run.characters[0].id))
-                if (runs.get().length < 1) return
-            }
+            if(this.checkFilters(runs, "tags").length < 1) return
 
             return tag
         },
@@ -113,20 +152,22 @@ export default {
             runs = this.runRepo.where((run) => run.characters[0].name === character.trueName && run.characters[0].version === character.version)
             if (runs.get().length < 1) return
 
-            // Check if runs has filtered tags
-            if (this.filterTags.length > 0 && runs.where((run) => run.tags_ids.some(tag => this.filterTags.map(filterTag => filterTag.id).includes(tag))).get().length < 1) return
+            if(this.checkFilters(runs, "characters").length < 1) return
             
             character.trueName = `${character.trueName}${character.version === 'Alternate' ? ' (tainted)' : ''}`
             return character
         },
         filterRuns(run) {
-            // tags filter
+            // Save filter
+            if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
+
+            // Tags filter
             if (this.filterTags.length > 0 && !this.filterTags.some(tag => run.tags_ids.includes(tag.id))) return
 
-            // characters filter
+            // Characters filter
             if (this.filterCharacters.length > 0 && !this.filterCharacters.map(filterCharacter => filterCharacter.id).includes(run.characters[0].id)) return
 
-            // text filter
+            // Text filter
             if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
                 const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
