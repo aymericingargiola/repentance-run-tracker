@@ -289,6 +289,9 @@ export default {
             .name {
                 display: none;
             }
+            .item-image {
+                opacity: 1;
+            }
         }
     }
 }

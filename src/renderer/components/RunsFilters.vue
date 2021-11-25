@@ -3,9 +3,11 @@
             <div class="search">
                 <input v-model="filterText" @input="resetPaginationFromInput()" placeholder="Search runs">
             </div>
-            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="No tag selected" @updateSelect="onUpdateTagsMultiSelect"/>
-            <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="No character selected" @updateSelect="onUpdateCharactersMultiSelect"/>
-            <CustomSelect v-if="gameStateOptions.length > 0" type="single" :items="gameStateWithRuns" label="Save" emptyMessage="No save slot selected" @updateSelect="onUpdateGameStateMultiSelect"/>
+            <DateRangePicker @updateDateRange="onUpdateDateRange"/>
+            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="All tags" @updateSelect="onUpdateTagsMultiSelect"/>
+            <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="All characters" @updateSelect="onUpdateCharactersMultiSelect"/>
+            <CustomSelect type="multi" :items="gameStateWithRuns" label="Save" emptyMessage="No save slot selected" @updateSelect="onUpdateGameStateMultiSelect"/>
+            <CustomSelect type="single" :items="winConditionOptions" label="Win condition" emptyMessage="All conditions" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
         </div>
 </template>
 
@@ -15,10 +17,12 @@ import Tag from '../store/classes/Tag'
 import Character from '../store/classes/Character'
 import Run from '../store/classes/Run'
 import CustomSelect from './Tools/CustomSelect.vue'
+import DateRangePicker from './Tools/DateRangePicker.vue'
 export default {
     name: "RunsFilters",
     components: {
-        CustomSelect
+        CustomSelect,
+        DateRangePicker
     },
     props: {
         filterOffset: Number,
@@ -27,14 +31,15 @@ export default {
     },
     data() {
         return {
-            gameStateOptions: [1,2,3],
             filterText: '',
             filterCharacters: [],
             filterTags: [],
+            gameStateOptions: [1,2,3],
             filterGameStates: [],
-            filterWiNOrDeath: '',
-            filterDateFrom: 0,
-            filterDateTo: 0,
+            winConditionOptions: ["Win", "Lose"],
+            filterWinCondition: null,
+            filterDateStart: null,
+            filterDateEnd: null,
             localFilteredRuns: this.filteredRuns
         }
     },
@@ -78,9 +83,18 @@ export default {
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
             this.$emit('filteredRuns', filteredRuns)
             return filteredRuns
-        },
+        }
     },
     methods: {
+        onUpdateDateRange(range) {
+            this.filterDateStart = range.start
+            this.filterDateEnd = range.end
+            this.$emit('resetPagination')
+        },
+        onUpdateWinConditionMultiSelect(selected) {
+            this.filterWinCondition = selected.length === 0 ? null : selected[0] === 'Win' ? true : false
+            this.$emit('resetPagination')
+        },
         onUpdateGameStateMultiSelect(selected) {
             this.filterGameStates = selected
             this.$emit('resetPagination')
@@ -158,6 +172,13 @@ export default {
             return character
         },
         filterRuns(run) {
+            // Date filter
+            if (this.filterDateStart && run.runStart < this.filterDateStart) return
+            if (this.filterDateEnd && run.runStart > this.filterDateEnd) return
+
+            // Win condition filter
+            if (this.filterWinCondition != null && run.runEnd.win != this.filterWinCondition) return
+
             // Save filter
             if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
 
@@ -191,11 +212,11 @@ export default {
     text-align: left;
     padding: 0px 12px;
     display: flex;
+    flex-wrap: wrap;
     margin-left: -8px;
     margin-right: -8px;
-    > div {
-        margin-left: 8px;
-        margin-right: 8px;
+    > div, > span {
+        margin: 8px;
     }
 }
 </style>

@@ -78,6 +78,7 @@ export default {
   @import "assets/styles/scss/default";
   @import "assets/styles/scss/small-portrait";
   @import "assets/styles/scss/overwrite/vuetimepicker";
+  @import "assets/styles/scss/overwrite/vcalendar";
 
   html {
     font-family: "Baby Doll", sans-serif;

@@ -30,6 +30,7 @@
     "electron-log": "^4.4.0",
     "electron-updater": "^4.3.8",
     "moment": "^2.29.1",
+    "v-calendar": "^2.3.4",
     "vue": "^2.6.11",
     "vue-color-gradient-picker": "^0.1.2",
     "vue-router": "^3.5.1",

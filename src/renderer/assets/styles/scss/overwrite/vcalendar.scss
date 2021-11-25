@@ -1,0 +1,19 @@
+.v-calendar {
+    &.date-picker {
+        display: flex;
+        align-items: center;
+        .custom-input {
+            input {
+                text-align: center;
+                min-width: unset;
+                width: 100px;
+            }
+        }
+        .separator {
+            margin: 0px 8px;
+        }
+    }
+    .custom-input {
+
+    }
+}
