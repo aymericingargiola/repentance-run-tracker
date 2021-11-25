@@ -113,6 +113,12 @@ export default {
         checkFilters(runsToCheck, from) {
             // Check all filters based on other filters
             let runs = runsToCheck
+            
+            // Check if runs are on date range
+            if (this.filterDateStart && this.filterDateEnd) {
+                runs = runs.where((run) => run.runStart > this.filterDateStart).where((run) => run.runStart < this.filterDateEnd)
+                if (runs.get().length < 1) return runs.get()
+            }
 
             // Check if runs has gamestate
             if (this.filterGameStates.length > 0 && from != "gameStates") {

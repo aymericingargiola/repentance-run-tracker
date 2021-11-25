@@ -1,6 +1,6 @@
 <template>
     <v-date-picker locale="en" v-model="rangeUpdate" :model-config="datePickerModelConfig" is-range>
-        <template v-slot="{ inputValue, inputEvents }">
+        <template v-slot="{ inputEvents }">
             <div class="v-calendar date-picker">
                 <div class="custom-input">
                     <input
