@@ -23,6 +23,8 @@ const oldFolderPath = path.normalize(`${appDataFolder}\\${oldFolderName}`)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
+elog.info(`App is starting... | App Version : ${app.getVersion()} | Node version : ${process.version} | Electron version : ${process.versions.electron}`)
+
 process.on('unhandledRejection', (error, p) => {
   console.log(error)
   elog.error(error)
