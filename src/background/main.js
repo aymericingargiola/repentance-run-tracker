@@ -62,11 +62,13 @@ ipcMain.on('HIDE_APP', (event, payload) => {
 
 ipcMain.on('CLOSE_APP', async (event, payload) => {
   await backupDatas(dataFolder)
+  elog.info('Closing app...')
   app.exit()
 })
 
 ipcMain.on('RESTART_APP', async (event, payload) => {
   await backupDatas(dataFolder)
+  elog.info('Closing app...')
   app.relaunch()
   app.exit()
 })
@@ -200,6 +202,7 @@ app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
+    elog.info('Closing app...')
     app.quit()
   }
 })

@@ -6,8 +6,9 @@ const { asyncForEach } = require('../tools/methods')
 const { writeFileAsync } = require('../tools/fileSystem')
 const moment = require('moment')
 const AdmZip = require("adm-zip")
-const log = require('electron-log')
+const elog = require('electron-log')
 const dataFolder = app.getPath("userData")
+const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
 
 ipcMain.on('ASK_ERROR_ZIP', async (event) => {
   const zipBuffer = await module.exports.generateErrorZip()
@@ -15,26 +16,57 @@ ipcMain.on('ASK_ERROR_ZIP', async (event) => {
 })
 
 module.exports = {
+  addLocalFiles: async function(zip, files, context) {
+    await asyncForEach(files, async (file) => {
+      try {
+        return zip.addLocalFile(file.path, file.zipFolder)
+      } catch (err) {
+        return elog.error(`Can't add ${path.normalize(file.path)} to ${context} zip file !`)
+      }
+    })
+    return zip
+  },
   backupDatas: async function(dataFolder) {
+    console.time('App datas backup created in')
+    elog.info('Creating app datas backup zip file...')
     let zip = new AdmZip()
-    zip.addLocalFile(`${dataFolder}/runs.json`)
-    zip.addLocalFile(`${dataFolder}/trash.json`)
-    zip.addLocalFile(`${dataFolder}/tags.json`)
-    zip.addLocalFile(`${dataFolder}/config.json`)
-    zip.addLocalFile(`${dataFolder}/winStreaks.json`)
+    let files = [
+      {
+        path: `${dataFolder}/runs.json`,
+        zipFolder: null
+      },
+      {
+        path: `${dataFolder}/trash.json`,
+        zipFolder: null
+      },
+      {
+        path: `${dataFolder}/tags.json`,
+        zipFolder: null
+      },
+      {
+        path: `${dataFolder}/config.json`,
+        zipFolder: null
+      },
+      {
+        path: `${dataFolder}/winStreaks.json`,
+        zipFolder: null
+      }
+    ]
+    zip = await module.exports.addLocalFiles(zip, files, 'datas backup')
     zip.writeZip(`${dataFolder}/backups/backup_datas_${moment().format('MM-D-YY-hhmmssa')}.zip`)
+    console.timeEnd('App datas backup created in')
+    elog.info('App datas backup created')
     return true
   },
   restoreDatas: async function(dataFolder, filesToRestore) {
-    console.log("Restoring datas...")
-    log.info(`Restoring ${filesToRestore} from backups...`)
+    elog.info(`Restoring ${filesToRestore} from backups...`)
     console.time("Datas restored in")
     let filesRestored = 0
     let backupZips
     try {
       backupZips = await fsPromises.readdir(`${dataFolder}/backups/`)
     } catch (err) {
-      log.error(`There is no backups in ${dataFolder}/backups/`)
+      elog.error(`There is no backups in ${dataFolder}/backups/`)
       console.timeEnd("Datas restored in")
       return false
     }
@@ -49,11 +81,11 @@ module.exports = {
         try {
           JSON.parse(fileContent)
         } catch (err) {
-          log.warn(`${fileName} file is corrupted from ${backupZip}! Try an other one...`);
+          elog.warn(`${fileName} file is corrupted from ${backupZip}! Try an other one...`);
           return fileRestored
         }
         await writeFileAsync(dataFolder, fileName, fileContent)
-        log.info(`${fileName} was restored from ${backupZip}`)
+        elog.info(`${fileName} was restored from ${backupZip}`)
         return fileRestored = true
       })
       return filesRestored = fileRestored ? ++filesRestored : filesRestored
@@ -62,13 +94,42 @@ module.exports = {
     return filesRestored == filesToRestore.length
   },
   generateErrorZip: async function() {
+    console.time('Error zip file created in')
+    elog.info('Creating error zip file...')
     let zip = new AdmZip()
-    zip.addLocalFile(`${dataFolder}/runs.json`)
-    zip.addLocalFile(`${dataFolder}/trash.json`)
-    zip.addLocalFile(`${dataFolder}/tags.json`)
-    zip.addLocalFile(`${dataFolder}/config.json`)
-    zip.addLocalFile(`${dataFolder}/winStreaks.json`)
-    zip.addLocalFile(`${dataFolder}/logs/main.log`)
+    let files = [
+      {
+        path: `${dataFolder}/runs.json`,
+        zipFolder: '/app/datas'
+      },
+      {
+        path: `${dataFolder}/trash.json`,
+        zipFolder: '/app/datas'
+      },
+      {
+        path: `${dataFolder}/tags.json`,
+        zipFolder: '/app/datas'
+      },
+      {
+        path: `${dataFolder}/config.json`,
+        zipFolder: '/app/datas'
+      },
+      {
+        path: `${dataFolder}/winStreaks.json`,
+        zipFolder: '/app/datas'
+      },
+      {
+        path: `${dataFolder}/logs/main.log`,
+        zipFolder: '/app/logs'
+      },
+      {
+        path: `${repentanceFolderPath}/log.txt`,
+        zipFolder: '/game/logs'
+      }
+    ]
+    zip = await module.exports.addLocalFiles(zip, files, 'error')
+    console.timeEnd('Error zip file created in')
+    elog.info('Error zip file created')
     return zip.toBuffer()
   }
 }
