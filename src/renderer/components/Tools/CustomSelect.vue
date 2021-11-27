@@ -1,5 +1,5 @@
 <template>
-    <div v-if="items && items.length > 1" class="select-wrapper">
+    <div v-if="items && items.length > 0" class="select-wrapper">
         <div  @click="showList" v-click-outside="hideList" :class="['select', type === 'multi' ? 'multi' : '']">
             <div class="select-content">
                 <span v-if="label != ''" class="label">{{label}} :</span>
