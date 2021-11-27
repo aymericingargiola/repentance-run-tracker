@@ -7,7 +7,7 @@
             <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="All tags" @updateSelect="onUpdateTagsMultiSelect"/>
             <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="All characters" @updateSelect="onUpdateCharactersMultiSelect"/>
             <CustomSelect type="multi" :items="gameStateWithRuns" label="Save" emptyMessage="No save slot selected" @updateSelect="onUpdateGameStateMultiSelect"/>
-            <CustomSelect type="single" :items="winConditionOptions" label="Win condition" emptyMessage="All conditions" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
+            <CustomSelect type="single" :items="winConditionWithRuns" label="Win condition" emptyMessage="All conditions" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
         </div>
 </template>
 
@@ -56,20 +56,31 @@ export default {
             characterRepo: Character,
             runRepo: Run
         }),
+        winConditionWithRuns() {
+            const conditions = this.winConditionOptions.filter(condition => this.checkWinCondition(condition))
+            this.resetFilters(conditions, "winCondition")
+            return conditions
+        },
         gameStateWithRuns() {
-            return this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
+            const gameStates = this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
+            this.resetFilters(gameStates, "gameStates")
+            return gameStates
         },
         allTags() {
             return this.tagRepo.all()
         },
         tagsWithRuns() {
-            return this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
+            const tags = this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
+            this.resetFilters(tags, "tags")
+            return tags
         },
         allCharacters() {
             return this.characterRepo.where().all()
         },
         charactersWithRuns() {
-            return this.characterRepo.where((character) => { return this.checkCharacters(character) }).orderBy('trueName', 'asc').get()
+            const characters = this.characterRepo.where((character) => { return this.checkCharacters(character) }).orderBy('trueName', 'asc').get()
+            this.resetFilters(characters, "characters")
+            return characters
         },
         allRuns() {
             return this.runRepo.all()
@@ -110,6 +121,23 @@ export default {
         resetPaginationFromInput() {
             if (this.filterText.length > 3 || this.filterText.length === 0) this.$emit('resetPagination')
         },
+        resetFilters(availableFilters, context) {
+            // Reset filter in case no filter available but at least one is selected
+            switch (context) {
+                case "winCondition":
+                    if (availableFilters.length === 0 && this.filterWinCondition !== null) this.filterWinCondition = null
+                    break
+                case "gameState":
+                    if (availableFilters.length === 0 && this.filterGameStates.length > 0) this.filterGameStates = []
+                    break
+                case "tags":
+                    if (availableFilters.length === 0 && this.filterTags.length > 0) this.filterTags = []
+                    break
+                case "characters":
+                    if (availableFilters.length === 0 && this.filterCharacters.length > 0) this.filterCharacters = []
+                    break
+            }
+        },
         checkFilters(runsToCheck, from) {
             // Check all filters based on other filters
             let runs = runsToCheck
@@ -120,25 +148,43 @@ export default {
                 if (runs.get().length < 1) return runs.get()
             }
 
+            // Check if runs are selected win condition
+            if (this.filterWinCondition !== null && from !== "winCondition") {
+                runs = runs.where((run) => run.gameState === this.filterWinCondition)
+                if (runs.get().length < 1) return runs.get()
+            }
+
             // Check if runs has gamestate
-            if (this.filterGameStates.length > 0 && from != "gameStates") {
+            if (this.filterGameStates.length > 0 && from !== "gameStates") {
                 runs = runs.where((run) => this.filterGameStates.includes(run.gameState))
                 if (runs.get().length < 1) return runs.get()
             }
 
             // Check if runs has filtered tags
-            if (this.filterTags.length > 0 && from != "tags") {
+            if (this.filterTags.length > 0 && from !== "tags") {
                 runs = runs.where((run) => run.tags_ids.some(tag => this.filterTags.map(filterTag => filterTag.id).includes(tag)))
                 if (runs.get().length < 1) return runs.get()
             }
 
             // Check if runs has filtered characters
-            if (this.filterCharacters.length > 0 && from != "characters") {
+            if (this.filterCharacters.length > 0 && from !== "characters") {
                 runs = runs.where((run) => this.filterCharacters.map(filterCharacter => filterCharacter.id).includes(run.characters[0].id))
                 if (runs.get().length < 1) return runs.get()
             }
 
             return runs.get()
+        },
+        checkWinCondition(condition) {
+            let runs
+            const thisCondition = condition === "Win" ? true : false
+
+            // Init Check if runs has save 
+            runs = this.runRepo.where((run) => run.runEnd.win === thisCondition)
+            if (runs.get().length < 1) return
+
+            if (this.checkFilters(runs, "winCondition").length < 1) return
+
+            return condition
         },
         checkGameState(gameState) {
             let runs
@@ -183,7 +229,7 @@ export default {
             if (this.filterDateEnd && run.runStart > this.filterDateEnd) return
 
             // Win condition filter
-            if (this.filterWinCondition != null && run.runEnd.win != this.filterWinCondition) return
+            if (this.filterWinCondition !== null && run.runEnd.win !== this.filterWinCondition) return
 
             // Save filter
             if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
