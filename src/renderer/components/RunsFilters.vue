@@ -6,7 +6,7 @@
             <DateRangePicker @updateDateRange="onUpdateDateRange"/>
             <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="All tags" @updateSelect="onUpdateTagsMultiSelect"/>
             <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="All characters" @updateSelect="onUpdateCharactersMultiSelect"/>
-            <CustomSelect type="multi" :items="gameStateWithRuns" label="Save" emptyMessage="No save slot selected" @updateSelect="onUpdateGameStateMultiSelect"/>
+            <CustomSelect type="multi" :items="gameStateWithRuns" label="Save" emptyMessage="All saves" @updateSelect="onUpdateGameStateMultiSelect"/>
             <CustomSelect type="single" :items="winConditionWithRuns" label="Win condition" emptyMessage="All conditions" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
         </div>
 </template>
@@ -141,7 +141,6 @@ export default {
         checkFilters(runsToCheck, from) {
             // Check all filters based on other filters
             let runs = runsToCheck
-            
             // Check if runs are on date range
             if (this.filterDateStart && this.filterDateEnd) {
                 runs = runs.where((run) => run.runStart > this.filterDateStart).where((run) => run.runStart < this.filterDateEnd)
@@ -150,7 +149,7 @@ export default {
 
             // Check if runs are selected win condition
             if (this.filterWinCondition !== null && from !== "winCondition") {
-                runs = runs.where((run) => run.gameState === this.filterWinCondition)
+                runs = runs.where((run) => run.runEnd.win === this.filterWinCondition)
                 if (runs.get().length < 1) return runs.get()
             }
 

@@ -5,7 +5,7 @@
         <div class="after" :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"></div>
         <div :class="['content', editing ? 'expended' : '']">
             <div v-if="usedGameStates">
-                <CustomSelect type="single" :items="availableGameStatesSelectOptions" label="Save" emptyMessage="No save selected" @updateSelect="onUpdateSaveSelect"/>
+                <CustomSelect type="single" :hide-at="0" :items="availableGameStatesSelectOptions" label="Save" emptyMessage="No save selected" @updateSelect="onUpdateSaveSelect"/>
             </div>
             <div class="adjust-number">
                 Adjust number :
