@@ -254,6 +254,7 @@ export default {
                             display: none;
                         }
                         .item-image {
+                            opacity: 1;
                             width: 50px;
                             z-index: 0;
                             position: absolute;

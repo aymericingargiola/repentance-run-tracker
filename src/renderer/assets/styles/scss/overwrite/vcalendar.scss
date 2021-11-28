@@ -1,0 +1,119 @@
+.v-calendar {
+    &.date-picker {
+        display: flex;
+        align-items: center;
+        .custom-input {
+            input {
+                text-align: center;
+                min-width: unset;
+                width: 100px;
+            }
+        }
+        .separator {
+            margin: 0px 8px;
+        }
+    }
+    .custom-input {
+
+    }
+}
+
+html {
+    .vc-container {
+        font-family: "Baby Doll", sans-serif;
+        background: rgba(255,255,255,0.4);
+        backdrop-filter: blur(8px);
+        border: none;
+        box-shadow: 5px 5px 0px rgba($color: #000000, $alpha: 0.3);
+        border-width: 2px;
+        border-style: outset;
+        border-color: grey;
+	    border-radius: 8px;
+        &::before {
+            display: none;
+        }
+    }
+    .vc-nav-title, .vc-nav-item {
+        &:focus {
+            border-color: $text-dark;
+            border-style: dashed;
+        }
+    }
+    .vc-nav-item {
+        &.is-current {
+            border-color: $text-dark;
+            font-weight: bold;
+            transform: scale(1.1);
+            &:not(:hover) {
+                color: $text-dark;
+            }
+        }
+    }
+    .vc-day-content {
+        &:focus {
+            background-color: rgba($color: white, $alpha: 0.8);
+        }
+    }
+    .vc-day {
+        [style="font-weight: var(--font-bold); color: var(--blue-900);"] {
+            color: white!important;
+        }
+    }
+    .vc-highlights {
+        &.vc-day-layer {
+            .vc-day-layer {
+                .vc-highlight {
+                    background-color: $text-dark!important;
+                    &.vc-highlight-base-start, &.vc-highlight-base-middle, &.vc-highlight-base-end {
+                        background-color: rgba($color: $text-dark, $alpha: 0.6)!important;
+                    }
+                }
+            }
+        }
+    }
+    .vc-nav-header {
+        .vc-nav-title {
+            color: $text-dark;
+            &:hover {
+                background-color: rgba($color: white, $alpha: 0.5);
+            }
+        }
+    }
+    .vc-popover-content.vc-nav-popover-container {
+        background: $paper-white;
+        color: $text-dark;
+        box-shadow: 3px 3px 0px rgba($color: #000000, $alpha: 0.3)!important;
+        border-width: 2px;
+        border-style: outset;
+        border-color: grey;
+	    border-radius: 8px;
+    }
+    .vc-popover-caret {
+        display: none!important;
+    }
+    .vc-arrow, .vc-nav-arrow {
+        &:hover {
+            background-color: rgba($color: white, $alpha: 0.5);
+        }
+        .vc-svg-icon, svg {
+            display: none;
+        }
+        &.is-left, &.is-right {
+            position: relative;
+            width: 26px;
+            height: 26px;
+            &::before {
+                content: "<";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+        &.is-right {
+            &::before {
+                content: ">";
+            }
+        }
+    }
+}

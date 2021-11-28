@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 export default {
@@ -95,7 +94,7 @@ export default {
             this.$root.$emit('OPEN_EDITRUN', id)
         },
         getDate(unixDate, format) {
-            return moment.unix(unixDate).format(format)
+            return this.$helpers.formatDate(unixDate, format)
         },
         getConfig(id) {
             return this.configRepo.query().where('id', id).get()[0]

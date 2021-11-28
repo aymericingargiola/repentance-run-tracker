@@ -3,16 +3,29 @@ import App from './App.vue'
 import store from './store/store'
 import router from './router/router'
 import vuescroll from 'vuescroll'
+import VCalendar from 'v-calendar'
 import VueTimepicker from 'vue2-timepicker'
 import 'vue2-timepicker/dist/VueTimepicker.css'
 import { ColorPicker } from 'vue-color-gradient-picker'
 import 'vue-color-gradient-picker/dist/index.css'
+import helpers from './helpers/format'
+
+const plugins = {
+  install () {
+    Vue.helpers = helpers
+    Vue.prototype.$helpers = helpers
+  }
+}
+
+Vue.use(plugins)
 
 Vue.use(vuescroll, {
   ops: {
     // The global config
   },
 })
+
+Vue.use(VCalendar);
 
 Vue.component("vue-timepicker", VueTimepicker)
 

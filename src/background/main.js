@@ -23,20 +23,28 @@ const oldFolderPath = path.normalize(`${appDataFolder}\\${oldFolderName}`)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
+elog.info(`App is starting... | App Version : ${app.getVersion()} | Node version : ${process.version} | Electron version : ${process.versions.electron}`)
+
 process.on('unhandledRejection', (error, p) => {
-  if (!errorMessage) errorMessage = []
-  errorMessage.push(error)
   console.log(error)
   elog.error(error)
-  if (win) syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack} })
+  if (win) {
+    syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack} })
+    win.setAlwaysOnTop(true)
+    win.show()
+    win.focus()
+  }
 })
 
 process.on('uncaughtException', (error) => {
-  if (!errorMessage) errorMessage = []
-  errorMessage.push(error)
   console.log(error)
   elog.error(error)
-  if (win) syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
+  if (win) {
+    syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
+    win.setAlwaysOnTop(true)
+    win.show()
+    win.focus()
+  }
 })
 
 ipcMain.on('READ_FILE', (event, payload) => {
@@ -54,11 +62,13 @@ ipcMain.on('HIDE_APP', (event, payload) => {
 
 ipcMain.on('CLOSE_APP', async (event, payload) => {
   await backupDatas(dataFolder)
+  elog.info('Closing app...')
   app.exit()
 })
 
 ipcMain.on('RESTART_APP', async (event, payload) => {
   await backupDatas(dataFolder)
+  elog.info('Closing app...')
   app.relaunch()
   app.exit()
 })
@@ -159,7 +169,6 @@ async function createWindow() {
       preload: path.resolve(__static, 'preload.js')
     }
   })
-
   readyToSync(win, false)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -193,6 +202,7 @@ app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
+    elog.info('Closing app...')
     app.quit()
   }
 })

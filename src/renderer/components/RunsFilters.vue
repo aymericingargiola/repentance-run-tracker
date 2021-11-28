@@ -3,19 +3,26 @@
             <div class="search">
                 <input v-model="filterText" @input="resetPaginationFromInput()" placeholder="Search runs">
             </div>
-            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="No tags selected" @updateSelect="onUpdateTagsMultiSelect"/>
+            <DateRangePicker @updateDateRange="onUpdateDateRange"/>
+            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="All tags" @updateSelect="onUpdateTagsMultiSelect"/>
+            <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="All characters" @updateSelect="onUpdateCharactersMultiSelect"/>
+            <CustomSelect type="multi" :items="gameStateWithRuns" label="Save" emptyMessage="All saves" @updateSelect="onUpdateGameStateMultiSelect"/>
+            <CustomSelect type="single" :items="winConditionWithRuns" label="Win condition" emptyMessage="All conditions" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
         </div>
 </template>
 
 <script>
 import { mapRepos } from '@vuex-orm/core'
-import Run from '../store/classes/Run'
 import Tag from '../store/classes/Tag'
+import Character from '../store/classes/Character'
+import Run from '../store/classes/Run'
 import CustomSelect from './Tools/CustomSelect.vue'
+import DateRangePicker from './Tools/DateRangePicker.vue'
 export default {
     name: "RunsFilters",
     components: {
-        CustomSelect
+        CustomSelect,
+        DateRangePicker
     },
     props: {
         filterOffset: Number,
@@ -25,13 +32,14 @@ export default {
     data() {
         return {
             filterText: '',
-            filterCharacter: [],
+            filterCharacters: [],
             filterTags: [],
-            filterCharacterVersion: '',
-            filterGameState: 0,
-            filterWiNOrDeath: '',
-            filterDateFrom: 0,
-            filterDateTo: 0,
+            gameStateOptions: [1,2,3],
+            filterGameStates: [],
+            winConditionOptions: ["Win", "Lose"],
+            filterWinCondition: null,
+            filterDateStart: null,
+            filterDateEnd: null,
             localFilteredRuns: this.filteredRuns
         }
     },
@@ -44,14 +52,35 @@ export default {
     },
     computed: {
         ...mapRepos({
-            runRepo: Run,
-            tagRepo: Tag
+            tagRepo: Tag,
+            characterRepo: Character,
+            runRepo: Run
         }),
+        winConditionWithRuns() {
+            const conditions = this.winConditionOptions.filter(condition => this.checkWinCondition(condition))
+            this.resetFilters(conditions, "winCondition")
+            return conditions
+        },
+        gameStateWithRuns() {
+            const gameStates = this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
+            this.resetFilters(gameStates, "gameStates")
+            return gameStates
+        },
         allTags() {
             return this.tagRepo.all()
         },
         tagsWithRuns() {
-            return this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'desc').get()
+            const tags = this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
+            this.resetFilters(tags, "tags")
+            return tags
+        },
+        allCharacters() {
+            return this.characterRepo.where().all()
+        },
+        charactersWithRuns() {
+            const characters = this.characterRepo.where((character) => { return this.checkCharacters(character) }).orderBy('trueName', 'asc').get()
+            this.resetFilters(characters, "characters")
+            return characters
         },
         allRuns() {
             return this.runRepo.all()
@@ -65,24 +94,152 @@ export default {
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
             this.$emit('filteredRuns', filteredRuns)
             return filteredRuns
-        },
+        }
     },
     methods: {
+        onUpdateDateRange(range) {
+            this.filterDateStart = range.start
+            this.filterDateEnd = range.end
+            this.$emit('resetPagination')
+        },
+        onUpdateWinConditionMultiSelect(selected) {
+            this.filterWinCondition = selected.length === 0 ? null : selected[0] === 'Win' ? true : false
+            this.$emit('resetPagination')
+        },
+        onUpdateGameStateMultiSelect(selected) {
+            this.filterGameStates = selected
+            this.$emit('resetPagination')
+        },
         onUpdateTagsMultiSelect(selected) {
             this.filterTags = selected
+            this.$emit('resetPagination')
+        },
+        onUpdateCharactersMultiSelect(selected) {
+            this.filterCharacters = selected
             this.$emit('resetPagination')
         },
         resetPaginationFromInput() {
             if (this.filterText.length > 3 || this.filterText.length === 0) this.$emit('resetPagination')
         },
+        resetFilters(availableFilters, context) {
+            // Reset filter in case no filter available but at least one is selected
+            switch (context) {
+                case "winCondition":
+                    if (availableFilters.length === 0 && this.filterWinCondition !== null) this.filterWinCondition = null
+                    break
+                case "gameState":
+                    if (availableFilters.length === 0 && this.filterGameStates.length > 0) this.filterGameStates = []
+                    break
+                case "tags":
+                    if (availableFilters.length === 0 && this.filterTags.length > 0) this.filterTags = []
+                    break
+                case "characters":
+                    if (availableFilters.length === 0 && this.filterCharacters.length > 0) this.filterCharacters = []
+                    break
+            }
+        },
+        checkFilters(runsToCheck, from) {
+            // Check all filters based on other filters
+            let runs = runsToCheck
+            // Check if runs are on date range
+            if (this.filterDateStart && this.filterDateEnd) {
+                runs = runs.where((run) => run.runStart > this.filterDateStart).where((run) => run.runStart < this.filterDateEnd)
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            // Check if runs are selected win condition
+            if (this.filterWinCondition !== null && from !== "winCondition") {
+                runs = runs.where((run) => run.runEnd.win === this.filterWinCondition)
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            // Check if runs has gamestate
+            if (this.filterGameStates.length > 0 && from !== "gameStates") {
+                runs = runs.where((run) => this.filterGameStates.includes(run.gameState))
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            // Check if runs has filtered tags
+            if (this.filterTags.length > 0 && from !== "tags") {
+                runs = runs.where((run) => run.tags_ids.some(tag => this.filterTags.map(filterTag => filterTag.id).includes(tag)))
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            // Check if runs has filtered characters
+            if (this.filterCharacters.length > 0 && from !== "characters") {
+                runs = runs.where((run) => this.filterCharacters.map(filterCharacter => filterCharacter.id).includes(run.characters[0].id))
+                if (runs.get().length < 1) return runs.get()
+            }
+
+            return runs.get()
+        },
+        checkWinCondition(condition) {
+            let runs
+            const thisCondition = condition === "Win" ? true : false
+
+            // Init Check if runs has save 
+            runs = this.runRepo.where((run) => run.runEnd.win === thisCondition)
+            if (runs.get().length < 1) return
+
+            if (this.checkFilters(runs, "winCondition").length < 1) return
+
+            return condition
+        },
+        checkGameState(gameState) {
+            let runs
+
+            // Init Check if runs has save
+            runs = this.runRepo.where((run) => run.gameState === gameState)
+            if (runs.get().length < 1) return
+
+            if(this.checkFilters(runs, "gameStates").length < 1) return
+
+            return gameState
+        },
         checkTags(tag) {
-            if (tag.runs_ids.filter(runId => !!this.runRepo.where('id', runId).first()).length < 1) return
+            let runs
+
+            // Init Check if runs has tag
+            runs = this.runRepo.where((run) => run.tags_ids.includes(tag.id))
+            if (runs.get().length < 1) return
+
+            if(this.checkFilters(runs, "tags").length < 1) return
+
             return tag
         },
+        checkCharacters(character) {
+            let runs
+
+            // Check if it's ignore character
+            if (character.ignore) return
+            
+            // Check if runs has character
+            runs = this.runRepo.where((run) => run.characters[0].name === character.trueName && run.characters[0].version === character.version)
+            if (runs.get().length < 1) return
+
+            if(this.checkFilters(runs, "characters").length < 1) return
+            
+            character.trueName = `${character.trueName}${character.version === 'Alternate' ? ' (tainted)' : ''}`
+            return character
+        },
         filterRuns(run) {
-            // tags filter
+            // Date filter
+            if (this.filterDateStart && run.runStart < this.filterDateStart) return
+            if (this.filterDateEnd && run.runStart > this.filterDateEnd) return
+
+            // Win condition filter
+            if (this.filterWinCondition !== null && run.runEnd.win !== this.filterWinCondition) return
+
+            // Save filter
+            if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
+
+            // Tags filter
             if (this.filterTags.length > 0 && !this.filterTags.some(tag => run.tags_ids.includes(tag.id))) return
-            // text filter
+
+            // Characters filter
+            if (this.filterCharacters.length > 0 && !this.filterCharacters.map(filterCharacter => filterCharacter.id).includes(run.characters[0].id)) return
+
+            // Text filter
             if(this.filterText.length > 3) {
                 const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
                 const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
@@ -106,11 +263,11 @@ export default {
     text-align: left;
     padding: 0px 12px;
     display: flex;
+    flex-wrap: wrap;
     margin-left: -8px;
     margin-right: -8px;
-    > div {
-        margin-left: 8px;
-        margin-right: 8px;
+    > div, > span {
+        margin: 8px;
     }
 }
 </style>
