@@ -9,7 +9,7 @@
                         v-on="inputEvents.start"
                     />
                 </div>
-                <span class="separator">
+                <span class="separator" @click="reset">
                     ->
                 </span>
                 <div class="custom-input">
@@ -64,6 +64,7 @@ export default {
         },
         rangeUpdate: {
             get() {
+                this.$emit('updateDateRange', this.range)
                 return this.range;
             },
             set(newVal) {
@@ -78,6 +79,12 @@ export default {
     methods: {
         getConfig(id) {
             return this.configRepo.query().where('id', id).get()[0]
+        },
+        reset() {
+            this.range = {
+                start: null,
+                end: null
+            }
         }
     }
 };
