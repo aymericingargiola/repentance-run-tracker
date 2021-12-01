@@ -8,7 +8,7 @@ const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
-const moment = require('moment')
+const { DateTime } = require('luxon')
 const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
@@ -203,13 +203,13 @@ function updateOrCreateRun(params = {}) {
                     sameRun.runEnd.killedBy = runEndInfo.killedBy
                     sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
                     sameRun.runEnd.damageFlags = runEndInfo.damageFlags
-                    sameRun.runDuration = getRunDuration(moment.unix(runEndInfo.date), moment.unix(sameRun.runStart))
+                    sameRun.runDuration = getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
                     if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     break
                 case 'run end ext':
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
-                    sameRun.runEnd.date = moment().unix()
+                    sameRun.runEnd.date = DateTime.now().toSeconds()
                 break
                 case 'player updated':
                     const playerStats = params.stats
@@ -222,7 +222,7 @@ function updateOrCreateRun(params = {}) {
                 default:
                     return false
             }
-            sameRun.runUpdate = moment().unix()
+            sameRun.runUpdate = DateTime.now().toSeconds()
             runs[sameRun.id] = sameRun
             syncApp(win,{trigger: "update run", run: sameRun})
             if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
@@ -238,7 +238,7 @@ function updateOrCreateRun(params = {}) {
             elog.error(errorMessage)
             return
         }
-        currentRun.id = `${currentRun.seed} ${moment().unix()}`
+        currentRun.id = `${currentRun.seed} ${DateTime.now().toSeconds()}`
         const run = {
             id: currentRun.id,
             customName: '',
@@ -248,8 +248,8 @@ function updateOrCreateRun(params = {}) {
             seed: currentRun.seed,
             gameState: currentGameState,
             gameMode: currentGameMode,
-            runStart: moment().unix(),
-            runUpdate: moment().unix(),
+            runStart: DateTime.now().toSeconds(),
+            runUpdate: DateTime.now().toSeconds(),
             runUserUpdate: null,
             runEnd: {
                 date: null,

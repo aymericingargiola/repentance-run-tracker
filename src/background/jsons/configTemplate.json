@@ -1,8 +1,8 @@
 [
     {
         "id":"dateFormat",
-        "value":"MM/DD/YY",
-        "choices":[{"name":"Month/Day/Year","value":"MM/DD/YY"},{"name":"Day/Month/Year","value":"DD/MM/YY"}],
+        "value":"LL/dd/yy",
+        "choices":[{"name":"Month/Day/Year","value":"LL/dd/yy"},{"name":"Day/Month/Year","value":"dd/LL/yy"}],
         "name":"Date format",
         "hint":"",
         "type":"select",

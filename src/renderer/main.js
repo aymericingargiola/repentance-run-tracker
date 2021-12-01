@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store/store'
 import router from './router/router'
+import { DateTime } from 'luxon'
 import vuescroll from 'vuescroll'
 import VCalendar from 'v-calendar'
 import VueTimepicker from 'vue2-timepicker'
@@ -31,6 +32,7 @@ Vue.component("vue-timepicker", VueTimepicker)
 
 Vue.component("ColorPicker", ColorPicker)
 
+Vue.prototype.$DateTime = DateTime
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
 
 // store.$repo(Context).insert({

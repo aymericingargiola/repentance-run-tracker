@@ -32,7 +32,6 @@
 </template>
 
 <script>
-// import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 export default {

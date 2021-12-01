@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 export default {
@@ -42,7 +41,6 @@ export default {
                 end: null
             },
             datePickerModelConfig: {
-                type: 'number',
                 start: {
                     timeAdjust: '00:00:00',
                 },
@@ -63,7 +61,7 @@ export default {
             return {start: this.$helpers.formatDate(this.range.start, this.dateFormat), end: this.$helpers.formatDate(this.range.end, this.dateFormat)}
         },
         todayDate() {
-            return this.$helpers.formatDate(Date.now(), this.getConfig("dateFormat") ? this.getConfig("dateFormat").value : 'MM/DD/YY')
+            return this.$helpers.formatDate(Math.floor(this.$DateTime.now().toSeconds()), this.getConfig("dateFormat") ? this.getConfig("dateFormat").value : 'MM/DD/YY')
         },
         rangeUpdate: {
             get() {
@@ -72,8 +70,8 @@ export default {
             },
             set(newVal) {
                 this.range = {
-                    start: moment(newVal.start).unix(),
-                    end: moment(newVal.end).unix()
+                    start: this.$DateTime.fromJSDate(newVal.start).toSeconds(),
+                    end: this.$DateTime.fromJSDate(newVal.end).toSeconds()
                 }
                 this.$emit('updateDateRange', this.range)
             }

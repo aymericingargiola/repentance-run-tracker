@@ -4,7 +4,7 @@ const fsPromises = fs.promises
 const { app, ipcMain } = require('electron')
 const { asyncForEach } = require('../tools/methods')
 const { writeFileAsync } = require('../tools/fileSystem')
-const moment = require('moment')
+const { DateTime } = require('luxon')
 const AdmZip = require("adm-zip")
 const elog = require('electron-log')
 const dataFolder = app.getPath("userData")
@@ -12,7 +12,7 @@ const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\B
 
 ipcMain.on('ASK_ERROR_ZIP', async (event) => {
   const zipBuffer = await module.exports.generateErrorZip()
-  event.reply('ASK_ERROR_ZIP', {datas:zipBuffer,fileName:`repentance_run_tracker_error_dump-${moment().format('MM-D-YY-hhmmssa')}.zip`})
+  event.reply('ASK_ERROR_ZIP', {datas:zipBuffer,fileName:`repentance_run_tracker_error_dump-${DateTime.now().toFormat('LL-dd-yy-hhmmssa')}.zip`})
 })
 
 module.exports = {
@@ -53,7 +53,7 @@ module.exports = {
       }
     ]
     zip = await module.exports.addLocalFiles(zip, files, 'datas backup')
-    zip.writeZip(`${dataFolder}/backups/backup_datas_${moment().format('MM-D-YY-hhmmssa')}.zip`)
+    zip.writeZip(`${dataFolder}/backups/backup_datas_${DateTime.now().toFormat('LL-dd-yy-hhmmssa')}.zip`)
     console.timeEnd('App datas backup created in')
     elog.info('App datas backup created')
     return true
