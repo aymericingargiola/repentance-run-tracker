@@ -2,7 +2,6 @@
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { writeFileAsync } from './tools/fileSystem'
 import { startLogsWatch, itemTrackerWindowState } from './runs-watcher'
 import { startModWatch } from './mod-watcher'
 import { checkOldFolder, readyToSync, initConfig, initRuns, initTrash } from './helpers/readyToSync'
@@ -10,7 +9,7 @@ import { buildJsons } from './helpers/jsonBuilder'
 import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 import { checkForUpdate } from './helpers/updater'
-import { backupDatas } from './helpers/backupDatas'
+import { cleanBackups, backupDatas } from './helpers/backupDatas'
 const { syncApp } = require('./helpers/sync')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
@@ -145,6 +144,7 @@ async function openItemTracker() {
 
 async function createWindow() {
   await checkOldFolder(oldFolderPath, dataFolder)
+  await cleanBackups()
   if(isDevelopment) await buildJsons()
   if(!config) config = await initConfig()
   if(!runs) runs = await initRuns()
