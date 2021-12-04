@@ -138,12 +138,22 @@ module.exports = {
 			await asyncForEach(filesToRestore, async (file) => {
 				const sourceFilePath = path.normalize(`${oldFolderPath}\\${file}`)
 				const destFilePath = path.normalize(`${dataFolder}\\${file}`)
-				const copyFile = await fsPromises.copyFile(sourceFilePath, destFilePath)
-				console.log(`${file} was restored from ${oldFolderPath}`)
-				return copyFile
+				try {
+					await fsPromises.copyFile(sourceFilePath, destFilePath)
+				} catch (err) {
+					log.warn(`Issue to restore ${oldFolderPath}! Empty file will be created : ${err}`)
+					return
+				}
+				log.info(`${file} was restored from ${oldFolderPath}`)
+				return
 			})
-			await fsPromises.rename(oldFolderPath, `${oldFolderPath}-backup`)
-			console.log(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
+			try {
+				await fsPromises.rename(oldFolderPath, `${oldFolderPath}-backup`)
+			} catch (err) {
+				log.error(`Issue to rename ${oldFolderPath}! ${err}`)
+				return console.timeEnd('Old folder check')
+			}
+			log.info(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
 		}
 		return console.timeEnd('Old folder check')
 	},
@@ -157,7 +167,8 @@ module.exports = {
         configTemplate.forEach((field) => {
             const tempConfigField = tempConfig.find((configItem) => configItem.id === field.id);
             if (!tempConfigField) tempConfig.push(field);
-            if (tempConfigField && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices;
+            if (tempConfigField && field.choices && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices;
+			if (tempConfigField && field.choices && !field.choices.map(choice => choice.value).includes(tempConfigField.value)) tempConfigField.value = field.choices[0].value
             if (tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name;
             if (tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint;
             if (tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type;

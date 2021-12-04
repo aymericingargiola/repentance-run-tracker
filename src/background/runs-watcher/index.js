@@ -2,13 +2,13 @@ const fs = require('fs')
 const { app } = require('electron')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
+const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getFloorById, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
-const moment = require('moment')
+const { DateTime } = require('luxon')
 const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
 const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
@@ -175,11 +175,12 @@ function updateOrCreateRun(params = {}) {
                     sameRun.floors.push(currentFloor)
                     break
                 case 'game mode':
-                    if (!sameRun.gameMode) {
-                        const gameMode = params.log.includes("copy") ? "greed" : "normal"
-                        sameRun.gameMode = gameMode
-                    }
+                    if (!sameRun.gameMode) sameRun.gameMode = params.log.includes("copy") ? "greed" : "normal"
                     currentGameMode = sameRun.gameMode
+                    if (currentGameMode === "greed") {
+                        firstGreedFloor = getFloorById(sameRun.floors[0].id, currentGameMode)
+                        sameRun.floors[0].name = firstGreedFloor.name
+                    }
                     break
                 case 'init other player':
                     if (params.character && !params.character.ignore) sameRun.characters.push(params.character)
@@ -203,13 +204,13 @@ function updateOrCreateRun(params = {}) {
                     sameRun.runEnd.killedBy = runEndInfo.killedBy
                     sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
                     sameRun.runEnd.damageFlags = runEndInfo.damageFlags
-                    sameRun.runDuration = getRunDuration(moment.unix(runEndInfo.date), moment.unix(sameRun.runStart))
+                    sameRun.runDuration = getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
                     if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     break
                 case 'run end ext':
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
-                    sameRun.runEnd.date = moment().unix()
+                    sameRun.runEnd.date = DateTime.now().toSeconds()
                 break
                 case 'player updated':
                     const playerStats = params.stats
@@ -222,7 +223,7 @@ function updateOrCreateRun(params = {}) {
                 default:
                     return false
             }
-            sameRun.runUpdate = moment().unix()
+            sameRun.runUpdate = DateTime.now().toSeconds()
             runs[sameRun.id] = sameRun
             syncApp(win,{trigger: "update run", run: sameRun})
             if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
@@ -238,7 +239,7 @@ function updateOrCreateRun(params = {}) {
             elog.error(errorMessage)
             return
         }
-        currentRun.id = `${currentRun.seed} ${moment().unix()}`
+        currentRun.id = `${currentRun.seed} ${DateTime.now().toSeconds()}`
         const run = {
             id: currentRun.id,
             customName: '',
@@ -248,8 +249,8 @@ function updateOrCreateRun(params = {}) {
             seed: currentRun.seed,
             gameState: currentGameState,
             gameMode: currentGameMode,
-            runStart: moment().unix(),
-            runUpdate: moment().unix(),
+            runStart: DateTime.now().toSeconds(),
+            runUpdate: DateTime.now().toSeconds(),
             runUserUpdate: null,
             runEnd: {
                 date: null,
@@ -311,12 +312,12 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Level::Init")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             currentCurse = logArray[logArray.lastIndexOf(log) + 1].includes("Curse") ? logArray[logArray.lastIndexOf(log) + 1].split(" ").slice(2).join(" ") : null
-            currentFloor = getFloor(log)
+            currentFloor = getFloor(log, currentGameMode)
             if (currentCurse) currentFloor.curse = currentCurse
             updateOrCreateRun({trigger: "level init"})
         }
         if(log.includes("generated rooms")) {
-            if (!currentRunInit) {
+            if (!currentRunInit && currentCharater) {
                 console.log("\x1b[35m", log, "\x1b[0m")
                 currentRunInit = true
                 updateOrCreateRun({trigger: "generated rooms"})
@@ -453,11 +454,8 @@ async function init() {
         console.log("Currently in run :", inRun)
         if (inRun) {
             parseLogs(lastLogs.filter(v=>v.includes("Start Seed") || v.includes("generated rooms")), repentanceLogsArray)
+            currentRunInit = true
         }
-        // else {
-        //     const lastLogsOver = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, gameInit[gameInit.length - 1]), repentanceLogsArray.length - 1)
-        //     parseLogs(lastLogsOver, repentanceLogsArray)
-        // }
     } else if (!isShutdown) {
         parseLogs(repentanceLogsArray, repentanceLogsArray)
     }

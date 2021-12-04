@@ -6,7 +6,7 @@ const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const items = require('../jsons/items.json')
 const floors = require('../jsons/floors.json')
-const moment = require('moment')
+const { DateTime, Duration } = require('luxon')
 const log = require('electron-log')
 module.exports = {
     getOptions: (path, splitFormat) => {
@@ -56,10 +56,14 @@ module.exports = {
             'seed': `${string.split(" ")[splitValuePart1]} ${string.split(" ")[splitValuePart2]}`
         }
     },
-    getFloor: (string) => {
+    getFloor: (string, mode, id) => {
+        if (id) return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
         const match1 = string.split(" ")[4].match(/\d+/)[0]
         const match2 = string.split(" ")[6]
-        return cloneFrom(floors.stages.find(floor => floor.id === `${match1}.${match2}`))
+        return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === `${match1}.${match2}`))
+    },
+    getFloorById: (id, mode) => {
+        return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
     },
     getGameState: function(string) {
         //Return game save state from logs
@@ -117,7 +121,7 @@ module.exports = {
     getRunEnd: (string) => {
         //Return game over from logs
         return {
-            date: moment().unix(),
+            date: DateTime.now().toSeconds(),
             win: string.includes("Game Over") ? false : true,
             killedBy: string.includes("Game Over") ? string.split(" ")[6].slice(1,-1) : null,
             spawnedBy: string.includes("Game Over") ? string.split(" ")[9].slice(1,-1) : null,
@@ -125,16 +129,14 @@ module.exports = {
         }
     },
     getRunDuration: (end, start) => {
-        const ms = moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"))
-        const duration = moment.duration(ms)
-        const hours = `0${Math.floor(duration.asHours())}`.slice(-2)
-        return `${hours}${moment.utc(ms).format(":mm:ss")}`
+        const diff = end.diff(start, ["seconds"])
+        const duration = Duration.fromObject(diff.toObject())
+        return duration.toFormat('hh:mm:ss')
     },
     getRealRunDuration: (string) => {
         const s = parseInt(string.split(" ")[9])
-        const duration = moment.duration(s,'seconds')
-        const hours = `0${Math.floor(duration.asHours())}`.slice(-2)
-        return `${hours}${moment.utc(duration.asMilliseconds()).format(":mm:ss")}`
+        const duration = Duration.fromObject({seconds:s})
+        return duration.toFormat('hh:mm:ss')
     },
     saveFileToDisk: (path, datas) => {
         //Update file

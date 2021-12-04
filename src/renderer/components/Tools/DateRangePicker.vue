@@ -10,8 +10,8 @@
                     />
                 </div>
                 <div class="separator" @click="reset">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
+                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01_noshadow.png')`}"></div>
+                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                     <span class="icon"></span>
                 </div>
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 export default {
@@ -42,7 +41,6 @@ export default {
                 end: null
             },
             datePickerModelConfig: {
-                type: 'number',
                 start: {
                     timeAdjust: '00:00:00',
                 },
@@ -63,7 +61,7 @@ export default {
             return {start: this.$helpers.formatDate(this.range.start, this.dateFormat), end: this.$helpers.formatDate(this.range.end, this.dateFormat)}
         },
         todayDate() {
-            return this.$helpers.formatDate(Date.now(), this.getConfig("dateFormat") ? this.getConfig("dateFormat").value : 'MM/DD/YY')
+            return this.$helpers.formatDate(Math.floor(this.$DateTime.now().toSeconds()), this.getConfig("dateFormat") ? this.getConfig("dateFormat").value : 'MM/DD/YY')
         },
         rangeUpdate: {
             get() {
@@ -72,8 +70,8 @@ export default {
             },
             set(newVal) {
                 this.range = {
-                    start: moment(newVal.start).unix(),
-                    end: moment(newVal.end).unix()
+                    start: this.$DateTime.fromJSDate(newVal.start).toSeconds(),
+                    end: this.$DateTime.fromJSDate(newVal.end).toSeconds()
                 }
                 this.$emit('updateDateRange', this.range)
             }
@@ -95,11 +93,15 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+.custom-input {
+    position: relative;
+    z-index: 1;
+}
 .separator {
     position: relative;
     padding: 0;
-    z-index: 2;
-    transform: translateY(1px) scaleX(1.8);
+    z-index: 0;
+    transform: translateY(4px) scaleX(1.8);
     > .before, .after, .mid {
         z-index: 0;
         position: absolute;
@@ -145,7 +147,7 @@ export default {
             text-align: center;
         }
         &::after {
-            content: "X";
+            content: "(X)";
             opacity: 0;
             transform: translate(-50%, -50%) scale(0);
         }

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const fsPromises = fs.promises
+const elog = require('electron-log')
 module.exports = {
   dirExist: function(dir) {
     if (!fs.existsSync(dir)) return false
@@ -20,6 +21,7 @@ module.exports = {
       await fsPromises.writeFile(`${dir}\\${fileName}`, datas);
     } catch (error) {
       console.log(error)
+      elog.error(error)
       return false
     }
     if (logs) console.timeEnd(`Write "${dir}\\${fileName}" in `)
@@ -37,10 +39,25 @@ module.exports = {
         file = await fsPromises.readFile(`${dir}\\${fileName}`)
       } catch (error) {
         console.log(error)
+        elog.error(error)
         return false
       }
     }
     if (logs) console.timeEnd(`Read "${dir}\\${fileName}" in `)
     return file;
+  },
+  removeFileAsync: async function(dir, fileName, logs = true) {
+    if (logs) console.time(`Remove "${dir}\\${fileName}" in `)
+    if (module.exports.dirExist(dir)) {
+      try {
+        await fsPromises.unlink(`${dir}\\${fileName}`)
+      } catch (error) {
+        console.log(error)
+        elog.error(error)
+        return false
+      }
+    }
+    if (logs) console.timeEnd(`Remove "${dir}\\${fileName}" in `)
+    return true
   }
 }

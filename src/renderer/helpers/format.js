@@ -1,6 +1,6 @@
-import moment from 'moment'
+import { DateTime } from 'luxon'
 export default { 
   formatDate(unixDate, format) {
-    return unixDate && format ? moment.unix(unixDate).format(format) : null
+    return unixDate && format ? DateTime.fromSeconds(unixDate).toFormat(format) : null
   }
 }

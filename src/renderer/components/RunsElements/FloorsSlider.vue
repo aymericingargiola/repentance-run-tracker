@@ -3,7 +3,7 @@
         <transition-group name="floors-group-transition" tag="ul" class="floors">
             <template v-for="(floor, fidx) in floors">
                 <li v-if="floor" :class="['run-el', 'floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
-                    <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors/${floor.group}-ground.png')`}">
+                    <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors${gameMode === 'greed' ? '/greed' : ''}/${floor.group}-ground.png')`}">
                         <div class="top-info">
                             <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
                             <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
@@ -40,7 +40,8 @@ export default {
         ops: Object,
         index: Number,
         floors: Array,
-        liveUpdate: Boolean
+        liveUpdate: Boolean,
+        gameMode: String
     },
     components: {
     },
