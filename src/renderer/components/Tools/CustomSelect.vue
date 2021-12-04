@@ -147,11 +147,11 @@ export default {
                 }
                 &::after {
                     opacity: 0;
-                    content: "X";
+                    content: "(X)";
                     position: absolute;
                     height: 100%;
                     width: 100%;
-                    right: calc(50% + -4px);
+                    right: calc(50% + 4px);
                     transform: translateX(50%) scale(0);
                     z-index: 1;
                     transition: 0.2s ease;

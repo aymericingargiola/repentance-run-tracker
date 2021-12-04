@@ -2,7 +2,7 @@ const fs = require('fs')
 const { app } = require('electron')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
+const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getFloorById, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
@@ -175,11 +175,12 @@ function updateOrCreateRun(params = {}) {
                     sameRun.floors.push(currentFloor)
                     break
                 case 'game mode':
-                    if (!sameRun.gameMode) {
-                        const gameMode = params.log.includes("copy") ? "greed" : "normal"
-                        sameRun.gameMode = gameMode
-                    }
+                    if (!sameRun.gameMode) sameRun.gameMode = params.log.includes("copy") ? "greed" : "normal"
                     currentGameMode = sameRun.gameMode
+                    if (currentGameMode === "greed") {
+                        firstGreedFloor = getFloorById(sameRun.floors[0].id, currentGameMode)
+                        sameRun.floors[0].name = firstGreedFloor.name
+                    }
                     break
                 case 'init other player':
                     if (params.character && !params.character.ignore) sameRun.characters.push(params.character)
@@ -311,7 +312,7 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Level::Init")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             currentCurse = logArray[logArray.lastIndexOf(log) + 1].includes("Curse") ? logArray[logArray.lastIndexOf(log) + 1].split(" ").slice(2).join(" ") : null
-            currentFloor = getFloor(log)
+            currentFloor = getFloor(log, currentGameMode)
             if (currentCurse) currentFloor.curse = currentCurse
             updateOrCreateRun({trigger: "level init"})
         }

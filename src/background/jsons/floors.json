@@ -342,5 +342,154 @@
             "group": "home",
             "shortName": "HO"
         }
+    ],
+    "stagesGreedMode": [
+        {
+            "id": "1.0",
+            "igId": "1",
+            "name": "Basement",
+            "group": "basement",
+            "shortName": "B1"
+        },
+        {
+            "id": "1.1",
+            "igId": "1a",
+            "name": "Cellar",
+            "group": "cellar",
+            "shortName": "B1[CE]"
+        },
+        {
+            "id": "1.2",
+            "igId": "1b",
+            "name": "Burning Basement",
+            "group": "burning basement",
+            "shortName": "B1[BB]"
+        },
+        {
+            "id": "2.0",
+            "igId": "2",
+            "name": "Caves",
+            "group": "caves",
+            "shortName": "C1"
+        },
+        {
+            "id": "2.1",
+            "igId": "2a",
+            "name": "Catacombs",
+            "group": "catacombs",
+            "shortName": "C1[CC]"
+        },
+        {
+            "id": "2.2",
+            "igId": "2b",
+            "name": "Flooded Caves",
+            "group": "flooded caves",
+            "shortName": "C1[FC]"
+        },
+        {
+            "id": "3.0",
+            "igId": "3",
+            "name": "Depths",
+            "group": "depths",
+            "shortName": "D1"
+        },
+        {
+            "id": "3.1",
+            "igId": "3a",
+            "name": "Necropolis",
+            "group": "necropolis",
+            "shortName": "D1[NE]"
+        },
+        {
+            "id": "3.2",
+            "igId": "3b",
+            "name": "Dank Depths",
+            "group": "dank depths",
+            "shortName": "D1[DP]"
+        },
+        {
+            "id": "4.0",
+            "igId": "4",
+            "name": "Womb",
+            "group": "womb",
+            "shortName": "W1"
+        },
+        {
+            "id": "4.1",
+            "igId": "4a",
+            "name": "Utero",
+            "group": "utero",
+            "shortName": "W1[UT]"
+        },
+        {
+            "id": "4.2",
+            "igId": "4b",
+            "name": "Scarred Womb",
+            "group": "scarred womb",
+            "shortName": "W1[SW]"
+        },
+        {
+            "id": "5.0",
+            "igId": "5",
+            "name": "Sheol",
+            "group": "sheol",
+            "shortName": "SH"
+        },
+        {
+            "id": "5.1",
+            "igId": "5a",
+            "name": "Sheol",
+            "group": "sheol",
+            "shortName": "SH"
+        },
+        {
+            "id": "5.2",
+            "igId": "5b",
+            "name": "Sheol",
+            "group": "sheol",
+            "shortName": "SH"
+        },
+        {
+            "id": "6.0",
+            "igId": "6",
+            "name": "The Shop",
+            "group": "the shop",
+            "shortName": "TS"
+        },
+        {
+            "id": "6.1",
+            "igId": "6a",
+            "name": "The Shop",
+            "group": "the shop",
+            "shortName": "TS"
+        },
+        {
+            "id": "6.2",
+            "igId": "6b",
+            "name": "The Shop",
+            "group": "the shop",
+            "shortName": "TS"
+        },
+        {
+            "id": "7.0",
+            "igId": "7",
+            "name": "Ultra Greed",
+            "group": "ultra greed",
+            "shortName": "UG"
+        },
+        {
+            "id": "7.1",
+            "igId": "7a",
+            "name": "Ultra Greed",
+            "group": "ultra greed",
+            "shortName": "UG"
+        },
+        {
+            "id": "7.2",
+            "igId": "7b",
+            "name": "Ultra Greed",
+            "group": "ultra greed",
+            "shortName": "UG"
+        }
     ]
 }

@@ -56,10 +56,14 @@ module.exports = {
             'seed': `${string.split(" ")[splitValuePart1]} ${string.split(" ")[splitValuePart2]}`
         }
     },
-    getFloor: (string) => {
+    getFloor: (string, mode, id) => {
+        if (id) return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
         const match1 = string.split(" ")[4].match(/\d+/)[0]
         const match2 = string.split(" ")[6]
-        return cloneFrom(floors.stages.find(floor => floor.id === `${match1}.${match2}`))
+        return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === `${match1}.${match2}`))
+    },
+    getFloorById: (id, mode) => {
+        return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
     },
     getGameState: function(string) {
         //Return game save state from logs

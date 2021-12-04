@@ -10,8 +10,8 @@
                     />
                 </div>
                 <div class="separator" @click="reset">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
+                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01_noshadow.png')`}"></div>
+                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                     <span class="icon"></span>
                 </div>
@@ -93,11 +93,15 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+.custom-input {
+    position: relative;
+    z-index: 1;
+}
 .separator {
     position: relative;
     padding: 0;
-    z-index: 2;
-    transform: translateY(1px) scaleX(1.8);
+    z-index: 0;
+    transform: translateY(4px) scaleX(1.8);
     > .before, .after, .mid {
         z-index: 0;
         position: absolute;
@@ -143,7 +147,7 @@ export default {
             text-align: center;
         }
         &::after {
-            content: "X";
+            content: "(X)";
             opacity: 0;
             transform: translate(-50%, -50%) scale(0);
         }
