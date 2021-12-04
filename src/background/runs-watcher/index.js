@@ -316,7 +316,7 @@ function parseLogs(newLogs, logArray) {
             updateOrCreateRun({trigger: "level init"})
         }
         if(log.includes("generated rooms")) {
-            if (!currentRunInit) {
+            if (!currentRunInit && currentCharater) {
                 console.log("\x1b[35m", log, "\x1b[0m")
                 currentRunInit = true
                 updateOrCreateRun({trigger: "generated rooms"})
@@ -453,11 +453,8 @@ async function init() {
         console.log("Currently in run :", inRun)
         if (inRun) {
             parseLogs(lastLogs.filter(v=>v.includes("Start Seed") || v.includes("generated rooms")), repentanceLogsArray)
+            currentRunInit = true
         }
-        // else {
-        //     const lastLogsOver = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, gameInit[gameInit.length - 1]), repentanceLogsArray.length - 1)
-        //     parseLogs(lastLogsOver, repentanceLogsArray)
-        // }
     } else if (!isShutdown) {
         parseLogs(repentanceLogsArray, repentanceLogsArray)
     }
