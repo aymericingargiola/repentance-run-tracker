@@ -94,7 +94,7 @@ function destroyCharacterAndRelatedItems(sameRun, characterId) {
 }
 
 function collectiblesManager(sameRun, collectible, status) {
-    if (!sameRun.floors[sameRun.floors.length - 1]) return
+    if (!sameRun.floors[sameRun.floors.length - 1]) return elog.error("[collectiblesManager] Last floor was not found!")
 
     const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player //Jacob & Esau
 
@@ -158,6 +158,8 @@ function collectiblesManager(sameRun, collectible, status) {
 function entitiesManager(sameRun, entity) {
     entity.number = 1
     const sameRunLastFloor = sameRun.floors[sameRun.floors.length - 1]
+
+    if (!sameRunLastFloor) return elog.error("[entitiesManager] Last floor was not found!")
 
     // add entities key on last floor if doesn't exist
     if (!sameRunLastFloor.entities) sameRunLastFloor.entities = []
