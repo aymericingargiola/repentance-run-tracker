@@ -183,13 +183,11 @@ function updateOrCreateRun(params = {}) {
                 case 'level init':
                     sameRun.floors.push(currentFloor)
                     break
-                case 'game mode':
-                    if (!sameRun.gameMode) sameRun.gameMode = params.log.includes("copy") ? "greed" : "normal"
-                    currentGameMode = sameRun.gameMode
-                    if (currentGameMode === "greed") {
-                        firstGreedFloor = getFloorById(sameRun.floors[0].id, currentGameMode)
-                        sameRun.floors[0].name = firstGreedFloor.name
-                    }
+                case 'game mode greed':
+                    if (sameRun.floors.length > 1) return
+                    currentGameMode = "greed"
+                    firstGreedFloor = getFloorById(sameRun.floors[0].id, currentGameMode)
+                    sameRun.floors[0].name = firstGreedFloor.name
                     break
                 case 'change room':
                     destroyCharacterAndRelatedItems(sameRun, "20") // Destroy temporary Esau if exist
@@ -323,7 +321,7 @@ function parseLogs(newLogs, logArray) {
             currentCharater = null
             currentFloor = null
             currentCurse = null
-            currentGameMode = null
+            currentGameMode = "normal"
             currentRun = getSeed(log)
             continueRun = log.includes("Continue")
             newRun = log.includes("New")
@@ -345,11 +343,12 @@ function parseLogs(newLogs, logArray) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "spawn entity", entity: getEntity(log)})
         }
+        if(log.includes("greed mode wave")) {
+            console.log("\x1b[35m", log, "\x1b[0m")
+            updateOrCreateRun({trigger: "game mode greed", log: log})
+        }
         if(log.split(' ')[2] === "Room") {
             console.log("\x1b[35m", log, "\x1b[0m")
-            if (!currentGameMode) {
-                updateOrCreateRun({trigger: "game mode", log: log})
-            }
             updateOrCreateRun({trigger: "change room", log: log})
         }
         if(log.includes("Adding collectible")) {
@@ -516,6 +515,12 @@ ipcMain.on('USER_EMPTY_TRASH', (event) => {
     syncApp(win,{trigger: "empty trash"})
     if(winTracker) syncApp(winTracker,{trigger: "empty trash"})
     saveFileToDisk(trashJsonPath, JSON.stringify(trash))
+})
+
+ipcMain.on('DEBUG_LOGS', (event, payload) => {
+    console.log(`Debug logs...`)
+    const logs = payload.split(splitFormat)
+    parseLogs(logs, logs)
 })
 
 module.exports = {
