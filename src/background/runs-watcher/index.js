@@ -4,7 +4,7 @@ const path = require('path')
 const { ipcMain } = require('electron')
 const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getFloorById, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
-const { isRunning, findLastIndex } = require('../tools/methods')
+const { isRunning, findLastIndex, findLastIndexObj } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
@@ -39,9 +39,6 @@ function checkPreviousRuns() {
             syncApp(win,{trigger: "remove run", run: runs[1].id})
             if(winTracker) syncApp(winTracker,{trigger: "remove run", run: runs[1].id})
             runs.splice(1, 1)
-            currentCharater = null
-            currentFloor = null
-            currentCurse = null
             deleted = true
         } else console.log("Run was not directly generated, check if same game state...")
         if (!deleted && runs[1].gameState === currentGameState) {
@@ -84,6 +81,16 @@ function isSameRun(seed) {
             return false
         }
     })
+}
+
+function destroyCharacterAndRelatedItems(sameRun, characterId) {
+    const playerNumber = findLastIndexObj(sameRun.characters, "id", characterId)
+    if (playerNumber === -1 || characterId === "20" && sameRun.characters[playerNumber - 1] && sameRun.characters[playerNumber - 1].id === "19") return console.log('No temporary character to destroy')
+    console.log(playerNumber, sameRun.characters[playerNumber].id)
+    sameRun.floors.forEach((floor, index) => {
+        sameRun.floors[index].itemsCollected = floor.itemsCollected.filter(item => parseInt(item.player) !== playerNumber)
+    })
+    sameRun.characters.splice(playerNumber, 1)
 }
 
 function collectiblesManager(sameRun, collectible, status) {
@@ -182,12 +189,21 @@ function updateOrCreateRun(params = {}) {
                         sameRun.floors[0].name = firstGreedFloor.name
                     }
                     break
+                case 'change room':
+                    destroyCharacterAndRelatedItems(sameRun, "20") // Destroy temporary Esau if exist
+                    break
                 case 'init other player':
-                    if (params.character && !params.character.ignore) sameRun.characters.push(params.character)
+                    if (params.character && !params.character.ignore || params.character.id === "20" && sameRun.characters[sameRun.characters.length - 1].id !== "19") {
+                        console.log(`Add character ${params.character.id}`)
+                        sameRun.characters.push(params.character)
+                    } else {
+                        console.log(`Add ignored character ${params.character.id}`)
+                        params.character.bypass = true
+                        sameRun.characters.push(params.character)
+                    }
                     break
                 case 'spawn entity':
                     if(params.entity) {
-                        console.log("Entity : ",params.entity)
                         entitiesManager(sameRun, params.entity)
                     }
                     break
@@ -196,6 +212,7 @@ function updateOrCreateRun(params = {}) {
                     break
                 case 'removing collectible':
                     if (params.collectible) collectiblesManager(sameRun, params.collectible, "remove")
+                    if (params.collectible.id === 667) destroyCharacterAndRelatedItems(sameRun, "14") // Destroy Strawman
                     break
                 case 'run end':
                     const runEndInfo = getRunEnd(params.log)
@@ -215,9 +232,9 @@ function updateOrCreateRun(params = {}) {
                 case 'player updated':
                     const playerStats = params.stats
                     // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
-                    if(playerStats.infos.subtype === 20) sameRun.characters[playerStats.infos.index].statsSecondary = playerStats
+                    if(playerStats.infos.subtype === 20 && sameRun.characters[playerStats.infos.number - 1].id === "19" ) sameRun.characters[playerStats.infos.number - 1].statsSecondary = playerStats
                     // Default case
-                    else sameRun.characters[playerStats.infos.index].stats = playerStats
+                    else if(sameRun.characters[playerStats.infos.number]) sameRun.characters[playerStats.infos.number].stats = playerStats
                     if(!sameRun.extendedSaveMode) sameRun.extendedSaveMode = true
                     break
                 default:
@@ -231,7 +248,7 @@ function updateOrCreateRun(params = {}) {
             console.log('Run is over')
         }
     }
-    else {
+    else if (!["run end","run end ext"].includes(params.trigger)) {
         console.log('Create a run...')
         if(!currentFloor) {
             const errorMessage = "Can't generate a run if the run is not new and was not started with the app launched ! Please start a new run."
@@ -320,7 +337,6 @@ function parseLogs(newLogs, logArray) {
             if (!currentRunInit && currentCharater) {
                 console.log("\x1b[35m", log, "\x1b[0m")
                 currentRunInit = true
-                updateOrCreateRun({trigger: "generated rooms"})
             }
         }
         if(log.includes("Spawn Entity")) {
@@ -332,6 +348,7 @@ function parseLogs(newLogs, logArray) {
             if (!currentGameMode) {
                 updateOrCreateRun({trigger: "game mode", log: log})
             }
+            updateOrCreateRun({trigger: "change room", log: log})
         }
         if(log.includes("Adding collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")

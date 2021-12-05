@@ -9,7 +9,13 @@ module.exports = {
     let index = array.slice().reverse().findIndex(x => x === searchValue)
     let count = array.length - 1
     let finalIndex = index >= 0 ? count - index : index
-    return finalIndex;
+    return finalIndex
+  },
+  findLastIndexObj: function(array, searchKey, searchValue) {
+    var index = array.slice().reverse().findIndex(x => x[searchKey] === searchValue);
+    var count = array.length - 1
+    var finalIndex = index >= 0 ? count - index : index
+    return finalIndex
   },
   isRunning: function(query, cb) {
     let platform = process.platform
