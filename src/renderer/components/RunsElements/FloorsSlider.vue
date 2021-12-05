@@ -13,10 +13,16 @@
                             <transition-group name="item-group-transition" tag="ul" class="items">
                                 <template v-for="(item, tidx) in floor.itemsCollected">
                                     <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
-                                        <div class="name">
-                                            {{item.title}}
-                                        </div>
                                         <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                            <div class="name">
+                                                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                                <span>{{item.title}}</span>
+                                            </div>
+                                            <div v-if="characters && (characters > 0 || characters[0].id === '19')" class="player-icon">
+                                                <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                                            </div>
                                             <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
                                             <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`}"></div> -->
                                         </a>
@@ -41,7 +47,8 @@ export default {
         index: Number,
         floors: Array,
         liveUpdate: Boolean,
-        gameMode: String
+        gameMode: String,
+        characters: Array
     },
     components: {
     },
@@ -249,11 +256,8 @@ export default {
                         max-width: 50px;
                         min-width: 5px;
                         min-height: 5px;
-                        transition: 0.5s ease;
+                        transition: 1s ease;
                         overflow: visible;
-                        .name {
-                            display: none;
-                        }
                         .item-image {
                             opacity: 1;
                             width: 50px;
@@ -262,19 +266,79 @@ export default {
                             left: 50%;
                             top: 50%;
                             transform: translate(-50%, -50%);
+                            .name {
+                                position: absolute;
+                                z-index: 3;
+                                padding: 5px 0px 10px 0px;
+                                font-size: 10px;
+                                transition: 1s ease;
+                                left: 50%;
+                                opacity: 0;
+                                transform: translateX(-50%) rotate(0deg) translateY(0px);
+                                > .before, .after, .mid {
+                                    z-index: 0;
+                                    position: absolute;
+                                    background-repeat: no-repeat;
+                                    background-size: 100% 100%;
+                                    pointer-events: none;
+                                }
+                                > .before {
+                                    content: "";
+                                    height: 100%;
+                                    width: 8px;
+                                    left: 0px;
+                                    top: 0px;
+                                    transform: translateX(-7px);
+                                }
+                                > .after {
+                                    height: 100%;
+                                    width: 12px;
+                                    right: 0px;
+                                    top: 0px;
+                                    transform: translateX(11px);
+                                    z-index: 2;
+                                }
+                                > .mid {
+                                    height: 100%;
+                                    width: 100%;
+                                    left: 0px;
+                                    top: 0px;
+                                    background-size: contain;
+                                    background-repeat: repeat-x;
+                                }
+                                > span {
+                                    position: relative;
+                                    z-index: 3;
+                                }
+                            }
                             img {
+                                position: relative;
+                                z-index: 1;
                                 pointer-events: none;
                                 width: 100%;
                                 height: 100%;
                                 transition: 1s;
                             }
+                            .player-icon {
+                                position: absolute;
+                                z-index: 2;
+                                pointer-events: none;
+                                transition: 1s ease;
+                            }
                         }
                         &:hover {
                             cursor: pointer;
                             .item-image {
+                                z-index: 1;
+                                .name {
+                                    opacity: 1;
+                                    transform: translateX(-50%) rotate(-10deg) translateY(25px);
+                                }
                                 img {
-                                    z-index: 1;
                                     transform: scale(1.1) rotate(-10deg) translateY(-10px);
+                                }
+                                .player-icon {
+                                    opacity: 0;
                                 }
                             }
                         }
@@ -287,15 +351,25 @@ export default {
                             height: 100%;
                         }
                         &.item-group-transition-move {
-                            transition: transform 0.7s ease;
+                            transition: transform 0.7s ease, opacity 1s ease, filter 1s ease;
                         }
                         &.item-group-transition-item {
-                            transition: transform 0.7s ease;
+                            transition: transform 0.7s ease, opacity 1s ease, filter 1s ease;
                             display: inline-block;
                             //margin: 0 5px;
                         }
                         &:hover {
+                            z-index: 1;
                             flex-grow: 2;
+                            opacity: 1;
+                            filter: grayscale(0);
+                        }
+                    }
+                    &:hover {
+                        > li {
+                            z-index: 0;
+                            opacity: 0.2;
+                            filter: grayscale(1);
                         }
                     }
                 }

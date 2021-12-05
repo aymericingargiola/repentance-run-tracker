@@ -1,118 +1,154 @@
 <template>
-    <div v-if="characters && floors && runEnd" class="run-el character" :style="{backgroundImage:`url('img/cards/characters-small.png')`}">
+    <div v-if="characters && floors && runEnd" class="run-el character" :style="{backgroundImage:`url('img/cards/characters-small-2.png')`}">
         <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
         <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-        <div v-if="characters[0].stats && parseInt(characters[0].id) != 10 && parseInt(characters[0].id) != 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
-            <template v-for="rhidx in characters[0].stats.life.maxHearts / 2">
-                <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
-                    <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${characters[0].stats.life.hearts > characters[0].stats.life.maxHearts ? `full` : characters[0].stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : characters[0].stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+        <template v-for="character in characters">
+            <div class="character-infos" :key="character.id">
+                <div v-if="character.stats && parseInt(character.id) != 10 && parseInt(character.id) != 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
+                    <template v-for="rhidx in character.stats.life.maxHearts / 2">
+                        <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${character.stats.life.hearts > character.stats.life.maxHearts ? `full` : character.stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : character.stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                        </div>
+                    </template>
+                    <template v-for="bhidx in character.stats.life.boneHearts">
+                        <div class="heart-container bone-heart" :key="`bone-heart-${bhidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/bone-heart-${(character.stats.life.hearts - character.stats.life.maxHearts) - (bhidx - 1) * 2 > 1 ? `full` : (character.stats.life.hearts - character.stats.life.maxHearts) - (bhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                        </div>
+                    </template>
+                    <template v-for="shidx in Math.ceil(character.stats.life.soulHearts / 2)">
+                        <div class="heart-container soul-heart" :key="`soul-heart-${shidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/soul-heart-${character.stats.life.soulHearts - (shidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
+                        </div>
+                    </template>
+                    <!-- There is an issue to calculate black heart, if you have blue hearts between black hearts it will count as black heart so i only show blue hearts for the moment (it includes black heart also) -->
+                    <!-- <template v-for="blhidx in calcBlackHeart(character.stats.life.blackHearts)">
+                        {{calcBlackHeart(character.stats.life.blackHearts)}}
+                        <div class="heart-container black-heart" :key="`black-heart-${blhidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/black-heart-${calcBlackHeart(character.stats.life.blackHearts)*2 - (blhidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
+                        </div>
+                    </template> -->
                 </div>
-            </template>
-            <template v-for="bhidx in characters[0].stats.life.boneHearts">
-                <div class="heart-container bone-heart" :key="`bone-heart-${bhidx}`">
-                    <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/bone-heart-${(characters[0].stats.life.hearts - characters[0].stats.life.maxHearts) - (bhidx - 1) * 2 > 1 ? `full` : (characters[0].stats.life.hearts - characters[0].stats.life.maxHearts) - (bhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                <div v-if="character.stats && parseInt(character.id) === 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
+                    <template v-for="chidx in character.stats.life.maxHearts / 2">
+                        <div class="heart-container coin-heart" :key="`red-heart-${chidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/coin-heart-${character.stats.life.hearts - (chidx - 1) * 2 > 1 ? `full` : `empty`}.png')`}"></div>
+                        </div>
+                    </template>
                 </div>
-            </template>
-            <template v-for="shidx in Math.ceil(characters[0].stats.life.soulHearts / 2)">
-                <div class="heart-container soul-heart" :key="`soul-heart-${shidx}`">
-                    <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/soul-heart-${characters[0].stats.life.soulHearts - (shidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
-                </div>
-            </template>
-            <!-- There is an issue to calculate black heart, if you have blue hearts between black hearts it will count as black heart so i only show blue hearts for the moment (it includes black heart also) -->
-            <!-- <template v-for="blhidx in calcBlackHeart(characters[0].stats.life.blackHearts)">
-                {{calcBlackHeart(characters[0].stats.life.blackHearts)}}
-                <div class="heart-container black-heart" :key="`black-heart-${blhidx}`">
-                    <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/black-heart-${calcBlackHeart(characters[0].stats.life.blackHearts)*2 - (blhidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
-                </div>
-            </template> -->
-        </div>
-        <div v-if="characters[0].stats && parseInt(characters[0].id) === 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
-            <template v-for="chidx in characters[0].stats.life.maxHearts / 2">
-                <div class="heart-container coin-heart" :key="`red-heart-${chidx}`">
-                    <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/coin-heart-${characters[0].stats.life.hearts - (chidx - 1) * 2 > 1 ? `full` : `empty`}.png')`}"></div>
-                </div>
-            </template>
-        </div>
-        <div v-if="characters[0].stats && floors[floors.length - 1] && floors[floors.length - 1].curse === 'Curse of the Unknown'" class="hearts">
-            <div class="heart-container unknow-heart">
-                <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/unknow-heart.png')`}"></div>
-            </div>
-        </div>
-        <div v-if="characters[0].stats" class="usables">
-            <ul>
-                <li class="coins">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/hud/coin.png')`}"></div>
-                    <span class="value">
-                        {{(`0${characters[0].stats.usables.coins}`).slice(-2)}}
-                    </span>
-                </li>
-                <li class="bombs">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/hud/bomb.png')`}"></div>
-                    <span class="value">
-                        {{(`0${characters[0].stats.usables.bombs}`).slice(-2)}}
-                    </span>
-                </li>
-                <li class="keys">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/hud/key.png')`}"></div>
-                    <span class="value">
-                        {{(`0${characters[0].stats.usables.keys}`).slice(-2)}}
-                    </span>
-                </li>
-            </ul>
-        </div>
-        <ul class="active-items">
-            <template v-for="(item, ctidx) in characters[0].activables">
-                <li class="item" :key="item.title + ctidx">
-                    <div class="name">
-                        {{item.title}}
+                <div v-if="character.stats && floors[floors.length - 1] && floors[floors.length - 1].curse === 'Curse of the Unknown'" class="hearts">
+                    <div class="heart-container unknow-heart">
+                        <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/unknow-heart.png')`}"></div>
                     </div>
-                    <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                        <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
-                    </a>
-                </li>
-            </template>
-        </ul>
-        <div class="image" :style="{backgroundImage:`url('img/characters/${characters[0].trueName}${parseInt(characters[0].id) > 20 ? ` Alt` : ``}.png')`}"></div>
-        <div v-if="characters[0].stats" class="stats">
-            <ul>
-                <li class="speed">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/stats/speed.png')`}"></div>
-                    <span class="value">
-                        {{(Math.round(characters[0].stats.stats.moveSpeed * 100) / 100).toFixed(2)}}
-                    </span>
-                    <span class="value-small">
-                        {{(Math.round(characters[0].stats.stats.moveSpeed * 100) / 100).toFixed(1)}}
-                    </span>
-                </li>
-                <li class="tear-rate">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/stats/tearrate.png')`}"></div>
-                    <span class="value">
-                        {{(Math.round(characters[0].stats.stats.currentFireDelay * 100) / 100).toFixed(2)}}
-                    </span>
-                    <span class="value-small">
-                        {{(Math.round(characters[0].stats.stats.currentFireDelay * 100) / 100).toFixed(1)}}
-                    </span>
-                </li>
-                <li class="damage">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/stats/damage.png')`}"></div>
-                    <span class="value">
-                        {{(Math.round(characters[0].stats.stats.damage * 100) / 100).toFixed(2)}}
-                    </span>
-                    <span class="value-small">
-                        {{(Math.round(characters[0].stats.stats.damage * 100) / 100).toFixed(1)}}
-                    </span>
-                </li>
-                <li class="luck">
-                    <div class="image" :style="{backgroundImage:`url('img/icons/stats/luck.png')`}"></div>
-                    <span class="value">
-                        {{(Math.round(characters[0].stats.stats.luck * 100) / 100).toFixed(2)}}
-                    </span>
-                    <span class="value-small">
-                        {{(Math.round(characters[0].stats.stats.luck * 100) / 100).toFixed(1)}}
-                    </span>
-                </li>
-            </ul>
-        </div>
+                </div>
+                <div v-if="character.stats" class="usables">
+                    <ul>
+                        <li class="coins">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/hud/coin.png')`}"></div>
+                            <span class="value">
+                                {{(`0${character.stats.usables.coins}`).slice(-2)}}
+                            </span>
+                        </li>
+                        <li class="bombs">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/hud/bomb.png')`}"></div>
+                            <span class="value">
+                                {{(`0${character.stats.usables.bombs}`).slice(-2)}}
+                            </span>
+                        </li>
+                        <li class="keys">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/hud/key.png')`}"></div>
+                            <span class="value">
+                                {{(`0${character.stats.usables.keys}`).slice(-2)}}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="active-items">
+                    <template v-for="(item, ctidx) in character.activables">
+                        <li class="item" :key="item.title + ctidx">
+                            <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                <div v-if="characters > 0 || characters[0].id === '19'" class="player-icon">
+                                    <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                                </div>
+                                <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+                <div class="image" :style="{backgroundImage:`url('img/characters/${character.trueName}${parseInt(character.id) > 20 ? ` Alt` : ``}.png')`}"></div>
+                <div v-if="character.stats" class="stats">
+                    <ul>
+                        <li class="speed">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/stats/speed.png')`}"></div>
+                            <span class="value">
+                                <span>{{(Math.round(character.stats.stats.moveSpeed * 100) / 100).toFixed(2)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.moveSpeed * 100) / 100).toFixed(2)}}</span>
+                            </span>
+                            <span class="value-small">
+                                <span>{{(Math.round(character.stats.stats.moveSpeed * 100) / 100).toFixed(1)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.moveSpeed * 100) / 100).toFixed(1)}}</span>
+                            </span>
+                        </li>
+                        <li class="tear-rate">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/stats/tearrate.png')`}"></div>
+                            <span class="value">
+                                <span>{{(Math.round(character.stats.stats.currentFireDelay * 100) / 100).toFixed(2)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.currentFireDelay * 100) / 100).toFixed(2)}}</span>
+                            </span>
+                            <span class="value-small">
+                                <span>{{(Math.round(character.stats.stats.currentFireDelay * 100) / 100).toFixed(1)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.currentFireDelay * 100) / 100).toFixed(1)}}</span>
+                            </span>
+                        </li>
+                        <li class="damage">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/stats/damage.png')`}"></div>
+                            <span class="value">
+                                <span>{{(Math.round(character.stats.stats.damage * 100) / 100).toFixed(2)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.damage * 100) / 100).toFixed(2)}}</span>
+                            </span>
+                            <span class="value-small">
+                                <span>{{(Math.round(character.stats.stats.damage * 100) / 100).toFixed(1)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.damage * 100) / 100).toFixed(1)}}</span>
+                            </span>
+                        </li>
+                        <li class="luck">
+                            <div class="image" :style="{backgroundImage:`url('img/icons/stats/luck.png')`}"></div>
+                            <span class="value">
+                                <span>{{(Math.round(character.stats.stats.luck * 100) / 100).toFixed(2)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.luck * 100) / 100).toFixed(2)}}</span>
+                            </span>
+                            <span class="value-small">
+                                <span>{{(Math.round(character.stats.stats.luck * 100) / 100).toFixed(1)}}</span>
+                                <span v-if="character.statsSecondary">{{(Math.round(character.statsSecondary.stats.luck * 100) / 100).toFixed(1)}}</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div v-if="character.statsSecondary && parseInt(character.id) != 10 && parseInt(character.id) != 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts secondary">
+                    <template v-for="rhidx in character.statsSecondary.life.maxHearts / 2">
+                        <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${character.statsSecondary.life.hearts > character.statsSecondary.life.maxHearts ? `full` : character.statsSecondary.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : character.statsSecondary.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                        </div>
+                    </template>
+                    <template v-for="bhidx in character.statsSecondary.life.boneHearts">
+                        <div class="heart-container bone-heart" :key="`bone-heart-${bhidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/bone-heart-${(character.statsSecondary.life.hearts - character.statsSecondary.life.maxHearts) - (bhidx - 1) * 2 > 1 ? `full` : (character.statsSecondary.life.hearts - character.statsSecondary.life.maxHearts) - (bhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
+                        </div>
+                    </template>
+                    <template v-for="shidx in Math.ceil(character.statsSecondary.life.soulHearts / 2)">
+                        <div class="heart-container soul-heart" :key="`soul-heart-${shidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/soul-heart-${character.statsSecondary.life.soulHearts - (shidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
+                        </div>
+                    </template>
+                    <!-- There is an issue to calculate black heart, if you have blue hearts between black hearts it will count as black heart so i only show blue hearts for the moment (it includes black heart also) -->
+                    <!-- <template v-for="blhidx in calcBlackHeart(character.stats.life.blackHearts)">
+                        {{calcBlackHeart(character.stats.life.blackHearts)}}
+                        <div class="heart-container black-heart" :key="`black-heart-${blhidx}`">
+                            <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/black-heart-${calcBlackHeart(character.stats.life.blackHearts)*2 - (blhidx - 1) * 2 > 1 ? `full` : `half`}.png')`}"></div>
+                        </div>
+                    </template> -->
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -176,6 +212,17 @@ export default {
     > * {
         transform: rotate(-3deg);
     }
+    .character-infos {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        > .image {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
     .name {
         margin-bottom: 2px;
         font-size: 16px;
@@ -201,6 +248,12 @@ export default {
                 width: 17px;
                 height: 16px;
             }
+        }
+        &.secondary {
+            transform: scale(0.7) rotate(-4deg);
+            width: calc(6*6px);
+            left: 8px;
+            top: 65px;
         }
     }
     .stats {
@@ -231,6 +284,15 @@ export default {
                     font-size: 12px;
                     pointer-events: none;
                     cursor: default;
+                    display: flex;
+                    flex-direction: column;
+                    > span {
+                        line-height: 8px;
+                        &:nth-child(2) {
+                            transform: translateX(3px);
+                            color: $red-a4;
+                        }
+                    }
                 }
                 .value {
                     opacity: 0;
@@ -283,14 +345,25 @@ export default {
     }
     .active-items {
         position: absolute;
-        right: 20px;
+        right: 10px;
         top: 24px;
+        transform: scale(0.8);
         .item {
+            max-height: 25px;
             .name {
                 display: none;
             }
             .item-image {
                 opacity: 1;
+                position: relative;
+                .player-icon {
+                    position: absolute;
+                    z-index: 2;
+                    pointer-events: none;
+                    bottom: 5px;
+                    transform-origin: left;
+                    transform: scale(0.6);
+                }
             }
         }
     }
