@@ -2,8 +2,8 @@
     <div v-if="characters && floors && runEnd" class="run-el character" :style="{backgroundImage:`url('img/cards/characters-small-2.png')`}">
         <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
         <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-        <template v-for="character in characters">
-            <div class="character-infos" :key="character.id">
+        <template v-for="(character, cidx) in characters">
+            <div class="character-infos" :key="`${character.id} ${cidx}`">
                 <div v-if="character.stats && parseInt(character.id) != 10 && parseInt(character.id) != 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
                     <template v-for="rhidx in character.stats.life.maxHearts / 2">
                         <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
