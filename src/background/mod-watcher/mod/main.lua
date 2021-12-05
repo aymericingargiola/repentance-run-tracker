@@ -1,5 +1,6 @@
 RRTE = RegisterMod("Repentance Run Tracker Extended", 1)
 local enableDebug = true
+local playerNumber = -1
 
 Isaac.DebugString("[RRTEEXTENDLOGS] Repentance Run Tracker Extended loaded")
 
@@ -38,10 +39,12 @@ function table.tostring(tbl)
 end
 
 function RRTE:playerInit(Player)
+    playerNumber = playerNumber + 1
     Player:GetData()["infos"] = {
         ["index"] = Player.Index,
         ["variant"] = Player.Variant,
-        ["subtype"] = Player.SubType
+        ["subtype"] = Player.SubType,
+        ["number"] = playerNumber
     }
     Player:GetData()["stats"] = {
         ["moveSpeed"] = Player.MoveSpeed,
@@ -74,7 +77,6 @@ function RRTE:playerInit(Player)
 end
 
 function RRTE:playerUpdate(Player)
-
     -- Update player stats infos
     if Player:GetData()["stats"]["moveSpeed"] ~= Player.MoveSpeed or
     Player:GetData()["stats"]["luck"] ~= Player.Luck or
@@ -135,47 +137,28 @@ function RRTE:playerUpdate(Player)
     end
 end
 
+function RRTE:entityRemoved(entity)
+    if entity.Type == EntityType.ENTITY_PLAYER then
+        if playerNumber > -1 then playerNumber = playerNumber - 1 end
+    end
+end
+
 function RRTE:runStart()
     Isaac.DebugString("[RRTEEXTENDLOGS] Run Start [seed] : " .. Game():GetSeeds():GetStartSeedString())
 end
 
 function RRTE:runEnd()
+    playerNumber = -1
     Isaac.DebugString("[RRTEEXTENDLOGS] Run End [time] : " .. (Game().TimeCounter) / 30)
+end
+
+function RRTE:runExit()
+    playerNumber = -1
 end
 
 RRTE:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, RRTE.playerUpdate)
 RRTE:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, RRTE.playerInit)
+RRTE:AddCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, RRTE.entityRemoved)
 RRTE:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, RRTE.runStart)
 RRTE:AddCallback(ModCallbacks.MC_POST_GAME_END, RRTE.runEnd)
-
--- function RRTE:entityTakeDamage(TookDamage, DamageAmount, DamageFlag, DamageSource, DamageCountdownFrames)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Damage : "..DamageAmount)
--- end
-
--- function RRTE:playerCollision(pickUp)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Coins : "..Isaac.GetPlayer(0):GetNumCoins())
--- end
-
--- function RRTE:usePill(PillEffect)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Pill :"..PillEffect)
--- end
-
--- function RRTE:useCard(Card)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Card :"..Card)
--- end
-
--- function RRTE:getCard(rng, CurrentCard, Playing, Runes, OnlyRunes)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Card :"..CurrentCard)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Card :"..Playing)
--- end
-
--- function RRTE:getTrinket(SelectedTrinket, TrinketRNG)
---     Isaac.DebugString("[RRTE EXTEND LOGS] Card :"..SelectedTrinket)
--- end
-
--- RRTE:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, RRTE.entityTakeDamage)
--- RRTE:AddCallback(ModCallbacks.MC_PRE_PICKUP_COLLISION, RRTE.playerCollision)
--- RRTE:AddCallback(ModCallbacks.MC_USE_PILL, RRTE.usePill)
--- RRTE:AddCallback(ModCallbacks.MC_USE_CARD, RRTE.useCard)
--- RRTE:AddCallback(ModCallbacks.MC_GET_CARD, RRTE.getCard)
--- RRTE:AddCallback(ModCallbacks.MC_GET_TRINKET, RRTE.getTrinket)
+RRTE:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, RRTE.runExit)

@@ -2,8 +2,17 @@
     <div v-if="characters && floors && runEnd" class="run-el character" :style="{backgroundImage:`url('img/cards/characters-small-2.png')`}">
         <div class="before" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
         <div class="after" :style="{backgroundImage:`url('img/icons/pin.png')`}"></div>
-        <template v-for="(character, cidx) in characters">
-            <div class="character-infos" :key="`${character.id} ${cidx}`">
+        <div v-if="validCharacters.length > 1" class="characters-selection">
+            <template v-for="(character, cidx) in validCharacters">
+                <div :class="['character', cidx === selected ? 'selected' : '']" @click="selected = cidx" :key="`${character.id} ${cidx} select`">
+                    <div class="icon">
+                        <img :src="`img/characters/small portraits/${character.id}.png`">
+                    </div>
+                </div>
+            </template>
+        </div>
+        <template v-for="(character, cidx) in validCharacters">
+            <div :class="['character-infos', cidx === selected ? 'selected' : '']" :key="`${character.id} ${cidx}`">
                 <div v-if="character.stats && parseInt(character.id) != 10 && parseInt(character.id) != 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
                     <template v-for="rhidx in character.stats.life.maxHearts / 2">
                         <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
@@ -66,7 +75,7 @@
                     <template v-for="(item, ctidx) in character.activables">
                         <li class="item" :key="item.title + ctidx">
                             <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                                <div v-if="characters > 0 || characters[0].id === '19'" class="player-icon">
+                                <div v-if="characters[0].id === '19'" class="player-icon">
                                     <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
                                 </div>
                                 <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
@@ -74,7 +83,7 @@
                         </li>
                     </template>
                 </ul>
-                <div class="image" :style="{backgroundImage:`url('img/characters/${character.trueName}${parseInt(character.id) > 20 ? ` Alt` : ``}.png')`}"></div>
+                <div class="image" :style="{backgroundImage:`url('img/characters/${character.trueName}${parseInt(character.id) === 20 ? ' Esau Only' : ''}${parseInt(character.id) > 20 ? ' Alt' : ''}.png')`}"></div>
                 <div v-if="character.stats" class="stats">
                     <ul>
                         <li class="speed">
@@ -164,9 +173,13 @@ export default {
     },
     data() {
         return {
+            selected: 0
         }
     },
     computed: {
+        validCharacters() {
+            return this.characters ? this.characters.filter(character => character.bypass !== true) : []
+        }
     },
     methods: {
     },
@@ -212,15 +225,52 @@ export default {
     > * {
         transform: rotate(-3deg);
     }
+    .characters-selection {
+        position: absolute;
+        display: flex;
+        transform: scale(0.6) rotate(-3deg);
+        bottom: 25px;
+        z-index: 2;
+        .character {
+            width: 25px;
+            height: 25px;
+            transform: scale(1.2);
+            transition: 1s ease;
+            .icon {
+                position: relative;
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            &:hover {
+                cursor: pointer;
+            }
+            &:not(.selected) {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+        }
+    }
     .character-infos {
         position: absolute;
         width: 100%;
         height: 100%;
+        z-index: 1;
+        transition: 1s ease;
+        transform: scale(1);
         > .image {
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+        }
+        &:not(.selected) {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0);
         }
     }
     .name {

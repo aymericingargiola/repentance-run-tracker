@@ -16,11 +16,11 @@
                                         <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
                                             <div class="name">
                                                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
+                                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
                                                 <span>{{item.title}}</span>
                                             </div>
-                                            <div v-if="characters && (characters > 0 || characters[0].id === '19')" class="player-icon">
+                                            <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
                                                 <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
                                             </div>
                                             <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
@@ -60,7 +60,10 @@ export default {
     computed: {
         ...mapRepos({
             configRepo: Config
-        })
+        }),
+        validCharacters() {
+            return this.characters ? this.characters.filter(character => character.bypass !== true) : []
+        }
     },
     methods: {
         getConfig(id) {
