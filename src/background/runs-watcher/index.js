@@ -89,13 +89,13 @@ function isSameRun(seed) {
 function collectiblesManager(sameRun, collectible, status) {
     if (!sameRun.floors[sameRun.floors.length - 1]) return
 
-    const playerContext = collectible.player
+    const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player //Jacob & Esau
 
     // add itemsCollected key on last floor if doesn't exist
     if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
 
     // add activables key to context player if doesn't exist and if current collectible is an activable
-    if (collectible.itemType === "Active" && !sameRun.characters[playerContext].activables) sameRun.characters[playerContext].activables = []
+    if (collectible.itemType === "Active" && !sameRun.characters[playerContextActiveItem].activables) sameRun.characters[playerContextActiveItem].activables = []
 
     // return a filtered array with matching item
     const foundItem = sameRun.floors.map((floor, index) => {
@@ -122,7 +122,7 @@ function collectiblesManager(sameRun, collectible, status) {
                     sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
                 }
                 if (lastFoundItem.itemType === "Active") {
-                    sameRun.characters[playerContext].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
+                    sameRun.characters[playerContextActiveItem].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
                 }
             case 'remove':
                 if (lastFoundItem.itemRemoved === false && lastFoundItem.itemsNumber > 0) {
@@ -133,8 +133,8 @@ function collectiblesManager(sameRun, collectible, status) {
                         sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += -1
                     }
                     if (lastFoundItem.itemType === "Active") {
-                        const itemToRemoveIndex = sameRun.characters[playerContext].activables.findIndex(item => item.id === collectible.id)
-                        sameRun.characters[playerContext].activables.splice(itemToRemoveIndex, 1)
+                        const itemToRemoveIndex = sameRun.characters[playerContextActiveItem].activables.findIndex(item => item.id === collectible.id)
+                        sameRun.characters[playerContextActiveItem].activables.splice(itemToRemoveIndex, 1)
                     }
                 }
         }
@@ -144,7 +144,7 @@ function collectiblesManager(sameRun, collectible, status) {
     else if (status === 'add') {
         collectible.number = 1
         sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(collectible)
-        if (collectible.itemType === "Active") sameRun.characters[playerContext].activables.push(collectible)
+        if (collectible.itemType === "Active") sameRun.characters[playerContextActiveItem].activables.push(collectible)
     }
 }
 

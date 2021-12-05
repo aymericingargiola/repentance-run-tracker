@@ -65,7 +65,6 @@ export default {
         },
         rangeUpdate: {
             get() {
-                this.$emit('updateDateRange', this.range)
                 return this.range;
             },
             set(newVal) {
@@ -86,6 +85,7 @@ export default {
                 start: null,
                 end: null
             }
+            this.$emit('updateDateRange', this.range)
         }
     }
 };

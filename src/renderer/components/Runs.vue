@@ -15,7 +15,7 @@
                     <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '']">
                         <RunInfos :id="run.id" :gameState="run.gameState" :seed="run.seed" :characters="run.characters" :floors="run.floors" :run-start="run.runStart" :run-end="run.runEnd" :run-duration="run.runDuration"/>
                         <RunCharacter :characters="run.characters" :floors="run.floors" :run-end="run.runEnd"/>
-                        <RunFloorsSlider :ops="opsFloors" :index="ridx" :floors="run.floors" :gameMode="run.gameMode"/>
+                        <RunFloorsSlider :ops="opsFloors" :index="ridx" :floors="run.floors" :gameMode="run.gameMode" :characters="run.characters"/>
                         <div class="run-custom-name" v-if="run.customName != ''">
                             <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                             <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
