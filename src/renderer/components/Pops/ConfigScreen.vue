@@ -25,6 +25,14 @@
                             <div class="hint">{{config.hint}}</div>
                         </div>
                     </template>
+                    <div class="heading">Debug Tools</div>
+                    <div class="config-item">
+                        <div class="title">Debug Logs</div>
+                        <div class="text">
+                            <textarea v-model="debuglogs" id="debuglogs" name="debuglogs"></textarea>
+                            <button @click="sendLogs()">Debug</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,7 +46,8 @@ export default {
     name: "ConfigScreen",
     data() {
         return {
-            isOpen: false
+            isOpen: false,
+            debuglogs: ''
         }
     },
     mounted() {
@@ -75,6 +84,9 @@ export default {
             const config = {id: id, value: type === "checkbox" ? e.target.checked : e.target.value}
             this.updateConfig(config)
             this.saveConfig(config)
+        },
+        sendLogs() {
+           window?.ipc?.send('DEBUG_LOGS', this.debuglogs) 
         }
     },
 };

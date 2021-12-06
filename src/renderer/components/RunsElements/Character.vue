@@ -190,6 +190,7 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+@import "../../assets/styles/scss/vars/_animations";
 .run-el.character {
     z-index: 2;
     margin-right: 28px;
@@ -235,7 +236,7 @@ export default {
             width: 25px;
             height: 25px;
             transform: scale(1.2);
-            transition: 1s ease;
+            transition: 0.5s ease;
             .icon {
                 position: relative;
                 img {
@@ -259,7 +260,7 @@ export default {
         width: 100%;
         height: 100%;
         z-index: 1;
-        transition: 1s ease;
+        transition: 0.5s ease;
         transform: scale(1);
         > .image {
             position: absolute;
