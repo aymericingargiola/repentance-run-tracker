@@ -47,16 +47,16 @@ function RRTE:playerInit(Player)
         ["number"] = playerNumber
     }
     Player:GetData()["stats"] = {
-        ["moveSpeed"] = math.ceil((Player.MoveSpeed) * 10^1) / 10^1,
-        ["luck"] = Player.Luck,
+        ["moveSpeed"] = math.ceil((Player.MoveSpeed) * 10^2) / 10^2,
+        ["luck"] = math.ceil((Player.Luck) * 10^2) / 10^2,
         ["damage"] = math.ceil((Player.Damage) * 10^2) / 10^2,
-        ["maxFireDelay"] = Player.MaxFireDelay,
+        ["maxFireDelay"] = math.ceil((Player.MaxFireDelay) * 10^2) / 10^2,
         -- ["fireDelay"] = Player.FireDelay,
         ["currentFireDelay"] = math.ceil((30/(Player.MaxFireDelay + 1)) * 10^2) / 10^2,
-        ["shotSpeed"] = Player.ShotSpeed,
-        ["tearFallingAcceleration"] = Player.TearFallingAcceleration,
-        ["tearFallingSpeed"] = Player.TearFallingSpeed,
-        ["tearHeight"] = Player.TearHeight,
+        ["shotSpeed"] =  math.ceil((Player.ShotSpeed) * 10^2) / 10^2,
+        ["tearFallingAcceleration"] = math.ceil((Player.TearFallingAcceleration) * 10^2) / 10^2,
+        ["tearFallingSpeed"] = math.ceil((Player.TearFallingSpeed) * 10^2) / 10^2,
+        ["tearHeight"] = math.ceil((Player.TearHeight) * 10^2) / 10^2,
     }
     Player:GetData()["life"] = {
         ["maxHearts"] = Player:GetMaxHearts(),
@@ -78,26 +78,26 @@ end
 
 function RRTE:playerUpdate(Player)
     -- Update player stats infos
-    if Player:GetData()["stats"]["moveSpeed"] ~= math.ceil((Player.MoveSpeed) * 10^1) / 10^1 or
-    Player:GetData()["stats"]["luck"] ~= Player.Luck or
+    if Player:GetData()["stats"]["moveSpeed"] ~= math.ceil((Player.MoveSpeed) * 10^2) / 10^2 or
+    Player:GetData()["stats"]["luck"] ~= math.ceil((Player.Luck) * 10^2) / 10^2 or
     Player:GetData()["stats"]["damage"] ~= math.ceil((Player.Damage) * 10^2) / 10^2 or
-    Player:GetData()["stats"]["maxFireDelay"] ~= Player.MaxFireDelay or
+    Player:GetData()["stats"]["maxFireDelay"] ~= math.ceil((Player.MaxFireDelay) * 10^2) / 10^2 or
     -- Player:GetData()["stats"]["fireDelay"] ~= Player.FireDelay or
-    Player:GetData()["stats"]["shotSpeed"] ~= Player.ShotSpeed or
-    Player:GetData()["stats"]["tearFallingAcceleration"] ~= Player.TearFallingAcceleration or
-    Player:GetData()["stats"]["tearFallingSpeed"] ~= Player.TearFallingSpeed or
-    Player:GetData()["stats"]["tearHeight"] ~= Player.TearHeight then
+    Player:GetData()["stats"]["shotSpeed"] ~= math.ceil((Player.ShotSpeed) * 10^2) / 10^2 or
+    Player:GetData()["stats"]["tearFallingAcceleration"] ~= math.ceil((Player.TearFallingAcceleration) * 10^2) / 10^2 or
+    Player:GetData()["stats"]["tearFallingSpeed"] ~= math.ceil((Player.TearFallingSpeed) * 10^2) / 10^2 or
+    Player:GetData()["stats"]["tearHeight"] ~= math.ceil((Player.TearHeight) * 10^2) / 10^2 then
         Player:GetData()["stats"] = {
-            ["moveSpeed"] = math.ceil((Player.MoveSpeed) * 10^1) / 10^1,
-            ["luck"] = Player.Luck,
+            ["moveSpeed"] = math.ceil((Player.MoveSpeed) * 10^2) / 10^2,
+            ["luck"] = math.ceil((Player.Luck) * 10^2) / 10^2,
             ["damage"] = math.ceil((Player.Damage) * 10^2) / 10^2,
-            ["maxFireDelay"] = Player.MaxFireDelay,
+            ["maxFireDelay"] = math.ceil((Player.MaxFireDelay) * 10^2) / 10^2,
             -- ["fireDelay"] = Player.FireDelay,
             ["currentFireDelay"] = math.ceil((30/(Player.MaxFireDelay + 1)) * 10^2) / 10^2,
-            ["shotSpeed"] = Player.ShotSpeed,
-            ["tearFallingAcceleration"] = Player.TearFallingAcceleration,
-            ["tearFallingSpeed"] = Player.TearFallingSpeed,
-            ["tearHeight"] = Player.TearHeight
+            ["shotSpeed"] = math.ceil((Player.ShotSpeed) * 10^2) / 10^2,
+            ["tearFallingAcceleration"] = math.ceil((Player.TearFallingAcceleration) * 10^2) / 10^2,
+            ["tearFallingSpeed"] = math.ceil((Player.TearFallingSpeed) * 10^2) / 10^2,
+            ["tearHeight"] = math.ceil((Player.TearHeight) * 10^2) / 10^2
         }
         Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [stats] : " .. table.tostring(Player:GetData()))
     end

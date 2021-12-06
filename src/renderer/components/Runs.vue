@@ -115,11 +115,13 @@ export default {
             }, 1500);
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-            console.log(response)
             if(!this.canUpdateRun) {
                 this.tempUpdateRun = response.run
             } else {
-                this.updateRun = response.run
+                if (this.validRunUpdate(response.run)) {
+                    console.log(response)
+                    this.updateRun = response.run
+                }
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
@@ -144,6 +146,12 @@ export default {
         }
     },
     methods: {
+        validRunUpdate(run) {
+            if (JSON.stringify(this.runRepo.query().where('id', run.id).first().characters) !== JSON.stringify(run.characters)) return true
+            if (JSON.stringify(this.runRepo.query().where('id', run.id).first().floors) !== JSON.stringify(run.floors)) return true
+            if (JSON.stringify(this.runRepo.query().where('id', run.id).first().runEnd) !== JSON.stringify(run.runEnd)) return true
+            return false
+        },
         resetPagination() {
             this.currentPage = this.currentPage === 1 ? this.currentPage : 1
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
