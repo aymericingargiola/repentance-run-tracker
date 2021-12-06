@@ -38,10 +38,13 @@
 </template>
 
 <script>
+import runsMinxin from '../../mixins/runs'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
+import Run from '../../store/classes/Run'
 export default {
     name: "RunFloorsSlider",
+    mixins: [runsMinxin],
     props: {
         ops: Object,
         index: Number,
@@ -59,7 +62,8 @@ export default {
     },
     computed: {
         ...mapRepos({
-            configRepo: Config
+            configRepo: Config,
+            runRepo: Run
         }),
         validCharacters() {
             return this.characters ? this.characters.filter(character => character.bypass !== true) : []
@@ -76,17 +80,17 @@ export default {
                 this.canUpdateRun = false
                 setTimeout(() => {
                     this.canUpdateRun = true
-                }, 1500);
+                }, 1500)
             })
-            window.ipc.on('SYNC_UPDATE_RUN', () => {
-                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"]) {
+            window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
                     this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
                     setTimeout(() => {
                         this.$refs["firstRunFloorsScroller"].refresh()
-                    }, 1000);
+                    }, 1000)
                     setTimeout(() => {
                         this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
-                    }, 1000);
+                    }, 1000)
                 }
             })
         }

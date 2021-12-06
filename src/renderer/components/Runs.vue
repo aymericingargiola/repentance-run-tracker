@@ -49,6 +49,7 @@
 
 <script>
 // import moment from 'moment'
+import runsMinxin from '../mixins/runs'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
 import RunInfos from '../components/RunsElements/Infos.vue'
@@ -57,6 +58,7 @@ import RunFloorsSlider from '../components/RunsElements/FloorsSlider.vue'
 import RunsFilters from './RunsFilters.vue'
 export default {
     name: "Runs",
+    mixins: [runsMinxin],
     components: {
         RunInfos,
         RunCharacter,
@@ -118,7 +120,7 @@ export default {
             if(!this.canUpdateRun) {
                 this.tempUpdateRun = response.run
             } else {
-                if (this.validRunUpdate(response.run)) {
+                if (this.validRunUpdate(response)) {
                     console.log(response)
                     this.updateRun = response.run
                 }
@@ -146,12 +148,6 @@ export default {
         }
     },
     methods: {
-        validRunUpdate(run) {
-            if (JSON.stringify(this.runRepo.query().where('id', run.id).first().characters) !== JSON.stringify(run.characters)) return true
-            if (JSON.stringify(this.runRepo.query().where('id', run.id).first().floors) !== JSON.stringify(run.floors)) return true
-            if (JSON.stringify(this.runRepo.query().where('id', run.id).first().runEnd) !== JSON.stringify(run.runEnd)) return true
-            return false
-        },
         resetPagination() {
             this.currentPage = this.currentPage === 1 ? this.currentPage : 1
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0

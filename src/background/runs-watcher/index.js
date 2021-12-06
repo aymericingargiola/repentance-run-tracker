@@ -182,34 +182,34 @@ function updateOrCreateRun(params = {}) {
             switch (params.trigger) {
                 case 'level init':
                     sameRun.floors.push(currentFloor)
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'game mode greed':
                     if (sameRun.floors.length > 1) return
                     currentGameMode = "greed"
                     firstGreedFloor = getFloorById(sameRun.floors[0].id, currentGameMode)
                     sameRun.floors[0].name = firstGreedFloor.name
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'change room':
                     destroyCharacterAndRelatedItems(sameRun, "20") // Destroy temporary Esau if exist
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'init other player':
                     if (params.character && !params.character.ignore || params.character.id === "20" && sameRun.characters[sameRun.characters.length - 1].id !== "19") {
                         console.log(`Add character ${params.character.id}`)
                         sameRun.characters.push(params.character)
-                        syncApp(win,{trigger: "update run", run: sameRun})
-                        if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                        syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                        if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     } else {
                         console.log(`Add ignored character ${params.character.id}`)
                         params.character.bypass = true
                         sameRun.characters.push(params.character)
-                        syncApp(win,{trigger: "update run", run: sameRun})
-                        if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                        syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                        if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     }
                     break
                 case 'spawn entity':
@@ -219,14 +219,14 @@ function updateOrCreateRun(params = {}) {
                     break
                 case 'adding collectible':
                     if (params.collectible) collectiblesManager(sameRun, params.collectible, "add")
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'removing collectible':
                     if (params.collectible) collectiblesManager(sameRun, params.collectible, "remove")
                     if (params.collectible.id === 667) destroyCharacterAndRelatedItems(sameRun, "14") // Destroy Strawman
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'run end':
                     const runEndInfo = getRunEnd(params.log)
@@ -238,14 +238,14 @@ function updateOrCreateRun(params = {}) {
                     sameRun.runDuration = getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
                     if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'run end ext':
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
                     sameRun.runEnd.date = DateTime.now().toSeconds()
-                    syncApp(win,{trigger: "update run", run: sameRun})
-                    if(winTracker) syncApp(winTracker,{trigger: "update run", run: sameRun})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                 break
                 case 'player updated':
                     const playerStats = params.stats
@@ -442,8 +442,8 @@ function parseLogs(newLogs, logArray) {
 setInterval(() => {
     // Slowdown run updates events with 1s interval instead of each updates
     if (currentSameRun && !currentSameRun.runEnd.date) {
-        syncApp(win,{trigger: "update run", run: currentSameRun})
-        if(winTracker) syncApp(winTracker,{trigger: "update run", run: currentSameRun})
+        syncApp(win,{trigger: "update run", channel: "interval updates", run: currentSameRun})
+        if(winTracker) syncApp(winTracker,{trigger: "update run", channel: "interval updates", run: currentSameRun})
     }
 }, 1000);
 
