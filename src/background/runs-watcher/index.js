@@ -186,8 +186,9 @@ function updateOrCreateRun(params = {}) {
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'game mode greed':
-                    if (sameRun.floors.length > 1) return
+                    if (sameRun.floors.length > 1 || currentGameMode === "greed") return
                     currentGameMode = "greed"
+                    sameRun.gameMode = currentGameMode
                     firstGreedFloor = getFloorById(sameRun.floors[0].id, currentGameMode)
                     sameRun.floors[0].name = firstGreedFloor.name
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
