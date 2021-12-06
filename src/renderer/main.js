@@ -34,6 +34,7 @@ Vue.component("ColorPicker", ColorPicker)
 
 Vue.prototype.$DateTime = DateTime
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
+Vue.prototype.$isDev = process.env.NODE_ENV === "development"
 
 // store.$repo(Context).insert({
 //   id: 1

@@ -26,6 +26,16 @@
                         </div>
                     </template>
                 </div>
+                <div v-if="$isDev" class="content debug">
+                    <div class="heading">Debug</div>
+                    <div class="config-item">
+                        <div class="title">Debug game logs</div>
+                        <div class="text textarea">
+                            <textarea v-model="debuglogs" id="debuglogs" name="debuglogs" spellcheck="false"></textarea>
+                        </div>
+                        <button @click="sendLogs()">Debug</button>
+                    </div>
+                </div>
             </div>
         </div>
     </transition>
@@ -38,7 +48,8 @@ export default {
     name: "ConfigScreen",
     data() {
         return {
-            isOpen: false
+            isOpen: false,
+            debuglogs: ''
         }
     },
     mounted() {
@@ -75,6 +86,9 @@ export default {
             const config = {id: id, value: type === "checkbox" ? e.target.checked : e.target.value}
             this.updateConfig(config)
             this.saveConfig(config)
+        },
+        sendLogs() {
+           window?.ipc?.send('DEBUG_LOGS', this.debuglogs) 
         }
     },
 };
@@ -113,6 +127,7 @@ export default {
         height: 100%;
         padding: 36px 36px 56px 28px;
         display: flex;
+        flex-direction: column;
         > .mid {
             z-index: 0;
             position: absolute;
@@ -130,8 +145,8 @@ export default {
         .content {
             margin-top: auto;
             margin-bottom: auto;
-            margin-left: 16px;
-            margin-right: 16px;
+            margin-left: 0px;
+            margin-right: 0px;
             width: 100%;
             max-height: 100%;
             overflow: auto;
@@ -177,6 +192,17 @@ export default {
                 .hint {
                     opacity: 0.8;
                     transform: scale(1);
+                }
+            }
+            .textarea {
+                margin: 0px 16px;
+                &  > textarea {
+                    border-radius: 10px;
+                    border: none;
+                    min-height: 200px;
+                    min-width: 400px;
+                    font-size: 9px;
+                    padding: 16px;
                 }
             }
         }

@@ -49,6 +49,7 @@
 
 <script>
 // import moment from 'moment'
+import runsMinxin from '../mixins/runs'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
 import RunInfos from '../components/RunsElements/Infos.vue'
@@ -57,6 +58,7 @@ import RunFloorsSlider from '../components/RunsElements/FloorsSlider.vue'
 import RunsFilters from './RunsFilters.vue'
 export default {
     name: "Runs",
+    mixins: [runsMinxin],
     components: {
         RunInfos,
         RunCharacter,
@@ -115,11 +117,13 @@ export default {
             }, 1500);
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-            console.log(response)
             if(!this.canUpdateRun) {
                 this.tempUpdateRun = response.run
             } else {
-                this.updateRun = response.run
+                if (this.validRunUpdate(response)) {
+                    console.log(response)
+                    this.updateRun = response.run
+                }
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
