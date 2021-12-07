@@ -28,7 +28,7 @@
                 </li>
             </template>
         </transition-group>
-        <Pagination :total="filteredRunsTotal" :limitPerPage="filterLimitPerPage" :offset="filterOffset" :currentPage="currentPage"  @updatePagination="onUpdatePagination"/>
+        <Pagination :currentPage="currentPage" :itemsTotal="filteredRunsTotal" :itemsPerPage="filterLimitPerPage" :maxPagesVisible="3" :offset="filterOffset"  @updatePagination="onUpdatePagination"/>
         <div v-if="filteredRuns && filteredRuns.length === 0" class="empty-runs">
             <div class="image-1 animated" style="background-image:url('img/loadimages/loadimages-001.png')"></div>
             <div class="image-2 animated" style="background-image:url('img/loadimages/loadimages-001_2.png')"></div>

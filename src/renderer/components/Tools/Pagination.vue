@@ -3,7 +3,7 @@
         <div class="pagination">
             <template v-for="page in pages">
                 <div v-if="showPage(page)" :class="['page', currentPage === page ? 'active' : '']" v-on:click="changePage(page)" :key="`page-${page}`">{{page}}</div>
-                <div v-if="showOffset(page)" class="page-offset" :key="`page-${page}`">...</div>
+                <div v-if="showOffset(page)" class="page-offset" :key="`offset page-${page}`">...</div>
             </template>
         </div>
     </div>
@@ -13,25 +13,36 @@
 export default {
     name: "Pagination",
     props: {
-        total: Number,
-        limitPerPage: Number,
+        itemsTotal: Number,
+        itemsPerPage: Number,
+        maxPagesVisible: Number,
         offset: Number,
         currentPage: Number
     },
     computed: {
         pages() {
-            return Math.ceil(this.total / this.limitPerPage)
+            return Math.ceil(this.itemsTotal / this.itemsPerPage)
+        },
+        getMaxPages() {
+            return this.maxPagesVisible ? this.maxPagesVisible : 3
+        },
+        maxPagesRange() {
+            const pagesRange = [this.currentPage]
+            for (let pageNb = 1; pageNb < this.getMaxPages; pageNb++) {
+                pagesRange.push(this.currentPage-pageNb, this.currentPage+pageNb)
+            }
+            return pagesRange
         }
     },
     methods: {
         changePage(page) {
-            this.$emit('updatePagination', {offset: this.limitPerPage * (page - 1), currentPage: page})
+            this.$emit('updatePagination', {offset: this.itemsPerPage * (page - 1), currentPage: page})
         },
         showPage(page) {
-            return page === 1 || page === this.pages || [this.currentPage-2, this.currentPage-1, this.currentPage, this.currentPage+1, this.currentPage+2].includes(page)
+            return page === 1 || page === this.pages || this.maxPagesRange.includes(page)
         },
         showOffset(page) {
-            return (page > 1 || page <  this.pages) && (page === this.currentPage-3 && this.currentPage >= 5 || page === this.currentPage+3 && this.currentPage <= this.pages-4)
+            return page > 1 && page < this.pages && (page === this.currentPage - this.getMaxPages && this.currentPage > this.getMaxPages || page === this.currentPage + this.getMaxPages && this.currentPage < this.pages - this.getMaxPages)
         }
     }
 };
