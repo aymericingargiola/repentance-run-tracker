@@ -27,21 +27,14 @@
                     </div>
                 </li>
             </template>
-      </transition-group>
-        <div v-if="Math.ceil(filteredRunsTotal / filterLimitPerPage) > 1" class="navigation-container">
-            <div class="navigation">
-                <template v-for="page in Math.ceil(filteredRunsTotal / filterLimitPerPage)">
-                    <div v-if="page === 1 || page === Math.ceil(filteredRunsTotal / filterLimitPerPage) || [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2].includes(page)" :class="['page',currentPage === page ? 'active' : '']" v-on:click="filterOffset = filterLimitPerPage * (page - 1); currentPage = page" :key="`page-${page}`">{{page}}</div>
-                    <div v-if="(page > 1 || page <  Math.ceil(filteredRunsTotal / filterLimitPerPage)) && (page === currentPage-3 && currentPage >= 5 || page === currentPage+3 && currentPage <= Math.ceil(filteredRunsTotal / filterLimitPerPage)-4)" class="page-offset" :key="`page-${page}`">...</div>
-                </template>
-            </div>
-        </div>
-        <div v-if="this.filteredRuns && this.filteredRuns.length === 0" class="empty-runs">
+        </transition-group>
+        <Pagination :total="filteredRunsTotal" :limitPerPage="filterLimitPerPage" :offset="filterOffset" :currentPage="currentPage"  @updatePagination="onUpdatePagination"/>
+        <div v-if="filteredRuns && filteredRuns.length === 0" class="empty-runs">
             <div class="image-1 animated" style="background-image:url('img/loadimages/loadimages-001.png')"></div>
             <div class="image-2 animated" style="background-image:url('img/loadimages/loadimages-001_2.png')"></div>
             <div class="message">
-                <span v-if="this.allRuns && this.allRuns.length === 0">Start your first run !</span>
-                <span v-if="this.filteredRuns && this.filteredRuns.length === 0 && this.allRuns && this.allRuns.length > 0">No runs found</span>
+                <span v-if="allRuns && allRuns.length === 0">Start your first run !</span>
+                <span v-if="filteredRuns && filteredRuns.length === 0 && allRuns && allRuns.length > 0">No runs found</span>
             </div>
         </div>
     </section>
@@ -56,6 +49,7 @@ import RunInfos from '../components/RunsElements/Infos.vue'
 import RunCharacter from '../components/RunsElements/Character.vue'
 import RunFloorsSlider from '../components/RunsElements/FloorsSlider.vue'
 import RunsFilters from './RunsFilters.vue'
+import Pagination from './Tools/Pagination.vue'
 export default {
     name: "Runs",
     mixins: [runsMinxin],
@@ -63,7 +57,8 @@ export default {
         RunInfos,
         RunCharacter,
         RunFloorsSlider,
-        RunsFilters
+        RunsFilters,
+        Pagination
     },
     data() {
         return {
@@ -148,6 +143,10 @@ export default {
         }
     },
     methods: {
+        onUpdatePagination(pagination) {
+            this.currentPage = pagination.currentPage
+            this.filterOffset = pagination.offset
+        },
         resetPagination() {
             this.currentPage = this.currentPage === 1 ? this.currentPage : 1
             this.filterOffset = this.filterOffset === 0 ? this.filterOffset : 0
@@ -367,32 +366,6 @@ export default {
                     filter: grayscale(1);
                     opacity: 0.5;
                 }
-            }
-        }
-    }
-}
-.navigation-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 0;
-    .navigation {
-        display: flex;
-        align-items: center;
-        .page, .page-offset {
-            padding: 8px;
-        }
-        .page {
-            opacity: 0.7;
-            cursor: pointer;
-            transition: 0.5s ease;
-            &.active {
-                opacity: 1;
-                font-size: 170%;
-            }
-            &-offset {
-                pointer-events: none;
-                cursor: default;
             }
         }
     }
