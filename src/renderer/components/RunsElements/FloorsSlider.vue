@@ -13,7 +13,7 @@
                             <transition-group name="item-group-transition" tag="ul" class="items">
                                 <template v-for="(item, tidx) in floor.itemsCollected">
                                     <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
-                                        <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
+                                        <a v-if="item.id >= 0" class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
                                             <div class="name">
                                                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
@@ -25,6 +25,24 @@
                                             </div>
                                             <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
                                             <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`}"></div> -->
+                                        </a>
+                                        <a v-else class="item-image glitched">
+                                            <div class="name">
+                                                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
+                                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
+                                                <span>{{item.title}}</span>
+                                            </div>
+                                            <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
+                                                <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                                            </div>
+                                            <div class="glitched-image">
+                                                <template v-for="index in 3">
+                                                    <div class="contain" :key="`glitched ${index}`">
+                                                        <img class="glitched" onerror="this.src='img/icons/collectibles/023.png'" :src="`img/icons/collectibles/${randomItemId()}.png`">
+                                                    </div>
+                                                </template>
+                                            </div>
                                         </a>
                                     </li>
                                 </template>
@@ -72,6 +90,12 @@ export default {
     methods: {
         getConfig(id) {
             return this.configRepo.query().where('id', id).get()[0]
+        },
+        randomItemId() {
+            let id = Math.floor(Math.random()*(700-1+1)+1);
+            if (id < 10) id = `00${id}`
+            else if (id < 100) id = `0${id}`
+            return id
         }
     },
     mounted() {
@@ -332,6 +356,42 @@ export default {
                                 pointer-events: none;
                                 transition: 1s ease;
                             }
+                            &.glitched {
+                                .glitched-image {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    height: 50px;
+                                    width: 32px;
+                                    margin: auto;
+                                    transition: 1s;
+                                    .contain {
+                                        position: relative;
+                                        width: calc(32px/3);
+                                        height: 100%;
+                                        overflow: hidden;
+                                        > img {
+                                            position: absolute;
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                            left: 50%;
+                                            top: 50%;
+                                            transform: translate(-50%, -50%);
+                                        }
+                                        &:first-child {
+                                            > img {
+                                                object-position: -12px;
+                                            }
+                                        }
+                                        &:last-child {
+                                            > img {
+                                                object-position: -28px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                         &:hover {
                             cursor: pointer;
@@ -341,7 +401,7 @@ export default {
                                     opacity: 1;
                                     transform: translateX(-50%) rotate(-10deg) translateY(25px);
                                 }
-                                img {
+                                > img, .glitched-image {
                                     transform: scale(1.1) rotate(-10deg) translateY(-10px);
                                 }
                                 .player-icon {
