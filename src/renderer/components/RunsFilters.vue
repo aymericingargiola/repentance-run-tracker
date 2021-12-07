@@ -214,7 +214,7 @@ export default {
             if (character.ignore) return
             
             // Check if runs has character
-            runs = this.runRepo.where((run) => run.characters[0].name === character.trueName && run.characters[0].version === character.version)
+            runs = this.runRepo.where((run) => run.characters[0].name === character.name && run.characters[0].version === character.version)
             if (runs.get().length < 1) return
 
             if(this.checkFilters(runs, "characters").length < 1) return
