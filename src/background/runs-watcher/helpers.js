@@ -27,9 +27,7 @@ module.exports = {
         const splitValue = string.includes("Pool") ? 19 : 9
         const character = characters.find(character => character.id === string.split(" ")[splitValue])
         if (character) return cloneFrom(character)
-        const logMessage = `Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}]`
-        console.log(logMessage)
-        log.error(logMessage)
+        log.error(`Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}]`)
         return cloneFrom(characters.find(character => character.id === "999999999999"))
     },
     getEntity: (string) => {
@@ -76,6 +74,17 @@ module.exports = {
     getCollectible: (string, splitValue) => {
         //Return matching collectible from logs
         const id = parseInt(string.split(" ")[splitValue])
+        if (id < 0) {
+            return {
+                id: id,
+                title: "Glitched item",
+                itemType: "unknow type",
+                category: "unknow category",
+                type: "item",
+                player: module.exports.getPlayer(string),
+                removed: false
+            }
+        }
         const matchingItem = items.collectibles.find(collectible => collectible.itemID === id)
         if (matchingItem) {
             return {
@@ -83,24 +92,26 @@ module.exports = {
                 title: matchingItem.title,
                 itemType: matchingItem.itemType,
                 category: matchingItem.category,
+                type: "item",
                 player: module.exports.getPlayer(string),
                 removed: false
             }
         }
-        const logMessage = `Item with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`
-        console.log(logMessage)
-        log.warn(logMessage)
+        log.warn(`Item with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`)
         return {
             id: id,
             title: "unknow item",
             itemType: "unknow type",
             category: "unknow category",
+            type: "item",
             player: module.exports.getPlayer(string),
             removed: false
         }
     },
     getTrinket: (string, splitValue) => {
         //Return matching trinket from logs
+        const goldenVar = 32768
+        const smelted = string.includes("smelted") ? true : false
         const id = parseInt(string.split(" ")[splitValue])
         const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
         if (matchingTrinket) {
@@ -108,15 +119,36 @@ module.exports = {
                 id: id,
                 title: matchingTrinket.title,
                 category: matchingTrinket.category,
+                type: "trinket",
                 player: module.exports.getPlayer(string),
                 removed: false,
-                smelted: false
+                golden: false,
+                smelted: smelted
             }
         }
-        const logMessage = `Trinket with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`
-        console.log(logMessage)
-        log.warn(logMessage)
-        return null
+        const matchingGoldenTrinket = items.trinkets.find(trinket => trinket.trinketID + goldenVar === id)
+        if (matchingGoldenTrinket) {
+            return {
+                id: id,
+                title: matchingGoldenTrinket.title,
+                category: matchingGoldenTrinket.category,
+                type: "trinket",
+                player: module.exports.getPlayer(string),
+                removed: false,
+                golden: true,
+                smelted: smelted
+            }
+        }
+        log.warn(`Trinket with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`)
+        return {
+            id: id,
+            title: "unknow trinket",
+            category: "unknow category",
+            type: "trinket",
+            player: module.exports.getPlayer(string),
+            removed: false,
+            smelted: smelted
+        }
     },
     getRunEnd: (string) => {
         //Return game over from logs
@@ -162,9 +194,7 @@ module.exports = {
             module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
             return true
         } else {
-            const logMessage = `Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`
-            console.log(logMessage)
-            log.warn(logMessage)
+            log.warn(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
             return false
         }
     },
@@ -177,16 +207,14 @@ module.exports = {
                 trash.splice(runIndex, 1)
                 removedRuns.push(runId)
             } else {
-                const logMessage = `Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`
-                console.log(logMessage)
-                log.warn(logMessage)
+                log.warn(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
             }
         })
         if (removedRuns.length > 0) {
             module.exports.saveFileToDisk(trashJsonPath, JSON.stringify(trash))
             syncApp(window,{trigger: "remove runs from trash", runs: removedRuns})
             if(windowTracker) { syncApp(windowTracker,{trigger: "remove runs from trash", runs: removedRuns}) }
-            console.log(`Runs : ${removedRuns} was removed from trash`)
+            log.info(`Runs : ${removedRuns} was removed from trash`)
         }
     },
     addRuns: (runsToAdd, window, windowTracker, runs, runsJsonPath) => {
@@ -211,9 +239,7 @@ module.exports = {
                 restoredRuns.push(runToRestore.id)
                 restoredRunsItems.push(runToRestore)
             } else {
-                const logMessage = `Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`
-                console.log(logMessage)
-                log.warn(logMessage)
+                log.warn(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
             }
         })
         if (restoredRuns.length > 0) {

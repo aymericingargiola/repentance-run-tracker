@@ -93,7 +93,7 @@ function destroyCharacterAndRelatedItems(sameRun, characterId) {
     sameRun.characters.splice(playerNumber, 1)
 }
 
-function collectiblesManager(sameRun, collectible, status) {
+function collectiblesManager(sameRun, collectible, status, isTrinket) {
     if (!sameRun.floors[sameRun.floors.length - 1]) return elog.error("[collectiblesManager] Last floor was not found!")
 
     const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player //Jacob & Esau
@@ -104,9 +104,12 @@ function collectiblesManager(sameRun, collectible, status) {
     // add activables key to context player if doesn't exist and if current collectible is an activable
     if (collectible.itemType === "Active" && !sameRun.characters[playerContextActiveItem].activables) sameRun.characters[playerContextActiveItem].activables = []
 
+    // add trinkets key to context player if doesn't exist and if current collectible is a trinket
+    if (isTrinket && !isTrinket.smelted && !sameRun.characters[playerContextActiveItem].trinkets) sameRun.characters[playerContextActiveItem].trinkets = []
+
     // return a filtered array with matching item
     const foundItem = sameRun.floors.map((floor, index) => {
-        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === collectible.id) : -1
+        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === collectible.id && item.type === collectible.type) : -1
         return {
             floorIndex: index,
             itemIndex: itemIndex,
@@ -229,6 +232,17 @@ function updateOrCreateRun(params = {}) {
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
+                // Trinkets has no "remove" event from game logs at the moment
+                // case 'adding trinket':
+                //     if (params.trinket) collectiblesManager(sameRun, params.trinket, "add", {smelted:false})
+                //     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                //     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                // break
+                case 'adding smelted trinket':
+                    if (params.trinket) collectiblesManager(sameRun, params.trinket, "add", {smelted:true})
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                break
                 case 'run end':
                     const runEndInfo = getRunEnd(params.log)
                     sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : sameRun.runEnd.date
@@ -379,15 +393,16 @@ function parseLogs(newLogs, logArray) {
             updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
-        if(log.includes("Adding trinket")) {
-            console.log("\x1b[35m", log, "\x1b[0m")
-            //updateOrCreateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
-            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-        }
+        // Trinkets has no "remove" event from game logs at the moment
+        // if(log.includes("Adding trinket")) {
+        //     console.log("\x1b[35m", log, "\x1b[0m")
+        //     updateOrCreateRun({trigger: "adding trinket", trinket: getTrinket(log, 4)})
+        //     saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+        // }
         if(log.includes("Adding smelted trinket")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            //updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
-            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+            updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 5)})
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
