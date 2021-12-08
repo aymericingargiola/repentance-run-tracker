@@ -1,0 +1,44 @@
+{
+    "news": [
+        {
+            "collectibles": [
+                {
+                    "itemID": 1001,
+                    "title": "13 Luck",
+                    "pickup": "An explosive amount of luck",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "13_Luck"
+                },
+                {
+                    "itemID": 1002,
+                    "title": "15 Luck",
+                    "pickup": "A fantastic amount of luck",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "15_Luck"
+                },
+                {
+                    "itemID": 1003,
+                    "title": "Sawblade",
+                    "pickup": "Slice your enemies",
+                    "effects": [],
+                    "itemType": "Passive, Familiar",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "Sawblade"
+                }
+            ]
+        }
+    ],
+    "replacements": [
+        {
+            "collectibles": [
+            ]
+        }
+    ]
+}
