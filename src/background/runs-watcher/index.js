@@ -23,7 +23,7 @@ let inRun = false
 let firstInit = false
 // let backToMenu = false
 let extendedSaveMode = false //This variable can be used later to save more informations (Stats, bombs, coins, time...), with the help of a mod or game memory reading
-let otherModLoaded = false
+let otherModsLoaded = []
 
 function checkPreviousRuns() {
     let deleted = false
@@ -183,6 +183,11 @@ function updateOrCreateRun(params = {}) {
             console.log('Update current run...')
             if(currentRun.id === undefined) currentRun.id = sameRun.id
             switch (params.trigger) {
+                case 'other mods loaded':
+                    sameRun.otherModsLoaded = otherModsLoaded
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    break
                 case 'level init':
                     sameRun.floors.push(currentFloor)
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
@@ -312,7 +317,7 @@ function updateOrCreateRun(params = {}) {
             characters: [currentCharater],
             floors: [currentFloor],
             extendedSaveMode: extendedSaveMode,
-            otherModLoaded: otherModLoaded,
+            otherModsLoaded: otherModsLoaded,
             gameOptions: repentanceOptions,
             toRemove: {
                 status: false,
@@ -418,7 +423,7 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Lua is resetting!")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             extendedSaveMode = false
-            otherModLoaded = false
+            otherModsLoaded = []
         }
         if(log.includes("Running Lua Script") && !log.includes("resources/scripts/")) {
             console.log("\x1b[35m", log, "\x1b[0m")
@@ -435,10 +440,14 @@ function parseLogs(newLogs, logArray) {
                 saveFileToDisk(configJsonPath, JSON.stringify(config))
             }
             if (log.includes("/mods/repentance_run_tracker_extended")) {
+                elog.info(`Repentance Run Tracker Extended mod is loaded`)
                 extendedSaveMode = true
             } else {
-                otherModLoaded = true
-                if (currentRun && currentRun.otherModLoaded === false) currentRun.otherModLoaded = true
+                const modName = log.split("/")[2] ? log.split("/")[2].replace(/[0-9_]/g, "") : log
+                elog.info(`Other mod is loaded : ${modName}`)
+                otherModsLoaded = otherModsLoaded ? otherModsLoaded.push(modName) : [modName]
+                if (currentRun) currentRun.otherModsLoaded = otherModsLoaded
+                updateOrCreateRun({trigger: "other mods loaded"})
             }
         }
         if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
@@ -501,11 +510,20 @@ async function init() {
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
     extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("RRTEEXTENDLOGS")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
-    let gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
+    const luaResetList = repentanceLogsArray.filter(v=>v.includes("Lua is resetting"))
+    const gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
-    let seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
+    const seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
     // let gameInit = repentanceLogsArray.filter(v=>v.includes("Menu Game Init"))
-    let isShutdown = repentanceLogsArray.filter(v=>v.includes("Isaac has shut down successfully")).length > 0
+    const isShutdown = repentanceLogsArray.filter(v=>v.includes("Isaac has shut down successfully")).length > 0
+
+    // Check loaded mods
+    if (luaResetList[luaResetList.length - 1] != undefined) {
+        const loadedModsList = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, luaResetList[luaResetList.length - 1]), repentanceLogsArray.length - 1).filter(log => log.includes("Running Lua Script"))
+        if (loadedModsList.length > 0) parseLogs(loadedModsList, loadedModsList)
+    }
+
+    // Check game status
     if (seedsList[seedsList.length - 1] != undefined && !isShutdown) {
         console.log("Seeds exist in current logs, checking...")
         const lastLogs = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, seedsList[seedsList.length - 1]), repentanceLogsArray.length - 1)

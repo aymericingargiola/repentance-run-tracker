@@ -24,7 +24,7 @@ export default class Run extends Model {
             floors: this.attr(null),
             toRemove: this.attr(null),
             extendedSaveMode: this.boolean(false),
-            otherModLoaded: this.boolean(false),
+            otherModsLoaded: this.attr([]),
             backup: this.attr(null)
         }
     }
