@@ -106,7 +106,7 @@ function collectiblesManager(sameRun, collectible, status) {
 
     // return a filtered array with matching item
     const foundItem = sameRun.floors.map((floor, index) => {
-        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === collectible.id) : -1
+        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === collectible.id && item.type === collectible.type) : -1
         return {
             floorIndex: index,
             itemIndex: itemIndex,
@@ -220,6 +220,11 @@ function updateOrCreateRun(params = {}) {
                     break
                 case 'adding collectible':
                     if (params.collectible) collectiblesManager(sameRun, params.collectible, "add")
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    break
+                case 'adding smelted trinket':
+                    if (params.trinket) collectiblesManager(sameRun, params.trinket, "add")
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
@@ -386,8 +391,8 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Adding smelted trinket")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            //updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 4)})
-            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+            updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 5)})
+            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")

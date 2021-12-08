@@ -23,8 +23,8 @@
                                             <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
                                                 <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
                                             </div>
-                                            <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
-                                            <!-- <div class="item-image" :style="{backgroundImage:`url('img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`}"></div> -->
+                                            <img v-if="item.type === 'trinket'" :src="`img/icons/trinkets/${(`00${item.id}`).slice(-3)}.png`">
+                                            <img v-else :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
                                         </a>
                                         <a v-else class="item-image glitched">
                                             <div class="name">

@@ -80,6 +80,7 @@ module.exports = {
                 title: "Glitched item",
                 itemType: "unknow type",
                 category: "unknow category",
+                type: "item",
                 player: module.exports.getPlayer(string),
                 removed: false
             }
@@ -91,6 +92,7 @@ module.exports = {
                 title: matchingItem.title,
                 itemType: matchingItem.itemType,
                 category: matchingItem.category,
+                type: "item",
                 player: module.exports.getPlayer(string),
                 removed: false
             }
@@ -101,12 +103,14 @@ module.exports = {
             title: "unknow item",
             itemType: "unknow type",
             category: "unknow category",
+            type: "item",
             player: module.exports.getPlayer(string),
             removed: false
         }
     },
     getTrinket: (string, splitValue) => {
         //Return matching trinket from logs
+        const smelted = string.includes("smelted") ? true : false
         const id = parseInt(string.split(" ")[splitValue])
         const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
         if (matchingTrinket) {
@@ -114,13 +118,22 @@ module.exports = {
                 id: id,
                 title: matchingTrinket.title,
                 category: matchingTrinket.category,
+                type: "trinket",
                 player: module.exports.getPlayer(string),
                 removed: false,
-                smelted: false
+                smelted: smelted
             }
         }
         log.warn(`Trinket with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`)
-        return null
+        return {
+            id: id,
+            title: "unknow trinket",
+            category: "unknow category",
+            type: "trinket",
+            player: module.exports.getPlayer(string),
+            removed: false,
+            smelted: smelted
+        }
     },
     getRunEnd: (string) => {
         //Return game over from logs
