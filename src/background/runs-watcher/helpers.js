@@ -110,6 +110,7 @@ module.exports = {
     },
     getTrinket: (string, splitValue) => {
         //Return matching trinket from logs
+        const goldenVar = 32768
         const smelted = string.includes("smelted") ? true : false
         const id = parseInt(string.split(" ")[splitValue])
         const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
@@ -121,6 +122,20 @@ module.exports = {
                 type: "trinket",
                 player: module.exports.getPlayer(string),
                 removed: false,
+                golden: false,
+                smelted: smelted
+            }
+        }
+        const matchingGoldenTrinket = items.trinkets.find(trinket => trinket.trinketID + goldenVar === id)
+        if (matchingGoldenTrinket) {
+            return {
+                id: id,
+                title: matchingGoldenTrinket.title,
+                category: matchingGoldenTrinket.category,
+                type: "trinket",
+                player: module.exports.getPlayer(string),
+                removed: false,
+                golden: true,
                 smelted: smelted
             }
         }
