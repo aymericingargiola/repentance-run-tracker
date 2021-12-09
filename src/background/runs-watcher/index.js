@@ -390,12 +390,12 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Adding collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
+            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4, otherModsLoaded)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Removing voided collectible") || log.includes("Removing collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4)})
+            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4, otherModsLoaded)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         // Trinkets has no "remove" event from game logs at the moment
@@ -445,7 +445,7 @@ function parseLogs(newLogs, logArray) {
             } else {
                 const modName = log.split("/")[2] ? log.split("/")[2].replace(/[0-9_]/g, "") : log
                 elog.info(`Other mod is loaded : ${modName}`)
-                otherModsLoaded = otherModsLoaded ? otherModsLoaded.push(modName) : [modName]
+                otherModsLoaded.push(modName)
                 if (currentRun) currentRun.otherModsLoaded = otherModsLoaded
                 updateOrCreateRun({trigger: "other mods loaded"})
             }

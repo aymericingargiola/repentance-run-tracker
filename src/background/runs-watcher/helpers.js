@@ -5,6 +5,7 @@ const { syncApp } = require('../helpers/sync')
 const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const items = require('../jsons/items.json')
+const itemsCustom = require('../jsons/itemsCustom.json')
 const floors = require('../jsons/floors.json')
 const { DateTime, Duration } = require('luxon')
 const log = require('electron-log')
@@ -71,10 +72,13 @@ module.exports = {
         //Return player from logs
         return string.split(" ")[string.split(" ").findIndex(value => value === "player") + 1]
     },
-    getCollectible: (string, splitValue) => {
+    getCollectible: (string, splitValue, otherModsLoaded) => {
         //Return matching collectible from logs
+        const rgx = /(([^()]*))/g
+        const itemName = [...string.matchAll(rgx)].flat()
+        console.log(itemName)
         const id = parseInt(string.split(" ")[splitValue])
-        if (id < 0) {
+        if (id < 0) { // Glitched items
             return {
                 id: id,
                 title: "Glitched item",
@@ -86,7 +90,7 @@ module.exports = {
             }
         }
         const matchingItem = items.collectibles.find(collectible => collectible.itemID === id)
-        if (matchingItem) {
+        if (matchingItem) { // Default items
             return {
                 id: id,
                 title: matchingItem.title,
@@ -96,6 +100,9 @@ module.exports = {
                 player: module.exports.getPlayer(string),
                 removed: false
             }
+        }
+        if (otherModsLoaded.length > 0) { // Supported custom items
+            const matchingCustomItem = items.collectibles.find(collectible => collectible.title === itemName && otherModsLoaded.includes(collectible.category))
         }
         log.warn(`Item with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`)
         return {
