@@ -4,6 +4,7 @@
             "collectibles": [
                 {
                     "itemID": 1001,
+                    "hidden": false,
                     "title": "13 Luck",
                     "pickup": "An explosive amount of luck",
                     "effects": [],
@@ -14,6 +15,7 @@
                 },
                 {
                     "itemID": 1002,
+                    "hidden": false,
                     "title": "15 Luck",
                     "pickup": "A fantastic amount of luck",
                     "effects": [],
@@ -24,6 +26,7 @@
                 },
                 {
                     "itemID": 1003,
+                    "hidden": false,
                     "title": "Sawblade",
                     "pickup": "Slice your enemies",
                     "effects": [],
@@ -31,6 +34,50 @@
                     "itemPool": "",
                     "category": "racing+",
                     "gfx": "Sawblade"
+                },
+                {
+                    "itemID": 1004,
+                    "hidden": true,
+                    "title": "Trophy",
+                    "pickup": "Congratulations!",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "Trophy"
+                },
+                {
+                    "itemID": 1005,
+                    "hidden": true,
+                    "title": "Checkpoint",
+                    "pickup": "On to the next character!",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "Checkpoint"
+                },
+                {
+                    "itemID": 1006,
+                    "hidden": true,
+                    "title": "Reset",
+                    "pickup": "Reset to the first character",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "questionmark"
+                },
+                {
+                    "itemID": 1007,
+                    "hidden": true,
+                    "title": "Debug",
+                    "pickup": "Something went wrong",
+                    "effects": [],
+                    "itemType": "Active",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": "Debug"
                 }
             ]
         }
@@ -38,6 +85,40 @@
     "replacements": [
         {
             "collectibles": [
+                {
+                    "itemID": 2001,
+                    "hidden": false,
+                    "originalItemID":191,
+                    "title": "3 Dollar Bill (Seeded)",
+                    "pickup": "Rainbow tears",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": null
+                },
+                {
+                    "itemID": 2002,
+                    "hidden": false,
+                    "title": "Magic 8 Ball (Seeded)",
+                    "pickup": "Shot speed up",
+                    "effects": [],
+                    "itemType": "Passive",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": null
+                },
+                {
+                    "itemID": 2003,
+                    "hidden": false,
+                    "title": "Flip (Custom)",
+                    "pickup": "Twist of fate",
+                    "effects": [],
+                    "itemType": "Active",
+                    "itemPool": "",
+                    "category": "racing+",
+                    "gfx": null
+                }
             ]
         }
     ]
