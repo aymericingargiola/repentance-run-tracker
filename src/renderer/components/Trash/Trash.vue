@@ -255,6 +255,12 @@ export default {
                             li {
                                 margin-left: 8px;
                                 margin-right: 8px;
+                                > .before {
+                                    left: 2px;
+                                }
+                                > .after {
+                                    right: 2px;
+                                }
                             }
                         }
                     }

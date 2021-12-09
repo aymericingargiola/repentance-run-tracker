@@ -74,9 +74,7 @@ module.exports = {
     },
     getCollectible: (string, splitValue, otherModsLoaded) => {
         //Return matching collectible from logs
-        const rgx = /(([^()]*))/g
-        const itemName = [...string.matchAll(rgx)].flat()
-        console.log(itemName)
+        const collectibleName = string.match(/\(([^\)]+\)*)\)/)[1] // Regex by Dylan aka lMiniD aka Odilon le crack
         const id = parseInt(string.split(" ")[splitValue])
         if (id < 0) { // Glitched items
             return {
@@ -88,6 +86,23 @@ module.exports = {
                 player: module.exports.getPlayer(string),
                 removed: false
             }
+        }
+        if (otherModsLoaded.length > 0) { // Supported custom items
+            const matchingCustomItem = itemsCustom.collectibles.find(collectible => collectible.title === collectibleName && otherModsLoaded.includes(collectible.category))
+            if (matchingCustomItem && !matchingCustomItem.hidden) {
+                return {
+                    id: matchingCustomItem.itemID,
+                    originalItemID: matchingCustomItem.originalItemID,
+                    title: matchingCustomItem.title,
+                    itemType: matchingCustomItem.itemType,
+                    category: matchingCustomItem.category,
+                    type: "item",
+                    player: module.exports.getPlayer(string),
+                    gfx: matchingCustomItem.gfx,
+                    removed: false,
+                    custom: true
+                }
+            } else if (matchingCustomItem) return log.info(`Matching custom item "${collectibleName}" is hidden and was not added`)
         }
         const matchingItem = items.collectibles.find(collectible => collectible.itemID === id)
         if (matchingItem) { // Default items
@@ -101,24 +116,23 @@ module.exports = {
                 removed: false
             }
         }
-        if (otherModsLoaded.length > 0) { // Supported custom items
-            const matchingCustomItem = items.collectibles.find(collectible => collectible.title === itemName && otherModsLoaded.includes(collectible.category))
-        }
         log.warn(`Item with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`)
         return {
             id: id,
-            title: "unknow item",
+            title: collectibleName,
             itemType: "unknow type",
             category: "unknow category",
             type: "item",
             player: module.exports.getPlayer(string),
-            removed: false
+            removed: false,
+            unknow: true
         }
     },
     getTrinket: (string, splitValue) => {
         //Return matching trinket from logs
         const goldenVar = 32768
         const smelted = string.includes("smelted") ? true : false
+        const trinketName = string.match(/\(([^\)]+\)*)\)/)[1] // Regex by Dylan aka lMiniD aka Odilon le crack
         const id = parseInt(string.split(" ")[splitValue])
         const matchingTrinket = items.trinkets.find(trinket => trinket.trinketID === id)
         if (matchingTrinket) {
@@ -149,12 +163,13 @@ module.exports = {
         log.warn(`Trinket with id ${id} was not found [log string : ${string} | split value : ${splitValue}]`)
         return {
             id: id,
-            title: "unknow trinket",
+            title: trinketName,
             category: "unknow category",
             type: "trinket",
             player: module.exports.getPlayer(string),
             removed: false,
-            smelted: smelted
+            smelted: smelted,
+            unknow: true
         }
     },
     getRunEnd: (string) => {
