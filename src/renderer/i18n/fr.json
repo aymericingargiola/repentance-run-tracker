@@ -1,0 +1,14 @@
+{
+    "config": {
+        "dateFormat" : {
+            "title" : "Format de la date"
+        },
+        "hourFormat" : {
+            "title" : "Format de l'heure"
+        },
+        "hideActiveItems" : {
+            "title" : "Cacher les items actifs",
+            "hint" : "Cacher les items actifs de la liste des etages"
+        }
+    }
+}

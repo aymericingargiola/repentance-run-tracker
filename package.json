@@ -33,6 +33,7 @@
     "v-calendar": "^2.3.4",
     "vue": "^2.6.11",
     "vue-color-gradient-picker": "^0.1.2",
+    "vue-i18n": "^8.26.7",
     "vue-router": "^3.5.1",
     "vue2-timepicker": "^1.1.6",
     "vuescroll": "^4.17.3",

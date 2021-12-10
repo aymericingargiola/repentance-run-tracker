@@ -8,9 +8,14 @@
                     <div class="heading">Settings</div>
                     <template v-for="(config, cidx) in enabledConfigs">
                         <div :class="['config-item', config.type]" :key="`config-${cidx}`">
-                            <div class="title">{{config.name}}</div>
+                            <div class="title">{{$t(`config.${config.id}.title`)}}</div>
                             <div class="selector" v-if="config.type === 'select'">
-                                <select :name="config.name" :id="config.id" @change="onChange($event, config.id, config.type)">
+                                <select v-if="config.id === 'languages'" :name="config.name" :id="config.id" @change="onChange($event, config.id, config.type)" v-model="$i18n.locale">
+                                    <template v-for="(select, sidx) in config.choices">
+                                        <option :value="select.value" :key="`option-${sidx}`" :selected="select.value === config.value">{{select.name}}</option>
+                                    </template>
+                                </select>
+                                <select v-else :name="config.name" :id="config.id" @change="onChange($event, config.id, config.type)">
                                     <template v-for="(select, sidx) in config.choices">
                                         <option :value="select.value" :key="`option-${sidx}`" :selected="select.value === config.value">{{select.name}}</option>
                                     </template>
@@ -22,7 +27,7 @@
                             <div class="checkbox" v-if="config.type === 'checkbox'">
                                 <input type="checkbox" :id="config.id" :name="config.name" @change="onChange($event, config.id, config.type)" :checked="config.value">
                             </div>
-                            <div class="hint">{{config.hint}}</div>
+                            <div class="hint">{{$t(`config.${config.id}.hint`)}}</div>
                         </div>
                     </template>
                 </div>
@@ -57,6 +62,8 @@ export default {
         window.ipc.on('SYNC_SEND_CONFIG', (response) => {
             console.log(response)
             this.configRepo.fresh(response.config)
+            console.log(this.$i18n.locale, response.config.filter(cfg => cfg.id === 'languages')[0].value)
+            this.$i18n.locale = response.config.filter(cfg => cfg.id === 'languages')[0].value
         })
         this.$root.$on('OPEN_SETTINGS', () => {
             this.isOpen = !this.isOpen

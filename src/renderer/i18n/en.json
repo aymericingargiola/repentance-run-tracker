@@ -1,0 +1,14 @@
+{
+    "config": {
+        "dateFormat" : {
+            "title" : "Date Format"
+        },
+        "hourFormat" : {
+            "title" : "Hour format"
+        },
+        "hideActiveItems" : {
+            "title" : "Hide active items",
+            "hint" : "Hide active items from floor's items list"
+        }
+    }
+}

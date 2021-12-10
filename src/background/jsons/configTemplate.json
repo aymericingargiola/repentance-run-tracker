@@ -1,5 +1,14 @@
 [
     {
+        "id":"languages",
+        "value":"en",
+        "choices":[{"name":"English","value":"en"},{"name":"French","value":"fr"}],
+        "name":"Languages",
+        "hint":"",
+        "type":"select",
+        "disabled":false
+    },
+    {
         "id":"dateFormat",
         "value":"LL/dd/yy",
         "choices":[{"name":"Month/Day/Year","value":"LL/dd/yy"},{"name":"Day/Month/Year","value":"dd/LL/yy"}],
