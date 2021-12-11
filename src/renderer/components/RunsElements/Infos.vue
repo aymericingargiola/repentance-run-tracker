@@ -23,7 +23,7 @@
                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                 <div class="content">
-                    {{characters[0].trueName}}
+                    {{characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${characters[0].id}.name`)}` }}
                 </div>
             </li>
             <li v-if="seed" class="info seed" title="Seed">

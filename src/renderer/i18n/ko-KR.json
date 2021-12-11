@@ -71,7 +71,13 @@
             "hint": "",
             "choices": {
                 "en-US": "English",
-                "fr-FR": "French"
+                "fr-FR": "Français",
+                "de-DE": "Deutsch",
+                "es-ES": "Español",
+                "ru-RU": "Русский",
+                "ja-JP": "日本語",
+                "ko-KR": "한국어",
+                "zh-ZH": "中文"
             }
         },
         "dateFormat": {
@@ -111,6 +117,9 @@
         },
         "3": {
             "name": "유다"
+        },
+        "4": {
+            "name": "???"
         },
         "5": {
             "name": "이브"
@@ -3832,6 +3841,9 @@
         "Scarred Womb": {
             "name": "상처난 자궁"
         },
+        "Blue Womb": {
+            "name": "???"
+        },
         "Sheol": {
             "name": "저승"
         },
@@ -3849,9 +3861,6 @@
         },
         "Ultra Greed": {
             "name": "극심한 탐욕"
-        },
-        "The Void": {
-            "name": "공허"
         },
         "Downpour": {
             "name": "폭우"
@@ -3876,6 +3885,9 @@
         },
         "Home": {
             "name": "집"
+        },
+        "Backwards": {
+            "name": "?"
         }
     }
 }

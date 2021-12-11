@@ -61,7 +61,9 @@ export default {
         window.ipc.send('ASK_CONFIG')
         window.ipc.on('SYNC_SEND_CONFIG', (response) => {
             this.configRepo.fresh(response.config)
-            this.$i18n.locale = response.config.filter(cfg => cfg.id === 'languages')[0].value
+            const currentLang = response.config.filter(cfg => cfg.id === 'languages')[0].value
+            this.$i18n.locale = currentLang
+            document.documentElement.setAttribute('lang', currentLang)
         })
         this.$root.$on('OPEN_SETTINGS', () => {
             this.isOpen = !this.isOpen
@@ -89,6 +91,7 @@ export default {
         },
         onChange(e, id, type) {
             const config = {id: id, value: type === "checkbox" ? e.target.checked : e.target.value}
+            if (e.target.id === "languages") document.documentElement.setAttribute('lang', e.target.value)
             this.updateConfig(config)
             this.saveConfig(config)
         },

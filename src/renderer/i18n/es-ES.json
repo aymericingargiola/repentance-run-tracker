@@ -71,7 +71,13 @@
             "hint": "",
             "choices": {
                 "en-US": "English",
-                "fr-FR": "French"
+                "fr-FR": "Français",
+                "de-DE": "Deutsch",
+                "es-ES": "Español",
+                "ru-RU": "Русский",
+                "ja-JP": "日本語",
+                "ko-KR": "한국어",
+                "zh-ZH": "中文"
             }
         },
         "dateFormat": {
@@ -111,6 +117,9 @@
         },
         "3": {
             "name": "Judas"
+        },
+        "4": {
+            "name": "???"
         },
         "5": {
             "name": "Eva"
@@ -3830,6 +3839,9 @@
         "Scarred Womb": {
             "name": "Matriz rasgada"
         },
+        "Blue Womb": {
+            "name": "???"
+        },
         "Sheol": {
             "name": "Sheol"
         },
@@ -3847,9 +3859,6 @@
         },
         "Ultra Greed": {
             "name": "Ultra Codicia"
-        },
-        "The Void": {
-            "name": "El Vacío"
         },
         "Downpour": {
             "name": "Aguacero"
@@ -3874,6 +3883,9 @@
         },
         "Home": {
             "name": "Casa"
+        },
+        "Backwards": {
+            "name": "¿?"
         }
     }
 }

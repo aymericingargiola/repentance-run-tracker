@@ -70,8 +70,14 @@
             "title": "Langue",
             "hint": "",
             "choices": {
-                "en-US": "Anglais",
-                "fr-FR": "Français"
+                "en-US": "English",
+                "fr-FR": "Français",
+                "de-DE": "Deutsch",
+                "es-ES": "Español",
+                "ru-RU": "Русский",
+                "ja-JP": "日本語",
+                "ko-KR": "한국어",
+                "zh-ZH": "中文"
             }
         },
         "dateFormat": {

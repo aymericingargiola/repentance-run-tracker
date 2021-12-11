@@ -2,7 +2,7 @@
     {
         "id":"languages",
         "value":"en-US",
-        "choices":[{"name":"English","value":"en-US"},{"name":"French","value":"fr-FR"}],
+        "choices":[{"name":"English","value":"en-US"},{"name":"Français","value":"fr-FR"},{"name":"Deutsch","value":"de-DE"},{"name":"Español","value":"es-ES"},{"name":"Русский","value":"ru-RU"},{"name":"日本語","value":"ja-JP"},{"name":"한국어","value":"ko-KR"},{"name":"中文","value":"zh-ZH"}],
         "name":"Languages",
         "hint":"",
         "type":"select",

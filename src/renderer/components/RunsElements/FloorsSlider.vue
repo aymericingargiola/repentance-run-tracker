@@ -9,7 +9,7 @@
                             <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
                         </div>
                         <div class="floor-wrapper">
-                            <div class="floor-name">{{$t(`stages.${floor.name.replace(/[0-9]/g, '').trim()}.name`)}} {{parseInt(floor.name.match(/\d/g))}}</div>
+                            <div class="floor-name">{{$t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`)}} {{!isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : ''}}</div>
                             <transition-group name="item-group-transition" tag="ul" class="items">
                                 <template v-for="(item, tidx) in floor.itemsCollected">
                                     <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
@@ -18,7 +18,7 @@
                                                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
                                                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-                                                <span>{{item.golden ? 'Golden ' : ''}}{{item.title}}</span>
+                                                <span>{{item.golden ? 'Golden ' : ''}}{{item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title)}}</span>
                                             </div>
                                             <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
                                                 <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
@@ -97,6 +97,15 @@ export default {
             if (id < 10) id = `00${id}`
             else if (id < 100) id = `0${id}`
             return id
+        },
+        t(str, fallbackStr) {
+            return this.$t && this.$te
+            ? this.$te(str)
+            ? this.$t(str)
+            : fallbackStr
+            : fallbackStr
+            ? fallbackStr
+            : str
         }
     },
     mounted() {

@@ -71,7 +71,13 @@
             "hint": "",
             "choices": {
                 "en-US": "English",
-                "fr-FR": "French"
+                "fr-FR": "Français",
+                "de-DE": "Deutsch",
+                "es-ES": "Español",
+                "ru-RU": "Русский",
+                "ja-JP": "日本語",
+                "ko-KR": "한국어",
+                "zh-ZH": "中文"
             }
         },
         "dateFormat": {
@@ -111,6 +117,9 @@
         },
         "3": {
             "name": "Judas"
+        },
+        "4": {
+            "name": "???"
         },
         "5": {
             "name": "Eve"
@@ -3832,6 +3841,9 @@
         "Scarred Womb": {
             "name": "Scarred Womb"
         },
+        "Blue Womb": {
+            "name": "???"
+        },
         "Sheol": {
             "name": "Sheol"
         },
@@ -3849,9 +3861,6 @@
         },
         "Ultra Greed": {
             "name": "Ultra Greed"
-        },
-        "The Void": {
-            "name": "The Void"
         },
         "Downpour": {
             "name": "Downpour"
@@ -3876,6 +3885,9 @@
         },
         "Home": {
             "name": "Home"
+        },
+        "Backwards": {
+            "name": "?"
         }
     }
 }

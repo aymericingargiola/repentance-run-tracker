@@ -71,7 +71,13 @@
             "hint": "",
             "choices": {
                 "en-US": "English",
-                "fr-FR": "French"
+                "fr-FR": "Français",
+                "de-DE": "Deutsch",
+                "es-ES": "Español",
+                "ru-RU": "Русский",
+                "ja-JP": "日本語",
+                "ko-KR": "한국어",
+                "zh-ZH": "中文"
             }
         },
         "dateFormat": {
@@ -111,6 +117,9 @@
         },
         "3": {
             "name": "ユダ"
+        },
+        "4": {
+            "name": "？？？"
         },
         "5": {
             "name": "イブ"
@@ -3832,6 +3841,9 @@
         "Scarred Womb": {
             "name": "傷だらけの子宮"
         },
+        "Blue Womb": {
+            "name": "？？？"
+        },
         "Sheol": {
             "name": "シェオル"
         },
@@ -3849,9 +3861,6 @@
         },
         "Ultra Greed": {
             "name": "ウルトラグリード"
-        },
-        "The Void": {
-            "name": "ザ ボイド"
         },
         "Downpour": {
             "name": "ダウンポアー"
@@ -3876,6 +3885,9 @@
         },
         "Home": {
             "name": "ホーム"
+        },
+        "Backwards": {
+            "name": "？？？"
         }
     }
 }
