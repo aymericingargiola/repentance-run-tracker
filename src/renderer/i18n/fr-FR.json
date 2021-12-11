@@ -98,5 +98,3861 @@
             "title": "Dossier des mods",
             "hint": ""
         }
+    },
+    "players": {
+        "0": {
+            "name": "Isaac"
+        },
+        "1": {
+            "name": "Magdalene"
+        },
+        "2": {
+            "name": "Caïn"
+        },
+        "3": {
+            "name": "Judas"
+        },
+        "4": {
+            "name": "???"
+        },
+        "5": {
+            "name": "Ève"
+        },
+        "6": {
+            "name": "Samson"
+        },
+        "7": {
+            "name": "Azazel"
+        },
+        "8": {
+            "name": "Lazare"
+        },
+        "9": {
+            "name": "Éden"
+        },
+        "10": {
+            "name": "L'Égaré"
+        },
+        "11": {
+            "name": "Lazare II"
+        },
+        "12": {
+            "name": "Judas Sombre"
+        },
+        "13": {
+            "name": "Lilith"
+        },
+        "14": {
+            "name": "Le Gardien"
+        },
+        "15": {
+            "name": "Apollyon"
+        },
+        "16": {
+            "name": "Le Délaissé"
+        },
+        "17": {
+            "name": "L'Âme"
+        },
+        "18": {
+            "name": "Béthanie"
+        },
+        "19": {
+            "name": "Jacob"
+        },
+        "20": {
+            "name": "Ésaü"
+        },
+        "21": {
+            "name": "Isaac"
+        },
+        "22": {
+            "name": "Magdalene"
+        },
+        "23": {
+            "name": "Caïn"
+        },
+        "24": {
+            "name": "Judas"
+        },
+        "25": {
+            "name": "???"
+        },
+        "26": {
+            "name": "Ève"
+        },
+        "27": {
+            "name": "Samson"
+        },
+        "28": {
+            "name": "Azazel"
+        },
+        "29": {
+            "name": "Lazare"
+        },
+        "30": {
+            "name": "Éden"
+        },
+        "31": {
+            "name": "L'Égaré"
+        },
+        "32": {
+            "name": "Lilith"
+        },
+        "33": {
+            "name": "Le Gardien"
+        },
+        "34": {
+            "name": "Apollyon"
+        },
+        "35": {
+            "name": "Le Délaissé"
+        },
+        "36": {
+            "name": "Béthanie"
+        },
+        "37": {
+            "name": "Jacob"
+        },
+        "38": {
+            "name": "Lazare"
+        },
+        "39": {
+            "name": "Jacob"
+        },
+        "40": {
+            "name": "L'Âme"
+        }
+    },
+    "items": {
+        "items": {
+            "1": {
+                "name": "Oignon Triste",
+                "description": "Débit augmenté"
+            },
+            "2": {
+                "name": "Le Troisième Œil",
+                "description": "Triple tir"
+            },
+            "3": {
+                "name": "Cuillère Tordue",
+                "description": "Tirs autoguidés"
+            },
+            "4": {
+                "name": "Tête de Cricket",
+                "description": "Dégâts augmentés"
+            },
+            "5": {
+                "name": "Mon Reflet",
+                "description": "Retour à l'envoyeur"
+            },
+            "6": {
+                "name": "Petite Commission",
+                "description": "Débit augmenté, portée diminuée"
+            },
+            "7": {
+                "name": "Sang du Martyr",
+                "description": "Dégâts augmentés"
+            },
+            "8": {
+                "name": "Frère Bobby",
+                "description": "Amis pour la vie"
+            },
+            "9": {
+                "name": "Scatol",
+                "description": "Amour diptérique"
+            },
+            "10": {
+                "name": "Couronne de Mouches",
+                "description": "Protection diptérique"
+            },
+            "11": {
+                "name": "1up !",
+                "description": "Vie supplémentaire"
+            },
+            "12": {
+                "name": "Champignon Magique",
+                "description": "Toutes les stats augmentées !"
+            },
+            "13": {
+                "name": "Le Virus",
+                "description": "Toucher contagieux + vitesse augmentée"
+            },
+            "14": {
+                "name": "Crise d'Hormones",
+                "description": "Vitesse et portée augmentées"
+            },
+            "15": {
+                "name": "<3",
+                "description": "PV augmentés"
+            },
+            "16": {
+                "name": "Foie Cru",
+                "description": "PV augmentés"
+            },
+            "17": {
+                "name": "Clé Squelette",
+                "description": "99 clés"
+            },
+            "18": {
+                "name": "Un Dollar",
+                "description": "COMBIEN ?!"
+            },
+            "19": {
+                "name": "Boum !",
+                "description": "+10 bombes"
+            },
+            "20": {
+                "name": "Transcendance",
+                "description": "On flotte tous en bas..."
+            },
+            "21": {
+                "name": "Boussole",
+                "description": "La fin est proche"
+            },
+            "22": {
+                "name": "Déjeuner",
+                "description": "PV augmentés"
+            },
+            "23": {
+                "name": "Dîner",
+                "description": "PV augmentés"
+            },
+            "24": {
+                "name": "Dessert",
+                "description": "PV augmentés"
+            },
+            "25": {
+                "name": "Petit Déjeuner",
+                "description": "PV augmentés"
+            },
+            "26": {
+                "name": "Viande Avariée",
+                "description": "PV augmentés"
+            },
+            "27": {
+                "name": "Cuillère en Bois",
+                "description": "Vitesse augmentée"
+            },
+            "28": {
+                "name": "Ceinture",
+                "description": "Vitesse augmentée"
+            },
+            "29": {
+                "name": "Sous-Vêtements de Maman",
+                "description": "Portée augmentée"
+            },
+            "30": {
+                "name": "Escarpins de Maman",
+                "description": "Portée augmentée"
+            },
+            "31": {
+                "name": "Rouge à Lèvres de Maman",
+                "description": "Portée augmentée"
+            },
+            "32": {
+                "name": "Cintre",
+                "description": "Débit augmenté"
+            },
+            "33": {
+                "name": "La Bible",
+                "description": "Vol temporaire"
+            },
+            "34": {
+                "name": "Le Livre de Bélial",
+                "description": "Augmentation temporaire des dégâts "
+            },
+            "35": {
+                "name": "Le Necronomicon",
+                "description": "Dégâts de masse"
+            },
+            "36": {
+                "name": "Le Caca",
+                "description": "Plop !"
+            },
+            "37": {
+                "name": "M. Boum",
+                "description": "Bombe réutilisable"
+            },
+            "38": {
+                "name": "Tête de Tammy",
+                "description": "Explosion de larmes"
+            },
+            "39": {
+                "name": "Soutien-Gorge de Maman",
+                "description": "Paralysie de masse"
+            },
+            "40": {
+                "name": "Kamikaze !",
+                "description": "Deviens la bombe !"
+            },
+            "41": {
+                "name": "Serviette de Maman",
+                "description": "Terreur de masse"
+            },
+            "42": {
+                "name": "Tête Décomposée de Bob",
+                "description": "Bombe puante jetable"
+            },
+            "44": {
+                "name": "Téléportation !",
+                "description": "Téléportation !"
+            },
+            "45": {
+                "name": "Joli Cœur",
+                "description": "Régénération réutilisable"
+            },
+            "46": {
+                "name": "Pied Chanceux",
+                "description": "Chance augmentée"
+            },
+            "47": {
+                "name": "Télécommande du Docteur",
+                "description": "Attaque aérienne"
+            },
+            "48": {
+                "name": "Flèche de Cupidon",
+                "description": "Larmes transperçantes"
+            },
+            "49": {
+                "name": "Super Laser de la Mort",
+                "description": "BLLLARRRRGGGHH !"
+            },
+            "50": {
+                "name": "Steven",
+                "description": "Dégâts augmentés"
+            },
+            "51": {
+                "name": "Pentagramme",
+                "description": "Dégâts augmentés"
+            },
+            "52": {
+                "name": "Dr. Fœtus",
+                "description": "???"
+            },
+            "53": {
+                "name": "Gros Aimant",
+                "description": "Attire les objets"
+            },
+            "54": {
+                "name": "Carte au Trésor",
+                "description": "Carte entièrement visible"
+            },
+            "55": {
+                "name": "Œil de Maman",
+                "description": "Un œil derrière la tête"
+            },
+            "56": {
+                "name": "Petit Acident",
+                "description": "Oups..."
+            },
+            "57": {
+                "name": "Admiration Distante",
+                "description": "Mouche d'attaque"
+            },
+            "58": {
+                "name": "Livre des Ombres",
+                "description": "Invincibilité temporaire"
+            },
+            "59": {
+                "name": "#THE_BOOK_OF_BELIAL_NAME",
+                "description": "#THE_BOOK_OF_BELIAL_DESCPTION"
+            },
+            "60": {
+                "name": "L'Échelle",
+                "description": "Pour faire le pont"
+            },
+            "62": {
+                "name": "Morsure de Vampire",
+                "description": "Sang salvateur"
+            },
+            "63": {
+                "name": "La Pile",
+                "description": "Stocke de l'énergie"
+            },
+            "64": {
+                "name": "Soldes",
+                "description": "Moitié prix ? C'est pas possible !"
+            },
+            "65": {
+                "name": "Livre de Recettes Anarchiste",
+                "description": "Destruction"
+            },
+            "66": {
+                "name": "Sablier",
+                "description": "Ralentissement temporaire des ennemis"
+            },
+            "67": {
+                "name": "Sœurette Maggy",
+                "description": "Amis pour la vie"
+            },
+            "68": {
+                "name": "Technologie",
+                "description": "Larmes laser"
+            },
+            "69": {
+                "name": "Chocolat Chaud",
+                "description": "Tirs chargés"
+            },
+            "70": {
+                "name": "Hormones de Croissance",
+                "description": "Vitesse et dégâts augmentés"
+            },
+            "71": {
+                "name": "Mini Champi",
+                "description": "Vitesse et portée augmentées"
+            },
+            "72": {
+                "name": "Rosaire",
+                "description": "Débit augmenté, ta foi grandit"
+            },
+            "73": {
+                "name": "Cube de Viande",
+                "description": "Viandez-les tous"
+            },
+            "74": {
+                "name": "Une Petite Pièce",
+                "description": "+25 centimes"
+            },
+            "75": {
+                "name": "Doctorat",
+                "description": "Meilleures pilules"
+            },
+            "76": {
+                "name": "Lunettes à Rayon X",
+                "description": "J'ai vu tout ce qu'il y avait à voir"
+            },
+            "77": {
+                "name": "Licorne Arc-En-Ciel",
+                "description": "Invincibilité temporaire"
+            },
+            "78": {
+                "name": "Livre de la Révélation",
+                "description": "Âmes protectrices"
+            },
+            "79": {
+                "name": "Le Nombre de la Bête",
+                "description": "Vitesse et dégâts augmentés"
+            },
+            "80": {
+                "name": "Le Pacte",
+                "description": "Débit et dégâts augmentés"
+            },
+            "81": {
+                "name": "Chat Mort",
+                "description": "9 vies"
+            },
+            "82": {
+                "name": "Empereur de la Fosse",
+                "description": "Ailes de démon"
+            },
+            "83": {
+                "name": "Clou Pointu",
+                "description": "Forme démoniaque temporaire"
+            },
+            "84": {
+                "name": "Aller au fond des choses",
+                "description": "Trappe réutilisable"
+            },
+            "85": {
+                "name": "Jeu de Cartes",
+                "description": "Générateur de cartes"
+            },
+            "86": {
+                "name": "Dent de Monstro",
+                "description": "Invoque Monstro"
+            },
+            "87": {
+                "name": "Cornes de Loki",
+                "description": "Tir en croix"
+            },
+            "88": {
+                "name": "P'tit Dodu",
+                "description": "Ver solidaire"
+            },
+            "89": {
+                "name": "Morsure d'Araignée",
+                "description": "Larmes ralentissantes"
+            },
+            "90": {
+                "name": "Gros Caillou",
+                "description": "Dégâts augmentés"
+            },
+            "91": {
+                "name": "Casque de Spéléologue",
+                "description": "Un œil sur les salles secrètes"
+            },
+            "92": {
+                "name": "Super Pansement",
+                "description": "+2 cœurs"
+            },
+            "93": {
+                "name": "Jeu Garçon",
+                "description": "Man-Pac temporaire"
+            },
+            "94": {
+                "name": "Bourse",
+                "description": "Elle est pleine de pièces"
+            },
+            "95": {
+                "name": "Robo-Bébé",
+                "description": "Amis pour la vvvzzzzzt"
+            },
+            "96": {
+                "name": "P'tit C.H.A.D.",
+                "description": "Il fait des bisous"
+            },
+            "97": {
+                "name": "Le Livre du Péché",
+                "description": "Invocateur d'objets"
+            },
+            "98": {
+                "name": "Relique",
+                "description": "Invoque des âmes"
+            },
+            "99": {
+                "name": "P'tit Gish",
+                "description": "Ami collant"
+            },
+            "100": {
+                "name": "P'tit Steven",
+                "description": "Ami oracle"
+            },
+            "101": {
+                "name": "Auréole",
+                "description": "Toutes les stats augmentées"
+            },
+            "102": {
+                "name": "Flacon de Pilules de Maman",
+                "description": "N'avale pas tout"
+            },
+            "103": {
+                "name": "Rhume",
+                "description": "Larmes empoisonnées"
+            },
+            "104": {
+                "name": "Le Parasite",
+                "description": "Tirs divisés"
+            },
+            "105": {
+                "name": "Le D6",
+                "description": "Relance le dé du destin"
+            },
+            "106": {
+                "name": "M. Méga",
+                "description": "Explosions plus puissantes"
+            },
+            "107": {
+                "name": "Ciseaux Cranteurs",
+                "description": "Coupe et cours"
+            },
+            "108": {
+                "name": "Hostie",
+                "description": "Résistance aux dégâts"
+            },
+            "109": {
+                "name": "Avidité",
+                "description": "L'argent, c'est le pouvoir"
+            },
+            "110": {
+                "name": "Lentille de Maman",
+                "description": "Larmes paralysantes"
+            },
+            "111": {
+                "name": "Flageolet",
+                "description": "Prout sur commande"
+            },
+            "112": {
+                "name": "Ange Gardien",
+                "description": "Protection supplémentaire"
+            },
+            "113": {
+                "name": "Bébé Démoniaque",
+                "description": "Protection rapprochée"
+            },
+            "114": {
+                "name": "Couteau de Maman",
+                "description": "Coupe, tranche et décapite"
+            },
+            "115": {
+                "name": "Planche de Ouija",
+                "description": "Larmes spectrales"
+            },
+            "116": {
+                "name": "Pile 9 Volts",
+                "description": "Charge rapide"
+            },
+            "117": {
+                "name": "Oiseau Mort",
+                "description": "Ami protecteur"
+            },
+            "118": {
+                "name": "Soufre",
+                "description": "Barrage de sang"
+            },
+            "119": {
+                "name": "Poche de Sang",
+                "description": "PV augmentés"
+            },
+            "120": {
+                "name": "Champignon Suspect",
+                "description": "Débit et vitesse augmentés, dégâts diminués"
+            },
+            "121": {
+                "name": "Champignon Suspect",
+                "description": "Dégâts et PV augmentés, vitesse diminuée"
+            },
+            "122": {
+                "name": "Grande Prostituée",
+                "description": "Malédiction"
+            },
+            "123": {
+                "name": "Manuel des Monstres",
+                "description": "Générateur d'amis temporaires"
+            },
+            "124": {
+                "name": "Manuscrits de la Mer Morte",
+                "description": "C'est un mystère"
+            },
+            "125": {
+                "name": "Bobby-Bombes",
+                "description": "Bombes à tête chercheuse"
+            },
+            "126": {
+                "name": "Lame de Rasoir",
+                "description": "Ressens ma douleur"
+            },
+            "127": {
+                "name": "Pilule Tranquillisante",
+                "description": "Je ne me souviens plus..."
+            },
+            "128": {
+                "name": "Seul à Jamais",
+                "description": "Mouche d'attaque"
+            },
+            "129": {
+                "name": "Seau de Saindoux",
+                "description": "PV augmentés"
+            },
+            "130": {
+                "name": "Un Poney",
+                "description": "Vole et fonce"
+            },
+            "131": {
+                "name": "Sac de Bombes",
+                "description": "Il est plein de bombes"
+            },
+            "132": {
+                "name": "Un Morceau de Charbon",
+                "description": "Mon cadeau de Noël"
+            },
+            "133": {
+                "name": "Patte de Guppy",
+                "description": "Convertis ton âme"
+            },
+            "134": {
+                "name": "Queue de Guppy",
+                "description": "Maudite ?"
+            },
+            "135": {
+                "name": "Perfusion",
+                "description": "Banque de sang portative"
+            },
+            "136": {
+                "name": "Meilleur Ami",
+                "description": "Amis pour la vie"
+            },
+            "137": {
+                "name": "Détonateur Télécommandé",
+                "description": "Explosions sur commande"
+            },
+            "138": {
+                "name": "Stigmates",
+                "description": "Dégâts et PV augmentés"
+            },
+            "139": {
+                "name": "Sac à Main de Maman",
+                "description": "De la place pour mes babioles"
+            },
+            "140": {
+                "name": "Malédiction de Bob",
+                "description": "+5 bombes empoisonnées"
+            },
+            "141": {
+                "name": "Bête de Foire",
+                "description": "Des pièces pour ta prestation"
+            },
+            "142": {
+                "name": "Scapulaire",
+                "description": "Prie pour un miracle"
+            },
+            "143": {
+                "name": "Pot Belge",
+                "description": "Vitesse et vitesse de tir augmentées"
+            },
+            "144": {
+                "name": "Ami Mendiant",
+                "description": "Il est avare"
+            },
+            "145": {
+                "name": "Tête de Guppy",
+                "description": "Appât à mouches"
+            },
+            "146": {
+                "name": "Carte Pieuse",
+                "description": "Éternité réutilisable"
+            },
+            "147": {
+                "name": "Pioche en Fer",
+                "description": "Les rochers n'ont qu'à bien se tenir"
+            },
+            "148": {
+                "name": "Infestation",
+                "description": "Revanche diptérique"
+            },
+            "149": {
+                "name": "Ipéca",
+                "description": "Tirs explosifs"
+            },
+            "150": {
+                "name": "Poing Américain",
+                "description": "Qui aime bien, châtie bien"
+            },
+            "151": {
+                "name": "Le Mulligan",
+                "description": "Ça grouille à l'intérieur"
+            },
+            "152": {
+                "name": "Technologie 2",
+                "description": "Œil laser"
+            },
+            "153": {
+                "name": "Araignée Mutante",
+                "description": "Quadruple tir"
+            },
+            "154": {
+                "name": "Masque à l'Acide",
+                "description": "Dégâts augmentés"
+            },
+            "155": {
+                "name": "Œil baladeur",
+                "description": "Jette un œil"
+            },
+            "156": {
+                "name": "Voile de Nonne",
+                "description": "Martyr utile"
+            },
+            "157": {
+                "name": "Soif de Sang",
+                "description": "RAGE !"
+            },
+            "158": {
+                "name": "Boule de Cristal",
+                "description": "Je peux lire l'avenir"
+            },
+            "159": {
+                "name": "Esprit de la Nuit",
+                "description": "Flippant"
+            },
+            "160": {
+                "name": "Fissure Céleste",
+                "description": "Châtiment des cieux"
+            },
+            "161": {
+                "name": "Ankh",
+                "description": "Vie éternelle ?"
+            },
+            "162": {
+                "name": "Croix Celte",
+                "description": "Bénédiction protectrice"
+            },
+            "163": {
+                "name": "Bébé Fantôme",
+                "description": "Ami spectral"
+            },
+            "164": {
+                "name": "Bougie Bleue",
+                "description": "Flamme réutilisable"
+            },
+            "165": {
+                "name": "Chat à Neuf Queues",
+                "description": "Dégâts et vitesse de tir augmentés"
+            },
+            "166": {
+                "name": "D20",
+                "description": "Rejoue les ressources"
+            },
+            "167": {
+                "name": "Bébé Arlequin",
+                "description": "Ami strabique"
+            },
+            "168": {
+                "name": "Super Fœtus",
+                "description": "Attaque aérienne sur commande"
+            },
+            "169": {
+                "name": "Polyphème",
+                "description": "Larmes géantes"
+            },
+            "170": {
+                "name": "Le Faucheux",
+                "description": "Un ami au plafond"
+            },
+            "171": {
+                "name": "Filière d'Araignée",
+                "description": "Dégâts et ralentissement de masse"
+            },
+            "172": {
+                "name": "Dague Sacrificielle",
+                "description": "Mon destin me protège"
+            },
+            "173": {
+                "name": "Mitre",
+                "description": "Bénédiction de pureté"
+            },
+            "174": {
+                "name": "Bébé Arc-En-Ciel",
+                "description": "Ami aléatoire"
+            },
+            "175": {
+                "name": "Clé de Papa",
+                "description": "Ouvre toutes les portes..."
+            },
+            "176": {
+                "name": "Cellules Souches",
+                "description": "PV et vitesse de tir augmentés"
+            },
+            "177": {
+                "name": "Casino Portatif",
+                "description": "Tu veux parier ?"
+            },
+            "178": {
+                "name": "Eau Bénite",
+                "description": "Splash !"
+            },
+            "179": {
+                "name": "Destin",
+                "description": "Vol éternel"
+            },
+            "180": {
+                "name": "Haricot Noir",
+                "description": "Prout au contact"
+            },
+            "181": {
+                "name": "Poney Blanc",
+                "description": "Vol + saint châtiment"
+            },
+            "182": {
+                "name": "Sacré-Cœur",
+                "description": "Dégâts augmentés + larmes autoguidées"
+            },
+            "183": {
+                "name": "Cure-Dents",
+                "description": "Vitesse de tir et débit augmentés"
+            },
+            "184": {
+                "name": "Saint Graal",
+                "description": "Vol + PV augmentés"
+            },
+            "185": {
+                "name": "Colombe Morte",
+                "description": "Vol + larmes spectrales"
+            },
+            "186": {
+                "name": "Droits du Sang",
+                "description": "Dégâts de masse... pour un prix"
+            },
+            "187": {
+                "name": "Boule de Poils de Guppy",
+                "description": "Qui fouette qui, maintenant ?"
+            },
+            "188": {
+                "name": "Abel",
+                "description": "Ami réfléchi"
+            },
+            "189": {
+                "name": "Fan de SMB",
+                "description": "Toutes les stats augmentées"
+            },
+            "190": {
+                "name": "Pyro",
+                "description": "99 bombes"
+            },
+            "191": {
+                "name": "Billet de 3 Dollars",
+                "description": "Larmes arc-en-ciel"
+            },
+            "192": {
+                "name": "La Télépathie Pour Les Nuls",
+                "description": "Tirs autoguidés temporaires"
+            },
+            "193": {
+                "name": "DE LA VIANDE !",
+                "description": "Dégâts et PV augmentés"
+            },
+            "194": {
+                "name": "La Boule Magique",
+                "description": "Vitesse de tir augmentée"
+            },
+            "195": {
+                "name": "Porte-Monnaie de Maman",
+                "description": "C'est quoi, tout ça ?"
+            },
+            "196": {
+                "name": "Jouet Anti-Stress",
+                "description": "Débit augmenté"
+            },
+            "197": {
+                "name": "Sang du Christ",
+                "description": "Portée et dégâts augmentés"
+            },
+            "198": {
+                "name": "Boîte",
+                "description": "Pleine de trucs"
+            },
+            "199": {
+                "name": "Clé de Maman",
+                "description": "Meilleurs coffres + 2 clés"
+            },
+            "200": {
+                "name": "Fard à Paupières de Maman",
+                "description": "Larmes envoûtantes"
+            },
+            "201": {
+                "name": "Lingot de Fer",
+                "description": "Dégâts augmentés + larmes étourdissantes"
+            },
+            "202": {
+                "name": "Malédiction de Midas",
+                "description": "Touche le pactole"
+            },
+            "203": {
+                "name": "Offre Spéciale",
+                "description": "1 acheté, 1 offert"
+            },
+            "204": {
+                "name": "Sac Banane",
+                "description": "Il est plein de bonnes choses"
+            },
+            "205": {
+                "name": "Prise de Sang",
+                "description": "Charges infinies... Pour un prix"
+            },
+            "206": {
+                "name": "Guillotine",
+                "description": "Dégâts et débit augmentés. À en perdre la tête !"
+            },
+            "207": {
+                "name": "Boule de Pansements",
+                "description": "Léchez-les tous !"
+            },
+            "208": {
+                "name": "Ceinture du Champion",
+                "description": "Difficulté et dégâts augmentés"
+            },
+            "209": {
+                "name": "Bombes Bronze",
+                "description": "Explosions toxiques +5 bombes"
+            },
+            "210": {
+                "name": "Feuille Mâchouillée",
+                "description": "Incassable"
+            },
+            "211": {
+                "name": "Bébé Araignée",
+                "description": "Vengeance arachnéenne"
+            },
+            "212": {
+                "name": "Collier de Guppy",
+                "description": "Vie éternelle ?"
+            },
+            "213": {
+                "name": "Lentille égarée",
+                "description": "Larmes renforcées"
+            },
+            "214": {
+                "name": "Anémie",
+                "description": "Sang corrosif"
+            },
+            "215": {
+                "name": "Tête de Bouc",
+                "description": "Il accepte ton offrande"
+            },
+            "216": {
+                "name": "Robe de Cérémonie",
+                "description": "Dégâts augmentés, le mal grandit en toi"
+            },
+            "217": {
+                "name": "Perruque de Maman",
+                "description": "Elle gratte..."
+            },
+            "218": {
+                "name": "Placenta",
+                "description": "Régénération + PV augmentés"
+            },
+            "219": {
+                "name": "Vieux Pansement",
+                "description": "PV augmentés"
+            },
+            "220": {
+                "name": "Bombes Tristes",
+                "description": "Explosions de larmes +5 bombes"
+            },
+            "221": {
+                "name": "Colle Caoutchouc",
+                "description": "Larmes rebondissantes"
+            },
+            "222": {
+                "name": "Anti-Gravité",
+                "description": "Larmes anti-gravité + débit augmenté"
+            },
+            "223": {
+                "name": "Pyromanie",
+                "description": "Le mal me fait du bien +5 bombes"
+            },
+            "224": {
+                "name": "Corps de Cricket",
+                "description": "Tirs en croix + débit augmenté"
+            },
+            "225": {
+                "name": "Latex",
+                "description": "Délicieuse souffrance"
+            },
+            "226": {
+                "name": "Lotus Noir",
+                "description": "PV augmentés x3"
+            },
+            "227": {
+                "name": "Tirelire Cochon",
+                "description": "Toutes mes économies"
+            },
+            "228": {
+                "name": "Parfum de Maman",
+                "description": "Débit augmenté + larmes terrifiantes"
+            },
+            "229": {
+                "name": "Poumon de Monstro",
+                "description": "Gerbe de tirs"
+            },
+            "230": {
+                "name": "Abaddon",
+                "description": "Larmes terrifiantes, le mal grandit en toi"
+            },
+            "231": {
+                "name": "Boule de Goudron",
+                "description": "J'ai les pieds qui collent..."
+            },
+            "232": {
+                "name": "Chronomètre",
+                "description": "Allons-y doucement..."
+            },
+            "233": {
+                "name": "Planète Naine",
+                "description": "Larmes en orbite + portée augmentée"
+            },
+            "234": {
+                "name": "Infestation 2",
+                "description": "Envahis l'ennemi"
+            },
+            "236": {
+                "name": "E. Coli",
+                "description": "Contact pathogène"
+            },
+            "237": {
+                "name": "La Faucheuse",
+                "description": "Larmes transperçantes + dégâts augmentés"
+            },
+            "238": {
+                "name": "Premier Fragment de Clé",
+                "description": "???"
+            },
+            "239": {
+                "name": "Second Fragment de Clé",
+                "description": "???"
+            },
+            "240": {
+                "name": "Traitement Expérimental",
+                "description": "Certaines stats augmentées, certaines diminuées"
+            },
+            "241": {
+                "name": "Contrat des Profondeurs",
+                "description": "La richesse... mais à quel prix ?"
+            },
+            "242": {
+                "name": "Infamie",
+                "description": "Protège des dégâts... parfois"
+            },
+            "243": {
+                "name": "Bouclier de la Trinité",
+                "description": "Tu te sens protégé"
+            },
+            "244": {
+                "name": "Tech 0,5",
+                "description": "C'est pas encore au point..."
+            },
+            "245": {
+                "name": "20/20",
+                "description": "Double tir"
+            },
+            "246": {
+                "name": "Carte Perdue",
+                "description": "Secrets"
+            },
+            "247": {
+                "name": "Meilleurs amis pour la vie !",
+                "description": "Le pouvoir de l'amitié"
+            },
+            "248": {
+                "name": "Conscience Collective",
+                "description": "Mouches et araignées géantes"
+            },
+            "249": {
+                "name": "L'Embarras du Choix",
+                "description": "Plus d'options"
+            },
+            "250": {
+                "name": "Soldes Explosives",
+                "description": "1+1 BOUM !"
+            },
+            "251": {
+                "name": "Deck de Démarrage",
+                "description": "Emplacement de carte supplémentaire"
+            },
+            "252": {
+                "name": "Petit Sachet",
+                "description": "Emplacement de pilule supplémentaire"
+            },
+            "253": {
+                "name": "Croûte Magique",
+                "description": "Chance et PV augmentés"
+            },
+            "254": {
+                "name": "Caillot de Sang",
+                "description": "Portée et dégâts augmentés"
+            },
+            "255": {
+                "name": "Vis",
+                "description": "Débit et vitesse de tir augmentés"
+            },
+            "256": {
+                "name": "Bombes Brûlantes",
+                "description": "Explosions enflammées +5 bombes"
+            },
+            "257": {
+                "name": "Esprit de Feu",
+                "description": "Larmes enflammées"
+            },
+            "258": {
+                "name": "Missing No.",
+                "description": "Erreur de syntaxe"
+            },
+            "259": {
+                "name": "Matière Noire",
+                "description": "Dégâts augmentés + tirs effrayants"
+            },
+            "260": {
+                "name": "Bougie Noire",
+                "description": "Immunité aux fléaux + le mal grandit en toi"
+            },
+            "261": {
+                "name": "Proptose",
+                "description": "Grosses larmes à courte portée"
+            },
+            "262": {
+                "name": "Page Déchirée 2",
+                "description": "Le mal grandit en toi. Tes ennemis paieront !"
+            },
+            "263": {
+                "name": "Rune de Cristal",
+                "description": "Calque de runes"
+            },
+            "264": {
+                "name": "Mouche Maline",
+                "description": "Protectrice revancharde"
+            },
+            "265": {
+                "name": "Bébé Desséché",
+                "description": "Ami immortel"
+            },
+            "266": {
+                "name": "Cocon Juteux",
+                "description": "Bébés collants"
+            },
+            "267": {
+                "name": "Robo-Bébé 2.0",
+                "description": "On a corrigé tous les bugs"
+            },
+            "268": {
+                "name": "Bébé Putride",
+                "description": "Ami infesté"
+            },
+            "269": {
+                "name": "Bébé Décapité",
+                "description": "Ami sanglant"
+            },
+            "270": {
+                "name": "Sangsue",
+                "description": "Voleuse de sang"
+            },
+            "271": {
+                "name": "Pochon Mystère",
+                "description": "?"
+            },
+            "272": {
+                "name": "BGM",
+                "description": "Bonne Grosse Mouche"
+            },
+            "273": {
+                "name": "Cerveau de Bob",
+                "description": "Pensées explosives"
+            },
+            "274": {
+                "name": "Meilleure Pote",
+                "description": "Protectrice dévouée"
+            },
+            "275": {
+                "name": "Bébé Soufre",
+                "description": "Ami maléfique"
+            },
+            "276": {
+                "name": "Cœur d'Isaac",
+                "description": "Protège-le"
+            },
+            "277": {
+                "name": "P'tit Revenu",
+                "description": "Craignez-le"
+            },
+            "278": {
+                "name": "Mendiant des Ombres",
+                "description": "Il en veut à ta vie"
+            },
+            "279": {
+                "name": "Mon Plus Gros Fan",
+                "description": "Bouclier vivant"
+            },
+            "280": {
+                "name": "Sissy La Faucheuse",
+                "description": "Elle t'adore"
+            },
+            "281": {
+                "name": "Théodule",
+                "description": "Bouc émissaire"
+            },
+            "282": {
+                "name": "Manuel de Saut",
+                "description": "Il est grand temps d'apprendre"
+            },
+            "283": {
+                "name": "Le D100",
+                "description": "REEEEJOUUUEE !"
+            },
+            "284": {
+                "name": "D4",
+                "description": "Deviens quelque chose d'autre"
+            },
+            "285": {
+                "name": "D10",
+                "description": "Rejoue les ennemis"
+            },
+            "286": {
+                "name": "Carte Blanche",
+                "description": "Fais-en ce que tu veux"
+            },
+            "287": {
+                "name": "Livre des Secrets",
+                "description": "Recueil de connaissances"
+            },
+            "288": {
+                "name": "Boîte d'Araignées",
+                "description": "C'est une boîte d'araignées"
+            },
+            "289": {
+                "name": "Bougie Rouge",
+                "description": "Allume le feu"
+            },
+            "290": {
+                "name": "Bocal en Verre",
+                "description": "Sauve ta vie"
+            },
+            "291": {
+                "name": "Chasse d'Eau",
+                "description": "..."
+            },
+            "292": {
+                "name": "Bible Satanique",
+                "description": "Ton cœur s'assombrit... ton avenir aussi"
+            },
+            "293": {
+                "name": "Tête de Krampus",
+                "description": "Rage démoniaque"
+            },
+            "294": {
+                "name": "Haricot Blanc",
+                "description": "Répulsion sur commande"
+            },
+            "295": {
+                "name": "Pot de Vin",
+                "description": "L'argent résout tous les problèmes"
+            },
+            "296": {
+                "name": "Adaptateur",
+                "description": "Convertis ton âme"
+            },
+            "297": {
+                "name": "Boîte de Pandore",
+                "description": "???"
+            },
+            "298": {
+                "name": "Corne Brisée",
+                "description": "Le pouvoir de l'arc-en-ciel"
+            },
+            "299": {
+                "name": "Taureau",
+                "description": "Vitesse diminuée + ta rage grandit"
+            },
+            "300": {
+                "name": "Bélier",
+                "description": "Fonce dans le tas"
+            },
+            "301": {
+                "name": "Cancer",
+                "description": "PV augmentés + tu te sens protégé"
+            },
+            "302": {
+                "name": "Lion",
+                "description": "Marche écrasante"
+            },
+            "303": {
+                "name": "Vierge",
+                "description": "Tu te sens revigoré et protégé"
+            },
+            "304": {
+                "name": "Balance",
+                "description": "Tu te sens équilibré"
+            },
+            "305": {
+                "name": "Scorpion",
+                "description": "Larmes empoisonnées"
+            },
+            "306": {
+                "name": "Sagittaire",
+                "description": "Larmes transperçantes + vitesse augmentée"
+            },
+            "307": {
+                "name": "Capricorne",
+                "description": "Toutes les stats augmentées"
+            },
+            "308": {
+                "name": "Verseau",
+                "description": "Traînée de larmes"
+            },
+            "309": {
+                "name": "Poissons",
+                "description": "Débit augmenté + tirs répulsifs"
+            },
+            "310": {
+                "name": "Mascara d'Ève",
+                "description": "Dégâts augmentés, débit + vitesse de tir diminués"
+            },
+            "311": {
+                "name": "Ombre de Judas",
+                "description": "Douce revanche"
+            },
+            "312": {
+                "name": "Chouchou de Maggy",
+                "description": "PV augmentés + tu te sens en bonne santé"
+            },
+            "313": {
+                "name": "Voile Sacré",
+                "description": "Sainte protection"
+            },
+            "314": {
+                "name": "Seau de Fromage",
+                "description": "PV augmentés + tu te sens lourd"
+            },
+            "315": {
+                "name": "Attracteur Étrange",
+                "description": "Larmes magnétiques"
+            },
+            "316": {
+                "name": "Œil Maudit",
+                "description": "Tirs chargés maudits"
+            },
+            "317": {
+                "name": "Liquide Mystérieux",
+                "description": "Flaques toxiques"
+            },
+            "318": {
+                "name": "Gémeaux",
+                "description": "Ami siamois"
+            },
+            "319": {
+                "name": "L'Œil Gauche de Caïn",
+                "description": "Ami myope"
+            },
+            "320": {
+                "name": "La Seule Amie de ???",
+                "description": "Amie manipulable"
+            },
+            "321": {
+                "name": "Boulet de Samson",
+                "description": "Traîne tes chaines"
+            },
+            "322": {
+                "name": "Bébé Mongo",
+                "description": "Ami Mongo"
+            },
+            "323": {
+                "name": "Bocal de Larmes",
+                "description": "Récoltées à la source"
+            },
+            "324": {
+                "name": "ERREUR",
+                "description": "erreur"
+            },
+            "325": {
+                "name": "Ciseaux",
+                "description": "Perds la tête"
+            },
+            "326": {
+                "name": "Souffle de Vie",
+                "description": "L'invincibilité à un prix"
+            },
+            "327": {
+                "name": "Le Positif",
+                "description": "Ton sort est scellé"
+            },
+            "328": {
+                "name": "Le Négatif",
+                "description": "Ton sort est scellé"
+            },
+            "329": {
+                "name": "La Technique Ludovico",
+                "description": "Larmes contrôlées"
+            },
+            "330": {
+                "name": "Lait de Soja",
+                "description": "Dégâts diminués, débit fortement augmenté"
+            },
+            "331": {
+                "name": "Œil de la Providence",
+                "description": "Larmes divines"
+            },
+            "332": {
+                "name": "Loques de Lazare",
+                "description": "Vie éternelle ?"
+            },
+            "333": {
+                "name": "L'esprit",
+                "description": "Je sais tout"
+            },
+            "334": {
+                "name": "Le Corps",
+                "description": "Je ressens tout"
+            },
+            "335": {
+                "name": "L'Âme",
+                "description": "Je suis tout"
+            },
+            "336": {
+                "name": "Oignon Pourri",
+                "description": "Larmes toxiques"
+            },
+            "337": {
+                "name": "Montre cassée",
+                "description": "Je crois qu'elle est cassée"
+            },
+            "338": {
+                "name": "Le Boomerang",
+                "description": "Il ne te quittera plus"
+            },
+            "339": {
+                "name": "Épingle à Nourrice",
+                "description": "Portée et vitesse de tir augmentées"
+            },
+            "340": {
+                "name": "Pilule de Caféine",
+                "description": "Vitesse augmentée, taille diminuée"
+            },
+            "341": {
+                "name": "Photo Déchirée",
+                "description": "Débit et vitesse de tir augmentés"
+            },
+            "342": {
+                "name": "Lactarius Indigo",
+                "description": "PV et débit augmentés, vitesse de tir diminuée"
+            },
+            "343": {
+                "name": "Collier à Clé",
+                "description": "Chance augmentée"
+            },
+            "344": {
+                "name": "Boîte d'Allumettes",
+                "description": "Le mal grandit en toi"
+            },
+            "345": {
+                "name": "Synthol",
+                "description": "Dégâts et portée augmentés"
+            },
+            "346": {
+                "name": "Casse-Croûte",
+                "description": "PV augmentés"
+            },
+            "347": {
+                "name": "Diplopie",
+                "description": "Je vois tout en double"
+            },
+            "348": {
+                "name": "Placebo",
+                "description": "Imitateur de pilules"
+            },
+            "349": {
+                "name": "Pièce en Bois",
+                "description": "Pile ou face ?"
+            },
+            "350": {
+                "name": "Choc Toxique",
+                "description": "Empoisonnement de masse"
+            },
+            "351": {
+                "name": "Méga Flageolet",
+                "description": "Maxi prout !"
+            },
+            "352": {
+                "name": "Canon de Verre",
+                "description": "Vas-y doucement..."
+            },
+            "353": {
+                "name": "Homme Bombeur",
+                "description": "Explosion en croix + 5 bombes"
+            },
+            "354": {
+                "name": "Céréales",
+                "description": "PV augmentés. N'avale pas le jouet !"
+            },
+            "355": {
+                "name": "Collier de Maman",
+                "description": "Portée et chance augmentées"
+            },
+            "356": {
+                "name": "Batterie de Voiture",
+                "description": "Amélioration active"
+            },
+            "357": {
+                "name": "Boîte de Potes",
+                "description": "Multiplie tes amis"
+            },
+            "358": {
+                "name": "Bonnet d'Âne",
+                "description": "Au coin !"
+            },
+            "359": {
+                "name": "Gros Clous",
+                "description": "Cloue-leur le bec !"
+            },
+            "360": {
+                "name": "Incube",
+                "description": "Ami obscur"
+            },
+            "361": {
+                "name": "Récompense du Destin",
+                "description": "Ta destinée à tes côtés"
+            },
+            "362": {
+                "name": "P'tit Coffre",
+                "description": "Qu'est-ce qu'il y a dans la boîte ?"
+            },
+            "363": {
+                "name": "Protecteur Dévoué",
+                "description": "Ami défensif"
+            },
+            "364": {
+                "name": "Relation à Distance",
+                "description": "Mouche apprivoisée"
+            },
+            "365": {
+                "name": "Mouche Égarée",
+                "description": "Protectrice perdue"
+            },
+            "366": {
+                "name": "Bombes à Fragmentation",
+                "description": "On a mis des bombes dans tes bombes !"
+            },
+            "367": {
+                "name": "Bombes Collantes",
+                "description": "Bombes arachnides !"
+            },
+            "368": {
+                "name": "Épiphora",
+                "description": "Débit de larmes croissant"
+            },
+            "369": {
+                "name": "Continuum",
+                "description": "Larmes transcendantes"
+            },
+            "370": {
+                "name": "Mme Poupée",
+                "description": "Débit et portée augmentés"
+            },
+            "371": {
+                "name": "Fléau de la Maison Dieu",
+                "description": "Sème le chaos"
+            },
+            "372": {
+                "name": "Bébé Chargé",
+                "description": "Bbbzzzzzt !"
+            },
+            "373": {
+                "name": "Œil de Lynx",
+                "description": "En plein dans le mille !"
+            },
+            "374": {
+                "name": "Saint Éclat",
+                "description": "Châtiment de lumière"
+            },
+            "375": {
+                "name": "Crâne d'Hôte",
+                "description": "Résistance aux explosions"
+            },
+            "376": {
+                "name": "Réapprovisionnement",
+                "description": "Achats sans fin !"
+            },
+            "377": {
+                "name": "Cocon Éclaté",
+                "description": "Amour arachnéen"
+            },
+            "378": {
+                "name": "Grosse Commission",
+                "description": "Oh oh..."
+            },
+            "379": {
+                "name": "Polycorie",
+                "description": "Larmes élargies"
+            },
+            "380": {
+                "name": "Fente magique",
+                "description": "Insérer une pièce"
+            },
+            "381": {
+                "name": "Bénédiction d'Éden",
+                "description": "Débit augmenté + Ton avenir s'annonce radieux"
+            },
+            "382": {
+                "name": "Boule à Monstres",
+                "description": "Capturez-les tous !"
+            },
+            "383": {
+                "name": "Détonateur Lacrymal",
+                "description": "Éclate tes larmes"
+            },
+            "384": {
+                "name": "P'tit Boris",
+                "description": "Ton propre tas d'organes !"
+            },
+            "385": {
+                "name": "Bumbo",
+                "description": "Bumbo vouloir pièce !"
+            },
+            "386": {
+                "name": "Le D12",
+                "description": "Rejoue les rochers"
+            },
+            "387": {
+                "name": "Encensoir",
+                "description": "Que la paix soit avec toi"
+            },
+            "388": {
+                "name": "Cléchard",
+                "description": "Il veut tes clés !"
+            },
+            "389": {
+                "name": "Sac de Runes",
+                "description": "Il est plein de runes"
+            },
+            "390": {
+                "name": "Séraphin",
+                "description": "Ami juré"
+            },
+            "391": {
+                "name": "Trahison",
+                "description": "Retourne leur veste"
+            },
+            "392": {
+                "name": "Zodiaque",
+                "description": "Les cieux te changeront"
+            },
+            "393": {
+                "name": "Le Baiser du Serpent",
+                "description": "Les lèvres de la mort"
+            },
+            "394": {
+                "name": "Ligne de Mire",
+                "description": "Larmes ciblées"
+            },
+            "395": {
+                "name": "Tech X",
+                "description": "Anneaux laser"
+            },
+            "396": {
+                "name": "Scalpel Ventriculaire",
+                "description": "Coupe court"
+            },
+            "397": {
+                "name": "Rayon Tracteur",
+                "description": "Larmes contrôlées"
+            },
+            "398": {
+                "name": "Chair des Dieux",
+                "description": "Tirs rapetissants !"
+            },
+            "399": {
+                "name": "Gouffre du Néant",
+                "description": "Annihile ton ennemi !"
+            },
+            "400": {
+                "name": "Sainte Lance",
+                "description": "Ta destinée"
+            },
+            "401": {
+                "name": "Explosivo",
+                "description": "Larmes explosives collantes"
+            },
+            "402": {
+                "name": "Chaos",
+                "description": "!!!"
+            },
+            "403": {
+                "name": "Roboraignée",
+                "description": "Araignée artificielle"
+            },
+            "404": {
+                "name": "Bébé Péteur",
+                "description": "Il pète"
+            },
+            "405": {
+                "name": "Bug",
+                "description": "Erreur à projeter"
+            },
+            "406": {
+                "name": "Le D8",
+                "description": "Rejoue tes statistiques"
+            },
+            "407": {
+                "name": "Pureté",
+                "description": "Aura amplificatrice"
+            },
+            "408": {
+                "name": "Athamé",
+                "description": "L'appel du vide"
+            },
+            "409": {
+                "name": "Flacon Vide",
+                "description": "Je récompense un récipient vide"
+            },
+            "410": {
+                "name": "Mauvais Œil",
+                "description": "Tirs oculaires"
+            },
+            "411": {
+                "name": "Sang Salace",
+                "description": "Leur sang te met en rogne !"
+            },
+            "412": {
+                "name": "Conception Impure",
+                "description": "Nourris-les de haine"
+            },
+            "413": {
+                "name": "Immaculée Conception",
+                "description": "Nourris-les d'amour"
+            },
+            "414": {
+                "name": "Plus d'Options",
+                "description": "L'embarras du choix"
+            },
+            "415": {
+                "name": "Couronne de Lumière",
+                "description": "Ta pureté sera récompensée"
+            },
+            "416": {
+                "name": "Poches Profondes",
+                "description": "Plus d'argent !"
+            },
+            "417": {
+                "name": "Succube",
+                "description": "Amplificateur de dégâts"
+            },
+            "418": {
+                "name": "Gâteau aux Fruits",
+                "description": "Effets aléatoires !"
+            },
+            "419": {
+                "name": "Téléportation 2.0",
+                "description": "I-Téléportation !"
+            },
+            "420": {
+                "name": "Poudre Noire",
+                "description": "Danse la ronde des ténèbres"
+            },
+            "421": {
+                "name": "Haricot Rouge",
+                "description": "Pets d'amour"
+            },
+            "422": {
+                "name": "Sablier Luisant",
+                "description": "Retourne les sables du temps"
+            },
+            "423": {
+                "name": "Cercle de Protection",
+                "description": "Protège-moi de moi-même"
+            },
+            "424": {
+                "name": "Sac en Papier",
+                "description": "Plus de sacs !"
+            },
+            "425": {
+                "name": "Veilleuse",
+                "description": "T'as peur du noir ?"
+            },
+            "426": {
+                "name": "Admiratrice Obsessionnelle",
+                "description": "Elle traque mes moindres gestes..."
+            },
+            "427": {
+                "name": "Bloc de TNT",
+                "description": "Boooum !"
+            },
+            "428": {
+                "name": "Pyjama",
+                "description": "C'est confortable..."
+            },
+            "429": {
+                "name": "Tête du Gardien",
+                "description": "Larmes d'or"
+            },
+            "430": {
+                "name": "Papa Mouche",
+                "description": "Tourelle de compagnie"
+            },
+            "431": {
+                "name": "Bébé Interdimensionnel",
+                "description": "imA Ami"
+            },
+            "432": {
+                "name": "Bombes à Paillettes",
+                "description": "Des cadeaux dans tes bombes"
+            },
+            "433": {
+                "name": "Mon Ombre",
+                "description": "Marche à l'ombre"
+            },
+            "434": {
+                "name": "Bocal de Mouches",
+                "description": "Piège à insectes"
+            },
+            "435": {
+                "name": "P'tit Loki",
+                "description": "Ami en croix !"
+            },
+            "436": {
+                "name": "Tasse de Lait",
+                "description": "Notre ami pour la vie !"
+            },
+            "437": {
+                "name": "Le D7",
+                "description": "Rejoue les ennemis"
+            },
+            "438": {
+                "name": "Tétine",
+                "description": "Débit augmenté"
+            },
+            "439": {
+                "name": "Boîte de Maman",
+                "description": "Que vas-tu y trouver ?"
+            },
+            "440": {
+                "name": "Calcul Rénal",
+                "description": "Tirs additionnels"
+            },
+            "441": {
+                "name": "Souffle du Diable",
+                "description": "Rayon destructeur"
+            },
+            "442": {
+                "name": "Couronne des Ténèbres",
+                "description": "La puissance par la perte"
+            },
+            "443": {
+                "name": "Pomme !",
+                "description": "Un délicieux coupe-faim"
+            },
+            "444": {
+                "name": "Crayon de Papier",
+                "description": "Il bave un peu !"
+            },
+            "445": {
+                "name": "Dent de Chien",
+                "description": "Hurle à la lune !"
+            },
+            "446": {
+                "name": "Dent Pourrie",
+                "description": "Haleine toxique"
+            },
+            "447": {
+                "name": "Haricot Péteux",
+                "description": "Pleurer me donne des gaz"
+            },
+            "448": {
+                "name": "Bris de Verre",
+                "description": "Du sang et des tripes !"
+            },
+            "449": {
+                "name": "Plaque de Métal",
+                "description": "Elle me démange..."
+            },
+            "450": {
+                "name": "Œil d'Avarice",
+                "description": "Larmes dorées"
+            },
+            "451": {
+                "name": "Nappe de Tarot",
+                "description": "Je vois l'avenir"
+            },
+            "452": {
+                "name": "Varices",
+                "description": "Mes veines fuient..."
+            },
+            "453": {
+                "name": "Fracture Ouverte",
+                "description": "Larmes osseuses"
+            },
+            "454": {
+                "name": "Polydactylie",
+                "description": "Attrape-moi !"
+            },
+            "455": {
+                "name": "Médaille de Papa",
+                "description": "Elle me dit quelque chose..."
+            },
+            "456": {
+                "name": "Encas de Minuit",
+                "description": "PV augmentés"
+            },
+            "457": {
+                "name": "Crâne d'Œuf",
+                "description": "T'as la tête dure !"
+            },
+            "458": {
+                "name": "Nombril",
+                "description": "Y'a quoi, là-dedans ?"
+            },
+            "459": {
+                "name": "Sinusite",
+                "description": "Tirs de morve !"
+            },
+            "460": {
+                "name": "Glaucome",
+                "description": "Larmes aveuglantes !"
+            },
+            "461": {
+                "name": "Parasitoïde",
+                "description": "Larmes infestées !"
+            },
+            "462": {
+                "name": "Œil de Bélial",
+                "description": "Larmes possédées !"
+            },
+            "463": {
+                "name": "Acide Sulfurique",
+                "description": "Larmes acides !"
+            },
+            "464": {
+                "name": "Marque d'Harmonie",
+                "description": "Un cadeau des cieux"
+            },
+            "465": {
+                "name": "Stick Analogique",
+                "description": "Larmes à 360 !"
+            },
+            "466": {
+                "name": "Contagion",
+                "description": "Épidémie !"
+            },
+            "467": {
+                "name": "Doigt Accusateur",
+                "description": "Fais attention où tu le mets !"
+            },
+            "468": {
+                "name": "Ombre",
+                "description": "Elle suit sans relâche"
+            },
+            "469": {
+                "name": "Dépression",
+                "description": ":("
+            },
+            "470": {
+                "name": "P'tit Murmure",
+                "description": "Rebondit sans un bruit"
+            },
+            "471": {
+                "name": "P'tit Monstro",
+                "description": "L'est-y pas mignon ?"
+            },
+            "472": {
+                "name": "Bébé Roi",
+                "description": "Longue vie au Bébé Roi"
+            },
+            "473": {
+                "name": "Gros Dodu",
+                "description": "Miam miom"
+            },
+            "474": {
+                "name": "Canon de Verre Brisé",
+                "description": "Tu l'as cassé !"
+            },
+            "475": {
+                "name": "Suppo de Satan",
+                "description": "Remède mortel"
+            },
+            "476": {
+                "name": "Le D1",
+                "description": "Ce sera quoi ?"
+            },
+            "477": {
+                "name": "Néant",
+                "description": "Absorbe"
+            },
+            "478": {
+                "name": "Pause",
+                "description": "On arrête tout !"
+            },
+            "479": {
+                "name": "Fondeuse",
+                "description": "Fusionne tes babioles !"
+            },
+            "480": {
+                "name": "Compost",
+                "description": "Attire de nouveaux amis !"
+            },
+            "481": {
+                "name": "Dataminer",
+                "description": "109"
+            },
+            "482": {
+                "name": "Télécommande",
+                "description": "Change de gènes"
+            },
+            "483": {
+                "name": "Mama Méga !",
+                "description": "BOOOOOOOOOUM !"
+            },
+            "484": {
+                "name": "Attends, quoi ?",
+                "description": "C'est la fin des haricots !"
+            },
+            "485": {
+                "name": "Pièce Tordue",
+                "description": "50/50"
+            },
+            "486": {
+                "name": "Lame Émoussée",
+                "description": "La douleur ne me fait plus rien..."
+            },
+            "487": {
+                "name": "Épluche-Légumes",
+                "description": "Une livre de chair..."
+            },
+            "488": {
+                "name": "Métronome",
+                "description": "Tic... Tac..."
+            },
+            "489": {
+                "name": "Dé Infini",
+                "description": "Rejoue à l'infini"
+            },
+            "490": {
+                "name": "L'Âme d'Éden",
+                "description": "..."
+            },
+            "491": {
+                "name": "Bébé Drogué",
+                "description": "Des pilules ! Des PILULES !!!"
+            },
+            "492": {
+                "name": "Fée Agaçante",
+                "description": "Excellente navigatrice"
+            },
+            "493": {
+                "name": "Adrénaline",
+                "description": "La panique prend le dessus"
+            },
+            "494": {
+                "name": "L'Échelle de Jacob",
+                "description": "Larmes électriques"
+            },
+            "495": {
+                "name": "Piment Fantôme",
+                "description": "Trop piquant pour moi"
+            },
+            "496": {
+                "name": "Euthanasie",
+                "description": "Larmes létales"
+            },
+            "497": {
+                "name": "Slip Camouflage",
+                "description": "On me voit... on me voit plus"
+            },
+            "498": {
+                "name": "Dualité",
+                "description": "Tu te sens très symétrique"
+            },
+            "499": {
+                "name": "Eucharistie",
+                "description": "Que la paix soit avec toi"
+            },
+            "500": {
+                "name": "Sac de sacs",
+                "description": "Il est plein de sacs"
+            },
+            "501": {
+                "name": "Gosier d'Avarice",
+                "description": "L'argent, c'est la vie"
+            },
+            "502": {
+                "name": "Grosse Pustule",
+                "description": "Tirs tâchés"
+            },
+            "503": {
+                "name": "P'tite Corne",
+                "description": "Ton grand frère te surveille"
+            },
+            "504": {
+                "name": "Bout de Crotte",
+                "description": "Il attire les mouches"
+            },
+            "505": {
+                "name": "Poké Go",
+                "description": "Capture-les tous"
+            },
+            "506": {
+                "name": "Traîtrise",
+                "description": "Surveillez vos arrières !"
+            },
+            "507": {
+                "name": "Paille Aiguisée",
+                "description": "J'ai soif de sang !"
+            },
+            "508": {
+                "name": "Rasoir de Maman",
+                "description": "Attention, ça coupe !"
+            },
+            "509": {
+                "name": "Nœnœil",
+                "description": "Ami sanguinolent"
+            },
+            "510": {
+                "name": "Délire",
+                "description": "Libère la folie !"
+            },
+            "511": {
+                "name": "Mouche Enragée",
+                "description": "Elle est agressive"
+            },
+            "512": {
+                "name": "Trou Noir",
+                "description": "Rien ne s'en échappera"
+            },
+            "513": {
+                "name": "Bozo",
+                "description": "C'est la fête !"
+            },
+            "514": {
+                "name": "Routeur Cassé",
+                "description": "Ça rame"
+            },
+            "515": {
+                "name": "Cadeau Surprise",
+                "description": "Tu ne devineras jamais ce que c'est !"
+            },
+            "516": {
+                "name": "Arroseur Automatique",
+                "description": "Pst pst pst pst pst"
+            },
+            "517": {
+                "name": "Bombes Éclair",
+                "description": "Pas de temps à perdre !"
+            },
+            "518": {
+                "name": "Pote en Boîte",
+                "description": "Alors, t'as eu lequel ??"
+            },
+            "519": {
+                "name": "P'tit Delirium",
+                "description": "Ami délirant"
+            },
+            "520": {
+                "name": "Câbles de Démarrage",
+                "description": "Charge sanglante"
+            },
+            "521": {
+                "name": "Coupon",
+                "description": "Livraison sous 70 jours ouvrés"
+            },
+            "522": {
+                "name": "Télékinésie",
+                "description": "Le pouvoir de l'esprit"
+            },
+            "523": {
+                "name": "Carton de Déménagement",
+                "description": "Emballe et déballe"
+            },
+            "524": {
+                "name": "Tech Zéro",
+                "description": "Larmes électrostatiques"
+            },
+            "525": {
+                "name": "Lèpre",
+                "description": "Ça déchire !"
+            },
+            "526": {
+                "name": "Livre des Sept Sceaux",
+                "description": "P'tits cavaliers !"
+            },
+            "527": {
+                "name": "Boîte à Larbins",
+                "description": "À votre service !"
+            },
+            "528": {
+                "name": "Prisme Angélique",
+                "description": "Éclipsé par la lune"
+            },
+            "529": {
+                "name": "Pop !",
+                "description": "Les yeux m'en tombent"
+            },
+            "530": {
+                "name": "Liste de la Mort",
+                "description": "Prie pour ne pas être le suivant..."
+            },
+            "531": {
+                "name": "Haemolacria",
+                "description": "Je vois rouge"
+            },
+            "532": {
+                "name": "Lachryphagie",
+                "description": "Délicieuses larmes"
+            },
+            "533": {
+                "name": "Trisagion",
+                "description": "Châtie ton ennemi"
+            },
+            "534": {
+                "name": "Sac à Dos",
+                "description": "Emplacement d'objet supplémentaire"
+            },
+            "535": {
+                "name": "Couverture",
+                "description": "Tu es en sécurité"
+            },
+            "536": {
+                "name": "Autel Sacrificiel",
+                "description": "Il exige un sacrifice"
+            },
+            "537": {
+                "name": "P'tit Spewer",
+                "description": "Ami gerbant"
+            },
+            "538": {
+                "name": "Sac de Billes",
+                "description": "Risque d'étouffement"
+            },
+            "539": {
+                "name": "Œuf Mystère",
+                "description": "Insémination artificielle"
+            },
+            "540": {
+                "name": "Pierre Plate",
+                "description": "Pour faire des ricochets..."
+            },
+            "541": {
+                "name": "Moelle",
+                "description": "PV augmentés ?"
+            },
+            "542": {
+                "name": "Côte Cassée",
+                "description": "Bouclier osseux"
+            },
+            "543": {
+                "name": "Terre Sacrée",
+                "description": "Sanctuaire portatif"
+            },
+            "544": {
+                "name": "Côte Pointue",
+                "description": "Lance l'os"
+            },
+            "545": {
+                "name": "Livre des Morts",
+                "description": "Réveillez-vous"
+            },
+            "546": {
+                "name": "Bague de Papa",
+                "description": "Bénédiction paternelle"
+            },
+            "547": {
+                "name": "Acte de Divorce",
+                "description": "Débit augmenté + tu te sens vide"
+            },
+            "548": {
+                "name": "Mandibule",
+                "description": "Va chercher !"
+            },
+            "549": {
+                "name": "Os de Verre",
+                "description": "J'ai mal partout"
+            },
+            "550": {
+                "name": "Pelle Brisée",
+                "description": "Elle semble maudite"
+            },
+            "551": {
+                "name": "Pelle Brisée",
+                "description": "Elle semble maudite"
+            },
+            "552": {
+                "name": "Pelle de Maman",
+                "description": "Égaré mais pas délaissé"
+            },
+            "553": {
+                "name": "Mucormycose",
+                "description": "Tirs fongiques"
+            },
+            "554": {
+                "name": "BOUH",
+                "description": "aaaaaaaaaaah"
+            },
+            "555": {
+                "name": "Lame de Rasoir Dorée",
+                "description": "La puissance a un prix"
+            },
+            "556": {
+                "name": "Sulfure",
+                "description": "Deviens un démon"
+            },
+            "557": {
+                "name": "Biscuit Chinois",
+                "description": "L'avenir est fait de surprises"
+            },
+            "558": {
+                "name": "Les Yeux de la Tête",
+                "description": "Abondance oculaire"
+            },
+            "559": {
+                "name": "120 Volts",
+                "description": "Zap !"
+            },
+            "560": {
+                "name": "Motus",
+                "description": "Et bouche cousue..."
+            },
+            "561": {
+                "name": "Lait d'Amande",
+                "description": "Dégâts diminués + débit augmenté"
+            },
+            "562": {
+                "name": "Au Fond du Trou",
+                "description": "Tu ne peux que remonter"
+            },
+            "563": {
+                "name": "Bombes Brillantes",
+                "description": "Explosions aléatoires + 5 bombes"
+            },
+            "564": {
+                "name": "Savonnette",
+                "description": "Débit et vitesse de tir augmentés"
+            },
+            "565": {
+                "name": "Chiot de Sang",
+                "description": "Qu'il est mignon !"
+            },
+            "566": {
+                "name": "Attrape-rêves",
+                "description": "Fais de beaux rêves !"
+            },
+            "567": {
+                "name": "Cierge Pascal",
+                "description": "Ne laisse pas la flamme s'éteindre"
+            },
+            "568": {
+                "name": "Intervention Divine",
+                "description": "Bouclier miracle"
+            },
+            "569": {
+                "name": "Serment du Sang",
+                "description": "Jusqu'à la dernière goutte"
+            },
+            "570": {
+                "name": "Cookie en pâte à modeler",
+                "description": "Mmm, délichieux !"
+            },
+            "571": {
+                "name": "Chaussettes Orphelines",
+                "description": "Tes pieds semblent plus résistants"
+            },
+            "572": {
+                "name": "Œil Occulte",
+                "description": "Dégâts et portée augmentés, larmes contrôlées"
+            },
+            "573": {
+                "name": "Cœur Immaculé",
+                "description": "Couronne de larmes"
+            },
+            "574": {
+                "name": "Monstrance",
+                "description": "Lumière purifiante"
+            },
+            "575": {
+                "name": "L'intrus",
+                "description": "Ami envahissant"
+            },
+            "576": {
+                "name": "Coprophilie",
+                "description": "Sales amis"
+            },
+            "577": {
+                "name": "Damoclès",
+                "description": "La fortune d'un roi... mais à quel prix ?"
+            },
+            "578": {
+                "name": "Carafe de Limonade",
+                "description": "Jusqu'à plus soif !"
+            },
+            "579": {
+                "name": "Épée de l'Esprit",
+                "description": "Lame divine"
+            },
+            "580": {
+                "name": "Clé Rouge",
+                "description": "Explore de l'autre côté"
+            },
+            "581": {
+                "name": "Mouche Oracle",
+                "description": "Protectrice flamboyante"
+            },
+            "582": {
+                "name": "Psilocybe Cyanescens",
+                "description": "Débit augmenté. Une expérience inoubliable !"
+            },
+            "583": {
+                "name": "Fusée en Bocal",
+                "description": "Missiles à propulsion +5 bombes"
+            },
+            "584": {
+                "name": "Livre des Vertus",
+                "description": "Accompagnement spirituel"
+            },
+            "585": {
+                "name": "Boîte d'Albâtre",
+                "description": "Offrande sacrée"
+            },
+            "586": {
+                "name": "Échelle Vers les Cieux",
+                "description": "Que ton rêve se réalise"
+            },
+            "588": {
+                "name": "Sol",
+                "description": "Victoire rayonnante"
+            },
+            "589": {
+                "name": "Luna",
+                "description": "La lune te voit et te bénit"
+            },
+            "590": {
+                "name": "Mercurius",
+                "description": "File comme le vent"
+            },
+            "591": {
+                "name": "Venus",
+                "description": "Beauté envoûtante"
+            },
+            "592": {
+                "name": "Terra",
+                "description": "Solide comme un roc"
+            },
+            "593": {
+                "name": "Mars",
+                "description": "Fonce tête baissée"
+            },
+            "594": {
+                "name": "Jupiter",
+                "description": "Géante gazeuse"
+            },
+            "595": {
+                "name": "Saturnus",
+                "description": "Cercle de larmes"
+            },
+            "596": {
+                "name": "Uranus",
+                "description": "Larmes gelées"
+            },
+            "597": {
+                "name": "Neptunus",
+                "description": "Les larmes te montent aux yeux"
+            },
+            "598": {
+                "name": "Pluto",
+                "description": "Minuscule"
+            },
+            "599": {
+                "name": "Tête Réduite",
+                "description": "Salles maudites supplémentaires"
+            },
+            "600": {
+                "name": "Collyre",
+                "description": "Débit augmenté"
+            },
+            "601": {
+                "name": "Acte de Contrition",
+                "description": "Tout est pardonné"
+            },
+            "602": {
+                "name": "Carte de Membre",
+                "description": "Accès exclusif"
+            },
+            "603": {
+                "name": "Batterie",
+                "description": "Recharge instantanée !"
+            },
+            "604": {
+                "name": "Bracelet de Maman",
+                "description": "Force maternelle"
+            },
+            "605": {
+                "name": "Cuillère à Glace",
+                "description": "Plop !"
+            },
+            "606": {
+                "name": "Faille Oculaire",
+                "description": "Contemple l'abîme"
+            },
+            "607": {
+                "name": "Bébé Furoncle",
+                "description": "Ami gicleur"
+            },
+            "608": {
+                "name": "Bébé Congelé",
+                "description": "Ami frigorifié"
+            },
+            "609": {
+                "name": "D6 Éternel",
+                "description": "???"
+            },
+            "610": {
+                "name": "Gros Piaf",
+                "description": "Ami en surpoids"
+            },
+            "611": {
+                "name": "Larynx",
+                "description": "Entends ma douleur"
+            },
+            "612": {
+                "name": "Âme Égarée",
+                "description": "Protège-la"
+            },
+            "614": {
+                "name": "Hémoglobombes",
+                "description": "Explosions sanglantes + PV augmentés"
+            },
+            "615": {
+                "name": "P'tit Prout",
+                "description": "Ami flatulent"
+            },
+            "616": {
+                "name": "Piment Oiseau",
+                "description": "Ça brûle"
+            },
+            "617": {
+                "name": "Magnétite",
+                "description": "Larmes magnétisantes"
+            },
+            "618": {
+                "name": "Tomate Pourrie",
+                "description": "À jeter !"
+            },
+            "619": {
+                "name": "Droit d'Aînesse",
+                "description": "???"
+            },
+            "621": {
+                "name": "Potage de Lentilles",
+                "description": "Soin complet + Force temporaire"
+            },
+            "622": {
+                "name": "Genèse",
+                "description": "Au commencement"
+            },
+            "623": {
+                "name": "Clé Aiguisée",
+                "description": "Ouvre tes ennemis"
+            },
+            "624": {
+                "name": "Paquet d'Extension",
+                "description": "Collectionne-les toutes !"
+            },
+            "625": {
+                "name": "Méga Champi",
+                "description": "Je suis un grand garçon, maintenant !"
+            },
+            "626": {
+                "name": "1er Morceau de Couteau",
+                "description": "???"
+            },
+            "627": {
+                "name": "2nd Morceau de Couteau",
+                "description": "???"
+            },
+            "628": {
+                "name": "Certificat de Décès",
+                "description": "Où suis-je ?"
+            },
+            "629": {
+                "name": "Mouche Robot",
+                "description": "Drone de défense"
+            },
+            "631": {
+                "name": "Couteau de Boucher",
+                "description": "Ça va couper, chérie"
+            },
+            "632": {
+                "name": "Pendentif Maléfique",
+                "description": "Porte-chance protecteur"
+            },
+            "633": {
+                "name": "Dogma",
+                "description": "Ascension"
+            },
+            "634": {
+                "name": "Purgatoire",
+                "description": "Coup de main de l'au-delà"
+            },
+            "635": {
+                "name": "Marionnette",
+                "description": "Mets-toi à sa place"
+            },
+            "636": {
+                "name": "Touche R",
+                "description": "Allez, on recommence !"
+            },
+            "637": {
+                "name": "Gouttes K.O.",
+                "description": "Elles tapent fort !"
+            },
+            "638": {
+                "name": "Gomme",
+                "description": "Efface ton ennemi"
+            },
+            "639": {
+                "name": "Cœur Pourri",
+                "description": "Dégueu !"
+            },
+            "640": {
+                "name": "Urne d'Âmes",
+                "description": "Libère leur chagrin"
+            },
+            "641": {
+                "name": "Haqeldemah",
+                "description": "Vide ton sac"
+            },
+            "642": {
+                "name": "Peau de Chagrin",
+                "description": "Tu possèderas tout, mais ta vie m'appartiendra"
+            },
+            "643": {
+                "name": "Révélation",
+                "description": "Éveille ta foi"
+            },
+            "644": {
+                "name": "Prix de Consolation",
+                "description": "+1 à ta stat la plus basse"
+            },
+            "645": {
+                "name": "P'tit Tératome",
+                "description": "Plus dégueu, tumeur"
+            },
+            "646": {
+                "name": "Bombes de Soufre",
+                "description": "Explosions démoniaques +5 bombes"
+            },
+            "647": {
+                "name": "4.5 Volts",
+                "description": "Fonctionne à l'énergie vitale"
+            },
+            "649": {
+                "name": "P'tite Prunelle",
+                "description": "Amie rebondissante"
+            },
+            "650": {
+                "name": "Flûte Prunelle",
+                "description": "C'est l'heure de s'amuser !"
+            },
+            "651": {
+                "name": "Étoile de Bethlehem",
+                "description": "Suis la lumière"
+            },
+            "652": {
+                "name": "Bébé Glaçon",
+                "description": "Tape dedans !"
+            },
+            "653": {
+                "name": "Vade Retro",
+                "description": "Exorcisme"
+            },
+            "654": {
+                "name": "Doctorat Falsifié",
+                "description": "Moins bonnes pilules + le mal grandit en toi"
+            },
+            "655": {
+                "name": "Toupie",
+                "description": "Hypeeer vitesse !"
+            },
+            "656": {
+                "name": "Damoclès",
+                "description": "La fortune d'un roi... mais à quel prix?"
+            },
+            "657": {
+                "name": "Vascularite",
+                "description": "On s'éclate"
+            },
+            "658": {
+                "name": "Cellule Géante",
+                "description": "Amis minuscules !"
+            },
+            "659": {
+                "name": "Tropicamide",
+                "description": "Portée et taille des larmes augmentées"
+            },
+            "660": {
+                "name": "Cartomancie",
+                "description": "Un regard sur ton avenir"
+            },
+            "661": {
+                "name": "Quintuplés",
+                "description": "Équipe de choc"
+            },
+            "663": {
+                "name": "Bec et Ongles",
+                "description": "Une situation épineuse"
+            },
+            "664": {
+                "name": "Goinfre",
+                "description": "Buffet à volonté"
+            },
+            "665": {
+                "name": "Œil de Guppy",
+                "description": "Un œil pour les secrets"
+            },
+            "667": {
+                "name": "Gardien en Peluche",
+                "description": "Il est vivant !"
+            },
+            "668": {
+                "name": "Lettre de Papa",
+                "description": "..."
+            },
+            "669": {
+                "name": "Saucisson",
+                "description": "Toutes les stats augmentées"
+            },
+            "670": {
+                "name": "Plus d'Options ?",
+                "description": "L'embarras du choix ?"
+            },
+            "671": {
+                "name": "Cœur Confit",
+                "description": "Le pouvoir de l'amour"
+            },
+            "672": {
+                "name": "Une Livre de Chair",
+                "description": "Le prix du sang"
+            },
+            "673": {
+                "name": "Rédemption",
+                "description": "Délivre-moi du mal"
+            },
+            "674": {
+                "name": "Chaînes de l'Esprit",
+                "description": "Des choses à terminer"
+            },
+            "675": {
+                "name": "Orbe Fêlé",
+                "description": "Des fragments de connaissances"
+            },
+            "676": {
+                "name": "Cœur Vide",
+                "description": "Ils prolifèrent"
+            },
+            "677": {
+                "name": "Projection Astrale",
+                "description": "Une expérience transcendante !"
+            },
+            "678": {
+                "name": "Césarienne",
+                "description": "Tirs fœtaux"
+            },
+            "679": {
+                "name": "P'tit Abaddon",
+                "description": "Ami des abysses"
+            },
+            "680": {
+                "name": "Tourista",
+                "description": "Oh non..."
+            },
+            "681": {
+                "name": "P'tit Vortex",
+                "description": "Il est affamé"
+            },
+            "682": {
+                "name": "Ver de Nerf",
+                "description": "Ami un peu trop câlin"
+            },
+            "683": {
+                "name": "Épines Osseuses",
+                "description": "Brise tes ennemis"
+            },
+            "684": {
+                "name": "Âme Affamée",
+                "description": "Elle a faim de sang"
+            },
+            "685": {
+                "name": "Bocal de Feux Follets",
+                "description": "Ta foi grandit"
+            },
+            "686": {
+                "name": "Pendentif des Âmes",
+                "description": "Le pouvoir de la foi"
+            },
+            "687": {
+                "name": "Amis Imaginaires",
+                "description": "Ils me tiennent compagnie"
+            },
+            "688": {
+                "name": "Enfant Intérieur",
+                "description": "Laisse-le sortir"
+            },
+            "689": {
+                "name": "Couronne Corrompue",
+                "description": "?????"
+            },
+            "690": {
+                "name": "Haricot Confit",
+                "description": "Boing !"
+            },
+            "691": {
+                "name": "Orbe Sacrée",
+                "description": "Un destin radieux t'attend"
+            },
+            "692": {
+                "name": "Pacte de Sang",
+                "description": "Il attend ton offrande"
+            },
+            "693": {
+                "name": "La Nuée",
+                "description": "Seigneur de la vermine"
+            },
+            "694": {
+                "name": "Cœur Brisé",
+                "description": "Chagrin éternel"
+            },
+            "695": {
+                "name": "Souffle de Sang",
+                "description": "Que ta rage devienne célérité"
+            },
+            "696": {
+                "name": "Salvation",
+                "description": "Protection divine"
+            },
+            "697": {
+                "name": "Jumeau Évanescent",
+                "description": "Il a soif de vengeance"
+            },
+            "698": {
+                "name": "Jumeaux Malicieux",
+                "description": "Jamais l'un sans l'autre !"
+            },
+            "699": {
+                "name": "Rage d'Azazel",
+                "description": "Pouvoir ancestral"
+            },
+            "700": {
+                "name": "Résonance",
+                "description": "Je vois l'avenir avenir avenir"
+            },
+            "701": {
+                "name": "Tombeau d'Isaac",
+                "description": "Souvenirs enfouis"
+            },
+            "702": {
+                "name": "Esprit Vengeur",
+                "description": "Renfort spirituel"
+            },
+            "703": {
+                "name": "Ésaü Junior",
+                "description": "Frère perdu"
+            },
+            "704": {
+                "name": "Frénésie !",
+                "description": "Laisse la fureur t'envahir"
+            },
+            "705": {
+                "name": "Arts Obscurs",
+                "description": "Fonds-toi parmi les ombres"
+            },
+            "706": {
+                "name": "Abysse",
+                "description": "Émergez des profondeurs"
+            },
+            "707": {
+                "name": "Souper",
+                "description": "PV augmentés"
+            },
+            "708": {
+                "name": "Agrafeuse",
+                "description": "Dégâts augmentés"
+            },
+            "709": {
+                "name": "Suplex !",
+                "description": "Briseur d'anges"
+            },
+            "710": {
+                "name": "Sac de Fabrication",
+                "description": "Forge ton destin"
+            },
+            "711": {
+                "name": "Inverser",
+                "description": "Retournement de situation"
+            },
+            "712": {
+                "name": "Lemegeton",
+                "description": "Invocateur d'objets"
+            },
+            "713": {
+                "name": "Sumptorium",
+                "description": "Goutte par goutte"
+            },
+            "714": {
+                "name": "Rappel",
+                "description": "Reviens"
+            },
+            "715": {
+                "name": "Garder",
+                "description": "Ça servira plus tard"
+            },
+            "716": {
+                "name": "Bourse du Gardien",
+                "description": "Pouvoir d'achat"
+            },
+            "717": {
+                "name": "Amis du Gardien",
+                "description": "Sous un rocher"
+            },
+            "719": {
+                "name": "Boîte du Gardien",
+                "description": "Boutique portative"
+            },
+            "720": {
+                "name": "Bocal de n'Importe Quoi",
+                "description": "Tout est possible"
+            },
+            "721": {
+                "name": "TMTRAINER",
+                "description": "Isaac et sa mère vivaient seuls sur une petite colline"
+            },
+            "722": {
+                "name": "Anima Sola",
+                "description": "Repens-toi"
+            },
+            "723": {
+                "name": "Dé Compteur",
+                "description": "-1"
+            },
+            "724": {
+                "name": "Hypercoagulation",
+                "description": "Sang visqueux"
+            },
+            "725": {
+                "name": "Intestin irrité",
+                "description": "Ton ventre gargouille"
+            },
+            "726": {
+                "name": "Hémoptysie",
+                "description": "Atchoum !"
+            },
+            "727": {
+                "name": "Bombes Fantômes",
+                "description": "Explosions hantées +5 bombes"
+            },
+            "728": {
+                "name": "Gello",
+                "description": "Gestation démoniaque"
+            },
+            "729": {
+                "name": "Décapitation",
+                "description": "Coup de boule !"
+            },
+            "730": {
+                "name": "Œil de Verre",
+                "description": "Chance et dégâts augmentés"
+            },
+            "731": {
+                "name": "Orgelet",
+                "description": "Portée et dégâts augmentés"
+            },
+            "732": {
+                "name": "Bague de Maman",
+                "description": "Dégâts augmentés"
+            }
+        },
+        "trinkets": {
+            "1": {
+                "name": "Pièce Avalée",
+                "description": "Gloups !"
+            },
+            "2": {
+                "name": "Caca Pétrifié",
+                "description": "Un porte-bonheur ?"
+            },
+            "3": {
+                "name": "Pile AAA",
+                "description": "Charge rapide"
+            },
+            "4": {
+                "name": "Télécommande Cassée",
+                "description": "Elle est cassée"
+            },
+            "5": {
+                "name": "Cœur Violet",
+                "description": "Pour l'élite"
+            },
+            "6": {
+                "name": "Aimant Démagnétisé",
+                "description": "Il marche un peu"
+            },
+            "7": {
+                "name": "Perle de Rosaire",
+                "description": "Crois en ta foi"
+            },
+            "8": {
+                "name": "Cartouche",
+                "description": "Je me rappelle de ces trucs !"
+            },
+            "9": {
+                "name": "Ver Pulsant",
+                "description": "Wob wob !"
+            },
+            "10": {
+                "name": "Ver Remuant",
+                "description": "Wouw wouw !"
+            },
+            "11": {
+                "name": "Teigne",
+                "description": "Woup woup !"
+            },
+            "12": {
+                "name": "Platode",
+                "description": "Bloub bloub !"
+            },
+            "13": {
+                "name": "Bon d'Achat",
+                "description": "OUI !"
+            },
+            "14": {
+                "name": "Callosités",
+                "description": "Tu sens tes pieds durcir"
+            },
+            "15": {
+                "name": "Caillou Porte-Bonheur",
+                "description": "Le début de la fortune"
+            },
+            "16": {
+                "name": "Ongle de Pied de Maman",
+                "description": "???"
+            },
+            "17": {
+                "name": "Noir à Lèvres",
+                "description": "Le baiser de l'ombre"
+            },
+            "18": {
+                "name": "Brochure Religieuse",
+                "description": "Pour une lumière éternelle"
+            },
+            "19": {
+                "name": "Trombone",
+                "description": "Crochetage facile"
+            },
+            "20": {
+                "name": "Patte de Singe",
+                "description": "Ton vœu est accordé"
+            },
+            "21": {
+                "name": "Papier Mystérieux",
+                "description": "???"
+            },
+            "22": {
+                "name": "Queue de Diablotin",
+                "description": "Les ténèbres t'envahissent"
+            },
+            "23": {
+                "name": "Avis de Recherche",
+                "description": "???"
+            },
+            "24": {
+                "name": "Pièce de Fesse",
+                "description": "La richesse par les gaz"
+            },
+            "25": {
+                "name": "Bonbon Bizarre",
+                "description": "Oups !"
+            },
+            "26": {
+                "name": "Ankylostome",
+                "description": "Zip zoup !"
+            },
+            "27": {
+                "name": "Trichuris Trichiura",
+                "description": "Wooosh !"
+            },
+            "28": {
+                "name": "Ânkh Brisée",
+                "description": "Vie éternelle ?"
+            },
+            "29": {
+                "name": "Tête de Poisson",
+                "description": "Elle pue !"
+            },
+            "30": {
+                "name": "Conjonctivite",
+                "description": "Larmes empoisonnées"
+            },
+            "31": {
+                "name": "Punaise",
+                "description": "Larmes transperçantes"
+            },
+            "32": {
+                "name": "Psilocybe Lancéolé",
+                "description": "T'en as trop pris"
+            },
+            "33": {
+                "name": "Cordon Ombilical",
+                "description": "Protection fœtale"
+            },
+            "34": {
+                "name": "Cœur d'Enfant",
+                "description": "Il appelle ses frères"
+            },
+            "35": {
+                "name": "Corne Tordue",
+                "description": "Dégâts augmentés"
+            },
+            "36": {
+                "name": "Clé Rouillée",
+                "description": "Elle semble porter chance"
+            },
+            "37": {
+                "name": "Sabot de Chèvre",
+                "description": "Vitesse augmentée"
+            },
+            "38": {
+                "name": "Perle de Maman",
+                "description": "Elle reluit de pureté"
+            },
+            "39": {
+                "name": "Cancer",
+                "description": "Youpi, j'ai le cancer !"
+            },
+            "40": {
+                "name": "Lambeau de Tissu",
+                "description": "Ta rage grandit"
+            },
+            "41": {
+                "name": "Allumette",
+                "description": "Ça a un gout de brûlure"
+            },
+            "42": {
+                "name": "Orteil Chanceux",
+                "description": "Chance augmentée !"
+            },
+            "43": {
+                "name": "Crâne Maudit",
+                "description": "Maudit ?"
+            },
+            "44": {
+                "name": "Bouchon de Sécurité",
+                "description": "Ne l'avale pas"
+            },
+            "45": {
+                "name": "As de Pique",
+                "description": "Bonne pioche"
+            },
+            "46": {
+                "name": "La Fourchette d'Isaac",
+                "description": "Consomme ton ennemi"
+            },
+            "48": {
+                "name": "Une Page Déchirée",
+                "description": "Elle reluit de puissance"
+            },
+            "49": {
+                "name": "Pièce Sanglante",
+                "description": "La richesse par la santé"
+            },
+            "50": {
+                "name": "Pièce Brûlée",
+                "description": "La richesse par le chaos"
+            },
+            "51": {
+                "name": "Pièce Aplatie",
+                "description": "La richesse par les réponses"
+            },
+            "52": {
+                "name": "Pièce de Contrefaçon",
+                "description": "La richesse par la richesse"
+            },
+            "53": {
+                "name": "Tique",
+                "description": "Elle a pas l'air de vouloir partir"
+            },
+            "54": {
+                "name": "Tête d'Isaac",
+                "description": "Ami mort"
+            },
+            "55": {
+                "name": "Foi de Maggy",
+                "description": "Ta foi sera récompensée"
+            },
+            "56": {
+                "name": "Langue de Judas",
+                "description": "Paiement accepté"
+            },
+            "57": {
+                "name": "L'Âme de ???",
+                "description": "Ami imaginaire"
+            },
+            "58": {
+                "name": "Mèche de Samson",
+                "description": "Ta rage grandit"
+            },
+            "59": {
+                "name": "Œil de Caïn",
+                "description": "Puisses-tu voir ta destination"
+            },
+            "60": {
+                "name": "Serre de l'Oiseau d'Ève",
+                "description": "Revanche de l'au-delà"
+            },
+            "61": {
+                "name": "La Main Gauche",
+                "description": "Le chemin de gauche offre de sombres présents"
+            },
+            "62": {
+                "name": "Caillou Étincelant",
+                "description": "Il brille pour ses frères"
+            },
+            "63": {
+                "name": "Ciseaux à Bout Rond",
+                "description": "Pour couper les mèches"
+            },
+            "64": {
+                "name": "Ver Arc-En-Ciel",
+                "description": "Blip bloup blop"
+            },
+            "65": {
+                "name": "Ver Solitaire",
+                "description": "Flooooooooooup !"
+            },
+            "66": {
+                "name": "Ver Fainéant",
+                "description": "Pft"
+            },
+            "67": {
+                "name": "Dé Fêlé",
+                "description": "Tu te sens maudit... Un peu."
+            },
+            "68": {
+                "name": "Aimant au Néodyme",
+                "description": "Il est puissant"
+            },
+            "69": {
+                "name": "Polaroid Décoloré",
+                "description": "Tu te sens fade"
+            },
+            "70": {
+                "name": "Lente",
+                "description": "Ça vous gratouille, ou ça vous chatouille ?"
+            },
+            "71": {
+                "name": "Vessie de Bob",
+                "description": "Bombes acides"
+            },
+            "72": {
+                "name": "Pile Bouton",
+                "description": "Pas très puissante"
+            },
+            "73": {
+                "name": "Détonateur",
+                "description": "Pop ! Pop !"
+            },
+            "74": {
+                "name": "Détecteur de Métaux",
+                "description": "Le sol sonne creux..."
+            },
+            "75": {
+                "name": "Erreur",
+                "description": "Effet indisponible ?"
+            },
+            "76": {
+                "name": "Jeton de Poker",
+                "description": "Quitte ou double ?"
+            },
+            "77": {
+                "name": "Cloque",
+                "description": "Retour à l'envoyeur !"
+            },
+            "78": {
+                "name": "Grande Aiguille",
+                "description": "Effets rallongés !"
+            },
+            "79": {
+                "name": "Histoire Sans Fin",
+                "description": "boucle... Je suis coincé dans une"
+            },
+            "80": {
+                "name": "Plume Noire",
+                "description": "Par les ténèbres vient la puissance"
+            },
+            "81": {
+                "name": "Rage Aveugle",
+                "description": "Ignore la douleur"
+            },
+            "82": {
+                "name": "Fer à Cheval Doré",
+                "description": "On tente sa chance ?"
+            },
+            "83": {
+                "name": "Clé Du Magasin",
+                "description": "Journée portes ouvertes"
+            },
+            "84": {
+                "name": "Côte d'Avarice",
+                "description": "Elle sent l'argent"
+            },
+            "85": {
+                "name": "Karma",
+                "description": "Le juste retour des choses"
+            },
+            "86": {
+                "name": "Petite Larve",
+                "description": "Le caca gigote..."
+            },
+            "87": {
+                "name": "Médaillon de Maman",
+                "description": "Tu ressens son amour"
+            },
+            "88": {
+                "name": "NON !",
+                "description": "Plus jamais !"
+            },
+            "89": {
+                "name": "Laisse pour Enfant",
+                "description": "Garde tes amis près de toi..."
+            },
+            "90": {
+                "name": "Bouchon Brun",
+                "description": "Cacaboum !"
+            },
+            "91": {
+                "name": "Méconium",
+                "description": "Beurk"
+            },
+            "92": {
+                "name": "Couronne Fêlée",
+                "description": "Augmentation des stats"
+            },
+            "93": {
+                "name": "Couche Usagée",
+                "description": "Tu pues"
+            },
+            "94": {
+                "name": "Queue de Poisson",
+                "description": "Elle pue aussi !"
+            },
+            "95": {
+                "name": "Dent Noircie",
+                "description": "Elle a l'air malade"
+            },
+            "96": {
+                "name": "Ver d'Ouroboros",
+                "description": "Foup foup !"
+            },
+            "97": {
+                "name": "Amygdale",
+                "description": "Dégueu..."
+            },
+            "98": {
+                "name": "Crotte de Nez",
+                "description": "Oh-ho !"
+            },
+            "99": {
+                "name": "Balle Rebondissante",
+                "description": "Boing !"
+            },
+            "100": {
+                "name": "Ampoule Brillante",
+                "description": "Elle a besoin d'énergie"
+            },
+            "101": {
+                "name": "Ampoule Éteinte",
+                "description": "Je crois qu'elle est cassée"
+            },
+            "102": {
+                "name": "Carte Scindée",
+                "description": "Double lune"
+            },
+            "103": {
+                "name": "Égalité !",
+                "description": "="
+            },
+            "104": {
+                "name": "Os de Poulet",
+                "description": "Fais un vœu"
+            },
+            "105": {
+                "name": "Sac de Friandises",
+                "description": "Je me demande ce que c'est"
+            },
+            "106": {
+                "name": "Bouchon de Liège",
+                "description": "Débouchonné"
+            },
+            "107": {
+                "name": "Cœur de Corbeau",
+                "description": "Vide-moi"
+            },
+            "108": {
+                "name": "Noix",
+                "description": "Elle a l'air solide"
+            },
+            "109": {
+                "name": "Ruban Adhésif",
+                "description": "Ça bouge plus !"
+            },
+            "110": {
+                "name": "Pièce d'Argent",
+                "description": "Elle rayonne de chance..."
+            },
+            "111": {
+                "name": "Couronne Sanglante",
+                "description": "Elle dégouline de sang..."
+            },
+            "112": {
+                "name": "Microtransaction",
+                "description": "..."
+            },
+            "113": {
+                "name": "Locuste de Guerre",
+                "description": "Avec moi vient la guerre"
+            },
+            "114": {
+                "name": "Locuste d'Épidémie",
+                "description": "Avec moi vient l'épidémie"
+            },
+            "115": {
+                "name": "Locuste de Famine",
+                "description": "Avec moi vient la famine"
+            },
+            "116": {
+                "name": "Locuste de Mort",
+                "description": "Avec moi vient la mort"
+            },
+            "117": {
+                "name": "Locuste de Conquête",
+                "description": "Avec moi vient la conquête"
+            },
+            "118": {
+                "name": "Aile de Chauve-Souris",
+                "description": "Elles poussent..."
+            },
+            "119": {
+                "name": "Cellule Souche",
+                "description": "Régénération !"
+            },
+            "120": {
+                "name": "Épingle à Cheveux",
+                "description": "Charge d'urgence"
+            },
+            "121": {
+                "name": "Croix de Bois",
+                "description": "Ma foi me protège"
+            },
+            "122": {
+                "name": "Plaquette de Beurre",
+                "description": "Elle glisse entre les doigts !"
+            },
+            "123": {
+                "name": "Plume Angélique",
+                "description": "Sacrés présents"
+            },
+            "124": {
+                "name": "Cale-Porte",
+                "description": "Pour filer en douce"
+            },
+            "125": {
+                "name": "Rallonge Électrique",
+                "description": "Amis électrisés"
+            },
+            "126": {
+                "name": "Pièce Moisie",
+                "description": "La richesse par les mouches"
+            },
+            "127": {
+                "name": "P'tite Cuillère Tordue",
+                "description": "Ils mangent de la magie !"
+            },
+            "128": {
+                "name": "Os de Doigt",
+                "description": "Il a l'air fragile"
+            },
+            "129": {
+                "name": "Boule de Mammouth",
+                "description": "Ne la mords pas"
+            },
+            "130": {
+                "name": "Stylo Mâchouillé",
+                "description": "Il fuit"
+            },
+            "131": {
+                "name": "Pièce Bénie",
+                "description": "La richesse par la pureté"
+            },
+            "132": {
+                "name": "Seringue Cassée",
+                "description": "Injection mystère"
+            },
+            "133": {
+                "name": "Pétard",
+                "description": "Explosions plus rapides"
+            },
+            "134": {
+                "name": "Haricot Géant",
+                "description": "Maxi prouts"
+            },
+            "135": {
+                "name": "Briquet",
+                "description": "C'est beau ça brûle"
+            },
+            "136": {
+                "name": "Cadenas Brisé",
+                "description": "Les bombes, c'est la clé"
+            },
+            "137": {
+                "name": "Myosotis",
+                "description": "Ne m'oubliez pas..."
+            },
+            "138": {
+                "name": " 'M",
+                "description": "st cassée9Relance le d"
+            },
+            "139": {
+                "name": "Larmulette",
+                "description": "Elle a l'air de porter bonheur"
+            },
+            "140": {
+                "name": "Pomme de Sodome",
+                "description": "Elle sonne creux"
+            },
+            "141": {
+                "name": "Berceuse Disparue",
+                "description": "Chante pour tes amis"
+            },
+            "142": {
+                "name": "Foi de Béthanie",
+                "description": "Ma foi me protège"
+            },
+            "143": {
+                "name": "Vieux Condensateur",
+                "description": "Assoiffé de courant"
+            },
+            "144": {
+                "name": "Parasite Cérébral",
+                "description": "Ding !"
+            },
+            "145": {
+                "name": "Perfection",
+                "description": "Chance fortement augmentée. Ne la perds pas !"
+            },
+            "146": {
+                "name": "Couronne du Diable",
+                "description": "Son client favori"
+            },
+            "147": {
+                "name": "Pièce Chargée",
+                "description": "La richesse par le courant"
+            },
+            "148": {
+                "name": "Collier d'Amitié",
+                "description": "Tous en ronde"
+            },
+            "149": {
+                "name": "Bouton rouge",
+                "description": "Appuyer en cas d'urgence"
+            },
+            "150": {
+                "name": "Clé Bleue",
+                "description": "Cherche entre les salles"
+            },
+            "151": {
+                "name": "Lime Plate",
+                "description": "À bas les piques !"
+            },
+            "152": {
+                "name": "Lentille de Télescope",
+                "description": "Observe les cieux"
+            },
+            "153": {
+                "name": "Mèche de Maman",
+                "description": "Une partie de son amour"
+            },
+            "154": {
+                "name": "Sac de Dés",
+                "description": "Lancer bonus"
+            },
+            "155": {
+                "name": "Couronne Sacrée",
+                "description": "Suis la voie du Seigneur"
+            },
+            "156": {
+                "name": "Bisou de Maman",
+                "description": "PV augmentés"
+            },
+            "157": {
+                "name": "Carte Déchirée",
+                "description": "La mort t'attend"
+            },
+            "158": {
+                "name": "Poche Trouée",
+                "description": "Un trou dans ta poche"
+            },
+            "159": {
+                "name": "Clé Dorée",
+                "description": "Addition par soustraction"
+            },
+            "160": {
+                "name": "Bourse Trèfle",
+                "description": "Cadeaux de bienvenue"
+            },
+            "161": {
+                "name": "Couronne Impure",
+                "description": "Suis la voie du Diable"
+            },
+            "162": {
+                "name": "Corne d'Azazel",
+                "description": "Libère ton démon intérieur"
+            },
+            "163": {
+                "name": "Colombin",
+                "description": "Oups !"
+            },
+            "164": {
+                "name": "Amorces",
+                "description": "C'est de la bombe !"
+            },
+            "165": {
+                "name": "Ah non !",
+                "description": "Toujours pas !"
+            },
+            "166": {
+                "name": "Pâte à Modeler",
+                "description": "???"
+            },
+            "167": {
+                "name": "Os Poli",
+                "description": "Des amis de l'au-delà"
+            },
+            "168": {
+                "name": "Cœur Creux",
+                "description": "Frêle Bénédiction"
+            },
+            "169": {
+                "name": "Dessin d'Enfant",
+                "description": "Il m'est familier..."
+            },
+            "170": {
+                "name": "Clé de Cristal",
+                "description": "Ouvre des serrures invisibles"
+            },
+            "171": {
+                "name": "L'Aubaine du Gardien",
+                "description": "Une affaire en or"
+            },
+            "172": {
+                "name": "Pièce Maudite",
+                "description": "La richesse par la misère"
+            },
+            "173": {
+                "name": "Ton Âme",
+                "description": "Donne-la moi"
+            },
+            "174": {
+                "name": "Chiffre Magnétique",
+                "description": "6"
+            },
+            "175": {
+                "name": "Clé Mystérieuse",
+                "description": "Que peut-elle bien ouvrir ?"
+            },
+            "176": {
+                "name": "Petit Pâté",
+                "description": "Ami miniature"
+            },
+            "177": {
+                "name": "Tatouage Temporaire",
+                "description": "Tu te sens courageux"
+            },
+            "178": {
+                "name": "Explosifs Avalés",
+                "description": "Boum !"
+            },
+            "179": {
+                "name": "Télécommande Radio",
+                "description": "Amis manipulables !"
+            },
+            "180": {
+                "name": "Âme Retrouvée",
+                "description": "Enfin !"
+            },
+            "181": {
+                "name": "Pack d'Extension",
+                "description": "Effets bonus"
+            },
+            "182": {
+                "name": "Essence de Béthanie",
+                "description": "Ta vertu récompensée"
+            },
+            "183": {
+                "name": "Les Jumeaux",
+                "description": "Je vois double..."
+            },
+            "184": {
+                "name": "Actes d'Adoption",
+                "description": "Trouve-leur un foyer"
+            },
+            "185": {
+                "name": "Patte de Grillon",
+                "description": "Vermine"
+            },
+            "186": {
+                "name": "La Meilleure Amie d'Apollyon",
+                "description": "Amie combative"
+            },
+            "187": {
+                "name": "Lunettes Cassées",
+                "description": "Double vision ?"
+            },
+            "188": {
+                "name": "Glaçon",
+                "description": "Reste frais"
+            },
+            "189": {
+                "name": "Sigil de Baphomet",
+                "description": "Délecte-toi de la mort"
+            }
+        }
+    },
+    "stages": {
+        "Special Rooms": {
+            "name": "Salles Spéciales"
+        },
+        "Basement": {
+            "name": "Le Néant"
+        },
+        "Cellar": {
+            "name": "Cave"
+        },
+        "Burning Basement": {
+            "name": "Sous-Sol Ardent"
+        },
+        "Caves": {
+            "name": "Grottes"
+        },
+        "Catacombs": {
+            "name": "Catacombes"
+        },
+        "Flooded Caves": {
+            "name": "Grottes Inondées"
+        },
+        "Depths": {
+            "name": "Profondeurs"
+        },
+        "Necropolis": {
+            "name": "Nécropole"
+        },
+        "Dank Depths": {
+            "name": "Profondeurs Humides"
+        },
+        "Womb": {
+            "name": "Utérus"
+        },
+        "Utero": {
+            "name": "Matrice"
+        },
+        "Scarred Womb": {
+            "name": "Utérus Balafré"
+        },
+        "Blue Womb": {
+            "name": "???"
+        },
+        "Sheol": {
+            "name": "Shéol"
+        },
+        "Cathedral": {
+            "name": "Cathédrale"
+        },
+        "Dark Room": {
+            "name": "Chambre Noire"
+        },
+        "Chest": {
+            "name": "Coffre"
+        },
+        "The Shop": {
+            "name": "La Boutique"
+        },
+        "Ultra Greed": {
+            "name": "Ultra Avarice"
+        },
+        "Downpour": {
+            "name": "Canalisations"
+        },
+        "Dross": {
+            "name": "Égouts"
+        },
+        "Mines": {
+            "name": "Mines"
+        },
+        "Ashpit": {
+            "name": "Cendrière"
+        },
+        "Mausoleum": {
+            "name": "Mausolée"
+        },
+        "Gehenna": {
+            "name": "Géhenne"
+        },
+        "Corpse": {
+            "name": "Cadavre"
+        },
+        "Home": {
+            "name": "Maison"
+        },
+        "Backwards": {
+            "name": "?"
+        }
     }
 }
