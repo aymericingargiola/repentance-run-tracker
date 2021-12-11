@@ -301,6 +301,10 @@
                 "name": "The Bible",
                 "description": "Temporary flight"
             },
+            "34": {
+                "name": "The Book of Belial",
+                "description": "Temporary DMG up"
+            },
             "35": {
                 "name": "The Necronomicon",
                 "description": "Mass room damage"
@@ -392,10 +396,6 @@
             "58": {
                 "name": "Book of Shadows",
                 "description": "Temporary invincibility"
-            },
-            "59": {
-                "name": "The Book of Belial",
-                "description": "Temporary DMG up"
             },
             "60": {
                 "name": "The Ladder",
@@ -2972,14 +2972,6 @@
             "713": {
                 "name": "Sumptorium",
                 "description": "Blood to blood"
-            },
-            "714": {
-                "name": "Recall",
-                "description": "Come back"
-            },
-            "715": {
-                "name": "Hold",
-                "description": "Saved for later"
             },
             "716": {
                 "name": "Keeper's Sack",

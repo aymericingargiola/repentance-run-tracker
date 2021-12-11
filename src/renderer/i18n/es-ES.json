@@ -301,6 +301,10 @@
                 "name": "La Biblia",
                 "description": "Vuelo (temporal)"
             },
+            "34": {
+                "name": "Libro de Belial",
+                "description": "+ DAÑO (temporal)"
+            },
             "35": {
                 "name": "El Necronomicón",
                 "description": "Daño masivo en sala"
@@ -392,10 +396,6 @@
             "58": {
                 "name": "Libro de las Sombras",
                 "description": "Invencibilidad temporal"
-            },
-            "59": {
-                "name": "Libro de Belial",
-                "description": "+ DAÑO (temporal)"
             },
             "60": {
                 "name": "La escalera",
@@ -2972,14 +2972,6 @@
             "713": {
                 "name": "Sumptorium",
                 "description": "Regresa"
-            },
-            "714": {
-                "name": "Llamado",
-                "description": "Vuelve"
-            },
-            "715": {
-                "name": "Frasco",
-                "description": "Guardado para después"
             },
             "716": {
                 "name": "Bolsa de Keeper",

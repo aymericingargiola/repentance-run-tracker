@@ -301,6 +301,10 @@
                 "name": "Die Bibel",
                 "description": "Temporäres Fliegen"
             },
+            "34": {
+                "name": "Das Buch Belial",
+                "description": "Temporär Schaden hoch"
+            },
             "35": {
                 "name": "Das Necronomicon",
                 "description": "Massenraumschaden"
@@ -392,10 +396,6 @@
             "58": {
                 "name": "Buch der Schatten",
                 "description": "Temporäre Unbesiegbarkeit"
-            },
-            "59": {
-                "name": "Das Buch Belial",
-                "description": "Temporär Schaden hoch"
             },
             "60": {
                 "name": "Die Leiter",
@@ -2972,14 +2972,6 @@
             "713": {
                 "name": "Sumptorium",
                 "description": "Rückkehr"
-            },
-            "714": {
-                "name": "Rückruf",
-                "description": "Komm zurück"
-            },
-            "715": {
-                "name": "Halten",
-                "description": "Aufgehoben für später"
             },
             "716": {
                 "name": "Sack des Hüters",

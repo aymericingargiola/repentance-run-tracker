@@ -94,8 +94,8 @@ module.exports = {
         if (fromStringTable) {
             const itemsIndex = stringTableFile.stringtable.category.findIndex(item => item._attributes.name === 'Items')
             const itemsJson = stringTableFile.stringtable.category[itemsIndex].key.reduce((t, obj) => {
-                const matchingItemName = convertItemsXmlItems.find(item => item._attributes.name === `#${obj._attributes.name}`)
-                const matchingItemDescription = convertItemsXmlItems.find(item => item._attributes.description === `#${obj._attributes.name}`)
+                const matchingItemName = convertItemsXmlItems.find(item => item._attributes.hidden !== "true" && item._attributes.name === `#${obj._attributes.name}`)
+                const matchingItemDescription = convertItemsXmlItems.find(item => item._attributes.hidden !== "true" && item._attributes.description === `#${obj._attributes.name}`)
                 if (matchingItemName) {
                     if (!t[matchingItemName._attributes.id]) t[matchingItemName._attributes.id] = {}
                     t[matchingItemName._attributes.id].name = obj.string[fromStringTable.index]._text
@@ -107,8 +107,8 @@ module.exports = {
                 return t
             }, {})
             const trinketsJson = stringTableFile.stringtable.category[itemsIndex].key.reduce((t, obj) => {
-                const matchingTrinketName = convertItemsXmlTrinkets.find(item => item._attributes.name === `#${obj._attributes.name}`)
-                const matchingTrinketDescription = convertItemsXmlTrinkets.find(item => item._attributes.description === `#${obj._attributes.name}`)
+                const matchingTrinketName = convertItemsXmlTrinkets.find(item => item._attributes.hidden !== "true" && item._attributes.name === `#${obj._attributes.name}`)
+                const matchingTrinketDescription = convertItemsXmlTrinkets.find(item => item._attributes.hidden !== "true" && item._attributes.description === `#${obj._attributes.name}`)
                 if (matchingTrinketName) {
                     if (!t[matchingTrinketName._attributes.id]) t[matchingTrinketName._attributes.id] = {}
                     t[matchingTrinketName._attributes.id].name = obj.string[fromStringTable.index]._text
@@ -155,7 +155,7 @@ module.exports = {
             const stagesJson = stringTableFile.stringtable.category[stageIndex].key.reduce((t, obj) => {
                 const matchingStage = convertStagesXml.stages.stage.find(stage => `${stage._attributes.name.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name || `${stage._attributes.path.split('.')[1].replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
                 if (!matchingStage) return t
-                const key = matchingStage._attributes.name === 'The Void' ? 'The Void' : matchingStage._attributes.path.split('.')[1]
+                const key = matchingStage._attributes.id === '26' ? 'The Void' : matchingStage._attributes.path.split('.')[1]
                 t[key] = {}
                 t[key].name = obj.string[fromStringTable.index]._text
                 return t
@@ -164,9 +164,10 @@ module.exports = {
             return stagesJson
         }
         const stagesJson = convertStagesXml.stages.stage.reduce((t, obj) => {
-                t[obj._attributes.path.split('.')[1]] = {}
-                t[obj._attributes.path.split('.')[1]].name = obj._attributes.name
-                return t
+            const key = obj._attributes.id === '26' ? 'The Void' : obj._attributes.path.split('.')[1]
+            t[key] = {}
+            t[key].name = obj._attributes.name
+            return t
         }, {})
         console.timeEnd(`Stages localization for ${language} json done in `)
         return stagesJson

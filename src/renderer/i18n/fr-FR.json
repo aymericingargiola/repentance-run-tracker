@@ -39,7 +39,7 @@
         "allTags": "Tous les tags",
         "allCharacters": "Tous les personnages",
         "allSaves": "Toutes les sauvegardes",
-        "allCondition": "Toutes les conditions",
+        "allCondition": "Toutes",
         "winCondition": "Condition de victoire"
     },
     "editRun": {
@@ -3877,7 +3877,7 @@
             "name": "Salles Spéciales"
         },
         "Basement": {
-            "name": "Le Néant"
+            "name": "Sous-Sol"
         },
         "Cellar": {
             "name": "Cave"
@@ -3932,6 +3932,9 @@
         },
         "Ultra Greed": {
             "name": "Ultra Avarice"
+        },
+        "The Void": {
+            "name": "Le Néant"
         },
         "Downpour": {
             "name": "Canalisations"
