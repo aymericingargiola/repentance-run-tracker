@@ -153,10 +153,11 @@ module.exports = {
         if (fromStringTable) {
             const stageIndex = stringTableFile.stringtable.category.findIndex(stage => stage._attributes.name === 'Stages')
             const stagesJson = stringTableFile.stringtable.category[stageIndex].key.reduce((t, obj) => {
-                const matchingStage = convertStagesXml.stages.stage.find(stage => `${stage._attributes.path && stage._attributes.path.split('.')[1].replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
+                const matchingStage = convertStagesXml.stages.stage.find(stage => `${stage._attributes.name.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name || `${stage._attributes.path.split('.')[1].replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
                 if (!matchingStage) return t
-                t[matchingStage._attributes.path.split('.')[1]] = {}
-                t[matchingStage._attributes.path.split('.')[1]].name = obj.string[fromStringTable.index]._text
+                const key = matchingStage._attributes.name === 'The Void' ? 'The Void' : matchingStage._attributes.path.split('.')[1]
+                t[key] = {}
+                t[key].name = obj.string[fromStringTable.index]._text
                 return t
             }, {})
             console.timeEnd(`Stages localization for ${language} json done in `)
