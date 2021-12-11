@@ -2,7 +2,7 @@
   "name": "repentanceruntracker",
   "author": "Aymeric Ingargiola",
   "description": "App to track The Binding of Isaac game's run",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "private": true,
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "v-calendar": "^2.3.4",
     "vue": "^2.6.11",
     "vue-color-gradient-picker": "^0.1.2",
+    "vue-i18n": "^8.26.7",
     "vue-router": "^3.5.1",
     "vue2-timepicker": "^1.1.6",
     "vuescroll": "^4.17.3",

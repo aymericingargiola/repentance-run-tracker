@@ -250,12 +250,12 @@ function updateOrCreateRun(params = {}) {
                 break
                 case 'run end':
                     const runEndInfo = getRunEnd(params.log)
-                    sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : sameRun.runEnd.date
+                    sameRun.runEnd.date = sameRun.extendedSaveMode ? sameRun.runEnd.date : runEndInfo.date
                     sameRun.runEnd.win = runEndInfo.win
                     sameRun.runEnd.killedBy = runEndInfo.killedBy
                     sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
                     sameRun.runEnd.damageFlags = runEndInfo.damageFlags
-                    sameRun.runDuration = getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
+                    sameRun.runDuration = sameRun.extendedSaveMode ? sameRun.runDuration : getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
                     if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
@@ -390,12 +390,12 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Adding collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4)})
+            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4, otherModsLoaded)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Removing voided collectible") || log.includes("Removing collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4)})
+            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4, otherModsLoaded)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         // Trinkets has no "remove" event from game logs at the moment
@@ -445,7 +445,7 @@ function parseLogs(newLogs, logArray) {
             } else {
                 const modName = log.split("/")[2] ? log.split("/")[2].replace(/[0-9_]/g, "") : log
                 elog.info(`Other mod is loaded : ${modName}`)
-                otherModsLoaded = otherModsLoaded ? otherModsLoaded.push(modName) : [modName]
+                if (!otherModsLoaded.includes(modName)) otherModsLoaded.push(modName)
                 if (currentRun) currentRun.otherModsLoaded = otherModsLoaded
                 updateOrCreateRun({trigger: "other mods loaded"})
             }
@@ -511,6 +511,7 @@ async function init() {
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
     extendedSaveMode = repentanceLogsArray.filter(v=>v.includes("RRTEEXTENDLOGS")).length > 0 //Check if the "Repentance Run Tracker Extended" mod was loaded (more logs infos)
     const luaResetList = repentanceLogsArray.filter(v=>v.includes("Lua is resetting"))
+    const listMods = repentanceLogsArray.filter(v=>v.includes("begin list mods"))
     const gameStatesList = repentanceLogsArray.filter(v=>v.includes("Loading GameState"))
     currentGameState = gameStatesList[gameStatesList.length - 1] != undefined ? getGameState(gameStatesList[gameStatesList.length - 1]) : null
     const seedsList = repentanceLogsArray.filter(v=>v.includes("RNG Start Seed"))
@@ -520,6 +521,9 @@ async function init() {
     // Check loaded mods
     if (luaResetList[luaResetList.length - 1] != undefined) {
         const loadedModsList = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, luaResetList[luaResetList.length - 1]), repentanceLogsArray.length - 1).filter(log => log.includes("Running Lua Script"))
+        if (loadedModsList.length > 0) parseLogs(loadedModsList, loadedModsList)
+    } else if (listMods[listMods.length - 1] != undefined) {
+        const loadedModsList = repentanceLogsArray.slice(findLastIndex(repentanceLogsArray, listMods[listMods.length - 1]), repentanceLogsArray.length - 1).filter(log => log.includes("Running Lua Script"))
         if (loadedModsList.length > 0) parseLogs(loadedModsList, loadedModsList)
     }
 

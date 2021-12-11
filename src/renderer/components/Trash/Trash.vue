@@ -7,16 +7,16 @@
                 <div class="buttons">
                     <div class="mid" :style="{backgroundImage:`url('img/textures/floors/chest-ground.png')`}"></div>
                     <div class="btn empty">
-                        <button :disabled="trashRuns.all().length < 1" class="warning" @click="emptyTrash()">Empty Trash</button>
+                        <button :disabled="trashRuns.all().length < 1" class="warning" @click="emptyTrash()">{{$t('trash.emptyTrash')}}</button>
                     </div>
                     <div class="btn delete">
-                        <button class="warning" :disabled="selected.length === 0" @click="deleteSelected()">Delete Selected</button>
+                        <button class="warning" :disabled="selected.length === 0" @click="deleteSelected()">{{$t('strings.deleteSelected')}}</button>
                     </div>
                     <div class="btn restore">
-                        <button :disabled="selected.length === 0" @click="restoreSelected()">Restore Selected</button>
+                        <button :disabled="selected.length === 0" @click="restoreSelected()">{{$t('strings.restoreSelected')}}</button>
                     </div>
                     <div class="btn close">
-                        <button @click="close()">Close</button>
+                        <button @click="close()">{{$t('dictionary.close')}}</button>
                     </div>
                 </div>
                 <transition-group name="trash-run-group-transition" tag="ul" class="runs-container">
@@ -41,7 +41,7 @@
                 </transition-group>
                 <div class="trash-empty" v-if="trashRuns.all().length < 1">
                     <span class="message">
-                        Trash is empty !
+                        {{$t('trash.trashIsEmpty')}}
                     </span>
                 </div>
             </div>
@@ -255,6 +255,12 @@ export default {
                             li {
                                 margin-left: 8px;
                                 margin-right: 8px;
+                                > .before {
+                                    left: 2px;
+                                }
+                                > .after {
+                                    right: 2px;
+                                }
                             }
                         }
                     }

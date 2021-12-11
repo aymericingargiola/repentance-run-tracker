@@ -1,5 +1,5 @@
 <template>
-    <v-date-picker locale="en" v-model="rangeUpdate" :model-config="datePickerModelConfig" is-range>
+    <v-date-picker :locale="getLanguage" v-model="rangeUpdate" :model-config="datePickerModelConfig" is-range>
         <template v-slot="{ inputEvents }">
             <div class="v-calendar date-picker">
                 <div class="custom-input">
@@ -54,6 +54,9 @@ export default {
         ...mapRepos({
             configRepo: Config
         }),
+        getLanguage() {
+            return this.getConfig("languages") ? this.getConfig("languages").value : 'en-US'
+        },
         dateFormat() {
             return this.getConfig("dateFormat") ? this.getConfig("dateFormat").value : 'MM/DD/YY'
         },

@@ -9,7 +9,7 @@
                             <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
                         </div>
                         <div class="floor-wrapper">
-                            <div class="floor-name">{{floor.name}}</div>
+                            <div class="floor-name">{{$t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`)}} {{!isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : ''}}</div>
                             <transition-group name="item-group-transition" tag="ul" class="items">
                                 <template v-for="(item, tidx) in floor.itemsCollected">
                                     <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
@@ -18,13 +18,14 @@
                                                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
                                                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-                                                <span>{{item.golden ? 'Golden ' : ''}}{{item.title}}</span>
+                                                <span>{{item.golden ? 'Golden ' : ''}}{{item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title)}}</span>
                                             </div>
                                             <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
                                                 <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
                                             </div>
-                                            <img v-if="item.type === 'trinket'" :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`">
-                                            <img v-else :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+                                            <img v-if="item.type === 'trinket'" :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
+                                            <img v-else-if="item.custom" :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
+                                            <img v-else :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
                                         </a>
                                         <a v-else class="item-image glitched">
                                             <div class="name">
@@ -39,7 +40,7 @@
                                             <div class="glitched-image">
                                                 <template v-for="index in 3">
                                                     <div class="contain" :key="`glitched ${index}`">
-                                                        <img class="glitched" onerror="this.src='img/icons/collectibles/023.png'" :src="`img/icons/collectibles/${randomItemId()}.png`">
+                                                        <img class="glitched" :src="`img/icons/collectibles/${randomItemId()}.png`" onerror="this.src='img/icons/collectibles/023.png'">
                                                     </div>
                                                 </template>
                                             </div>
@@ -96,6 +97,15 @@ export default {
             if (id < 10) id = `00${id}`
             else if (id < 100) id = `0${id}`
             return id
+        },
+        t(str, fallbackStr) {
+            return this.$t && this.$te
+            ? this.$te(str)
+            ? this.$t(str)
+            : fallbackStr
+            : fallbackStr
+            ? fallbackStr
+            : str
         }
     },
     mounted() {
@@ -108,12 +118,12 @@ export default {
             })
             window.ipc.on('SYNC_UPDATE_RUN', (response) => {
                 if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
-                    this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
+                    this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
                     setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"].refresh()
+                        this.$refs["firstRunFloorsScroller"]?.refresh()
                     }, 1000)
                     setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
+                        this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
                     }, 1000)
                 }
             })

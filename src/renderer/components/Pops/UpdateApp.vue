@@ -4,8 +4,9 @@
             <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
             <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
             <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-            <div v-if="updateProgress" class="title">Update {{updateVersion}} downloading: {{Math.round(updateProgressInfos.percent)}}%</div>
-            <div v-if="updateDownloaded" class="title">Update {{updateVersion}} downloaded, click here to update and restart</div>
+            <div v-if="updateProgress" class="title">{{$t('update.updateDownloading', { updateVersion: updateVersion, updateProgressInfos: Math.round(updateProgressInfos.percent) })}}
+            </div>
+            <div v-if="updateDownloaded" class="title">{{$t('update.updateDownloaded', { updateVersion: updateVersion })}}</div>
         </div>
     </transition>
 </template>

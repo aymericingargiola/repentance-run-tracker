@@ -33,8 +33,8 @@
             <div class="image-1 animated" style="background-image:url('img/loadimages/loadimages-001.png')"></div>
             <div class="image-2 animated" style="background-image:url('img/loadimages/loadimages-001_2.png')"></div>
             <div class="message">
-                <span v-if="allRuns && allRuns.length === 0">Start your first run !</span>
-                <span v-if="filteredRuns && filteredRuns.length === 0 && allRuns && allRuns.length > 0">No runs found</span>
+                <span v-if="allRuns && allRuns.length === 0">{{$t('strings.startFirstRun')}}</span>
+                <span v-if="filteredRuns && filteredRuns.length === 0 && allRuns && allRuns.length > 0">{{$t('strings.noRunsFound')}}</span>
             </div>
         </div>
     </section>

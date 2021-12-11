@@ -165,14 +165,15 @@ module.exports = {
         const loadConfig = await fileResolve(dataFolder, 'config.json', JSON.stringify(configTemplate));
         let tempConfig = await module.exports.checkJson(dataFolder, loadConfig, 'config.json', JSON.stringify(configTemplate))
         configTemplate.forEach((field) => {
-            const tempConfigField = tempConfig.find((configItem) => configItem.id === field.id);
-            if (!tempConfigField) tempConfig.push(field);
-            if (tempConfigField && field.choices && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices;
-			if (tempConfigField && field.choices && !field.choices.map(choice => choice.value).includes(tempConfigField.value)) tempConfigField.value = field.choices[0].value
-            if (tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name;
-            if (tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint;
-            if (tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type;
-            if (tempConfigField && tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled;
+            const tempConfigField = tempConfig.find((configItem) => configItem.id === field.id)
+            if (!tempConfigField) tempConfig.push(field)
+            if (tempConfigField && field.choices && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices
+			if (tempConfigField && field.choices && (!tempConfigField.value || !field.choices.map(choice => choice.value).includes(tempConfigField.value))) tempConfigField.value = field.choices[0].value
+            if (tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name
+            if (tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
+            if (tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type
+			if (tempConfigField && tempConfigField.order != field.order) tempConfigField.order = field.order
+            if (tempConfigField && tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled
         })
         await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
         return tempConfig

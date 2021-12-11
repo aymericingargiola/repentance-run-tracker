@@ -81,7 +81,7 @@ export default {
   @import "assets/styles/scss/overwrite/vcalendar";
 
   html {
-    font-family: "Baby Doll", sans-serif;
+    font-family: "BabyDollv2", sans-serif;
     text-align: center;
     color: $text-dark;
     background-color: $paper-white-dark;

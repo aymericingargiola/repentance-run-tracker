@@ -1,13 +1,13 @@
 <template>
         <div v-if="allRuns && allRuns.length > 0 && filteredRuns" class="filters">
             <div class="search">
-                <input v-model="filterText" @input="resetPaginationFromInput()" placeholder="Search runs">
+                <input v-model="filterText" @input="resetPaginationFromInput()" :placeholder="$t('strings.searchRuns')">
             </div>
             <DateRangePicker @updateDateRange="onUpdateDateRange"/>
-            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" label="Tags" emptyMessage="All tags" @updateSelect="onUpdateTagsMultiSelect"/>
-            <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="trueName" :items="charactersWithRuns" label="Characters" emptyMessage="All characters" @updateSelect="onUpdateCharactersMultiSelect"/>
-            <CustomSelect type="multi" :items="gameStateWithRuns" label="Save" emptyMessage="All saves" @updateSelect="onUpdateGameStateMultiSelect"/>
-            <CustomSelect type="single" :items="winConditionWithRuns" label="Win condition" emptyMessage="All conditions" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
+            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" :label="$tc('dictionary.tag', 2)" :emptyMessage="$t('select.allTags')" @updateSelect="onUpdateTagsMultiSelect"/>
+            <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="name" :items="charactersWithRuns" :label="$tc('dictionary.character', 2)" :emptyMessage="$t('select.allCharacters')" @updateSelect="onUpdateCharactersMultiSelect"/>
+            <CustomSelect type="multi" :items="gameStateWithRuns" :label="$tc('dictionary.save', 2)" :emptyMessage="$t('select.allSaves')" @updateSelect="onUpdateGameStateMultiSelect"/>
+            <CustomSelect type="single" :items="winConditionWithRuns" :label="$t('select.winCondition')" :emptyMessage="$t('select.allCondition')" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
         </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
             filterTags: [],
             gameStateOptions: [1,2,3],
             filterGameStates: [],
-            winConditionOptions: ["Win", "Lose"],
+            winConditionOptions: [{id: 0, value: "Win", name: this.$t('dictionary.win')}, {id: 1, value: "Lose", name: this.$t('dictionary.lose')}],
             filterWinCondition: null,
             filterDateStart: null,
             filterDateEnd: null,
@@ -103,7 +103,7 @@ export default {
             this.$emit('resetPagination')
         },
         onUpdateWinConditionMultiSelect(selected) {
-            this.filterWinCondition = selected.length === 0 ? null : selected[0] === 'Win' ? true : false
+            this.filterWinCondition = selected.length === 0 ? null : selected[0].value === 'Win' ? true : false
             this.$emit('resetPagination')
         },
         onUpdateGameStateMultiSelect(selected) {
@@ -175,14 +175,14 @@ export default {
         },
         checkWinCondition(condition) {
             let runs
-            const thisCondition = condition === "Win" ? true : false
+            const thisCondition = condition.value === "Win" ? true : false
 
             // Init Check if runs has save 
             runs = this.runRepo.where((run) => run.runEnd.win === thisCondition)
             if (runs.get().length < 1) return
 
             if (this.checkFilters(runs, "winCondition").length < 1) return
-
+            condition.name = this.$t(`dictionary.${condition.value.toLowerCase()}`)
             return condition
         },
         checkGameState(gameState) {
@@ -218,8 +218,8 @@ export default {
             if (runs.get().length < 1) return
 
             if(this.checkFilters(runs, "characters").length < 1) return
-            
-            character.trueName = `${character.trueName}${character.version === 'Alternate' ? ' (tainted)' : ''}`
+
+            character.name = character.id === "19" ? `${this.$t("players.19.name")} & ${this.$t("players.20.name")}` : `${this.$t(`players.${character.id}.name`)}${character.version === 'Alternate' ? ` (${this.$t('dictionary.tainted')})` : ''}`
             return character
         },
         filterRuns(run) {

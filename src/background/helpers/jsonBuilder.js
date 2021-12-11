@@ -1,6 +1,15 @@
+const path = require('path')
+const fs = require('fs')
+const fsPromises = fs.promises
 const { writeFileAsync } = require('../tools/fileSystem')
+const { asyncForEach } = require('../tools/methods')
 const convert = require('xml-js')
 const entitiesXml = require('!raw-loader!../jsons/entities2.xml')
+const i18nFolder = './src/renderer/i18n'
+const xmlsFolders = './src/background/jsons/languages'
+const stringTable = [{index: 0, language: "en-US"}, {index: 1, language: "ja-JP"}, {index: 2, language: "ko-KR"}, {index: 3, language: "zh-ZH"}, {index: 4, language: "ru-RU"}, {index: 5, language: "de-DE"}, {index: 6, language: "es-ES"}]
+const stringTablePath = './src/background/jsons/languages/stringtable.sta'
+let stringTableFile
 
 module.exports = {
     convertToJson: async function(xml) {
@@ -33,10 +42,173 @@ module.exports = {
         await writeFileAsync('./src/background/jsons', 'entitiesFiltered.json', JSON.stringify(entitiesJson))
         return console.timeEnd('Entities json done in ')
     },
+    playersLocalization: async function(language) {
+        console.time(`Players localization for ${language} json done in `)
+        const fromStringTable = stringTable.find(item => item.language === language)
+        const playersXmlPath = !fromStringTable ? `${xmlsFolders}/${language}/players.xml` : `${xmlsFolders}/en-US/players.xml`
+        let playersXml
+        try {
+            playersXml = await fsPromises.readFile(playersXmlPath)
+        } catch (err) {
+            console.log(err)
+            console.timeEnd(`Players localization for ${language} json done in `)
+            return {}
+        }
+        const cleanPlayersXml = await module.exports.removeXmlComments(playersXml.toString())
+        const convertPlayersXml = await module.exports.convertToJson(cleanPlayersXml)
+        if (fromStringTable) {
+            const playersIndex = stringTableFile.stringtable.category.findIndex(item => item._attributes.name === 'Players')
+            const playersJson = stringTableFile.stringtable.category[playersIndex].key.reduce((t, obj) => {
+                const matchingPlayer = convertPlayersXml.players.player.find(player => `${player._attributes.name.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name || `${player._attributes.costumeSuffix && player._attributes.costumeSuffix.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
+                if (!matchingPlayer) return t
+                t[matchingPlayer._attributes.id] = {}
+                t[matchingPlayer._attributes.id].name = obj.string[fromStringTable.index]._text
+                return t
+            }, {})
+            console.timeEnd(`Players localization for ${language} json done in `)
+            return playersJson
+        }
+        const playersJson = convertPlayersXml.players.player.reduce((t, obj) => {
+                t[obj._attributes.id] = {}
+                t[obj._attributes.id].name = obj._attributes.name
+                return t
+        }, {})
+        console.timeEnd(`Players localization for ${language} json done in `)
+        return playersJson
+    },
+    itemsLocalization: async function(language) {
+        console.time(`Items localization for ${language} json done in `)
+        const fromStringTable = stringTable.find(item => item.language === language)
+        const itemsXmlPath = !fromStringTable ? `${xmlsFolders}/${language}/items.xml` : `${xmlsFolders}/en-US/items.xml`
+        let itemsXml
+        try {
+            itemsXml = await fsPromises.readFile(itemsXmlPath)
+        } catch (err) {
+            console.log(err)
+            return console.timeEnd(`Items localization for ${language} json done in `)
+        }
+        const cleanItemsXml = await module.exports.removeXmlComments(itemsXml.toString())
+        const convertItemsXml = await module.exports.convertToJson(cleanItemsXml)
+        const convertItemsXmlItems = [...convertItemsXml.items.passive, ...convertItemsXml.items.active, ...convertItemsXml.items.familiar]
+        const convertItemsXmlTrinkets = [...convertItemsXml.items.trinket]
+        if (fromStringTable) {
+            const itemsIndex = stringTableFile.stringtable.category.findIndex(item => item._attributes.name === 'Items')
+            const itemsJson = stringTableFile.stringtable.category[itemsIndex].key.reduce((t, obj) => {
+                const matchingItemName = convertItemsXmlItems.find(item => item._attributes.hidden !== "true" && item._attributes.name === `#${obj._attributes.name}`)
+                const matchingItemDescription = convertItemsXmlItems.find(item => item._attributes.hidden !== "true" && item._attributes.description === `#${obj._attributes.name}`)
+                if (matchingItemName) {
+                    if (!t[matchingItemName._attributes.id]) t[matchingItemName._attributes.id] = {}
+                    t[matchingItemName._attributes.id].name = obj.string[fromStringTable.index]._text
+                }
+                if (matchingItemDescription) {
+                    if (!t[matchingItemDescription._attributes.id]) t[matchingItemDescription._attributes.id] = {}
+                    t[matchingItemDescription._attributes.id].description = obj.string[fromStringTable.index]._text
+                }
+                return t
+            }, {})
+            const trinketsJson = stringTableFile.stringtable.category[itemsIndex].key.reduce((t, obj) => {
+                const matchingTrinketName = convertItemsXmlTrinkets.find(item => item._attributes.hidden !== "true" && item._attributes.name === `#${obj._attributes.name}`)
+                const matchingTrinketDescription = convertItemsXmlTrinkets.find(item => item._attributes.hidden !== "true" && item._attributes.description === `#${obj._attributes.name}`)
+                if (matchingTrinketName) {
+                    if (!t[matchingTrinketName._attributes.id]) t[matchingTrinketName._attributes.id] = {}
+                    t[matchingTrinketName._attributes.id].name = obj.string[fromStringTable.index]._text
+                }
+                if (matchingTrinketDescription) {
+                    if (!t[matchingTrinketDescription._attributes.id]) t[matchingTrinketDescription._attributes.id] = {}
+                    t[matchingTrinketDescription._attributes.id].description = obj.string[fromStringTable.index]._text
+                }
+                return t
+            }, {})
+            console.timeEnd(`Items localization for ${language} json done in `)
+            return {items: itemsJson, trinkets: trinketsJson}
+        }
+        const itemsJson = convertItemsXmlItems.reduce((t, obj) => {
+            t[obj._attributes.id] = {}
+            t[obj._attributes.id].name = obj._attributes.name
+            t[obj._attributes.id].description = obj._attributes.description
+            return t
+        }, {})
+        const trinketsJson = convertItemsXmlTrinkets.reduce((t, obj) => {
+            t[obj._attributes.id] = {}
+            t[obj._attributes.id].name = obj._attributes.name
+            t[obj._attributes.id].description = obj._attributes.description
+            return t
+        }, {})
+        console.timeEnd(`Items localization for ${language} json done in `)
+        return {items: itemsJson, trinkets: trinketsJson}
+    },
+    stagesLocalization: async function(language) {
+        console.time(`Stages localization for ${language} json done in `)
+        const fromStringTable = stringTable.find(item => item.language === language)
+        const stagesXmlPath = !fromStringTable ? `${xmlsFolders}/${language}/stages.xml` : `${xmlsFolders}/en-US/stages.xml`
+        let stagesXml
+        try {
+            stagesXml = await fsPromises.readFile(stagesXmlPath)
+        } catch (err) {
+            console.log(err)
+            return console.timeEnd(`Stages localization for ${language} json done in `)
+        }
+        const cleanStagesXml = await module.exports.removeXmlComments(stagesXml.toString())
+        const convertStagesXml = await module.exports.convertToJson(cleanStagesXml)
+        if (fromStringTable) {
+            const stageIndex = stringTableFile.stringtable.category.findIndex(stage => stage._attributes.name === 'Stages')
+            const stagesJson = stringTableFile.stringtable.category[stageIndex].key.reduce((t, obj) => {
+                const matchingStage = convertStagesXml.stages.stage.find(stage => `${stage._attributes.name.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name || `${stage._attributes.path.split('.')[1].replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
+                if (!matchingStage) return t
+                const key = matchingStage._attributes.id === '26' ? 'The Void' : matchingStage._attributes.path.split('.')[1]
+                t[key] = {}
+                t[key].name = obj.string[fromStringTable.index]._text
+                return t
+            }, {})
+            console.timeEnd(`Stages localization for ${language} json done in `)
+            return stagesJson
+        }
+        const stagesJson = convertStagesXml.stages.stage.reduce((t, obj) => {
+            const key = obj._attributes.id === '26' ? 'The Void' : obj._attributes.path.split('.')[1]
+            t[key] = {}
+            t[key].name = obj._attributes.name
+            return t
+        }, {})
+        console.timeEnd(`Stages localization for ${language} json done in `)
+        return stagesJson
+    },
+    updateLocalizationJsons: async function() {
+        console.time('Localization json done in ')
+        let languageJsons = []
+        try {
+            languageJsons = await fsPromises.readdir(i18nFolder)
+            stringTableFile = await fsPromises.readFile(stringTablePath)
+            stringTableFile = await module.exports.removeXmlComments(stringTableFile.toString())
+            stringTableFile = await module.exports.convertToJson(stringTableFile)
+        } catch (err) {
+            console.log(err)
+            return console.timeEnd('Localization jsons done in ')
+        }
+        languageJsons = languageJsons.filter(item => path.extname(item) === '.json')
+        if (languageJsons.length === 0) return console.timeEnd('Localization json done in ')
+        await asyncForEach(languageJsons, async (languageJson) => {
+            const languageJsonName = path.parse(languageJson).name
+            const languageJsonPath = `${i18nFolder}/${languageJson}`
+            let languageJsonFile
+            try {
+                languageJsonFile = await fsPromises.readFile(languageJsonPath)
+            } catch (err) {
+                console.log(err)
+                return
+            }
+            languageJsonFile = JSON.parse(languageJsonFile.toString())
+            languageJsonFile.players = await module.exports.playersLocalization(languageJsonName)
+            languageJsonFile.items = await module.exports.itemsLocalization(languageJsonName)
+            languageJsonFile.stages = await module.exports.stagesLocalization(languageJsonName)
+            await writeFileAsync(i18nFolder, languageJson, JSON.stringify(languageJsonFile, null, 4))
+        })
+        return console.timeEnd('Localization jsons done in ')
+    },
 	buildJsons: async function() {
         console.log('Building jsons...')
         console.time('Jsons builder done in ')
         await module.exports.buildEntitiesJson(entitiesXml)
+        await module.exports.updateLocalizationJsons()
         return console.timeEnd('Jsons builder done in ')
 	}
 }

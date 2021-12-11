@@ -8,6 +8,8 @@ import VCalendar from 'v-calendar'
 import VueTimepicker from 'vue2-timepicker'
 import 'vue2-timepicker/dist/VueTimepicker.css'
 import { ColorPicker } from 'vue-color-gradient-picker'
+import VueI18n from 'vue-i18n'
+import { languages, customModifiers, defaultLocale } from './i18n/index'
 import 'vue-color-gradient-picker/dist/index.css'
 import helpers from './helpers/format'
 
@@ -20,25 +22,27 @@ const plugins = {
 
 Vue.use(plugins)
 
-Vue.use(vuescroll, {
-  ops: {
-    // The global config
-  },
-})
+Vue.use(vuescroll)
 
-Vue.use(VCalendar);
+Vue.use(VCalendar)
 
 Vue.component("vue-timepicker", VueTimepicker)
 
 Vue.component("ColorPicker", ColorPicker)
 
+Vue.use(VueI18n)
+const messages = Object.assign(languages)
+const modifiers = Object.assign(customModifiers)
+const i18n = new VueI18n({
+  locale: defaultLocale,
+  fallbackLocale: defaultLocale,
+  messages,
+  modifiers
+})
+
 Vue.prototype.$DateTime = DateTime
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
 Vue.prototype.$isDev = process.env.NODE_ENV === "development"
-
-// store.$repo(Context).insert({
-//   id: 1
-// });
 
 Vue.config.productionTip = false
 
@@ -59,5 +63,6 @@ Vue.directive('click-outside', {
 new Vue({
   store,
   router,
+  i18n,
   render: h => h(App),
 }).$mount('#app')
