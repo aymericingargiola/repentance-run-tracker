@@ -60,7 +60,7 @@ export default {
     mounted() {
         window.ipc.send('ASK_CONFIG')
         window.ipc.on('SYNC_SEND_CONFIG', (response) => {
-            this.configRepo.fresh(response.config)
+            this.configRepo.fresh(response.config.sort((a, b) => a.order - b.order))
             const currentLang = response.config.filter(cfg => cfg.id === 'languages')[0].value
             this.$i18n.locale = currentLang
             document.documentElement.setAttribute('lang', currentLang)
