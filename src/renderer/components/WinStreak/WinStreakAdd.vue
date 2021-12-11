@@ -30,7 +30,7 @@
                     <template v-for="character in allCharacters">
                         <li :class="['character', characters.includes(character.id) ? 'selected' : '']" :key="character.id" v-on:click="characterSelected(character.id)">
                             <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/${character.id}.png')`}"></span>
-                            <span class="name">{{character.trueName}} {{character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : ""}} {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}</span>
+                            <span class="name">{{character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${character.id}.name`)}` }} {{character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : ""}} {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}</span>
                         </li>
                     </template>
                 </ul>
@@ -45,7 +45,7 @@
                 <template v-for="boss in lastBosses">
                     <li :class="['boss', bosses.includes(boss.id) ? 'selected' : '']" :key="boss.id" v-on:click="bossSelected(boss.id)">
                         <span class="small-portrait boss image" :style="{backgroundImage:`url('img/entities/small portraits/${boss.portrait}.png')`}"></span>
-                        <span class="name">{{boss.name}} {{bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : ''}}</span>
+                        <span class="name">{{$t(`entities.${boss.id.replaceAll('.', '-')}.name`)}} {{bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : ''}}</span>
                     </li>
                 </template>
             </div>

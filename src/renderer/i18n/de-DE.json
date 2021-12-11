@@ -3944,5 +3944,1357 @@
         "Backwards": {
             "name": "?"
         }
+    },
+    "entities": {
+        "10-0-0": {
+            "name": "Mürrischer Gaffer"
+        },
+        "10-1-0": {
+            "name": "Gaffer"
+        },
+        "10-2-0": {
+            "name": "Flammender Gaffer"
+        },
+        "10-3-0": {
+            "name": "Verfaulter Gaffer"
+        },
+        "10-3-1": {
+            "name": "Verfaulter Gaffer"
+        },
+        "10-3-2": {
+            "name": "Verfaulter Gaffer"
+        },
+        "10-3-3": {
+            "name": "Verfaulter Gaffer"
+        },
+        "10-3-4": {
+            "name": "Verfaulter Gaffer"
+        },
+        "10-3-5": {
+            "name": "Verfaulter Gaffer"
+        },
+        "11-0-0": {
+            "name": "Bluter"
+        },
+        "11-1-0": {
+            "name": "Schreiter"
+        },
+        "12-0-0": {
+            "name": "Horf"
+        },
+        "13-0-0": {
+            "name": "Fliege"
+        },
+        "14-0-0": {
+            "name": "Kackewerfer"
+        },
+        "14-1-0": {
+            "name": "Super-Kackewerfer"
+        },
+        "14-2-0": {
+            "name": "Befleckter Kackewerfer"
+        },
+        "15-0-0": {
+            "name": "Klumpi"
+        },
+        "15-1-0": {
+            "name": "Klumpen"
+        },
+        "15-3-0": {
+            "name": "Gegrillter Klumpi"
+        },
+        "16-0-0": {
+            "name": "Mulligan"
+        },
+        "16-1-0": {
+            "name": "Mulligauner"
+        },
+        "16-2-0": {
+            "name": "Mullibumm"
+        },
+        "3-43-0": {
+            "name": "Angriffsfliege"
+        },
+        "18-0-0": {
+            "name": "Angriffsfliege"
+        },
+        "19-1-0": {
+            "name": "Hollow"
+        },
+        "19-2-0": {
+            "name": "Tuff-Zwilling"
+        },
+        "19-3-0": {
+            "name": "Shell"
+        },
+        "20-0-0": {
+            "name": "Monstro"
+        },
+        "21-0-0": {
+            "name": "Made"
+        },
+        "1000-63-1": {
+            "name": "Made"
+        },
+        "22-0-0": {
+            "name": "Stock"
+        },
+        "22-1-0": {
+            "name": "Ertrunkener Stock"
+        },
+        "22-2-0": {
+            "name": "Heiliger Mulligan"
+        },
+        "22-3-0": {
+            "name": "Befleckter Mulligan"
+        },
+        "23-0-0": {
+            "name": "Sturmmade"
+        },
+        "23-1-0": {
+            "name": "Ertrunkene Sturmmade"
+        },
+        "23-2-0": {
+            "name": "Nasse Sturmmade"
+        },
+        "23-3-0": {
+            "name": "Aasprinzessin"
+        },
+        "24-0-0": {
+            "name": "Globin"
+        },
+        "24-1-0": {
+            "name": "Starrendes Globin"
+        },
+        "24-2-0": {
+            "name": "Nasses Globin"
+        },
+        "24-3-0": {
+            "name": "Verfluchtes Globin"
+        },
+        "25-0-0": {
+            "name": "Bumm-Fliege"
+        },
+        "25-3-0": {
+            "name": "Drachenfliege"
+        },
+        "25-4-0": {
+            "name": "Knochenfliege"
+        },
+        "26-0-0": {
+            "name": "Schlund"
+        },
+        "26-1-0": {
+            "name": "Rotschlund"
+        },
+        "26-2-0": {
+            "name": "Psycho-Schlund"
+        },
+        "27-0-0": {
+            "name": "Wirt"
+        },
+        "27-1-0": {
+            "name": "Roter Wirt"
+        },
+        "27-3-0": {
+            "name": "Harter Wirt"
+        },
+        "28-0-0": {
+            "name": "Pummel"
+        },
+        "29-0-0": {
+            "name": "Hüpfer"
+        },
+        "29-1-0": {
+            "name": "Trite"
+        },
+        "29-2-0": {
+            "name": "Eisack-Hüpfer"
+        },
+        "29-3-0": {
+            "name": "Befleckter Hüpfer"
+        },
+        "30-0-0": {
+            "name": "Beule"
+        },
+        "30-1-0": {
+            "name": "Darm"
+        },
+        "30-2-0": {
+            "name": "Sack"
+        },
+        "31-0-0": {
+            "name": "Spucki"
+        },
+        "31-1-0": {
+            "name": "Befleckter Spucki"
+        },
+        "32-0-0": {
+            "name": "Hirn"
+        },
+        "33-11-0": {
+            "name": "Kohle"
+        },
+        "33-11-1": {
+            "name": "Kohle"
+        },
+        "33-11-2": {
+            "name": "Kohle"
+        },
+        "33-11-3": {
+            "name": "Kohle"
+        },
+        "34-0-0": {
+            "name": "Springer"
+        },
+        "34-1-0": {
+            "name": "Klebriger Springer"
+        },
+        "36-0-0": {
+            "name": "Gurdy"
+        },
+        "38-0-0": {
+            "name": "Baby"
+        },
+        "38-1-0": {
+            "name": "Engelsbaby"
+        },
+        "38-3-0": {
+            "name": "Faltiges Baby"
+        },
+        "39-0-0": {
+            "name": "Vis"
+        },
+        "39-1-0": {
+            "name": "Doppel-Vis"
+        },
+        "39-2-0": {
+            "name": "Dicker"
+        },
+        "40-0-0": {
+            "name": "Darmi"
+        },
+        "40-1-0": {
+            "name": "Vernarbter Darmi"
+        },
+        "40-2-0": {
+            "name": "Klebriger Darmi"
+        },
+        "41-0-0": {
+            "name": "Ritter"
+        },
+        "41-1-0": {
+            "name": "Selbstloser Ritter"
+        },
+        "41-2-0": {
+            "name": "Lässiger Ritter"
+        },
+        "41-3-0": {
+            "name": "Hirnloser Ritter"
+        },
+        "41-4-0": {
+            "name": "Schwarzer Ritter"
+        },
+        "42-0-0": {
+            "name": "Steingrimasse"
+        },
+        "42-1-0": {
+            "name": "Kotzgrimasse"
+        },
+        "42-2-0": {
+            "name": "Dreifache Grimasse"
+        },
+        "43-0-0": {
+            "name": "Monstro II"
+        },
+        "43-1-0": {
+            "name": "Gish"
+        },
+        "44-0-0": {
+            "name": "Stachi"
+        },
+        "44-1-0": {
+            "name": "Rutscher"
+        },
+        "45-0-0": {
+            "name": "Mama"
+        },
+        "46-0-0": {
+            "name": "Faulheit"
+        },
+        "46-1-0": {
+            "name": "Super-Faulheit"
+        },
+        "46-2-0": {
+            "name": "Ultra-Hochmut"
+        },
+        "47-0-0": {
+            "name": "Wollust"
+        },
+        "47-1-0": {
+            "name": "Super-Wollust"
+        },
+        "48-0-0": {
+            "name": "Zorn"
+        },
+        "48-1-0": {
+            "name": "Super-Zorn"
+        },
+        "49-0-0": {
+            "name": "Völlerei"
+        },
+        "49-1-0": {
+            "name": "Super-Völlerei"
+        },
+        "50-0-0": {
+            "name": "Gier"
+        },
+        "50-1-0": {
+            "name": "Super-Gier"
+        },
+        "51-0-0": {
+            "name": "Neid"
+        },
+        "51-1-0": {
+            "name": "Super-Neid"
+        },
+        "52-0-0": {
+            "name": "Hochmut"
+        },
+        "52-1-0": {
+            "name": "Super-Hochmut"
+        },
+        "53-0-0": {
+            "name": "Doppel"
+        },
+        "53-1-0": {
+            "name": "Böser Zwilling"
+        },
+        "54-0-0": {
+            "name": "Flammender Hüpfer"
+        },
+        "3-56-0": {
+            "name": "Blutegel"
+        },
+        "55-0-0": {
+            "name": "Blutegel"
+        },
+        "1000-63-2": {
+            "name": "Blutegel"
+        },
+        "55-1-0": {
+            "name": "Kamikaze-Blutegel"
+        },
+        "55-2-0": {
+            "name": "Heiliger Blutegel"
+        },
+        "56-0-0": {
+            "name": "Geschwulst"
+        },
+        "57-0-0": {
+            "name": "Mem-Brägen"
+        },
+        "57-1-0": {
+            "name": "Mama-Gedärm"
+        },
+        "57-2-0": {
+            "name": "Totes Fleisch"
+        },
+        "59-0-0": {
+            "name": "Fred"
+        },
+        "60-0-0": {
+            "name": "Auge"
+        },
+        "3-116-0": {
+            "name": "Blutunterlaufenes Auge"
+        },
+        "60-1-0": {
+            "name": "Blutunterlaufenes Auge"
+        },
+        "60-2-0": {
+            "name": "Heiliges Auge"
+        },
+        "61-0-0": {
+            "name": "Sauger"
+        },
+        "61-1-0": {
+            "name": "Spucker"
+        },
+        "61-2-0": {
+            "name": "Seelensauger"
+        },
+        "61-3-0": {
+            "name": "Tintensauger"
+        },
+        "61-4-0": {
+            "name": "Mama-Fliege"
+        },
+        "61-5-0": {
+            "name": "Glühfliege"
+        },
+        "61-6-0": {
+            "name": "Blutfliege"
+        },
+        "61-7-0": {
+            "name": "Befleckter Sauger"
+        },
+        "62-0-0": {
+            "name": "Stecknadel"
+        },
+        "62-1-0": {
+            "name": "Scolex"
+        },
+        "62-2-0": {
+            "name": "Der Gebrechliche"
+        },
+        "62-3-0": {
+            "name": "Wermut"
+        },
+        "63-0-0": {
+            "name": "Hungersnot"
+        },
+        "64-0-0": {
+            "name": "Pestilenz"
+        },
+        "65-0-0": {
+            "name": "Krieg"
+        },
+        "65-1-0": {
+            "name": "Eroberung"
+        },
+        "66-0-0": {
+            "name": "Tod"
+        },
+        "67-1-0": {
+            "name": "Die Hülle"
+        },
+        "68-0-0": {
+            "name": "Pipi"
+        },
+        "68-1-0": {
+            "name": "Der Aufgeblähte"
+        },
+        "69-0-0": {
+            "name": "Loki"
+        },
+        "69-1-0": {
+            "name": "Lokii"
+        },
+        "71-0-0": {
+            "name": "Fistel"
+        },
+        "71-1-0": {
+            "name": "Teratom"
+        },
+        "74-0-0": {
+            "name": "Blastozyste"
+        },
+        "77-0-0": {
+            "name": "Embryo"
+        },
+        "78-1-0": {
+            "name": "Es lebt"
+        },
+        "78-10-0": {
+            "name": "Mamas Gedärm"
+        },
+        "79-0-0": {
+            "name": "Zwillinge"
+        },
+        "79-1-0": {
+            "name": "Steven"
+        },
+        "79-10-0": {
+            "name": "Zwillinge-Baby"
+        },
+        "79-11-0": {
+            "name": "Steven-Baby"
+        },
+        "80-0-0": {
+            "name": "Motter"
+        },
+        "81-0-0": {
+            "name": "Der Gefallene"
+        },
+        "81-1-0": {
+            "name": "Krampus"
+        },
+        "82-0-0": {
+            "name": "Kopfloser Reiter"
+        },
+        "84-0-0": {
+            "name": "Satan"
+        },
+        "85-0-0": {
+            "name": "Spinne"
+        },
+        "86-0-0": {
+            "name": "Hüter"
+        },
+        "87-0-0": {
+            "name": "Gurgler"
+        },
+        "87-1-0": {
+            "name": "Prassler"
+        },
+        "88-0-0": {
+            "name": "Laufende Beule"
+        },
+        "88-1-0": {
+            "name": "Laufender Darm"
+        },
+        "88-2-0": {
+            "name": "Laufender Sack"
+        },
+        "89-0-0": {
+            "name": "Popolecker"
+        },
+        "90-0-0": {
+            "name": "Hänger"
+        },
+        "91-0-0": {
+            "name": "Schwärmer"
+        },
+        "5-10-1": {
+            "name": "Herz"
+        },
+        "92-0-0": {
+            "name": "Herz"
+        },
+        "93-0-0": {
+            "name": "Maske"
+        },
+        "93-1-0": {
+            "name": "Maske II"
+        },
+        "94-0-0": {
+            "name": "Große Spinne"
+        },
+        "96-0-0": {
+            "name": "Ewige Fliege"
+        },
+        "100-0-0": {
+            "name": "Witwe"
+        },
+        "100-1-0": {
+            "name": "Der Elende"
+        },
+        "101-1-0": {
+            "name": "Tri-Arachnid"
+        },
+        "102-0-0": {
+            "name": "???"
+        },
+        "102-1-0": {
+            "name": "???"
+        },
+        "102-2-0": {
+            "name": "???"
+        },
+        "201-0-0": {
+            "name": "Steinauge"
+        },
+        "203-0-0": {
+            "name": "Schwefelkopf"
+        },
+        "204-0-0": {
+            "name": "Mobiler Wirt"
+        },
+        "205-0-0": {
+            "name": "Nest"
+        },
+        "208-0-0": {
+            "name": "Fettkloß"
+        },
+        "208-1-0": {
+            "name": "Blasser Fettkloß"
+        },
+        "208-2-0": {
+            "name": "Flammender Fettkloß"
+        },
+        "209-0-0": {
+            "name": "Fettsack"
+        },
+        "210-0-0": {
+            "name": "Speck"
+        },
+        "211-0-0": {
+            "name": "Halber Sack"
+        },
+        "212-4-0": {
+            "name": "Roter Schädel"
+        },
+        "216-0-0": {
+            "name": "Schwinger"
+        },
+        "216-1-0": {
+            "name": "Schwingerkopf"
+        },
+        "217-0-0": {
+            "name": "Tröpfchen"
+        },
+        "217-1-0": {
+            "name": "Mais"
+        },
+        "217-2-0": {
+            "name": "Brownie-Mais"
+        },
+        "217-3-0": {
+            "name": "Großer Mais"
+        },
+        "218-0-0": {
+            "name": "Wandschleicher"
+        },
+        "219-0-0": {
+            "name": "Magier"
+        },
+        "220-0-0": {
+            "name": "Batzen"
+        },
+        "220-1-0": {
+            "name": "Dunkler Batzen"
+        },
+        "221-0-0": {
+            "name": "Fischwurm"
+        },
+        "222-0-0": {
+            "name": "Ringfliege"
+        },
+        "223-0-0": {
+            "name": "Kacko"
+        },
+        "224-0-0": {
+            "name": "Oob"
+        },
+        "225-0-0": {
+            "name": "Schwarzschlund"
+        },
+        "226-0-0": {
+            "name": "Dürrer"
+        },
+        "226-1-0": {
+            "name": "Faulender"
+        },
+        "226-2-0": {
+            "name": "Knuspriger"
+        },
+        "227-0-0": {
+            "name": "Knochiger"
+        },
+        "227-1-0": {
+            "name": "Heiliger Knochiger"
+        },
+        "228-0-0": {
+            "name": "Homunkulus"
+        },
+        "229-0-0": {
+            "name": "Tumor"
+        },
+        "229-1-0": {
+            "name": "Planetoid"
+        },
+        "231-0-0": {
+            "name": "Nervenende"
+        },
+        "234-0-0": {
+            "name": "Einzahn"
+        },
+        "235-0-0": {
+            "name": "Klaffender Schlund"
+        },
+        "237-0-0": {
+            "name": "Kleiner Gurgler"
+        },
+        "237-2-0": {
+            "name": "Kackerchen"
+        },
+        "238-0-0": {
+            "name": "Spritzer"
+        },
+        "239-0-0": {
+            "name": "Larve"
+        },
+        "239-100-0": {
+            "name": "Leichenfresser"
+        },
+        "239-101-0": {
+            "name": "Aasreiter"
+        },
+        "240-0-0": {
+            "name": "Wandkriecher"
+        },
+        "240-1-0": {
+            "name": "Sojakriecher"
+        },
+        "240-2-0": {
+            "name": "Lumpenkriecher"
+        },
+        "241-0-0": {
+            "name": "Wutkriecher"
+        },
+        "242-0-0": {
+            "name": "Blinder Kriecher"
+        },
+        "243-0-0": {
+            "name": "Siamesischer Spucki"
+        },
+        "244-0-0": {
+            "name": "Rundwurm"
+        },
+        "244-1-0": {
+            "name": "Röhrenwurm"
+        },
+        "246-0-0": {
+            "name": "Kleiner Lump"
+        },
+        "248-0-0": {
+            "name": "Psycho-Horf"
+        },
+        "249-0-0": {
+            "name": "Volle Fliege"
+        },
+        "250-0-0": {
+            "name": "Tickende Spinne"
+        },
+        "251-0-0": {
+            "name": "Gezeugter"
+        },
+        "252-0-0": {
+            "name": "Nuller"
+        },
+        "253-0-0": {
+            "name": "Psy-Tumor"
+        },
+        "254-0-0": {
+            "name": "Schwebender Ritter"
+        },
+        "255-0-0": {
+            "name": "Nachtraupe"
+        },
+        "256-0-0": {
+            "name": "Dartfliege"
+        },
+        "257-0-0": {
+            "name": "Siamesischer Fettkloß"
+        },
+        "258-0-0": {
+            "name": "Fette Fledermaus"
+        },
+        "259-0-0": {
+            "name": "Imp"
+        },
+        "260-0-0": {
+            "name": "Spuk"
+        },
+        "261-0-0": {
+            "name": "Kacker"
+        },
+        "261-1-0": {
+            "name": "Kacki"
+        },
+        "262-0-0": {
+            "name": "Megaschlund"
+        },
+        "263-0-0": {
+            "name": "Das Tor"
+        },
+        "264-0-0": {
+            "name": "Mega-Fettkloß"
+        },
+        "265-0-0": {
+            "name": "Der Käfig"
+        },
+        "266-0-0": {
+            "name": "Mama Gurdy"
+        },
+        "267-0-0": {
+            "name": "Dunkler"
+        },
+        "268-0-0": {
+            "name": "Der Widersacher"
+        },
+        "269-0-0": {
+            "name": "Polyzephalus"
+        },
+        "269-1-0": {
+            "name": "Der Knochenhaufen"
+        },
+        "271-0-0": {
+            "name": "Uriel"
+        },
+        "271-1-0": {
+            "name": "Gefallener Uriel"
+        },
+        "272-0-0": {
+            "name": "Gabriel"
+        },
+        "272-1-0": {
+            "name": "Gefallener Gabriel"
+        },
+        "273-0-0": {
+            "name": "Das Lamm"
+        },
+        "274-0-0": {
+            "name": "Mega-Satan"
+        },
+        "276-0-0": {
+            "name": "Rundling"
+        },
+        "277-0-0": {
+            "name": "Schwarzer Knochiger"
+        },
+        "278-0-0": {
+            "name": "Schwarzes Globin"
+        },
+        "281-0-0": {
+            "name": "Schwarm"
+        },
+        "282-0-0": {
+            "name": "Mega-Klumpi"
+        },
+        "283-0-0": {
+            "name": "Knochenritter"
+        },
+        "284-0-0": {
+            "name": "Zyklopie"
+        },
+        "285-0-0": {
+            "name": "Roter Geist"
+        },
+        "288-0-0": {
+            "name": "Herzoglein"
+        },
+        "289-0-0": {
+            "name": "Geschwür"
+        },
+        "290-0-0": {
+            "name": "Fleischbällchen"
+        },
+        "295-0-0": {
+            "name": "Maismine"
+        },
+        "296-0-0": {
+            "name": "Stille Fliege"
+        },
+        "297-0-0": {
+            "name": "Blauer Gaffer"
+        },
+        "298-0-0": {
+            "name": "Blaue Beule"
+        },
+        "299-0-0": {
+            "name": "Gieriger Gaffer"
+        },
+        "300-0-0": {
+            "name": "Pilz"
+        },
+        "301-0-0": {
+            "name": "Giftgeist"
+        },
+        "302-0-0": {
+            "name": "Steiniger"
+        },
+        "302-10-0": {
+            "name": "Kreuz-Steiniger"
+        },
+        "303-0-0": {
+            "name": "Blase"
+        },
+        "304-0-0": {
+            "name": "Das Ding"
+        },
+        "305-0-0": {
+            "name": "Ministro"
+        },
+        "306-0-0": {
+            "name": "Portal"
+        },
+        "3-232-0": {
+            "name": "Kleines Portal"
+        },
+        "306-1-0": {
+            "name": "Kleines Portal"
+        },
+        "307-0-0": {
+            "name": "Teerjunge"
+        },
+        "308-0-0": {
+            "name": "Fisteloid"
+        },
+        "309-0-0": {
+            "name": "Sprudler"
+        },
+        "310-0-0": {
+            "name": "Aussätziger"
+        },
+        "310-1-0": {
+            "name": "Aussätziges Fleisch"
+        },
+        "401-0-0": {
+            "name": "Der Fleck"
+        },
+        "402-0-0": {
+            "name": "Nougat"
+        },
+        "403-0-0": {
+            "name": "Der Verlassene"
+        },
+        "404-0-0": {
+            "name": "Kleines Horn"
+        },
+        "405-0-0": {
+            "name": "Lumpenmann"
+        },
+        "406-0-0": {
+            "name": "Ultra-Gier"
+        },
+        "406-1-0": {
+            "name": "Ultra-Gieriger"
+        },
+        "407-0-0": {
+            "name": "Stille"
+        },
+        "409-0-0": {
+            "name": "Lumpen-Mega"
+        },
+        "410-0-0": {
+            "name": "Schwestern Vis"
+        },
+        "411-0-0": {
+            "name": "Großes Horn"
+        },
+        "412-0-0": {
+            "name": "Delirium"
+        },
+        "413-0-0": {
+            "name": "Die Matriarchin"
+        },
+        "3-241-0": {
+            "name": "Blutwelpe"
+        },
+        "802-0-0": {
+            "name": "Blutwelpe"
+        },
+        "802-1-0": {
+            "name": "Blutwelpe"
+        },
+        "804-0-0": {
+            "name": "Bebengrimasse"
+        },
+        "804-0-1": {
+            "name": "Bebengrimasse"
+        },
+        "804-0-2": {
+            "name": "Bebengrimasse"
+        },
+        "804-0-3": {
+            "name": "Bebengrimasse"
+        },
+        "805-0-0": {
+            "name": "Läufer"
+        },
+        "806-0-0": {
+            "name": "Platscher"
+        },
+        "807-0-0": {
+            "name": "Gespenst"
+        },
+        "808-0-0": {
+            "name": "Irrlicht"
+        },
+        "809-0-0": {
+            "name": "Bombengrimasse"
+        },
+        "810-0-0": {
+            "name": "Kleiner Blutegel"
+        },
+        "811-0-0": {
+            "name": "Untiefengaffer"
+        },
+        "811-0-1": {
+            "name": "Untiefengaffer"
+        },
+        "811-0-2": {
+            "name": "Untiefengaffer"
+        },
+        "811-0-3": {
+            "name": "Untiefengaffer"
+        },
+        "811-0-4": {
+            "name": "Untiefengaffer"
+        },
+        "811-0-5": {
+            "name": "Untiefengaffer"
+        },
+        "811-0-6": {
+            "name": "Untiefengaffer"
+        },
+        "812-0-0": {
+            "name": "Untersee-Horf"
+        },
+        "813-0-0": {
+            "name": "Glucker"
+        },
+        "814-0-0": {
+            "name": "Wasserläufer"
+        },
+        "815-0-0": {
+            "name": "Fischur"
+        },
+        "816-0-0": {
+            "name": "Polti"
+        },
+        "816-1-0": {
+            "name": "Kineti"
+        },
+        "817-0-0": {
+            "name": "Beute"
+        },
+        "817-1-0": {
+            "name": "Mullighul"
+        },
+        "818-0-0": {
+            "name": "Felsenspinne"
+        },
+        "818-0-1": {
+            "name": "Felsenspinne"
+        },
+        "818-0-2": {
+            "name": "Felsenspinne"
+        },
+        "818-0-3": {
+            "name": "Felsenspinne"
+        },
+        "818-2-0": {
+            "name": "Kohlenspinne"
+        },
+        "818-2-1": {
+            "name": "Kohlenspinne"
+        },
+        "818-2-2": {
+            "name": "Kohlenspinne"
+        },
+        "818-2-3": {
+            "name": "Kohlenspinne"
+        },
+        "819-0-0": {
+            "name": "Fliegenbombe"
+        },
+        "820-0-0": {
+            "name": "Danny"
+        },
+        "820-1-0": {
+            "name": "Kohlenjunge"
+        },
+        "821-0-0": {
+            "name": "Kanonier"
+        },
+        "822-0-0": {
+            "name": "Riesenschädel"
+        },
+        "823-0-0": {
+            "name": "Erschütterer"
+        },
+        "824-0-0": {
+            "name": "Gyros"
+        },
+        "824-1-0": {
+            "name": "Gegrilltes Gyros"
+        },
+        "825-0-0": {
+            "name": "Feuerwurm"
+        },
+        "826-0-0": {
+            "name": "Harter Stuhl"
+        },
+        "827-0-0": {
+            "name": "Gesichtsloser"
+        },
+        "827-1-0": {
+            "name": "Befleckter Gesichtsloser"
+        },
+        "828-0-0": {
+            "name": "Nekro"
+        },
+        "829-0-0": {
+            "name": "Maulwurf"
+        },
+        "829-1-0": {
+            "name": "Befleckter Maulwurf"
+        },
+        "830-0-0": {
+            "name": "Großknochiger"
+        },
+        "831-0-0": {
+            "name": "Ausgeweideter Fettkloß"
+        },
+        "831-20-0": {
+            "name": "Schwärender Darmi"
+        },
+        "832-0-0": {
+            "name": "Exorzist"
+        },
+        "832-1-0": {
+            "name": "Fanatiker"
+        },
+        "833-0-0": {
+            "name": "Kerzenleuchter"
+        },
+        "834-0-0": {
+            "name": "Peitscher"
+        },
+        "834-1-0": {
+            "name": "Wirbler"
+        },
+        "834-2-0": {
+            "name": "Flagellant"
+        },
+        "835-0-0": {
+            "name": "Linsender Fettkloß"
+        },
+        "836-0-0": {
+            "name": "Vis Versa"
+        },
+        "837-0-0": {
+            "name": "Heinrich"
+        },
+        "839-0-0": {
+            "name": "Streiter"
+        },
+        "840-0-0": {
+            "name": "Kleinhirn"
+        },
+        "841-0-0": {
+            "name": "Wiedergänger"
+        },
+        "841-1-0": {
+            "name": "Viergesicht-Wiedergänger"
+        },
+        "842-0-0": {
+            "name": "Nachtwächter"
+        },
+        "844-0-0": {
+            "name": "Bombenspucker"
+        },
+        "851-0-0": {
+            "name": "Zappler"
+        },
+        "852-0-0": {
+            "name": "Stachelkugel"
+        },
+        "853-0-0": {
+            "name": "Kleine Made"
+        },
+        "854-0-0": {
+            "name": "Ausgewachsener Blutegel"
+        },
+        "855-1-0": {
+            "name": "Elite-Blutegel"
+        },
+        "856-0-0": {
+            "name": "Gasbeutel"
+        },
+        "857-0-0": {
+            "name": "Kohorte"
+        },
+        "858-0-0": {
+            "name": "Gefäß"
+        },
+        "860-0-0": {
+            "name": "Ungeborener"
+        },
+        "861-0-0": {
+            "name": "Pustel"
+        },
+        "862-0-0": {
+            "name": "Zyste"
+        },
+        "863-0-0": {
+            "name": "Morgenstern"
+        },
+        "864-0-0": {
+            "name": "Dämonenauge"
+        },
+        "865-0-0": {
+            "name": "Evis"
+        },
+        "866-0-0": {
+            "name": "Dunkler Esau"
+        },
+        "868-0-0": {
+            "name": "Armeefliege"
+        },
+        "869-0-0": {
+            "name": "Migräne"
+        },
+        "870-0-0": {
+            "name": "Tropfen"
+        },
+        "871-0-0": {
+            "name": "Batzen"
+        },
+        "872-0-0": {
+            "name": "Kackklumpi"
+        },
+        "873-0-0": {
+            "name": "Fliegenfalle"
+        },
+        "875-0-0": {
+            "name": "Furzmine"
+        },
+        "876-0-0": {
+            "name": "Kackschnecke"
+        },
+        "876-1-0": {
+            "name": "Kackschnecke"
+        },
+        "877-0-0": {
+            "name": "Groll"
+        },
+        "878-0-0": {
+            "name": "Klebriger Popolecker"
+        },
+        "879-0-0": {
+            "name": "Aufgedunsener"
+        },
+        "880-0-0": {
+            "name": "Fleischerne Jungfrau"
+        },
+        "881-0-0": {
+            "name": "Nadel"
+        },
+        "881-1-0": {
+            "name": "Blasser"
+        },
+        "882-0-0": {
+            "name": "Staub"
+        },
+        "883-0-0": {
+            "name": "Baby-Gezeugter"
+        },
+        "884-0-0": {
+            "name": "Schwarmspinne"
+        },
+        "885-0-0": {
+            "name": "Kultist"
+        },
+        "885-1-0": {
+            "name": "Blutkultist"
+        },
+        "886-0-0": {
+            "name": "Vis-Fettkloß"
+        },
+        "886-1-0": {
+            "name": "Dämonenfötus"
+        },
+        "888-0-0": {
+            "name": "Schattenfettkloß"
+        },
+        "889-0-0": {
+            "name": "Klapper-klapp"
+        },
+        "890-0-0": {
+            "name": "Labyrinthbewohner"
+        },
+        "890-0-1": {
+            "name": "Labyrinthbewohner"
+        },
+        "891-0-0": {
+            "name": "Ziege"
+        },
+        "891-1-0": {
+            "name": "Schwarze Ziege"
+        },
+        "892-0-0": {
+            "name": "Blähkugel"
+        },
+        "900-0-0": {
+            "name": "Todeskriecher"
+        },
+        "901-0-0": {
+            "name": "Kleiner Blubberer"
+        },
+        "902-0-0": {
+            "name": "Regenmacher"
+        },
+        "903-0-0": {
+            "name": "Die Visage"
+        },
+        "904-0-0": {
+            "name": "Sirene"
+        },
+        "905-0-0": {
+            "name": "Der Ketzer"
+        },
+        "906-0-0": {
+            "name": "Hornfels"
+        },
+        "907-0-0": {
+            "name": "Großer Gideon"
+        },
+        "908-0-0": {
+            "name": "Baby-Pflaume"
+        },
+        "909-0-0": {
+            "name": "Die Geißel"
+        },
+        "910-0-0": {
+            "name": "Chimäre"
+        },
+        "911-0-0": {
+            "name": "Fäulnisgedärm"
+        },
+        "912-0-0": {
+            "name": "Mutter"
+        },
+        "912-20-0": {
+            "name": "Toter Isaac"
+        },
+        "913-0-0": {
+            "name": "Min Min"
+        },
+        "914-0-0": {
+            "name": "Verstopfer"
+        },
+        "915-0-0": {
+            "name": "Versenger"
+        },
+        "916-0-0": {
+            "name": "Bumbino"
+        },
+        "917-0-0": {
+            "name": "Kolostomia"
+        },
+        "918-0-0": {
+            "name": "Kackwurst"
+        },
+        "919-0-0": {
+            "name": "Lumpenleichnam"
+        },
+        "920-0-0": {
+            "name": "Hornbuben"
+        },
+        "921-0-0": {
+            "name": "Klammerer"
+        },
+        "950-0-0": {
+            "name": "Dogma"
+        },
+        "951-0-0": {
+            "name": "Die Bestie"
+        },
+        "951-10-0": {
+            "name": "Ultra-Hungersnot"
+        },
+        "951-20-0": {
+            "name": "Ultra-Pestilenz"
+        },
+        "951-30-0": {
+            "name": "Ultra-Krieg"
+        },
+        "951-40-0": {
+            "name": "Ultra-Tod"
+        }
     }
 }

@@ -174,6 +174,44 @@ module.exports = {
         console.timeEnd(`Stages localization for ${language} json done in `)
         return stagesJson
     },
+    entitiesLocalization: async function(language) {
+        console.time(`Entities localization for ${language} json done in `)
+        const fromStringTable = stringTable.find(item => item.language === language)
+        const entitiesXmlPath = !fromStringTable ? `${xmlsFolders}/${language}/entities2.xml` : `${xmlsFolders}/en-US/entities2.xml`
+        let entitiesXml
+        try {
+            entitiesXml = await fsPromises.readFile(entitiesXmlPath)
+        } catch (err) {
+            console.log(err)
+            console.timeEnd(`Entities localization for ${language} json done in `)
+            return {}
+        }
+        const cleanEntitiesXml = await module.exports.removeXmlComments(entitiesXml.toString())
+        const convertEntitiesXml = await module.exports.convertToJson(cleanEntitiesXml)
+        if (fromStringTable) {
+            const entitiesIndex = stringTableFile.stringtable.category.findIndex(item => item._attributes.name === 'Entities')
+            const entitiesJson = stringTableFile.stringtable.category[entitiesIndex].key.reduce((t, obj) => {
+                const matchingEntity = convertEntitiesXml.entities.entity.filter(entity => `${entity._attributes.name.replace(' ', '_').toUpperCase()}` === obj._attributes.name || (entity._attributes.id === "102" && obj._attributes.name === "BLUEBABY"))
+                if (matchingEntity.length < 1) return t
+                matchingEntity.forEach((entity) => {
+                    const entityId = `${entity._attributes.id}-${entity._attributes.variant ? entity._attributes.variant : 0}-${entity._attributes.subtype ? entity._attributes.subtype : 0}`
+                    if (!t[entityId]) t[entityId] = {}
+                    t[entityId].name = obj.string[fromStringTable.index]._text
+                })
+                return t
+            }, {})
+            console.timeEnd(`Players localization for ${language} json done in `)
+            return entitiesJson
+        }
+        const entitiesJson = convertEntitiesXml.entities.entity.reduce((t, obj) => {
+                const entityId = `${obj._attributes.id}-${obj._attributes.variant ? obj._attributes.variant : 0}-${obj._attributes.subtype ? obj._attributes.subtype : 0}`
+                t[entityId] = {}
+                t[entityId].name = obj._attributes.name
+                return t
+        }, {})
+        console.timeEnd(`Players localization for ${language} json done in `)
+        return entitiesJson
+    },
     updateLocalizationJsons: async function() {
         console.time('Localization json done in ')
         let languageJsons = []
@@ -202,6 +240,7 @@ module.exports = {
             languageJsonFile.players = await module.exports.playersLocalization(languageJsonName)
             languageJsonFile.items = await module.exports.itemsLocalization(languageJsonName)
             languageJsonFile.stages = await module.exports.stagesLocalization(languageJsonName)
+            languageJsonFile.entities = await module.exports.entitiesLocalization(languageJsonName)
             await writeFileAsync(i18nFolder, languageJson, JSON.stringify(languageJsonFile, null, 4))
         })
         return console.timeEnd('Localization jsons done in ')

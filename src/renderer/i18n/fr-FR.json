@@ -3963,5 +3963,4012 @@
         "Backwards": {
             "name": "?"
         }
+    },
+    "entities": {
+        "1-0-0": {
+            "name": "Player"
+        },
+        "1-1-0": {
+            "name": "Coplayer"
+        },
+        "2-0-0": {
+            "name": "Tear"
+        },
+        "2-1-0": {
+            "name": "Blood Tear"
+        },
+        "2-2-0": {
+            "name": "Tooth Tear"
+        },
+        "2-3-0": {
+            "name": "Metallic Tear"
+        },
+        "2-4-0": {
+            "name": "Bobs Head Tear"
+        },
+        "2-5-0": {
+            "name": "Fire Tear"
+        },
+        "2-6-0": {
+            "name": "Dark Matter Tear"
+        },
+        "2-7-0": {
+            "name": "Mysterious Tear"
+        },
+        "2-8-0": {
+            "name": "Scythe Tear"
+        },
+        "2-9-0": {
+            "name": "Chaos Card Tear"
+        },
+        "2-10-0": {
+            "name": "Chaos Card Tear"
+        },
+        "2-11-0": {
+            "name": "Tear"
+        },
+        "2-12-0": {
+            "name": "Blood Tear"
+        },
+        "2-13-0": {
+            "name": "Nail Tear"
+        },
+        "2-14-0": {
+            "name": "Pupula Tear"
+        },
+        "2-15-0": {
+            "name": "Pupula Blood Tear"
+        },
+        "2-16-0": {
+            "name": "God's Flesh Tear"
+        },
+        "2-17-0": {
+            "name": "God's Flesh Blood Tear"
+        },
+        "2-18-0": {
+            "name": "Diamond Tear"
+        },
+        "2-19-0": {
+            "name": "Explosivo Tear"
+        },
+        "2-20-0": {
+            "name": "Coin Tear"
+        },
+        "2-21-0": {
+            "name": "Multidimensional Tear"
+        },
+        "2-22-0": {
+            "name": "Stone Tear"
+        },
+        "2-23-0": {
+            "name": "Nail Blood Tear"
+        },
+        "2-24-0": {
+            "name": "Glaucoma Tear"
+        },
+        "2-25-0": {
+            "name": "Glaucoma Blood Tear"
+        },
+        "2-26-0": {
+            "name": "Booger Tear"
+        },
+        "2-27-0": {
+            "name": "Egg Tear"
+        },
+        "2-28-0": {
+            "name": "Razor Tear"
+        },
+        "2-29-0": {
+            "name": "Bone Tear"
+        },
+        "2-30-0": {
+            "name": "Black Tooth Tear"
+        },
+        "2-31-0": {
+            "name": "Needle Tear"
+        },
+        "2-32-0": {
+            "name": "Belial Tear"
+        },
+        "2-33-0": {
+            "name": "Pop Tear"
+        },
+        "2-34-0": {
+            "name": "Pop Blood Tear"
+        },
+        "2-35-0": {
+            "name": "Balloon Tear"
+        },
+        "2-36-0": {
+            "name": "Hungry Tear"
+        },
+        "2-37-0": {
+            "name": "Brimstone Balloon Tear"
+        },
+        "2-38-0": {
+            "name": "Bomb Balloon Tear"
+        },
+        "3-1-0": {
+            "name": "Brother Bobby"
+        },
+        "3-2-0": {
+            "name": "Demon Baby"
+        },
+        "3-3-0": {
+            "name": "Little Chubby"
+        },
+        "3-4-0": {
+            "name": "Little Gish"
+        },
+        "3-5-0": {
+            "name": "Little Steve"
+        },
+        "3-6-0": {
+            "name": "Robo-Baby"
+        },
+        "3-7-0": {
+            "name": "Sister Maggy"
+        },
+        "3-8-0": {
+            "name": "Abel"
+        },
+        "3-9-0": {
+            "name": "Ghost Baby"
+        },
+        "3-10-0": {
+            "name": "Harlequin Baby"
+        },
+        "3-11-0": {
+            "name": "Rainbow Baby"
+        },
+        "3-12-0": {
+            "name": "Isaacs Head"
+        },
+        "3-13-0": {
+            "name": "Blue Baby Soul"
+        },
+        "3-14-0": {
+            "name": "Dead Bird"
+        },
+        "3-15-0": {
+            "name": "Eves Bird Foot"
+        },
+        "3-16-0": {
+            "name": "Daddys Foot"
+        },
+        "3-17-0": {
+            "name": "Peepers Eye"
+        },
+        "3-20-0": {
+            "name": "Bomb Bag"
+        },
+        "3-21-0": {
+            "name": "Sack of Pennies"
+        },
+        "3-22-0": {
+            "name": "Little C.H.A.D."
+        },
+        "3-23-0": {
+            "name": "The Relic"
+        },
+        "3-24-0": {
+            "name": "Bum Fiend"
+        },
+        "3-25-0": {
+            "name": "Holy Water"
+        },
+        "3-26-0": {
+            "name": "Key Piece 1"
+        },
+        "3-27-0": {
+            "name": "Key Piece 2"
+        },
+        "3-28-0": {
+            "name": "Full Key"
+        },
+        "3-30-0": {
+            "name": "Forever Alone"
+        },
+        "3-31-0": {
+            "name": "Distant Admiration"
+        },
+        "3-32-0": {
+            "name": "Guardian Angel"
+        },
+        "3-33-0": {
+            "name": "Fly Orbital"
+        },
+        "3-35-0": {
+            "name": "Sacrificial Dagger"
+        },
+        "3-40-0": {
+            "name": "Dead Cat"
+        },
+        "3-41-0": {
+            "name": "1UP"
+        },
+        "3-42-0": {
+            "name": "Guppys Hair Ball"
+        },
+        "3-43-0": {
+            "name": "Attack Fly"
+        },
+        "3-44-0": {
+            "name": "Cube of Meat L1"
+        },
+        "3-45-0": {
+            "name": "Cube of Meat L2"
+        },
+        "3-46-0": {
+            "name": "Cube of Meat L3"
+        },
+        "3-47-0": {
+            "name": "Cube of Meat L4"
+        },
+        "3-48-0": {
+            "name": "Isaacs Body"
+        },
+        "3-50-0": {
+            "name": "Smart Fly"
+        },
+        "3-51-0": {
+            "name": "Dry Baby"
+        },
+        "3-52-0": {
+            "name": "Juicy Sack"
+        },
+        "3-53-0": {
+            "name": "Robo-Baby 2.0"
+        },
+        "3-54-0": {
+            "name": "Rotten Baby"
+        },
+        "3-55-0": {
+            "name": "Headless Baby"
+        },
+        "3-56-0": {
+            "name": "Leech"
+        },
+        "3-57-0": {
+            "name": "Mystery Sack"
+        },
+        "3-58-0": {
+            "name": "BBF"
+        },
+        "3-59-0": {
+            "name": "Bob's Brain"
+        },
+        "3-60-0": {
+            "name": "Best Bud"
+        },
+        "3-61-0": {
+            "name": "Lil' Brimstone"
+        },
+        "3-62-0": {
+            "name": "Isaac's Heart"
+        },
+        "3-63-0": {
+            "name": "Lil' Haunt"
+        },
+        "3-64-0": {
+            "name": "Dark Bum"
+        },
+        "3-65-0": {
+            "name": "Big Fan"
+        },
+        "3-66-0": {
+            "name": "Sissy Longlegs"
+        },
+        "3-67-0": {
+            "name": "Punching Bag"
+        },
+        "3-68-0": {
+            "name": "Guillotine"
+        },
+        "3-69-0": {
+            "name": "Ball of Bandages L1"
+        },
+        "3-70-0": {
+            "name": "Ball of Bandages L2"
+        },
+        "3-71-0": {
+            "name": "Ball of Bandages L3"
+        },
+        "3-72-0": {
+            "name": "Ball of Bandages L4"
+        },
+        "3-73-0": {
+            "name": "Blue Spider"
+        },
+        "3-74-0": {
+            "name": "Mongo Baby"
+        },
+        "3-75-0": {
+            "name": "Samson's Chains"
+        },
+        "3-78-0": {
+            "name": "Scissors"
+        },
+        "3-79-0": {
+            "name": "Gemini Familiar"
+        },
+        "3-76-0": {
+            "name": "Cain's Eye"
+        },
+        "3-77-0": {
+            "name": "???'s Only Friend"
+        },
+        "3-80-0": {
+            "name": "Incubus"
+        },
+        "3-81-0": {
+            "name": "Fate's Reward"
+        },
+        "3-82-0": {
+            "name": "Lil Chest"
+        },
+        "3-83-0": {
+            "name": "Sworn Protector"
+        },
+        "3-84-0": {
+            "name": "Friend Zone"
+        },
+        "3-85-0": {
+            "name": "Lost Fly"
+        },
+        "3-86-0": {
+            "name": "Charged Baby"
+        },
+        "3-87-0": {
+            "name": "Lil Gurdy"
+        },
+        "3-88-0": {
+            "name": "Bumbo"
+        },
+        "3-89-0": {
+            "name": "Censer"
+        },
+        "3-90-0": {
+            "name": "Key Bum"
+        },
+        "3-91-0": {
+            "name": "Rune Bag"
+        },
+        "3-92-0": {
+            "name": "Seraphim"
+        },
+        "3-93-0": {
+            "name": "GB Bug"
+        },
+        "3-94-0": {
+            "name": "Spider Mod"
+        },
+        "3-95-0": {
+            "name": "Farting Baby"
+        },
+        "3-96-0": {
+            "name": "Succubus"
+        },
+        "3-97-0": {
+            "name": "Lil Loki"
+        },
+        "3-98-0": {
+            "name": "Obsessed Fan"
+        },
+        "3-99-0": {
+            "name": "Papa Fly"
+        },
+        "3-100-0": {
+            "name": "Milk!"
+        },
+        "3-101-0": {
+            "name": "Multidimensional Baby"
+        },
+        "3-102-0": {
+            "name": "Super Bum"
+        },
+        "3-103-0": {
+            "name": "Tonsil"
+        },
+        "3-104-0": {
+            "name": "Big Chubby"
+        },
+        "3-105-0": {
+            "name": "Depression"
+        },
+        "3-106-0": {
+            "name": "Shade"
+        },
+        "3-107-0": {
+            "name": "Hushy"
+        },
+        "3-108-0": {
+            "name": "Lil Monstro"
+        },
+        "3-109-0": {
+            "name": "King Baby"
+        },
+        "3-110-0": {
+            "name": "Finger!"
+        },
+        "3-111-0": {
+            "name": "YO LISTEN!"
+        },
+        "3-112-0": {
+            "name": "Acid Baby"
+        },
+        "3-113-0": {
+            "name": "Spider Baby"
+        },
+        "3-114-0": {
+            "name": "Sack of Sacks"
+        },
+        "3-115-0": {
+            "name": "Brown Nugget"
+        },
+        "3-116-0": {
+            "name": "Bloodshot Eye"
+        },
+        "3-117-0": {
+            "name": "Mom's Razor"
+        },
+        "3-118-0": {
+            "name": "Angry Fly"
+        },
+        "3-119-0": {
+            "name": "Box Buddy"
+        },
+        "3-120-0": {
+            "name": "Sprinkler"
+        },
+        "3-121-0": {
+            "name": "Leprocy"
+        },
+        "3-122-0": {
+            "name": "Lil Harbingers"
+        },
+        "3-123-0": {
+            "name": "Angelic Prism"
+        },
+        "3-124-0": {
+            "name": "Mystery Egg"
+        },
+        "3-125-0": {
+            "name": "Lil Spewer"
+        },
+        "3-126-0": {
+            "name": "Slipped Rib"
+        },
+        "3-127-0": {
+            "name": "Pointy Rib"
+        },
+        "3-128-0": {
+            "name": "Bone Orbital"
+        },
+        "3-129-0": {
+            "name": "Hallowed Ground"
+        },
+        "3-130-0": {
+            "name": "Jaw Bone"
+        },
+        "3-900-0": {
+            "name": "Forgotten Body"
+        },
+        "4-0-0": {
+            "name": "Bomb"
+        },
+        "4-1-0": {
+            "name": "Big Bomb"
+        },
+        "4-2-0": {
+            "name": "Decoy"
+        },
+        "4-3-0": {
+            "name": "Troll Bomb"
+        },
+        "4-4-0": {
+            "name": "Megatroll Bomb"
+        },
+        "4-5-0": {
+            "name": "Poison Bomb"
+        },
+        "4-6-0": {
+            "name": "Big Poison Bomb"
+        },
+        "4-7-0": {
+            "name": "Sad Bomb"
+        },
+        "4-8-0": {
+            "name": "Hot Bomb"
+        },
+        "4-9-0": {
+            "name": "Butt Bomb"
+        },
+        "4-10-0": {
+            "name": "Mr. Mega Bomb"
+        },
+        "4-11-0": {
+            "name": "Bobby Bomb"
+        },
+        "4-12-0": {
+            "name": "Glitter Bomb"
+        },
+        "5-10-1": {
+            "name": "Heart"
+        },
+        "5-10-2": {
+            "name": "Heart (half)"
+        },
+        "5-10-3": {
+            "name": "Heart (soul)"
+        },
+        "5-10-4": {
+            "name": "Heart (eternal)"
+        },
+        "5-10-5": {
+            "name": "Heart (double)"
+        },
+        "5-10-6": {
+            "name": "Black Heart"
+        },
+        "5-10-7": {
+            "name": "Gold Heart"
+        },
+        "5-10-8": {
+            "name": "Heart (half soul)"
+        },
+        "5-10-9": {
+            "name": "Scared Heart"
+        },
+        "5-10-10": {
+            "name": "Blended Heart"
+        },
+        "5-10-11": {
+            "name": "Bone Heart"
+        },
+        "5-20-1": {
+            "name": "Penny"
+        },
+        "5-20-2": {
+            "name": "Nickel"
+        },
+        "5-20-3": {
+            "name": "Dime"
+        },
+        "5-20-4": {
+            "name": "Double Penny"
+        },
+        "5-20-5": {
+            "name": "Lucky Penny"
+        },
+        "5-20-6": {
+            "name": "Sticky Nickel"
+        },
+        "5-30-1": {
+            "name": "Key"
+        },
+        "5-30-2": {
+            "name": "Golden Key"
+        },
+        "5-30-3": {
+            "name": "Key Ring"
+        },
+        "5-30-4": {
+            "name": "Charged Key"
+        },
+        "5-40-1": {
+            "name": "Bomb"
+        },
+        "5-40-2": {
+            "name": "Double Bomb"
+        },
+        "5-40-3": {
+            "name": "Troll Bomb"
+        },
+        "5-40-4": {
+            "name": "Golden Bomb"
+        },
+        "5-40-5": {
+            "name": "Megatroll Bomb"
+        },
+        "5-90-1": {
+            "name": "Lil' Battery"
+        },
+        "5-90-2": {
+            "name": "Micro Battery"
+        },
+        "5-50-0": {
+            "name": "Chest"
+        },
+        "5-51-0": {
+            "name": "Bomb Chest"
+        },
+        "5-52-0": {
+            "name": "Spiked Chest"
+        },
+        "5-53-0": {
+            "name": "Eternal Chest"
+        },
+        "5-54-0": {
+            "name": "Mimic Chest"
+        },
+        "5-60-0": {
+            "name": "Locked Chest"
+        },
+        "5-69-1": {
+            "name": "Grab Bag"
+        },
+        "5-70-1": {
+            "name": "Pill Blue-Blue"
+        },
+        "5-70-2": {
+            "name": "Pill White-Blue"
+        },
+        "5-70-3": {
+            "name": "Pill Orange-Orange"
+        },
+        "5-70-4": {
+            "name": "Pill White-White"
+        },
+        "5-70-5": {
+            "name": "Pill Dots-Red"
+        },
+        "5-70-6": {
+            "name": "Pill Pink-Red"
+        },
+        "5-70-7": {
+            "name": "Pill Blue-Cadetblue"
+        },
+        "5-70-8": {
+            "name": "Pill Yellow-Orange"
+        },
+        "5-70-9": {
+            "name": "Pill Dots-White"
+        },
+        "5-70-10": {
+            "name": "Pill White-Azure"
+        },
+        "5-70-11": {
+            "name": "Pill Black-Yellow"
+        },
+        "5-70-12": {
+            "name": "Pill White-Black"
+        },
+        "5-70-13": {
+            "name": "Pill White-Yellow"
+        },
+        "5-100-0": {
+            "name": "Collectible"
+        },
+        "5-110-0": {
+            "name": "Broken Shovel"
+        },
+        "5-150-0": {
+            "name": "Shop Item"
+        },
+        "5-300-0": {
+            "name": "Tarot Card"
+        },
+        "5-300-1": {
+            "name": "Tarot Card"
+        },
+        "5-300-2": {
+            "name": "Suit Card"
+        },
+        "5-300-3": {
+            "name": "Rune#1"
+        },
+        "5-300-4": {
+            "name": "Rune#2"
+        },
+        "5-300-5": {
+            "name": "Emergency Contact"
+        },
+        "5-300-6": {
+            "name": "Dice Shard"
+        },
+        "5-300-7": {
+            "name": "Black Rune"
+        },
+        "5-300-8": {
+            "name": "Magic Card"
+        },
+        "5-300-9": {
+            "name": "Card Against Humanity"
+        },
+        "5-300-10": {
+            "name": "Credit Card"
+        },
+        "5-300-11": {
+            "name": "Holy Card"
+        },
+        "5-300-12": {
+            "name": "Chance Card"
+        },
+        "5-300-13": {
+            "name": "Rune Shard"
+        },
+        "5-340-0": {
+            "name": "Big Chest"
+        },
+        "5-350-0": {
+            "name": "Trinket"
+        },
+        "5-360-0": {
+            "name": "Red Chest"
+        },
+        "5-370-0": {
+            "name": "Challenge Trophy"
+        },
+        "5-380-0": {
+            "name": "Isaac's Bed"
+        },
+        "6-1-0": {
+            "name": "Slot Machine"
+        },
+        "6-2-0": {
+            "name": "Blood Donation Machine"
+        },
+        "6-3-0": {
+            "name": "Fortune Telling Machine"
+        },
+        "6-4-0": {
+            "name": "Beggar"
+        },
+        "6-5-0": {
+            "name": "Devil Beggar"
+        },
+        "6-6-0": {
+            "name": "Shell Game"
+        },
+        "6-7-0": {
+            "name": "Key Master"
+        },
+        "6-8-0": {
+            "name": "Donation Machine"
+        },
+        "6-9-0": {
+            "name": "Bomb Bum"
+        },
+        "6-10-0": {
+            "name": "Shop Restock Machine"
+        },
+        "6-11-0": {
+            "name": "Greed Donation Machine"
+        },
+        "6-12-0": {
+            "name": "Mom's Dressing Table"
+        },
+        "7-1-0": {
+            "name": "Laser (Thick Red)"
+        },
+        "7-1-3": {
+            "name": "Laser (Thick Dark)"
+        },
+        "7-2-0": {
+            "name": "Laser (Thin Red)"
+        },
+        "7-3-0": {
+            "name": "Laser (Shoop da Whoop)"
+        },
+        "7-4-0": {
+            "name": "Laser (Pride)"
+        },
+        "7-5-0": {
+            "name": "Laser (Light Beam)"
+        },
+        "7-6-0": {
+            "name": "Laser (Giant Red)"
+        },
+        "7-7-0": {
+            "name": "Tractor Beam"
+        },
+        "7-8-0": {
+            "name": "Light Ring"
+        },
+        "7-9-0": {
+            "name": "Laser (Brimtech)"
+        },
+        "7-10-0": {
+            "name": "Laser (Electric)"
+        },
+        "8-0-0": {
+            "name": "Moms Knife"
+        },
+        "8-1-0": {
+            "name": "Bone Club"
+        },
+        "8-2-0": {
+            "name": "Bone Scythe"
+        },
+        "8-9-0": {
+            "name": "Notched Axe"
+        },
+        "9-0-0": {
+            "name": "Projectile"
+        },
+        "9-1-0": {
+            "name": "Projectile"
+        },
+        "9-2-0": {
+            "name": "Purple Fire Projectile"
+        },
+        "9-3-0": {
+            "name": "Puke Projectile"
+        },
+        "9-4-0": {
+            "name": "Tear Projectile"
+        },
+        "9-5-0": {
+            "name": "Corn Projectile"
+        },
+        "9-6-0": {
+            "name": "Hush Projectile"
+        },
+        "9-7-0": {
+            "name": "Coin Projectile"
+        },
+        "9-12-0": {
+            "name": "Steven Projectile"
+        },
+        "10-0-0": {
+            "name": "Béant Énervé"
+        },
+        "10-1-0": {
+            "name": "Béant"
+        },
+        "10-2-0": {
+            "name": "Béant Enflammé"
+        },
+        "11-0-0": {
+            "name": "Giclant"
+        },
+        "11-1-0": {
+            "name": "Errant"
+        },
+        "12-0-0": {
+            "name": "Crachant"
+        },
+        "13-0-0": {
+            "name": "Mouche"
+        },
+        "14-0-0": {
+            "name": "Prout"
+        },
+        "14-1-0": {
+            "name": "Super Prout"
+        },
+        "15-0-0": {
+            "name": "Coagulé"
+        },
+        "15-1-0": {
+            "name": "Caillot"
+        },
+        "15-2-0": {
+            "name": "Églobule"
+        },
+        "16-0-0": {
+            "name": "Mulligan"
+        },
+        "16-1-0": {
+            "name": "Mullidiot"
+        },
+        "16-2-0": {
+            "name": "Mulliboum"
+        },
+        "17-0-0": {
+            "name": "Shopkeeper"
+        },
+        "17-1-0": {
+            "name": "Secret Room Keeper"
+        },
+        "17-2-0": {
+            "name": "Error Room Keeper"
+        },
+        "17-3-0": {
+            "name": "Special Shopkeeper"
+        },
+        "17-4-0": {
+            "name": "Special Secret Room Keeper"
+        },
+        "18-0-0": {
+            "name": "Mouche d'Attaque"
+        },
+        "19-0-0": {
+            "name": "Larry Jr."
+        },
+        "19-1-0": {
+            "name": "L'Évidé"
+        },
+        "20-0-0": {
+            "name": "Monstro"
+        },
+        "21-0-0": {
+            "name": "Astiot"
+        },
+        "22-0-0": {
+            "name": "Ruche"
+        },
+        "22-1-0": {
+            "name": "Ruche Noyée"
+        },
+        "23-0-0": {
+            "name": "Fonceur"
+        },
+        "23-0-1": {
+            "name": "My Shadow"
+        },
+        "23-1-0": {
+            "name": "Fonceur Noyé"
+        },
+        "23-2-0": {
+            "name": "Fonceur Moite"
+        },
+        "24-0-0": {
+            "name": "Globin"
+        },
+        "24-1-0": {
+            "name": "Globin Lorgneur"
+        },
+        "24-2-0": {
+            "name": "Globin Moite"
+        },
+        "25-0-0": {
+            "name": "Dynamouche"
+        },
+        "25-1-0": {
+            "name": "Dynamouche Rouge"
+        },
+        "25-2-0": {
+            "name": "Dynamouche Noyée"
+        },
+        "26-0-0": {
+            "name": "Gueule"
+        },
+        "26-1-0": {
+            "name": "Gueule Rouge"
+        },
+        "26-2-0": {
+            "name": "Gueule Oracle"
+        },
+        "27-0-0": {
+            "name": "Hôte"
+        },
+        "27-1-0": {
+            "name": "Hôte de Chair"
+        },
+        "28-0-0": {
+            "name": "Dodu"
+        },
+        "28-1-0": {
+            "name": "C.H.A.D."
+        },
+        "28-2-0": {
+            "name": "La Reine Charogne"
+        },
+        "29-0-0": {
+            "name": "Sautelant"
+        },
+        "29-1-0": {
+            "name": "Trite"
+        },
+        "30-0-0": {
+            "name": "Furoncle"
+        },
+        "30-1-0": {
+            "name": "Boyau"
+        },
+        "30-2-0": {
+            "name": "Cocon"
+        },
+        "31-0-0": {
+            "name": "Postillon"
+        },
+        "32-0-0": {
+            "name": "Cervelle"
+        },
+        "33-0-0": {
+            "name": "Fire Place"
+        },
+        "33-1-0": {
+            "name": "Red Fire Place"
+        },
+        "33-2-0": {
+            "name": "Blue Fire Place"
+        },
+        "33-3-0": {
+            "name": "Purple Fire Place"
+        },
+        "34-0-0": {
+            "name": "Bondissant"
+        },
+        "35-0-0": {
+            "name": "M. Gueule"
+        },
+        "35-1-0": {
+            "name": "Tête de M. Gueule"
+        },
+        "35-2-0": {
+            "name": "M. Gueule Rouge"
+        },
+        "35-3-0": {
+            "name": "Tête de M. Gueule Rouge"
+        },
+        "35-10-0": {
+            "name": "Mr. Maw Neck"
+        },
+        "36-0-0": {
+            "name": "Boris"
+        },
+        "38-0-0": {
+            "name": "Bébé"
+        },
+        "38-1-0": {
+            "name": "Bébé Angélique"
+        },
+        "38-2-0": {
+            "name": "Bébé Ultra Orgueil"
+        },
+        "39-0-0": {
+            "name": "Vis"
+        },
+        "39-1-0": {
+            "name": "Double Vis"
+        },
+        "39-2-0": {
+            "name": "Larve"
+        },
+        "39-22-0": {
+            "name": "Chubber Projectile"
+        },
+        "39-3-0": {
+            "name": "Double Vis Scarifiée"
+        },
+        "40-0-0": {
+            "name": "Tripes"
+        },
+        "40-1-0": {
+            "name": "Tripes Scarifiées"
+        },
+        "41-0-0": {
+            "name": "Chevalier"
+        },
+        "41-1-0": {
+            "name": "Chevalier Double-Face"
+        },
+        "42-0-0": {
+            "name": "Grimace de Pierre"
+        },
+        "42-1-0": {
+            "name": "Grimace Malade"
+        },
+        "43-0-0": {
+            "name": "Monstro II"
+        },
+        "43-1-0": {
+            "name": "Gish"
+        },
+        "44-0-0": {
+            "name": "Picote"
+        },
+        "44-1-0": {
+            "name": "Glisse"
+        },
+        "45-0-0": {
+            "name": "Maman"
+        },
+        "45-10-0": {
+            "name": "Mom Stomp"
+        },
+        "46-0-0": {
+            "name": "Paresse"
+        },
+        "46-1-0": {
+            "name": "Super Paresse"
+        },
+        "46-2-0": {
+            "name": "Ultra Orgueil"
+        },
+        "47-0-0": {
+            "name": "Luxure"
+        },
+        "47-1-0": {
+            "name": "Super Luxure"
+        },
+        "48-0-0": {
+            "name": "Colère"
+        },
+        "48-1-0": {
+            "name": "Super Colère"
+        },
+        "49-0-0": {
+            "name": "Gourmandise"
+        },
+        "49-1-0": {
+            "name": "Super Gourmandise"
+        },
+        "50-0-0": {
+            "name": "Avarice"
+        },
+        "50-1-0": {
+            "name": "Super Avarice"
+        },
+        "51-0-0": {
+            "name": "Envie"
+        },
+        "51-10-0": {
+            "name": "Envy (big)"
+        },
+        "51-20-0": {
+            "name": "Envy (medium)"
+        },
+        "51-30-0": {
+            "name": "Envy (small)"
+        },
+        "51-1-0": {
+            "name": "Super Envie"
+        },
+        "51-11-0": {
+            "name": "Super Envy (big)"
+        },
+        "51-21-0": {
+            "name": "Super Envy (medium)"
+        },
+        "51-31-0": {
+            "name": "Super Envy (small)"
+        },
+        "52-0-0": {
+            "name": "Orgueil"
+        },
+        "52-1-0": {
+            "name": "Super Orgueil"
+        },
+        "53-0-0": {
+            "name": "Dople"
+        },
+        "53-1-0": {
+            "name": "Jumeau Maléfique"
+        },
+        "54-0-0": {
+            "name": "Sautelant Enflammé"
+        },
+        "55-0-0": {
+            "name": "Sangsue"
+        },
+        "55-1-0": {
+            "name": "Sangsue Kamikaze"
+        },
+        "55-2-0": {
+            "name": "Sainte Sangsue"
+        },
+        "56-0-0": {
+            "name": "Grumeau"
+        },
+        "57-0-0": {
+            "name": "Membrane"
+        },
+        "57-1-0": {
+            "name": "Abats"
+        },
+        "58-0-0": {
+            "name": "Ver Béant"
+        },
+        "58-1-0": {
+            "name": "Ver Béant Scarifié"
+        },
+        "59-0-0": {
+            "name": "Fred"
+        },
+        "60-0-0": {
+            "name": "Œil"
+        },
+        "60-1-0": {
+            "name": "Œil Rougi"
+        },
+        "61-0-0": {
+            "name": "Ventouse"
+        },
+        "61-1-0": {
+            "name": "Crachat"
+        },
+        "61-2-0": {
+            "name": "Ventouse Pleine"
+        },
+        "62-0-0": {
+            "name": "Pin"
+        },
+        "62-1-0": {
+            "name": "Scolex"
+        },
+        "62-2-0": {
+            "name": "Le Frêle"
+        },
+        "63-0-0": {
+            "name": "Famine"
+        },
+        "64-0-0": {
+            "name": "Épidémie"
+        },
+        "65-0-0": {
+            "name": "Guerre"
+        },
+        "65-1-0": {
+            "name": "Conquête"
+        },
+        "65-10-0": {
+            "name": "War without horse"
+        },
+        "66-0-0": {
+            "name": "Mort"
+        },
+        "66-10-0": {
+            "name": "Death Scythe"
+        },
+        "66-20-0": {
+            "name": "Death Horse"
+        },
+        "66-30-0": {
+            "name": "Death without horse"
+        },
+        "67-0-0": {
+            "name": "Le Duc des Mouches"
+        },
+        "67-1-0": {
+            "name": "La Carcasse"
+        },
+        "68-0-0": {
+            "name": "La Flaque"
+        },
+        "68-1-0": {
+            "name": "Boursoufle"
+        },
+        "68-10-0": {
+            "name": "Peep Eye"
+        },
+        "68-11-0": {
+            "name": "Bloat Eye"
+        },
+        "69-0-0": {
+            "name": "Loki"
+        },
+        "69-1-0": {
+            "name": "Lokii"
+        },
+        "71-0-0": {
+            "name": "Fistule"
+        },
+        "71-1-0": {
+            "name": "Tératome"
+        },
+        "72-0-0": {
+            "name": "Fistula Medium"
+        },
+        "72-1-0": {
+            "name": "Teratoma Medium"
+        },
+        "73-0-0": {
+            "name": "Fistula Small"
+        },
+        "73-1-0": {
+            "name": "Teratoma Small"
+        },
+        "74-0-0": {
+            "name": "Blastocyste"
+        },
+        "75-0-0": {
+            "name": "Blastocyst Medium"
+        },
+        "76-0-0": {
+            "name": "Blastocyst Small"
+        },
+        "77-0-0": {
+            "name": "Embryon"
+        },
+        "78-0-0": {
+            "name": "Le Cœur de Maman"
+        },
+        "78-1-0": {
+            "name": "Il Est Vivant"
+        },
+        "78-10-0": {
+            "name": "#MOMS_GUTS"
+        },
+        "79-0-0": {
+            "name": "Gémeaux"
+        },
+        "79-1-0": {
+            "name": "Steven"
+        },
+        "79-2-0": {
+            "name": "L'Œuf Clair"
+        },
+        "79-10-0": {
+            "name": "Bébé Gémeaux"
+        },
+        "79-11-0": {
+            "name": "Bébé Steven"
+        },
+        "79-12-0": {
+            "name": "Bébé Œuf Clair"
+        },
+        "79-20-0": {
+            "name": "Umbilical Cord"
+        },
+        "80-0-0": {
+            "name": "Moumouche"
+        },
+        "81-0-0": {
+            "name": "Le Déchu"
+        },
+        "81-1-0": {
+            "name": "Krampus"
+        },
+        "82-0-0": {
+            "name": "Cavalier sans Tête"
+        },
+        "83-0-0": {
+            "name": "Tête du Cavalier sans Tête"
+        },
+        "84-0-0": {
+            "name": "Satan"
+        },
+        "84-10-0": {
+            "name": "Satan Stomp"
+        },
+        "85-0-0": {
+            "name": "Araignée"
+        },
+        "86-0-0": {
+            "name": "Tête de Gardien"
+        },
+        "87-0-0": {
+            "name": "Gargouillant"
+        },
+        "88-0-0": {
+            "name": "Furoncle sur Pattes"
+        },
+        "88-1-0": {
+            "name": "Boyau sur Pattes"
+        },
+        "88-2-0": {
+            "name": "Cocon sur Pattes"
+        },
+        "89-0-0": {
+            "name": "Lèche-Cul"
+        },
+        "90-0-0": {
+            "name": "Pendu"
+        },
+        "91-0-0": {
+            "name": "Essaim"
+        },
+        "92-0-0": {
+            "name": "Cœur"
+        },
+        "93-0-0": {
+            "name": "Masque"
+        },
+        "94-0-0": {
+            "name": "Grosse Araignée"
+        },
+        "96-0-0": {
+            "name": "Mouche Éternelle"
+        },
+        "97-0-0": {
+            "name": "Masque d'Infamie"
+        },
+        "98-0-0": {
+            "name": "Cœur d'Infamie"
+        },
+        "99-0-0": {
+            "name": "Boris Junior"
+        },
+        "100-0-0": {
+            "name": "La Veuve"
+        },
+        "100-1-0": {
+            "name": "Le Misérable"
+        },
+        "101-0-0": {
+            "name": "Le Faucheux"
+        },
+        "101-1-0": {
+            "name": "Triachnide"
+        },
+        "102-0-0": {
+            "name": "Isaac"
+        },
+        "102-1-0": {
+            "name": "???"
+        },
+        "102-2-0": {
+            "name": "??? (Alt)"
+        },
+        "201-0-0": {
+            "name": "Œil de Pierre"
+        },
+        "202-0-0": {
+            "name": "Grimace Éternelle"
+        },
+        "202-10-0": {
+            "name": "Grimace en Croix"
+        },
+        "202-10-1": {
+            "name": "Grimace en Croix"
+        },
+        "202-11-0": {
+            "name": "Cross Stone Shooter (always on)"
+        },
+        "202-11-1": {
+            "name": "Cross Stone Shooter (always on)"
+        },
+        "203-0-0": {
+            "name": "Tête de Soufre"
+        },
+        "204-0-0": {
+            "name": "Hôte Mobile"
+        },
+        "205-0-0": {
+            "name": "Nid"
+        },
+        "206-0-0": {
+            "name": "Bébé Faucheux"
+        },
+        "206-1-0": {
+            "name": "Mini Bébé Faucheux"
+        },
+        "207-0-0": {
+            "name": "Foucheux"
+        },
+        "207-1-0": {
+            "name": "Mini Foucheux"
+        },
+        "208-0-0": {
+            "name": "Gros Tas"
+        },
+        "208-1-0": {
+            "name": "Gros Tas Pâle"
+        },
+        "208-2-0": {
+            "name": "Gros Tas Enflammé"
+        },
+        "209-0-0": {
+            "name": "Gros Sac"
+        },
+        "210-0-0": {
+            "name": "Déambulant"
+        },
+        "211-0-0": {
+            "name": "Demi-Sac"
+        },
+        "212-0-0": {
+            "name": "Tête de Mort"
+        },
+        "212-1-0": {
+            "name": "Tête de Mort Moite"
+        },
+        "213-0-0": {
+            "name": "Main de Maman"
+        },
+        "214-0-0": {
+            "name": "Mouche 2"
+        },
+        "215-0-0": {
+            "name": "Araignée 2"
+        },
+        "216-0-0": {
+            "name": "Yo-Yo"
+        },
+        "216-1-0": {
+            "name": "Tête de Yo-Yo"
+        },
+        "216-10-0": {
+            "name": "Swinger Neck"
+        },
+        "217-0-0": {
+            "name": "Crotte"
+        },
+        "217-1-0": {
+            "name": "Maïs"
+        },
+        "217-2-0": {
+            "name": "Maïs Jaune"
+        },
+        "218-0-0": {
+            "name": "Gratte-Mur"
+        },
+        "219-0-0": {
+            "name": "Magizoob"
+        },
+        "220-0-0": {
+            "name": "Giclée"
+        },
+        "220-1-0": {
+            "name": "Giclée Moite"
+        },
+        "221-0-0": {
+            "name": "Copépode"
+        },
+        "222-0-0": {
+            "name": "Mouche Anneau"
+        },
+        "223-0-0": {
+            "name": "Bronze"
+        },
+        "224-0-0": {
+            "name": "Oob"
+        },
+        "225-0-0": {
+            "name": "Gueule Ténébreuse"
+        },
+        "226-0-0": {
+            "name": "Maigrichon"
+        },
+        "226-1-0": {
+            "name": "Moisichon"
+        },
+        "226-2-0": {
+            "name": "Croustichon"
+        },
+        "227-0-0": {
+            "name": "Osselet"
+        },
+        "228-0-0": {
+            "name": "Homoncule"
+        },
+        "228-10-0": {
+            "name": "Homunculus Cord"
+        },
+        "229-0-0": {
+            "name": "Tumeur"
+        },
+        "230-0-0": {
+            "name": "Camillo Junior"
+        },
+        "231-0-0": {
+            "name": "Terminaison Nerveuse"
+        },
+        "231-1-0": {
+            "name": "Terminaison Nerveuse 2"
+        },
+        "234-0-0": {
+            "name": "Monodent"
+        },
+        "235-0-0": {
+            "name": "Gueule Béante"
+        },
+        "236-0-0": {
+            "name": "Gueule Béante Fêlée"
+        },
+        "237-0-0": {
+            "name": "Gargouillis"
+        },
+        "237-1-0": {
+            "name": "Gargouillis (boss)"
+        },
+        "237-2-0": {
+            "name": "Dégoulis"
+        },
+        "238-0-0": {
+            "name": "Éclaboussant"
+        },
+        "239-0-0": {
+            "name": "Vermine"
+        },
+        "240-0-0": {
+            "name": "Rampant Mural"
+        },
+        "241-0-0": {
+            "name": "Rampant Enragé"
+        },
+        "242-0-0": {
+            "name": "Rampant Aveugle"
+        },
+        "243-0-0": {
+            "name": "Postillion Siamois"
+        },
+        "244-0-0": {
+            "name": "Ascaris"
+        },
+        "244-1-0": {
+            "name": "Tubicole"
+        },
+        "245-0-0": {
+            "name": "Poop"
+        },
+        "246-0-0": {
+            "name": "Haillon"
+        },
+        "246-1-0": {
+            "name": "Rag Man's Ragling"
+        },
+        "247-0-0": {
+            "name": "Hôte de Chair Mobile"
+        },
+        "248-0-0": {
+            "name": "Crachant Oracle"
+        },
+        "249-0-0": {
+            "name": "Mouche Pleine"
+        },
+        "250-0-0": {
+            "name": "Araignée Tic-Tac"
+        },
+        "251-0-0": {
+            "name": "Création"
+        },
+        "251-10-0": {
+            "name": "Begotten Chain"
+        },
+        "252-0-0": {
+            "name": "Néant"
+        },
+        "253-0-0": {
+            "name": "Tumeur Oracle"
+        },
+        "254-0-0": {
+            "name": "Chevalier Volant"
+        },
+        "255-0-0": {
+            "name": "Lombric"
+        },
+        "256-0-0": {
+            "name": "Mouche Flèche"
+        },
+        "257-0-0": {
+            "name": "Gros Tas Siamois"
+        },
+        "257-1-0": {
+            "name": "Gros Tas Siamois Bleu"
+        },
+        "258-0-0": {
+            "name": "Chauve-Nourrie"
+        },
+        "259-0-0": {
+            "name": "Lutin"
+        },
+        "260-0-0": {
+            "name": "Le Revenant"
+        },
+        "260-10-0": {
+            "name": "Revenu"
+        },
+        "261-0-0": {
+            "name": "Pendille"
+        },
+        "261-1-0": {
+            "name": "Pendouille"
+        },
+        "262-0-0": {
+            "name": "Grande Gueule"
+        },
+        "263-0-0": {
+            "name": "Le Rempart"
+        },
+        "264-0-0": {
+            "name": "Rondouillard"
+        },
+        "265-0-0": {
+            "name": "La Cage"
+        },
+        "266-0-0": {
+            "name": "Mama Boris"
+        },
+        "266-1-0": {
+            "name": "Mama Gurdy Left Hand"
+        },
+        "266-2-0": {
+            "name": "Mama Gurdy Right Hand"
+        },
+        "267-0-0": {
+            "name": "Le Ténébreux"
+        },
+        "268-0-0": {
+            "name": "L'Adversaire"
+        },
+        "269-0-0": {
+            "name": "Polycéphale"
+        },
+        "270-0-0": {
+            "name": "M. Fred"
+        },
+        "271-0-0": {
+            "name": "Uriel"
+        },
+        "271-1-0": {
+            "name": "Uriel Déchu"
+        },
+        "272-0-0": {
+            "name": "Gabriel"
+        },
+        "272-1-0": {
+            "name": "Gabriel Déchu"
+        },
+        "273-0-0": {
+            "name": "Le Bélier"
+        },
+        "273-10-0": {
+            "name": "Lamb Body"
+        },
+        "274-0-0": {
+            "name": "Méga Satan"
+        },
+        "274-1-0": {
+            "name": "Mega Satan's Right Hand"
+        },
+        "274-2-0": {
+            "name": "Mega Satan's Left Hand"
+        },
+        "275-0-0": {
+            "name": "Méga Satan 2"
+        },
+        "275-1-0": {
+            "name": "Mega Satan 2's Right Hand"
+        },
+        "275-2-0": {
+            "name": "Mega Satan 2's Left Hand"
+        },
+        "276-0-0": {
+            "name": "Ver Dodu"
+        },
+        "277-0-0": {
+            "name": "Osselet Noir"
+        },
+        "278-0-0": {
+            "name": "Globin Noir"
+        },
+        "279-0-0": {
+            "name": "Tête de Globin Noir"
+        },
+        "280-0-0": {
+            "name": "Corps de Globin Noir"
+        },
+        "281-0-0": {
+            "name": "Nuée"
+        },
+        "282-0-0": {
+            "name": "Gros Coagulé"
+        },
+        "283-0-0": {
+            "name": "Chevalier d'Os"
+        },
+        "284-0-0": {
+            "name": "Cyclope"
+        },
+        "285-0-0": {
+            "name": "Fantôme Rouge"
+        },
+        "286-0-0": {
+            "name": "Tête de Mort Charnue"
+        },
+        "287-0-0": {
+            "name": "Main Morte"
+        },
+        "288-0-0": {
+            "name": "Duché"
+        },
+        "289-0-0": {
+            "name": "Ulcère"
+        },
+        "290-0-0": {
+            "name": "Boulette"
+        },
+        "291-0-0": {
+            "name": "Pitfall"
+        },
+        "291-1-0": {
+            "name": "Suction Pitfall"
+        },
+        "291-2-0": {
+            "name": "Teleport Pitfall"
+        },
+        "292-0-0": {
+            "name": "Movable TNT"
+        },
+        "292-1-0": {
+            "name": "Movable TNT (Mine Crafter)"
+        },
+        "293-0-0": {
+            "name": "Ultra Greed Coin (Spinner)"
+        },
+        "293-1-0": {
+            "name": "Ultra Greed Coin (Key)"
+        },
+        "293-2-0": {
+            "name": "Ultra Greed Coin (Bomb)"
+        },
+        "293-3-0": {
+            "name": "Ultra Greed Coin (Heart)"
+        },
+        "294-0-0": {
+            "name": "Ultra Greed Door"
+        },
+        "295-0-0": {
+            "name": "Mine de Maïs"
+        },
+        "296-0-0": {
+            "name": "Mouche Bleue"
+        },
+        "297-0-0": {
+            "name": "Béant Bleu"
+        },
+        "298-0-0": {
+            "name": "Furoncle Bleu"
+        },
+        "299-0-0": {
+            "name": "Béant Avare"
+        },
+        "300-0-0": {
+            "name": "Champignon"
+        },
+        "301-0-0": {
+            "name": "Cervelle Toxique"
+        },
+        "302-0-0": {
+            "name": "Grocher"
+        },
+        "302-10-0": {
+            "name": "Grocher en Croix"
+        },
+        "303-0-0": {
+            "name": "Cloque"
+        },
+        "304-0-0": {
+            "name": "La Chose"
+        },
+        "305-0-0": {
+            "name": "Monstrounet"
+        },
+        "306-0-0": {
+            "name": "Vortex"
+        },
+        "307-0-0": {
+            "name": "Goudronné"
+        },
+        "307-0-1": {
+            "name": "Crache-Goudron"
+        },
+        "308-0-0": {
+            "name": "Fistuloïde"
+        },
+        "309-0-0": {
+            "name": "Geyser"
+        },
+        "310-0-0": {
+            "name": "Lépreux"
+        },
+        "310-0-1": {
+            "name": "Lépreux (Stage 2)"
+        },
+        "310-0-2": {
+            "name": "Lépreux (Stage 3)"
+        },
+        "310-0-3": {
+            "name": "Lépreux (Stage 4)"
+        },
+        "310-1-0": {
+            "name": "Chair de Lépreux"
+        },
+        "311-0-0": {
+            "name": "M. Mine"
+        },
+        "311-10-0": {
+            "name": "Mr. Mine Neck"
+        },
+        "401-0-0": {
+            "name": "La Souillure"
+        },
+        "402-0-0": {
+            "name": "#BROWNIE"
+        },
+        "403-0-0": {
+            "name": "L'Oublié"
+        },
+        "404-0-0": {
+            "name": "P'tite Corne"
+        },
+        "404-1-0": {
+            "name": "Dark Ball"
+        },
+        "405-0-0": {
+            "name": "Toutânhaillons"
+        },
+        "405-1-0": {
+            "name": "Rag Man's Head"
+        },
+        "406-0-0": {
+            "name": "Ultra Avarice"
+        },
+        "406-1-0": {
+            "name": "Ultra Avarissime"
+        },
+        "407-0-0": {
+            "name": "Murmure"
+        },
+        "408-0-0": {
+            "name": "Hush (Skinless)"
+        },
+        "409-0-0": {
+            "name": "Phararond"
+        },
+        "409-1-0": {
+            "name": "Purple Ball"
+        },
+        "409-2-0": {
+            "name": "Rag Mega's Rebirth Pillar"
+        },
+        "410-0-0": {
+            "name": "Les Soeurs Vis"
+        },
+        "411-0-0": {
+            "name": "Grosse Corne"
+        },
+        "411-1-0": {
+            "name": "Small Hole"
+        },
+        "411-2-0": {
+            "name": "Big Hole"
+        },
+        "412-0-0": {
+            "name": "#DELIRIUM"
+        },
+        "413-0-0": {
+            "name": "La Matriarche"
+        },
+        "1000-1-0": {
+            "name": "Bomb Explosion"
+        },
+        "1000-2-0": {
+            "name": "Blood Explosion"
+        },
+        "1000-3-0": {
+            "name": "Fly Explosion"
+        },
+        "1000-4-0": {
+            "name": "Rock Particle"
+        },
+        "1000-5-0": {
+            "name": "Blood Particle"
+        },
+        "1000-6-0": {
+            "name": "Devil"
+        },
+        "1000-7-0": {
+            "name": "Blood Splat"
+        },
+        "1000-8-0": {
+            "name": "Ladder"
+        },
+        "1000-9-0": {
+            "name": "Angel"
+        },
+        "1000-10-0": {
+            "name": "Blue Flame"
+        },
+        "1000-11-0": {
+            "name": "Bullet Poof"
+        },
+        "1000-12-0": {
+            "name": "Tear PoofA"
+        },
+        "1000-12-10": {
+            "name": "Tear PoofA (no tear)"
+        },
+        "1000-13-0": {
+            "name": "Tear PoofB"
+        },
+        "1000-14-0": {
+            "name": "Ripple Poof"
+        },
+        "1000-14-1": {
+            "name": "Ripple Poof"
+        },
+        "1000-15-0": {
+            "name": "Poof01"
+        },
+        "1000-16-0": {
+            "name": "Poof02"
+        },
+        "1000-16-1": {
+            "name": "Large Ground Poof"
+        },
+        "1000-16-2": {
+            "name": "Large Ground Poof (foreground)"
+        },
+        "1000-16-3": {
+            "name": "Large Blood Poof"
+        },
+        "1000-16-4": {
+            "name": "Large Blood Poof (foreground)"
+        },
+        "1000-16-5": {
+            "name": "Blood Cloud"
+        },
+        "1000-16-10": {
+            "name": "Forgotten Soul Poof"
+        },
+        "1000-16-11": {
+            "name": "Holy Mantle Poof"
+        },
+        "1000-17-0": {
+            "name": "Poof04"
+        },
+        "1000-18-0": {
+            "name": "Bomb Crater"
+        },
+        "1000-19-0": {
+            "name": "Crack The Sky"
+        },
+        "1000-20-0": {
+            "name": "Scythe Break"
+        },
+        "1000-21-0": {
+            "name": "Tiny Bug"
+        },
+        "1000-68-0": {
+            "name": "Wall Bug"
+        },
+        "1000-22-0": {
+            "name": "Creep (Red)"
+        },
+        "1000-23-0": {
+            "name": "Creep (Green)"
+        },
+        "1000-24-0": {
+            "name": "Creep (Yellow)"
+        },
+        "1000-25-0": {
+            "name": "Creep (White)"
+        },
+        "1000-26-0": {
+            "name": "Creep (Black)"
+        },
+        "1000-27-0": {
+            "name": "Wood Particle"
+        },
+        "1000-28-0": {
+            "name": "Monstros Tooth"
+        },
+        "1000-29-0": {
+            "name": "Mom Foot Stomp"
+        },
+        "1000-30-0": {
+            "name": "Dr. Fetus Target"
+        },
+        "1000-31-0": {
+            "name": "Dr. Fetus Rocket"
+        },
+        "1000-32-0": {
+            "name": "Lemon Mishap"
+        },
+        "1000-78-0": {
+            "name": "Lemon Party"
+        },
+        "1000-33-0": {
+            "name": "Tiny Fly"
+        },
+        "1000-34-0": {
+            "name": "Fart"
+        },
+        "1000-35-0": {
+            "name": "Tooth Particle"
+        },
+        "1000-36-0": {
+            "name": "Wall Hole X-Ray"
+        },
+        "1000-37-0": {
+            "name": "Player Creep (Holy Water)"
+        },
+        "1000-38-0": {
+            "name": "Spider Explosion"
+        },
+        "1000-39-0": {
+            "name": "Heaven Door"
+        },
+        "1000-41-0": {
+            "name": "Water Droplet"
+        },
+        "1000-42-0": {
+            "name": "Blood Gush"
+        },
+        "1000-43-0": {
+            "name": "Poop Explosion"
+        },
+        "1000-44-0": {
+            "name": "Player Creep (White)"
+        },
+        "1000-45-0": {
+            "name": "Player Creep (Black)"
+        },
+        "1000-46-0": {
+            "name": "Player Creep (Red)"
+        },
+        "1000-47-0": {
+            "name": "Trinity Shield"
+        },
+        "1000-48-0": {
+            "name": "Battery up"
+        },
+        "1000-49-0": {
+            "name": "Effect Notification"
+        },
+        "1000-50-0": {
+            "name": "Laser Impact"
+        },
+        "1000-50-1": {
+            "name": "Brimstone Impact"
+        },
+        "1000-50-2": {
+            "name": "Shoop Impact"
+        },
+        "1000-50-3": {
+            "name": "Brimstone Impact CageVis"
+        },
+        "1000-50-4": {
+            "name": "Bouncing Impact"
+        },
+        "1000-50-5": {
+            "name": "Ring Impact"
+        },
+        "1000-51-0": {
+            "name": "Fire"
+        },
+        "1000-52-0": {
+            "name": "Red Flame"
+        },
+        "1000-53-0": {
+            "name": "Tear Creep (Green)"
+        },
+        "1000-54-0": {
+            "name": "Player Creep Holy Water Trail"
+        },
+        "1000-55-0": {
+            "name": "Spike Effect"
+        },
+        "1000-56-0": {
+            "name": "Brown Creep"
+        },
+        "1000-57-0": {
+            "name": "Pulling Effect"
+        },
+        "1000-58-0": {
+            "name": "Poop Particle"
+        },
+        "1000-59-0": {
+            "name": "Dust Cloud"
+        },
+        "1000-60-0": {
+            "name": "Boomerang"
+        },
+        "1000-61-0": {
+            "name": "Shockwave (Radial)"
+        },
+        "1000-62-0": {
+            "name": "Rock Explosion"
+        },
+        "1000-63-0": {
+            "name": "Worm"
+        },
+        "1000-63-1": {
+            "name": "Maggot"
+        },
+        "1000-63-2": {
+            "name": "Leech"
+        },
+        "1000-64-0": {
+            "name": "Beetle"
+        },
+        "1000-65-0": {
+            "name": "Wisp"
+        },
+        "1000-66-0": {
+            "name": "Ember Particle"
+        },
+        "1000-69-0": {
+            "name": "Butterfly"
+        },
+        "1000-70-0": {
+            "name": "Blood Drop"
+        },
+        "1000-71-0": {
+            "name": "Brimstone Swirl"
+        },
+        "1000-74-0": {
+            "name": "Isaac's Carpet"
+        },
+        "1000-76-0": {
+            "name": "Dice Room Floor"
+        },
+        "1000-77-0": {
+            "name": "Large Blood Explosion"
+        },
+        "1000-75-0": {
+            "name": "Bar Particle"
+        },
+        "1000-67-0": {
+            "name": "Shockwave (Directional)"
+        },
+        "1000-72-0": {
+            "name": "Crackwave"
+        },
+        "1000-73-0": {
+            "name": "Shockwave (Random)"
+        },
+        "1000-79-0": {
+            "name": "Tear Poof small"
+        },
+        "1000-80-0": {
+            "name": "Tear Poof very small"
+        },
+        "1000-81-0": {
+            "name": "Friendly ball"
+        },
+        "1000-82-0": {
+            "name": "Womb hole teleport"
+        },
+        "1000-83-0": {
+            "name": "Spear of destiny"
+        },
+        "1000-84-0": {
+            "name": "Evil Eye"
+        },
+        "1000-85-0": {
+            "name": "Diamond Particle"
+        },
+        "1000-86-0": {
+            "name": "Nail Particle"
+        },
+        "1000-87-0": {
+            "name": "Falling Ember"
+        },
+        "1000-88-0": {
+            "name": "Dark Ball Smoke Particle"
+        },
+        "1000-89-0": {
+            "name": "Ultra Greed Footprint"
+        },
+        "1000-90-0": {
+            "name": "Milk Puddle"
+        },
+        "1000-91-0": {
+            "name": "Mom's Hand (Emergency Contact)"
+        },
+        "1000-92-0": {
+            "name": "Player Creep (Black Powder)"
+        },
+        "1000-93-0": {
+            "name": "Pentagram (Black Powder)"
+        },
+        "1000-94-0": {
+            "name": "Slippery Brown Creep"
+        },
+        "1000-95-0": {
+            "name": "Diamond Particle"
+        },
+        "1000-96-0": {
+            "name": "Hush Laser"
+        },
+        "1000-97-0": {
+            "name": "Impact"
+        },
+        "1000-98-0": {
+            "name": "Coin Particle"
+        },
+        "1000-99-0": {
+            "name": "Water Splash"
+        },
+        "1000-100-0": {
+            "name": "Hush Ashes"
+        },
+        "1000-101-0": {
+            "name": "Hush Laser Up"
+        },
+        "1000-102-0": {
+            "name": "Bullet Poof"
+        },
+        "1000-103-0": {
+            "name": "Ultra Greed Bling"
+        },
+        "1000-104-0": {
+            "name": "Fireworks"
+        },
+        "1000-105-0": {
+            "name": "Brown Cloud"
+        },
+        "1000-106-0": {
+            "name": "Fart Ring"
+        },
+        "1000-107-0": {
+            "name": "BlackHole"
+        },
+        "1000-107-1": {
+            "name": "BlackHoleRay"
+        },
+        "1000-108-0": {
+            "name": "Mr. Me!"
+        },
+        "1000-109-0": {
+            "name": "Death Skull"
+        },
+        "1000-110-0": {
+            "name": "Enemy Brimstone Swirl"
+        },
+        "1000-111-0": {
+            "name": "Haemolacria Trail"
+        },
+        "1000-112-0": {
+            "name": "Hallowed Ground"
+        },
+        "1000-113-0": {
+            "name": "Brimstone Ball"
+        },
+        "1000-114-0": {
+            "name": "Forgotten Chain"
+        },
+        "1000-115-0": {
+            "name": "Broken Shovel Shadow"
+        },
+        "1000-116-0": {
+            "name": "Dirt Patch"
+        },
+        "1000-117-0": {
+            "name": "Forgotten Soul"
+        },
+        "1000-118-0": {
+            "name": "Small Rocket"
+        },
+        "1000-119-0": {
+            "name": "Timer"
+        },
+        "1000-120-0": {
+            "name": "Spawner"
+        },
+        "1000-121-0": {
+            "name": "Light"
+        },
+        "1000-122-0": {
+            "name": "Big Horn Hole Helper"
+        },
+        "1000-123-0": {
+            "name": "Halo"
+        },
+        "1000-123-1": {
+            "name": "Telekinesis\tHalo"
+        },
+        "1000-124-0": {
+            "name": "Tar Bubble"
+        },
+        "1000-125-0": {
+            "name": "Big Horn Hand"
+        },
+        "1000-126-0": {
+            "name": "Tech Dot"
+        },
+        "1000-127-0": {
+            "name": "Mama Mega Explosion"
+        },
+        "9001-1-0": {
+            "name": "Spidermod Text"
+        },
+        "2-39-0": {
+            "name": "Fist Tear"
+        },
+        "2-40-0": {
+            "name": "Grid Tear"
+        },
+        "2-41-0": {
+            "name": "Ice Tear"
+        },
+        "2-42-0": {
+            "name": "Rock Tear"
+        },
+        "2-43-0": {
+            "name": "Key Tear"
+        },
+        "2-44-0": {
+            "name": "Bloody Key Tear"
+        },
+        "2-45-0": {
+            "name": "Eraser Tear"
+        },
+        "2-46-0": {
+            "name": "Fire Tear"
+        },
+        "2-47-0": {
+            "name": "Sword Tear"
+        },
+        "2-48-0": {
+            "name": "Spore Tear"
+        },
+        "2-49-0": {
+            "name": "Tech Sword Tear"
+        },
+        "2-50-0": {
+            "name": "Fetus Tear"
+        },
+        "3-200-0": {
+            "name": "Intruder"
+        },
+        "3-201-0": {
+            "name": "Dip Familiar"
+        },
+        "3-201-1": {
+            "name": "Dip Familiar (red)"
+        },
+        "3-201-2": {
+            "name": "Dip Familiar (corny)"
+        },
+        "3-201-3": {
+            "name": "Dip Familiar (gold)"
+        },
+        "3-201-4": {
+            "name": "Dip Familiar (rainbow)"
+        },
+        "3-201-5": {
+            "name": "Dip Familiar (black)"
+        },
+        "3-201-6": {
+            "name": "Dip Familiar (white)"
+        },
+        "3-201-12": {
+            "name": "Dip Familiar (stone)"
+        },
+        "3-201-13": {
+            "name": "Dip Familiar (flaming)"
+        },
+        "3-201-14": {
+            "name": "Dip Familiar (stinky)"
+        },
+        "3-201-20": {
+            "name": "Dip Familiar (Brownie)"
+        },
+        "3-202-0": {
+            "name": "Damocles"
+        },
+        "3-203-0": {
+            "name": "Blood Oath"
+        },
+        "3-204-0": {
+            "name": "Psy Fly"
+        },
+        "3-205-0": {
+            "name": "Menorah"
+        },
+        "3-206-0": {
+            "name": "Wisp Familiar"
+        },
+        "3-207-0": {
+            "name": "Peepers Other Eye"
+        },
+        "3-208-0": {
+            "name": "Boiled Baby"
+        },
+        "3-209-0": {
+            "name": "Freezer Baby"
+        },
+        "3-210-0": {
+            "name": "Bird Cage"
+        },
+        "3-211-0": {
+            "name": "Lost Soul"
+        },
+        "3-212-0": {
+            "name": "Lil Dumpy"
+        },
+        "3-213-0": {
+            "name": "Knife Piece 1"
+        },
+        "3-214-0": {
+            "name": "Knife Piece 2"
+        },
+        "3-215-0": {
+            "name": "Knife Piece 3"
+        },
+        "3-216-0": {
+            "name": "Tinytoma"
+        },
+        "3-217-0": {
+            "name": "Tinytoma (small)"
+        },
+        "3-218-0": {
+            "name": "Bot Fly"
+        },
+        "3-219-0": {
+            "name": "Dead Bird (permanent)"
+        },
+        "3-220-0": {
+            "name": "Siren Minion"
+        },
+        "3-221-0": {
+            "name": "Paschal Candle"
+        },
+        "3-222-0": {
+            "name": "Stitches"
+        },
+        "3-223-0": {
+            "name": "Full Knife"
+        },
+        "3-224-0": {
+            "name": "Baby Plum (familiar)"
+        },
+        "3-225-0": {
+            "name": "Fruity Plum"
+        },
+        "3-226-0": {
+            "name": "Spin to Win"
+        },
+        "3-227-0": {
+            "name": "Beths Heart"
+        },
+        "3-228-0": {
+            "name": "Minisaac"
+        },
+        "3-229-0": {
+            "name": "Swarm Fly Orbital"
+        },
+        "3-230-0": {
+            "name": "Lil Abaddon"
+        },
+        "3-231-0": {
+            "name": "Abyss Locust"
+        },
+        "3-232-0": {
+            "name": "Lil Portal"
+        },
+        "3-233-0": {
+            "name": "Worm Friend"
+        },
+        "3-234-0": {
+            "name": "Bone Spur"
+        },
+        "3-235-0": {
+            "name": "Twisted Baby 1"
+        },
+        "3-235-1": {
+            "name": "Twisted Baby 2"
+        },
+        "3-236-0": {
+            "name": "Star of Bethlehem"
+        },
+        "3-237-0": {
+            "name": "Item Wisp Familiar"
+        },
+        "3-238-0": {
+            "name": "Blood Baby"
+        },
+        "3-239-0": {
+            "name": "Cube Baby"
+        },
+        "3-240-0": {
+            "name": "Umbilical Baby"
+        },
+        "3-241-0": {
+            "name": "Blood Puppy"
+        },
+        "3-242-0": {
+            "name": "Vanishing Twin"
+        },
+        "3-243-0": {
+            "name": "Decap Attack"
+        },
+        "3-244-0": {
+            "name": "Esau Jr."
+        },
+        "4-13-0": {
+            "name": "Throwable Bomb"
+        },
+        "4-14-0": {
+            "name": "Small Bomb"
+        },
+        "4-15-0": {
+            "name": "Brimstone Bomb"
+        },
+        "4-16-0": {
+            "name": "Bloody Sad Bomb"
+        },
+        "4-17-0": {
+            "name": "Giga Bomb"
+        },
+        "4-18-0": {
+            "name": "Golden Troll Bomb"
+        },
+        "4-19-0": {
+            "name": "Rocket"
+        },
+        "4-20-0": {
+            "name": "Giga Rocket"
+        },
+        "5-41-0": {
+            "name": "Throwable Bomb (pickup)"
+        },
+        "5-20-7": {
+            "name": "Golden Penny"
+        },
+        "5-69-2": {
+            "name": "Black Sack"
+        },
+        "5-70-14": {
+            "name": "Pill Gold-Gold"
+        },
+        "5-70-2049": {
+            "name": "Horse Pill Blue-Blue"
+        },
+        "5-70-2050": {
+            "name": "Horse Pill White-Blue"
+        },
+        "5-70-2051": {
+            "name": "Horse Pill Orange-Orange"
+        },
+        "5-70-2052": {
+            "name": "Horse Pill White-White"
+        },
+        "5-70-2053": {
+            "name": "Horse Pill Dots-Red"
+        },
+        "5-70-2054": {
+            "name": "Horse Pill Pink-Red"
+        },
+        "5-70-2055": {
+            "name": "Horse Pill Blue-Cadetblue"
+        },
+        "5-70-2056": {
+            "name": "Horse Pill Yellow-Orange"
+        },
+        "5-70-2057": {
+            "name": "Horse Pill Dots-White"
+        },
+        "5-70-2058": {
+            "name": "Horse Pill White-Azure"
+        },
+        "5-70-2059": {
+            "name": "Horse Pill Black-Yellow"
+        },
+        "5-70-2060": {
+            "name": "Horse Pill White-Black"
+        },
+        "5-70-2061": {
+            "name": "Horse Pill White-Yellow"
+        },
+        "5-70-2062": {
+            "name": "Horse Pill Gold-Gold"
+        },
+        "5-10-12": {
+            "name": "Rotten Heart"
+        },
+        "5-42-0": {
+            "name": "Poop Nugget"
+        },
+        "5-42-1": {
+            "name": "Big Poop Nugget"
+        },
+        "5-40-7": {
+            "name": "Giga Bomb"
+        },
+        "5-90-3": {
+            "name": "Mega Battery"
+        },
+        "5-90-4": {
+            "name": "Golden Battery"
+        },
+        "5-300-14": {
+            "name": "Reverse Tarot Card"
+        },
+        "5-300-15": {
+            "name": "Cracked Key"
+        },
+        "5-300-16": {
+            "name": "Treasure Card"
+        },
+        "5-300-17": {
+            "name": "Unus Card"
+        },
+        "5-300-18": {
+            "name": "Soul of Isaac"
+        },
+        "5-300-19": {
+            "name": "Soul of Magdalene"
+        },
+        "5-300-20": {
+            "name": "Soul of Cain"
+        },
+        "5-300-21": {
+            "name": "Soul of Judas"
+        },
+        "5-300-22": {
+            "name": "Soul of ???"
+        },
+        "5-300-23": {
+            "name": "Soul of Eve"
+        },
+        "5-300-24": {
+            "name": "Soul of Samson"
+        },
+        "5-300-25": {
+            "name": "Soul of Azazel"
+        },
+        "5-300-26": {
+            "name": "Soul of Lazarus"
+        },
+        "5-300-27": {
+            "name": "Soul of Eden"
+        },
+        "5-300-28": {
+            "name": "Soul of the Lost"
+        },
+        "5-300-29": {
+            "name": "Soul of Lilith"
+        },
+        "5-300-30": {
+            "name": "Soul of the Keeper"
+        },
+        "5-300-31": {
+            "name": "Soul of Apollyon"
+        },
+        "5-300-32": {
+            "name": "Soul of the Forgotten"
+        },
+        "5-300-33": {
+            "name": "Soul of Bethany"
+        },
+        "5-300-34": {
+            "name": "Soul of Jacob"
+        },
+        "5-380-10": {
+            "name": "Mom's Bed"
+        },
+        "5-390-0": {
+            "name": "Mom's Chest"
+        },
+        "5-55-0": {
+            "name": "Old Chest"
+        },
+        "5-56-0": {
+            "name": "Wooden Chest"
+        },
+        "5-57-0": {
+            "name": "Mega Chest"
+        },
+        "5-58-0": {
+            "name": "Haunted Chest"
+        },
+        "6-13-0": {
+            "name": "Battery Bum"
+        },
+        "6-14-0": {
+            "name": "Isaac (secret)"
+        },
+        "6-15-0": {
+            "name": "Hell Game"
+        },
+        "6-16-0": {
+            "name": "Crane Game"
+        },
+        "6-17-0": {
+            "name": "Confessional"
+        },
+        "6-18-0": {
+            "name": "Rotten Beggar"
+        },
+        "7-11-0": {
+            "name": "Laser (Thicker Red)"
+        },
+        "7-12-0": {
+            "name": "Laser (Thick Brown)"
+        },
+        "7-13-0": {
+            "name": "Laser (Beast)"
+        },
+        "7-14-0": {
+            "name": "Laser (Thicker Brimtech)"
+        },
+        "7-15-0": {
+            "name": "Laser (Giant Brimtech)"
+        },
+        "8-3-0": {
+            "name": "Donkey Jawbone"
+        },
+        "8-4-0": {
+            "name": "Bag of Crafting"
+        },
+        "8-5-0": {
+            "name": "Sumptorium"
+        },
+        "8-10-0": {
+            "name": "Spirit Sword"
+        },
+        "8-11-0": {
+            "name": "Tech Sword"
+        },
+        "9-8-0": {
+            "name": "Grid Projectile"
+        },
+        "9-9-0": {
+            "name": "Rock Projectile"
+        },
+        "9-11-0": {
+            "name": "Meat Projectile"
+        },
+        "9-13-0": {
+            "name": "Feather Projectile"
+        },
+        "9-14-0": {
+            "name": "Lava Projectile"
+        },
+        "9-15-0": {
+            "name": "Head Projectile"
+        },
+        "9-16-0": {
+            "name": "Eyeball Projectile"
+        },
+        "10-3-0": {
+            "name": "Béant Putride"
+        },
+        "10-3-1": {
+            "name": "Béant Putride"
+        },
+        "10-3-2": {
+            "name": "Béant Putride"
+        },
+        "10-3-3": {
+            "name": "Béant Putride"
+        },
+        "10-3-4": {
+            "name": "Béant Putride"
+        },
+        "10-3-5": {
+            "name": "Béant Putride"
+        },
+        "14-2-0": {
+            "name": "Prout Impur"
+        },
+        "15-3-0": {
+            "name": "Coagrillé"
+        },
+        "19-2-0": {
+            "name": "Les Vers de Pierre"
+        },
+        "19-3-0": {
+            "name": "La Carapace"
+        },
+        "22-2-0": {
+            "name": "Saint Mulligan"
+        },
+        "22-3-0": {
+            "name": "Mulligan Impur"
+        },
+        "23-3-0": {
+            "name": "Princesse Charogne"
+        },
+        "24-3-0": {
+            "name": "Globin Maudit"
+        },
+        "25-3-0": {
+            "name": "Flammouche"
+        },
+        "25-3-1": {
+            "name": "Flammouche X"
+        },
+        "25-4-0": {
+            "name": "Mouche Squelette"
+        },
+        "25-5-0": {
+            "name": "Dynamouche Malade"
+        },
+        "25-6-0": {
+            "name": "Dynamouche Impure"
+        },
+        "27-3-0": {
+            "name": "Hôte de Pierre"
+        },
+        "29-2-0": {
+            "name": "Infesté"
+        },
+        "29-3-0": {
+            "name": "Sautelant Impur"
+        },
+        "31-1-0": {
+            "name": "Postillon Impur"
+        },
+        "33-4-0": {
+            "name": "White Fire Place"
+        },
+        "33-10-0": {
+            "name": "Moveable Fireplace"
+        },
+        "33-12-0": {
+            "name": "Moveable Blue Fireplace"
+        },
+        "33-13-0": {
+            "name": "Moveable Purple Fireplace"
+        },
+        "34-1-0": {
+            "name": "Bondissant Poisseux"
+        },
+        "38-1-1": {
+            "name": "Angelic Baby (small)"
+        },
+        "38-3-0": {
+            "name": "Bébé Flétri"
+        },
+        "60-2-0": {
+            "name": "Œil Sacré"
+        },
+        "87-1-0": {
+            "name": "Crépitant"
+        },
+        "227-1-0": {
+            "name": "Saint Osselet"
+        },
+        "229-1-0": {
+            "name": "Planétoïde"
+        },
+        "244-2-0": {
+            "name": "Ascaris Impur"
+        },
+        "244-2-1": {
+            "name": "Tainted Round Worm Butt"
+        },
+        "244-3-0": {
+            "name": "Tubicole Impur"
+        },
+        "33-11-0": {
+            "name": "Charbon"
+        },
+        "33-11-1": {
+            "name": "Coal"
+        },
+        "33-11-2": {
+            "name": "Coal"
+        },
+        "33-11-3": {
+            "name": "Coal"
+        },
+        "40-2-0": {
+            "name": "Goudroule"
+        },
+        "41-2-0": {
+            "name": "Chevalier Tombant"
+        },
+        "41-3-0": {
+            "name": "Chevalier Écervelé"
+        },
+        "41-4-0": {
+            "name": "Chevalier Noir"
+        },
+        "42-2-0": {
+            "name": "Trimace"
+        },
+        "61-3-0": {
+            "name": "Encre"
+        },
+        "57-2-0": {
+            "name": "Entrailles Pourries"
+        },
+        "61-4-0": {
+            "name": "Mouche Mère"
+        },
+        "61-5-0": {
+            "name": "Bulbe"
+        },
+        "61-6-0": {
+            "name": "Vampire"
+        },
+        "61-7-0": {
+            "name": "Ventouse Impure"
+        },
+        "62-3-0": {
+            "name": "Absinthe"
+        },
+        "92-1-0": {
+            "name": "Demi-Cœur"
+        },
+        "92-1-1": {
+            "name": "Demi-Cœur"
+        },
+        "93-1-0": {
+            "name": "Masque II"
+        },
+        "212-2-0": {
+            "name": "Tête de Mort Maudite"
+        },
+        "212-3-0": {
+            "name": "Tête de Mort Sulfureuse"
+        },
+        "212-4-0": {
+            "name": "Crâne de Chair"
+        },
+        "239-100-0": {
+            "name": "Mange-Mort"
+        },
+        "239-101-0": {
+            "name": "Chevauche-Charogne"
+        },
+        "240-1-0": {
+            "name": "Rampant Soja"
+        },
+        "240-2-0": {
+            "name": "Rampant Hailloné"
+        },
+        "240-3-0": {
+            "name": "Rampant Soja Impur"
+        },
+        "241-1-0": {
+            "name": "Rampant Enragé Divisé"
+        },
+        "269-1-0": {
+            "name": "Le Vestige"
+        },
+        "306-1-0": {
+            "name": "P'tit Vortex"
+        },
+        "802-0-0": {
+            "name": "Chiot de Sang"
+        },
+        "802-1-0": {
+            "name": "Chiot de Sang"
+        },
+        "803-0-0": {
+            "name": "Blind Bat"
+        },
+        "804-0-0": {
+            "name": "Grimace Sismique"
+        },
+        "804-0-1": {
+            "name": "Quake Grimace"
+        },
+        "804-0-2": {
+            "name": "Quake Grimace"
+        },
+        "804-0-3": {
+            "name": "Quake Grimace"
+        },
+        "805-0-0": {
+            "name": "Prêtre"
+        },
+        "806-0-0": {
+            "name": "Balloné"
+        },
+        "807-0-0": {
+            "name": "Spectre"
+        },
+        "808-0-0": {
+            "name": "Follet"
+        },
+        "809-0-0": {
+            "name": "Grimace à Bombes"
+        },
+        "810-0-0": {
+            "name": "Petite Sangsue"
+        },
+        "811-0-0": {
+            "name": "Béant des Profondeurs"
+        },
+        "811-0-1": {
+            "name": "Deep Gaper"
+        },
+        "811-0-2": {
+            "name": "Deep Gaper"
+        },
+        "811-0-3": {
+            "name": "Deep Gaper"
+        },
+        "811-0-4": {
+            "name": "Deep Gaper"
+        },
+        "811-0-5": {
+            "name": "Deep Gaper"
+        },
+        "811-0-6": {
+            "name": "Deep Gaper"
+        },
+        "812-0-0": {
+            "name": "Crachant Sous-Marin"
+        },
+        "812-1-0": {
+            "name": "Crachant Sous-Marin Impur"
+        },
+        "813-0-0": {
+            "name": "Bloup"
+        },
+        "814-0-0": {
+            "name": "Maraignée"
+        },
+        "815-0-0": {
+            "name": "#FISSURE"
+        },
+        "816-0-0": {
+            "name": "#POLTY"
+        },
+        "816-1-0": {
+            "name": "Kinéti"
+        },
+        "817-0-0": {
+            "name": "Proie"
+        },
+        "817-1-0": {
+            "name": "Mulligoule"
+        },
+        "818-0-0": {
+            "name": "Araignée Rocher"
+        },
+        "818-0-1": {
+            "name": "Araignée Rocher"
+        },
+        "818-0-2": {
+            "name": "Araignée Rocher"
+        },
+        "818-0-3": {
+            "name": "Araignée Rocher"
+        },
+        "818-1-0": {
+            "name": "Araignée Rocher Marqué"
+        },
+        "818-1-1": {
+            "name": "Araignée Rocher Marqué"
+        },
+        "818-1-2": {
+            "name": "Araignée Rocher Marqué"
+        },
+        "818-1-3": {
+            "name": "Araignée Rocher Marqué"
+        },
+        "818-2-0": {
+            "name": "Araignée Charbon"
+        },
+        "818-2-1": {
+            "name": "Araignée Charbon"
+        },
+        "818-2-2": {
+            "name": "Araignée Charbon"
+        },
+        "818-2-3": {
+            "name": "Araignée Charbon"
+        },
+        "819-0-0": {
+            "name": "Mouche Explosive"
+        },
+        "819-1-0": {
+            "name": "Mouche Explosive Éternelle"
+        },
+        "820-0-0": {
+            "name": "#DANNY"
+        },
+        "820-1-0": {
+            "name": "Charbonné"
+        },
+        "821-0-0": {
+            "name": "Rocanon"
+        },
+        "822-0-0": {
+            "name": "Gonflé"
+        },
+        "823-0-0": {
+            "name": "Sisme"
+        },
+        "824-0-0": {
+            "name": "Bidoche"
+        },
+        "824-1-0": {
+            "name": "Bidoche Grillée"
+        },
+        "825-0-0": {
+            "name": "Ver Flambant"
+        },
+        "826-0-0": {
+            "name": "Durci"
+        },
+        "827-0-0": {
+            "name": "Dévisagé"
+        },
+        "827-1-0": {
+            "name": "Dévisagé Impur"
+        },
+        "828-0-0": {
+            "name": "Nécro"
+        },
+        "829-0-0": {
+            "name": "Taupe"
+        },
+        "829-1-0": {
+            "name": "Taupe Impure"
+        },
+        "830-0-0": {
+            "name": "Grosselet"
+        },
+        "830-10-0": {
+            "name": "Big Bone"
+        },
+        "831-0-0": {
+            "name": "Gros Tas Éventré"
+        },
+        "831-10-0": {
+            "name": "Gutted Fatty Eye"
+        },
+        "831-20-0": {
+            "name": "Organes Putréfiés"
+        },
+        "832-0-0": {
+            "name": "Exorciste"
+        },
+        "832-1-0": {
+            "name": "Fanatique"
+        },
+        "833-0-0": {
+            "name": "Chandelle"
+        },
+        "834-0-0": {
+            "name": "Pierre"
+        },
+        "834-1-0": {
+            "name": "Charles"
+        },
+        "834-2-0": {
+            "name": "#FLAGELLANT"
+        },
+        "835-0-0": {
+            "name": "Gros Tas Lorgneur"
+        },
+        "835-10-0": {
+            "name": "Peeping Fatty Eye"
+        },
+        "836-0-0": {
+            "name": "#VIS_VERSA"
+        },
+        "837-0-0": {
+            "name": "#HENRY"
+        },
+        "838-0-0": {
+            "name": "Follet 2"
+        },
+        "839-0-0": {
+            "name": "#STRIFER"
+        },
+        "840-0-0": {
+            "name": "#PON"
+        },
+        "841-0-0": {
+            "name": "Dragon"
+        },
+        "841-1-0": {
+            "name": "Quadragon"
+        },
+        "842-0-0": {
+            "name": "Veilleur"
+        },
+        "843-0-0": {
+            "name": "Canary"
+        },
+        "843-1-0": {
+            "name": "Foreigner"
+        },
+        "844-0-0": {
+            "name": "Gerbombe"
+        },
+        "850-0-0": {
+            "name": "Béant 2"
+        },
+        "850-1-0": {
+            "name": "Crachant 2"
+        },
+        "850-2-0": {
+            "name": "Giclant 2"
+        },
+        "851-0-0": {
+            "name": "Mordu"
+        },
+        "852-0-0": {
+            "name": "Boule à Pics"
+        },
+        "853-0-0": {
+            "name": "Petit Asticot"
+        },
+        "854-0-0": {
+            "name": "Sangsue Adulte"
+        },
+        "855-0-0": {
+            "name": "Fonceur 2"
+        },
+        "855-1-0": {
+            "name": "Sangsue Impure"
+        },
+        "856-0-0": {
+            "name": "Brumisateur"
+        },
+        "857-0-0": {
+            "name": "Cohorte"
+        },
+        "858-0-0": {
+            "name": "Servant"
+        },
+        "859-0-0": {
+            "name": "Hôte Flottant"
+        },
+        "860-0-0": {
+            "name": "Avorté"
+        },
+        "861-0-0": {
+            "name": "Pustule"
+        },
+        "862-0-0": {
+            "name": "Kyste"
+        },
+        "863-0-0": {
+            "name": "Étoile du Matin"
+        },
+        "863-0-1": {
+            "name": "Étoile du Matin"
+        },
+        "863-0-2": {
+            "name": "Étoile du Matin"
+        },
+        "864-0-0": {
+            "name": "Moqulus"
+        },
+        "865-0-0": {
+            "name": "Éviscéré"
+        },
+        "865-10-0": {
+            "name": "Evis Guts"
+        },
+        "866-0-0": {
+            "name": "Ésaü Sombre"
+        },
+        "866-0-1": {
+            "name": "Ésaü Obscur"
+        },
+        "866-1-0": {
+            "name": "Dark Esau's Pit"
+        },
+        "867-0-0": {
+            "name": "Ombre de Mère"
+        },
+        "868-0-0": {
+            "name": "Mouche Militaire"
+        },
+        "869-0-0": {
+            "name": "#MIGRAINE"
+        },
+        "870-0-0": {
+            "name": "Gouttelette"
+        },
+        "871-0-0": {
+            "name": "Goutte"
+        },
+        "872-0-0": {
+            "name": "Floculé"
+        },
+        "873-0-0": {
+            "name": "Piège à Mouches"
+        },
+        "874-0-0": {
+            "name": "Proutigan"
+        },
+        "217-3-0": {
+            "name": "Gros Maïs"
+        },
+        "875-0-0": {
+            "name": "Pétomine"
+        },
+        "876-0-0": {
+            "name": "Ordure"
+        },
+        "876-1-0": {
+            "name": "Tête d'Ordure"
+        },
+        "877-0-0": {
+            "name": "Ranque"
+        },
+        "878-0-0": {
+            "name": "Lèche-Glue"
+        },
+        "879-0-0": {
+            "name": "Gonflé"
+        },
+        "880-0-0": {
+            "name": "Dame de Chair"
+        },
+        "881-0-0": {
+            "name": "Pinuscule"
+        },
+        "881-1-0": {
+            "name": "Frelet"
+        },
+        "882-0-0": {
+            "name": "Poussière"
+        },
+        "883-0-0": {
+            "name": "Bébé Création"
+        },
+        "884-0-0": {
+            "name": "Horde"
+        },
+        "885-0-0": {
+            "name": "Cultiste"
+        },
+        "885-1-0": {
+            "name": "Cultiste Sanguinaire"
+        },
+        "885-10-0": {
+            "name": "Bone Trap"
+        },
+        "886-0-0": {
+            "name": "Gros Sac Éviscéré"
+        },
+        "886-1-0": {
+            "name": "Démon Fœtal"
+        },
+        "887-0-0": {
+            "name": "Tête Poussiéreuse"
+        },
+        "888-0-0": {
+            "name": "Ombre"
+        },
+        "889-0-0": {
+            "name": "Clic-Clac"
+        },
+        "890-0-0": {
+            "name": "Enroulé"
+        },
+        "890-0-1": {
+            "name": "Enroulé"
+        },
+        "891-0-0": {
+            "name": "Chèvre"
+        },
+        "891-1-0": {
+            "name": "Chèvre Noire"
+        },
+        "892-0-0": {
+            "name": "Pouf"
+        },
+        "893-0-0": {
+            "name": "Boule Enchaînée"
+        },
+        "900-0-0": {
+            "name": "La Mère des Rampants"
+        },
+        "901-0-0": {
+            "name": "Bubulle"
+        },
+        "902-0-0": {
+            "name": "L'Espluie"
+        },
+        "903-0-0": {
+            "name": "Le Visage"
+        },
+        "903-1-0": {
+            "name": "Visage Mask"
+        },
+        "903-10-0": {
+            "name": "Visage Chain"
+        },
+        "903-20-0": {
+            "name": "Visage Plasma"
+        },
+        "904-0-0": {
+            "name": "La Sirène"
+        },
+        "904-1-0": {
+            "name": "Siren's Skull"
+        },
+        "904-10-0": {
+            "name": "Siren Helper Projectile"
+        },
+        "905-0-0": {
+            "name": "L'Hérétique"
+        },
+        "906-0-0": {
+            "name": "#HORNFEL"
+        },
+        "906-1-0": {
+            "name": "Hornfel Decoy"
+        },
+        "907-0-0": {
+            "name": "Gédéon le Grand"
+        },
+        "907-0-1": {
+            "name": "Great Gideon (defeated)"
+        },
+        "908-0-0": {
+            "name": "Prunelle"
+        },
+        "909-0-0": {
+            "name": "Le Fléau"
+        },
+        "909-10-0": {
+            "name": "The Scourge (chain)"
+        },
+        "910-0-0": {
+            "name": "Chimère"
+        },
+        "910-1-0": {
+            "name": "Chimera (body)"
+        },
+        "910-2-0": {
+            "name": "Chimera (head)"
+        },
+        "911-0-0": {
+            "name": "Mort-Boyaux"
+        },
+        "911-1-0": {
+            "name": "Rotgut (maggot)"
+        },
+        "911-2-0": {
+            "name": "Rotgut (heart)"
+        },
+        "912-0-0": {
+            "name": "Mère"
+        },
+        "912-10-0": {
+            "name": "Mother 2"
+        },
+        "912-20-0": {
+            "name": "Cadavre d'Isaac"
+        },
+        "912-30-0": {
+            "name": "Mother Worm"
+        },
+        "912-100-0": {
+            "name": "Mother Ball"
+        },
+        "912-100-1": {
+            "name": "Mother Ball (Medium)"
+        },
+        "912-100-2": {
+            "name": "Mother Ball (Small)"
+        },
+        "913-0-0": {
+            "name": "#MIN_MIN"
+        },
+        "914-0-0": {
+            "name": "Bouchon"
+        },
+        "915-0-0": {
+            "name": "Roussi"
+        },
+        "915-1-0": {
+            "name": "Singe's Ball"
+        },
+        "916-0-0": {
+            "name": "#BUMBINO"
+        },
+        "917-0-0": {
+            "name": "Colostomie"
+        },
+        "918-0-0": {
+            "name": "Crotelette"
+        },
+        "919-0-0": {
+            "name": "#RAGLICH"
+        },
+        "919-1-0": {
+            "name": "Raglich Arm"
+        },
+        "920-0-0": {
+            "name": "Bis-Cornu"
+        },
+        "921-0-0": {
+            "name": "#CLUTCH"
+        },
+        "921-1-0": {
+            "name": "Clutch Orbital"
+        },
+        "950-0-0": {
+            "name": "#DOGMA"
+        },
+        "950-1-0": {
+            "name": "Dogma's TV"
+        },
+        "950-2-0": {
+            "name": "Dogma Angel"
+        },
+        "950-10-0": {
+            "name": "Dogma Angel Baby"
+        },
+        "951-1-0": {
+            "name": "Stalactite"
+        },
+        "951-2-0": {
+            "name": "Beast Rock Projectile"
+        },
+        "951-3-0": {
+            "name": "Beast Soul"
+        },
+        "951-10-0": {
+            "name": "#ULTRA_FAMINE"
+        },
+        "951-11-0": {
+            "name": "Ultra Famine Fly"
+        },
+        "951-20-0": {
+            "name": "Ultra Épidémie"
+        },
+        "951-21-0": {
+            "name": "Ultra Pestilence Fly"
+        },
+        "951-22-0": {
+            "name": "Ultra Pestilence Maggot"
+        },
+        "951-23-0": {
+            "name": "Ultra Pestilence Fly Ball"
+        },
+        "951-30-0": {
+            "name": "Ultra Guerre"
+        },
+        "951-31-0": {
+            "name": "Ultra War Bomb"
+        },
+        "951-40-0": {
+            "name": "Ultra Mort"
+        },
+        "951-41-0": {
+            "name": "Ultra Death Scythe"
+        },
+        "951-42-0": {
+            "name": "Ultra Death Head"
+        },
+        "951-0-0": {
+            "name": "La Bête"
+        },
+        "951-100-0": {
+            "name": "Background (Beast)"
+        },
+        "951-101-0": {
+            "name": "Background (Famine)"
+        },
+        "951-102-0": {
+            "name": "Background (Pestilence)"
+        },
+        "951-103-0": {
+            "name": "Background (War)"
+        },
+        "951-104-0": {
+            "name": "Background (Death)"
+        },
+        "960-0-0": {
+            "name": "Generic Prop"
+        },
+        "960-1-0": {
+            "name": "Mom's Dresser"
+        },
+        "960-2-0": {
+            "name": "Mom's Vanity"
+        },
+        "960-3-0": {
+            "name": "Couch"
+        },
+        "960-4-0": {
+            "name": "TV"
+        },
+        "963-0-0": {
+            "name": "Frozen Enemy"
+        },
+        "964-0-0": {
+            "name": "Dummy"
+        },
+        "965-0-0": {
+            "name": "Minecart"
+        },
+        "966-0-0": {
+            "name": "Siren Helper"
+        },
+        "967-0-0": {
+            "name": "Hornfel Door"
+        },
+        "1000-12-20": {
+            "name": "Key Tear Poof"
+        },
+        "1000-12-21": {
+            "name": "Bloody Key Tear Poof"
+        },
+        "1000-12-22": {
+            "name": "Sword Tear Poof"
+        },
+        "1000-12-23": {
+            "name": "Tech Sword Tear Poof"
+        },
+        "1000-16-66": {
+            "name": "Lava Splash"
+        },
+        "1000-16-67": {
+            "name": "Lava Splash (Large)"
+        },
+        "1000-50-6": {
+            "name": "Big Brimstone Impact"
+        },
+        "1000-50-7": {
+            "name": "Brimstone Impact (Poop)"
+        },
+        "1000-123-2": {
+            "name": "Monstrance Halo"
+        },
+        "1000-123-3": {
+            "name": "Curse Halo"
+        },
+        "1000-123-4": {
+            "name": "Static Halo"
+        },
+        "1000-123-5": {
+            "name": "Saturnus Halo"
+        },
+        "1000-123-6": {
+            "name": "Thorns Halo"
+        },
+        "1000-123-7": {
+            "name": "Static Halo (Prerendered)"
+        },
+        "1000-123-8": {
+            "name": "Dark Arts Halo"
+        },
+        "1000-74-1": {
+            "name": "Mom's Carpet"
+        },
+        "1000-74-2": {
+            "name": "Mom's Carpet"
+        },
+        "1000-130-0": {
+            "name": "Leech Explosion"
+        },
+        "1000-131-0": {
+            "name": "Maggot Explosion"
+        },
+        "1000-132-0": {
+            "name": "Big Water Splash"
+        },
+        "1000-132-1": {
+            "name": "Static Splash"
+        },
+        "1000-132-2": {
+            "name": "Static Splash 2"
+        },
+        "1000-133-0": {
+            "name": "Water Ripple"
+        },
+        "1000-133-1": {
+            "name": "Small Water Ripple"
+        },
+        "1000-134-0": {
+            "name": "Pedestal Ripple"
+        },
+        "1000-135-0": {
+            "name": "Rain Drop"
+        },
+        "1000-136-0": {
+            "name": "Grid Projectile Helper"
+        },
+        "1000-137-0": {
+            "name": "Wormwood Hole"
+        },
+        "1000-137-1": {
+            "name": "Wormwood Hole Spray"
+        },
+        "1000-138-0": {
+            "name": "Mist"
+        },
+        "1000-139-0": {
+            "name": "Trap Door Cover"
+        },
+        "1000-140-0": {
+            "name": "Backdrop Decoration"
+        },
+        "1000-141-0": {
+            "name": "Smoke Cloud"
+        },
+        "1000-142-0": {
+            "name": "Whirlpool"
+        },
+        "1000-142-1": {
+            "name": "Whirlpool Particle"
+        },
+        "1000-143-0": {
+            "name": "Fartwave"
+        },
+        "1000-144-0": {
+            "name": "Enemy Ghost"
+        },
+        "1000-145-0": {
+            "name": "Rock Tear Poof"
+        },
+        "1000-146-0": {
+            "name": "Dirt Pile"
+        },
+        "1000-147-0": {
+            "name": "Fire Jet"
+        },
+        "1000-147-1": {
+            "name": "Fire Jet (purple)"
+        },
+        "1000-148-0": {
+            "name": "Fire Wave"
+        },
+        "1000-149-0": {
+            "name": "Big Rock Explosion"
+        },
+        "1000-150-0": {
+            "name": "Big Rock Wave"
+        },
+        "1000-151-0": {
+            "name": "Gideon Attract Ring"
+        },
+        "1000-151-1": {
+            "name": "Gideon Attract Trail"
+        },
+        "1000-151-10": {
+            "name": "Shockwave Ring"
+        },
+        "1000-151-11": {
+            "name": "Shockwave Trail"
+        },
+        "1000-152-0": {
+            "name": "Hornfel Room Controller"
+        },
+        "1000-153-0": {
+            "name": "Occult Target"
+        },
+        "1000-154-0": {
+            "name": "Door Outline"
+        },
+        "1000-39-1": {
+            "name": "Moonlight"
+        },
+        "1000-155-0": {
+            "name": "Slippery Brown Creep (growing)"
+        },
+        "1000-156-0": {
+            "name": "Tall Ladder"
+        },
+        "1000-156-1": {
+            "name": "Stairway"
+        },
+        "1000-157-0": {
+            "name": "Willo Spawner"
+        },
+        "1000-158-0": {
+            "name": "Tadpole"
+        },
+        "1000-159-0": {
+            "name": "Lil Ghost"
+        },
+        "1000-160-0": {
+            "name": "Bishop Shield"
+        },
+        "1000-161-0": {
+            "name": "Portal Teleport"
+        },
+        "1000-162-0": {
+            "name": "Heretic Pentagram"
+        },
+        "1000-163-0": {
+            "name": "Chain Gib"
+        },
+        "1000-164-0": {
+            "name": "Siren Ring"
+        },
+        "1000-165-0": {
+            "name": "Siren Charm Effect"
+        },
+        "1000-165-1": {
+            "name": "Siren Charm Glow"
+        },
+        "1000-166-0": {
+            "name": "Sprite Trail"
+        },
+        "1000-167-0": {
+            "name": "Chain Lightning"
+        },
+        "1000-168-0": {
+            "name": "Colostomia Puddle"
+        },
+        "1000-169-0": {
+            "name": "Creep (Static)"
+        },
+        "1000-170-0": {
+            "name": "Dogma Debris"
+        },
+        "1000-171-0": {
+            "name": "Dogma Blackhole"
+        },
+        "1000-172-0": {
+            "name": "Dogma Orb"
+        },
+        "1000-173-0": {
+            "name": "Cracked Orb Poof"
+        },
+        "1000-174-0": {
+            "name": "Shop Spikes"
+        },
+        "1000-175-0": {
+            "name": "Kineti Beam"
+        },
+        "1000-176-0": {
+            "name": "Cleaver Slash"
+        },
+        "1000-177-0": {
+            "name": "Reverse Explosion"
+        },
+        "1000-177-1": {
+            "name": "Reverse Explosion Debris"
+        },
+        "1000-178-0": {
+            "name": "Urn of Souls"
+        },
+        "1000-178-1": {
+            "name": "Urn of Souls (Belial)"
+        },
+        "1000-179-0": {
+            "name": "Enemy Soul"
+        },
+        "1000-179-1": {
+            "name": "Enemy Soul (Belial)"
+        },
+        "1000-180-0": {
+            "name": "Rift"
+        },
+        "1000-181-0": {
+            "name": "Lava Spawner"
+        },
+        "1000-182-0": {
+            "name": "Big Knife Projectile"
+        },
+        "1000-183-0": {
+            "name": "Mother Shockwave"
+        },
+        "1000-184-0": {
+            "name": "Worm Friend Snare"
+        },
+        "1000-185-0": {
+            "name": "Redemption"
+        },
+        "1000-186-0": {
+            "name": "Hungry Soul"
+        },
+        "1000-187-0": {
+            "name": "Explosion Wave"
+        },
+        "1000-188-0": {
+            "name": "Divine Intervention"
+        },
+        "1000-189-0": {
+            "name": "Purgatory Rift"
+        },
+        "1000-189-1": {
+            "name": "Purgatory Soul"
+        },
+        "1000-190-0": {
+            "name": "Mother Tracer"
+        },
+        "1000-191-0": {
+            "name": "Pickup Ghost"
+        },
+        "1000-192-0": {
+            "name": "Fissure Spawner"
+        },
+        "1000-193-0": {
+            "name": "Anima Chain"
+        },
+        "1000-194-0": {
+            "name": "Dark Snare"
+        },
+        "1000-195-0": {
+            "name": "Liquid Poop Creep"
+        },
+        "1000-196-0": {
+            "name": "Ground Glow"
+        },
+        "1000-197-0": {
+            "name": "Dead Bird"
+        },
+        "1000-198-0": {
+            "name": "Generic Tracer"
+        },
+        "1000-199-0": {
+            "name": "Ultra Death Scythe"
+        },
+        "1000-200-0": {
+            "name": "Bullet Poof (Static)"
+        },
+        "1000-201-0": {
+            "name": "Umbilical Cord Helper"
+        }
     }
 }
