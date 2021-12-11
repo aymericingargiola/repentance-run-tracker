@@ -59,10 +59,12 @@ module.exports = {
         if (fromStringTable) {
             const playersIndex = stringTableFile.stringtable.category.findIndex(item => item._attributes.name === 'Players')
             const playersJson = stringTableFile.stringtable.category[playersIndex].key.reduce((t, obj) => {
-                const matchingPlayer = convertPlayersXml.players.player.find(player => `${player._attributes.name.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name || `${player._attributes.costumeSuffix && player._attributes.costumeSuffix.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
-                if (!matchingPlayer) return t
-                t[matchingPlayer._attributes.id] = {}
-                t[matchingPlayer._attributes.id].name = obj.string[fromStringTable.index]._text
+                const matchingPlayer = convertPlayersXml.players.player.filter(player => `${player._attributes.name.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name || `${player._attributes.costumeSuffix && player._attributes.costumeSuffix.replace(' ', '_').toUpperCase()}_NAME` === obj._attributes.name)
+                if (matchingPlayer.length < 1) return t
+                matchingPlayer.forEach((player) => {
+                    if (!t[player._attributes.id]) t[player._attributes.id] = {}
+                    t[player._attributes.id].name = obj.string[fromStringTable.index]._text
+                })
                 return t
             }, {})
             console.timeEnd(`Players localization for ${language} json done in `)
