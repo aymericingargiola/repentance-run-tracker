@@ -9,7 +9,7 @@
                             <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
                         </div>
                         <div class="floor-wrapper">
-                            <div class="floor-name">{{floor.name}}</div>
+                            <div class="floor-name">{{$t(`stages.${floor.name.replace(/[0-9]/g, '').trim()}.name`)}} {{parseInt(floor.name.match(/\d/g))}}</div>
                             <transition-group name="item-group-transition" tag="ul" class="items">
                                 <template v-for="(item, tidx) in floor.itemsCollected">
                                     <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">

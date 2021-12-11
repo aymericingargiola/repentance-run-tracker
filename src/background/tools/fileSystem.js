@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs')
 const fsPromises = fs.promises
 const elog = require('electron-log')
 module.exports = {
