@@ -118,12 +118,12 @@ export default {
             })
             window.ipc.on('SYNC_UPDATE_RUN', (response) => {
                 if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
-                    this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
+                    this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
                     setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"].refresh()
+                        this.$refs["firstRunFloorsScroller"]?.refresh()
                     }, 1000)
                     setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"].scrollTo({x:"100%"}, 1000)
+                        this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
                     }, 1000)
                 }
             })

@@ -250,12 +250,12 @@ function updateOrCreateRun(params = {}) {
                 break
                 case 'run end':
                     const runEndInfo = getRunEnd(params.log)
-                    sameRun.runEnd.date = !extendedSaveMode ? runEndInfo.date : sameRun.runEnd.date
+                    sameRun.runEnd.date = sameRun.extendedSaveMode ? sameRun.runEnd.date : runEndInfo.date
                     sameRun.runEnd.win = runEndInfo.win
                     sameRun.runEnd.killedBy = runEndInfo.killedBy
                     sameRun.runEnd.spawnedBy = runEndInfo.spawnedBy
                     sameRun.runEnd.damageFlags = runEndInfo.damageFlags
-                    sameRun.runDuration = getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
+                    sameRun.runDuration = sameRun.extendedSaveMode ? sameRun.runDuration : getRunDuration(DateTime.fromSeconds(runEndInfo.date), DateTime.fromSeconds(sameRun.runStart))
                     if (!sameRun.runEnd.win) sameRun.floors[sameRun.floors.length - 1].death = true
                     elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
