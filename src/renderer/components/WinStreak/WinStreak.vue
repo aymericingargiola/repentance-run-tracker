@@ -12,14 +12,14 @@
                                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                                <span>Win streak save {{winStreak.gameState}}</span>
+                                <span>{{$t('strings.winStreakSave')}} {{winStreak.gameState}}</span>
                             </div>
                             <div class="characters">
                                 <span class="title">
                                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                                    <span>{{winStreak.characters_ids.length > 1 ? 'Characters' : 'Character'}}</span>
+                                    <span>{{$tc('dictionary.character', winStreak.characters_ids.length)}}</span>
                                 </span>
                                 <div v-if="!winStreak.randomNormal && !winStreak.randomAlt">
                                     <template v-for="(character, index) in winStreak.characters_ids" tag="ul">
@@ -39,7 +39,7 @@
                                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                                    <span>{{winStreak.bosses_ids.length > 1 ? 'Bosses' : 'Boss'}}</span>
+                                    <span>{{$tc('dictionary.boss', winStreak.characters_ids.length)}}</span>
                                 </span>
                                 <div>
                                     <template v-for="(boss, index) in winStreak.bosses_ids" tag="ul">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="buttons">
                                 <div class="remove">
-                                    <button v-on:click="remove(winStreak.id)">Remove</button>
+                                    <button v-on:click="remove(winStreak.id)">{{$t('dictionary.remove')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -384,14 +384,14 @@ export default {
                     content: "";
                     height: 100%;
                     width: 8px;
-                    left: 0px;
+                    left: 1px;
                     top: 0px;
                     transform: translateX(-8px);
                 }
                 > .after {
                     height: 100%;
                     width: 12px;
-                    right: 0px;
+                    right: 1px;
                     top: 0px;
                     transform: translateX(12px);
                     z-index: 2;

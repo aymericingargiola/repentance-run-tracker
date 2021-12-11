@@ -9,7 +9,7 @@ import VueTimepicker from 'vue2-timepicker'
 import 'vue2-timepicker/dist/VueTimepicker.css'
 import { ColorPicker } from 'vue-color-gradient-picker'
 import VueI18n from 'vue-i18n'
-import { languages, defaultLocale } from './i18n/index'
+import { languages, customModifiers, defaultLocale } from './i18n/index'
 import 'vue-color-gradient-picker/dist/index.css'
 import helpers from './helpers/format'
 
@@ -32,15 +32,17 @@ Vue.component("ColorPicker", ColorPicker)
 
 Vue.use(VueI18n)
 const messages = Object.assign(languages)
-const i18n = new VueI18n({ locale: defaultLocale, fallbackLocale: 'en', messages })
+const modifiers = Object.assign(customModifiers)
+const i18n = new VueI18n({
+  locale: defaultLocale,
+  fallbackLocale: defaultLocale,
+  messages,
+  modifiers
+})
 
 Vue.prototype.$DateTime = DateTime
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
 Vue.prototype.$isDev = process.env.NODE_ENV === "development"
-
-// store.$repo(Context).insert({
-//   id: 1
-// });
 
 Vue.config.productionTip = false
 

@@ -5,10 +5,10 @@
         <div class="after" :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"></div>
         <div :class="['content', editing ? 'expended' : '']">
             <div v-if="usedGameStates">
-                <CustomSelect type="single" :hide-at="0" :items="availableGameStatesSelectOptions" label="Save" emptyMessage="No save selected" @updateSelect="onUpdateSaveSelect"/>
+                <CustomSelect type="single" hide-at="0" :items="availableGameStatesSelectOptions" :label="$tc('dictionary.save')" :emptyMessage="$t('select.noSavesSelected')" @updateSelect="onUpdateSaveSelect"/>
             </div>
             <div class="adjust-number">
-                Adjust number :
+                {{$t('strings.adjustNumber')}} :
                 <input type="number" id="adjustNumber" name="adjust number" class="size-auto" v-model="adjustNumber">
             </div>
             <div v-if="allCharacters" class="characters">
@@ -16,21 +16,21 @@
                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <span>Characters</span>
+                    <span>{{$tc('dictionary.character', 2)}}</span>
                 </span>
                 <ul>
                     <li :class="['character', randomNormal ? 'selected' : '']" v-on:click="randomSelected('normal')">
                         <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
-                        <span class="name">Random normal</span>
+                        <span class="name">{{$t('strings.randomNormal')}}</span>
                     </li>
                     <li :class="['character', randomAlternate ? 'selected' : '']" v-on:click="randomSelected('alternate')">
                         <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
-                        <span class="name">Random tainted</span>
+                        <span class="name">{{$t('strings.randomTainted')}}</span>
                     </li>
                     <template v-for="character in allCharacters">
                         <li :class="['character', characters.includes(character.id) ? 'selected' : '']" :key="character.id" v-on:click="characterSelected(character.id)">
                             <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/${character.id}.png')`}"></span>
-                            <span class="name">{{character.trueName}} ({{character.version === "Alternate" ? "Tainted" : "Normal"}}) {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}</span>
+                            <span class="name">{{character.trueName}} {{character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : ""}} {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}</span>
                         </li>
                     </template>
                 </ul>
@@ -40,7 +40,7 @@
                     <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                     <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                     <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <span>Bosses</span>
+                    <span>{{$tc('dictionary.boss', 2)}}</span>
                 </span>
                 <template v-for="boss in lastBosses">
                     <li :class="['boss', bosses.includes(boss.id) ? 'selected' : '']" :key="boss.id" v-on:click="bossSelected(boss.id)">
@@ -51,17 +51,17 @@
             </div>
             <div class="buttons">
                 <div class="cancel">
-                    <button v-on:click="cancel()">Cancel</button>
+                    <button v-on:click="cancel()">{{$t('dictionary.cancel')}}</button>
                 </div>
                 <div class="add-rule">
-                    <button :disabled="!gameState || bosses.length === 0" v-on:click="addRule()">Add rule</button>
+                    <button :disabled="!gameState || bosses.length === 0" v-on:click="addRule()">{{$tc('strings.addRule')}}</button>
                 </div>
             </div>
         </div>
         <div :class="['expend', editing ? 'hidden' : '']">
             <div v-on:click="editing = !editing">
                 (+)
-                <span>Add win streak rule</span>
+                <span>{{$t('strings.addWinStreakRule')}}</span>
             </div>
         </div>
     </li>
@@ -203,7 +203,7 @@ export default {
                 transition: 0.25s ease;
             }
             &.expended {
-              max-height: 500px;
+              max-height: 600px;
               opacity: 1;
               transform: scale(1);
               &::after {

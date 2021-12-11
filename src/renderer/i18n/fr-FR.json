@@ -1,0 +1,102 @@
+{
+    "dictionary": {
+        "no": "Non",
+        "here": "Ici",
+        "save": "Sauvegarde | Sauvegardes",
+        "rule": "Règle | Règles",
+        "tag": "Tag | Tags",
+        "winStreak": "Win streak | Win streaks",
+        "character": "Personnage | Personnages",
+        "boss": "Boss | Bosses",
+        "remove": "Effacer",
+        "cancel": "Annuler",
+        "close": "Fermer",
+        "add": "Ajouter",
+        "random": "Aléatoire",
+        "normal": "Normal",
+        "tainted": "Tainted",
+        "win": "Victoire",
+        "lose": "Défaite"
+    },
+    "strings": {
+        "addRule": "@:dictionary.add la règle",
+        "addWinStreakRule": "Ajouter une règle de win streak",
+        "winStreakSave": "Sauvegarde",
+        "randomNormal": "@:dictionary.random @.lower:dictionary.normal",
+        "randomTainted": "@:dictionary.random @.lower:dictionary.tainted",
+        "adjustNumber": "Ajuster",
+        "searchRuns": "Chercher des runs",
+        "removeRun": "Supprimer la run",
+        "deleteSelected": "Effacer la sélection",
+        "restoreSelected": "Restaurer la sélection",
+        "restartApp": "Redémarrer l'app",
+        "closeApp": "Fermer l'app",
+        "startFirstRun": "Commencez votre première run !",
+        "noRunsFound": "Aucune run trouvée"
+    },
+    "select": {
+        "noSavesSelected": "Aucune sauvegarde",
+        "allTags": "Tous les tags",
+        "allCharacters": "Tous les personnages",
+        "allSaves": "Toutes les sauvegardes",
+        "allCondition": "Toutes les conditions",
+        "winCondition": "Condition de victoire"
+    },
+    "editRun": {
+        "title": "Editer la run",
+        "runTitle": "Titre",
+        "runDuration": "Durée",
+        "videoLink": "Lien vers la vidéo",
+        "videoHighlights": "Moments clés de la vidéo"
+    },
+    "trash": {
+        "emptyTrash": "Vider la corbeille",
+        "trashIsEmpty": "La corbeille est vide !"
+    },
+    "update": {
+        "updateDownloading": "Mise à jour {updateVersion} en téléchargement: {updateProgressInfos}%",
+        "updateDownloaded": "Mise à jour {updateVersion} téléchargée, cliquez ici pour mettre à jour et redémarrer"
+    },
+    "appError": {
+        "title": "Erreur !",
+        "messagePart1": "Vous pouvez aider à corriger cette erreur en partageant un fichier zip généré avec le bouton ci-dessous, ouvrez une nouvelle issue",
+        "messagePart2": "puis attachez le fichier zip.",
+        "messagePart3": "Le ficher ne contiens que les données de l'app et des logs.",
+        "generateZip": "Générer le zip"
+    },
+    "config": {
+        "title": "Paramètres",
+        "languages": {
+            "title": "Langue",
+            "hint": "",
+            "choices": {
+                "en-US": "Anglais",
+                "fr-FR": "Français"
+            }
+        },
+        "dateFormat": {
+            "title": "Format de la date",
+            "hint": "",
+            "choices": {
+                "LL/dd/yy": "Mois/Jour/Année",
+                "dd/LL/yy": "Jour/Mois/Année"
+            }
+        },
+        "hourFormat": {
+            "title": "Format de l'heure",
+            "hint": "",
+            "choices": {
+                "hh:mm a": "12 Heures",
+                "HH:mm": "24 Heures"
+            }
+        },
+        "hideActiveItems": {
+            "title": "Cacher les items actifs",
+            "hint": "Cacher les items actifs de la liste des etages"
+        },
+        "isaacModFolderPath": {
+            "title": "Dossier des mods",
+            "hint": ""
+        }
+    }
+}

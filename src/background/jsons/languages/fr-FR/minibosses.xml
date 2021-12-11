@@ -1,0 +1,20 @@
+<minibosses>
+	<miniboss id="0" name="Paresse" />
+	<miniboss id="1" name="Luxure" />
+	<miniboss id="2" name="Colère" />
+	<miniboss id="3" name="Gourmandise" />
+	<miniboss id="4" name="Avarice" />
+	<miniboss id="5" name="Envie" />
+	<miniboss id="6" name="Orgueil" />
+	
+	<miniboss id="7" name="Super Paresse" />
+	<miniboss id="8" name="Super Luxure" />
+	<miniboss id="9" name="Super Colère" />
+	<miniboss id="10" name="Super Gourmandise" />
+	<miniboss id="11" name="Super Avarice" />
+	<miniboss id="12" name="Super Envie" />
+	<miniboss id="13" name="Super Orgueil" />
+	
+	<miniboss id="14" name="Ultra Orgueil" />
+	<miniboss id="15" name="Krampus" />
+</minibosses>

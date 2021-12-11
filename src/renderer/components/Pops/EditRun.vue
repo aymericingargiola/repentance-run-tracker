@@ -5,29 +5,29 @@
             <div class="config-items edit-run">
                 <div class="mid" :style="{backgroundImage:`url('img/cards/big-frame.png')`}"></div>
                 <div class="content">
-                    <div class="heading">Edit Run</div>
+                    <div class="heading">{{$t('editRun.title')}}</div>
                     <div class="config-item">
-                        <div class="title">Run title</div>
+                        <div class="title">{{$t('editRun.runTitle')}}</div>
                         <input type="texte" v-model="customName" @change="updateCustomName">
                     </div>
                     <div class="config-item">
-                        <div class="title">Run duration</div>
+                        <div class="title">{{$t('editRun.runDuration')}}</div>
                         <vue-timepicker v-model="runDuration" @change="updateRunDuration" format="HH:mm:ss"></vue-timepicker>
                     </div>
                     <div class="config-item">
-                        <div class="title">Video link</div>
+                        <div class="title">{{$t('editRun.videoLink')}}</div>
                         <input type="texte" v-model="videoLink" @change="updateVideoLink">
                     </div>
                     <div class="config-item">
-                        <div class="title">Video Highlights</div>
+                        <div class="title">{{$t('editRun.videoHighlights')}}</div>
                         <Tags :run-id="this.currentRun.id" :type="'time'" :video-link="videoLink"></Tags>
                     </div>
                     <div class="config-item">
-                        <div class="title">Tags</div>
+                        <div class="title">{{$tc('dictionary.tag', 2)}}</div>
                         <Tags :run-id="this.currentRun.id" :type="'string'"></Tags>
                     </div>
                     <div class="config-item">
-                        <button class="warning" v-on:click="removeRun()">Remove run</button>
+                        <button class="warning" v-on:click="removeRun()">{{$t('strings.removeRun')}}</button>
                     </div>
                 </div>
             </div>

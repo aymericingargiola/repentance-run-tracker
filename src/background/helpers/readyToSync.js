@@ -172,6 +172,7 @@ module.exports = {
             if (tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name
             if (tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
             if (tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type
+			if (tempConfigField && tempConfigField.order != field.order) tempConfigField.order = field.order
             if (tempConfigField && tempConfigField.disabled != field.disabled) tempConfigField.disabled = field.disabled
         })
         await writeFileAsync(dataFolder, 'config.json', JSON.stringify(tempConfig))
