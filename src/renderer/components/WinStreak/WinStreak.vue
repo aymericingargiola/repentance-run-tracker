@@ -25,13 +25,13 @@
                                     <template v-for="(character, index) in winStreak.characters_ids" tag="ul">
                                         <li :class="['character', getRuns(winStreak).number % winStreak.characters_ids.length === index ? 'current' : 'not-current']" :key="winStreak.id+character">
                                             <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/${character}.png')`}"></span>
-                                            <span class="name">{{getCharacter(character).name}}</span>
+                                            <span class="name">{{getCharacter(character).id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${getCharacter(character).id}.name`)}` }} {{getCharacter(character).version === "Alternate" ? `(${$t('dictionary.tainted')})` : ""}}</span>
                                         </li>
                                     </template>
                                 </div>
                                 <div v-if="winStreak.randomNormal || winStreak.randomAlt">
                                     <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
-                                    <span class="name">{{winStreak.randomNormal ? 'Random normal' : 'Random tainted'}}</span>
+                                    <span class="name">{{winStreak.randomNormal ? `${$t('strings.randomNormal')}` : `${$t('strings.randomTainted')}`}}</span>
                                 </div>
                             </div>
                             <div class="bosses">
@@ -45,7 +45,7 @@
                                     <template v-for="(boss, index) in winStreak.bosses_ids" tag="ul">
                                         <li :class="['boss', getRuns(winStreak).number % winStreak.bosses_ids.length === index ? 'current' : 'not-current']" :key="winStreak.id+boss">
                                             <span class="small-portrait boss image" :style="{backgroundImage:`url('img/entities/small portraits/${getBoss(boss).portrait}.png')`}"></span>
-                                            <span class="name">{{getBoss(boss).name}}</span>
+                                            <span class="name">{{$t(`entities.${getBoss(boss).id.replaceAll('.', '-')}.name`)}}</span>
                                         </li>
                                     </template>
                                 </div>
