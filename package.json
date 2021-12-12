@@ -24,6 +24,7 @@
   "dependencies": {
     "@vuex-orm/core": "^1.0.0-draft.16",
     "adm-zip": "^0.5.6",
+    "apexcharts": "^3.32.0",
     "compare-versions": "^3.6.0",
     "core-js": "^3.6.5",
     "electron-log": "^4.4.0",
@@ -32,6 +33,7 @@
     "luxon": "^2.1.1",
     "v-calendar": "^2.3.4",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.2",
     "vue-color-gradient-picker": "^0.1.2",
     "vue-i18n": "^8.26.7",
     "vue-router": "^3.5.1",

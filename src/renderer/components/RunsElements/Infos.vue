@@ -51,7 +51,15 @@
                     <div class="text-icon">{{runDuration}}</div>
                 </div>
             </li>
-            <li v-if="!hideEdit && id" class="info edit" @click="openOrCloseEditRun(id)">
+            <li v-if="!hideDetails && id" class="info details clickable" @click="openOrCloseRunDetails(id)">
+                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
+                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
+                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
+                <div class="content">
+                    <div class="icon" :style="{backgroundImage:`url('img/icons/config.png')`}"></div>
+                </div>
+            </li>
+            <li v-if="!hideEdit && id" class="info edit clickable" @click="openOrCloseEditRun(id)">
                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
@@ -76,7 +84,8 @@ export default {
         runStart: Number,
         runEnd: Object,
         runDuration: String,
-        hideEdit: Boolean
+        hideEdit: Boolean,
+        hideDetails: Boolean
     },
     components: {
     },
@@ -92,6 +101,9 @@ export default {
     methods: {
         openOrCloseEditRun(id) {
             this.$root.$emit('OPEN_EDITRUN', id)
+        },
+        openOrCloseRunDetails(id) {
+            this.$root.$emit('OPEN_RUNDETAILS', id)
         },
         getDate(unixDate, format) {
             return this.$helpers.formatDate(unixDate, format)
@@ -160,10 +172,12 @@ export default {
             &:not(:first-child) {
                 margin-left: 20px;
             }
-            &:last-child {
-                margin-left: auto;
+            &.clickable {
                 pointer-events: all;
                 cursor: pointer;
+                &:nth-last-child(2) {
+                    margin-left: auto;
+                }
             }
             .icon {
                 position: absolute;

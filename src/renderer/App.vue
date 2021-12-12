@@ -79,6 +79,7 @@ export default {
   @import "assets/styles/scss/small-portrait";
   @import "assets/styles/scss/overwrite/vuetimepicker";
   @import "assets/styles/scss/overwrite/vcalendar";
+  @import "assets/styles/scss/overwrite/apexcharts";
 
   html {
     font-family: "BabyDollv2", sans-serif;

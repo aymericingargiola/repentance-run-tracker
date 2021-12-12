@@ -8,9 +8,10 @@ import VCalendar from 'v-calendar'
 import VueTimepicker from 'vue2-timepicker'
 import 'vue2-timepicker/dist/VueTimepicker.css'
 import { ColorPicker } from 'vue-color-gradient-picker'
+import 'vue-color-gradient-picker/dist/index.css'
 import VueI18n from 'vue-i18n'
 import { languages, customModifiers, defaultLocale } from './i18n/index'
-import 'vue-color-gradient-picker/dist/index.css'
+import VueApexCharts from 'vue-apexcharts'
 import helpers from './helpers/format'
 
 const plugins = {
@@ -25,6 +26,10 @@ Vue.use(plugins)
 Vue.use(vuescroll)
 
 Vue.use(VCalendar)
+
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
 
 Vue.component("vue-timepicker", VueTimepicker)
 

@@ -9,6 +9,7 @@
     <Runs/>
     <BrokenRuns/>
     <EditRun/>
+    <RunDetails/>
     <ConfigScreen/>
     <AppError/>
   </div>
@@ -21,6 +22,7 @@ import WinStreak from '../components/WinStreak/WinStreak.vue'
 import Runs from '../components/Runs.vue'
 import BrokenRuns from '../components/Pops/BrokenRuns.vue'
 import EditRun from '../components/Pops/EditRun.vue'
+import RunDetails from '../components/Pops/RunDetails.vue'
 import ConfigScreen from '../components/Pops/ConfigScreen.vue'
 import Trash from '../components/Trash/Trash.vue'
 import AppError from '../components/Pops/AppError.vue'
@@ -31,6 +33,7 @@ export default {
     Runs,
     BrokenRuns,
     EditRun,
+    RunDetails,
     ConfigScreen,
     Trash,
     AppError
