@@ -64,6 +64,15 @@ module.exports = {
     getFloorById: (id, mode) => {
         return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
     },
+    getRoom: (string, typeOnlyExt) => {
+        if (typeOnlyExt) return {type: string.split(" ").splice(8).join(" ")}
+        const roomId = parseFloat(string.match(/-?(?:\d+(?:\.\d*)?|\.\d+)/)[0])
+        const roomType = string.match(/\(([^\)]+\)*)\)/) ? string.match(/\(([^\)]+\)*)\)/)[1].replace("(copy)", "").toLowerCase().trim() : "room"
+        return {
+            id: roomId,
+            type: roomType !== "" ? roomType : "room"
+        }
+    },
     getGameState: function(string) {
         //Return game save state from logs
         return string.split(" ")[4]

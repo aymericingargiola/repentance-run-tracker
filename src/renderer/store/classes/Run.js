@@ -6,6 +6,7 @@ export default class Run extends Model {
     static fields() {
         return {
             id: this.attr(null),
+            runBuilderVersion: this.number(1),
             customName: this.string(''),
             videoLink: this.string(''),
             videoHighlights: this.attr([]),

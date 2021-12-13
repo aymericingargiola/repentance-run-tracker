@@ -2,7 +2,7 @@ const fs = require('fs')
 const { app } = require('electron')
 const path = require('path')
 const { ipcMain } = require('electron')
-const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getFloorById, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
+const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSeed, getFloor, getRoom, getFloorById, getGameState, getCollectible, getTrinket, getRunEnd, getRunDuration, getRealRunDuration, saveFileToDisk, removeRun, removeRunsFromTrash, restoreRunsFromTrash } = require('./helpers')
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex, findLastIndexObj } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
@@ -17,7 +17,7 @@ const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 const runsJsonPath = `${dataFolder}\\runs.json`
 const trashJsonPath = `${dataFolder}\\trash.json`
 const configJsonPath = `${dataFolder}\\config.json`
-let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
+let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
@@ -173,6 +173,25 @@ function entitiesManager(sameRun, entity) {
     else sameRunSameEntity.number += 1
 }
 
+function roomsManager(sameRun, room, updateType) {
+    console.log(sameRun !== null, room, updateType)
+    // Init first room if run doesn't exist yet
+    if (!sameRun && !updateType) return currentRoom = room
+
+    // Update current room
+    if (!updateType) currentRoom = room
+
+    // Only update more detailed room type from mod
+    if (updateType && currentRoom) currentRoom.type = room.type
+
+    // Update/Add current room in current run
+    if (sameRun.floors[sameRun.floors.length - 1] && !sameRun.floors[sameRun.floors.length - 1].rooms) sameRun.floors[sameRun.floors.length - 1].rooms = []
+    else if (!sameRun.floors[sameRun.floors.length - 1]) return
+    const currentRoomIndexInRun = sameRun.floors[sameRun.floors.length - 1].rooms.findIndex(room => room.id === currentRoom.id)
+    if (currentRoomIndexInRun < 1) sameRun.floors[sameRun.floors.length - 1].rooms.push(currentRoom)
+    else if (updateType) sameRun.floors[sameRun.floors.length - 1].rooms[currentRoomIndexInRun].type = currentRoom.type
+}
+
 function updateOrCreateRun(params = {}) {
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
@@ -203,7 +222,13 @@ function updateOrCreateRun(params = {}) {
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'change room':
+                    roomsManager(sameRun, getRoom(params.log))
                     destroyCharacterAndRelatedItems(sameRun, "20") // Destroy temporary Esau if exist
+                    syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    break
+                case 'change room ext':
+                    roomsManager(sameRun, getRoom(params.log, true), true)
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
@@ -289,13 +314,16 @@ function updateOrCreateRun(params = {}) {
         console.log('Create a run...')
         if(!currentFloor) {
             const errorMessage = "Can't generate a run if the run is not new and was not started with the app launched ! Please start a new run."
-            console.log(errorMessage)
             elog.error(errorMessage)
             return
+        } else if (currentRoom) {
+            currentFloor.rooms = []
+            currentFloor.rooms.push(currentRoom)
         }
         currentRun.id = `${currentRun.seed} ${DateTime.now().toSeconds()}`
         const run = {
             id: currentRun.id,
+            runBuilderVersion: 2,
             customName: '',
             videoLink: '',
             videoHighlights: [],
@@ -358,6 +386,7 @@ function parseLogs(newLogs, logArray) {
             currentCharater = null
             currentFloor = null
             currentCurse = null
+            currentRoom = null
             currentGameMode = "normal"
             currentRun = getSeed(log)
             continueRun = log.includes("Continue")
@@ -386,7 +415,8 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.split(' ')[2] === "Room") {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "change room", log: log})
+            if (!currentRoom) roomsManager(null, getRoom(log))
+            else updateOrCreateRun({trigger: "change room", log: log})
         }
         if(log.includes("Adding collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
@@ -449,6 +479,10 @@ function parseLogs(newLogs, logArray) {
                 if (currentRun) currentRun.otherModsLoaded = otherModsLoaded
                 updateOrCreateRun({trigger: "other mods loaded"})
             }
+        }
+        if(log.includes("[RRTEEXTENDLOGS] Room")) {
+            console.log("\x1b[35m", log, "\x1b[0m")
+            updateOrCreateRun({trigger: "change room ext", log: log})
         }
         if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
             console.log("\x1b[35m", log, "\x1b[0m")
