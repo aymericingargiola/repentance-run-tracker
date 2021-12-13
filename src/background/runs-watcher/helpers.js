@@ -38,7 +38,6 @@ module.exports = {
         const entity = entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`))
         if (entity) return cloneFrom(entity)
         const logMessage = `Entity was not found. [log string : ${string} | split value : ID-${entityId}-${5} Variant-${entityVariant}-${6}]`
-        console.log(logMessage)
         log.warn(logMessage)
         return null
     },
@@ -70,7 +69,7 @@ module.exports = {
         const roomType = string.match(/\(([^\)]+\)*)\)/) ? string.match(/\(([^\)]+\)*)\)/)[1].replace("(copy)", "").toLowerCase().trim() : "room"
         return {
             id: roomId,
-            type: roomType !== "" ? roomType : "room"
+            type: roomType !== "" && roomType !== "new room" ? roomType : "room"
         }
     },
     getGameState: function(string) {
@@ -81,7 +80,7 @@ module.exports = {
         //Return player from logs
         return string.split(" ")[string.split(" ").findIndex(value => value === "player") + 1]
     },
-    getCollectible: (string, splitValue, otherModsLoaded) => {
+    getCollectible: (string, splitValue, otherModsLoaded, currentRoom) => {
         //Return matching collectible from logs
         const collectibleName = string.match(/\(([^\)]+\)*)\)/)[1] // Regex by Dylan aka lMiniD aka Odilon le crack
         const id = parseInt(string.split(" ")[splitValue])
@@ -93,6 +92,7 @@ module.exports = {
                 category: "unknow category",
                 type: "item",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false
             }
         }
@@ -107,6 +107,7 @@ module.exports = {
                     category: matchingCustomItem.category,
                     type: "item",
                     player: module.exports.getPlayer(string),
+                    room: currentRoom ? currentRoom.id : -1,
                     gfx: matchingCustomItem.gfx,
                     removed: false,
                     custom: true
@@ -122,6 +123,7 @@ module.exports = {
                 category: matchingItem.category,
                 type: "item",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false
             }
         }
@@ -133,6 +135,7 @@ module.exports = {
             category: "unknow category",
             type: "item",
             player: module.exports.getPlayer(string),
+            room: currentRoom ? currentRoom.id : -1,
             removed: false,
             unknow: true
         }

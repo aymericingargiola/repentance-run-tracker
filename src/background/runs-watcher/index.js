@@ -125,15 +125,13 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
         const lastFoundItem = foundItem[foundItem.length - 1]
         switch (status) {
             case 'add':
-                if (lastFoundItem.itemRemoved === true) {
-                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 1
-                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = false
-                } else {
-                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
-                }
-                if (lastFoundItem.itemType === "Active") {
-                    sameRun.characters[playerContextActiveItem].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
-                }
+                    if (lastFoundItem.itemRemoved === true) {
+                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 1
+                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = false
+                    } else {
+                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
+                    }
+                    if (lastFoundItem.itemType === "Active") sameRun.characters[playerContextActiveItem].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
             case 'remove':
                 if (lastFoundItem.itemRemoved === false && lastFoundItem.itemsNumber > 0) {
                     if(lastFoundItem.itemsNumber === 1) {
@@ -159,22 +157,25 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
 }
 
 function entitiesManager(sameRun, entity) {
-    entity.number = 1
     const sameRunLastFloor = sameRun.floors[sameRun.floors.length - 1]
 
     if (!sameRunLastFloor) return elog.error("[entitiesManager] Last floor was not found!")
 
+    const roomId = currentRoom ? currentRoom.id : -1
+    entity.number = 1
+    entity.room = roomId
+
     // add entities key on last floor if doesn't exist
     if (!sameRunLastFloor.entities) sameRunLastFloor.entities = []
 
-    const sameRunSameEntity = sameRunLastFloor.entities[sameRunLastFloor.entities.findIndex(ent => ent.name === entity.name)]
+    const sameRunSameRoomSameEntity = sameRunLastFloor.entities[sameRunLastFloor.entities.findIndex(ent => ent.name === entity.name && ent.room === roomId)]
 
-    if (!sameRunSameEntity) sameRunLastFloor.entities.push(entity)
-    else sameRunSameEntity.number += 1
+    if (!sameRunSameRoomSameEntity) sameRunLastFloor.entities.push(entity)
+    else sameRunSameRoomSameEntity.number += 1
 }
 
 function roomsManager(sameRun, room, updateType) {
-    console.log(sameRun !== null, room, updateType)
+    console.log(sameRun !== null, room)
     // Init first room if run doesn't exist yet
     if (!sameRun && !updateType) return currentRoom = room
 
@@ -316,9 +317,6 @@ function updateOrCreateRun(params = {}) {
             const errorMessage = "Can't generate a run if the run is not new and was not started with the app launched ! Please start a new run."
             elog.error(errorMessage)
             return
-        } else if (currentRoom) {
-            currentFloor.rooms = []
-            currentFloor.rooms.push(currentRoom)
         }
         currentRun.id = `${currentRun.seed} ${DateTime.now().toSeconds()}`
         const run = {
@@ -403,6 +401,7 @@ function parseLogs(newLogs, logArray) {
             if (!currentRunInit && currentCharater) {
                 console.log("\x1b[35m", log, "\x1b[0m")
                 currentRunInit = true
+                updateOrCreateRun({trigger: "start"})
             }
         }
         if(log.includes("Spawn Entity")) {
@@ -415,17 +414,16 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.split(' ')[2] === "Room") {
             console.log("\x1b[35m", log, "\x1b[0m")
-            if (!currentRoom) roomsManager(null, getRoom(log))
-            else updateOrCreateRun({trigger: "change room", log: log})
+            updateOrCreateRun({trigger: "change room", log: log})
         }
         if(log.includes("Adding collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4, otherModsLoaded)})
+            updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4, otherModsLoaded, currentRoom)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Removing voided collectible") || log.includes("Removing collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4, otherModsLoaded)})
+            updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4, otherModsLoaded, currentRoom)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         // Trinkets has no "remove" event from game logs at the moment
