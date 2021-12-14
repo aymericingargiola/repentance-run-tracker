@@ -94,6 +94,7 @@ function destroyCharacterAndRelatedItems(sameRun, characterId) {
 }
 
 function collectiblesManager(sameRun, collectible, status, isTrinket) {
+
     function addCollectible(collectible, playerContextActiveItem) {
         collectible.number = 1
         sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(collectible)
@@ -101,8 +102,9 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
     }
 
     if (!sameRun.floors[sameRun.floors.length - 1]) return elog.error("[collectiblesManager] Last floor was not found!")
+    if (collectible.player === "-1") collectible.player = `${sameRun.characters.length - 1}`
 
-    const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player //Jacob & Esau
+    const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player
     const currentRoomId = currentRoom ? currentRoom.id : null
     const currentFloorIndex = sameRun.floors.length - 1
 
