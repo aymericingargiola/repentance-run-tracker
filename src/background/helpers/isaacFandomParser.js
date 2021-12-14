@@ -97,8 +97,8 @@ module.exports = {
       })
     },
     buildEntitiesImages: async function() {
-      // await module.exports.buildMonstersImages()
-      // await module.exports.buildBossesImages()
+      await module.exports.buildMonstersImages()
+      await module.exports.buildBossesImages()
       await module.exports.buildMiniBossesImages()
     }
 }
