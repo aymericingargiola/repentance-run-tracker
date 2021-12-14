@@ -26,6 +26,7 @@
                                             <img v-if="item.type === 'trinket'" :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
                                             <img v-else-if="item.custom" :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
                                             <img v-else :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
+                                            <span v-if="item.number > 1" class="item-number">x{{item.number}}</span>
                                         </a>
                                         <a v-else class="item-image glitched">
                                             <div class="name">
@@ -44,6 +45,7 @@
                                                     </div>
                                                 </template>
                                             </div>
+                                            <span v-if="item.number > 1" class="item-number">x{{item.number}}</span>
                                         </a>
                                     </li>
                                 </template>
@@ -366,6 +368,16 @@ export default {
                                 pointer-events: none;
                                 transition: 1s ease;
                             }
+                            .item-number {
+                                z-index: 2;
+                                position: absolute;
+                                pointer-events: none;
+                                right: 0px;
+                                font-family: "Up Heaval", sans-serif;
+                                color: $red-a2;
+                                text-shadow: 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black;
+                                transition: 1s ease;
+                            }
                             &.glitched {
                                 .glitched-image {
                                     display: flex;
@@ -414,7 +426,7 @@ export default {
                                 > img, .glitched-image {
                                     transform: scale(1.1) rotate(-10deg) translateY(-10px);
                                 }
-                                .player-icon {
+                                .player-icon, .item-number {
                                     opacity: 0;
                                 }
                             }

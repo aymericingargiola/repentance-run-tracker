@@ -56,7 +56,7 @@
                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
                 <div class="content">
-                    <div class="icon" :style="{backgroundImage:`url('img/icons/config.png')`}"></div>
+                    <div class="icon" :style="{backgroundImage:`url('img/icons/chart.png')`}"></div>
                 </div>
             </li>
             <li v-if="!hideEdit && id" class="info edit clickable" @click="openOrCloseEditRun(id)">

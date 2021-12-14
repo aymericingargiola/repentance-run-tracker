@@ -16,7 +16,10 @@
         "normal": "Normal",
         "tainted": "Tainted",
         "win": "Win",
-        "lose": "Lose"
+        "lose": "Lose",
+        "room": "Room | Rooms",
+        "enemy": "Enemy | Enemies",
+        "item": "Item | Items"
     },
     "strings": {
         "addRule": "@:dictionary.add rule",
