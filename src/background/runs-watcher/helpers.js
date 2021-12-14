@@ -140,7 +140,7 @@ module.exports = {
             unknow: true
         }
     },
-    getTrinket: (string, splitValue) => {
+    getTrinket: (string, splitValue, currentRoom) => {
         //Return matching trinket from logs
         const goldenVar = 32768
         const smelted = string.includes("smelted") ? true : false
@@ -154,6 +154,7 @@ module.exports = {
                 category: matchingTrinket.category,
                 type: "trinket",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false,
                 golden: false,
                 smelted: smelted
@@ -167,6 +168,7 @@ module.exports = {
                 category: matchingGoldenTrinket.category,
                 type: "trinket",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false,
                 golden: true,
                 smelted: smelted
@@ -179,6 +181,7 @@ module.exports = {
             category: "unknow category",
             type: "trinket",
             player: module.exports.getPlayer(string),
+            room: currentRoom ? currentRoom.id : -1,
             removed: false,
             smelted: smelted,
             unknow: true

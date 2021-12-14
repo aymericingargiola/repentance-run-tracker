@@ -94,9 +94,17 @@ function destroyCharacterAndRelatedItems(sameRun, characterId) {
 }
 
 function collectiblesManager(sameRun, collectible, status, isTrinket) {
+    function addCollectible(collectible, playerContextActiveItem) {
+        collectible.number = 1
+        sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(collectible)
+        if (playerContextActiveItem && collectible.itemType === "Active") sameRun.characters[playerContextActiveItem].activables.push(collectible)
+    }
+
     if (!sameRun.floors[sameRun.floors.length - 1]) return elog.error("[collectiblesManager] Last floor was not found!")
 
     const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player //Jacob & Esau
+    const currentRoomId = currentRoom ? currentRoom.id : null
+    const currentFloorIndex = sameRun.floors.length - 1
 
     // add itemsCollected key on last floor if doesn't exist
     if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
@@ -114,6 +122,7 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
             floorIndex: index,
             itemIndex: itemIndex,
             itemPlayer: itemIndex > -1 ? floor.itemsCollected[itemIndex].player : null,
+            itemRoom: itemIndex > -1 ? floor.itemsCollected[itemIndex].room : null,
             itemType: itemIndex > -1 ? floor.itemsCollected[itemIndex].itemType : null,
             itemRemoved: itemIndex > -1 ? floor.itemsCollected[itemIndex].removed : null,
             itemsNumber: itemIndex > -1 ? floor.itemsCollected[itemIndex].number : 0
@@ -125,35 +134,37 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
         const lastFoundItem = foundItem[foundItem.length - 1]
         switch (status) {
             case 'add':
-                    if (lastFoundItem.itemRemoved === true) {
-                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 1
-                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = false
-                    } else {
-                        sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
-                    }
-                    if (lastFoundItem.itemType === "Active") sameRun.characters[playerContextActiveItem].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
+                if ((lastFoundItem.itemRemoved === true && lastFoundItem.itemType === "Active") || (lastFoundItem.itemRemoved === true && lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemRoom === currentRoomId)) {
+                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 1
+                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = false
+                } 
+                else if ((lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemType === "Active") || (lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemRoom === currentRoomId)) {
+                    sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
+                }
+                else if (lastFoundItem.itemType !== "Active") {
+                    addCollectible(collectible)
+                }
+                if (lastFoundItem.itemType === "Active") {
+                    sameRun.characters[playerContextActiveItem].activables.push(sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex])
+                }
+            break
             case 'remove':
                 if (lastFoundItem.itemRemoved === false && lastFoundItem.itemsNumber > 0) {
                     if(lastFoundItem.itemsNumber === 1) {
                         sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 0
                         sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = true
-                    } else if (lastFoundItem.itemsNumber > 1) {
-                        sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += -1
-                    }
+                    } else if (lastFoundItem.itemsNumber > 1) sameRun.floors[foundItem[foundItem.length - 1].floorIndex].itemsCollected[foundItem[foundItem.length - 1].itemIndex].number += -1
                     if (lastFoundItem.itemType === "Active") {
                         const itemToRemoveIndex = sameRun.characters[playerContextActiveItem].activables.findIndex(item => item.id === collectible.id)
                         sameRun.characters[playerContextActiveItem].activables.splice(itemToRemoveIndex, 1)
                     }
                 }
+            break
         }
     }
 
     // if no item found, create a new one if the status is on "add"
-    else if (status === 'add') {
-        collectible.number = 1
-        sameRun.floors[sameRun.floors.length - 1].itemsCollected.push(collectible)
-        if (collectible.itemType === "Active") sameRun.characters[playerContextActiveItem].activables.push(collectible)
-    }
+    else if (status === 'add') addCollectible(collectible, playerContextActiveItem)
 }
 
 function entitiesManager(sameRun, entity) {
@@ -434,7 +445,7 @@ function parseLogs(newLogs, logArray) {
         // }
         if(log.includes("Adding smelted trinket")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 5)})
+            updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 5, currentRoom)})
             saveFileToDisk(runsJsonPath, JSON.stringify(runs))
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
