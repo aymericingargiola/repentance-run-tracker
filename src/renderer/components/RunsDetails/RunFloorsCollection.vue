@@ -1,12 +1,12 @@
 <template>
-  <section v-if="!selectedFloor || selectedFloor === index" class="run-floors-collection">
-    <h2>{{floorName}}</h2>
+  <section class="run-floors-collection">
+    <h2 class="floor-name">{{floorName}} <div v-if="floor.curse" class="curse-icon" :title="floor.curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div></h2>
     <div class="rooms">
       <ul class="rooms-list">
         <template v-for="room in floorRoom">
-          <li :class="['room', !selectedRoom || room.id === selectedRoom ? 'selected' : '']" @click="changeSelectedRoom(room.id)" :key="`room ${room.id}`">
-            <!-- <div class="background" :style="{backgroundImage:`url('img/icons/minimap/room default visited.png')`}"></div> -->
-            {{room.id}}
+          <li :class="['room', selectedRoom === -1 || room.id === selectedRoom ? 'selected' : '']" @click="changeSelectedRoom(room.id)" :key="`room ${room.id}`">
+            <div class="background" :style="{backgroundImage:`url('img/icons/minimap/room default visited.png')`}"></div>
+            <div class="icon" :style="{backgroundImage:`url('img/icons/minimap/${room.type}.png')`}"></div>
           </li>
         </template>
       </ul>
@@ -51,18 +51,36 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+.run-floors-collection {
+  width: 100%;
+  padding: 40px 0;
+}
+.floor-name {
+  position: relative;
+  .curse-icon {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    transform: translateY(5px);
+  }
+}
 .rooms {
   width: 100%;
+  margin: auto;
   overflow: visible;
   .rooms-list {
     display: flex;
-    margin-left: -4px;
-    margin-right: -4px;
+    margin: -4px;
+    justify-content: center;
+    flex-wrap: wrap;
     .room {
+      align-self: flex-start;
       position: relative;
       width: calc(18px*2);
       height: calc(16px*2);
-      margin: 0px 4px;
+      margin: 4px;
       cursor: pointer;
       transition: 0.5s ease;
       &:not(.selected) {
@@ -70,7 +88,6 @@ export default {
         filter: brightness(0.5);
       }
       &:hover {
-        
       }
       .background {
         position: absolute;
@@ -80,6 +97,15 @@ export default {
         height: 100%;
         background-repeat: no-repeat;
         background-size: cover;
+      }
+      .icon {
+        position: absolute;
+        width: calc(18px*2);
+        height: calc(16px*2);
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
     }
   }

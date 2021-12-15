@@ -7,16 +7,18 @@
           <h1>{{currentRun.characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${currentRun.characters[0].id}.name`)}` }}, {{getRunStartDate}}</h1>
           <span class="run-title">{{currentRun.customName}}</span>
         </div>
-        <div class="close" v-on:click="openOrCloseRunDetails()">X</div>
+        <div class="close" v-on:click="closeRunDetails()">X</div>
       </div>
       <div class="wrapper">
         <div class="content chart">
           <RunFloorsChart height="330" :floors-prop="floors" @selectedFloor="onSelectedFloor"/>
         </div>
         <div class="content collection">
-          <template v-for="(floor, fdx) in floors">
-            <RunFloorsCollection :floor="floor" :index="fdx" :selectedFloor="selectedFloor" :key="`floor ${fdx}`"/>
-          </template>
+          <transition-group name="run-floors-collections" tag="div">
+            <template v-for="(floor, fdx) in selectedFloors">
+              <RunFloorsCollection :floor="floor" :index="fdx" :selectedFloor="selectedFloor" :key="`floor ${fdx}`"/>
+            </template>
+          </transition-group>
         </div>
       </div>
     </div>
@@ -62,14 +64,18 @@ export default {
       return this.$helpers.formatDate(this.currentRun.runStart, `dd LLLL yyyy - ${this.getConfig("hourFormat").value}`, this.$i18n.locale)
     },
     floors() {
-        return this.currentRun && this.currentRun.floors ? this.currentRun.floors : []
+      return this.currentRun && this.currentRun.floors ? this.currentRun.floors : []
+    },
+    selectedFloors() {
+      return this.selectedFloor === -1 ? this.floors : [this.floors[this.selectedFloor]]
     }
   },
   methods: {
     getConfig(id) {
       return this.configRepo.query().where('id', id).get()[0]
     },
-    openOrCloseRunDetails() {
+    closeRunDetails() {
+      this.selectedFloor = -1
       this.$root.$emit("OPEN_RUNDETAILS")
     },
     onSelectedFloor(floorIndex) {
@@ -81,6 +87,18 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+.run-floors-collections-item {
+  transition: all 1s;
+  display: inline-block;
+}
+.run-floors-collections-enter, .run-floors-collections-leave-to
+{
+  opacity: 0;
+  transform: translateY(30px);
+}
+.run-floors-collections-leave-active {
+  position: absolute;
+}
 .run-details {
     position: fixed;
     bottom: 0px;
@@ -101,9 +119,14 @@ export default {
     .menu {
       padding: 10px 60px;
       width: 100%;
+      height: 75px;
       display: flex;
-      position: relative;
-      margin-bottom: 28px;
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 0px;
+      transform: translate(-50%, 0);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
       .title {
         margin: auto;
         h1 {
@@ -113,21 +136,29 @@ export default {
       }
       .close {
         position: absolute;
-        right: 0px;
-        top: 0px;
+        right: 20px;
+        top: calc(50% - 5px);
+        transform: translate(0, -50%);
         margin-left: auto;
         font-size: 60px;
+        line-height: 40px;
         cursor: pointer;
       }
     }
     .wrapper {
-      height: 100%;
+      margin-top: 55px;
+      height: calc(100% - 30px);
       display: flex;
+      padding-bottom: 20px;
       flex-direction: column;
+      overflow: auto;
+      overflow-x: hidden;
       .content {
+        &.chart {
+          padding-top: 20px;
+        }
         &.collection {
-          overflow-y: auto;
-          overflow-x: hidden;
+          position: relative;
         }
       }
     }
