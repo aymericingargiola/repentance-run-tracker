@@ -188,7 +188,6 @@ function entitiesManager(sameRun, entity) {
 }
 
 function roomsManager(sameRun, room, updateType) {
-    console.log(sameRun !== null, room)
     // Init first room if run doesn't exist yet
     if (!sameRun && !updateType) return currentRoom = room
 
@@ -202,7 +201,7 @@ function roomsManager(sameRun, room, updateType) {
     if (sameRun.floors[sameRun.floors.length - 1] && !sameRun.floors[sameRun.floors.length - 1].rooms) sameRun.floors[sameRun.floors.length - 1].rooms = []
     else if (!sameRun.floors[sameRun.floors.length - 1]) return
     const currentRoomIndexInRun = sameRun.floors[sameRun.floors.length - 1].rooms.findIndex(room => room.id === currentRoom.id)
-    if (currentRoomIndexInRun < 1) sameRun.floors[sameRun.floors.length - 1].rooms.push(currentRoom)
+    if (currentRoomIndexInRun < 0) sameRun.floors[sameRun.floors.length - 1].rooms.push(currentRoom)
     else if (updateType) sameRun.floors[sameRun.floors.length - 1].rooms[currentRoomIndexInRun].type = currentRoom.type
 }
 
