@@ -2,6 +2,7 @@
     <div class="chart">
       <apexchart
         width="700"
+        :height="height ? height : '330'"
         type="line"
         :options="floorChartOptions"
         :series="floorChartSeries"
@@ -14,7 +15,8 @@
 export default {
   name: "RunFloorsChart",
   props: {
-      floorsProp: Array
+      floorsProp: Array,
+      height: String
   },
   computed: {
     floors() {
@@ -46,7 +48,6 @@ export default {
             },
             chart: {
                 id: "floors",
-                height: 350,
                 fontFamily: 'BabyDollv2, sans-serif',
                 type: 'line',
                 zoom: {

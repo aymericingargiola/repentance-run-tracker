@@ -10,8 +10,13 @@
         <div class="close" v-on:click="openOrCloseRunDetails()">X</div>
       </div>
       <div class="wrapper">
-        <div class="content">
-          <RunFloorsChart :floors-prop="floors" @selectedFloor="onSelectedFloor"/>
+        <div class="content chart">
+          <RunFloorsChart height="330" :floors-prop="floors" @selectedFloor="onSelectedFloor"/>
+        </div>
+        <div class="content collection">
+          <template v-for="(floor, fdx) in floors">
+            <RunFloorsCollection :floor="floor" :index="fdx" :selectedFloor="selectedFloor" :key="`floor ${fdx}`"/>
+          </template>
         </div>
       </div>
     </div>
@@ -24,17 +29,19 @@ import { mapRepos } from "@vuex-orm/core"
 import Run from "../../store/classes/Run"
 import Config from "../../store/classes/Config"
 import RunFloorsChart from "../RunsDetails/RunFloorsChart.vue"
+import RunFloorsCollection from "../RunsDetails/RunFloorsCollection.vue"
 export default {
   name: "RunDetails",
   components: {
-    RunFloorsChart
+    RunFloorsChart,
+    RunFloorsCollection
   },
   data() {
     return {
       isOpen: false,
       id: null,
       selectedFloor: -1
-    };
+    }
   },
   mounted() {
     this.$root.$on("OPEN_RUNDETAILS", (id) => {
@@ -66,8 +73,7 @@ export default {
       this.$root.$emit("OPEN_RUNDETAILS")
     },
     onSelectedFloor(floorIndex) {
-      console.log(floorIndex)
-      this.selectedFloor = floorIndex
+      this.selectedFloor = floorIndex === this.selectedFloor ? -1 : floorIndex
     }
   },
 };
@@ -112,6 +118,17 @@ export default {
         margin-left: auto;
         font-size: 60px;
         cursor: pointer;
+      }
+    }
+    .wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .content {
+        &.collection {
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
       }
     }
 }
