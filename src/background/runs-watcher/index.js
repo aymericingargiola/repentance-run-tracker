@@ -195,14 +195,23 @@ function roomsManager(sameRun, room, updateType) {
     if (!updateType) currentRoom = room
 
     // Only update more detailed room type from mod
-    if (updateType && currentRoom) currentRoom.type = room.type
+    if (updateType && currentRoom) {
+        currentRoom.type = currentRoom.type != "start_room" ? room.type : currentRoom.type
+        currentRoom.enterIgTime = room.enterIgTime
+        currentRoom.shape = room.shape
+    }
 
     // Update/Add current room in current run
     if (sameRun.floors[sameRun.floors.length - 1] && !sameRun.floors[sameRun.floors.length - 1].rooms) sameRun.floors[sameRun.floors.length - 1].rooms = []
     else if (!sameRun.floors[sameRun.floors.length - 1]) return
     const currentRoomIndexInRun = sameRun.floors[sameRun.floors.length - 1].rooms.findIndex(room => room.id === currentRoom.id)
     if (currentRoomIndexInRun < 0) sameRun.floors[sameRun.floors.length - 1].rooms.push(currentRoom)
-    else if (updateType) sameRun.floors[sameRun.floors.length - 1].rooms[currentRoomIndexInRun].type = currentRoom.type
+    else if (updateType) {
+        const matchingRoom = sameRun.floors[sameRun.floors.length - 1].rooms[currentRoomIndexInRun]
+        matchingRoom.type = currentRoom.type
+        matchingRoom.enterIgTime = matchingRoom.enterIgTime === null ? currentRoom.enterIgTime : matchingRoom.enterIgTime
+        matchingRoom.shape = matchingRoom.shape === null ? currentRoom.shape : matchingRoom.shape
+    }
 }
 
 function updateOrCreateRun(params = {}) {

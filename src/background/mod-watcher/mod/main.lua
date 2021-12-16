@@ -145,30 +145,35 @@ end
 
 function RRTE:newRoom()
     local room = Game():GetRoom()
+    local logText = "[RRTEEXTENDLOGS] Room [type/shape/time] :"
     local roomType = room:GetType()
-    if roomType == RoomType.ROOM_TREASURE then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : treasure") end
-    if roomType == RoomType.ROOM_SHOP then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : shop") end
-    if roomType == RoomType.ROOM_ERROR then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : error") end
-    if roomType == RoomType.ROOM_BOSS then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : boss") end
-    if roomType == RoomType.ROOM_MINIBOSS then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : miniboss") end
-    if roomType == RoomType.ROOM_SECRET then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : secret") end
-    if roomType == RoomType.ROOM_SUPERSECRET then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : super secret") end
-    if roomType == RoomType.ROOM_ARCADE then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : arcade") end
-    if roomType == RoomType.ROOM_CURSE then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : curse") end
-    if roomType == RoomType.ROOM_CHALLENGE then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : challenge") end
-    if roomType == RoomType.ROOM_LIBRARY then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : library") end
-    if roomType == RoomType.ROOM_SACRIFICE then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : sacrifice") end
-    if roomType == RoomType.ROOM_DEVIL then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : devil") end
-    if roomType == RoomType.ROOM_ANGEL then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : angel") end
-    if roomType == RoomType.ROOM_DUNGEON then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : dungeon") end
-    if roomType == RoomType.ROOM_BOSSRUSH then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : bossrush") end
-    if roomType == RoomType.ROOM_ISAACS then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : isaacs") end
-    if roomType == RoomType.ROOM_BARREN then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : barren") end
-    if roomType == RoomType.ROOM_CHEST then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : chest") end
-    if roomType == RoomType.ROOM_DICE then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : dice") end
-    if roomType == RoomType.ROOM_BLACK_MARKET then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : black market") end
-    if roomType == RoomType.ROOM_PLANETARIUM then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : planetarium") end
-    if roomType == RoomType.ROOM_ULTRASECRET then Isaac.DebugString("[RRTEEXTENDLOGS] Room [type] : ultra secret") end
+    local roomTypeText = "room"
+    local roomShape = room:GetRoomShape()
+    local time = (Game().TimeCounter) / 30
+    if roomType == RoomType.ROOM_TREASURE then roomTypeText = "treasure"
+    elseif roomType == RoomType.ROOM_SHOP then roomTypeText = "shop"
+    elseif roomType == RoomType.ROOM_ERROR then roomTypeText = "error"
+    elseif roomType == RoomType.ROOM_BOSS then roomTypeText = "boss"
+    elseif roomType == RoomType.ROOM_MINIBOSS then roomTypeText = "miniboss"
+    elseif roomType == RoomType.ROOM_SECRET then roomTypeText = "secret"
+    elseif roomType == RoomType.ROOM_SUPERSECRET then roomTypeText = "super_secret"
+    elseif roomType == RoomType.ROOM_ARCADE then roomTypeText = "arcade"
+    elseif roomType == RoomType.ROOM_CURSE then roomTypeText = "curse"
+    elseif roomType == RoomType.ROOM_CHALLENGE then roomTypeText = "challenge"
+    elseif roomType == RoomType.ROOM_LIBRARY then roomTypeText = "library"
+    elseif roomType == RoomType.ROOM_SACRIFICE then roomTypeText = "sacrifice"
+    elseif roomType == RoomType.ROOM_DEVIL then roomTypeText = "devil"
+    elseif roomType == RoomType.ROOM_ANGEL then roomTypeText = "angel"
+    elseif roomType == RoomType.ROOM_DUNGEON then roomTypeText = "dungeon"
+    elseif roomType == RoomType.ROOM_BOSSRUSH then roomTypeText = "bossrush"
+    elseif roomType == RoomType.ROOM_ISAACS then roomTypeText = "isaacs"
+    elseif roomType == RoomType.ROOM_BARREN then roomTypeText = "barren"
+    elseif roomType == RoomType.ROOM_CHEST then roomTypeText = "chest"
+    elseif roomType == RoomType.ROOM_DICE then roomTypeText = "dice"
+    elseif roomType == RoomType.ROOM_BLACK_MARKET then roomTypeText = "black_market"
+    elseif roomType == RoomType.ROOM_PLANETARIUM then roomTypeText = "planetarium"
+    elseif roomType == RoomType.ROOM_ULTRASECRET then roomTypeText = "ultra_secret" end
+    Isaac.DebugString(logText .. " " .. roomTypeText .. " " .. time .. " " .. roomShape)
 end
 
 function RRTE:runStart()

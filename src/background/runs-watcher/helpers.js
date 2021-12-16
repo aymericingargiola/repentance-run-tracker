@@ -63,13 +63,25 @@ module.exports = {
     getFloorById: (id, mode) => {
         return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
     },
-    getRoom: (string, typeOnlyExt) => {
-        if (typeOnlyExt) return {type: string.split(" ").splice(8).join(" ")}
+    getRoom: (string, ext) => {
+        if (ext) {
+            const s = parseInt(string.split(" ")[9])
+            const duration = Duration.fromObject({seconds:s})
+            return {
+                type: string.split(" ")[8],
+                enterIgTime: {formatedTime: duration.toFormat('hh:mm:ss'), time: s},
+                shape: string.split(" ")[10]
+            }
+        }
         const roomId = parseFloat(string.match(/-?(?:\d+(?:\.\d*)?|\.\d+)/)[0])
-        const roomType = string.match(/\(([^\)]+\)*)\)/) ? string.match(/\(([^\)]+\)*)\)/)[1].replace("(copy)", "").toLowerCase().trim() : "room"
+        const roomType = string.match(/\(([^\)]+\)*)\)/) ? string.match(/\(([^\)]+\)*)\)/)[1].replace("(copy)", "").toLowerCase().split(" ").join("_").trim() : "room"
+        const roomEnterDate = DateTime.now().toSeconds()
         return {
             id: roomId,
-            type: roomType !== "" && roomType !== "new room" ? roomType : "room"
+            type: roomId === "1.0" ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
+            enterDate: roomEnterDate,
+            enterIgTime: null,
+            shape: null
         }
     },
     getGameState: function(string) {
