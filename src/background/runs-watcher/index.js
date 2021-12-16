@@ -199,18 +199,30 @@ function roomsManager(sameRun, room, updateType) {
         currentRoom.type = currentRoom.type != "start_room" ? room.type : currentRoom.type
         currentRoom.enterIgTime = room.enterIgTime
         currentRoom.shape = room.shape
+        currentRoom.doorsSlots = room.doorsSlots
     }
 
-    // Update/Add current room in current run
+    // Update/Add room
     if (sameRun.floors[sameRun.floors.length - 1] && !sameRun.floors[sameRun.floors.length - 1].rooms) sameRun.floors[sameRun.floors.length - 1].rooms = []
     else if (!sameRun.floors[sameRun.floors.length - 1]) return
     const currentRoomIndexInRun = sameRun.floors[sameRun.floors.length - 1].rooms.findIndex(room => room.id === currentRoom.id)
     if (currentRoomIndexInRun < 0) sameRun.floors[sameRun.floors.length - 1].rooms.push(currentRoom)
-    else if (updateType) {
+    else if (updateType && currentRoomIndexInRun < 0) {
         const matchingRoom = sameRun.floors[sameRun.floors.length - 1].rooms[currentRoomIndexInRun]
         matchingRoom.type = currentRoom.type
         matchingRoom.enterIgTime = matchingRoom.enterIgTime === null ? currentRoom.enterIgTime : matchingRoom.enterIgTime
         matchingRoom.shape = matchingRoom.shape === null ? currentRoom.shape : matchingRoom.shape
+        if (room.doorsSlots[0].thisRoomEnter != -1 && room.doorsSlots[0].previousRoomLeave != -1) {
+            // Add doors infos to current room
+            if (!matchingRoom.doorsSlots) matchingRoom.doorsSlots = []
+            if (matchingRoom.doorsSlots.findIndex(door => door.thisRoomEnter === room.doorsSlots[0].thisRoomEnter && door.previousRoomLeave === room.doorsSlots[0].previousRoomLeave) < 0) matchingRoom.doorsSlots.push(room.doorsSlots[0])
+            if (currentRoomIndexInRun > 0) {
+                // Add reversed doors infos to previous room
+                const previousRoom = sameRun.floors[sameRun.floors.length - 1].rooms[currentRoomIndexInRun - 1]
+                if (!previousRoom.doorsSlots) previousRoom.doorsSlots = []
+                if (previousRoom.doorsSlots.findIndex(door => door.thisRoomEnter === room.doorsSlots[0].previousRoomLeave && door.previousRoomLeave === room.doorsSlots[0].thisRoomEnter) < 0) previousRoom.doorsSlots.push({thisRoomEnter: room.doorsSlots[0].previousRoomLeave, previousRoomLeave: room.doorsSlots[0].thisRoomEnter, linkedRoom: matchingRoom.id})
+            }
+        }
     }
 }
 
@@ -250,7 +262,7 @@ function updateOrCreateRun(params = {}) {
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break
                 case 'change room ext':
-                    roomsManager(sameRun, getRoom(params.log, true), true)
+                    roomsManager(sameRun, getRoom(params.log, true, currentRoom), true)
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                     break

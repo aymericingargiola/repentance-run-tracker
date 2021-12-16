@@ -144,12 +144,16 @@ function RRTE:entityRemoved(entity)
 end
 
 function RRTE:newRoom()
+    local level = Game():GetLevel()
     local room = Game():GetRoom()
-    local logText = "[RRTEEXTENDLOGS] Room [type/shape/time] :"
+    local logText = "[RRTEEXTENDLOGS] Room [type/time/shape/enterDoor/leaveDoor] :"
     local roomType = room:GetType()
     local roomTypeText = "room"
     local roomShape = room:GetRoomShape()
     local time = (Game().TimeCounter) / 30
+    local enterDoor = level.EnterDoor
+    local leaveDoor = level.LeaveDoor
+    local roomIndex = level.DungeonReturnRoomIndex
     if roomType == RoomType.ROOM_TREASURE then roomTypeText = "treasure"
     elseif roomType == RoomType.ROOM_SHOP then roomTypeText = "shop"
     elseif roomType == RoomType.ROOM_ERROR then roomTypeText = "error"
@@ -173,7 +177,11 @@ function RRTE:newRoom()
     elseif roomType == RoomType.ROOM_BLACK_MARKET then roomTypeText = "black_market"
     elseif roomType == RoomType.ROOM_PLANETARIUM then roomTypeText = "planetarium"
     elseif roomType == RoomType.ROOM_ULTRASECRET then roomTypeText = "ultra_secret" end
-    Isaac.DebugString(logText .. " " .. roomTypeText .. " " .. time .. " " .. roomShape)
+    Isaac.DebugString(logText .. " " .. roomTypeText .. " " .. time .. " " .. roomShape .. " " .. enterDoor .. " " .. leaveDoor)
+end
+
+function RRTE:newLevel()
+    local level = Game():GetLevel()
 end
 
 function RRTE:runStart()
@@ -193,6 +201,7 @@ RRTE:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, RRTE.playerUpdate)
 RRTE:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, RRTE.playerInit)
 RRTE:AddCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, RRTE.entityRemoved)
 RRTE:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, RRTE.newRoom)
+RRTE:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, RRTE.newLevel)
 RRTE:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, RRTE.runStart)
 RRTE:AddCallback(ModCallbacks.MC_POST_GAME_END, RRTE.runEnd)
 RRTE:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, RRTE.runExit)

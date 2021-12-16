@@ -63,14 +63,20 @@ module.exports = {
     getFloorById: (id, mode) => {
         return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
     },
-    getRoom: (string, ext) => {
+    getRoom: (string, ext, previousRoom) => {
         if (ext) {
-            const s = parseInt(string.split(" ")[9])
+            const s = parseInt(string.split(" ")[10])
             const duration = Duration.fromObject({seconds:s})
+            const previousRoomId = previousRoom.id
             return {
                 type: string.split(" ")[8],
                 enterIgTime: {formatedTime: duration.toFormat('hh:mm:ss'), time: s},
-                shape: string.split(" ")[10]
+                shape: string.split(" ")[9],
+                doorsSlots: [{
+                    thisRoomEnter: parseInt(string.split(" ")[11]),
+                    previousRoomLeave: parseInt(string.split(" ")[12]),
+                    linkedRoom: previousRoomId
+                }]
             }
         }
         const roomId = parseFloat(string.match(/-?(?:\d+(?:\.\d*)?|\.\d+)/)[0])
@@ -81,7 +87,8 @@ module.exports = {
             type: roomId === "1.0" ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
             enterDate: roomEnterDate,
             enterIgTime: null,
-            shape: null
+            shape: null,
+            doorsSlots: null
         }
     },
     getGameState: function(string) {
