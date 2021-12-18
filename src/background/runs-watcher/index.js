@@ -227,6 +227,7 @@ function roomsManager(sameRun, room, updateType) {
 }
 
 function updateOrCreateRun(params = {}) {
+    if (!inRun) return console.warn("Not in run yet !")
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
     const sameRun = isSameRun(currentRun.seed)
@@ -406,15 +407,16 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Initialized player")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            if(!currentCharater) currentCharater = getCharater(log)
+            if(!currentCharater || !inRun || !currentRunInit) currentCharater = getCharater(log)
             else if (currentRunInit) {
                 updateOrCreateRun({trigger: "init other player", character: getCharater(log)})
             }
         }
         if(log.includes("Start Seed")) {
             console.log("\x1b[35m", log, "\x1b[0m")
+            inRun = true
+            backToMenu = false
             currentRunInit = false
-            currentCharater = null
             currentFloor = null
             currentCurse = null
             currentRoom = null
