@@ -38,7 +38,7 @@ module.exports = {
         const entity = entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`))
         if (entity) return cloneFrom(entity)
         const logMessage = `Entity was not found. [log string : ${string} | split value : ID-${entityId}-${5} Variant-${entityVariant}-${6}]`
-        log.warn(logMessage)
+        console.log(logMessage)
         return null
     },
     getCharaterStats: (string) => {
