@@ -65,17 +65,19 @@ module.exports = {
     },
     getRoom: (string, ext, previousRoom) => {
         if (ext) {
-            const s = parseInt(string.split(" ")[10])
+            if (!previousRoom) return null
+            const s = parseInt(string.split(" ")[9])
             const duration = Duration.fromObject({seconds:s})
-            const previousRoomId = previousRoom.id
+            const thisRoomEnter = parseInt(string.split(" ")[11])
+            const thisRoomLeave = parseInt(string.split(" ")[12])
             return {
                 type: string.split(" ")[8],
                 enterIgTime: {formatedTime: duration.toFormat('hh:mm:ss'), time: s},
-                shape: string.split(" ")[9],
+                shape: string.split(" ")[10],
                 doorsSlots: [{
-                    thisRoomEnter: parseInt(string.split(" ")[11]),
-                    previousRoomLeave: parseInt(string.split(" ")[12]),
-                    linkedRoom: previousRoomId
+                    thisRoomEnter: thisRoomEnter,
+                    previousRoomLeave: thisRoomLeave,
+                    linkedRoom: previousRoom.id
                 }]
             }
         }
@@ -84,7 +86,7 @@ module.exports = {
         const roomEnterDate = DateTime.now().toSeconds()
         return {
             id: roomId,
-            type: roomId === "1.0" ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
+            type: roomId === "1.0" || roomId === "1" ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
             enterDate: roomEnterDate,
             enterIgTime: null,
             shape: null,

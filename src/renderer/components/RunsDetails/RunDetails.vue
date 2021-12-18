@@ -110,6 +110,7 @@ export default {
     transition: 0.5s ease;
     background-color: rgba($color: $paper-white-dark, $alpha: 0.98);
     padding: 20px;
+    padding-top: 0;
     //backdrop-filter: blur(5px);
     &.open-enter-active, &.open-leave-active {
     }
@@ -118,14 +119,11 @@ export default {
     }
     .menu {
       padding: 10px 60px;
-      width: 100%;
-      height: 75px;
+      width: 100vw;
+      transform: translateX(-20px);
       display: flex;
-      position: absolute;
+      position: relative;
       z-index: 2;
-      left: 50%;
-      top: 0px;
-      transform: translate(-50%, 0);
       box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
       .title {
         margin: auto;
@@ -146,7 +144,6 @@ export default {
       }
     }
     .wrapper {
-      margin-top: 55px;
       height: calc(100% - 30px);
       display: flex;
       padding-bottom: 20px;
