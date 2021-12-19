@@ -86,7 +86,7 @@ module.exports = {
         const roomEnterDate = DateTime.now().toSeconds()
         return {
             id: roomId,
-            type: roomId === "1.0" || roomId === "1" ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
+            type: roomId === 1 ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
             enterDate: roomEnterDate,
             enterIgTime: null,
             shape: null,

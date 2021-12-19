@@ -23,7 +23,7 @@ export default {
         return this.floorsProp ? this.floorsProp : []
     },
     floorsNames() {
-        return this.floors.map(floor => this.$t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`))
+        return this.floors.map(floor => `${this.$t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`)}${!isNaN(parseInt(floor.name.match(/\d/g))) ? ` ${parseInt(floor.name.match(/\d/g))}` : ''}`)
     },
     floorsItems() {
         return this.floors.map(floor => floor.itemsCollected ? floor.itemsCollected.reduce((acc, cur) => cur.number === 0 ? acc + 1 : acc + cur.number, 0) : 0)

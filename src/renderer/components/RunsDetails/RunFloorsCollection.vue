@@ -1,6 +1,7 @@
 <template>
   <section class="run-floors-collection">
     <h2 class="floor-name">{{floorName}} <div v-if="floor.curse" class="curse-icon" :title="floor.curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div></h2>
+    <Minimap :floor="floor"/>
     <div class="rooms">
       <ul class="rooms-list">
         <template v-for="room in floorRoom">
@@ -15,8 +16,12 @@
 </template>
 
 <script>
+import Minimap from "../RunsDetails/Minimap.vue"
 export default {
   name: "RunFloorsCollection",
+  components: {
+    Minimap
+  },
   props: {
       floor: Object,
       index: Number,
@@ -29,7 +34,7 @@ export default {
   },
   computed: {
     floorName() {
-        return this.$t(`stages.${this.floor.name === 'Hush' ? 'Blue Womb' : this.floor.name.replace(/[0-9]/g, '').trim()}.name`)
+        return `${this.$t(`stages.${this.floor.name === 'Hush' ? 'Blue Womb' : this.floor.name.replace(/[0-9]/g, '').trim()}.name`)}${!isNaN(parseInt(this.floor.name.match(/\d/g))) ? ` ${parseInt(this.floor.name.match(/\d/g))}` : ''}`
     },
     floorItems() {
         return this.floor.itemsCollected
