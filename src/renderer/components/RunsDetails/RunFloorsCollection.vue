@@ -1,7 +1,7 @@
 <template>
   <section class="run-floors-collection">
     <h2 class="floor-name">{{floorName}} <div v-if="floor.curse" class="curse-icon" :title="floor.curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div></h2>
-    <Minimap :floor="floor"/>
+    <Minimap :floor="floor" :selectedRoom="selectedRoom"/>
     <div class="rooms">
       <ul class="rooms-list">
         <template v-for="room in floorRoom">
