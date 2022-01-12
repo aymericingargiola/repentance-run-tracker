@@ -12,18 +12,27 @@
         </template>
       </ul>
     </div>
+    <div class="entities">
+      <Items :items="floorItems" :characters="characters" :selectedRoom="selectedRoom"/>
+      <Ennemies :ennemies="floorEnnemies" :selectedRoom="selectedRoom"/>
+    </div>
   </section>
 </template>
 
 <script>
 import Minimap from "../RunsDetails/Minimap.vue"
+import Items from "../RunsDetails/Items.vue"
+import Ennemies from "../RunsDetails/Ennemies.vue"
 export default {
   name: "RunFloorsCollection",
   components: {
-    Minimap
+    Minimap,
+    Items,
+    Ennemies
   },
   props: {
       floor: Object,
+      characters: Array,
       index: Number,
       selectedFloor: Number
   },
@@ -59,6 +68,12 @@ export default {
 .run-floors-collection {
   width: 100%;
   padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  &:nth-child(odd) {
+    background-color: rgba($color: $text-dark, $alpha: 0.1);
+  }
 }
 .floor-name {
   position: relative;
@@ -113,6 +128,13 @@ export default {
         transform: translate(-50%, -50%);
       }
     }
+  }
+}
+.entities {
+  margin-top: 20px;
+  display: flex;
+  > div {
+    width: 50%;
   }
 }
 </style>

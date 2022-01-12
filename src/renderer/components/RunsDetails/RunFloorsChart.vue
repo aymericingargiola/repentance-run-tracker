@@ -2,7 +2,7 @@
     <div class="chart">
       <apexchart
         width="700"
-        :height="height ? height : '330'"
+        :height="height ? height : '380'"
         type="line"
         :options="floorChartOptions"
         :series="floorChartSeries"

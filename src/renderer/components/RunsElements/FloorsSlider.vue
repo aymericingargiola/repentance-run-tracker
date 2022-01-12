@@ -59,13 +59,14 @@
 </template>
 
 <script>
-import runsMinxin from '../../mixins/runs'
+import runsMixin from '../../mixins/runs'
+import i18nMixin from '../../mixins/i18n'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 import Run from '../../store/classes/Run'
 export default {
     name: "RunFloorsSlider",
-    mixins: [runsMinxin],
+    mixins: [runsMixin, i18nMixin],
     props: {
         ops: Object,
         index: Number,
@@ -99,15 +100,6 @@ export default {
             if (id < 10) id = `00${id}`
             else if (id < 100) id = `0${id}`
             return id
-        },
-        t(str, fallbackStr) {
-            return this.$t && this.$te
-            ? this.$te(str)
-            ? this.$t(str)
-            : fallbackStr
-            : fallbackStr
-            ? fallbackStr
-            : str
         }
     },
     mounted() {

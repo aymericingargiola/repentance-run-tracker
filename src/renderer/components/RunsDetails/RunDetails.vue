@@ -11,12 +11,12 @@
       </div>
       <div class="wrapper">
         <div class="content chart">
-          <RunFloorsChart height="330" :floors-prop="floors" @selectedFloor="onSelectedFloor"/>
+          <RunFloorsChart height="380" :floors-prop="floors" @selectedFloor="onSelectedFloor"/>
         </div>
         <div class="content collection">
           <transition-group name="run-floors-collections" tag="div">
             <template v-for="(floor, fdx) in selectedFloors">
-              <RunFloorsCollection :floor="floor" :index="fdx" :selectedFloor="selectedFloor" :key="`floor ${fdx}`"/>
+              <RunFloorsCollection :floor="floor" :characters="characters" :index="fdx" :selectedFloor="selectedFloor" :key="`floor ${fdx}`"/>
             </template>
           </transition-group>
         </div>
@@ -62,6 +62,9 @@ export default {
     },
     getRunStartDate() {
       return this.$helpers.formatDate(this.currentRun.runStart, `dd LLLL yyyy - ${this.getConfig("hourFormat").value}`, this.$i18n.locale)
+    },
+    characters() {
+      return this.currentRun && this.currentRun.characters ? this.currentRun.characters : []
     },
     floors() {
       return this.currentRun && this.currentRun.floors ? this.currentRun.floors : []
@@ -143,7 +146,7 @@ export default {
         cursor: pointer;
       }
     }
-    .wrapper {
+    > .wrapper {
       height: calc(100% - 30px);
       display: flex;
       padding-bottom: 20px;

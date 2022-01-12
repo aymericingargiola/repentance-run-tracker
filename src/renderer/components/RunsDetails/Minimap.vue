@@ -1,5 +1,5 @@
 <template>
-    <div class="minimap">
+    <div v-if="floor && floor.rooms && floor.rooms.length > 0" class="minimap">
         <div :class="['wrapper', selectedRoom > -1 ? 'room-selected' : '']" :ref="`minimap-${floor.name}`">
             <div type="row" first-row index="0">
                 <div type="col" first-col index="0">
@@ -37,6 +37,15 @@ export default {
   methods: {
     getRoom(id) {
         return this.floorsRoom.find(room => room.id === id)
+    },
+    minimapReset() {
+        const template = `
+        <div type="row" first-row index="0">
+            <div type="col" first-col index="0">
+            </div>
+        </div>
+        `
+        this.wrapper.innerHTML = template
     },
     addRow(referenceRowIndex, position) {
         const referenceRow = this.wrapper.querySelector(`[type="row"][index="${referenceRowIndex}"]`)
@@ -397,7 +406,7 @@ export default {
                     }
                     if (referenceRoomPart === "ROOMTOPRIGHT" && roomPart === "ROOMBOTLEFT") {
                         this.checkMinimapStructure("LEFT", referenceRoomCol, referenceRoomRow)
-                        this.checkMinimapStructure("UP", referenceRoomCol, referenceRoomRow)
+                        this.checkMinimapStructure("DOWN", referenceRoomCol, referenceRoomRow)
                         matchingCol = referenceRoomRow?.nextElementSibling?.querySelector(`[index="${parseInt(referenceRoomCol.getAttribute("index")) - 1}"]`)
                     }
                     matchingCol?.setAttribute("room", id)
@@ -424,12 +433,14 @@ export default {
   },
     watch: { 
         floor: function(newVal) {
-            if (newVal?.rooms && newVal.rooms.length > 0) this.minimapBuilder(newVal.rooms)
+            if (newVal?.rooms && newVal.rooms.length > 0) {
+                this.minimapReset()
+                this.minimapBuilder(newVal.rooms)
+            }
         },
         selectedRoom: function(newVal, oldVal) {
             const newSelected = newVal > -1 ? [...this.wrapper.querySelectorAll(`[room="${newVal}"]`)] : []
             const oldSelected = oldVal > -1 ? [...this.wrapper.querySelectorAll(`[room="${oldVal}"]`)] : []
-            console.log(newVal, oldVal, newSelected, oldSelected)
             if (newSelected.length > 0) newSelected.forEach(roomPart => roomPart.classList.add('selected'))
             if (oldSelected.length > 0) oldSelected.forEach(roomPart => roomPart.classList.remove('selected'))
         }
@@ -440,10 +451,17 @@ export default {
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
 .minimap {
-    .wrapper {
+    align-self: baseline;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba($color: black, $alpha: 0.8);
+    border-radius: 10px;
+    > .wrapper {
         width: auto;
         height: auto;
         display: flex;
+        flex-direction: column;
         [type="row"] {
             display: block;
             height: 16px;
