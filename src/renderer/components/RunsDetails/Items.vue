@@ -141,6 +141,11 @@ export default {
           width: 50px;
           height: 50px;
         }
+        .player-icon {
+          position: absolute;
+          z-index: 1;
+          transform: scale(0.5) translate(20px, -20px);
+        }
         .item-number {
           pointer-events: none;
           color: $red-a2;

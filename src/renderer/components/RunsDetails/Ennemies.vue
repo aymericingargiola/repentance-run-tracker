@@ -7,7 +7,7 @@
                 <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-              <span class="title">{{t(`entities.${formatLocaleId(ennemy.id)}.name`, ennemy.name)}}</span>
+              <span class="title">{{t(`entities.${formatLocaleId(ennemy.id)}.name`, ennemy.name)}}{{ $isDev ? ` [id : ${ennemy.id}]` : ''}}</span>
             </div>
             <div class="image">
               <img :src="`img/entities/${ennemy.id}.png`">

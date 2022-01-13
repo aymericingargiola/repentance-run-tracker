@@ -434,8 +434,11 @@ export default {
     watch: { 
         floor: function(newVal) {
             if (newVal?.rooms && newVal.rooms.length > 0) {
-                this.minimapReset()
-                this.minimapBuilder(newVal.rooms)
+                if (!this.wrapper) this.wrapper = this.$refs[`minimap-${this.floor.name}`]
+                if (this.wrapper) {
+                    this.minimapReset()
+                    this.minimapBuilder(newVal.rooms)
+                }
             }
         },
         selectedRoom: function(newVal, oldVal) {
