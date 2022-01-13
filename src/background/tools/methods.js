@@ -12,6 +12,7 @@ module.exports = {
     return finalIndex
   },
   findLastIndexObj: function(array, searchKey, searchValue) {
+    if (!array || !searchValue) return -1
     var index = array.slice().reverse().findIndex(x => x[searchKey] === searchValue);
     var count = array.length - 1
     var finalIndex = index >= 0 ? count - index : index

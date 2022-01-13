@@ -145,7 +145,6 @@ async function openItemTracker() {
 async function createWindow() {
   await checkOldFolder(oldFolderPath, dataFolder)
   await cleanBackups()
-  if(isDevelopment) await buildJsons()
   if(!config) config = await initConfig()
   if(!runs) runs = await initRuns()
   if(!trash) trash = await initTrash()

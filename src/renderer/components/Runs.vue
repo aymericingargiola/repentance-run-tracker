@@ -42,7 +42,7 @@
 
 <script>
 // import moment from 'moment'
-import runsMinxin from '../mixins/runs'
+import runsMixin from '../mixins/runs'
 import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
 import RunInfos from '../components/RunsElements/Infos.vue'
@@ -52,7 +52,7 @@ import RunsFilters from './RunsFilters.vue'
 import Pagination from './Tools/Pagination.vue'
 export default {
     name: "Runs",
-    mixins: [runsMinxin],
+    mixins: [runsMixin],
     components: {
         RunInfos,
         RunCharacter,

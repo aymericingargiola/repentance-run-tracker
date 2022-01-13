@@ -39,7 +39,6 @@ module.exports = {
         if (entity) return cloneFrom(entity)
         const logMessage = `Entity was not found. [log string : ${string} | split value : ID-${entityId}-${5} Variant-${entityVariant}-${6}]`
         console.log(logMessage)
-        log.warn(logMessage)
         return null
     },
     getCharaterStats: (string) => {
@@ -64,6 +63,36 @@ module.exports = {
     getFloorById: (id, mode) => {
         return cloneFrom(floors[mode === "greed" ? "stagesGreedMode" : "stages"].find(floor => floor.id === id))
     },
+    getRoom: (string, ext, previousRoom) => {
+        if (ext) {
+            if (!previousRoom) return null
+            const s = parseInt(string.split(" ")[9])
+            const duration = Duration.fromObject({seconds:s})
+            const thisRoomEnter = parseInt(string.split(" ")[11])
+            const thisRoomLeave = parseInt(string.split(" ")[12])
+            return {
+                type: string.split(" ")[8],
+                enterIgTime: {formatedTime: duration.toFormat('hh:mm:ss'), time: s},
+                shape: string.split(" ")[10],
+                doorsSlots: [{
+                    thisRoomEnter: thisRoomEnter,
+                    previousRoomLeave: thisRoomLeave,
+                    linkedRoom: previousRoom.id
+                }]
+            }
+        }
+        const roomId = parseFloat(string.match(/-?(?:\d+(?:\.\d*)?|\.\d+)/)[0])
+        const roomType = string.match(/\(([^\)]+\)*)\)/) ? string.match(/\(([^\)]+\)*)\)/)[1].replace("(copy)", "").toLowerCase().split(" ").join("_").trim() : "room"
+        const roomEnterDate = DateTime.now().toSeconds()
+        return {
+            id: roomId,
+            type: roomId === 1 ? "start_room" : roomType !== "" && roomType !== "new_room" ? roomType : "room",
+            enterDate: roomEnterDate,
+            enterIgTime: null,
+            shape: null,
+            doorsSlots: null
+        }
+    },
     getGameState: function(string) {
         //Return game save state from logs
         return string.split(" ")[4]
@@ -72,7 +101,7 @@ module.exports = {
         //Return player from logs
         return string.split(" ")[string.split(" ").findIndex(value => value === "player") + 1]
     },
-    getCollectible: (string, splitValue, otherModsLoaded) => {
+    getCollectible: (string, splitValue, otherModsLoaded, currentRoom) => {
         //Return matching collectible from logs
         const collectibleName = string.match(/\(([^\)]+\)*)\)/)[1] // Regex by Dylan aka lMiniD aka Odilon le crack
         const id = parseInt(string.split(" ")[splitValue])
@@ -84,6 +113,7 @@ module.exports = {
                 category: "unknow category",
                 type: "item",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false
             }
         }
@@ -98,6 +128,7 @@ module.exports = {
                     category: matchingCustomItem.category,
                     type: "item",
                     player: module.exports.getPlayer(string),
+                    room: currentRoom ? currentRoom.id : -1,
                     gfx: matchingCustomItem.gfx,
                     removed: false,
                     custom: true
@@ -113,6 +144,7 @@ module.exports = {
                 category: matchingItem.category,
                 type: "item",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false
             }
         }
@@ -124,11 +156,12 @@ module.exports = {
             category: "unknow category",
             type: "item",
             player: module.exports.getPlayer(string),
+            room: currentRoom ? currentRoom.id : -1,
             removed: false,
             unknow: true
         }
     },
-    getTrinket: (string, splitValue) => {
+    getTrinket: (string, splitValue, currentRoom) => {
         //Return matching trinket from logs
         const goldenVar = 32768
         const smelted = string.includes("smelted") ? true : false
@@ -142,6 +175,7 @@ module.exports = {
                 category: matchingTrinket.category,
                 type: "trinket",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false,
                 golden: false,
                 smelted: smelted
@@ -155,6 +189,7 @@ module.exports = {
                 category: matchingGoldenTrinket.category,
                 type: "trinket",
                 player: module.exports.getPlayer(string),
+                room: currentRoom ? currentRoom.id : -1,
                 removed: false,
                 golden: true,
                 smelted: smelted
@@ -167,6 +202,7 @@ module.exports = {
             category: "unknow category",
             type: "trinket",
             player: module.exports.getPlayer(string),
+            room: currentRoom ? currentRoom.id : -1,
             removed: false,
             smelted: smelted,
             unknow: true

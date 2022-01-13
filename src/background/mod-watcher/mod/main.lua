@@ -143,6 +143,47 @@ function RRTE:entityRemoved(entity)
     end
 end
 
+function RRTE:newRoom()
+    local level = Game():GetLevel()
+    local room = Game():GetRoom()
+    local logText = "[RRTEEXTENDLOGS] Room [type/time/shape/enterDoor/leaveDoor] :"
+    local roomType = room:GetType()
+    local roomTypeText = "room"
+    local roomShape = room:GetRoomShape()
+    local time = (Game().TimeCounter) / 30
+    local enterDoor = level.EnterDoor
+    local leaveDoor = level.LeaveDoor
+    local roomIndex = level.DungeonReturnRoomIndex
+    if roomType == RoomType.ROOM_TREASURE then roomTypeText = "treasure"
+    elseif roomType == RoomType.ROOM_SHOP then roomTypeText = "shop"
+    elseif roomType == RoomType.ROOM_ERROR then roomTypeText = "error"
+    elseif roomType == RoomType.ROOM_BOSS then roomTypeText = "boss"
+    elseif roomType == RoomType.ROOM_MINIBOSS then roomTypeText = "miniboss"
+    elseif roomType == RoomType.ROOM_SECRET then roomTypeText = "secret"
+    elseif roomType == RoomType.ROOM_SUPERSECRET then roomTypeText = "super_secret"
+    elseif roomType == RoomType.ROOM_ARCADE then roomTypeText = "arcade"
+    elseif roomType == RoomType.ROOM_CURSE then roomTypeText = "curse"
+    elseif roomType == RoomType.ROOM_CHALLENGE then roomTypeText = "challenge"
+    elseif roomType == RoomType.ROOM_LIBRARY then roomTypeText = "library"
+    elseif roomType == RoomType.ROOM_SACRIFICE then roomTypeText = "sacrifice"
+    elseif roomType == RoomType.ROOM_DEVIL then roomTypeText = "devil"
+    elseif roomType == RoomType.ROOM_ANGEL then roomTypeText = "angel"
+    elseif roomType == RoomType.ROOM_DUNGEON then roomTypeText = "dungeon"
+    elseif roomType == RoomType.ROOM_BOSSRUSH then roomTypeText = "bossrush"
+    elseif roomType == RoomType.ROOM_ISAACS then roomTypeText = "isaacs"
+    elseif roomType == RoomType.ROOM_BARREN then roomTypeText = "barren"
+    elseif roomType == RoomType.ROOM_CHEST then roomTypeText = "chest"
+    elseif roomType == RoomType.ROOM_DICE then roomTypeText = "dice"
+    elseif roomType == RoomType.ROOM_BLACK_MARKET then roomTypeText = "black_market"
+    elseif roomType == RoomType.ROOM_PLANETARIUM then roomTypeText = "planetarium"
+    elseif roomType == RoomType.ROOM_ULTRASECRET then roomTypeText = "ultra_secret" end
+    Isaac.DebugString(logText .. " " .. roomTypeText .. " " .. time .. " " .. roomShape .. " " .. enterDoor .. " " .. leaveDoor)
+end
+
+function RRTE:newLevel()
+    local level = Game():GetLevel()
+end
+
 function RRTE:runStart()
     Isaac.DebugString("[RRTEEXTENDLOGS] Run Start [seed] : " .. Game():GetSeeds():GetStartSeedString())
 end
@@ -159,6 +200,8 @@ end
 RRTE:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, RRTE.playerUpdate)
 RRTE:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, RRTE.playerInit)
 RRTE:AddCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, RRTE.entityRemoved)
+RRTE:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, RRTE.newRoom)
+RRTE:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, RRTE.newLevel)
 RRTE:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, RRTE.runStart)
 RRTE:AddCallback(ModCallbacks.MC_POST_GAME_END, RRTE.runEnd)
 RRTE:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, RRTE.runExit)

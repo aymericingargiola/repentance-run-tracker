@@ -13,7 +13,7 @@
         </div>
         <template v-for="(character, cidx) in validCharacters">
             <div :class="['character-infos', cidx === selected ? 'selected' : '']" :key="`${character.id} ${cidx}`">
-                <div v-if="character.stats && parseInt(character.id) != 10 && parseInt(character.id) != 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
+                <div v-if="character.stats && parseInt(character.id) != 10 && parseInt(character.id) != 14 && parseInt(character.id) != 33 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
                     <template v-for="rhidx in character.stats.life.maxHearts / 2">
                         <div class="heart-container red-heart" :key="`red-heart-${rhidx}`">
                             <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/red-heart-${character.stats.life.hearts > character.stats.life.maxHearts ? `full` : character.stats.life.hearts - (rhidx - 1) * 2 > 1 ? `full` : character.stats.life.hearts - (rhidx - 1) * 2 > 0 ? `half` : `empty`}.png')`}"></div>
@@ -37,7 +37,7 @@
                         </div>
                     </template> -->
                 </div>
-                <div v-if="character.stats && parseInt(character.id) === 14 && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
+                <div v-if="character.stats && (parseInt(character.id) === 14 || parseInt(character.id) === 33) && (floors[floors.length - 1] && floors[floors.length - 1].curse != 'Curse of the Unknown' || runEnd.date != null)" class="hearts">
                     <template v-for="chidx in character.stats.life.maxHearts / 2">
                         <div class="heart-container coin-heart" :key="`red-heart-${chidx}`">
                             <div class="heart" :style="{backgroundImage:`url('img/icons/hearts/coin-heart-${character.stats.life.hearts - (chidx - 1) * 2 > 1 ? `full` : `empty`}.png')`}"></div>

@@ -23,8 +23,7 @@ module.exports = {
                 productName: "Repentance Run Tracker",
                 win: {
                     target: [
-                        "nsis",
-                        "appx"
+                        "nsis"
                     ]
                 },
                 publish: [

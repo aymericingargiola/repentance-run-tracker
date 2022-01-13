@@ -2,7 +2,7 @@
   "name": "repentanceruntracker",
   "author": "Aymeric Ingargiola",
   "description": "App to track The Binding of Isaac game's run",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -18,12 +18,18 @@
     "electron:inspect": "./node_modules/.bin/electron --inspect=5858 dist_electron",
     "electron:deploy": "vue-cli-service electron:build \"-p\" \"always\"",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "build:locales" : "node -e require('./src/background/helpers/jsonBuilder.js').buildLocalesJsons()",
+    "build:entitiesJson" : "node -e require('./src/background/helpers/jsonBuilder.js').buildEntitiesJson()",
+    "build:entitiesImages" : "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()"
   },
   "main": "background.js",
   "dependencies": {
     "@vuex-orm/core": "^1.0.0-draft.16",
     "adm-zip": "^0.5.6",
+    "apexcharts": "^3.32.0",
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
     "compare-versions": "^3.6.0",
     "core-js": "^3.6.5",
     "electron-log": "^4.4.0",
@@ -32,6 +38,7 @@
     "luxon": "^2.1.1",
     "v-calendar": "^2.3.4",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.2",
     "vue-color-gradient-picker": "^0.1.2",
     "vue-i18n": "^8.26.7",
     "vue-router": "^3.5.1",
