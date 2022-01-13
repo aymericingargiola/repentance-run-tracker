@@ -34,15 +34,16 @@ export default {
   },
   computed: {
     filteredEnnemies() {
-      return this.selectedRoom > -1 ? this.ennemies.filter(ennemy => ennemy.room === this.selectedRoom) : this.ennemies ? this.groupedEnnemies : []
+      return this.selectedRoom > -1 && this.ennemies ? this.ennemies.filter(ennemy => ennemy.room === this.selectedRoom) : this.ennemies ? this.groupedEnnemies : []
     },
     groupedEnnemies() {
-      return this.ennemies.reduce((groups, ennemyObj) => {
-        const ennemy = Object.assign({}, ennemyObj)
-        if (!groups[ennemy.id]) groups[ennemy.id] = ennemy
-        else if (groups[ennemy.id]) groups[ennemy.id].number += ennemy.number
-        return groups
-      }, {})
+      return this.ennemies.reduce((groups, itemObj) => {
+          const ennemy = Object.assign({}, itemObj)
+          const ennemyExist = groups.findIndex(i => i.id === ennemy.id)
+          if (ennemyExist === -1) groups.push(ennemy)
+          else groups[ennemyExist].number += ennemy.number
+          return groups
+      }, [])
     }
   },
   mounted() {

@@ -55,15 +55,16 @@ export default {
   },
   computed: {
     filteredItems() {
-      return this.selectedRoom > -1 ? this.items.filter(item => item.room === this.selectedRoom) : this.items ? this.groupedItems : []
+      return this.selectedRoom > -1 && this.items ? this.items.filter(item => item.room === this.selectedRoom) : this.items ? this.groupedItems : []
     },
     groupedItems() {
       return this.items.reduce((groups, itemObj) => {
-        const item = Object.assign({}, itemObj)
-        if (!groups[item.id]) groups[item.id] = item
-        else if (groups[item.id]) groups[item.id].number += item.number
-        return groups
-      }, {})
+          const item = Object.assign({}, itemObj)
+          const itemExist = groups.findIndex(i => i.id === item.id)
+          if (itemExist === -1) groups.push(item)
+          else groups[itemExist].number += item.number
+          return groups
+      }, [])
     },
     validCharacters() {
         return this.characters ? this.characters.filter(character => character.bypass !== true) : []

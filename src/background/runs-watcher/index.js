@@ -119,7 +119,7 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
 
     // return a filtered array with matching item
     const foundItem = sameRun.floors.map((floor, index) => {
-        const itemIndex = floor.itemsCollected ? floor.itemsCollected.findIndex(item => item.id === collectible.id && item.type === collectible.type) : -1
+        const itemIndex = findLastIndexObj(floor.itemsCollected, "id", collectible.id)
         return {
             floorIndex: index,
             itemIndex: itemIndex,
@@ -136,11 +136,12 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
         const lastFoundItem = foundItem[foundItem.length - 1]
         switch (status) {
             case 'add':
+                console.log(foundItem, lastFoundItem.itemRoom, collectible.room)
                 if ((lastFoundItem.itemRemoved === true && lastFoundItem.itemType === "Active") || (lastFoundItem.itemRemoved === true && lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemRoom === currentRoomId)) {
                     sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number = 1
                     sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].removed = false
                 } 
-                else if ((lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemType === "Active") || (lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemRoom === currentRoomId)) {
+                else if ((lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemType === "Active") || (lastFoundItem.floorIndex === currentFloorIndex && lastFoundItem.itemRoom === collectible.room)) {
                     sameRun.floors[lastFoundItem.floorIndex].itemsCollected[lastFoundItem.itemIndex].number += 1
                 }
                 else if (lastFoundItem.itemType !== "Active") {

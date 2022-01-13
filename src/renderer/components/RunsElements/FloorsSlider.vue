@@ -11,7 +11,7 @@
                         <div class="floor-wrapper">
                             <div class="floor-name">{{$t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`)}} {{!isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : ''}}</div>
                             <transition-group name="item-group-transition" tag="ul" class="items">
-                                <template v-for="(item, tidx) in floor.itemsCollected">
+                                <template v-for="(item, tidx) in groupedItems(floor.itemsCollected)">
                                     <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
                                         <a v-if="item.id >= 0" class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
                                             <div class="name">
@@ -100,7 +100,17 @@ export default {
             if (id < 10) id = `00${id}`
             else if (id < 100) id = `0${id}`
             return id
-        }
+        },
+        groupedItems(items) {
+            if (!items) return []
+            return items.reduce((groups, itemObj) => {
+                const item = Object.assign({}, itemObj)
+                const itemExist = groups.findIndex(i => i.id === item.id)
+                if (itemExist === -1) groups.push(item)
+                else groups[itemExist].number += item.number
+                return groups
+            }, [])
+        },
     },
     mounted() {
         if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {

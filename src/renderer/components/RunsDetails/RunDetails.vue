@@ -111,7 +111,7 @@ export default {
     z-index: 2;
     box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.2);
     transition: 0.5s ease;
-    background-color: rgba($color: $paper-white-dark, $alpha: 0.98);
+    background-color: rgba($color: $paper-white-dark, $alpha: 1);
     padding: 20px;
     padding-top: 0;
     //backdrop-filter: blur(5px);
