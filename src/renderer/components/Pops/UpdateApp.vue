@@ -1,14 +1,36 @@
 <template>
-    <transition name="fade">
-        <div v-if="updateDownloaded || updateProgress" class="pop-up update-app" @click="update">
-            <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-            <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
-            <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-            <div v-if="updateProgress" class="title">{{$t('update.updateDownloading', { updateVersion: updateVersion, updateProgressInfos: Math.round(updateProgressInfos.percent) })}}
-            </div>
-            <div v-if="updateDownloaded" class="title">{{$t('update.updateDownloaded', { updateVersion: updateVersion })}}</div>
-        </div>
-    </transition>
+  <transition name="fade">
+    <div
+      v-if="updateDownloaded || updateProgress"
+      class="pop-up update-app"
+      @click="update"
+    >
+      <div
+        class="before"
+        :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+      />
+      <div
+        class="mid"
+        :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+      />
+      <div
+        class="after"
+        :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+      />
+      <div
+        v-if="updateProgress"
+        class="title"
+      >
+        {{ $t('update.updateDownloading', { updateVersion: updateVersion, updateProgressInfos: Math.round(updateProgressInfos.percent) }) }}
+      </div>
+      <div
+        v-if="updateDownloaded"
+        class="title"
+      >
+        {{ $t('update.updateDownloaded', { updateVersion: updateVersion }) }}
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -22,6 +44,20 @@ export default {
             updateProgressInfos: null,
             updateDownloaded: false,
             updateDownloadedInfos: null,
+        }
+    },
+    computed: {
+        updateVersion() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.version : null
+        },
+        updateSize() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.size : null
+        },
+        updateName() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.releaseName : null
+        },
+        updateNotes() {
+            return this.updateAvailableInfos ? this.updateAvailableInfos.releaseNotes : null
         }
     },
     mounted() {
@@ -38,20 +74,6 @@ export default {
             this.updateDownloaded = true
             this.updateDownloadedInfos = infos
         })
-    },
-    computed: {
-        updateVersion() {
-            return this.updateAvailableInfos ? this.updateAvailableInfos.version : null
-        },
-        updateSize() {
-            return this.updateAvailableInfos ? this.updateAvailableInfos.size : null
-        },
-        updateName() {
-            return this.updateAvailableInfos ? this.updateAvailableInfos.releaseName : null
-        },
-        updateNotes() {
-            return this.updateAvailableInfos ? this.updateAvailableInfos.releaseNotes : null
-        }
     },
     methods: {
         update() {

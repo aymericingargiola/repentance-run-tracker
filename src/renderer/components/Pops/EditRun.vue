@@ -1,38 +1,83 @@
 <template>
-    <transition name="open">
-        <div v-if="isOpen && this.runRepo" class="config-popup edit-run-popup">
-            <div class="overlay" v-on:click="openOrCloseEditRun()"></div>
-            <div class="config-items edit-run">
-                <div class="mid" :style="{backgroundImage:`url('img/cards/big-frame.png')`}"></div>
-                <div class="content">
-                    <div class="heading">{{$t('editRun.title')}}</div>
-                    <div class="config-item">
-                        <div class="title">{{$t('editRun.runTitle')}}</div>
-                        <input type="texte" v-model="customName" @change="updateCustomName">
-                    </div>
-                    <div class="config-item">
-                        <div class="title">{{$t('editRun.runDuration')}}</div>
-                        <vue-timepicker v-model="runDuration" @change="updateRunDuration" format="HH:mm:ss"></vue-timepicker>
-                    </div>
-                    <div class="config-item">
-                        <div class="title">{{$t('editRun.videoLink')}}</div>
-                        <input type="texte" v-model="videoLink" @change="updateVideoLink">
-                    </div>
-                    <div class="config-item">
-                        <div class="title">{{$t('editRun.videoHighlights')}}</div>
-                        <Tags :run-id="this.currentRun.id" :type="'time'" :video-link="videoLink"></Tags>
-                    </div>
-                    <div class="config-item">
-                        <div class="title">{{$tc('dictionary.tag', 2)}}</div>
-                        <Tags :run-id="this.currentRun.id" :type="'string'"></Tags>
-                    </div>
-                    <div class="config-item">
-                        <button class="warning" v-on:click="removeRun()">{{$t('strings.removeRun')}}</button>
-                    </div>
-                </div>
+  <transition name="open">
+    <div
+      v-if="isOpen && runRepo"
+      class="config-popup edit-run-popup"
+    >
+      <div
+        class="overlay"
+        @click="openOrCloseEditRun()"
+      />
+      <div class="config-items edit-run">
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/big-frame.png')`}"
+        />
+        <div class="content">
+          <div class="heading">
+            {{ $t('editRun.title') }}
+          </div>
+          <div class="config-item">
+            <div class="title">
+              {{ $t('editRun.runTitle') }}
             </div>
+            <input
+              v-model="customName"
+              type="texte"
+              @change="updateCustomName"
+            >
+          </div>
+          <div class="config-item">
+            <div class="title">
+              {{ $t('editRun.runDuration') }}
+            </div>
+            <vue-timepicker
+              v-model="runDuration"
+              format="HH:mm:ss"
+              @change="updateRunDuration"
+            />
+          </div>
+          <div class="config-item">
+            <div class="title">
+              {{ $t('editRun.videoLink') }}
+            </div>
+            <input
+              v-model="videoLink"
+              type="texte"
+              @change="updateVideoLink"
+            >
+          </div>
+          <div class="config-item">
+            <div class="title">
+              {{ $t('editRun.videoHighlights') }}
+            </div>
+            <Tags
+              :run-id="currentRun.id"
+              :type="'time'"
+              :video-link="videoLink"
+            />
+          </div>
+          <div class="config-item">
+            <div class="title">
+              {{ $tc('dictionary.tag', 2) }}
+            </div>
+            <Tags
+              :run-id="currentRun.id"
+              :type="'string'"
+            />
+          </div>
+          <div class="config-item">
+            <button
+              class="warning"
+              @click="removeRun()"
+            >
+              {{ $t('strings.removeRun') }}
+            </button>
+          </div>
         </div>
-    </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -50,14 +95,6 @@ export default {
             isOpen: false,
             id: null
         }
-    },
-    mounted() {
-        this.$root.$on('OPEN_EDITRUN', (id) => {
-            if(id) this.id = id
-            this.isOpen = !this.isOpen
-        })
-    },
-    watch: {
     },
     computed: {
         ...mapRepos({
@@ -90,6 +127,12 @@ export default {
                 this.runRepo.where('id', this.currentRun.id).update({ videoLink: value })
             }
         }
+    },
+    mounted() {
+        this.$root.$on('OPEN_EDITRUN', (id) => {
+            if(id) this.id = id
+            this.isOpen = !this.isOpen
+        })
     },
     methods: {
         openOrCloseEditRun() {

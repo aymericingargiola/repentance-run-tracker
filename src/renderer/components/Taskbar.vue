@@ -1,19 +1,40 @@
 <template>
-    <div class="taskbar">
-        <div class="background"></div>
-        <div class="drag"></div>
-        <div class="logo">repentance run tracker <div class="app-version">{{appVersion}}</div></div>
-        <div class="menu center-menu">
-        </div>
-        <div class="menu right-menu" v-if="$isElectron">
-            <!-- <span class="action-btn item-tracker" v-on:click="openItemTracker()"></span> -->
-            <span class="action-btn open-trash" v-on:click="openOrCloseTrash()"></span>
-            <span class="action-btn config" v-on:click="openOrCloseSettings()"></span>
-            <span class="action-btn minimize-app" v-on:click="minimizeApp()"></span>
-            <span class="action-btn fullscreen-app" v-on:click="fullscreenApp()"></span>
-            <span class="action-btn close-app" v-on:click="closeApp()"></span>
-        </div>
+  <div class="taskbar">
+    <div class="background" />
+    <div class="drag" />
+    <div class="logo">
+      repentance run tracker <div class="app-version">
+        {{ appVersion }}
+      </div>
     </div>
+    <div class="menu center-menu" />
+    <div
+      v-if="$isElectron"
+      class="menu right-menu"
+    >
+      <!-- <span class="action-btn item-tracker" v-on:click="openItemTracker()"></span> -->
+      <span
+        class="action-btn open-trash"
+        @click="openOrCloseTrash()"
+      />
+      <span
+        class="action-btn config"
+        @click="openOrCloseSettings()"
+      />
+      <span
+        class="action-btn minimize-app"
+        @click="minimizeApp()"
+      />
+      <span
+        class="action-btn fullscreen-app"
+        @click="fullscreenApp()"
+      />
+      <span
+        class="action-btn close-app"
+        @click="closeApp()"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -26,9 +47,9 @@ export default {
         return {
         }
     },
-    mounted() {
-    },
     computed: {
+    },
+    mounted() {
     },
     methods: {
         minimizeApp() {

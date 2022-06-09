@@ -1,52 +1,108 @@
 <template>
-    <transition name="open-trash">
-        <div v-if="isOpen" class="trash">
-            <div class="before" :style="{backgroundImage:`url('img/textures/borders/chest-top.png')`}"></div>
-            <div class="mid" :style="{backgroundImage:`url('img/textures/floors/mines-ground.png')`}"></div>
-            <div class="trash-container">
-                <div class="buttons">
-                    <div class="mid" :style="{backgroundImage:`url('img/textures/floors/chest-ground.png')`}"></div>
-                    <div class="btn empty">
-                        <button :disabled="trashRuns.all().length < 1" class="warning" @click="emptyTrash()">{{$t('trash.emptyTrash')}}</button>
-                    </div>
-                    <div class="btn delete">
-                        <button class="warning" :disabled="selected.length === 0" @click="deleteSelected()">{{$t('strings.deleteSelected')}}</button>
-                    </div>
-                    <div class="btn restore">
-                        <button :disabled="selected.length === 0" @click="restoreSelected()">{{$t('strings.restoreSelected')}}</button>
-                    </div>
-                    <div class="btn close">
-                        <button @click="close()">{{$t('dictionary.close')}}</button>
-                    </div>
-                </div>
-                <transition-group name="trash-run-group-transition" tag="ul" class="runs-container">
-                        <template v-for="(run, ridx) in allTrashRuns">
-                            <li :class="
-                            [
-                            'run', 'trash-item', 'trash-run-group-transition-item',
-                            selected.includes(run.id) ? 'selected' : '',
-                            run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished',
-                            run.toRemove.status === true && run.toRemove.checkedByUser === false ? 'run-to-remove-unchecked' : run.toRemove.status === true && run.toRemove.checkedByUser === true ?'run-to-remove-checked' : ''
-                            ]" :data-id="run.id + ridx" :key="run.id" @click="runSelected(run.id)">
-                                <!-- <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
+  <transition name="open-trash">
+    <div
+      v-if="isOpen"
+      class="trash"
+    >
+      <div
+        class="before"
+        :style="{backgroundImage:`url('img/textures/borders/chest-top.png')`}"
+      />
+      <div
+        class="mid"
+        :style="{backgroundImage:`url('img/textures/floors/mines-ground.png')`}"
+      />
+      <div class="trash-container">
+        <div class="buttons">
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/textures/floors/chest-ground.png')`}"
+          />
+          <div class="btn empty">
+            <button
+              :disabled="trashRuns.all().length < 1"
+              class="warning"
+              @click="emptyTrash()"
+            >
+              {{ $t('trash.emptyTrash') }}
+            </button>
+          </div>
+          <div class="btn delete">
+            <button
+              class="warning"
+              :disabled="selected.length === 0"
+              @click="deleteSelected()"
+            >
+              {{ $t('strings.deleteSelected') }}
+            </button>
+          </div>
+          <div class="btn restore">
+            <button
+              :disabled="selected.length === 0"
+              @click="restoreSelected()"
+            >
+              {{ $t('strings.restoreSelected') }}
+            </button>
+          </div>
+          <div class="btn close">
+            <button @click="close()">
+              {{ $t('dictionary.close') }}
+            </button>
+          </div>
+        </div>
+        <transition-group
+          name="trash-run-group-transition"
+          tag="ul"
+          class="runs-container"
+        >
+          <template v-for="(run, ridx) in allTrashRuns">
+            <li
+              :key="run.id"
+              :class="
+                [
+                  'run', 'trash-item', 'trash-run-group-transition-item',
+                  selected.includes(run.id) ? 'selected' : '',
+                  run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished',
+                  run.toRemove.status === true && run.toRemove.checkedByUser === false ? 'run-to-remove-unchecked' : run.toRemove.status === true && run.toRemove.checkedByUser === true ?'run-to-remove-checked' : ''
+                ]"
+              :data-id="run.id + ridx"
+              @click="runSelected(run.id)"
+            >
+              <!-- <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
                                 <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
                                 <div class="after" :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"></div> -->
-                                <div class="run-content">
-                                    <RunCharacter :characters="run.characters" :floors="run.floors" :run-end="run.runEnd"/>
-                                    <RunInfos :id="run.id" :gameState="run.gameState" :seed="run.seed" :characters="run.characters" :floors="run.floors" :run-start="run.runStart" :run-end="run.runEnd" :run-duration="run.runDuration" :hide-edit="true"/>
-                                    
-                                </div>
-                            </li>
-                        </template>
-                </transition-group>
-                <div class="trash-empty" v-if="trashRuns.all().length < 1">
-                    <span class="message">
-                        {{$t('trash.trashIsEmpty')}}
-                    </span>
-                </div>
-            </div>
+              <div class="run-content">
+                <RunCharacter
+                  :characters="run.characters"
+                  :floors="run.floors"
+                  :run-end="run.runEnd"
+                />
+                <RunInfos
+                  :id="run.id"
+                  :game-state="run.gameState"
+                  :seed="run.seed"
+                  :characters="run.characters"
+                  :floors="run.floors"
+                  :run-start="run.runStart"
+                  :run-end="run.runEnd"
+                  :run-duration="run.runDuration"
+                  :hide-edit="true"
+                />
+              </div>
+            </li>
+          </template>
+        </transition-group>
+        <div
+          v-if="trashRuns.all().length < 1"
+          class="trash-empty"
+        >
+          <span class="message">
+            {{ $t('trash.trashIsEmpty') }}
+          </span>
         </div>
-    </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -77,26 +133,6 @@ export default {
             return this.trashRunRepo.all()
         }
     },
-    methods: {
-        runSelected(id) {
-            this.selected.includes(id) ? this.selected = this.selected.filter((runId) => runId !== id) : this.selected.push(id)
-        },
-        restoreSelected() {
-            window.ipc.send('USER_RESTORE_RUNS_FROM_TRASH', this.selected)
-            this.selected = []
-        },
-        deleteSelected() {
-            window.ipc.send('USER_REMOVE_RUNS_FROM_TRASH', this.selected)
-            this.selected = []
-        },
-        emptyTrash() {
-            window.ipc.send('USER_EMPTY_TRASH')
-            this.selected = []
-        },
-        close() {
-            this.isOpen = false
-        }
-    },
     mounted() {
         this.$root.$on('OPEN_TRASH', () => {
             this.isOpen = !this.isOpen
@@ -118,6 +154,26 @@ export default {
             console.log("Empty trash")
             this.trashRunRepo.flush()
         })
+    },
+    methods: {
+        runSelected(id) {
+            this.selected.includes(id) ? this.selected = this.selected.filter((runId) => runId !== id) : this.selected.push(id)
+        },
+        restoreSelected() {
+            window.ipc.send('USER_RESTORE_RUNS_FROM_TRASH', this.selected)
+            this.selected = []
+        },
+        deleteSelected() {
+            window.ipc.send('USER_REMOVE_RUNS_FROM_TRASH', this.selected)
+            this.selected = []
+        },
+        emptyTrash() {
+            window.ipc.send('USER_EMPTY_TRASH')
+            this.selected = []
+        },
+        close() {
+            this.isOpen = false
+        }
     }
 };
 </script>

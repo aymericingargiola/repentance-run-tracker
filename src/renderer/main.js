@@ -29,9 +29,9 @@ Vue.use(VCalendar)
 
 Vue.use(VueApexCharts)
 
-Vue.component('apexchart', VueApexCharts)
+Vue.component('Apexchart', VueApexCharts)
 
-Vue.component("vue-timepicker", VueTimepicker)
+Vue.component("VueTimepicker", VueTimepicker)
 
 Vue.component("ColorPicker", ColorPicker)
 

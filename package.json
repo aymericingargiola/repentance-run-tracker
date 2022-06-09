@@ -19,9 +19,9 @@
     "electron:deploy": "vue-cli-service electron:build \"-p\" \"always\"",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "build:locales" : "node -e require('./src/background/helpers/jsonBuilder.js').buildLocalesJsons()",
-    "build:entitiesJson" : "node -e require('./src/background/helpers/jsonBuilder.js').buildEntitiesJson()",
-    "build:entitiesImages" : "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()"
+    "build:locales": "node -e require('./src/background/helpers/jsonBuilder.js').buildLocalesJsons()",
+    "build:entitiesJson": "node -e require('./src/background/helpers/jsonBuilder.js').buildEntitiesJson()",
+    "build:entitiesImages": "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()"
   },
   "main": "background.js",
   "dependencies": {
@@ -49,16 +49,16 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "^4.5.11",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^5.0.4",
+    "@vue/cli-plugin-eslint": "^5.0.4",
+    "@vue/cli-plugin-router": "^5.0.4",
+    "@vue/cli-service": "^5.0.4",
     "babel-eslint": "^10.1.0",
     "electron": "^18.0.0",
     "electron-builder": "^22.14.5",
     "electron-devtools-installer": "^3.2.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint": "^7.0.0",
+    "eslint-plugin-vue": "^9.0.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
@@ -66,7 +66,8 @@
     "vue-template-compiler": "^2.6.11"
   },
   "resolutions": {
-    "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz"
+    "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
+    "glob-parent": "^6.0.1"
   },
   "eslintConfig": {
     "root": true,

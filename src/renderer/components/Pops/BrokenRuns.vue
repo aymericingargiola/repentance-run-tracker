@@ -1,17 +1,36 @@
 <template>
-    <transition name="show">
-        <div v-if="allRunsToRemoveAlert && allRunsToRemoveAlert.length > 0" class="pop-up ask-remove-run">
-            <div class="title">Broken runs found ?</div>
-            <transition-group name="broken-run-group-transition" tag="ul" class="broken-runs-container">
-                <template v-for="(run, ridx) in allRunsToRemoveAlert">
-                    <li class="broken-run-group-transition-item" :data-run-id="run.id" :key="`broken${run.id}${ridx}`">
-                        {{run.id}}
-                        <div @click="onRemoveRunClick" :data-run-id="run.id" class="remove">Remove</div>
-                    </li>
-                </template>
-            </transition-group>
-        </div>
-    </transition>
+  <transition name="show">
+    <div
+      v-if="allRunsToRemoveAlert && allRunsToRemoveAlert.length > 0"
+      class="pop-up ask-remove-run"
+    >
+      <div class="title">
+        Broken runs found ?
+      </div>
+      <transition-group
+        name="broken-run-group-transition"
+        tag="ul"
+        class="broken-runs-container"
+      >
+        <template v-for="(run, ridx) in allRunsToRemoveAlert">
+          <li
+            :key="`broken${run.id}${ridx}`"
+            class="broken-run-group-transition-item"
+            :data-run-id="run.id"
+          >
+            {{ run.id }}
+            <div
+              :data-run-id="run.id"
+              class="remove"
+              @click="onRemoveRunClick"
+            >
+              Remove
+            </div>
+          </li>
+        </template>
+      </transition-group>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -24,13 +43,6 @@ export default {
         return {
             anyBrokenRun: []
         }
-    },
-    mounted() {
-        window.ipc.on('SYNC_ASK_REMOVE_RUN', (response) => {
-            console.log(response)
-            this.updateRun = response.run
-        })
-        this.anyBrokenRun = this.allRunsToRemoveAlert
     },
     computed: {
         ...mapRepos({
@@ -47,6 +59,13 @@ export default {
                 this.runRepo.where('id', run.id).update(run)
             }
         },
+    },
+    mounted() {
+        window.ipc.on('SYNC_ASK_REMOVE_RUN', (response) => {
+            console.log(response)
+            this.updateRun = response.run
+        })
+        this.anyBrokenRun = this.allRunsToRemoveAlert
     },
     methods: {
         // onRunClick(e) {

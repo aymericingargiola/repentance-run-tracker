@@ -1,70 +1,149 @@
 <template>
-    <li :class="['win-streak-item add', !editing ? 'short' : '']">
-        <div class="before" :style="{backgroundImage:`url('img/cards/bar-ws-left_01.png')`}"></div>
-        <div class="mid" :style="{backgroundImage:`url('img/cards/bar-ws-mid_01.png')`}"></div>
-        <div class="after" :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"></div>
-        <div :class="['content', editing ? 'expended' : '']">
-            <div v-if="usedGameStates">
-                <CustomSelect type="single" hide-at="0" :items="availableGameStatesSelectOptions" :label="$tc('dictionary.save')" :emptyMessage="$t('select.noSavesSelected')" @updateSelect="onUpdateSaveSelect"/>
-            </div>
-            <div class="adjust-number">
-                {{$t('strings.adjustNumber')}} :
-                <input type="number" id="adjustNumber" name="adjust number" class="size-auto" v-model="adjustNumber">
-            </div>
-            <div v-if="allCharacters" class="characters">
-                <span class="title">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <span>{{$tc('dictionary.character', 2)}}</span>
-                </span>
-                <ul>
-                    <li :class="['character', randomNormal ? 'selected' : '']" v-on:click="randomSelected('normal')">
-                        <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
-                        <span class="name">{{$t('strings.randomNormal')}}</span>
-                    </li>
-                    <li :class="['character', randomAlternate ? 'selected' : '']" v-on:click="randomSelected('alternate')">
-                        <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"></span>
-                        <span class="name">{{$t('strings.randomTainted')}}</span>
-                    </li>
-                    <template v-for="character in allCharacters">
-                        <li :class="['character', characters.includes(character.id) ? 'selected' : '']" :key="character.id" v-on:click="characterSelected(character.id)">
-                            <span class="small-portrait character image" :style="{backgroundImage:`url('img/characters/small portraits/${character.id}.png')`}"></span>
-                            <span class="name">{{character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${character.id}.name`)}` }} {{character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : ""}} {{characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : ''}}</span>
-                        </li>
-                    </template>
-                </ul>
-            </div>
-            <div v-if="lastBosses" class="bosses">
-                <span class="title">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <span>{{$tc('dictionary.boss', 2)}}</span>
-                </span>
-                <template v-for="boss in lastBosses">
-                    <li :class="['boss', bosses.includes(boss.id) ? 'selected' : '']" :key="boss.id" v-on:click="bossSelected(boss.id)">
-                        <span class="small-portrait boss image" :style="{backgroundImage:`url('img/entities/small portraits/${boss.portrait}.png')`}"></span>
-                        <span class="name">{{$t(`entities.${boss.id.replaceAll('.', '-')}.name`)}} {{bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : ''}}</span>
-                    </li>
-                </template>
-            </div>
-            <div class="buttons">
-                <div class="cancel">
-                    <button v-on:click="cancel()">{{$t('dictionary.cancel')}}</button>
-                </div>
-                <div class="add-rule">
-                    <button :disabled="!gameState || bosses.length === 0" v-on:click="addRule()">{{$tc('strings.addRule')}}</button>
-                </div>
-            </div>
+  <li :class="['win-streak-item add', !editing ? 'short' : '']">
+    <div
+      class="before"
+      :style="{backgroundImage:`url('img/cards/bar-ws-left_01.png')`}"
+    />
+    <div
+      class="mid"
+      :style="{backgroundImage:`url('img/cards/bar-ws-mid_01.png')`}"
+    />
+    <div
+      class="after"
+      :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"
+    />
+    <div :class="['content', editing ? 'expended' : '']">
+      <div v-if="usedGameStates">
+        <CustomSelect
+          type="single"
+          hide-at="0"
+          :items="availableGameStatesSelectOptions"
+          :label="$tc('dictionary.save')"
+          :empty-message="$t('select.noSavesSelected')"
+          @updateSelect="onUpdateSaveSelect"
+        />
+      </div>
+      <div class="adjust-number">
+        {{ $t('strings.adjustNumber') }} :
+        <input
+          id="adjustNumber"
+          v-model="adjustNumber"
+          type="number"
+          name="adjust number"
+          class="size-auto"
+        >
+      </div>
+      <div
+        v-if="allCharacters"
+        class="characters"
+      >
+        <span class="title">
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <span>{{ $tc('dictionary.character', 2) }}</span>
+        </span>
+        <ul>
+          <li
+            :class="['character', randomNormal ? 'selected' : '']"
+            @click="randomSelected('normal')"
+          >
+            <span
+              class="small-portrait character image"
+              :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
+            />
+            <span class="name">{{ $t('strings.randomNormal') }}</span>
+          </li>
+          <li
+            :class="['character', randomAlternate ? 'selected' : '']"
+            @click="randomSelected('alternate')"
+          >
+            <span
+              class="small-portrait character image"
+              :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
+            />
+            <span class="name">{{ $t('strings.randomTainted') }}</span>
+          </li>
+          <template v-for="character in allCharacters">
+            <li
+              :key="character.id"
+              :class="['character', characters.includes(character.id) ? 'selected' : '']"
+              @click="characterSelected(character.id)"
+            >
+              <span
+                class="small-portrait character image"
+                :style="{backgroundImage:`url('img/characters/small portraits/${character.id}.png')`}"
+              />
+              <span class="name">{{ character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${character.id}.name`)}` }} {{ character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }} {{ characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : '' }}</span>
+            </li>
+          </template>
+        </ul>
+      </div>
+      <div
+        v-if="lastBosses"
+        class="bosses"
+      >
+        <span class="title">
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <span>{{ $tc('dictionary.boss', 2) }}</span>
+        </span>
+        <template v-for="boss in lastBosses">
+          <li
+            :key="boss.id"
+            :class="['boss', bosses.includes(boss.id) ? 'selected' : '']"
+            @click="bossSelected(boss.id)"
+          >
+            <span
+              class="small-portrait boss image"
+              :style="{backgroundImage:`url('img/entities/small portraits/${boss.portrait}.png')`}"
+            />
+            <span class="name">{{ $t(`entities.${boss.id.replaceAll('.', '-')}.name`) }} {{ bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : '' }}</span>
+          </li>
+        </template>
+      </div>
+      <div class="buttons">
+        <div class="cancel">
+          <button @click="cancel()">
+            {{ $t('dictionary.cancel') }}
+          </button>
         </div>
-        <div :class="['expend', editing ? 'hidden' : '']">
-            <div v-on:click="editing = !editing">
-                (+)
-                <span>{{$t('strings.addWinStreakRule')}}</span>
-            </div>
+        <div class="add-rule">
+          <button
+            :disabled="!gameState || bosses.length === 0"
+            @click="addRule()"
+          >
+            {{ $tc('strings.addRule') }}
+          </button>
         </div>
-    </li>
+      </div>
+    </div>
+    <div :class="['expend', editing ? 'hidden' : '']">
+      <div @click="editing = !editing">
+        (+)
+        <span>{{ $t('strings.addWinStreakRule') }}</span>
+      </div>
+    </div>
+  </li>
 </template>
 
 <script>
@@ -74,7 +153,7 @@ import Entity from '../../store/classes/Entity'
 import Character from '../../store/classes/Character'
 import CustomSelect from '../Tools/CustomSelect.vue'
 export default {
-    name: "winStreaksAdd",
+    name: "WinStreaksAdd",
     components: {
         CustomSelect
     },
@@ -119,6 +198,8 @@ export default {
         lastBosses() {
             return this.entityRepo.where('lastBoss', true).get()
         }
+    },
+    mounted() {
     },
     methods: {
         cancel() {
@@ -165,8 +246,6 @@ export default {
         onUpdateSaveSelect(selected) {
             this.gameState = selected.length > 0 ? selected[0].value : null
         }
-    },
-    mounted() {
     }
 };
 </script>

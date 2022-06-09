@@ -1,12 +1,28 @@
 <template>
-    <div v-if="pages > 1" class="pagination-container">
-        <div class="pagination">
-            <template v-for="page in pages">
-                <div v-if="showPage(page)" :class="['page', currentPage === page ? 'active' : '']" v-on:click="changePage(page)" :key="`page-${page}`">{{page}}</div>
-                <div v-if="showOffset(page)" class="page-offset" :key="`offset page-${page}`">...</div>
-            </template>
+  <div
+    v-if="pages > 1"
+    class="pagination-container"
+  >
+    <div class="pagination">
+      <template v-for="page in pages">
+        <div
+          v-if="showPage(page)"
+          :key="`page-${page}`"
+          :class="['page', currentPage === page ? 'active' : '']"
+          @click="changePage(page)"
+        >
+          {{ page }}
         </div>
+        <div
+          v-if="showOffset(page)"
+          :key="`offset page-${page}`"
+          class="page-offset"
+        >
+          ...
+        </div>
+      </template>
     </div>
+  </div>
 </template>
 
 <script>

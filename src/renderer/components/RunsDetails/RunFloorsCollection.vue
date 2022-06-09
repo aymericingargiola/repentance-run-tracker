@@ -1,20 +1,47 @@
 <template>
   <section class="run-floors-collection">
-    <h2 class="floor-name">{{floorName}} <div v-if="floor.curse" class="curse-icon" :title="floor.curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div></h2>
-    <Minimap :floor="floor" :selectedRoom="selectedRoom"/>
+    <h2 class="floor-name">
+      {{ floorName }} <div
+        v-if="floor.curse"
+        class="curse-icon"
+        :title="floor.curse"
+        :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"
+      />
+    </h2>
+    <Minimap
+      :floor="floor"
+      :selected-room="selectedRoom"
+    />
     <div class="rooms">
       <ul class="rooms-list">
         <template v-for="room in floorRoom">
-          <li :class="['room', selectedRoom === -1 || room.id === selectedRoom ? 'selected' : '']" @click="changeSelectedRoom(room.id)" :key="`room ${room.id}`">
-            <div class="background" :style="{backgroundImage:`url('img/icons/minimap/room default visited.png')`}"></div>
-            <div class="icon" :style="{backgroundImage:`url('img/icons/minimap/${room.type}.png')`}"></div>
+          <li
+            :key="`room ${room.id}`"
+            :class="['room', selectedRoom === -1 || room.id === selectedRoom ? 'selected' : '']"
+            @click="changeSelectedRoom(room.id)"
+          >
+            <div
+              class="background"
+              :style="{backgroundImage:`url('img/icons/minimap/room default visited.png')`}"
+            />
+            <div
+              class="icon"
+              :style="{backgroundImage:`url('img/icons/minimap/${room.type}.png')`}"
+            />
           </li>
         </template>
       </ul>
     </div>
     <div class="entities">
-      <Items :items="floorItems" :characters="characters" :selectedRoom="selectedRoom"/>
-      <Ennemies :ennemies="floorEnnemies" :selectedRoom="selectedRoom"/>
+      <Items
+        :items="floorItems"
+        :characters="characters"
+        :selected-room="selectedRoom"
+      />
+      <Ennemies
+        :ennemies="floorEnnemies"
+        :selected-room="selectedRoom"
+      />
     </div>
   </section>
 </template>

@@ -1,61 +1,152 @@
 <template>
-    <vue-scroll v-if="ops && floors" :ops="ops" class="run-el custom-scroll-floors" :ref="index === 0 ? 'firstRunFloorsScroller' : ''">
-        <transition-group name="floors-group-transition" tag="ul" class="floors">
-            <template v-for="(floor, fidx) in floors">
-                <li v-if="floor" :class="['run-el', 'floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']" :data-id="floor.id" :key="floor.id + fidx">
-                    <div class="floor-content" :style="{backgroundImage:`url('img/textures/floors${gameMode === 'greed' ? '/greed' : ''}/${floor.group}-ground.png')`}">
-                        <div class="top-info">
-                            <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
-                            <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
-                        </div>
-                        <div class="floor-wrapper">
-                            <div class="floor-name">{{$t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`)}} {{!isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : ''}}</div>
-                            <transition-group name="item-group-transition" tag="ul" class="items">
-                                <template v-for="(item, tidx) in groupedItems(floor.itemsCollected)">
-                                    <li v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'" class="item-group-transition-item" :key="item.title + tidx">
-                                        <a v-if="item.id >= 0" class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                                            <div class="name">
-                                                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
-                                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-                                                <span>{{item.golden ? 'Golden ' : ''}}{{item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title)}}</span>
-                                            </div>
-                                            <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
-                                                <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
-                                            </div>
-                                            <img v-if="item.type === 'trinket'" :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
-                                            <img v-else-if="item.custom" :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
-                                            <img v-else :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
-                                            <span v-if="item.number > 1" class="item-number">x{{item.number}}</span>
-                                        </a>
-                                        <a v-else class="item-image glitched">
-                                            <div class="name">
-                                                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
-                                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-                                                <span>{{item.title}}</span>
-                                            </div>
-                                            <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
-                                                <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
-                                            </div>
-                                            <div class="glitched-image">
-                                                <template v-for="index in 3">
-                                                    <div class="contain" :key="`glitched ${index}`">
-                                                        <img class="glitched" :src="`img/icons/collectibles/${randomItemId()}.png`" onerror="this.src='img/icons/collectibles/023.png'">
-                                                    </div>
-                                                </template>
-                                            </div>
-                                            <span v-if="item.number > 1" class="item-number">x{{item.number}}</span>
-                                        </a>
-                                    </li>
-                                </template>
-                            </transition-group>
-                        </div>
-                    </div>
-                </li>
-            </template>
-        </transition-group>
-    </vue-scroll>
+  <vue-scroll
+    v-if="ops && floors"
+    :ref="index === 0 ? 'firstRunFloorsScroller' : ''"
+    :ops="ops"
+    class="run-el custom-scroll-floors"
+  >
+    <transition-group
+      name="floors-group-transition"
+      tag="ul"
+      class="floors"
+    >
+      <template v-for="(floor, fidx) in floors">
+        <li
+          v-if="floor"
+          :key="floor.id + fidx"
+          :class="['run-el', 'floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']"
+          :data-id="floor.id"
+        >
+          <div
+            class="floor-content"
+            :style="{backgroundImage:`url('img/textures/floors${gameMode === 'greed' ? '/greed' : ''}/${floor.group}-ground.png')`}"
+          >
+            <div class="top-info">
+              <div
+                class="icon floor"
+                :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"
+              />
+              <div
+                v-if="floor.curse"
+                class="icon curse"
+                :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"
+              />
+            </div>
+            <div class="floor-wrapper">
+              <div class="floor-name">
+                {{ $t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`) }} {{ !isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : '' }}
+              </div>
+              <transition-group
+                name="item-group-transition"
+                tag="ul"
+                class="items"
+              >
+                <template v-for="(item, tidx) in groupedItems(floor.itemsCollected)">
+                  <li
+                    v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'"
+                    :key="item.title + tidx"
+                    class="item-group-transition-item"
+                  >
+                    <a
+                      v-if="item.id >= 0"
+                      class="item-image"
+                      :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
+                      target="_blank"
+                    >
+                      <div class="name">
+                        <div
+                          class="before"
+                          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+                        />
+                        <div
+                          class="mid"
+                          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+                        />
+                        <div
+                          class="after"
+                          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+                        />
+                        <span>{{ item.golden ? 'Golden ' : '' }}{{ item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title) }}</span>
+                      </div>
+                      <div
+                        v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
+                        class="player-icon"
+                      >
+                        <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                      </div>
+                      <img
+                        v-if="item.type === 'trinket'"
+                        :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`"
+                        onerror="this.src='img/icons/collectibles/questionmark.png'"
+                      >
+                      <img
+                        v-else-if="item.custom"
+                        :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`"
+                        onerror="this.src='img/icons/collectibles/questionmark.png'"
+                      >
+                      <img
+                        v-else
+                        :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`"
+                        onerror="this.src='img/icons/collectibles/questionmark.png'"
+                      >
+                      <span
+                        v-if="item.number > 1"
+                        class="item-number"
+                      >x{{ item.number }}</span>
+                    </a>
+                    <a
+                      v-else
+                      class="item-image glitched"
+                    >
+                      <div class="name">
+                        <div
+                          class="before"
+                          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+                        />
+                        <div
+                          class="mid"
+                          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+                        />
+                        <div
+                          class="after"
+                          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+                        />
+                        <span>{{ item.title }}</span>
+                      </div>
+                      <div
+                        v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
+                        class="player-icon"
+                      >
+                        <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                      </div>
+                      <div class="glitched-image">
+                        <template v-for="glitdx in 3">
+                          <div
+                            :key="`glitched ${glitdx}`"
+                            class="contain"
+                          >
+                            <img
+                              class="glitched"
+                              :src="`img/icons/collectibles/${randomItemId()}.png`"
+                              onerror="this.src='img/icons/collectibles/023.png'"
+                            >
+                          </div>
+                        </template>
+                      </div>
+                      <span
+                        v-if="item.number > 1"
+                        class="item-number"
+                      >x{{ item.number }}</span>
+                    </a>
+                  </li>
+                </template>
+              </transition-group>
+            </div>
+          </div>
+        </li>
+      </template>
+    </transition-group>
+  </vue-scroll>
 </template>
 
 <script>
@@ -66,6 +157,8 @@ import Config from '../../store/classes/Config'
 import Run from '../../store/classes/Run'
 export default {
     name: "RunFloorsSlider",
+    components: {
+    },
     mixins: [runsMixin, i18nMixin],
     props: {
         ops: Object,
@@ -74,8 +167,6 @@ export default {
         liveUpdate: Boolean,
         gameMode: String,
         characters: Array
-    },
-    components: {
     },
     data() {
         return {
@@ -89,6 +180,27 @@ export default {
         }),
         validCharacters() {
             return this.characters ? this.characters.filter(character => character.bypass !== true) : []
+        }
+    },
+    mounted() {
+        if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
+            window.ipc.on('SYNC_CREATE_RUN', () => {
+                this.canUpdateRun = false
+                setTimeout(() => {
+                    this.canUpdateRun = true
+                }, 1500)
+            })
+            window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
+                    this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
+                    setTimeout(() => {
+                        this.$refs["firstRunFloorsScroller"]?.refresh()
+                    }, 1000)
+                    setTimeout(() => {
+                        this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
+                    }, 1000)
+                }
+            })
         }
     },
     methods: {
@@ -111,27 +223,6 @@ export default {
                 return groups
             }, [])
         },
-    },
-    mounted() {
-        if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
-            window.ipc.on('SYNC_CREATE_RUN', () => {
-                this.canUpdateRun = false
-                setTimeout(() => {
-                    this.canUpdateRun = true
-                }, 1500)
-            })
-            window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
-                    this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
-                    setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"]?.refresh()
-                    }, 1000)
-                    setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
-                    }, 1000)
-                }
-            })
-        }
     }
 };
 </script>

@@ -1,12 +1,25 @@
 <template>
-    <div v-if="floor && floor.rooms && floor.rooms.length > 0" class="minimap">
-        <div :class="['wrapper', selectedRoom > -1 ? 'room-selected' : '']" :ref="`minimap-${floor.name}`">
-            <div type="row" first-row index="0">
-                <div type="col" first-col index="0">
-                </div>
-            </div>
-        </div>
+  <div
+    v-if="floor && floor.rooms && floor.rooms.length > 0"
+    class="minimap"
+  >
+    <div
+      :ref="`minimap-${floor.name}`"
+      :class="['wrapper', selectedRoom > -1 ? 'room-selected' : '']"
+    >
+      <div
+        type="row"
+        first-row
+        index="0"
+      >
+        <div
+          type="col"
+          first-col
+          index="0"
+        />
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -28,6 +41,23 @@ export default {
         return this.floor?.rooms ? this.floor.rooms : []
     },
   },
+    watch: { 
+        floor: function(newVal) {
+            if (newVal?.rooms && newVal.rooms.length > 0) {
+                if (!this.wrapper) this.wrapper = this.$refs[`minimap-${this.floor.name}`]
+                if (this.wrapper) {
+                    this.minimapReset()
+                    this.minimapBuilder(newVal.rooms)
+                }
+            }
+        },
+        selectedRoom: function(newVal, oldVal) {
+            const newSelected = newVal > -1 ? [...this.wrapper.querySelectorAll(`[room="${newVal}"]`)] : []
+            const oldSelected = oldVal > -1 ? [...this.wrapper.querySelectorAll(`[room="${oldVal}"]`)] : []
+            if (newSelected.length > 0) newSelected.forEach(roomPart => roomPart.classList.add('selected'))
+            if (oldSelected.length > 0) oldSelected.forEach(roomPart => roomPart.classList.remove('selected'))
+        }
+    },
   mounted() {
     // Rooms shape doc : https://wofsauge.github.io/IsaacDocs/rep/enums/RoomShape.html?h=room
     // Doors slot doc : https://wofsauge.github.io/IsaacDocs/rep/enums/DoorSlot.html?h=door
@@ -430,24 +460,7 @@ export default {
             })
         })
     }
-  },
-    watch: { 
-        floor: function(newVal) {
-            if (newVal?.rooms && newVal.rooms.length > 0) {
-                if (!this.wrapper) this.wrapper = this.$refs[`minimap-${this.floor.name}`]
-                if (this.wrapper) {
-                    this.minimapReset()
-                    this.minimapBuilder(newVal.rooms)
-                }
-            }
-        },
-        selectedRoom: function(newVal, oldVal) {
-            const newSelected = newVal > -1 ? [...this.wrapper.querySelectorAll(`[room="${newVal}"]`)] : []
-            const oldSelected = oldVal > -1 ? [...this.wrapper.querySelectorAll(`[room="${oldVal}"]`)] : []
-            if (newSelected.length > 0) newSelected.forEach(roomPart => roomPart.classList.add('selected'))
-            if (oldSelected.length > 0) oldSelected.forEach(roomPart => roomPart.classList.remove('selected'))
-        }
-    }
+  }
 };
 </script>
 
