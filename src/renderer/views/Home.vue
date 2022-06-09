@@ -3,15 +3,15 @@
     <!-- <div>available : {{updateAvailable}}</div>
     <div>downloaded : {{updateDownloaded}}</div>
     <div>status : {{updateStatus}}</div> -->
-    <UpdateApp/>
-    <WinStreak/>
-    <Trash/>
-    <Runs/>
-    <BrokenRuns/>
-    <EditRun/>
-    <RunDetails/>
-    <ConfigScreen/>
-    <AppError/>
+    <UpdateApp />
+    <WinStreak />
+    <Trash />
+    <Runs />
+    <BrokenRuns />
+    <EditRun />
+    <RunDetails />
+    <ConfigScreen />
+    <AppError />
   </div>
 </template>
 
@@ -27,6 +27,7 @@ import ConfigScreen from '../components/Pops/ConfigScreen.vue'
 import Trash from '../components/Trash/Trash.vue'
 import AppError from '../components/Pops/AppError.vue'
 export default {
+  name: "Home",
   components: {
     UpdateApp,
     WinStreak,
@@ -38,14 +39,13 @@ export default {
     Trash,
     AppError
   },
-  name: "Home",
   data() {
     return {
     }
   },
-  async created() {
-  },
   computed: {
+  },
+  async created() {
   },
   mounted() {
   },

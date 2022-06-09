@@ -1,22 +1,34 @@
 <template>
-    <div class="ennemies">
-      <ul>
-        <template v-for="ennemy in filteredEnnemies">
-          <li :key="`${ennemy.name} ${ennemy.room}`">
-            <div class="name">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-              <span class="title">{{t(`entities.${formatLocaleId(ennemy.id)}.name`, ennemy.name)}}{{ $isDev ? ` [id : ${ennemy.id}]` : ''}}</span>
-            </div>
-            <div class="image">
-              <img :src="`img/entities/${ennemy.id}.png`">
-              <span v-if="ennemy.number > 1" class="number">x{{ennemy.number}}</span>
-            </div>
-          </li>
-        </template>
-      </ul>
-    </div>
+  <div class="ennemies">
+    <ul>
+      <template v-for="ennemy in filteredEnnemies">
+        <li :key="`${ennemy.name} ${ennemy.room}`">
+          <div class="name">
+            <div
+              class="before"
+              :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+            />
+            <div
+              class="mid"
+              :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+            />
+            <div
+              class="after"
+              :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+            />
+            <span class="title">{{ t(`entities.${formatLocaleId(ennemy.id)}.name`, ennemy.name) }}{{ $isDev ? ` [id : ${ennemy.id}]` : '' }}</span>
+          </div>
+          <div class="image">
+            <img :src="`img/entities/${ennemy.id}.png`">
+            <span
+              v-if="ennemy.number > 1"
+              class="number"
+            >x{{ ennemy.number }}</span>
+          </div>
+        </li>
+      </template>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -46,12 +58,12 @@ export default {
       }, [])
     }
   },
+  watch: { 
+  },
   mounted() {
   },
   methods: {
     
-  },
-  watch: { 
   }
 };
 </script>

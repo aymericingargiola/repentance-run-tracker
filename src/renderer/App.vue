@@ -1,16 +1,25 @@
 <template>
   <div id="app">
-    <Taskbar :app-version="appVersion"/>
+    <Taskbar :app-version="appVersion" />
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">
-        <transition name="fade">
-          <div class="overlay-watch-status" v-if="!watchStatus || loading">
-              <div class="image-1 animated" :style="{backgroundImage:loadingImage1}"></div>
-              <div class="image-2 animated" :style="{backgroundImage:loadingImage2}"></div>
-          </div>
-        </transition>
-        <router-view />
+      <transition name="fade">
+        <div
+          v-if="!watchStatus || loading"
+          class="overlay-watch-status"
+        >
+          <div
+            class="image-1 animated"
+            :style="{backgroundImage:loadingImage1}"
+          />
+          <div
+            class="image-2 animated"
+            :style="{backgroundImage:loadingImage2}"
+          />
+        </div>
+      </transition>
+      <router-view />
     </div>
   </div>
 </template>

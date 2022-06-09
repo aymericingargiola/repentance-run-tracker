@@ -1,49 +1,125 @@
 <template>
-    <transition name="open">
-        <div v-if="isOpen" class="config-popup">
-            <div class="overlay" v-on:click="openOrCloseSettings()"></div>
-            <div class="config-items">
-                <div class="mid" :style="{backgroundImage:`url('img/cards/big-frame.png')`}"></div>
-                <div class="content">
-                    <div class="heading">{{$t(`config.title`)}}</div>
-                    <template v-for="(config, cidx) in enabledConfigs">
-                        <div :class="['config-item', config.type]" :key="`config-${cidx}`">
-                            <div class="title">{{$t(`config.${config.id}.title`)}}</div>
-                            <div class="selector" v-if="config.type === 'select'">
-                                <select v-if="config.id === 'languages'" :name="config.name" :id="config.id" @change="onChange($event, config.id, config.type)" v-model="$i18n.locale">
-                                    <template v-for="(select, sidx) in config.choices">
-                                        <option :value="select.value" :key="`option-${sidx}`" :selected="select.value === config.value">{{$t(`config.${config.id}.choices.${select.value}`)}}</option>
-                                    </template>
-                                </select>
-                                <select v-else :name="config.name" :id="config.id" @change="onChange($event, config.id, config.type)">
-                                    <template v-for="(select, sidx) in config.choices">
-                                        <option :value="select.value" :key="`option-${sidx}`" :selected="select.value === config.value">{{$t(`config.${config.id}.choices.${select.value}`)}}</option>
-                                    </template>
-                                </select>
-                            </div>
-                            <div class="text" v-if="config.type === 'text'">
-                                <input type="text" :id="config.id" :name="config.name" @change="onChange($event, config.id, config.type)" :value="config.value">
-                            </div>
-                            <div class="checkbox" v-if="config.type === 'checkbox'">
-                                <input type="checkbox" :id="config.id" :name="config.name" @change="onChange($event, config.id, config.type)" :checked="config.value">
-                            </div>
-                            <div class="hint">{{$t(`config.${config.id}.hint`)}}</div>
-                        </div>
-                    </template>
-                </div>
-                <div v-if="$isDev" class="content debug">
-                    <div class="heading">Debug</div>
-                    <div class="config-item">
-                        <div class="title">Debug game logs</div>
-                        <div class="text textarea">
-                            <textarea v-model="debuglogs" id="debuglogs" name="debuglogs" spellcheck="false"></textarea>
-                        </div>
-                        <button @click="sendLogs()">Debug</button>
-                    </div>
-                </div>
+  <transition name="open">
+    <div
+      v-if="isOpen"
+      class="config-popup"
+    >
+      <div
+        class="overlay"
+        @click="openOrCloseSettings()"
+      />
+      <div class="config-items">
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/big-frame.png')`}"
+        />
+        <div class="content">
+          <div class="heading">
+            {{ $t(`config.title`) }}
+          </div>
+          <template v-for="(config, cidx) in enabledConfigs">
+            <div
+              :key="`config-${cidx}`"
+              :class="['config-item', config.type]"
+            >
+              <div class="title">
+                {{ $t(`config.${config.id}.title`) }}
+              </div>
+              <div
+                v-if="config.type === 'select'"
+                class="selector"
+              >
+                <select
+                  v-if="config.id === 'languages'"
+                  :id="config.id"
+                  v-model="$i18n.locale"
+                  :name="config.name"
+                  @change="onChange($event, config.id, config.type)"
+                >
+                  <template v-for="(select, sidx) in config.choices">
+                    <option
+                      :key="`option-${sidx}`"
+                      :value="select.value"
+                      :selected="select.value === config.value"
+                    >
+                      {{ $t(`config.${config.id}.choices.${select.value}`) }}
+                    </option>
+                  </template>
+                </select>
+                <select
+                  v-else
+                  :id="config.id"
+                  :name="config.name"
+                  @change="onChange($event, config.id, config.type)"
+                >
+                  <template v-for="(select, sidx) in config.choices">
+                    <option
+                      :key="`option-${sidx}`"
+                      :value="select.value"
+                      :selected="select.value === config.value"
+                    >
+                      {{ $t(`config.${config.id}.choices.${select.value}`) }}
+                    </option>
+                  </template>
+                </select>
+              </div>
+              <div
+                v-if="config.type === 'text'"
+                class="text"
+              >
+                <input
+                  :id="config.id"
+                  type="text"
+                  :name="config.name"
+                  :value="config.value"
+                  @change="onChange($event, config.id, config.type)"
+                >
+              </div>
+              <div
+                v-if="config.type === 'checkbox'"
+                class="checkbox"
+              >
+                <input
+                  :id="config.id"
+                  type="checkbox"
+                  :name="config.name"
+                  :checked="config.value"
+                  @change="onChange($event, config.id, config.type)"
+                >
+              </div>
+              <div class="hint">
+                {{ $t(`config.${config.id}.hint`) }}
+              </div>
             </div>
+          </template>
         </div>
-    </transition>
+        <div
+          v-if="$isDev"
+          class="content debug"
+        >
+          <div class="heading">
+            Debug
+          </div>
+          <div class="config-item">
+            <div class="title">
+              Debug game logs
+            </div>
+            <div class="text textarea">
+              <textarea
+                id="debuglogs"
+                v-model="debuglogs"
+                name="debuglogs"
+                spellcheck="false"
+              />
+            </div>
+            <button @click="sendLogs()">
+              Debug
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -57,6 +133,14 @@ export default {
             debuglogs: ''
         }
     },
+    computed: {
+        ...mapRepos({
+            configRepo: Config
+        }),
+        enabledConfigs() {
+            return this.configRepo.query().where('disabled', false).get()
+        }
+    },
     mounted() {
         window.ipc.send('ASK_CONFIG')
         window.ipc.on('SYNC_SEND_CONFIG', (response) => {
@@ -68,16 +152,6 @@ export default {
         this.$root.$on('OPEN_SETTINGS', () => {
             this.isOpen = !this.isOpen
         })
-    },
-    watch: {
-    },
-    computed: {
-        ...mapRepos({
-            configRepo: Config
-        }),
-        enabledConfigs() {
-            return this.configRepo.query().where('disabled', false).get()
-        }
     },
     methods: {
         openOrCloseSettings() {

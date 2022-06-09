@@ -1,14 +1,49 @@
 <template>
-        <div v-if="allRuns && allRuns.length > 0 && filteredRuns" class="filters">
-            <div class="search">
-                <input v-model="filterText" @input="resetPaginationFromInput()" :placeholder="$t('strings.searchRuns')">
-            </div>
-            <DateRangePicker @updateDateRange="onUpdateDateRange"/>
-            <CustomSelect v-if="allTags && tagsWithRuns.length > 0" type="multi" :items="tagsWithRuns" :label="$tc('dictionary.tag', 2)" :emptyMessage="$t('select.allTags')" @updateSelect="onUpdateTagsMultiSelect"/>
-            <CustomSelect v-if="allCharacters && charactersWithRuns.length > 0" type="multi" custom-value="name" :items="charactersWithRuns" :label="$tc('dictionary.character', 2)" :emptyMessage="$t('select.allCharacters')" @updateSelect="onUpdateCharactersMultiSelect"/>
-            <CustomSelect type="multi" :items="gameStateWithRuns" :label="$tc('dictionary.save', 2)" :emptyMessage="$t('select.allSaves')" @updateSelect="onUpdateGameStateMultiSelect"/>
-            <CustomSelect type="single" :items="winConditionWithRuns" :label="$t('select.winCondition')" :emptyMessage="$t('select.allCondition')" order="desc" @updateSelect="onUpdateWinConditionMultiSelect"/>
-        </div>
+  <div
+    v-if="allRuns && allRuns.length > 0 && filteredRuns"
+    class="filters"
+  >
+    <div class="search">
+      <input
+        v-model="filterText"
+        :placeholder="$t('strings.searchRuns')"
+        @input="resetPaginationFromInput()"
+      >
+    </div>
+    <DateRangePicker @updateDateRange="onUpdateDateRange" />
+    <CustomSelect
+      v-if="allTags && tagsWithRuns.length > 0"
+      type="multi"
+      :items="tagsWithRuns"
+      :label="$tc('dictionary.tag', 2)"
+      :empty-message="$t('select.allTags')"
+      @updateSelect="onUpdateTagsMultiSelect"
+    />
+    <CustomSelect
+      v-if="allCharacters && charactersWithRuns.length > 0"
+      type="multi"
+      custom-value="name"
+      :items="charactersWithRuns"
+      :label="$tc('dictionary.character', 2)"
+      :empty-message="$t('select.allCharacters')"
+      @updateSelect="onUpdateCharactersMultiSelect"
+    />
+    <CustomSelect
+      type="multi"
+      :items="gameStateWithRuns"
+      :label="$tc('dictionary.save', 2)"
+      :empty-message="$t('select.allSaves')"
+      @updateSelect="onUpdateGameStateMultiSelect"
+    />
+    <CustomSelect
+      type="single"
+      :items="winConditionWithRuns"
+      :label="$t('select.winCondition')"
+      :empty-message="$t('select.allCondition')"
+      order="desc"
+      @updateSelect="onUpdateWinConditionMultiSelect"
+    />
+  </div>
 </template>
 
 <script>
@@ -39,16 +74,8 @@ export default {
             winConditionOptions: [{id: 0, value: "Win", name: this.$t('dictionary.win')}, {id: 1, value: "Lose", name: this.$t('dictionary.lose')}],
             filterWinCondition: null,
             filterDateStart: null,
-            filterDateEnd: null,
-            localFilteredRuns: this.filteredRuns
+            filterDateEnd: null
         }
-    },
-    mounted() {
-        window.ipc.send('ASK_TAGS')
-        window.ipc.on('SYNC_SEND_TAGS', (response) => {
-            console.log(response)
-            this.tagRepo.fresh(response.tags)
-        })
     },
     computed: {
         ...mapRepos({
@@ -95,6 +122,13 @@ export default {
             this.$emit('filteredRuns', filteredRuns)
             return filteredRuns
         }
+    },
+    mounted() {
+        window.ipc.send('ASK_TAGS')
+        window.ipc.on('SYNC_SEND_TAGS', (response) => {
+            console.log(response)
+            this.tagRepo.fresh(response.tags)
+        })
     },
     methods: {
         onUpdateDateRange(range) {

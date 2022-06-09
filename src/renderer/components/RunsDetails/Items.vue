@@ -1,42 +1,96 @@
 <template>
-    <div class="items-list">
-      <ul>
-        <template v-for="item in filteredItems">
-          <li :key="`${item.title} ${item.room}`">
-            <div class="name">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <span>{{item.golden ? 'Golden ' : ''}}{{item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title)}}</span>
+  <div class="items-list">
+    <ul>
+      <template v-for="item in filteredItems">
+        <li :key="`${item.title} ${item.room}`">
+          <div class="name">
+            <div
+              class="before"
+              :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+            />
+            <div
+              class="mid"
+              :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+            />
+            <div
+              class="after"
+              :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+            />
+            <span>{{ item.golden ? 'Golden ' : '' }}{{ item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title) }}</span>
+          </div>
+          <a
+            v-if="item.id >= 0"
+            class="item-image"
+            :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
+            target="_blank"
+          >
+            <div
+              v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
+              class="player-icon"
+            >
+              <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
             </div>
-            <a v-if="item.id >= 0" class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
-                    <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+            <img
+              v-if="item.type === 'trinket'"
+              :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`"
+              onerror="this.src='img/icons/collectibles/questionmark.png'"
+            >
+            <img
+              v-else-if="item.custom"
+              :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`"
+              onerror="this.src='img/icons/collectibles/questionmark.png'"
+            >
+            <img
+              v-else
+              :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`"
+              onerror="this.src='img/icons/collectibles/questionmark.png'"
+            >
+            <span
+              v-if="item.number > 1"
+              class="item-number"
+            >x{{ item.number }}</span>
+            <span
+              v-if="item.number < 1"
+              class="item-number removed"
+            >X</span>
+          </a>
+          <a
+            v-else
+            class="item-image glitched"
+          >
+            <div
+              v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
+              class="player-icon"
+            >
+              <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+            </div>
+            <div class="glitched-image">
+              <template v-for="index in 3">
+                <div
+                  :key="`glitched ${index}`"
+                  class="contain"
+                >
+                  <img
+                    class="glitched"
+                    :src="`img/icons/collectibles/${randomItemId()}.png`"
+                    onerror="this.src='img/icons/collectibles/023.png'"
+                  >
                 </div>
-                <img v-if="item.type === 'trinket'" :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
-                <img v-else-if="item.custom" :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
-                <img v-else :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`" onerror="this.src='img/icons/collectibles/questionmark.png'">
-                <span v-if="item.number > 1" class="item-number">x{{item.number}}</span>
-                <span v-if="item.number < 1" class="item-number removed">X</span>
-            </a>
-            <a v-else class="item-image glitched">
-                <div v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')" class="player-icon">
-                    <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
-                </div>
-                <div class="glitched-image">
-                    <template v-for="index in 3">
-                        <div class="contain" :key="`glitched ${index}`">
-                            <img class="glitched" :src="`img/icons/collectibles/${randomItemId()}.png`" onerror="this.src='img/icons/collectibles/023.png'">
-                        </div>
-                    </template>
-                </div>
-                <span v-if="item.number > 1" class="item-number">x{{item.number}}</span>
-                <span v-if="item.number < 1" class="item-number">X</span>
-            </a>
-          </li>
-        </template>
-      </ul>
-    </div>
+              </template>
+            </div>
+            <span
+              v-if="item.number > 1"
+              class="item-number"
+            >x{{ item.number }}</span>
+            <span
+              v-if="item.number < 1"
+              class="item-number"
+            >X</span>
+          </a>
+        </li>
+      </template>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -70,12 +124,12 @@ export default {
         return this.characters ? this.characters.filter(character => character.bypass !== true) : []
     }
   },
+    watch: { 
+    },
   mounted() {
   },
   methods: {
-  },
-    watch: { 
-    }
+  }
 };
 </script>
 

@@ -1,14 +1,14 @@
 <template>
-    <div class="chart">
-      <apexchart
-        width="700"
-        :height="height ? height : '380'"
-        type="line"
-        :options="floorChartOptions"
-        :series="floorChartSeries"
-        @click="floorChartClick"
-      ></apexchart>
-    </div>
+  <div class="chart">
+    <apexchart
+      width="700"
+      :height="height ? height : '380'"
+      type="line"
+      :options="floorChartOptions"
+      :series="floorChartSeries"
+      @click="floorChartClick"
+    />
+  </div>
 </template>
 
 <script>

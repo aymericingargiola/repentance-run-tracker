@@ -1,22 +1,43 @@
 <template>
   <transition name="open">
-    <div v-if="isOpen && this.runRepo" class="run-details">
-      <div class="overlay"></div>
+    <div
+      v-if="isOpen && runRepo"
+      class="run-details"
+    >
+      <div class="overlay" />
       <div class="menu">
         <div class="title">
-          <h1>{{currentRun.characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${currentRun.characters[0].id}.name`)}` }}, {{getRunStartDate}}</h1>
-          <span class="run-title">{{currentRun.customName}}</span>
+          <h1>{{ currentRun.characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${currentRun.characters[0].id}.name`)}` }}, {{ getRunStartDate }}</h1>
+          <span class="run-title">{{ currentRun.customName }}</span>
         </div>
-        <div class="close" v-on:click="closeRunDetails()">X</div>
+        <div
+          class="close"
+          @click="closeRunDetails()"
+        >
+          X
+        </div>
       </div>
       <div class="wrapper">
         <div class="content chart">
-          <RunFloorsChart height="380" :floors-prop="floors" @selectedFloor="onSelectedFloor"/>
+          <RunFloorsChart
+            height="380"
+            :floors-prop="floors"
+            @selectedFloor="onSelectedFloor"
+          />
         </div>
         <div class="content collection">
-          <transition-group name="run-floors-collections" tag="div">
+          <transition-group
+            name="run-floors-collections"
+            tag="div"
+          >
             <template v-for="(floor, fdx) in selectedFloors">
-              <RunFloorsCollection :floor="floor" :characters="characters" :index="fdx" :selectedFloor="selectedFloor" :key="`floor ${fdx}`"/>
+              <RunFloorsCollection
+                :key="`floor ${fdx}`"
+                :floor="floor"
+                :characters="characters"
+                :index="fdx"
+                :selected-floor="selectedFloor"
+              />
             </template>
           </transition-group>
         </div>
@@ -45,13 +66,6 @@ export default {
       selectedFloor: -1
     }
   },
-  mounted() {
-    this.$root.$on("OPEN_RUNDETAILS", (id) => {
-      if (id) this.id = id;
-      this.isOpen = !this.isOpen;
-    });
-  },
-  watch: {},
   computed: {
     ...mapRepos({
       runRepo: Run,
@@ -72,6 +86,12 @@ export default {
     selectedFloors() {
       return this.selectedFloor === -1 ? this.floors : [this.floors[this.selectedFloor]]
     }
+  },
+  mounted() {
+    this.$root.$on("OPEN_RUNDETAILS", (id) => {
+      if (id) this.id = id;
+      this.isOpen = !this.isOpen;
+    });
   },
   methods: {
     getConfig(id) {

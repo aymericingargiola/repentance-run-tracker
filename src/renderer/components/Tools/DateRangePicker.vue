@@ -1,30 +1,47 @@
 <template>
-    <v-date-picker :locale="getLanguage" v-model="rangeUpdate" :model-config="datePickerModelConfig" is-range>
-        <template v-slot="{ inputEvents }">
-            <div class="v-calendar date-picker">
-                <div class="custom-input">
-                    <input
-                        :value="formatedRangeDates.start"
-                        :placeholder="todayDate"
-                        v-on="inputEvents.start"
-                    />
-                </div>
-                <div class="separator" @click="reset">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01_noshadow.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <span class="icon"></span>
-                </div>
-                <div class="custom-input">
-                    <input
-                        :value="formatedRangeDates.end"
-                        :placeholder="todayDate"
-                        v-on="inputEvents.end"
-                    />
-                </div>
-            </div>
-        </template>
-    </v-date-picker>
+  <v-date-picker
+    v-model="rangeUpdate"
+    :locale="getLanguage"
+    :model-config="datePickerModelConfig"
+    is-range
+  >
+    <template #default="{ inputEvents }">
+      <div class="v-calendar date-picker">
+        <div class="custom-input">
+          <input
+            :value="formatedRangeDates.start"
+            :placeholder="todayDate"
+            v-on="inputEvents.start"
+          >
+        </div>
+        <div
+          class="separator"
+          @click="reset"
+        >
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01_noshadow.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <span class="icon" />
+        </div>
+        <div class="custom-input">
+          <input
+            :value="formatedRangeDates.end"
+            :placeholder="todayDate"
+            v-on="inputEvents.end"
+          >
+        </div>
+      </div>
+    </template>
+  </v-date-picker>
 </template>
 
 <script>

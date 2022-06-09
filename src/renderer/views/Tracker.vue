@@ -1,31 +1,59 @@
 <template>
-  <div class="tracker" @contextmenu="handler($event)">
-      <ColorPicker
+  <div
+    class="tracker"
+    @contextmenu="handler($event)"
+  >
+    <ColorPicker
       v-if="showPicker && getLiveTrackerBackground"
       :color="color"
-      :onStartChange="color => onChange(color, 'start')"
-      :onChange="color => onChange(color, 'change')"
-      :onEndChange="color => onChange(color, 'end')"
-      :style="{top:`${this.top}px`,left:`${this.left}px`}"
-      />
-      <div v-if="getLiveTrackerBackground" :class="['background', showPicker ? 'on-top' : '']" :style="{backgroundColor:`rgba(${showPicker ? color.red : getLiveTrackerBackground.value.red},${showPicker ? color.green : getLiveTrackerBackground.value.green},${showPicker ? color.blue : getLiveTrackerBackground.value.blue},${showPicker ? color.alpha : getLiveTrackerBackground.value.alpha})`}"></div>
-      <ul v-if="currentRun" class="current-run">
-        <template v-for="(floor, fidx) in currentRun.floors">
-          <li class="floor" :key="floor.id + fidx">
-            <div class="top-info">
-                <div class="icon floor" :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"></div>
-                <div v-if="floor.curse" class="icon curse" :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"></div>
-            </div>
+      :on-start-change="color => onChange(color, 'start')"
+      :on-change="color => onChange(color, 'change')"
+      :on-end-change="color => onChange(color, 'end')"
+      :style="{top:`${top}px`,left:`${left}px`}"
+    />
+    <div
+      v-if="getLiveTrackerBackground"
+      :class="['background', showPicker ? 'on-top' : '']"
+      :style="{backgroundColor:`rgba(${showPicker ? color.red : getLiveTrackerBackground.value.red},${showPicker ? color.green : getLiveTrackerBackground.value.green},${showPicker ? color.blue : getLiveTrackerBackground.value.blue},${showPicker ? color.alpha : getLiveTrackerBackground.value.alpha})`}"
+    />
+    <ul
+      v-if="currentRun"
+      class="current-run"
+    >
+      <template v-for="(floor, fidx) in currentRun.floors">
+        <li
+          :key="floor.id + fidx"
+          class="floor"
+        >
+          <div class="top-info">
+            <div
+              class="icon floor"
+              :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"
+            />
+            <div
+              v-if="floor.curse"
+              class="icon curse"
+              :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"
+            />
+          </div>
+        </li>
+        <template v-for="(item, itdx) in floor.itemsCollected">
+          <li
+            v-if="!hideActiveItems || !hideActiveItems.value || (hideActiveItems.value && item.itemType != 'Active')"
+            :key="item.id + itdx"
+            class="item"
+          >
+            <a
+              class="item-image"
+              :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
+              target="_blank"
+            >
+              <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+            </a>
           </li>
-          <template v-for="(item, itdx) in floor.itemsCollected">
-            <li v-if="!hideActiveItems || !hideActiveItems.value || (hideActiveItems.value && item.itemType != 'Active')" class="item" :key="item.id + itdx">
-              <a class="item-image" :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`" target="_blank">
-                  <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
-              </a>
-            </li>
-          </template>
         </template>
-      </ul>
+      </template>
+    </ul>
   </div>
 </template>
 
@@ -35,9 +63,9 @@ import { mapRepos } from '@vuex-orm/core'
 import Config from '../store/classes/Config'
 import Run from '../store/classes/Run'
 export default {
+  name: "Tracker",
   components: {
   },
-  name: "Tracker",
   data() {
     return {
       filterOrder: 'desc',
@@ -47,7 +75,28 @@ export default {
       left: 0
     }
   },
-  async created() {
+  computed: {
+    ...mapRepos({
+        configRepo: Config,
+        runRepo: Run
+    }),
+    getLiveTrackerBackground() {
+        return this.configRepo.find('itemTrackerBackgroundColor')
+    },
+    currentRun() {
+        return this.runRepo.orderBy('runUpdate', this.filterOrder).first()
+    },
+    hideActiveItems() {
+        return this.configRepo.find('hideActiveItems')
+    },
+    updateRun: {
+        get: function(run) {
+            return this.runRepo.query().where('id', run.id).get()
+        },
+        set: function (run) {
+            this.runRepo.update(run)
+        }
+    }
   },
   mounted() {
     window.ipc.send('ASK_CONFIG', ({window:"itemTracker"}))
@@ -72,29 +121,6 @@ export default {
         console.log(response)
         this.runRepo.destroy(response.run)
     })
-  },
-  computed: {
-    ...mapRepos({
-        configRepo: Config,
-        runRepo: Run
-    }),
-    getLiveTrackerBackground() {
-        return this.configRepo.find('itemTrackerBackgroundColor')
-    },
-    currentRun() {
-        return this.runRepo.orderBy('runUpdate', this.filterOrder).first()
-    },
-    hideActiveItems() {
-        return this.configRepo.find('hideActiveItems')
-    },
-    updateRun: {
-        get: function(run) {
-            return this.runRepo.query().where('id', run.id).get()
-        },
-        set: function (run) {
-            this.runRepo.update(run)
-        }
-    }
   },
   methods: {
     handler(e) {

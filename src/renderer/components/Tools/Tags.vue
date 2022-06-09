@@ -1,53 +1,158 @@
 <template>
-    <div class="tags-wrapper">
-        <ul class="list">
-            <template v-for="(tag, idx) in getRunVideoHighlights">
-                <li v-if="type === 'time'" class="tag" :key="`${tag.name} ${idx}`">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <a class="tag-name" :href="getVideoLink[idx]" target="_blank">{{tag.name}}</a>
-                    <div class="action remove-tag" @click="removeItem(tag.value)">(x)</div>
+  <div class="tags-wrapper">
+    <ul class="list">
+      <template v-for="(tag, idx) in getRunVideoHighlights">
+        <li
+          v-if="type === 'time'"
+          :key="`${tag.name} ${idx}`"
+          class="tag"
+        >
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <a
+            class="tag-name"
+            :href="getVideoLink[idx]"
+            target="_blank"
+          >{{ tag.name }}</a>
+          <div
+            class="action remove-tag"
+            @click="removeItem(tag.value)"
+          >
+            (x)
+          </div>
+        </li>
+      </template>
+      <template v-for="(tag, idx) in getRunTags">
+        <li
+          v-if="type === 'string'"
+          :key="`${tag.name} ${idx}`"
+          class="tag"
+        >
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <div class="tag-name">
+            {{ tag.value }}
+          </div>
+          <div
+            class="action remove-tag"
+            @click="removeItem(tag.value)"
+          >
+            (x)
+          </div>
+        </li>
+      </template>
+      <li
+        v-if="!addingItem && !disabled"
+        class="tag new-tag"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div
+          class="action solo new-tag"
+          contenteditable="false"
+          @click="createNewTag"
+        >
+          (+)
+        </div>
+      </li>
+      <li v-if="!addingItem && disabled">
+        /!\ Under construction /!\
+      </li>
+      <li
+        v-if="addingItem"
+        class="tag new-tag edit"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+        />
+        <div
+          v-if="type === 'string'"
+          class="tag-name edit"
+        >
+          <input
+            v-model="tempVal"
+            type="text"
+            class="size-auto"
+            placeholder="Tag name"
+          >
+          <div
+            v-if="tempVal != '' && getMatchingTags && getMatchingTags.length > 0"
+            class="tags-suggestions"
+          >
+            <ul>
+              <template v-for="tag in getMatchingTags">
+                <li
+                  :key="`${tag.id}`"
+                  class="tag"
+                  @click="addFromSuggestions(tag.value)"
+                >
+                  <div class="tag-name">
+                    {{ tag.value }}
+                  </div>
                 </li>
-            </template>
-            <template v-for="(tag, idx) in getRunTags">
-                <li v-if="type === 'string'" class="tag" :key="`${tag.name} ${idx}`">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                    <div class="tag-name">{{tag.value}}</div>
-                    <div class="action remove-tag" @click="removeItem(tag.value)">(x)</div>
-                </li>
-            </template>
-            <li v-if="!addingItem && !disabled" class="tag new-tag">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="action solo new-tag" @click="createNewTag" contenteditable="false">(+)</div>
-            </li>
-            <li v-if="!addingItem && disabled"> /!\ Under construction /!\ </li>
-            <li v-if="addingItem" class="tag new-tag edit">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"></div>
-                <div v-if="type === 'string'" class="tag-name edit">
-                    <input type="text" class="size-auto" v-model="tempVal" placeholder="Tag name">
-                    <div v-if="tempVal != '' && getMatchingTags && getMatchingTags.length > 0" class="tags-suggestions">
-                        <ul>
-                            <template v-for="tag in getMatchingTags">
-                                <li class="tag" @click="addFromSuggestions(tag.value)" :key="`${tag.id}`">
-                                    <div class="tag-name">{{tag.value}}</div>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
-                </div>
-                <vue-timepicker v-if="type === 'time'" v-model="tempVal" format="HH:mm:ss"></vue-timepicker>
-                <div class="action add-tag" @click="addItem">(v)</div>
-                <div class="action add-tag" @click="reset">(x)</div>
-            </li>
-        </ul>
-    </div>
+              </template>
+            </ul>
+          </div>
+        </div>
+        <vue-timepicker
+          v-if="type === 'time'"
+          v-model="tempVal"
+          format="HH:mm:ss"
+        />
+        <div
+          class="action add-tag"
+          @click="addItem"
+        >
+          (v)
+        </div>
+        <div
+          class="action add-tag"
+          @click="reset"
+        >
+          (x)
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -69,8 +174,6 @@ export default {
             tempVal: this.type === 'time' ? { HH:"00", mm:"00", ss:"00" } : '',
             tempCurrentTag: ''
         }
-    },
-    mounted() {
     },
     computed: {
         ...mapRepos({

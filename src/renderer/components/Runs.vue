@@ -1,43 +1,117 @@
 <template>
-    <section class="section runs">
-        <RunsFilters :filter-offset="filterOffset" :filter-limit-per-page="filterLimitPerPage" :filter-order="filterOrder" @filteredRunsTotal="onUpdateFilteredRunsTotal" @filteredRuns="onUpdateFilteredRuns" @resetPagination="resetPagination"/>
-        <transition-group name="run-group-transition" tag="ul" class="runs-container">
-            <template v-for="(run, ridx) in filteredRuns">
-                <li :class="
-                [
-                'run', 'run-group-transition-item',
-                run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished',
-                run.toRemove.status === true && run.toRemove.checkedByUser === false ? 'run-to-remove-unchecked' : run.toRemove.status === true && run.toRemove.checkedByUser === true ?'run-to-remove-checked' : ''
-                ]" :data-id="run.id + ridx" :key="run.id">
-                    <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
-                    <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
-                    <div class="after" :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"></div>
-                    <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '']">
-                        <RunInfos :id="run.id" :gameState="run.gameState" :seed="run.seed" :characters="run.characters" :floors="run.floors" :run-start="run.runStart" :run-end="run.runEnd" :run-duration="run.runDuration"/>
-                        <RunCharacter :characters="run.characters" :floors="run.floors" :run-end="run.runEnd"/>
-                        <RunFloorsSlider :ops="opsFloors" :index="ridx" :floors="run.floors" :gameMode="run.gameMode" :characters="run.characters"/>
-                        <div class="run-custom-name" v-if="run.customName != ''">
-                            <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                            <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                            <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                            <div class="content" :title="run.customName">
-                                {{run.customName}}
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </template>
-        </transition-group>
-        <Pagination :currentPage="currentPage" :itemsTotal="filteredRunsTotal" :itemsPerPage="filterLimitPerPage" :maxPagesVisible="3" :offset="filterOffset"  @updatePagination="onUpdatePagination"/>
-        <div v-if="filteredRuns && filteredRuns.length === 0" class="empty-runs">
-            <div class="image-1 animated" style="background-image:url('img/loadimages/loadimages-001.png')"></div>
-            <div class="image-2 animated" style="background-image:url('img/loadimages/loadimages-001_2.png')"></div>
-            <div class="message">
-                <span v-if="allRuns && allRuns.length === 0">{{$t('strings.startFirstRun')}}</span>
-                <span v-if="filteredRuns && filteredRuns.length === 0 && allRuns && allRuns.length > 0">{{$t('strings.noRunsFound')}}</span>
+  <section class="section runs">
+    <RunsFilters
+      :filter-offset="filterOffset"
+      :filter-limit-per-page="filterLimitPerPage"
+      :filter-order="filterOrder"
+      @filteredRunsTotal="onUpdateFilteredRunsTotal"
+      @filteredRuns="onUpdateFilteredRuns"
+      @resetPagination="resetPagination"
+    />
+    <transition-group
+      name="run-group-transition"
+      tag="ul"
+      class="runs-container"
+    >
+      <template v-for="(run, ridx) in filteredRuns">
+        <li
+          :key="run.id"
+          :class="
+            [
+              'run', 'run-group-transition-item',
+              run.runEnd.win === true ? 'run-win' : run.runEnd.win === false ? 'run-death' : 'run-unfinished',
+              run.toRemove.status === true && run.toRemove.checkedByUser === false ? 'run-to-remove-unchecked' : run.toRemove.status === true && run.toRemove.checkedByUser === true ?'run-to-remove-checked' : ''
+            ]"
+          :data-id="run.id + ridx"
+        >
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"
+          />
+          <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '']">
+            <RunInfos
+              :id="run.id"
+              :game-state="run.gameState"
+              :seed="run.seed"
+              :characters="run.characters"
+              :floors="run.floors"
+              :run-start="run.runStart"
+              :run-end="run.runEnd"
+              :run-duration="run.runDuration"
+            />
+            <RunCharacter
+              :characters="run.characters"
+              :floors="run.floors"
+              :run-end="run.runEnd"
+            />
+            <RunFloorsSlider
+              :ops="opsFloors"
+              :index="ridx"
+              :floors="run.floors"
+              :game-mode="run.gameMode"
+              :characters="run.characters"
+            />
+            <div
+              v-if="run.customName != ''"
+              class="run-custom-name"
+            >
+              <div
+                class="before"
+                :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+              />
+              <div
+                class="mid"
+                :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+              />
+              <div
+                class="after"
+                :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+              />
+              <div
+                class="content"
+                :title="run.customName"
+              >
+                {{ run.customName }}
+              </div>
             </div>
-        </div>
-    </section>
+          </div>
+        </li>
+      </template>
+    </transition-group>
+    <Pagination
+      :current-page="currentPage"
+      :items-total="filteredRunsTotal"
+      :items-per-page="filterLimitPerPage"
+      :max-pages-visible="3"
+      :offset="filterOffset"
+      @updatePagination="onUpdatePagination"
+    />
+    <div
+      v-if="filteredRuns && filteredRuns.length === 0"
+      class="empty-runs"
+    >
+      <div
+        class="image-1 animated"
+        style="background-image:url('img/loadimages/loadimages-001.png')"
+      />
+      <div
+        class="image-2 animated"
+        style="background-image:url('img/loadimages/loadimages-001_2.png')"
+      />
+      <div class="message">
+        <span v-if="allRuns && allRuns.length === 0">{{ $t('strings.startFirstRun') }}</span>
+        <span v-if="filteredRuns && filteredRuns.length === 0 && allRuns && allRuns.length > 0">{{ $t('strings.noRunsFound') }}</span>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -52,7 +126,6 @@ import RunsFilters from './RunsFilters.vue'
 import Pagination from './Tools/Pagination.vue'
 export default {
     name: "Runs",
-    mixins: [runsMixin],
     components: {
         RunInfos,
         RunCharacter,
@@ -60,6 +133,7 @@ export default {
         RunsFilters,
         Pagination
     },
+    mixins: [runsMixin],
     data() {
         return {
             canUpdateRun: true,
@@ -91,6 +165,22 @@ export default {
             filterLimitPerPage: 6,
             filterOffset: 0,
             filterOrder: 'desc'
+        }
+    },
+    computed: {
+        ...mapRepos({
+            runRepo: Run
+        }),
+        allRuns() {
+            return this.runRepo.all()
+        },
+        updateRun: {
+            get: function (run) {
+                return this.runRepo.query().where('id', run.id).first()
+            },
+            set: function (run) {
+                this.runRepo.where('id', run.id).update(run)
+            }
         }
     },
     mounted() {
@@ -125,22 +215,6 @@ export default {
             console.log(response)
             this.runRepo.destroy(response.run)
         })
-    },
-    computed: {
-        ...mapRepos({
-            runRepo: Run
-        }),
-        allRuns() {
-            return this.runRepo.all()
-        },
-        updateRun: {
-            get: function (run) {
-                return this.runRepo.query().where('id', run.id).first()
-            },
-            set: function (run) {
-                this.runRepo.where('id', run.id).update(run)
-            }
-        }
     },
     methods: {
         onUpdatePagination(pagination) {

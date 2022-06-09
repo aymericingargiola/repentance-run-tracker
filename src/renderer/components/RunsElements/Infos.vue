@@ -1,74 +1,196 @@
 <template>
-    <div class="run-el infos">
-        <ul>
-            <li v-if="runEnd" class="info status" title="Run status">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    <div class="icon" :style="{backgroundImage:`url('img/icons/hud/${runEnd.win === true ? `crown` : runEnd.win === false ? `dead` : `race`}.png')`}"></div>
-                </div>
-            </li>
-            <li v-if="gameState" class="info game-state" title="Save file">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    <div class="icon" :style="{backgroundImage:`url('img/icons/hud/gamestate.png')`}"></div>
-                    <div class="text-icon big">{{gameState}}</div>
-                </div>
-            </li>
-            <li v-if="characters" class="info character-name">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    {{characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${characters[0].id}.name`)}` }}
-                </div>
-            </li>
-            <li v-if="seed" class="info seed" title="Seed">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    {{seed}}
-                </div>
-            </li>
-            <li v-if="runStart" class="info date" title="Run start date">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    {{getDate(runStart, getConfig("dateFormat") ? getConfig("dateFormat").value : 'MM/DD/YY')}} - {{getDate(runStart, getConfig("hourFormat") ? getConfig("hourFormat").value : 'hh:mm a')}}
-                </div>
-            </li>
-            <li v-if="runDuration" class="info date" title="Run duration">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    <div class="icon" :style="{backgroundImage:`url('img/icons/hud/time.png')`}"></div>
-                    <div class="text-icon">{{runDuration}}</div>
-                </div>
-            </li>
-            <li v-if="!hideDetails && id" class="info details clickable" @click="openOrCloseRunDetails(id)">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    <div class="icon" :style="{backgroundImage:`url('img/icons/chart.png')`}"></div>
-                </div>
-            </li>
-            <li v-if="!hideEdit && id" class="info edit clickable" @click="openOrCloseEditRun(id)">
-                <div class="before" :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"></div>
-                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"></div>
-                <div class="after" :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"></div>
-                <div class="content">
-                    <div class="icon" :style="{backgroundImage:`url('img/icons/config.png')`}"></div>
-                </div>
-            </li>
-        </ul>
-    </div>
+  <div class="run-el infos">
+    <ul>
+      <li
+        v-if="runEnd"
+        class="info status"
+        title="Run status"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          <div
+            class="icon"
+            :style="{backgroundImage:`url('img/icons/hud/${runEnd.win === true ? `crown` : runEnd.win === false ? `dead` : `race`}.png')`}"
+          />
+        </div>
+      </li>
+      <li
+        v-if="gameState"
+        class="info game-state"
+        title="Save file"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          <div
+            class="icon"
+            :style="{backgroundImage:`url('img/icons/hud/gamestate.png')`}"
+          />
+          <div class="text-icon big">
+            {{ gameState }}
+          </div>
+        </div>
+      </li>
+      <li
+        v-if="characters"
+        class="info character-name"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          {{ characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${characters[0].id}.name`)}` }}
+        </div>
+      </li>
+      <li
+        v-if="seed"
+        class="info seed"
+        title="Seed"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          {{ seed }}
+        </div>
+      </li>
+      <li
+        v-if="runStart"
+        class="info date"
+        title="Run start date"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          {{ getDate(runStart, getConfig("dateFormat") ? getConfig("dateFormat").value : 'MM/DD/YY') }} - {{ getDate(runStart, getConfig("hourFormat") ? getConfig("hourFormat").value : 'hh:mm a') }}
+        </div>
+      </li>
+      <li
+        v-if="runDuration"
+        class="info date"
+        title="Run duration"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          <div
+            class="icon"
+            :style="{backgroundImage:`url('img/icons/hud/time.png')`}"
+          />
+          <div class="text-icon">
+            {{ runDuration }}
+          </div>
+        </div>
+      </li>
+      <li
+        v-if="!hideDetails && id"
+        class="info details clickable"
+        @click="openOrCloseRunDetails(id)"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          <div
+            class="icon"
+            :style="{backgroundImage:`url('img/icons/chart.png')`}"
+          />
+        </div>
+      </li>
+      <li
+        v-if="!hideEdit && id"
+        class="info edit clickable"
+        @click="openOrCloseEditRun(id)"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          <div
+            class="icon"
+            :style="{backgroundImage:`url('img/icons/config.png')`}"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -76,6 +198,8 @@ import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 export default {
     name: "RunInfos",
+    components: {
+    },
     props: {
         id: String,
         characters: Array,
@@ -87,8 +211,6 @@ export default {
         hideEdit: Boolean,
         hideDetails: Boolean
     },
-    components: {
-    },
     data() {
         return {
         }
@@ -97,6 +219,8 @@ export default {
         ...mapRepos({
             configRepo: Config
         })
+    },
+    mounted() {
     },
     methods: {
         openOrCloseEditRun(id) {
@@ -111,8 +235,6 @@ export default {
         getConfig(id) {
             return this.configRepo.query().where('id', id).get()[0]
         }
-    },
-    mounted() {
     }
 };
 </script>
