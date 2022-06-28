@@ -60,7 +60,7 @@
     },
     "update": {
         "updateDownloading": "Mise à jour {updateVersion} en téléchargement: {updateProgressInfos}%",
-        "updateDownloaded": "Mise à jour {updateVersion} téléchargée, cliquez ici pour mettre à jour et redémarrer"
+        "updateDownloaded": "Mise à jour {updateVersion} téléchargée, fermer pour installer"
     },
     "appError": {
         "title": "Erreur !",

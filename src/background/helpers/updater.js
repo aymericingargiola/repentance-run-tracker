@@ -8,7 +8,7 @@ if(!isDevelopment && !process.env.IS_TEST) {
     // autoUpdater.logger = log
     // autoUpdater.logger["transports"].file.level = "info"
     autoUpdater.autoDownload = true
-    autoUpdater.autoInstallOnAppQuit = false
+    autoUpdater.autoInstallOnAppQuit = true
     autoUpdater.setFeedURL({
         provider: 'github',
         repo: 'repentance-run-tracker',

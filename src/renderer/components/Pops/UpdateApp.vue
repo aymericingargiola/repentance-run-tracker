@@ -78,7 +78,7 @@ export default {
     methods: {
         update() {
             if (this.updateDownloaded) {
-                window?.ipc?.send('RESTART_APP')
+                // window?.ipc?.send('RESTART_APP')
             }
         }
     }
