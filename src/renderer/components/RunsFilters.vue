@@ -3,6 +3,28 @@
     v-if="allRuns && allRuns.length > 0 && filteredRuns"
     class="filters"
   >
+    <div
+      v-if="filteredRunsTotal"
+      class="total"
+    >
+      <div class="content">
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+        />
+        <div class="text">
+          Total : <span class="number">{{ filteredRunsTotal.length }}</span>
+        </div>
+      </div>
+    </div>
     <div class="search">
       <input
         v-model="filterText"
@@ -71,7 +93,12 @@ export default {
             filterTags: [],
             gameStateOptions: [1,2,3],
             filterGameStates: [],
-            winConditionOptions: [{id: 0, value: "Win", name: this.$t('dictionary.win')}, {id: 1, value: "Lose", name: this.$t('dictionary.lose')}],
+            winConditionOptions: [
+                {id: 0, value: "Win", name: this.$t('dictionary.win')},
+                {id: 1, value: "Lose", name: this.$t('dictionary.lose')},
+                {id: 2, value: "CurrentWinStreak", name: this.$t('strings.currentWinStreak', 1)},
+                {id: 3, value: "BestWinStreak", name: this.$t('strings.bestWinStreak', 1)}
+            ],
             filterWinCondition: null,
             filterDateStart: null,
             filterDateEnd: null
@@ -113,7 +140,8 @@ export default {
             return this.runRepo.all()
         },
         filteredRunsTotal() {
-            const filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy('runUpdate', this.filterOrder).get()
+            let filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy('runUpdate', this.filterOrder).get()
+            if (typeof this.filterWinCondition === "string") filteredRunsTotal = this.filterStreak(filteredRunsTotal)
             this.$emit('filteredRunsTotal', filteredRunsTotal)
             return filteredRunsTotal
         },
@@ -137,7 +165,10 @@ export default {
             this.$emit('resetPagination')
         },
         onUpdateWinConditionMultiSelect(selected) {
-            this.filterWinCondition = selected.length === 0 ? null : selected[0].value === 'Win' ? true : false
+            this.filterWinCondition = selected.length === 0 ? null
+            : selected[0].value === 'Win' ? true
+            : selected[0].value === 'Lose' ? false
+            : selected[0].value
             this.$emit('resetPagination')
         },
         onUpdateGameStateMultiSelect(selected) {
@@ -182,7 +213,7 @@ export default {
             }
 
             // Check if runs are selected win condition
-            if (this.filterWinCondition !== null && from !== "winCondition") {
+            if (this.filterWinCondition === true || this.filterWinCondition === false && from !== "winCondition") {
                 runs = runs.where((run) => run.runEnd.win === this.filterWinCondition)
                 if (runs.get().length < 1) return runs.get()
             }
@@ -209,14 +240,15 @@ export default {
         },
         checkWinCondition(condition) {
             let runs
-            const thisCondition = condition.value === "Win" ? true : false
+            const thisCondition = condition.value === "Win" ? true : condition.value === "Lose" ? false : null 
 
-            // Init Check if runs has save 
+            // Init Check if runs has save
+            if (thisCondition === null) return condition
+
             runs = this.runRepo.where((run) => run.runEnd.win === thisCondition)
             if (runs.get().length < 1) return
 
             if (this.checkFilters(runs, "winCondition").length < 1) return
-            condition.name = this.$t(`dictionary.${condition.value.toLowerCase()}`)
             return condition
         },
         checkGameState(gameState) {
@@ -262,7 +294,7 @@ export default {
             if (this.filterDateEnd && run.runStart > this.filterDateEnd) return
 
             // Win condition filter
-            if (this.filterWinCondition !== null && run.runEnd.win !== this.filterWinCondition) return
+            if ((this.filterWinCondition === true || this.filterWinCondition === false) && run.runEnd.win !== this.filterWinCondition) return
 
             // Save filter
             if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
@@ -286,6 +318,27 @@ export default {
                     ) return
             }
             return run
+        },
+        filterStreak(runs) {
+            let checkRuns = runs
+            console.log(runs)
+            if (this.filterWinCondition === "CurrentWinStreak") {
+                const deathIndex = checkRuns.findIndex(run => run.runEnd.win === false)
+                checkRuns = deathIndex > -1 ? checkRuns.slice(0,deathIndex) : checkRuns
+                return checkRuns
+            }
+            if (this.filterWinCondition === "BestWinStreak") {
+                let current = []
+                while (checkRuns.length > 0) {
+                    if (checkRuns[0].runEnd.win !== true) checkRuns.splice(0,1)
+                    else {
+                        const deathIndex = checkRuns.findIndex(run => run.runEnd.win !== true)
+                        const streak = deathIndex > -1 ? checkRuns.splice(0,deathIndex) : checkRuns.splice(0,checkRuns.length)
+                        current = streak.length > current.length ? streak : current
+                    }
+                }
+                return current
+            }
         }
     }
 };
@@ -302,6 +355,54 @@ export default {
     margin-right: -8px;
     > div, > span {
         margin: 8px;
+    }
+    .total {
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        position: relative;
+        z-index: 2;
+        .content {
+            position: relative;
+            transform-origin: top left;
+            transform: translate(4px, 21px) rotate(-1deg);
+            > .before, .after, .mid {
+                z-index: 0;
+                position: absolute;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                pointer-events: none;
+            }
+            > .before {
+                content: "";
+                height: 100%;
+                width: 8px;
+                left: 0px;
+                top: 0px;
+                transform: translateX(-7px);
+            }
+            > .after {
+                height: 100%;
+                width: 12px;
+                right: 0px;
+                top: 0px;
+                transform: translateX(11px);
+                z-index: 2;
+            }
+            > .mid {
+                height: 100%;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+                background-size: contain;
+                background-repeat: repeat-x;
+            }
+            .text {
+                position: relative;
+                padding: 4px 8px 8px 8px;
+            }
+        }
     }
 }
 </style>
