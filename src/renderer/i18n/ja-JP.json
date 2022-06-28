@@ -60,7 +60,7 @@
     },
     "update": {
         "updateDownloading": "Update {updateVersion} downloading: {updateProgressInfos}%",
-        "updateDownloaded": "Update {updateVersion} downloaded, click here to update and restart"
+        "updateDownloaded": "Update {updateVersion} downloaded, close to install"
     },
     "appError": {
         "title": "App error !",
