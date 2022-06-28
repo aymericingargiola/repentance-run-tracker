@@ -12,7 +12,8 @@ export default class Entity extends Model {
             lastBoss: this.boolean(false),
             floors_ids: this.attr(null),
             floors: this.hasManyBy(Floor, 'floors_ids'),
-            portrait: this.number(0)
+            portrait: this.number(0),
+            xp: this.number(0)
         }
     }
 }

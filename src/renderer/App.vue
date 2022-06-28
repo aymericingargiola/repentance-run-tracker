@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Taskbar :app-version="appVersion" />
+    <Level :app-version="appVersion" />
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">
@@ -26,13 +27,15 @@
 
 <script>
 import Taskbar from './components/Taskbar.vue'
+import Level from './components/Level/Level.vue'
 import { mapRepos } from '@vuex-orm/core'
 import Config from './store/classes/Config'
 const loadingImagesStringTemplate = "url('img/loadimages/loadimages-#.png')"
 export default {
   name: 'App',
   components: {
-    Taskbar
+    Taskbar,
+    Level
   },
   data() {
     return {
