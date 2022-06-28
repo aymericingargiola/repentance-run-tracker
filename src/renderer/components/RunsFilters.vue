@@ -71,7 +71,12 @@ export default {
             filterTags: [],
             gameStateOptions: [1,2,3],
             filterGameStates: [],
-            winConditionOptions: [{id: 0, value: "Win", name: this.$t('dictionary.win')}, {id: 1, value: "Lose", name: this.$t('dictionary.lose')}],
+            winConditionOptions: [
+                {id: 0, value: "Win", name: this.$t('dictionary.win')},
+                {id: 1, value: "Lose", name: this.$t('dictionary.lose')},
+                {id: 2, value: "CurrentWinStreak", name: this.$t('strings.currentWinStreak', 1)},
+                {id: 3, value: "BestWinStreak", name: this.$t('strings.bestWinStreak', 1)}
+            ],
             filterWinCondition: null,
             filterDateStart: null,
             filterDateEnd: null
@@ -119,6 +124,11 @@ export default {
         },
         filteredRuns() {
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
+            console.log(typeof this.filterWinCondition);
+            if (typeof this.filterWinCondition === "string") {
+                // Process winstreak checking
+                console.log(this.filterWinCondition)
+            }
             this.$emit('filteredRuns', filteredRuns)
             return filteredRuns
         }
@@ -137,7 +147,10 @@ export default {
             this.$emit('resetPagination')
         },
         onUpdateWinConditionMultiSelect(selected) {
-            this.filterWinCondition = selected.length === 0 ? null : selected[0].value === 'Win' ? true : false
+            this.filterWinCondition = selected.length === 0 ? null
+            : selected[0].value === 'Win' ? true
+            : selected[0].value === 'Lose' ? false
+            : selected[0].value
             this.$emit('resetPagination')
         },
         onUpdateGameStateMultiSelect(selected) {
@@ -182,7 +195,7 @@ export default {
             }
 
             // Check if runs are selected win condition
-            if (this.filterWinCondition !== null && from !== "winCondition") {
+            if (this.filterWinCondition === true || this.filterWinCondition === false && from !== "winCondition") {
                 runs = runs.where((run) => run.runEnd.win === this.filterWinCondition)
                 if (runs.get().length < 1) return runs.get()
             }
@@ -209,14 +222,15 @@ export default {
         },
         checkWinCondition(condition) {
             let runs
-            const thisCondition = condition.value === "Win" ? true : false
+            const thisCondition = condition.value === "Win" ? true : condition.value === "Lose" ? false : null 
 
-            // Init Check if runs has save 
+            // Init Check if runs has save
+            if (thisCondition === null) return condition
+
             runs = this.runRepo.where((run) => run.runEnd.win === thisCondition)
             if (runs.get().length < 1) return
 
             if (this.checkFilters(runs, "winCondition").length < 1) return
-            condition.name = this.$t(`dictionary.${condition.value.toLowerCase()}`)
             return condition
         },
         checkGameState(gameState) {
@@ -262,7 +276,7 @@ export default {
             if (this.filterDateEnd && run.runStart > this.filterDateEnd) return
 
             // Win condition filter
-            if (this.filterWinCondition !== null && run.runEnd.win !== this.filterWinCondition) return
+            if ((this.filterWinCondition === true || this.filterWinCondition === false) && run.runEnd.win !== this.filterWinCondition) return
 
             // Save filter
             if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
@@ -287,6 +301,7 @@ export default {
             }
             return run
         }
+        //filterStreak()
     }
 };
 </script>

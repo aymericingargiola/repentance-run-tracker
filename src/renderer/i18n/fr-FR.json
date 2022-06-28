@@ -25,6 +25,8 @@
         "addRule": "@:dictionary.add la règle",
         "addWinStreakRule": "Ajouter une règle de win streak",
         "winStreakSave": "Sauvegarde",
+        "currentWinStreak": "Win streak actuelle",
+        "bestWinStreak": "Meilleure win streak",
         "randomNormal": "@:dictionary.random @.lower:dictionary.normal",
         "randomTainted": "@:dictionary.random @.lower:dictionary.tainted",
         "adjustNumber": "Ajuster",
