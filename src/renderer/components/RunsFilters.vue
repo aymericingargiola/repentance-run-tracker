@@ -3,6 +3,28 @@
     v-if="allRuns && allRuns.length > 0 && filteredRuns"
     class="filters"
   >
+    <div
+      v-if="filteredRunsTotal"
+      class="total"
+    >
+      <div class="content">
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+        />
+        <div class="text">
+          Total : <span class="number">{{ filteredRunsTotal.length }}</span>
+        </div>
+      </div>
+    </div>
     <div class="search">
       <input
         v-model="filterText"
@@ -333,6 +355,54 @@ export default {
     margin-right: -8px;
     > div, > span {
         margin: 8px;
+    }
+    .total {
+        width: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        position: relative;
+        z-index: 2;
+        .content {
+            position: relative;
+            transform-origin: top left;
+            transform: translate(4px, 21px) rotate(-1deg);
+            > .before, .after, .mid {
+                z-index: 0;
+                position: absolute;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                pointer-events: none;
+            }
+            > .before {
+                content: "";
+                height: 100%;
+                width: 8px;
+                left: 0px;
+                top: 0px;
+                transform: translateX(-7px);
+            }
+            > .after {
+                height: 100%;
+                width: 12px;
+                right: 0px;
+                top: 0px;
+                transform: translateX(11px);
+                z-index: 2;
+            }
+            > .mid {
+                height: 100%;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+                background-size: contain;
+                background-repeat: repeat-x;
+            }
+            .text {
+                position: relative;
+                padding: 4px 8px 8px 8px;
+            }
+        }
     }
 }
 </style>
