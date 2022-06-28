@@ -118,17 +118,13 @@ export default {
             return this.runRepo.all()
         },
         filteredRunsTotal() {
-            const filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy('runUpdate', this.filterOrder).get()
+            let filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy('runUpdate', this.filterOrder).get()
+            if (typeof this.filterWinCondition === "string") filteredRunsTotal = this.filterStreak(filteredRunsTotal)
             this.$emit('filteredRunsTotal', filteredRunsTotal)
             return filteredRunsTotal
         },
         filteredRuns() {
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
-            console.log(typeof this.filterWinCondition);
-            if (typeof this.filterWinCondition === "string") {
-                // Process winstreak checking
-                console.log(this.filterWinCondition)
-            }
             this.$emit('filteredRuns', filteredRuns)
             return filteredRuns
         }
@@ -300,8 +296,28 @@ export default {
                     ) return
             }
             return run
+        },
+        filterStreak(runs) {
+            let checkRuns = runs
+            console.log(runs)
+            if (this.filterWinCondition === "CurrentWinStreak") {
+                const deathIndex = checkRuns.findIndex(run => run.runEnd.win === false)
+                checkRuns = deathIndex > -1 ? checkRuns.slice(0,deathIndex) : checkRuns
+                return checkRuns
+            }
+            if (this.filterWinCondition === "BestWinStreak") {
+                let current = []
+                while (checkRuns.length > 0) {
+                    if (checkRuns[0].runEnd.win !== true) checkRuns.splice(0,1)
+                    else {
+                        const deathIndex = checkRuns.findIndex(run => run.runEnd.win !== true)
+                        const streak = deathIndex > -1 ? checkRuns.splice(0,deathIndex) : checkRuns.splice(0,checkRuns.length)
+                        current = streak.length > current.length ? streak : current
+                    }
+                }
+                return current
+            }
         }
-        //filterStreak()
     }
 };
 </script>
