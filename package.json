@@ -35,6 +35,7 @@
     "electron-log": "^4.4.7",
     "electron-updater": "^5.0.5",
     "jsonfile": "^6.1.0",
+    "lowdb": "1.0.0",
     "luxon": "^2.4.0",
     "v-calendar": "^2.4.1",
     "vue": "^2.6.11",

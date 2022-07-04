@@ -8,6 +8,8 @@ const dataFolder = app.getPath("userData")
 const { writeFileAsync, fileResolve, dirExist } = require('../tools/fileSystem')
 const { asyncForEach } = require('../tools/methods')
 const { restoreDatas } = require('./backupDatas')
+const low = require('lowdb')
+const FileAsync = require('lowdb/adapters/FileAsync')
 const characters = require('../jsons/characters.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const floors = require('../jsons/floors.json')
@@ -103,7 +105,8 @@ ipcMain.on('USER_UPDATE_TAGS', async (event, payload) => {
 ipcMain.on('ASK_RUNS', async (event, payload) => {
 	const window = payload && payload.window === 'itemTracker' ? trackerWin : win
 	if (!runs) runs = await module.exports.initRuns()
-	syncApp(window, { trigger: 'send runs', runs: runs })
+	const runsItems = await runs
+	syncApp(window, { trigger: 'send runs', runs: runsItems.value() })
 });
 
 ipcMain.on('ASK_TRASH', async (event, payload) => {
@@ -187,8 +190,11 @@ module.exports = {
 		return await module.exports.checkJson(dataFolder, loadTags, 'tags.json', '[]')
     },
     initRuns: async function() {
-        let loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
-		return await module.exports.checkJson(dataFolder, loadRuns, 'runs.json', '[]')
+        const loadRuns = await fileResolve(dataFolder, 'runs.json', '[]')
+		await module.exports.checkJson(dataFolder, loadRuns, 'runs.json', '[]')
+		const adapter = new FileAsync(path.join(dataFolder, 'runs.json'))
+		runs = low(adapter)
+		return runs
     },
 	initTrash: async function() {
         const loadTrash = await fileResolve(dataFolder, 'trash.json', '[]')
