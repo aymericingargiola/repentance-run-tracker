@@ -36,7 +36,8 @@
             class="after"
             :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"
           />
-          <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '']">
+          <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '',
+          run.runEnd && run.floors && lastBosses(run.floors).length > 0 ? 'has-bosses' : '']">
             <RunInfos
               :id="run.id"
               :game-state="run.gameState"
@@ -58,6 +59,10 @@
               :floors="run.floors"
               :game-mode="run.gameMode"
               :characters="run.characters"
+            />
+            <RunBosses
+              v-if="run.runEnd && run.floors && lastBosses(run.floors).length > 0"
+              :bosses="lastBosses(run.floors)"
             />
             <div
               v-if="run.customName != ''"
@@ -121,17 +126,20 @@ import { mapRepos } from '@vuex-orm/core'
 import Run from '../store/classes/Run'
 import RunInfos from '../components/RunsElements/Infos.vue'
 import RunCharacter from '../components/RunsElements/Character.vue'
+import RunBosses from '../components/RunsElements/Bosses.vue'
 import RunFloorsSlider from '../components/RunsElements/FloorsSlider.vue'
 import RunsFilters from './RunsFilters.vue'
 import Pagination from './Tools/Pagination.vue'
+import {getRunLastBosses} from "../helpers/runsDetails"
 export default {
     name: "Runs",
     components: {
         RunInfos,
         RunCharacter,
+        RunBosses,
         RunFloorsSlider,
         RunsFilters,
-        Pagination
+        Pagination,
     },
     mixins: [runsMixin],
     data() {
@@ -217,6 +225,9 @@ export default {
         })
     },
     methods: {
+        lastBosses(flrs) {
+            return getRunLastBosses(flrs)
+        },
         onUpdatePagination(pagination) {
             this.currentPage = pagination.currentPage
             this.filterOffset = pagination.offset
@@ -342,6 +353,13 @@ export default {
             opacity: 1;
             transform: translateX(0px) translateY(-50%);
             z-index: 2;
+        }
+        &.has-bosses {
+            &::after {
+                width: 140px;
+                background: linear-gradient(to left, $paper-white-darker 70%, transparent 100%);
+                z-index: 1;
+            }
         }
         .run-custom-name {
             display: block;
