@@ -105,6 +105,10 @@
             "title": "Cacher les items actifs",
             "hint": "Cacher les items actifs de la liste des etages"
         },
+        "darkMode": {
+            "title": "Mode sombre",
+            "hint": ""
+        },
         "isaacModFolderPath": {
             "title": "Dossier des mods",
             "hint": ""

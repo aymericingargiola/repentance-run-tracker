@@ -252,11 +252,15 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+@import "../../assets/styles/scss/vars/_mixins";
 .win-streak-item {
     &.add {
         transition: 0.5s ease;
         &.short {
             opacity: 0.7;
+            @include darkMode {
+              opacity: 1;
+            }
             &:hover {
                 opacity: 1;
             }
@@ -280,6 +284,9 @@ export default {
                 z-index: 0;
                 pointer-events: none;
                 transition: 0.25s ease;
+                @include darkMode {
+                  filter: brightness(0.5);
+                }
             }
             &.expended {
               max-height: 600px;
@@ -307,6 +314,9 @@ export default {
             > div {
                 cursor: pointer;
                 font-size: 56px;
+                @include darkMode {
+                  filter: invert(1);
+                }
                 span {
                     font-size: 16px;
                     width: 100%;

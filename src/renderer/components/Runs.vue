@@ -244,6 +244,7 @@ export default {
 
 <style lang="scss">
 @import "../assets/styles/scss/vars/_colors";
+@import "../assets/styles/scss/vars/_mixins";
 .section.runs {
     padding: 20px;
     position: relative;
@@ -281,7 +282,7 @@ export default {
         transition: transform 1s ease, opacity 1s ease;
         //display: block;
     }
-    > .before, .after, .mid {
+    > .before, > .after, > .mid {
         z-index: 0;
         position: absolute;
         background-repeat: no-repeat;
@@ -295,6 +296,9 @@ export default {
         left: 0px;
         top: 0px;
         transform: translateX(-14.25px);
+        @include darkMode {
+            filter: brightness(0.5);
+        }
     }
     > .after {
         height: 100%;
@@ -303,6 +307,9 @@ export default {
         top: 0px;
         transform: translateX(14.25px);
         z-index: 2;
+        @include darkMode {
+            filter: brightness(0.5);
+        }
     }
     > .mid {
         height: 100%;
@@ -311,6 +318,9 @@ export default {
         top: 0px;
         background-size: contain;
         background-repeat: repeat-x;
+        @include darkMode {
+            filter: brightness(0.5);
+        }
     }
     .run-content {
         z-index: 1;
@@ -337,6 +347,9 @@ export default {
             opacity: 1;
             transform: translateX(0px) translateY(-50%);
             z-index: 2;
+            @include darkMode {
+                filter: brightness(0.5);
+            }
         }
         &::after {
             content: "";
@@ -349,6 +362,9 @@ export default {
             opacity: 1;
             transform: translateX(0px) translateY(-50%);
             z-index: 2;
+            @include darkMode {
+                filter: brightness(0.5);
+            }
         }
         &.has-bosses {
             &::after {

@@ -39,12 +39,21 @@
         "disabled":false
     },
     {
+        "id":"darkMode",
+        "value":false,
+        "name":"Dark mode",
+        "hint":"",
+        "type":"checkbox",
+        "order": 5,
+        "disabled":false
+    },
+    {
         "id":"isaacModFolderPath",
         "value":"",
         "name":"Isaac mods folder",
         "hint":"",
         "type":"text",
-        "order": 5,
+        "order": 6,
         "disabled":false
     },
     {
@@ -53,7 +62,7 @@
         "name":"Streaking Website Token",
         "hint":"",
         "type":"text",
-        "order": 6,
+        "order": 7,
         "disabled":true
     },
     {
@@ -62,7 +71,7 @@
         "name":"Store existing tags",
         "hint":"",
         "type":"array",
-        "order": 7,
+        "order": 8,
         "disabled":true
     },
     {
@@ -71,7 +80,7 @@
         "name":"Change Live Tracker Background",
         "hint":"",
         "type":"object",
-        "order": 8,
+        "order": 9,
         "disabled":true
     }
 ]

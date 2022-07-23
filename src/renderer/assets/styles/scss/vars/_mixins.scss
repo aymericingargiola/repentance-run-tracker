@@ -24,3 +24,9 @@ $desktop-width: 992px;
     @content;
   }
 }
+
+@mixin darkMode {
+  @at-root .dark-mode #{&} {
+    @content;
+  }
+}

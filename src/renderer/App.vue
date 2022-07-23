@@ -3,10 +3,10 @@
     <Taskbar :app-version="appVersion" />
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
-    <div class="main">
+    <div class="main" :class="darkMode ? 'dark-mode' : ''">
       <transition name="fade">
         <div
-          v-if="!watchStatus || loading"
+          v-if="!configReady || !runReady || loading"
           class="overlay-watch-status"
         >
           <div
@@ -28,6 +28,7 @@
 import Taskbar from './components/Taskbar.vue'
 import { mapRepos } from '@vuex-orm/core'
 import Config from './store/classes/Config'
+import Run from './store/classes/Run'
 const loadingImagesStringTemplate = "url('img/loadimages/loadimages-#.png')"
 export default {
   name: 'App',
@@ -46,8 +47,22 @@ export default {
   },
   computed: {
     ...mapRepos({
-        configRepo: Config
-    })
+        configRepo: Config,
+        runRepo: Run
+    }),
+    configReady() {
+      return this.configRepo?.query().all()?.length > 0
+    },
+    runReady() {
+      return this.runRepo?.query().all()?.length > -1
+    },
+    darkMode() {
+      const value = this.configRepo?.query().where('id', 'darkMode')?.first()?.value
+      const body = document.querySelector('body')
+      if (value) body.classList.add('dark-mode')
+      else if (value === false && body.classList.contains('dark-mode')) body.classList.remove('dark-mode')
+      return value
+    }
   },
   mounted() {
     this.randomLoadingImages()
@@ -83,6 +98,7 @@ export default {
 <style lang="scss">
   @import "assets/styles/scss/vars/_animations";
   @import "assets/styles/scss/vars/_colors";
+  @import "assets/styles/scss/vars/_mixins";
   @import "assets/styles/scss/default";
   @import "assets/styles/scss/small-portrait";
   @import "assets/styles/scss/overwrite/vuetimepicker";
@@ -127,12 +143,17 @@ export default {
       //   height: 800px;
       //   left: 0px;
       //   bottom: 0px;
-      //   background-image: url("../../public/img/menushadow.png");
+      //   background-image: url("../../public/img/textures/floors/dark room-ground.png");
       //   background-repeat: no-repeat;
       //   background-size: contain;
       //   background-position: bottom;
-      //   z-index: 100;
+      //   z-index: 0;
+      //   opacity: 0;
+      //   transition: 0.5s ease;
       // }
+      &.dark-mode {
+        background-image: url("../../public/img/textures/floors/dark room-ground.png");
+      }
       #app {
         width: 100%;
         height: 100%;
@@ -147,7 +168,7 @@ export default {
 
   //Overlay watch status
   .overlay-watch-status {
-    display: none;
+    //display: none;
     background: black;
     position: fixed;
     width: 100%;

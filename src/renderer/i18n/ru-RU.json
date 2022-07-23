@@ -105,6 +105,10 @@
             "title": "Hide active items",
             "hint": "Hide active items from floor's items list"
         },
+        "darkMode": {
+            "title": "Dark Mode",
+            "hint": ""
+        },
         "isaacModFolderPath": {
             "title": "Isaac mods folder",
             "hint": ""

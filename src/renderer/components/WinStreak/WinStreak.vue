@@ -309,6 +309,7 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+@import "../../assets/styles/scss/vars/_mixins";
 .win-streaks {
     padding: 20px;
     display: flex;
@@ -347,14 +348,20 @@ export default {
             width: 21px;
             left: 0px;
             top: 0px;
-            transform: translateX(-21px);
+            transform: translateX(-20px);
+            @include darkMode {
+              filter: brightness(0.5);
+            }
         }
         > .after {
             height: 100%;
             width: 21px;
             right: 0px;
             top: 0px;
-            transform: translateX(21px);
+            transform: translateX(20px);
+            @include darkMode {
+              filter: brightness(0.5);
+            }
         }
         > .mid {
             height: 100%;
@@ -363,6 +370,9 @@ export default {
             top: 0px;
             background-size: contain;
             background-repeat: repeat-x;
+            @include darkMode {
+              filter: brightness(0.5);
+            }
         }
         .number {
             position: relative;
@@ -430,6 +440,11 @@ export default {
             li {
                 display: flex;
                 align-items: center;
+                .name {
+                  @include darkMode {
+                    filter: invert(1);
+                  }
+                }
                 &:not(:only-child) {
                     transition: 0.25s ease;
                     &.not-current {

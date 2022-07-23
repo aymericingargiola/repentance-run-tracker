@@ -76,6 +76,7 @@ export default {
 
 <style lang="scss">
 @import "../assets/styles/scss/vars/_colors";
+@import "../assets/styles/scss/vars/_mixins";
 .taskbar {
     font-family: "Up Heaval", sans-serif;
     position: fixed;
@@ -91,6 +92,9 @@ export default {
     overflow: auto;
     * {
         -webkit-app-region: no-drag;
+    }
+    @include darkMode {
+        filter: invert(1);
     }
     &::before {
         content: "";

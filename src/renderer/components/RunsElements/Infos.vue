@@ -241,12 +241,19 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+@import "../../assets/styles/scss/vars/_mixins";
 .run-el.infos {
     position: absolute;
     top: 14px;
     left: 14px;
     width: calc(100% - 22px);
     z-index: 3;
+    @include darkMode {
+      filter: invert(1);
+      li:not(.clickable) .icon {
+        filter: invert(1);
+      }
+    }
     ul {
         display: flex;
         width: 100%;

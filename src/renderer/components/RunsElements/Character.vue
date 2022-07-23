@@ -308,6 +308,7 @@ export default {
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
 @import "../../assets/styles/scss/vars/_animations";
+@import "../../assets/styles/scss/vars/_mixins";
 .run-el.character {
     z-index: 2;
     margin-right: 28px;
@@ -324,6 +325,9 @@ export default {
     background-repeat: no-repeat;
     position: relative;
     transform: translateY(-2px) scale(1.25);
+    @include darkMode {
+        background-image: url('../../../../public/img/cards/characters-small-2-iv.png') !important;
+    }
     .before, .after {
         position: absolute;
         left: 0px;
@@ -384,6 +388,9 @@ export default {
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            @include darkMode {
+              filter: invert(1);
+            }
         }
         &:not(.selected) {
             opacity: 0;

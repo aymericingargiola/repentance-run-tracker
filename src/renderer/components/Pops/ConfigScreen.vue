@@ -178,6 +178,7 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/scss/vars/_colors";
+@import "../../assets/styles/scss/vars/_mixins";
 .config-popup {
     position: fixed;
     top: 30px;
@@ -223,6 +224,9 @@ export default {
             left: 0px;
             top: 0px;
             background-repeat: no-repeat;
+            @include darkMode {
+                background-image: url('../../../../public/img/cards/big-frame-iv.png') !important;
+            }
         }
         .content {
             margin-top: auto;
@@ -236,6 +240,9 @@ export default {
             z-index: 1;
             display: flex;
             flex-direction: column;
+            @include darkMode {
+                filter: invert(1);
+            }
         }
         .heading {
             font-size: 80px;
