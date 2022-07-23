@@ -409,6 +409,7 @@ export default {
         width: calc(12*6px);
         top: 10px;
         left: 30px;
+        transform: rotate(-2deg);
         .heart-container {
             width: 12px;
             height: 9px;

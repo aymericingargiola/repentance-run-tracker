@@ -232,24 +232,24 @@ module.exports = {
         //Update file
         fs.writeFile(path, datas, 'utf8', (err) => {if (err) throw err})
     },
-    removeRun: (runId, runs, runsJsonPath, window, windowTracker, saveIntrash, trash, trashJsonPath) => {
+    removeRun: async (runId, runs, runsJsonPath, window, windowTracker, saveIntrash, trash, trashJsonPath) => {
         //From user action, if the runid is found remove a run on frontend and backend
         console.log(`Removing run : ${runId}...`)
-        const runIndex = runs.findIndex(run => run.id === runId)
-        if (runIndex != -1) {
+        const runsItems = await runs
+        const matchingRun = runsItems.find({id: runId}).value()
+        console.log("matchingRun", matchingRun)
+        if (matchingRun) {
             if (saveIntrash) {
-                const run = runs.find(run => run.id === runId)
-                syncApp(window,{trigger: "add run to trash", run: run})
-                if(windowTracker) syncApp(windowTracker,{trigger: "add run to trash", run: run})
-                trash.push(run)
+                syncApp(window,{trigger: "add run to trash", run: matchingRun})
+                if(windowTracker) syncApp(windowTracker,{trigger: "add run to trash", run: matchingRun})
+                trash.push(matchingRun)
                 module.exports.saveFileToDisk(trashJsonPath, JSON.stringify(trash))
                 console.log(`Run : ${runId} was save in trash bin`)
             }
-            syncApp(window,{trigger: "remove run", run: runs[runIndex].id}) //Remove matching run on frontend
-            if(windowTracker) { syncApp(windowTracker,{trigger: "remove run", run: runs[runIndex].id}) }
-            runs.splice(runIndex, 1) //Remove matching run on saved runs json file
+            syncApp(window,{trigger: "remove run", run: matchingRun.id}) //Remove matching run on frontend
+            if(windowTracker) { syncApp(windowTracker,{trigger: "remove run", run: matchingRun.id}) }
+            await runsItems.remove({id: matchingRun.id}).write()
             console.log(`Run : ${runId} was removed`)
-            module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
             return true
         } else {
             log.warn(`Impossible to find : ${runId}, this run doesn't exist on the backend ! (Sync issue ?)`)
@@ -275,18 +275,21 @@ module.exports = {
             log.info(`Runs : ${removedRuns} was removed from trash`)
         }
     },
-    addRuns: (runsToAdd, window, windowTracker, runs, runsJsonPath) => {
+    addRuns: async (runsToAdd, window, windowTracker, runs, runsJsonPath) => {
+        const addedRunsId = []
         const addedRuns = []
+        const runsItems = await runs
         runsToAdd.forEach(run => {
-            addedRuns.push(run.id)
-            runs.push(run)
+            addedRunsId.push(run.id)
+            addedRuns.push(run)
             syncApp(window,{trigger: "create run", run: run})
             if(windowTracker) { syncApp(windowTracker,{trigger: "create run", runs: run}) }
         })
-        module.exports.saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-        console.log(`Runs : ${addedRuns} was added`)
+        await runsItems.push(...addedRuns).write()
+        console.log(`Runs : ${addedRunsId} was added`)
+        return true
     },
-    restoreRunsFromTrash: (runsToRestore, runs, runsJsonPath, win, winTracker, trash, trashJsonPath) => {
+    restoreRunsFromTrash: async (runsToRestore, runs, runsJsonPath, win, winTracker, trash, trashJsonPath) => {
         const restoredRuns = []
         const restoredRunsItems = []
         runsToRestore.forEach(run => {
@@ -302,7 +305,9 @@ module.exports = {
         })
         if (restoredRuns.length > 0) {
             module.exports.removeRunsFromTrash(restoredRuns, win, winTracker, trash, trashJsonPath)
-            module.exports.addRuns(restoredRunsItems, win, winTracker, runs, runsJsonPath)
+            await module.exports.addRuns(restoredRunsItems, win, winTracker, runs, runsJsonPath)
+            return true
         }
+        return false
     }
 }
