@@ -116,6 +116,22 @@ ipcMain.on('ASK_TRASH', async (event, payload) => {
 });
 
 module.exports = {
+	checkRuns: async function() {
+		console.time('Checking runs done in')
+		log.info('Checking runs...')
+		const runsItems = await runs
+		const corruptedRuns = []
+		await asyncForEach(runsItems.value(), async (run) => {
+			// Check for corrupted characters
+			const characters = !run.characters || run.characters.length < 1 ? true : run.characters.includes(null)
+			if (characters) {
+				corruptedRuns.push(run.id)
+				await runsItems.remove({id: run.id}).write()
+			}
+		})
+		log.info(`Corrupted runs removed : ${corruptedRuns.toString()}`)
+		console.timeEnd('Checking runs done in')
+	},
 	checkJson: async function(dataFolder, file, fileName, defaultContent) {
 		let thisFile = file
 		try{
@@ -194,6 +210,7 @@ module.exports = {
 		await module.exports.checkJson(dataFolder, loadRuns, 'runs.json', '[]')
 		const adapter = new FileAsync(path.join(dataFolder, 'runs.json'))
 		runs = low(adapter)
+		await module.exports.checkRuns()
 		return runs
     },
 	initTrash: async function() {
