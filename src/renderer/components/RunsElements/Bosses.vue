@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="bosses.length > 0"
     class="run-el boss"
     :style="{ backgroundImage: `url('img/cards/characters-small-2-bloody.png')` }"
   >
@@ -13,10 +12,10 @@
       :style="{ backgroundImage: `url('img/icons/pin.png')` }"
     />
     <div
-      v-if="bosses.length > 1"
+      v-if="lastBosses && lastBosses.length > 1"
       class="characters-selection"
     >
-      <template v-for="(boss, bidx) in bosses">
+      <template v-for="(boss, bidx) in lastBosses">
         <div
           :key="`${boss.bossId} ${bidx} select`"
           :class="['character', bidx === selected ? 'selected' : '']"
@@ -28,7 +27,7 @@
         </div>
       </template>
     </div>
-    <template v-for="(boss, bidx) in bosses">
+    <template v-for="(boss, bidx) in lastBosses">
       <div
         :key="`${boss.id} ${bidx}`"
         :class="['character-infos', bidx === selected ? 'selected' : '']"
@@ -44,11 +43,13 @@
 </template>
 
 <script>
+import {getRunLastBosses} from "../../helpers/runsDetails"
+
 export default {
   name: "RunBosses",
   components: {},
   props: {
-    bosses: Array,
+    floors: Array,
   },
   data() {
     return {
@@ -56,6 +57,9 @@ export default {
     };
   },
   computed: {
+    lastBosses() {
+      return getRunLastBosses(this.floors)
+    }
   },
   mounted() {},
   methods: {},
