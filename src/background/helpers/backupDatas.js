@@ -29,8 +29,8 @@ module.exports = {
     console.time("Cleaning backups done in")
     // First, remove backups with corrupted datas
     let backupZips = await module.exports.getBackupZips()
-    backupZips = backupZips.filter(zipName => !zipName.split('_').includes('checked.zip'))
     if (!backupZips) return console.timeEnd("Cleaning backups done in")
+    backupZips = backupZips.filter(zipName => !zipName.split('_').includes('checked.zip'))
     await asyncForEach(backupZips, async (backupZip) => {
       const zip = new AdmZip(`${dataFolder}/backups/${backupZip}`)
       let toRemove
