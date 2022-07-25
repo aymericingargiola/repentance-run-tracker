@@ -354,8 +354,6 @@ async function updateOrCreateRun(params = {}) {
             }
             sameRun.runUpdate = DateTime.now().toSeconds()
             currentSameRun = sameRun
-            const runsItems = await runs
-            await runsItems.find({ id: sameRun.id }).assign(sameRun).write()
         } else {
             console.log('Run is over')
         }
@@ -471,20 +469,20 @@ function parseLogs(newLogs, logArray) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "adding collectible", collectible: getCollectible(log, 4, otherModsLoaded, currentRoom)})
             //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-            if (currentRun) {
-                const runsItems = await runs
-                await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
-            }
+            // if (currentRun) {
+            //     const runsItems = await runs
+            //     await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
+            // }
         }
         if(log.includes("Removing voided collectible") || log.includes("Removing collectible")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "removing collectible", collectible: getCollectible(log, log.includes("Removing voided collectible") ? 5 : 4, otherModsLoaded, currentRoom)})
             //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-            const runsItems = await runs
-            if (currentRun) {
-                const runsItems = await runs
-                await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
-            }
+            // const runsItems = await runs
+            // if (currentRun) {
+            //     const runsItems = await runs
+            //     await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
+            // }
         }
         // Trinkets has no "remove" event from game logs at the moment
         // if(log.includes("Adding trinket")) {
@@ -496,15 +494,14 @@ function parseLogs(newLogs, logArray) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "adding smelted trinket", trinket: getTrinket(log, 5, currentRoom)})
             //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-            if (currentRun) {
-                const runsItems = await runs
-                await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
-            }
+            // if (currentRun) {
+            //     const runsItems = await runs
+            //     await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
+            // }
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end", log: log})
-            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
             if (currentRun) {
                 const runsItems = await runs
                 await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
@@ -559,10 +556,9 @@ function parseLogs(newLogs, logArray) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
             if (!extendedSaveMode) extendedSaveMode = true
-            //saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-            if (currentRun) {
+            if (currentSameRun) {
                 const runsItems = await runs
-                await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
+                await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()
             }
         }
     })
@@ -576,10 +572,18 @@ setInterval(() => {
     }
 }, 1000);
 
-// setInterval(() => {
-//     // Avoid writing errors if multiple writings happens
-//     if (watchingLogs && runsJsonPath && runs) saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-// }, 5000);
+setInterval(async () => {
+    // Avoid writing errors if multiple writings happens
+    if (watchingLogs && currentSameRun && !currentSameRun.runEnd.date && currentRunInit && runs) {
+        const runsItems = await runs
+        try {
+            await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()
+            console.log("[interval] Runs json db updated")
+        } catch (error) {
+            elog.error("[interval] Error during runs json db update", error)
+        }
+    }
+}, 5000);
 
 function watchRepentanceLogs() {
     fs.watchFile(repentanceLogsFile,{interval: 500},
@@ -657,7 +661,7 @@ ipcMain.on('IS_APP_READY', (event, payload) => {
 //Frontend event, trigger if a run is edited by user
 ipcMain.on('USER_UPDATE_RUN', async (event, payload) => {
     const runsItems = await runs
-    await runsItems.find({ id: payload.id }).assign(payload.value).write()
+    await runsItems.find({ id: payload.id }).assign({[payload.property]: payload.value}).write()
 })
 
 //Frontend event, trigger if a run is removed by user
