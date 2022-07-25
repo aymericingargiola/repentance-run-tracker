@@ -93,7 +93,8 @@ export default {
     data() {
         return {
             isOpen: false,
-            id: null
+            id: null,
+            timer: null
         }
     },
     computed: {
@@ -139,7 +140,11 @@ export default {
             this.$root.$emit('OPEN_EDITRUN')
         },
         updateCustomName(e) {
-            window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'customName', value: e.target.value })
+            if (this.timer) clearTimeout(this.timer);
+            this.timer = setTimeout(()=>{
+              console.log("update name")
+              window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'customName', value: e.target.value })
+            }, 1000);
         },
         updateRunDuration(e) {
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'runDuration', value: e.displayTime })
