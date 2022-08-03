@@ -1,6 +1,6 @@
 <template>
     <li
-    v-if="runs.length > 0 && entities.length > 0 && charactersRep.length > 0"
+    v-if="runs && entities && charactersRep && runs.all().length > 0 && entities.all().length > 0 && charactersRep.all().length > 0"
     class="win-streak-item"
     >
         <div
@@ -142,7 +142,7 @@
             </div>
             <div v-if="editing" class="save">
                 <button @click="save(winStreak.id)">
-                {{ $t('dictionary.save') }}
+                {{ $tc('dictionary.save') }}
                 </button>
             </div>
             <div v-if="editing" class="cancel">
@@ -188,13 +188,13 @@ export default {
             characterRepo: Character
         }),
         runs() {
-            return this.runRepo?.all().length > 0 ? this.runRepo.all() : []
+            return this.runRepo
         },
         entities() {
-            return this.entityRepo?.all().length > 0 ? this.entityRepo?.all() : []
+            return this.entityRepo
         },
         charactersRep() {
-            return this.characterRepo?.all().length > 0 ? this.characterRepo?.all() : []
+            return this.characterRepo
         }
     },
     methods: {
@@ -288,7 +288,7 @@ export default {
             return this.check(this.runs.where((run) => { return this.filter(run, winStreak) }).orderBy('runUpdate', 'desc').get(), winStreak)
         },
         getCharacter(characterId) {
-            return this.characters.where('id', characterId).first()
+            return this.charactersRep.where('id', characterId).first()
         },
         getBoss(bossId) {
             return this.entities.where('id', bossId).first()
