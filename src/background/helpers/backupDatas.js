@@ -91,7 +91,7 @@ module.exports = {
     })
     return zip
   },
-  backupDatas: async function(dataFolder) {
+  backupDatas: async function() {
     console.time('App datas backup created in')
     elog.info('Creating app datas backup zip file...')
     let zip = new AdmZip()
