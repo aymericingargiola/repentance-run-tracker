@@ -7,6 +7,7 @@ const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex, findLastIndexObj, asyncForEach } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
 const { initRuns } = require('../helpers/readyToSync')
+const { backupDatas } = require('../helpers/backupDatas')
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
 const { DateTime } = require('luxon')
@@ -502,9 +503,10 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
             updateOrCreateRun({trigger: "run end", log: log})
-            if (currentRun) {
+            if (currentRun && !extendedSaveMode) {
                 const runsItems = await runs
                 await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
+                await backupDatas()
             }
         }
         if(log.includes("Menu Game Init")) {
@@ -545,20 +547,22 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("[RRTEEXTENDLOGS] Room")) {
             console.log("\x1b[35m", log, "\x1b[0m")
+            if (!extendedSaveMode) extendedSaveMode = true
             updateOrCreateRun({trigger: "change room ext", log: log})
         }
         if(log.includes("[RRTEEXTENDLOGS] Player updated")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "player updated", stats: getCharaterStats(log)})
             if (!extendedSaveMode) extendedSaveMode = true
+            updateOrCreateRun({trigger: "player updated", stats: getCharaterStats(log)})
         }
         if(log.includes("[RRTEEXTENDLOGS] Run End")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
             if (!extendedSaveMode) extendedSaveMode = true
+            updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
             if (currentSameRun) {
                 const runsItems = await runs
                 await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()
+                await backupDatas()
             }
         }
     })
@@ -568,13 +572,13 @@ setInterval(() => {
     // Slowdown run updates events with 1s interval instead of each updates
     if (currentSameRun && !currentSameRun.runEnd.date) {
         syncApp(win,{trigger: "update run", channel: "interval updates", run: currentSameRun})
-        if(winTracker) syncApp(winTracker,{trigger: "update run", channel: "interval updates", run: currentSameRun})
+        if(winTracker) syncApp(winTracker,{trigger: "update run", channel: "interval updates", run: currentSameRun})   
     }
 }, 1000);
 
 setInterval(async () => {
     // Avoid writing errors if multiple writings happens
-    if (watchingLogs && currentSameRun && !currentSameRun.runEnd.date && currentRunInit && runs) {
+    if (inRun && watchingLogs && currentSameRun && !currentSameRun.runEnd.date && currentRunInit && runs) {
         const runsItems = await runs
         try {
             await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()

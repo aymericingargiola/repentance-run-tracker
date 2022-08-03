@@ -39,10 +39,14 @@ process.on('uncaughtException', (error) => {
   console.log(error)
   elog.error(error)
   if (win) {
-    syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
-    win.setAlwaysOnTop(true)
-    win.show()
-    win.focus()
+    try {
+      syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
+      win.setAlwaysOnTop(true)
+      win.show()
+      win.focus() 
+    } catch (error) {
+      console.log("Can't handle exception from frontend, win seems destroyed")
+    }
   }
 })
 
