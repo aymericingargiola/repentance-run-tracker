@@ -24,10 +24,16 @@
             </li>
           </template>
           <li
-            v-if="selected.length === 0"
+            v-if="selected.length === 0 && !selectedValue"
             class="item"
           >
             {{ emptyMessage != '' ? emptyMessage : 'Nothing selected' }}
+          </li>
+          <li
+            v-if="selected.length === 0 && selectedValue"
+            class="item"
+          >
+            {{ selectedValue }}
           </li>
         </ul>
         <span
@@ -70,7 +76,8 @@ export default {
         maxItems: Number,
         label: String,
         emptyMessage: String,
-        order: String
+        order: String,
+        selectedValue: String
     },
     data() {
         return {
