@@ -247,7 +247,6 @@ async function updateOrCreateRun(params = {}) {
     const sameRun = await isSameRun(currentRun.seed)
     if (sameRun) {
         console.log('Seed exists, check...')
-        console.log('Samerun',sameRun)
         if(sameRun.runEnd.date === null || sameRun.runEnd.win === null) {
             console.log('Update current run...')
             if(currentRun.id === undefined) currentRun.id = sameRun.id
@@ -646,7 +645,13 @@ async function init() {
         inRun = lastLogs.filter(v=>v.includes("Menu Game Init")).length < 1 && lastLogs.filter(v=>v.includes("Game Over")).length < 1 && lastLogs.filter(v=>v.includes("playing cutscene")).length < 1
         console.log("Currently in run :", inRun)
         if (inRun) {
-            parseLogs(lastLogs, repentanceLogsArray)
+            const runsItems = await runs;
+            const unfinishedRun = runsItems.value()[0] != undefined && runsItems.value()[0].runEnd.date === null && runsItems.value()[0].toRemove.checkedByUser === false
+            if (unfinishedRun) {
+                parseLogs(lastLogs.filter(v=>v.includes("Start Seed") || v.includes("generated rooms")), repentanceLogsArray)
+            } else {
+                parseLogs(lastLogs, repentanceLogsArray)
+            }
             currentRunInit = true
         }
     } else if (!isShutdown) {
