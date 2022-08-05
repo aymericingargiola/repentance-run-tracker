@@ -646,7 +646,7 @@ async function init() {
         inRun = lastLogs.filter(v=>v.includes("Menu Game Init")).length < 1 && lastLogs.filter(v=>v.includes("Game Over")).length < 1 && lastLogs.filter(v=>v.includes("playing cutscene")).length < 1
         console.log("Currently in run :", inRun)
         if (inRun) {
-            parseLogs(lastLogs.filter(v=>v.includes("Start Seed") || v.includes("generated rooms")), repentanceLogsArray)
+            parseLogs(lastLogs, repentanceLogsArray)
             currentRunInit = true
         }
     } else if (!isShutdown) {
