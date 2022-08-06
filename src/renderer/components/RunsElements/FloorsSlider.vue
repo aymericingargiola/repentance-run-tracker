@@ -164,6 +164,7 @@ export default {
     },
     mixins: [runsMixin, i18nMixin],
     props: {
+        id: String,
         index: Number,
         floors: Array,
         liveUpdate: Boolean,
@@ -193,7 +194,7 @@ export default {
                 }, 1500)
             })
             window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-                if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
+                if(this.index === 0 && this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && response.run.id === this.id && this.validRunUpdate(response)) {
                   this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update();
                   const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
                   this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slideTo(slides.length - 1, 1000);
@@ -245,7 +246,7 @@ export default {
         height: 100%;
         width: 200px;
         transition: transform 1s ease, opacity 1s ease;
-        animation: 0.25s ease-out 0s 1 fadeIn;
+        animation: 1s ease-out 0s 1 enterFloor;
         animation-fill-mode: forwards;
         .floor-content {
             position: relative;

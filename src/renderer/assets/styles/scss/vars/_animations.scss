@@ -13,6 +13,17 @@
     }
 }
 
+@keyframes enterFloor {
+  0% {
+    opacity: 0;
+    transform: translateX(200px) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px) scale(1);
+  }
+}
+
 @keyframes openFloor {
   0% {
     transform: translate(0px, 0px) scale(1);

@@ -54,6 +54,7 @@
               :run-end="run.runEnd"
             />
             <RunFloorsSlider
+              :id="run.id"
               :index="ridx"
               :floors="run.floors"
               :game-mode="run.gameMode"
@@ -391,7 +392,7 @@ export default {
     &.run-unfinished {
         &:first-child {
             .run-content {
-                .floors {
+                .swiper-wrapper {
                     .floor {
                         &:last-child {
                             .floor-content {
