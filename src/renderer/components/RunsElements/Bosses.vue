@@ -85,7 +85,7 @@ export default {
   background-repeat: no-repeat;
   position: relative;
   //transform: translateY(-2px) scale(1.25);
-  transform: translateY(-2px) scale(1.25) scaleX(-100%);
+  transform: translateY(-2px) translateX(20px) scale(1.25) scaleX(-100%);
   .before,
   .after {
     position: absolute;

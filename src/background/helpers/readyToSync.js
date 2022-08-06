@@ -69,7 +69,7 @@ ipcMain.on('USER_REMOVE_WINSTREAK', async (event, payload) => {
 
 ipcMain.on('USER_UPDATE_WINSTREAK', async (event, payload) => {
 	if (!winStreaks) winStreaks = await initwinStreaks()
-	winStreaks.find((winStreaksItem) => winStreaksItem.id === payload.id)[payload.property] = payload.value
+	winStreaks[winStreaks.findIndex((winStreaksItem) => winStreaksItem.id === payload.id)] = payload.value
 	await writeFileAsync(dataFolder, 'winStreaks.json', JSON.stringify(winStreaks))
 });
 
@@ -129,7 +129,8 @@ module.exports = {
 				await runsItems.remove({id: run.id}).write()
 			}
 		})
-		log.info(`Corrupted runs removed : ${corruptedRuns.toString()}`)
+		if (corruptedRuns.length > 0) log.info(`Corrupted runs removed : ${corruptedRuns.toString()}`)
+		log.info('Checking runs done')
 		console.timeEnd('Checking runs done in')
 	},
 	checkJson: async function(dataFolder, file, fileName, defaultContent) {

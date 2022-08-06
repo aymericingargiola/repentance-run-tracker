@@ -11,6 +11,18 @@ And more...
 ## Settings
 
 ![Settings](/doc/img/settings.jpg)
+### Language
+Change the language to :
+- English
+- Français
+- Deutsch
+- Español
+- Русский
+- 日本語
+- 한국어
+- 中文
+
+If you want to contribute/help, you can contact me or directly fork and edit jsons translations here : src\renderer\i18n
 ### Date format
 Change the date format to :
 - Day / Month / Year
@@ -46,9 +58,11 @@ If something exciting happens during your run you can add a timecode, if the vid
 You can add tags used for filtering (tags filter available later).
 ## Screenshots
 
+![Screen1](/doc/img/screen1.jpg)
+
 ![Screen2](/doc/img/screen2.jpg)
 
-![Settings](/doc/img/screen1.jpg)
+![Screen2](/doc/img/screen3.jpg)
 
 # Contribute
 ## Project setup

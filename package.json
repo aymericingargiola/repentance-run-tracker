@@ -2,7 +2,7 @@
   "name": "repentanceruntracker",
   "author": "Aymeric Ingargiola",
   "description": "App to track The Binding of Isaac game's run",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "private": true,
   "repository": {
     "type": "git",
@@ -37,14 +37,14 @@
     "jsonfile": "^6.1.0",
     "lowdb": "1.0.0",
     "luxon": "^2.4.0",
+    "swiper-vue2": "^1.0.9",
     "v-calendar": "^2.4.1",
-    "vue": "^2.6.11",
+    "vue": "2.6.14",
     "vue-apexcharts": "^1.6.2",
     "vue-color-gradient-picker": "^0.1.2",
     "vue-i18n": "^8.26.7",
     "vue-router": "^3.5.1",
     "vue2-timepicker": "^1.1.6",
-    "vuescroll": "^4.17.3",
     "vuex": "^3.6.2",
     "xml-js": "^1.6.11"
   },
@@ -64,7 +64,7 @@
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
     "vue-cli-plugin-electron-builder": "^2.1.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "2.6.14"
   },
   "resolutions": {
     "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
