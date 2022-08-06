@@ -1,160 +1,149 @@
 <template>
-  <!-- <vue-scroll
-    v-if="ops && floors"
-    :ref="index === 0 ? 'firstRunFloorsScroller' : ''"
-    :ops="ops"
-    class="run-el custom-scroll-floors"
-  >
-  </vue-scroll> -->
   <swiper
-  v-if="ops && floors"
+  v-if="floors"
   slides-per-view="auto"
   :space-between="24"
   :loop="false"
-  @swiper="onSwiper"
-  @slideChange="onSlideChange"
+  :freeMode="true"
+  :mousewheel="{
+    releaseOnEdges: false,
+  }"
   :ref="index === 0 ? 'firstRunFloorsScroller' : ''">
-    <!-- <transition-group
-      name="floors-group-transition"
-      tag="ul"
-      class="floors"
-    > -->
-      <template v-for="(floor, fidx) in floors">
-        <swiper-slide
-          v-if="floor"
-          :key="floor.id + fidx"
-          :class="['run-el', 'floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']"
-          :data-id="floor.id"
+    <template v-for="(floor, fidx) in floors">
+      <swiper-slide
+        v-if="floor"
+        :key="floor.id + fidx"
+        :class="['run-el', 'floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']"
+        :data-id="floor.id"
+      >
+        <div
+          class="floor-content"
+          :style="{backgroundImage:`url('img/textures/floors${gameMode === 'greed' ? '/greed' : ''}/${floor.group}-ground.png')`}"
         >
-          <div
-            class="floor-content"
-            :style="{backgroundImage:`url('img/textures/floors${gameMode === 'greed' ? '/greed' : ''}/${floor.group}-ground.png')`}"
-          >
-            <div class="top-info">
-              <div
-                class="icon floor"
-                :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"
-              />
-              <div
-                v-if="floor.curse"
-                class="icon curse"
-                :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"
-              />
-            </div>
-            <div class="floor-wrapper">
-              <div class="floor-name">
-                {{ $t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`) }} {{ !isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : '' }}
-              </div>
-              <transition-group
-                name="item-group-transition"
-                tag="ul"
-                class="items"
-              >
-                <template v-for="(item, tidx) in groupedItems(floor.itemsCollected)">
-                  <li
-                    v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'"
-                    :key="item.title + tidx"
-                    class="item-group-transition-item"
-                  >
-                    <a
-                      v-if="item.id >= 0"
-                      class="item-image"
-                      :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
-                      target="_blank"
-                    >
-                      <div class="name">
-                        <div
-                          class="before"
-                          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
-                        />
-                        <div
-                          class="mid"
-                          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
-                        />
-                        <div
-                          class="after"
-                          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
-                        />
-                        <span>{{ item.golden ? 'Golden ' : '' }}{{ item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title) }}</span>
-                      </div>
-                      <div
-                        v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
-                        class="player-icon"
-                      >
-                        <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
-                      </div>
-                      <img
-                        v-if="item.type === 'trinket'"
-                        :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`"
-                        onerror="this.src='img/icons/collectibles/questionmark.png'"
-                      >
-                      <img
-                        v-else-if="item.custom"
-                        :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`"
-                        onerror="this.src='img/icons/collectibles/questionmark.png'"
-                      >
-                      <img
-                        v-else
-                        :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`"
-                        onerror="this.src='img/icons/collectibles/questionmark.png'"
-                      >
-                      <span
-                        v-if="item.number > 1"
-                        class="item-number"
-                      >x{{ item.number }}</span>
-                    </a>
-                    <a
-                      v-else
-                      class="item-image glitched"
-                    >
-                      <div class="name">
-                        <div
-                          class="before"
-                          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
-                        />
-                        <div
-                          class="mid"
-                          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
-                        />
-                        <div
-                          class="after"
-                          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
-                        />
-                        <span>{{ item.title }}</span>
-                      </div>
-                      <div
-                        v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
-                        class="player-icon"
-                      >
-                        <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
-                      </div>
-                      <div class="glitched-image">
-                        <template v-for="glitdx in 3">
-                          <div
-                            :key="`glitched ${glitdx}`"
-                            class="contain"
-                          >
-                            <img
-                              class="glitched"
-                              :src="`img/icons/collectibles/${randomItemId()}.png`"
-                              onerror="this.src='img/icons/collectibles/023.png'"
-                            >
-                          </div>
-                        </template>
-                      </div>
-                      <span
-                        v-if="item.number > 1"
-                        class="item-number"
-                      >x{{ item.number }}</span>
-                    </a>
-                  </li>
-                </template>
-              </transition-group>
-            </div>
+          <div class="top-info">
+            <div
+              class="icon floor"
+              :style="{backgroundImage:`url('img/icons/floors/${floor.group}.png')`}"
+            />
+            <div
+              v-if="floor.curse"
+              class="icon curse"
+              :style="{backgroundImage:`url('img/icons/curses/${floor.curse}.png')`}"
+            />
           </div>
-        </swiper-slide>
-      </template>
-    <!-- </transition-group> -->
+          <div class="floor-wrapper">
+            <div class="floor-name">
+              {{ $t(`stages.${floor.name === 'Hush' ? 'Blue Womb' : floor.name.replace(/[0-9]/g, '').trim()}.name`) }} {{ !isNaN(parseInt(floor.name.match(/\d/g))) ? parseInt(floor.name.match(/\d/g)) : '' }}
+            </div>
+            <transition-group
+              name="item-group-transition"
+              tag="ul"
+              class="items"
+            >
+              <template v-for="(item, tidx) in groupedItems(floor.itemsCollected)">
+                <li
+                  v-if="getConfig('hideActiveItems') && !getConfig('hideActiveItems').value || getConfig('hideActiveItems') && getConfig('hideActiveItems').value && item.itemType != 'Active'"
+                  :key="item.title + tidx"
+                  class="item-group-transition-item"
+                >
+                  <a
+                    v-if="item.id >= 0"
+                    class="item-image"
+                    :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
+                    target="_blank"
+                  >
+                    <div class="name">
+                      <div
+                        class="before"
+                        :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+                      />
+                      <div
+                        class="mid"
+                        :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+                      />
+                      <div
+                        class="after"
+                        :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+                      />
+                      <span>{{ item.golden ? 'Golden ' : '' }}{{ item.type === 'trinket' ? t(`items.trinkets.${item.id}.name`, item.title) : t(`items.items.${item.id}.name`, item.title) }}</span>
+                    </div>
+                    <div
+                      v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
+                      class="player-icon"
+                    >
+                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                    </div>
+                    <img
+                      v-if="item.type === 'trinket'"
+                      :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`"
+                      onerror="this.src='img/icons/collectibles/questionmark.png'"
+                    >
+                    <img
+                      v-else-if="item.custom"
+                      :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`"
+                      onerror="this.src='img/icons/collectibles/questionmark.png'"
+                    >
+                    <img
+                      v-else
+                      :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`"
+                      onerror="this.src='img/icons/collectibles/questionmark.png'"
+                    >
+                    <span
+                      v-if="item.number > 1"
+                      class="item-number"
+                    >x{{ item.number }}</span>
+                  </a>
+                  <a
+                    v-else
+                    class="item-image glitched"
+                  >
+                    <div class="name">
+                      <div
+                        class="before"
+                        :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+                      />
+                      <div
+                        class="mid"
+                        :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+                      />
+                      <div
+                        class="after"
+                        :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+                      />
+                      <span>{{ item.title }}</span>
+                    </div>
+                    <div
+                      v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
+                      class="player-icon"
+                    >
+                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                    </div>
+                    <div class="glitched-image">
+                      <template v-for="glitdx in 3">
+                        <div
+                          :key="`glitched ${glitdx}`"
+                          class="contain"
+                        >
+                          <img
+                            class="glitched"
+                            :src="`img/icons/collectibles/${randomItemId()}.png`"
+                            onerror="this.src='img/icons/collectibles/023.png'"
+                          >
+                        </div>
+                      </template>
+                    </div>
+                    <span
+                      v-if="item.number > 1"
+                      class="item-number"
+                    >x{{ item.number }}</span>
+                  </a>
+                </li>
+              </template>
+            </transition-group>
+          </div>
+        </div>
+      </swiper-slide>
+    </template>
   </swiper>
 </template>
 
@@ -164,10 +153,9 @@ import i18nMixin from '../../mixins/i18n'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 import Run from '../../store/classes/Run'
-import { Navigation, Pagination } from 'swiper'
+import { Mousewheel } from 'swiper'
 import { SwiperCore, Swiper, SwiperSlide } from 'swiper-vue2'
-import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination])
+SwiperCore.use([Mousewheel])
 export default {
     name: "RunFloorsSlider",
     components: {
@@ -176,7 +164,6 @@ export default {
     },
     mixins: [runsMixin, i18nMixin],
     props: {
-        ops: Object,
         index: Number,
         floors: Array,
         liveUpdate: Boolean,
@@ -206,15 +193,6 @@ export default {
                 }, 1500)
             })
             window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-                // if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
-                //     this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
-                //     setTimeout(() => {
-                //         this.$refs["firstRunFloorsScroller"]?.refresh()
-                //     }, 1000)
-                //     setTimeout(() => {
-                //         this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
-                //     }, 1000)
-                // }
                 if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
                   this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update();
                   const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
@@ -242,12 +220,6 @@ export default {
                 else groups[itemExist].number += item.number
                 return groups
             }, [])
-        },
-        onSwiper (swiper) {
-          console.log(swiper)
-        },
-        onSlideChange () {
-          console.log('slide change')
         }
       }
 };
@@ -265,64 +237,18 @@ export default {
     }
 }
 .swiper-container {
-  overflow: visible;
+  overflow: visible!important;
   width: calc(100% - 140px*2 - 28px*2);
 }
 .swiper-wrapper {
-    // position: absolute;
-    // display: flex;
-    // width: 100%;
-    // height: 100%;
-    // z-index: 0;
-    // transition: 1s ease;
     .run-el.floor {
         height: 100%;
         width: 200px;
         transition: transform 1s ease, opacity 1s ease;
-        // &:not(:first-child) {
-        //     margin-left: 24px;
-        // }
-        // &:last-child {
-        //     .floor-content {
-        //         margin-right: 224px;
-        //     }
-        // }
-        &.floors-group-transition-enter{
-            opacity: 0;
-            transform: translateX(100%);
-            .floor-content {
-                .top-info {
-                    .icon {
-                        &.floor {
-                            width: 100%;
-                            height: 100%;
-                            transform: translate(0px, 0px);
-                        }
-                        &.curse {
-                            opacity: 0;
-                        }
-                    }
-                }
-            }
-        }
-        &.floors-group-transition-leave-to {
-            opacity: 0;
-            transform: translateX(200%);
-        }
-        &.floors-group-transition-leave-active {
-            position: absolute;
-            //width: 100%;
-        }
-        &.floors-group-transition-move {
-            transition: transform 1s ease;
-        }
-        &.floors-group-transition-item {
-            transition: transform 1s ease, opacity 1s ease;
-            display: block;
-        }
+        animation: 0.25s ease-out 0s 1 fadeIn;
+        animation-fill-mode: forwards;
         .floor-content {
             position: relative;
-            //width: 1200px;
             height: 100%;
             background-position: center;
             background-size: cover;
@@ -347,18 +273,20 @@ export default {
                     &.floor {
                         transition: 1s ease;
                         transition-delay: 1s;
-                        width: 48px;
-                        height: 32px;
-                        transform: translate(-12px, -12px);
+                        transform-origin: top left;
+                        width: 100%;
+                        height: 100%;
+                        animation: 1s ease-out 1s 1 openFloor;
+                        animation-fill-mode: forwards;
                     }
                     &.curse {
-                        opacity: 1;
+                        opacity: 0;
                         width: 30px;
                         height: 30px;
                         position: absolute;
                         transform: translate(16px);
-                        transition: 1s ease;
-                        transition-delay: 2s;
+                        animation: 1s ease-out 2s 1 fadeIn;
+                        animation-fill-mode: forwards;
                     }
                 }
             }

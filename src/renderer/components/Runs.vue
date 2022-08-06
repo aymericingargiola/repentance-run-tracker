@@ -54,7 +54,6 @@
               :run-end="run.runEnd"
             />
             <RunFloorsSlider
-              :ops="opsFloors"
               :index="ridx"
               :floors="run.floors"
               :game-mode="run.gameMode"
@@ -145,27 +144,6 @@ export default {
         return {
             canUpdateRun: true,
             tempUpdateRun: null,
-            opsFloors: {
-                vuescroll: {
-                    mode: 'slide',
-                    detectResize: true,
-                    wheelScrollDuration: 0,
-                    zooming: false,
-                    scroller: {
-                        speedMultiplier: 0.5,
-                    }
-                },
-                scrollPanel: {
-                    scrollingY: false,
-                },
-                rail: {
-                    opacity: 0,
-                    size: '0px'
-                },
-                bar: {
-                    disable: true
-                }
-            },
             filteredRunsTotal: 0,
             filteredRuns: [],
             currentPage: 1,
