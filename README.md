@@ -1,10 +1,7 @@
 # Repentance Run Tracker project
 Repentance Run Tracker is an [Electron](https://www.electronjs.org/) app to record your runs in [The Binding Of Isaac: Repentance](https://store.steampowered.com/app/1426300/The_Binding_of_Isaac_Repentance/) (not supporting older version of the game). This project was inspired by [RebirthItemTracker](https://github.com/Rchardon/RebirthItemTracker) project wich reads and parse the ``log.txt`` to track what is happening during the game, and also The [Finding of Items](https://moddingofisaac.com/mod/900/the-finding-of-items).
 
-The project is in his very early state but here is the functionality ToDo list :
-- [ ] Add compact current run "item tracker" view component
-- [ ] Add stats\
-And more...
+The project is still in early state but it's more and more stable, you can ask for features or open a bug ticket on this github from the issue tab
 
 # Usage
 
@@ -12,7 +9,7 @@ And more...
 
 ![Settings](/doc/img/settings.jpg)
 ### Language
-Change the language to :
+Change app language to :
 - English
 - Français
 - Deutsch
@@ -22,7 +19,9 @@ Change the language to :
 - 한국어
 - 中文
 
-If you want to contribute/help, you can contact me or directly fork and edit jsons translations here : src\renderer\i18n
+Except french and english, other languages are partial translations (datas from the original game only), if you want to contribute or help, you can contact me or directly fork and edit jsons translations here : src\renderer\i18n
+
+Available languages are currently officialy supported languages from the game (except french), but if you want to add your own language let me know
 ### Date format
 Change the date format to :
 - Day / Month / Year
