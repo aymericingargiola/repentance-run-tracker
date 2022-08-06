@@ -1,17 +1,26 @@
 <template>
-  <vue-scroll
+  <!-- <vue-scroll
     v-if="ops && floors"
     :ref="index === 0 ? 'firstRunFloorsScroller' : ''"
     :ops="ops"
     class="run-el custom-scroll-floors"
   >
-    <transition-group
+  </vue-scroll> -->
+  <swiper
+  v-if="ops && floors"
+  slides-per-view="auto"
+  :space-between="24"
+  :loop="false"
+  @swiper="onSwiper"
+  @slideChange="onSlideChange"
+  :ref="index === 0 ? 'firstRunFloorsScroller' : ''">
+    <!-- <transition-group
       name="floors-group-transition"
       tag="ul"
       class="floors"
-    >
+    > -->
       <template v-for="(floor, fidx) in floors">
-        <li
+        <swiper-slide
           v-if="floor"
           :key="floor.id + fidx"
           :class="['run-el', 'floor', 'floors-group-transition-item', floor.death ? 'death-here' : '']"
@@ -143,10 +152,10 @@
               </transition-group>
             </div>
           </div>
-        </li>
+        </swiper-slide>
       </template>
-    </transition-group>
-  </vue-scroll>
+    <!-- </transition-group> -->
+  </swiper>
 </template>
 
 <script>
@@ -155,9 +164,15 @@ import i18nMixin from '../../mixins/i18n'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 import Run from '../../store/classes/Run'
+import { Navigation, Pagination } from 'swiper'
+import { SwiperCore, Swiper, SwiperSlide } from 'swiper-vue2'
+import 'swiper/swiper-bundle.css'
+SwiperCore.use([Navigation, Pagination])
 export default {
     name: "RunFloorsSlider",
     components: {
+      Swiper,
+      SwiperSlide
     },
     mixins: [runsMixin, i18nMixin],
     props: {
@@ -191,14 +206,19 @@ export default {
                 }, 1500)
             })
             window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+                // if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
+                //     this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
+                //     setTimeout(() => {
+                //         this.$refs["firstRunFloorsScroller"]?.refresh()
+                //     }, 1000)
+                //     setTimeout(() => {
+                //         this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
+                //     }, 1000)
+                // }
                 if(this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && this.validRunUpdate(response)) {
-                    this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
-                    setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"]?.refresh()
-                    }, 1000)
-                    setTimeout(() => {
-                        this.$refs["firstRunFloorsScroller"]?.scrollTo({x:"100%"}, 1000)
-                    }, 1000)
+                  this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update();
+                  const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
+                  this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slideTo(slides.length - 1, 1000);
                 }
             })
         }
@@ -223,7 +243,13 @@ export default {
                 return groups
             }, [])
         },
-    }
+        onSwiper (swiper) {
+          console.log(swiper)
+        },
+        onSlideChange () {
+          console.log('slide change')
+        }
+      }
 };
 </script>
 
@@ -238,24 +264,29 @@ export default {
         height: 137px;
     }
 }
-.floors {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    transition: 1s ease;
+.swiper-container {
+  overflow: visible;
+  width: calc(100% - 140px*2 - 28px*2);
+}
+.swiper-wrapper {
+    // position: absolute;
+    // display: flex;
+    // width: 100%;
+    // height: 100%;
+    // z-index: 0;
+    // transition: 1s ease;
     .run-el.floor {
         height: 100%;
-        transition: 1s ease;
-        &:not(:first-child) {
-            margin-left: 24px;
-        }
-        &:last-child {
-            .floor-content {
-                margin-right: 224px;
-            }
-        }
+        width: 200px;
+        transition: transform 1s ease, opacity 1s ease;
+        // &:not(:first-child) {
+        //     margin-left: 24px;
+        // }
+        // &:last-child {
+        //     .floor-content {
+        //         margin-right: 224px;
+        //     }
+        // }
         &.floors-group-transition-enter{
             opacity: 0;
             transform: translateX(100%);
@@ -286,7 +317,7 @@ export default {
             transition: transform 1s ease;
         }
         &.floors-group-transition-item {
-            transition: all 1s ease;
+            transition: transform 1s ease, opacity 1s ease;
             display: block;
         }
         .floor-content {
