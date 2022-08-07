@@ -247,6 +247,7 @@ export default {
     data() {
         return {
           gameStateOptions: [1, 2, 3],
+          id: this.winStreak.id,
           gameState: this.winStreak.gameState,
           randomNormal: this.winStreak.randomNormal,
           randomAlternate: this.winStreak.randomAlt,
@@ -285,6 +286,7 @@ export default {
         save(winstreakId) {
             console.log(winstreakId)
             const updateObj = {
+                id: this.id,
                 gameState: this.gameState,
                 randomNormal: this.randomNormal,
                 randomAlt: this.randomAlternate,

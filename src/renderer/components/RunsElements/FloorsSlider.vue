@@ -193,13 +193,6 @@ export default {
                     this.canUpdateRun = true
                 }, 1500)
             })
-            window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-                if(this.index === 0 && this.canUpdateRun && this.$refs["firstRunFloorsScroller"] && response.run.id === this.id && this.validRunUpdate(response)) {
-                  this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update();
-                  const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
-                  this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slideTo(slides.length - 1, 1000);
-                }
-            })
         }
     },
     methods: {
@@ -222,7 +215,18 @@ export default {
                 return groups
             }, [])
         }
+      },
+    watch: {
+    // whenever question changes, this function will run
+    floors(newArray, oldArray) {
+      console.log(newArray, oldArray)
+      if(this.canUpdateRun && this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
+        this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update()
+        const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
+        this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slideTo(slides.length - 1, 1000)
       }
+    }
+  },
 };
 </script>
 
