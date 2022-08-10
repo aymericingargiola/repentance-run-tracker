@@ -1,11 +1,11 @@
 <template>
-  <div class="section win-streaks">
+  <div v-if="allRuns && entities && charactersRep && entities.all().length > 0 && charactersRep.all().length > 0 && allRuns.length > 0" class="section win-streaks">
     <div
       class="win-streaks-container"
     >
       <ul>
-        <template v-for="winStreak in allWinStreaks">
-          <WinStreakItem :winStreak="winStreak" :key="winStreak.id"/>
+        <template v-for="winStreak in currentWinStreak">
+          <WinStreakItem v-if="allWinStreak && allWinStreak.length > 0" :winStreak="winStreak" :key="winStreak.id"/>
         </template>
         <WinStreakAdd v-if="allWinStreaks && allWinStreaks.length < 3" />
       </ul>
@@ -36,6 +36,21 @@ export default {
             floorRepo: Floor,
             characterRepo: Character
         }),
+        allRuns() {
+            return this.runRepo.all()
+        },
+        allWinStreak() {
+            return this.winStreakRepo.all()
+        },
+        currentWinStreak() {
+            return this.winStreakRepo.where("archived", false).all()
+        },
+        entities() {
+            return this.entityRepo
+        },
+        charactersRep() {
+            return this.characterRepo
+        },
         allWinStreaks() {
           return this.winStreakRepo?.all().length > 0 ? this.winStreakRepo.all() : []
         }
