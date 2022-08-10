@@ -501,10 +501,10 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "run end", log: log})
-            if (currentRun && !extendedSaveMode) {
+            await updateOrCreateRun({trigger: "run end", log: log})
+            if (currentSameRun && !extendedSaveMode) {
                 const runsItems = await runs
-                await runsItems.find({ id: currentRun.id }).assign(currentRun).write()
+                await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()
                 await backupDatas()
             }
         }
@@ -557,7 +557,7 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("[RRTEEXTENDLOGS] Run End")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             if (!extendedSaveMode) extendedSaveMode = true
-            updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
+            await updateOrCreateRun({trigger: "run end ext", runDuration: log.includes("[time]") ? getRealRunDuration(log) : null})
             if (currentSameRun) {
                 const runsItems = await runs
                 await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()
