@@ -43,7 +43,7 @@ export default {
             return this.winStreakRepo.all()
         },
         currentWinStreak() {
-            return this.winStreakRepo.where("archived", false).all()
+            return this.winStreakRepo.where("archived", false).get()
         },
         entities() {
             return this.entityRepo

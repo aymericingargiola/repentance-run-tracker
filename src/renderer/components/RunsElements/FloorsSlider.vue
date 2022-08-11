@@ -217,9 +217,7 @@ export default {
         }
       },
     watch: {
-    // whenever question changes, this function will run
-    floors(newArray, oldArray) {
-      console.log(newArray, oldArray)
+    floors() {
       if(this.canUpdateRun && this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
         this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update()
         const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
