@@ -142,6 +142,33 @@
         </div>
       </li>
       <li
+        v-if="runKiller"
+        class="info run-killer"
+        title="Total win streak before this death"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <div class="content">
+          <div
+            class="icon"
+            :style="{backgroundImage:`url('img/icons/hud/race.png')`}"
+          />
+          <div class="text-icon">
+            {{ runKiller }}
+          </div>
+        </div>
+      </li>
+      <li
         v-if="!hideDetails && id"
         class="info details clickable"
         @click="openOrCloseRunDetails(id)"
@@ -208,6 +235,7 @@ export default {
         runStart: Number,
         runEnd: Object,
         runDuration: String,
+        runKiller: Number,
         hideEdit: Boolean,
         hideDetails: Boolean
     },

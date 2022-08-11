@@ -73,6 +73,7 @@ import { mapRepos } from '@vuex-orm/core'
 import Tag from '../store/classes/Tag'
 import Character from '../store/classes/Character'
 import Run from '../store/classes/Run'
+import Winstreak from '../store/classes/WinStreak'
 import CustomSelect from './Tools/CustomSelect.vue'
 import DateRangePicker from './Tools/DateRangePicker.vue'
 export default {
@@ -108,7 +109,8 @@ export default {
         ...mapRepos({
             tagRepo: Tag,
             characterRepo: Character,
-            runRepo: Run
+            runRepo: Run,
+            winStreakRepo: Winstreak
         }),
         winConditionWithRuns() {
             const conditions = this.winConditionOptions.filter(condition => this.checkWinCondition(condition))
@@ -149,6 +151,9 @@ export default {
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
             this.$emit('filteredRuns', filteredRuns)
             return filteredRuns
+        },
+        bestWinStreak() {
+            return this.winStreakRepo?.orderBy(winStreak => winStreak.runs_ids.length, 'desc')?.first()
         }
     },
     mounted() {
@@ -321,24 +326,18 @@ export default {
         },
         filterStreak(runs) {
             let checkRuns = runs
-            console.log(runs)
             if (this.filterWinCondition === "CurrentWinStreak") {
                 const deathIndex = checkRuns.findIndex(run => run.runEnd.win === false)
                 checkRuns = deathIndex > -1 ? checkRuns.slice(0,deathIndex) : checkRuns
                 return checkRuns
             }
             if (this.filterWinCondition === "BestWinStreak") {
-                let current = []
-                while (checkRuns.length > 0) {
-                    if (checkRuns[0].runEnd.win !== true) checkRuns.splice(0,1)
-                    else {
-                        const deathIndex = checkRuns.findIndex(run => run.runEnd.win !== true)
-                        const streak = deathIndex > -1 ? checkRuns.splice(0,deathIndex) : checkRuns.splice(0,checkRuns.length)
-                        current = streak.length > current.length ? streak : current
-                    }
+                if (this.bestWinStreak) {
+                    console.log(this.bestWinStreak);
+                    return checkRuns.filter(run => this.bestWinStreak.runs_ids.includes(run.id))
                 }
-                return current
             }
+            return checkRuns
         }
     }
 };

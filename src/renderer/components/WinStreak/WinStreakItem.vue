@@ -348,7 +348,7 @@ export default {
                 })
                 // Mark winstreak run killer
                 this.runRepo.where('id', streakKiller.id).update({
-                    runKiller: checkRuns.length + this.actualWinStreak?.first()?.adjustNumber
+                    runKiller: checkRuns.length + this.actualWinStreak?.first()?.adjustNumber - 1
                 })
                 window?.ipc?.send('USER_UPDATE_RUN', { id: streakKiller.id, property: 'runKiller', value: checkRuns.length })
                 // Add new rule
