@@ -47,6 +47,7 @@
               :run-start="run.runStart"
               :run-end="run.runEnd"
               :run-duration="run.runDuration"
+              :run-killer="run.runKiller"
             />
             <RunCharacter
               :characters="run.characters"

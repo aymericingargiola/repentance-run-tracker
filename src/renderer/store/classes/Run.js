@@ -20,6 +20,7 @@ export default class Run extends Model {
             runUpdate: this.attr(null),
             runUserUpdate: this.attr(null),
             runEnd: this.attr(null),
+            runKiller: this.number(0),
             runDuration: this.string(''),
             characters: this.attr(null),
             floors: this.attr(null),

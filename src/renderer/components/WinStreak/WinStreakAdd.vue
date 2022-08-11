@@ -168,6 +168,9 @@ export default {
             adjustNumber: 0,
             characters: [],
             bosses: [],
+            runs: [],
+            init: false,
+            archived: false,
             editing: false
         }
     },
@@ -192,6 +195,9 @@ export default {
             this.bosses = []
             this.adjustNumber = 0
             this.gameState = null
+            this.runs = []
+            this.init = false
+            this.archived = false
         },
         addRule() {
             this.winStreakRepo.save({
@@ -200,7 +206,10 @@ export default {
                 randomAlt: this.randomAlternate,
                 characters_ids: this.characters,
                 bosses_ids: this.bosses,
-                adjustNumber: this.adjustNumber
+                adjustNumber: this.adjustNumber,
+                runs: this.runs,
+                init: this.init,
+                archived: this.archived
             })
             window?.ipc?.send('USER_CREATE_WINSTREAK', this.winStreakRepo.query().all().slice(-1)[0])
             this.cancel()

@@ -1,6 +1,6 @@
 <template>
     <li
-    v-if="runs && entities && charactersRep && runs.all().length > 0 && entities.all().length > 0 && charactersRep.all().length > 0"
+    v-if="winStreak"
     class="win-streak-item"
     >
         <div
@@ -110,7 +110,7 @@
                 >
                 <li
                     :key="winStreak.id+character"
-                    :class="['character', getRuns(winStreak).number % winStreak.characters_ids.length === index ? 'current' : 'not-current']"
+                    :class="['character', streak % winStreak.characters_ids.length === index ? 'current' : 'not-current']"
                 >
                     <span
                     class="small-portrait character image"
@@ -166,7 +166,7 @@
                 >
                 <li
                     :key="winStreak.id+boss"
-                    :class="['boss', getRuns(winStreak).number % winStreak.bosses_ids.length === index ? 'current' : 'not-current']"
+                    :class="['boss', streak % winStreak.bosses_ids.length === index ? 'current' : 'not-current']"
                 >
                     <span
                     class="small-portrait boss image"
@@ -198,7 +198,7 @@
                     class="icon small"
                     :style="{backgroundImage:`url('img/icons/hud/crown.png')`}"
                 />
-                <span class="wins">{{ getRuns(winStreak).number }}</span>
+                <span class="wins">{{ streak }}</span>
             </div>
             <div class="buttons">
             <div v-if="!editing" class="edit">
@@ -207,12 +207,12 @@
                 </button>
             </div>
             <div v-if="!editing" class="remove">
-                <button @click="remove(winStreak.id)">
+                <button @click="remove()">
                 {{ $t('dictionary.remove') }}
                 </button>
             </div>
             <div v-if="editing" class="save">
-                <button @click="save(winStreak.id)">
+                <button @click="save()">
                 {{ $tc('dictionary.save') }}
                 </button>
             </div>
@@ -247,7 +247,6 @@ export default {
     data() {
         return {
           gameStateOptions: [1, 2, 3],
-          id: this.winStreak.id,
           gameState: this.winStreak.gameState,
           randomNormal: this.winStreak.randomNormal,
           randomAlternate: this.winStreak.randomAlt,
@@ -257,6 +256,20 @@ export default {
           editing: false
         }
     },
+    mounted() {
+        if (this.actualWinStreak?.first().init === false) {
+            this.getRuns()
+        }
+        window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+            if (this.actualWinStreak?.first()?.archived === false && response.channel === "run end" && parseInt(response.run.gameState) === this.actualWinStreak?.first()?.gameState) {
+                let newRuns = []
+                if (this.winStreakWithRuns?.runs.length > 0) newRuns = [...this.winStreakWithRuns?.runs]
+                newRuns.push(response.run)
+                newRuns.reverse()
+                this.getRuns(newRuns)
+            }
+        })
+    },
     computed: {
         ...mapRepos({
             runRepo: Run,
@@ -265,7 +278,7 @@ export default {
             floorRepo: Floor,
             characterRepo: Character
         }),
-        runs() {
+        runsRep() {
             return this.runRepo
         },
         entities() {
@@ -273,29 +286,36 @@ export default {
         },
         charactersRep() {
             return this.characterRepo
+        },
+        actualWinStreak() {
+            return this.winStreakRepo?.where("id", this.winStreak?.id)
+        },
+        winStreakWithRuns() {
+            return this.actualWinStreak?.with('runs')?.first()
+        },
+        streak() {
+            return (this.winStreakWithRuns?.runs?.length > 0 ? this.winStreakWithRuns.runs.filter((run) => run.runEnd.win !== false).length : 0) + this.actualWinStreak?.first()?.adjustNumber
         }
     },
     methods: {
-        remove(winstreakId) {
-            this.winStreakRepo.where("id", winstreakId).delete()
-            window?.ipc?.send('USER_REMOVE_WINSTREAK', winstreakId)
+        remove() {
+            this.winStreakRepo.where("id", this.actualWinStreak?.first()?.id).delete()
+            window?.ipc?.send('USER_REMOVE_WINSTREAK', this.actualWinStreak?.first()?.id)
         },
         edit() {
           this.editing = true
         },
-        save(winstreakId) {
-            console.log(winstreakId)
+        save() {
             const updateObj = {
-                id: this.id,
                 gameState: this.gameState,
                 randomNormal: this.randomNormal,
                 randomAlt: this.randomAlternate,
                 characters_ids: this.characters,
                 bosses_ids: this.bosses,
-                adjustNumber: this.adjustNumber
+                adjustNumber: this.adjustNumber,
             }
-            this.winStreakRepo.where('id', winstreakId).update(updateObj)
-            window?.ipc?.send('USER_UPDATE_WINSTREAK', { id: this.id, value: updateObj})
+            this.actualWinStreak?.update(updateObj)
+            this.getRuns()
             this.editing = false
         },
         cancel() {
@@ -307,23 +327,52 @@ export default {
           this.bosses = this.winStreak.bosses_ids.slice(),
           this.editing = false
         },
-        check(runs, winStreak) {
-            let checkRuns = runs
-            let cancelAdjustNumber = false
+        check(rns) {
+            let checkRuns = rns
+            let streakKiller
+
+            if (this.actualWinStreak?.first()?.init === false) {
+                this.winStreakRepo.where('id', this.actualWinStreak?.first()?.id).update({
+                    init: true
+                })
+            }
 
             // check first death
-            const deathIndex = checkRuns.findIndex(run => run.runEnd.win === false)
+            let deathIndex = checkRuns.findIndex(run => run.runEnd.win === false)
+            if (deathIndex === 0 && this.actualWinStreak?.first()?.runs?.length > 0) {
+                // Winstreak is over
+                streakKiller = checkRuns[deathIndex]
+                deathIndex = checkRuns.findIndex((run, index) => index !== 0 && run.runEnd.win === false)
+                this.winStreakRepo.where('id', this.actualWinStreak?.first()?.id).update({
+                    archived: true
+                })
+                // Mark winstreak run killer
+                this.runRepo.where('id', streakKiller.id).update({
+                    runKiller: checkRuns.length + this.actualWinStreak?.first()?.adjustNumber - 1
+                })
+                window?.ipc?.send('USER_UPDATE_RUN', { id: streakKiller.id, property: 'runKiller', value: checkRuns.length })
+                // Add new rule
+                this.winStreakRepo.save({
+                    gameState: this.actualWinStreak?.first()?.gameState,
+                    randomNormal: this.actualWinStreak?.first()?.randomNormal,
+                    randomAlt: this.actualWinStreak?.first()?.randomAlternate,
+                    characters_ids: this.actualWinStreak?.first()?.characters_ids.slice(),
+                    bosses_ids: this.actualWinStreak?.first()?.bosses_ids.slice()
+                })
+                window?.ipc?.send('USER_CREATE_WINSTREAK', this.winStreakRepo.query().all().slice(-1)[0])
+                checkRuns.sort((a, b) => a.runUpdate < b.runUpdate ? -1 : a.runUpdate < b.runUpdate ? 1 : 0)
+                return checkRuns.map(r => r.id)
+            }
             checkRuns = deathIndex > -1 ? checkRuns.slice(0,deathIndex) : checkRuns
-            // cancelAdjustNumber = deathIndex > -1
             
             // check if random normal characters
-            if (winStreak.randomNormal) {
+            if (this.actualWinStreak?.first()?.randomNormal) {
                 const notNormalCharacterIndex = checkRuns.findIndex(run => parseInt(run.characters[0].id) > 20)
                 checkRuns = notNormalCharacterIndex > -1 ? checkRuns.slice(0,notNormalCharacterIndex) : checkRuns
             }
 
             // check if alt (tainted) characters
-            if (winStreak.randomAlt) {
+            if (this.actualWinStreak?.first()?.randomAlt) {
                 const notAltCharacterIndex = checkRuns.findIndex(run => parseInt(run.characters[0].id) < 21)
                 checkRuns = notAltCharacterIndex > -1 ? checkRuns.slice(0,notAltCharacterIndex) : checkRuns
             }
@@ -332,20 +381,19 @@ export default {
             checkRuns.sort((a, b) => a.runUpdate < b.runUpdate ? -1 : a.runUpdate < b.runUpdate ? 1 : 0)
             
             // check if streak has to follow a specific characters/bosses order
-            if (!winStreak.randomAlt && !winStreak.randomNormal) {
+            if (!this.actualWinStreak?.first()?.randomAlt && !this.actualWinStreak?.first()?.randomNormal) {
                 const checkCharactersAndBosses = checkRuns.reduce((arr, run) => {
                     if(!arr['runs']) arr['runs'] = []
                     if(!arr['index']) arr['index'] = 0
-                    const bossFloors = this.entities.where('id', winStreak.bosses_ids[arr['index'] % winStreak.bosses_ids.length]).first().floors_ids
+                    const bossFloors = this.entities.where('id', this.actualWinStreak?.first()?.bosses_ids[arr['index'] % this.actualWinStreak?.first()?.bosses_ids.length]).first().floors_ids
                     const runFloors = run.floors.map((runFloor) => { return runFloor.id })
-                    if (run.characters[0].id === winStreak.characters_ids[arr['index'] % winStreak.characters_ids.length] && bossFloors.some(bossFloor => runFloors.includes(bossFloor))) {
+                    if (run.characters[0].id === this.actualWinStreak?.first()?.characters_ids[arr['index'] % this.actualWinStreak?.first()?.characters_ids.length] && bossFloors.some(bossFloor => runFloors.includes(bossFloor))) {
                         arr['runs'].push(run)
                         arr['index']++
                     }
                     else {
                         arr['runs'] = []
                         arr['index'] = 0
-                        // if(!cancelAdjustNumber) cancelAdjustNumber = true
                     }
                     return arr;
                 }, {})
@@ -354,7 +402,7 @@ export default {
                 const checkBosses = checkRuns.reduce((arr, run) => {
                     if(!arr['runs']) arr['runs'] = []
                     if(!arr['index']) arr['index'] = 0
-                    const bossFloors = this.entities.where('id', winStreak.bosses_ids[arr['index'] % winStreak.bosses_ids.length]).first().floors_ids
+                    const bossFloors = this.entities.where('id', this.actualWinStreak?.first()?.bosses_ids[arr['index'] % this.actualWinStreak?.first()?.bosses_ids.length]).first().floors_ids
                     const runFloors = run.floors.map((runFloor) => { return runFloor.id })
                     if (bossFloors.some(bossFloor => runFloors.includes(bossFloor))) {
                         arr['runs'].push(run)
@@ -363,28 +411,32 @@ export default {
                     else {
                         arr['runs'] = []
                         arr['index'] = 0
-                        // if(!cancelAdjustNumber) cancelAdjustNumber = true
                     }
                     return arr;
                 }, {})
                 checkRuns = !checkBosses.runs ? [] : checkBosses.runs
             }
-            return {runs:checkRuns, number: checkRuns.length + (cancelAdjustNumber ? 0 : winStreak.adjustNumber)}
+
+            return  checkRuns?.length > 0 ? checkRuns.map(r => r.id) : checkRuns
         },
-        filter(run, winStreak) {
+        filter(r) {
             // gamestate
-            if (run.gameState != winStreak.gameState) return
+            if (r.gameState != this.actualWinStreak?.first()?.gameState) return
 
             // game end
-            if(!run.runEnd.date) return
+            if(!r.runEnd.date) return
 
             // death
-            if(run.runEnd.win === false) return run
+            if(r.runEnd.win === false) return r
 
-            return run
+            return r
         },
-        getRuns(winStreak) {
-            return this.check(this.runs.where((run) => { return this.filter(run, winStreak) }).orderBy('runUpdate', 'desc').get(), winStreak)
+        getRuns(rns) {
+            const runs = !rns ? this.check(this.runsRep.where((run) => { return this.filter(run) }).orderBy('runUpdate', 'desc').get()) : this.check(rns)
+            this.winStreakRepo.where('id', this.actualWinStreak?.first()?.id).update({
+                runs_ids: runs
+            })
+            window?.ipc?.send('USER_UPDATE_WINSTREAK', { id: this.actualWinStreak?.first()?.id, value: this.winStreakRepo.where('id', this.actualWinStreak?.first()?.id).first()})
         },
         getCharacter(characterId) {
             return this.charactersRep.where('id', characterId).first()
