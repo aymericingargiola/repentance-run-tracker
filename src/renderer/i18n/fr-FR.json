@@ -46,7 +46,10 @@
         "allCharacters": "Tous les personnages",
         "allSaves": "Toutes les sauvegardes",
         "allCondition": "Toutes",
-        "winCondition": "Condition de victoire"
+        "winCondition": "Condition de victoire",
+        "sort": "Trier par",
+        "sortByDate": "Date",
+        "sortByRunDuration": "Durée"
     },
     "editRun": {
         "title": "Editer la run",

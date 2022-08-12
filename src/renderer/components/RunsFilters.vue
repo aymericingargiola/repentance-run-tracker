@@ -32,6 +32,16 @@
         @input="resetPaginationFromInput()"
       >
     </div>
+    <CustomSelect
+      type="single"
+      :items="sortOptions"
+      :label="$t('select.sort')"
+      :empty-message="$t('select.sortByDate')"
+      order="desc"
+      :selectableOrder="order"
+      @updateSelect="onUpdateSortMultiSelect"
+      @updateOrder="onUpdateOrder"
+    />
     <DateRangePicker @updateDateRange="onUpdateDateRange" />
     <CustomSelect
       v-if="allTags && tagsWithRuns.length > 0"
@@ -76,6 +86,7 @@ import Run from '../store/classes/Run'
 import Winstreak from '../store/classes/WinStreak'
 import CustomSelect from './Tools/CustomSelect.vue'
 import DateRangePicker from './Tools/DateRangePicker.vue'
+import format from '../helpers/format'
 export default {
     name: "RunsFilters",
     components: {
@@ -84,8 +95,7 @@ export default {
     },
     props: {
         filterOffset: Number,
-        filterLimitPerPage: Number,
-        filterOrder: String
+        filterLimitPerPage: Number
     },
     data() {
         return {
@@ -100,7 +110,13 @@ export default {
                 {id: 2, value: "CurrentWinStreak", name: this.$t('strings.currentWinStreak', 1)},
                 {id: 3, value: "BestWinStreak", name: this.$t('strings.bestWinStreak', 1)}
             ],
+            sortOptions: [
+                {id: 0, value: "Date", name: this.$t('select.sortByDate')},
+                {id: 1, value: "RunDuration", name: this.$t('select.sortByRunDuration')}
+            ],
+            order: "desc",
             filterWinCondition: null,
+            filterSort: null,
             filterDateStart: null,
             filterDateEnd: null
         }
@@ -142,7 +158,10 @@ export default {
             return this.runRepo.all()
         },
         filteredRunsTotal() {
-            let filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy('runUpdate', this.filterOrder).get()
+            let filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy((run) => {
+                if (this.filterSort === "RunDuration") return format.formatDuration(run.runDuration)
+                return run.runUpdate
+            }, this.order).get()
             if (typeof this.filterWinCondition === "string") filteredRunsTotal = this.filterStreak(filteredRunsTotal)
             this.$emit('filteredRunsTotal', filteredRunsTotal)
             return filteredRunsTotal
@@ -159,11 +178,15 @@ export default {
     mounted() {
         window.ipc.send('ASK_TAGS')
         window.ipc.on('SYNC_SEND_TAGS', (response) => {
-            console.log(response)
+            if (this.$isDev) console.log(response)
             this.tagRepo.fresh(response.tags)
         })
     },
     methods: {
+        onUpdateOrder(selected) {
+            this.order = selected
+            this.$emit('resetPagination')
+        },
         onUpdateDateRange(range) {
             this.filterDateStart = range.start
             this.filterDateEnd = range.end
@@ -174,6 +197,10 @@ export default {
             : selected[0].value === 'Win' ? true
             : selected[0].value === 'Lose' ? false
             : selected[0].value
+            this.$emit('resetPagination')
+        },
+        onUpdateSortMultiSelect(selected) {
+            this.filterSort = selected[0]?.value
             this.$emit('resetPagination')
         },
         onUpdateGameStateMultiSelect(selected) {
@@ -333,7 +360,7 @@ export default {
             }
             if (this.filterWinCondition === "BestWinStreak") {
                 if (this.bestWinStreak) {
-                    console.log(this.bestWinStreak);
+                    if (this.$isDev) console.log(this.bestWinStreak);
                     return checkRuns.filter(run => this.bestWinStreak.runs_ids.includes(run.id))
                 }
             }

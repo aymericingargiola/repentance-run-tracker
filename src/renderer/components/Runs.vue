@@ -3,7 +3,6 @@
     <RunsFilters
       :filter-offset="filterOffset"
       :filter-limit-per-page="filterLimitPerPage"
-      :filter-order="filterOrder"
       @filteredRunsTotal="onUpdateFilteredRunsTotal"
       @filteredRuns="onUpdateFilteredRuns"
       @resetPagination="resetPagination"
@@ -150,8 +149,7 @@ export default {
             filteredRuns: [],
             currentPage: 1,
             filterLimitPerPage: 6,
-            filterOffset: 0,
-            filterOrder: 'desc'
+            filterOffset: 0
         }
     },
     computed: {

@@ -35,6 +35,20 @@
           >
             {{ selectedValue }}
           </li>
+          <div class="order" v-if="selectableOrder">
+            <div class="item desc" :class="selectableOrder === 'desc' ? 'selected' : ''" @click="selectableOrder !== 'desc' ? $emit('updateOrder', 'desc') : null">
+              <div
+                class="icon"
+                :style="{backgroundImage:`url('img/icons/top-arrow.png')`}"
+              />
+            </div>
+            <div class="item asc" :class="selectableOrder === 'asc' ? 'selected' : ''" @click="selectableOrder !== 'asc' ? $emit('updateOrder', 'asc') : null">
+              <div
+                class="icon"
+                :style="{backgroundImage:`url('img/icons/bottom-arrow.png')`}"
+              />
+            </div>
+          </div>
         </ul>
         <span
           v-if="selected.length > 0 && type === 'multi' && (!maxItems || maxItems > 1)"
@@ -77,7 +91,8 @@ export default {
         label: String,
         emptyMessage: String,
         order: String,
-        selectedValue: String
+        selectedValue: String,
+        selectableOrder: String
     },
     data() {
         return {
@@ -112,8 +127,8 @@ export default {
             }
             this.$emit('updateSelect', this.selected)
         },
-        showList() {
-            this.show = true
+        showList(e) {
+            if (!e.target.classList.contains("icon")) this.show = true
         },
         hideList() {
             this.show = false
@@ -160,6 +175,27 @@ export default {
                     &::after {
                         content: "\00a0";
                     }
+                }
+                .order {
+                  display: flex;
+                  position: absolute;
+                  right: 8px;
+                  .item {
+                    height: 100%;
+                    width: 20px;
+                    position: relative;
+                    transition: 0.5s ease;
+                    &:not(.selected) {
+                      opacity: 0.5;
+                      transform: scale(0.8);
+                    }
+                    cursor: pointer;
+                    .icon {
+                      position: absolute;
+                      width: 100%;
+                      height: 100%;
+                    }
+                  }
                 }
             }
             .selected-number {
