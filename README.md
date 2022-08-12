@@ -55,7 +55,6 @@ You can add any video link here.
 If something exciting happens during your run you can add a timecode, if the video link is from YouTube or Twitch it automatically opens the link with the right timecode on click.
 ### Tags
 You can add tags used for filtering (tags filter available later).
-## Screenshots
 
 ## Filters
 
@@ -69,6 +68,8 @@ In the search box you can type :
 Or a custom query :
 - Search an item : `:item:[item id]:[floor number, default = 1]`
 exemple, search runs with Pentagram found at second floor : `:item:51:2`
+
+## Screenshots
 
 ![Screen1](/doc/img/screen1.jpg)
 
