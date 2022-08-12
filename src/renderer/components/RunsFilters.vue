@@ -339,15 +339,32 @@ export default {
 
             // Text filter
             if(this.filterText.length > 3) {
-                const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
-                const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
-                const customRunName = run.customName.normalize('NFC').toLowerCase()
-                const id = run.id.normalize('NFC').toLowerCase()
-                if (
-                    !characterName.includes(textSearchValue) &&
-                    !customRunName.includes(textSearchValue) &&
-                    !id.includes(textSearchValue)
-                    ) return
+                if (this.filterText[0] !== ":") {
+                    const textSearchValue = this.filterText.normalize('NFC').toLowerCase()
+                    const characterName = run.characters[0].trueName.normalize('NFC').toLowerCase()
+                    const customRunName = run.customName.normalize('NFC').toLowerCase()
+                    const id = run.id.normalize('NFC').toLowerCase()
+                    if (
+                        !characterName.includes(textSearchValue) &&
+                        !customRunName.includes(textSearchValue) &&
+                        !id.includes(textSearchValue)
+                        ) return
+                } else {
+                    const customQuery = this.filterText.split(":")
+                    switch (customQuery[1]) {
+                        case "item":
+                        if (!isNaN(parseInt(customQuery[2]))) {
+                            console.log(isNaN(parseInt(customQuery[3])), parseInt(customQuery[3]) === 0)
+                            if (isNaN(parseInt(customQuery[3])) || parseInt(customQuery[3]) === 0) {
+                                console.log(run.floors[0]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2])))
+                                if (run.floors[0]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2]))) return run
+                                return
+                            }
+                            if (run.floors[parseInt(customQuery[3]) - 1]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2]))) return run
+                            return
+                        }
+                    }
+                }
             }
             return run
         },

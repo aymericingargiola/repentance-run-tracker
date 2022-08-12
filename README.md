@@ -57,6 +57,19 @@ If something exciting happens during your run you can add a timecode, if the vid
 You can add tags used for filtering (tags filter available later).
 ## Screenshots
 
+## Filters
+
+### Search box
+In the search box you can type :
+- Character name
+- Custom run name
+- Seed
+- Id
+
+Or a custom query :
+- Search an item : `:item:[item id]:[floor number, default = 1]`
+exemple, search runs with Pentagram found at second floor : `:item:51:2`
+
 ![Screen1](/doc/img/screen1.jpg)
 
 ![Screen2](/doc/img/screen2.jpg)
