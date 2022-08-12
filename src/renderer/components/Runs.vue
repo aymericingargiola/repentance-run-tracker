@@ -23,7 +23,7 @@
             ]"
           :data-id="run.id + ridx"
         >
-          <div
+          <!-- <div
             class="before"
             :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"
           />
@@ -34,7 +34,7 @@
           <div
             class="after"
             :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"
-          />
+          /> -->
           <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '',
           run.runEnd && run.floors ? 'has-bosses' : '']">
             <RunInfos
@@ -228,21 +228,21 @@ export default {
 }
 .runs-container {
     position: relative;
-    padding: 0px 24px;
+    padding: 0px 12px;
 }
 .run {
     position: relative;
     margin-bottom: 0px;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
     transition: 1.5s ease;
     width: 100%;
-    // cursor: pointer;
-    &:not(:first-child) {
-        margin-top: 12px;
-    }
+    border: transparent 12px solid;
+    border-image: url('../../../public/img/cards/bar-big-border-frame2.png') 15 fill;
+    border-image-width: 32px;
+    filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.25));
+    margin-top: 24px;
     &.run-group-transition-enter{
         opacity: 0;
-        transform: translateY(100%);
+        transform: translateY(calc(100% + 24px));
     }
     &.run-group-transition-leave-to {
         opacity: 0;
@@ -259,43 +259,12 @@ export default {
         transition: transform 1s ease, opacity 1s ease;
         //display: block;
     }
-    > .before, .after, .mid {
-        z-index: 0;
-        position: absolute;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        pointer-events: none;
-    }
-    > .before {
-        content: "";
-        height: 100%;
-        width: 15px;
-        left: 0px;
-        top: 0px;
-        transform: translateX(-14.25px);
-    }
-    > .after {
-        height: 100%;
-        width: 15px;
-        right: 0px;
-        top: 0px;
-        transform: translateX(14.25px);
-        z-index: 2;
-    }
-    > .mid {
-        height: 100%;
-        width: 100%;
-        left: 0px;
-        top: 0px;
-        background-size: contain;
-        background-repeat: repeat-x;
-    }
     .run-content {
         z-index: 1;
         position: relative;
         display: flex;
         padding: 24px;
-        padding-bottom: 56px;
+        padding-bottom: 28px;
         padding-top: 72px;
         overflow: hidden;
         width: 100%;

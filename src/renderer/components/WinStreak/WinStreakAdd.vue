@@ -1,17 +1,5 @@
 <template>
   <li :class="['win-streak-item add', !editing ? 'short' : '']">
-    <div
-      class="before"
-      :style="{backgroundImage:`url('img/cards/bar-ws-left_01.png')`}"
-    />
-    <div
-      class="mid"
-      :style="{backgroundImage:`url('img/cards/bar-ws-mid_01.png')`}"
-    />
-    <div
-      class="after"
-      :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"
-    />
     <div :class="['content', editing ? 'expended' : '']">
       <div v-if="usedGameStates">
         <CustomSelect
