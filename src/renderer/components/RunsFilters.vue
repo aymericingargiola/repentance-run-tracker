@@ -354,13 +354,11 @@ export default {
                     switch (customQuery[1]) {
                         case "item":
                         if (!isNaN(parseInt(customQuery[2]))) {
-                            console.log(isNaN(parseInt(customQuery[3])), parseInt(customQuery[3]) === 0)
                             if (isNaN(parseInt(customQuery[3])) || parseInt(customQuery[3]) === 0) {
-                                console.log(run.floors[0]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2])))
-                                if (run.floors[0]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2]))) return run
+                                if (run.floors[0]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2])  && item.type === "item")) return run
                                 return
                             }
-                            if (run.floors[parseInt(customQuery[3]) - 1]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2]))) return run
+                            if (run.floors[parseInt(customQuery[3]) - 1]?.itemsCollected?.find(item => item.id === parseInt(customQuery[2]) && item.type === "item")) return run
                             return
                         }
                     }
