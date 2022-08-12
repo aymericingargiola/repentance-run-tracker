@@ -3,18 +3,6 @@
     v-if="winStreak"
     class="win-streak-item"
     >
-        <div
-            class="before"
-            :style="{backgroundImage:`url('img/cards/bar-ws-left_01.png')`}"
-        />
-        <div
-            class="mid"
-            :style="{backgroundImage:`url('img/cards/bar-ws-mid_01.png')`}"
-        />
-        <div
-            class="after"
-            :style="{backgroundImage:`url('img/cards/bar-ws-right_01.png')`}"
-        />
         <div class="content">
             <div v-if="usedGameStates && editing">
                 <CustomSelect
@@ -452,40 +440,14 @@ export default {
 @import "../../assets/styles/scss/vars/_colors";
 .win-streak-item {
     position: relative;
-    padding: 20px 12px 28px 12px;
+    padding: 20px 12px 12px 12px;
     margin-left: 25px;
     margin-right: 25px;
     width: calc(100%/3);
-    > .before, > .after, > .mid {
-        z-index: 0;
-        position: absolute;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        pointer-events: none;
-    }
-    > .before {
-        content: "";
-        height: 100%;
-        width: 21px;
-        left: 0px;
-        top: 0px;
-        transform: translateX(-21px);
-    }
-    > .after {
-        height: 100%;
-        width: 21px;
-        right: 0px;
-        top: 0px;
-        transform: translateX(21px);
-    }
-    > .mid {
-        height: 100%;
-        width: 100%;
-        left: 0px;
-        top: 0px;
-        background-size: contain;
-        background-repeat: repeat-x;
-    }
+    border: transparent 12px solid;
+    border-image: url('../../../../public/img/cards/bar-big-border-frame.png') 14 fill;
+    border-image-width: 30px;
+    filter: drop-shadow(6px 6px 0px rgba(0,0,0,0.25));
     .number {
         position: relative;
         z-index: 0;

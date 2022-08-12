@@ -7,7 +7,7 @@
         <template v-for="winStreak in currentWinStreak">
           <WinStreakItem v-if="allWinStreak && allWinStreak.length > 0" :winStreak="winStreak" :key="winStreak.id"/>
         </template>
-        <WinStreakAdd v-if="allWinStreaks && allWinStreaks.length < 3" />
+        <WinStreakAdd v-if="currentWinStreak && currentWinStreak.length < 3" />
       </ul>
     </div>
   </div>
@@ -50,9 +50,6 @@ export default {
         },
         charactersRep() {
             return this.characterRepo
-        },
-        allWinStreaks() {
-          return this.winStreakRepo?.all().length > 0 ? this.winStreakRepo.all() : []
         }
     },
     mounted() {

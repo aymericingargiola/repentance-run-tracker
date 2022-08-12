@@ -46,7 +46,10 @@
         "allCharacters": "All characters",
         "allSaves": "All saves",
         "allCondition": "All conditions",
-        "winCondition": "Win condition"
+        "winCondition": "Win condition",
+        "sort": "Sort",
+        "sortByDate": "Date",
+        "sortByRunDuration": "Run time"
     },
     "editRun": {
         "title": "Edit run",
