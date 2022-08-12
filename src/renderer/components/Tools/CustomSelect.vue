@@ -39,13 +39,13 @@
             <div class="item desc" :class="selectableOrder === 'desc' ? 'selected' : ''" @click="selectableOrder !== 'desc' ? $emit('updateOrder', 'desc') : null">
               <div
                 class="icon"
-                :style="{backgroundImage:`url('img/icons/top-arrow.png')`}"
+                :style="{backgroundImage:`url('img/icons/bottom-arrow.png')`}"
               />
             </div>
             <div class="item asc" :class="selectableOrder === 'asc' ? 'selected' : ''" @click="selectableOrder !== 'asc' ? $emit('updateOrder', 'asc') : null">
               <div
                 class="icon"
-                :style="{backgroundImage:`url('img/icons/bottom-arrow.png')`}"
+                :style="{backgroundImage:`url('img/icons/top-arrow.png')`}"
               />
             </div>
           </div>
