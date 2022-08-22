@@ -343,11 +343,13 @@ async function updateOrCreateRun(params = {}) {
                 break
                 case 'player updated':
                     const playerStats = params.stats
-                    // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
-                    if(playerStats.infos.subtype === 20 && sameRun.characters[playerStats.infos.number - 1].id === "19" ) sameRun.characters[playerStats.infos.number - 1].statsSecondary = playerStats
-                    // Default case
-                    else if(sameRun.characters[playerStats.infos.number]) sameRun.characters[playerStats.infos.number].stats = playerStats
-                    if(!sameRun.extendedSaveMode) sameRun.extendedSaveMode = true
+                    if (playerStats && playerStats.infos) {
+                        // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
+                        if(playerStats.infos.subtype === 20 && sameRun.characters[playerStats.infos.number - 1].id === "19" ) sameRun.characters[playerStats.infos.number - 1].statsSecondary = playerStats
+                        // Default case
+                        else if(sameRun.characters[playerStats.infos.number]) sameRun.characters[playerStats.infos.number].stats = playerStats
+                        if(!sameRun.extendedSaveMode) sameRun.extendedSaveMode = true
+                    }
                     break
                 default:
                     return false
@@ -421,9 +423,9 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Initialized player")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            if(!currentCharater || !inRun || !currentRunInit) currentCharater = getCharater(log)
+            if(!currentCharater || !inRun || !currentRunInit) currentCharater = getCharater(log, otherModsLoaded)
             else if (currentRunInit) {
-                updateOrCreateRun({trigger: "init other player", character: getCharater(log)})
+                updateOrCreateRun({trigger: "init other player", character: getCharater(log, otherModsLoaded)})
             }
         }
         if(log.includes("Start Seed")) {

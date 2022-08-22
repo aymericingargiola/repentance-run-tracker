@@ -3,9 +3,11 @@ const path = require('path')
 const { cloneFrom } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
 const characters = require('../jsons/characters.json')
+const charactersFiendFolio = require('../jsons/characters_fiendfolio-reheated.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const items = require('../jsons/items.json')
 const itemsCustom = require('../jsons/itemsCustom.json')
+const itemsFiendFolio = require('../jsons/items_fiendfolio-reheated.json')
 const floors = require('../jsons/floors.json')
 const { DateTime, Duration } = require('luxon')
 const log = require('electron-log')
@@ -23,10 +25,14 @@ module.exports = {
         const modPathIndex = modPath.indexOf("/mods/")
         return path.normalize(`${modPath.slice(0,modPathIndex)}\\mods`)
     },
-    getCharater: (string) => {
+    getCharater: (string, otherModsLoaded) => {
         //Return matching character from logs
         const splitValue = string.includes("Pool") ? 19 : 9
-        const character = characters.find(character => character.id === string.split(" ")[splitValue])
+        let character = null
+        if (otherModsLoaded.length > 0) { // Supported custom items
+            character = charactersFiendFolio.find(character => character.id === string.split(" ")[splitValue])
+        }
+        if (!character) character = characters.find(character => character.id === string.split(" ")[splitValue])
         if (character) return cloneFrom(character)
         log.error(`Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}]`)
         return cloneFrom(characters.find(character => character.id === "999999999999"))
@@ -43,9 +49,13 @@ module.exports = {
     },
     getCharaterStats: (string) => {
         //Return character stats from RRTE mod converted to json
-        let playerStats = string.split(" ")[9].replaceAll("=", ":")
-        playerStats.replace(/(\w+)\s*:\s*('[^']*'|"[^"]*"|)/gi, (match, match2) => playerStats = playerStats.replace(match2, `"${match2}"`))
-        return JSON.parse(playerStats)
+        try {
+            const stats = JSON.parse(string.split(" ")[9])
+            return stats
+        } catch (error) {
+            log.error("Impossible to parse character datas and stats", string.split(" ")[9], error)
+            return {}
+        }
     },
     getSeed: (string) => {
         const splitValuePart1 = string.includes("Pool") ? 15 : 5
@@ -118,7 +128,10 @@ module.exports = {
             }
         }
         if (otherModsLoaded.length > 0) { // Supported custom items
-            const matchingCustomItem = itemsCustom.collectibles.find(collectible => collectible.title === collectibleName && otherModsLoaded.includes(collectible.category))
+            console.log(otherModsLoaded, otherModsLoaded.includes("fiendfolio-reheated"))
+            let matchingCustomItem = otherModsLoaded.includes("fiendfolio-reheated") ? itemsFiendFolio.collectibles.find(collectible => collectible.title === collectibleName && otherModsLoaded.includes(collectible.category)) : null
+            console.log(matchingCustomItem)
+            if (!matchingCustomItem) matchingCustomItem = itemsCustom.collectibles.find(collectible => collectible.title === collectibleName && otherModsLoaded.includes(collectible.category))
             if (matchingCustomItem && !matchingCustomItem.hidden) {
                 return {
                     id: matchingCustomItem.itemID,

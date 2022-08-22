@@ -163,7 +163,7 @@
         </ul>
         <div
           class="image"
-          :style="{backgroundImage:`url('img/characters/${character.trueName}${parseInt(character.id) === 20 ? ' Esau Only' : ''}${parseInt(character.id) > 20 ? ' Alt' : ''}.png')`}"
+          :style="{backgroundImage:`url('img/characters/${character.trueName}${parseInt(character.id) === 20 ? ' Esau Only' : ''}${character.version === 'Alternate' ? ' Alt' : ''}.png')`}"
         />
         <div
           v-if="character.stats"

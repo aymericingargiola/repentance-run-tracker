@@ -74,13 +74,13 @@
                       <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
                     </div>
                     <img
-                      v-if="item.type === 'trinket'"
-                      :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`"
+                      v-if="item.custom"
+                      :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : `${(`00${item.originalItemID}`).slice(-3)}.png`}`"
                       onerror="this.src='img/icons/collectibles/questionmark.png'"
                     >
                     <img
-                      v-else-if="item.custom"
-                      :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : (`00${item.originalItemID}`).slice(-3)}.png`"
+                      v-else-if="item.type === 'trinket'"
+                      :src="`img/icons/trinkets/${item.golden ? item.id : (`00${item.id}`).slice(-3)}.png`"
                       onerror="this.src='img/icons/collectibles/questionmark.png'"
                     >
                     <img
