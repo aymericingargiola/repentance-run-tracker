@@ -457,7 +457,7 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Spawn Entity")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            updateOrCreateRun({trigger: "spawn entity", entity: getEntity(log)})
+            updateOrCreateRun({trigger: "spawn entity", entity: getEntity(log, otherModsLoaded)})
         }
         if(log.includes("greed mode wave")) {
             console.log("\x1b[35m", log, "\x1b[0m")

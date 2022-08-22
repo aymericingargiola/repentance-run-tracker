@@ -22,7 +22,8 @@
     "build:locales": "node -e require('./src/background/helpers/jsonBuilder.js').buildLocalesJsons()",
     "build:entitiesJson": "node -e require('./src/background/helpers/jsonBuilder.js').buildEntitiesJson()",
     "build:itemsJson": "node -e require('./src/background/helpers/jsonBuilder.js').buildItemsJson()",
-    "build:entitiesImages": "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()"
+    "build:entitiesImages": "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()",
+    "build:entitiesImagesFiendFolio": "node -e require('./src/background/helpers/FiendFolioParser.js').buildEntitiesImages()"
   },
   "main": "background.js",
   "dependencies": {

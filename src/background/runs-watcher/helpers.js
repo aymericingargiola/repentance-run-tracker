@@ -5,6 +5,7 @@ const { syncApp } = require('../helpers/sync')
 const characters = require('../jsons/characters.json')
 const charactersFiendFolio = require('../jsons/characters_fiendfolio-reheated.json')
 const entities = require('../jsons/entitiesFiltered.json')
+const entitiesFiendFolio = require('../jsons/entitiesFiltered_fiendfolio-reheated.json')
 const items = require('../jsons/items.json')
 const itemsCustom = require('../jsons/itemsCustom.json')
 const itemsFiendFolio = require('../jsons/items_fiendfolio-reheated.json')
@@ -37,11 +38,15 @@ module.exports = {
         log.error(`Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}]`)
         return cloneFrom(characters.find(character => character.id === "999999999999"))
     },
-    getEntity: (string) => {
+    getEntity: (string, otherModsLoaded) => {
         //Return matching entity from logs
         const entityId = string.split(" ")[5].match(/(\d+)/)[0]
         const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
-        const entity = entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`))
+        let entity = null
+        if (otherModsLoaded.length > 0) { // Supported custom items
+            entity = otherModsLoaded.includes("fiendfolio-reheated") ? entitiesFiendFolio.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`)) : null
+        }
+        if (!entity) entity = entities.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`))
         if (entity) return cloneFrom(entity)
         const logMessage = `Entity was not found. [log string : ${string} | split value : ID-${entityId}-${5} Variant-${entityVariant}-${6}]`
         console.log(logMessage)
@@ -128,9 +133,7 @@ module.exports = {
             }
         }
         if (otherModsLoaded.length > 0) { // Supported custom items
-            console.log(otherModsLoaded, otherModsLoaded.includes("fiendfolio-reheated"))
             let matchingCustomItem = otherModsLoaded.includes("fiendfolio-reheated") ? itemsFiendFolio.collectibles.find(collectible => collectible.title === collectibleName && otherModsLoaded.includes(collectible.category)) : null
-            console.log(matchingCustomItem)
             if (!matchingCustomItem) matchingCustomItem = itemsCustom.collectibles.find(collectible => collectible.title === collectibleName && otherModsLoaded.includes(collectible.category))
             if (matchingCustomItem && !matchingCustomItem.hidden) {
                 return {

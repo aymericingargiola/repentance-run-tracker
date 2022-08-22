@@ -61,7 +61,7 @@ module.exports = {
         }
         const cleanEntitiesXml = await module.exports.removeXmlComments(xml.toString())
         const convertEntitiesXml = await module.exports.convertToJson(cleanEntitiesXml)
-        const ignoreEntities = []
+        const ignoreEntities = ["180.212.0", "180.211.0", "150.2.0"]
         const entitiesJson = convertEntitiesXml.entities.entity.map((entity, index) => {
             const entityId = `${entity._attributes.id}.${entity._attributes.variant ? entity._attributes.variant : 0}.${entity._attributes.subtype ? entity._attributes.subtype : 0}`
             if (!ignoreEntities.includes(entityId) && entity._attributes.baseHP && parseInt(entity._attributes.baseHP) > 0 && entity._attributes.collisionDamage && parseInt(entity._attributes.collisionDamage) > 0 || entity._attributes.boss === "1") {
@@ -70,7 +70,8 @@ module.exports = {
                     name: entity._attributes.name,
                     champion: entity._attributes.champion,
                     boss: entity._attributes.boss === "1" ? true : false,
-                    portrait: entity._attributes.portrait
+                    portrait: entity._attributes.portrait,
+                    category: "fiendfolio-reheated"
                 }
             }
         }).filter(entity => entity)
