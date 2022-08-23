@@ -69,7 +69,7 @@
           :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
         />
         <div class="content">
-          {{ characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${characters[0].id}.name`)}` }}
+          {{ characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${characters[0].id}.name`, characters[0].name)}` }}
         </div>
       </li>
       <li
@@ -223,10 +223,10 @@
 <script>
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
+import i18nMixin from '../../mixins/i18n'
 export default {
     name: "RunInfos",
-    components: {
-    },
+    mixins: [i18nMixin],
     props: {
         id: String,
         characters: Array,

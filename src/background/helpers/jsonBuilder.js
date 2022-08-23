@@ -49,6 +49,125 @@ module.exports = {
         await writeFileAsync('./src/background/jsons', 'entitiesFiltered.json', JSON.stringify(entitiesJson))
         return console.timeEnd('Entities json done in ')
     },
+    entitiesCustomJson: async function() {
+        console.time('Entities Custom json done in ')
+        // Fiend Folio Reheated
+        let xml
+        try {
+            xml = await fsPromises.readFile('./src/background/jsons/entities2_fiendfolio-reheated.xml')
+        } catch (err) {
+            console.log(err)
+            return
+        }
+        const cleanEntitiesXml = await module.exports.removeXmlComments(xml.toString())
+        const convertEntitiesXml = await module.exports.convertToJson(cleanEntitiesXml)
+        const ignoreEntities = ["180.212.0", "180.211.0", "150.2.0"]
+        const entitiesJson = convertEntitiesXml.entities.entity.map((entity, index) => {
+            const entityId = `${entity._attributes.id}.${entity._attributes.variant ? entity._attributes.variant : 0}.${entity._attributes.subtype ? entity._attributes.subtype : 0}`
+            if (!ignoreEntities.includes(entityId) && entity._attributes.baseHP && parseInt(entity._attributes.baseHP) > 0 && entity._attributes.collisionDamage && parseInt(entity._attributes.collisionDamage) > 0 || entity._attributes.boss === "1") {
+                return {
+                    id: entityId,
+                    name: entity._attributes.name,
+                    champion: entity._attributes.champion,
+                    boss: entity._attributes.boss === "1" ? true : false,
+                    portrait: entity._attributes.portrait,
+                    category: "fiendfolio-reheated"
+                }
+            }
+        }).filter(entity => entity)
+        await writeFileAsync('./src/background/jsons', 'entitiesFiltered_fiendfolio-reheated.json', JSON.stringify(entitiesJson))
+        return console.timeEnd('Entities Custom json done in ')
+    },
+    itemsCustomJson: async function() {
+        console.time('Items Custom json done in ')
+        // Fiend Folio Reheated
+        let xml
+        try {
+            xml = await fsPromises.readFile('./src/background/jsons/items_fiendfolio-reheated.xml')
+        } catch (err) {
+            console.log(err)
+            return
+        }
+        const cleanItemsXml = await module.exports.removeXmlComments(xml.toString())
+        const convertItemsXml = await module.exports.convertToJson(cleanItemsXml)
+        const itemsPassive = [...convertItemsXml.items.passive].map(item => {
+            if (item._attributes.gfx && item._attributes.gfx !== "") {
+                return {
+                    title: item._attributes.name,
+                    pickup: item._attributes.description,
+                    gfx: item._attributes.gfx,
+                    tags: item._attributes.tags,
+                    itemType: "Passive",
+                    category: "fiendfolio-reheated"
+                }
+            }
+        }).filter(item => item)
+        const itemsActive = [...convertItemsXml.items.active].map(item => {
+            if (item._attributes.gfx && item._attributes.gfx !== "") {
+                return {
+                    title: item._attributes.name,
+                    pickup: item._attributes.description,
+                    gfx: item._attributes.gfx,
+                    tags: item._attributes.tags,
+                    itemType: "Active",
+                    category: "fiendfolio-reheated"
+                }
+            }
+        }).filter(item => item)
+        const itemsFamiliar = [...convertItemsXml.items.familiar].map(item => {
+            if (item._attributes.gfx && item._attributes.gfx !== "") {
+                return {
+                    title: item._attributes.name,
+                    pickup: item._attributes.description,
+                    gfx: item._attributes.gfx,
+                    tags: item._attributes.tags,
+                    itemType: "Familiar",
+                    category: "fiendfolio-reheated"
+                }
+            }
+        }).filter(item => item)
+        const itemsTrinket = [...convertItemsXml.items.trinket].map(item => {
+            if (item._attributes.gfx && item._attributes.gfx !== "") {
+                return {
+                    title: item._attributes.name,
+                    pickup: item._attributes.description,
+                    gfx: item._attributes.gfx,
+                    tags: item._attributes.tags,
+                    itemType: "Trinket",
+                    category: "fiendfolio-reheated"
+                }
+            }
+        }).filter(item => item)
+        const itemsJson = [...itemsPassive, ...itemsActive, ...itemsFamiliar, ...itemsTrinket]
+        const reduceItemsJson = itemsJson.reduce((arr, item, index) => {
+            if(!arr['collectibles']) arr['collectibles'] = []
+            if(!arr['trinkets']) arr['trinkets'] = []
+            if(item.itemType === "Trinket") {
+                arr['trinkets'].push({
+                    itemID: 2000 + index,
+                    title: item.title,
+                    pickup: item.pickup,
+                    gfx: item.gfx,
+                    itemType: item.itemType,
+                    category: item.category,
+                    tags: item.tags
+                })
+            } else {
+                arr['collectibles'].push({
+                    itemID: 2000 + index,
+                    title: item.title,
+                    pickup: item.pickup,
+                    gfx: item.gfx,
+                    itemType: item.itemType,
+                    category: item.category,
+                    tags: item.tags
+                })
+            }
+            return arr
+        }, {})
+        await writeFileAsync('./src/background/jsons', 'items_fiendfolio-reheated.json', JSON.stringify(reduceItemsJson))
+        return console.timeEnd('Items Custom json done in ')
+    },
     playersLocalization: async function(language) {
         console.time(`Players localization for ${language} json done in `)
         const fromStringTable = stringTable.find(item => item.language === language)
@@ -262,6 +381,11 @@ module.exports = {
     buildEntitiesJson: async function() {
         console.log('Building entities json...')
         await module.exports.entitiesJson()
+        await module.exports.entitiesCustomJson()
+    },
+    buildItemsJson: async function() {
+        console.log('Building items json...')
+        await module.exports.itemsCustomJson()
     },
     buildLocalesJsons: async function() {
         console.log('Building locales jsons...')

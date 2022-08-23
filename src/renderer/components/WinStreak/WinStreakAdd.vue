@@ -69,9 +69,9 @@
             >
               <span
                 class="small-portrait character image"
-                :style="{backgroundImage:`url('img/characters/small portraits/${character.id}.png')`}"
+                :style="{backgroundImage:`url('img/characters/small portraits/${character.version === 'Alternate' ? `${character.name} Alt` : character.name}.png')`}"
               />
-              <span class="name">{{ character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${character.id}.name`)}` }} {{ character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }} {{ characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : '' }}</span>
+              <span class="name">{{ character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${character.id}.name`, character.name)}` }} {{ character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }} {{ characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : '' }}</span>
             </li>
           </template>
         </ul>
@@ -141,12 +141,13 @@ import Entity from '../../store/classes/Entity'
 import Character from '../../store/classes/Character'
 import CustomSelect from '../Tools/CustomSelect.vue'
 import winstreakMixin from '../../mixins/winstreak'
+import i18nMixin from '../../mixins/i18n'
 export default {
     name: "WinStreaksAdd",
     components: {
         CustomSelect
     },
-    mixins: [winstreakMixin],
+    mixins: [winstreakMixin, i18nMixin],
     data() {
         return {
             gameStateOptions: [1, 2, 3],

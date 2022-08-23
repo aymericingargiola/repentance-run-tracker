@@ -20,7 +20,11 @@
         "lose": "Lose",
         "room": "Room | Rooms",
         "enemy": "Enemy | Enemies",
-        "item": "Item | Items"
+        "item": "Item | Items",
+        "damage": "Damage | Damages",
+        "luck": "Luck | Lucks",
+        "speed": "Speed | Speeds",
+        "tearRate": "Tear Rate | Tear Rates"
     },
     "strings": {
         "addRule": "@:dictionary.add rule",

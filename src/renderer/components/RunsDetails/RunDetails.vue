@@ -7,7 +7,7 @@
       <div class="overlay" />
       <div class="menu">
         <div class="title">
-          <h1>{{ currentRun.characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${$t(`players.${currentRun.characters[0].id}.name`)}` }}, {{ getRunStartDate }}</h1>
+          <h1>{{ currentRun.characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${currentRun.characters[0].id}.name`), currentRun.characters[0].name}` }}, {{ getRunStartDate }}</h1>
           <span class="run-title">{{ currentRun.customName }}</span>
         </div>
         <div
@@ -21,6 +21,7 @@
         <div class="content chart">
           <RunFloorsChart
             height="380"
+            :start-states="getRunStartStats"
             :floors-prop="floors"
             @selectedFloor="onSelectedFloor"
           />
@@ -53,8 +54,10 @@ import Run from "../../store/classes/Run"
 import Config from "../../store/classes/Config"
 import RunFloorsChart from "../RunsDetails/RunFloorsChart.vue"
 import RunFloorsCollection from "../RunsDetails/RunFloorsCollection.vue"
+import i18nMixin from "../../mixins/i18n"
 export default {
   name: "RunDetails",
+  mixins: [i18nMixin],
   components: {
     RunFloorsChart,
     RunFloorsCollection
@@ -76,6 +79,9 @@ export default {
     },
     getRunStartDate() {
       return this.$helpers.formatDate(this.currentRun.runStart, `dd LLLL yyyy - ${this.getConfig("hourFormat").value}`, this.$i18n.locale)
+    },
+    getRunStartStats() {
+      return this.characters?.length > 0 ? this.characters[0]?.startStats?.stats : {}
     },
     characters() {
       return this.currentRun && this.currentRun.characters ? this.currentRun.characters : []
