@@ -1,42 +1,9 @@
 RRTE = RegisterMod("Repentance Run Tracker Extended", 1)
+local json = require "json"
 local enableDebug = true
 local playerNumber = -1
 
 Isaac.DebugString("[RRTEEXTENDLOGS] Repentance Run Tracker Extended loaded")
-
-function table.val_to_str(v)
-    if "string" == type(v) then
-        v = string.gsub(v, "\n", "\\n")
-        if string.match(string.gsub(v, "[^'\"]", ""), '^"+$') then
-            return "'" .. v .. "'"
-        end
-        return '"' .. string.gsub(v, '"', '\\"') .. '"'
-    else
-        return "table" == type(v) and table.tostring(v) or tostring(v)
-    end
-end
-
-function table.key_to_str(k)
-    if "string" == type(k) and string.match(k, "^[_%a][_%a%d]*$") then
-        return k
-    else
-        return "[" .. table.val_to_str(k) .. "]"
-    end
-end
-
-function table.tostring(tbl)
-    local result, done = {}, {}
-    for k, v in ipairs(tbl) do
-        table.insert(result, table.val_to_str(v))
-        done[k] = true
-    end
-    for k, v in pairs(tbl) do
-        if not done[k] then
-            table.insert(result, table.key_to_str(k) .. "=" .. table.val_to_str(v))
-        end
-    end
-    return "{" .. table.concat(result, ",") .. "}"
-end
 
 function RRTE:playerInit(Player)
     playerNumber = playerNumber + 1
@@ -73,7 +40,7 @@ function RRTE:playerInit(Player)
         ["bombs"] = Player:GetNumBombs(),
         ["keys"] = Player:GetNumKeys()
     }
-    Isaac.DebugString("[RRTEEXTENDLOGS] Player init : " .. table.tostring(Player:GetData()))
+    Isaac.DebugString("[RRTEEXTENDLOGS] Player init : " .. json.encode(Player:GetData()))
 end
 
 function RRTE:playerUpdate(Player)
@@ -99,7 +66,7 @@ function RRTE:playerUpdate(Player)
             ["tearFallingSpeed"] = math.ceil((Player.TearFallingSpeed) * 10^2) / 10^2,
             ["tearHeight"] = math.ceil((Player.TearHeight) * 10^2) / 10^2
         }
-        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [stats] : " .. table.tostring(Player:GetData()))
+        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [stats] : " .. json.encode(Player:GetData()))
     end
 
     -- Update player life infos
@@ -121,7 +88,7 @@ function RRTE:playerUpdate(Player)
             ["blackHearts"] = Player:GetBlackHearts(),
             ["extraLives"] = Player:GetExtraLives()
         }
-        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [life] : " .. table.tostring(Player:GetData()))
+        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [life] : " .. json.encode(Player:GetData()))
     end
 
     -- Update player usables infos
@@ -133,7 +100,7 @@ function RRTE:playerUpdate(Player)
             ["bombs"] = Player:GetNumBombs(),
             ["keys"] = Player:GetNumKeys()
         }
-        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [usable] : " .. table.tostring(Player:GetData()))
+        Isaac.DebugString("[RRTEEXTENDLOGS] Player updated [usable] : " .. json.encode(Player:GetData()))
     end
 end
 

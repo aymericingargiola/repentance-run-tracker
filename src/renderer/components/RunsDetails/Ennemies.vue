@@ -18,8 +18,9 @@
             />
             <span class="title">{{ t(`entities.${formatLocaleId(ennemy.id)}.name`, ennemy.name) }}{{ $isDev ? ` [id : ${ennemy.id}]` : '' }}</span>
           </div>
-          <div class="image">
-            <img :src="`img/entities/${ennemy.id}.png`">
+          <div class="image" :class="ennemy.category" :category="ennemy.category">
+            <img :src="`img/entities/${ennemy.category ? `${ennemy.category}/${ennemy.name.replaceAll(' ', '').replaceAll('\'', '')}`: ennemy.id}.png`"
+            @error="onImageLoadError($event, ennemy.category)">
             <span
               v-if="ennemy.number > 1"
               class="number"
@@ -63,7 +64,10 @@ export default {
   mounted() {
   },
   methods: {
-    
+    onImageLoadError(e, category) {
+      e.target.src="img/entities/questionmark.png"
+      e.target.parentNode.classList.add("not-loaded")
+    }
   }
 };
 </script>
@@ -133,6 +137,13 @@ export default {
           color: $red-a2;
           position: absolute;
           //text-shadow: 0px 0px 2px black, 0px 0px 2px black, 0px 0px 2px black;
+        }
+        &:not(.not-loaded) {
+          &.fiendfolio-reheated {
+            > img {
+              width: 30%;
+            }
+          }
         }
       }
     }

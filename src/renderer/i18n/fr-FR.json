@@ -20,7 +20,11 @@
         "lose": "Défaite",
         "room": "Salle | Salles",
         "enemy": "Ennemi | Ennemis",
-        "item": "Objet | Objets"
+        "item": "Objet | Objets",
+        "damage": "Dégât | Dégâts",
+        "luck": "Chance | Chances",
+        "speed": "Vitesse | Vitesses",
+        "tearRate": "Vitesse de tire | Vitesses de tir"
     },
     "strings": {
         "addRule": "@:dictionary.add la règle",

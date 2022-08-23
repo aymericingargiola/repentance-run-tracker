@@ -10,7 +10,7 @@
             "itemType": "Passive",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "13_Luck"
+            "gfx": "13_Luck.png"
         },
         {
             "itemID": 1002,
@@ -22,7 +22,7 @@
             "itemType": "Passive",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "15_Luck"
+            "gfx": "15_Luck.png"
         },
         {
             "itemID": 1003,
@@ -34,7 +34,7 @@
             "itemType": "Passive, Familiar",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "Sawblade"
+            "gfx": "Sawblade.png"
         },
         {
             "itemID": 1004,
@@ -46,7 +46,7 @@
             "itemType": "Passive",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "Trophy"
+            "gfx": "Trophy.png"
         },
         {
             "itemID": 1005,
@@ -58,7 +58,7 @@
             "itemType": "Passive",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "Checkpoint"
+            "gfx": "Checkpoint.png"
         },
         {
             "itemID": 1006,
@@ -70,7 +70,7 @@
             "itemType": "Passive",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "questionmark"
+            "gfx": "questionmark.png"
         },
         {
             "itemID": 1007,
@@ -82,7 +82,7 @@
             "itemType": "Active",
             "itemPool": "",
             "category": "racing+",
-            "gfx": "Debug"
+            "gfx": "Debug.png"
         },
         {
             "itemID": 1008,

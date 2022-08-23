@@ -11,6 +11,7 @@ const { restoreDatas } = require('./backupDatas')
 const low = require('lowdb')
 const FileAsync = require('lowdb/adapters/FileAsync')
 const characters = require('../jsons/characters.json')
+const charactersFiendFolio = require('../jsons/characters_fiendfolio-reheated.json')
 const entities = require('../jsons/entitiesFiltered.json')
 const floors = require('../jsons/floors.json')
 const configTemplate = require('../jsons/configTemplate.json')
@@ -41,7 +42,7 @@ ipcMain.on('ASK_FLOORS', async (event, payload) => {
 
 ipcMain.on('ASK_CHARACTERS', async (event, payload) => {
 	const window = payload && payload.window === 'itemTracker' ? trackerWin : win
-	syncApp(window, { trigger: 'send characters', characters: characters })
+	syncApp(window, { trigger: 'send characters', characters: [...characters, ...charactersFiendFolio] })
 });
 
 ipcMain.on('ASK_WINSTREAKS', async (event, payload) => {

@@ -87,8 +87,10 @@ import Winstreak from '../store/classes/WinStreak'
 import CustomSelect from './Tools/CustomSelect.vue'
 import DateRangePicker from './Tools/DateRangePicker.vue'
 import format from '../helpers/format'
+import i18nMixin from '../mixins/i18n'
 export default {
     name: "RunsFilters",
+    mixins: [i18nMixin],
     components: {
         CustomSelect,
         DateRangePicker
@@ -317,7 +319,7 @@ export default {
 
             if(this.checkFilters(runs, "characters").length < 1) return
 
-            character.name = character.id === "19" ? `${this.$t("players.19.name")} & ${this.$t("players.20.name")}` : `${this.$t(`players.${character.id}.name`)}${character.version === 'Alternate' ? ` (${this.$t('dictionary.tainted')})` : ''}`
+            character.name = character.id === "19" ? `${this.$t("players.19.name")} & ${this.$t("players.20.name")}` : `${this.t(`players.${character.id}.name`, character.name)}${character.version === 'Alternate' ? ` (${this.$t('dictionary.tainted')})` : ''}`
             return character
         },
         filterRuns(run) {

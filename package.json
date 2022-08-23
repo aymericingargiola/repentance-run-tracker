@@ -2,7 +2,7 @@
   "name": "repentanceruntracker",
   "author": "Aymeric Ingargiola",
   "description": "App to track The Binding of Isaac game's run",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "private": true,
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
     "postuninstall": "electron-builder install-app-deps",
     "build:locales": "node -e require('./src/background/helpers/jsonBuilder.js').buildLocalesJsons()",
     "build:entitiesJson": "node -e require('./src/background/helpers/jsonBuilder.js').buildEntitiesJson()",
-    "build:entitiesImages": "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()"
+    "build:itemsJson": "node -e require('./src/background/helpers/jsonBuilder.js').buildItemsJson()",
+    "build:entitiesImages": "node -e require('./src/background/helpers/isaacFandomParser.js').buildEntitiesImages()",
+    "build:entitiesImagesFiendFolio": "node -e require('./src/background/helpers/FiendFolioParser.js').buildEntitiesImages()"
   },
   "main": "background.js",
   "dependencies": {
