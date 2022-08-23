@@ -49,7 +49,7 @@
                   <a
                     v-if="item.id >= 0"
                     class="item-image"
-                    :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
+                    :href="getWikiUrl(item)"
                     target="_blank"
                   >
                     <div class="name">
@@ -150,6 +150,7 @@
 <script>
 import runsMixin from '../../mixins/runs'
 import i18nMixin from '../../mixins/i18n'
+import itemsMixin from '../../mixins/items'
 import { mapRepos } from '@vuex-orm/core'
 import Config from '../../store/classes/Config'
 import Run from '../../store/classes/Run'
@@ -162,7 +163,7 @@ export default {
       Swiper,
       SwiperSlide
     },
-    mixins: [runsMixin, i18nMixin],
+    mixins: [runsMixin, i18nMixin, itemsMixin],
     props: {
         id: String,
         index: Number,

@@ -147,16 +147,25 @@
             >
               <a
                 class="item-image"
-                :href="`https://bindingofisaacrebirth.fandom.com/wiki/${encodeURIComponent(item.title.replace(/ /g,'_'))}`"
+                :href="getWikiUrl(item)"
                 target="_blank"
               >
                 <div
                   v-if="characters[0].id === '19'"
                   class="player-icon"
                 >
-                  <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                  <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? 'Esau' : characters[parseInt(item.player)].name}.png`">
                 </div>
-                <img :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`">
+                <img
+                  v-if="item.custom"
+                  :src="`img/icons/collectibles/${item.gfx ? `${item.category}/${item.gfx}` : `${(`00${item.originalItemID}`).slice(-3)}.png`}`"
+                  onerror="this.src='img/icons/collectibles/questionmark.png'"
+                >
+                <img
+                  v-else
+                  :src="`img/icons/collectibles/${(`00${item.id}`).slice(-3)}.png`"
+                  onerror="this.src='img/icons/collectibles/questionmark.png'"
+                >
               </a>
             </li>
           </template>
@@ -279,8 +288,10 @@
 </template>
 
 <script>
+import itemsMixin from '../../mixins/items';
 export default {
     name: "RunCharacter",
+    mixins: [itemsMixin],
     components: {
     },
     props: {
