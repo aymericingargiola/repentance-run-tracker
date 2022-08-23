@@ -81,7 +81,7 @@ export default {
       return this.$helpers.formatDate(this.currentRun.runStart, `dd LLLL yyyy - ${this.getConfig("hourFormat").value}`, this.$i18n.locale)
     },
     getRunStartStats() {
-      return this.characters?.length > 0 ? this.characters[0].startStats.stats : {}
+      return this.characters?.length > 0 ? this.characters[0]?.startStats?.stats : {}
     },
     characters() {
       return this.currentRun && this.currentRun.characters ? this.currentRun.characters : []
