@@ -344,10 +344,19 @@ async function updateOrCreateRun(params = {}) {
                 case 'player updated':
                     const playerStats = params.stats
                     if (playerStats && playerStats.infos) {
+                        const sameRunLastFloor = sameRun.floors[sameRun.floors.length - 1]
                         // Special case where player control 2 characters with différent stats like Jacob & Essau (Essau is subtype 20)
-                        if(playerStats.infos.subtype === 20 && sameRun.characters[playerStats.infos.number - 1].id === "19" ) sameRun.characters[playerStats.infos.number - 1].statsSecondary = playerStats
+                        if(playerStats.infos.subtype === 20 && sameRun.characters[playerStats.infos.number - 1].id === "19" ) {
+                            sameRun.characters[playerStats.infos.number - 1].statsSecondary = playerStats
+                            if (!sameRun.characters[playerStats.infos.number - 1].startStatsSecondary) sameRun.characters[playerStats.infos.number].startStatsSecondary = playerStats
+                            if (sameRunLastFloor) sameRunLastFloor.statsSecondary = playerStats
+                        }
                         // Default case
-                        else if(sameRun.characters[playerStats.infos.number]) sameRun.characters[playerStats.infos.number].stats = playerStats
+                        else if(sameRun.characters[playerStats.infos.number]) {
+                            sameRun.characters[playerStats.infos.number].stats = playerStats
+                            if (!sameRun.characters[playerStats.infos.number].startStats) sameRun.characters[playerStats.infos.number].startStats = playerStats
+                            if (sameRunLastFloor) sameRunLastFloor.stats = playerStats
+                        }
                         if(!sameRun.extendedSaveMode) sameRun.extendedSaveMode = true
                     }
                     break

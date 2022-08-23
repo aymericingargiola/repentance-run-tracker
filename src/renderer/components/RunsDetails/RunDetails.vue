@@ -21,6 +21,7 @@
         <div class="content chart">
           <RunFloorsChart
             height="380"
+            :start-states="getRunStartStats"
             :floors-prop="floors"
             @selectedFloor="onSelectedFloor"
           />
@@ -78,6 +79,9 @@ export default {
     },
     getRunStartDate() {
       return this.$helpers.formatDate(this.currentRun.runStart, `dd LLLL yyyy - ${this.getConfig("hourFormat").value}`, this.$i18n.locale)
+    },
+    getRunStartStats() {
+      return this.characters?.length > 0 ? this.characters[0].startStats.stats : {}
     },
     characters() {
       return this.currentRun && this.currentRun.characters ? this.currentRun.characters : []

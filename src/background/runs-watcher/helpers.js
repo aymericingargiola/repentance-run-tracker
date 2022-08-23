@@ -56,6 +56,7 @@ module.exports = {
         //Return character stats from RRTE mod converted to json
         try {
             const stats = JSON.parse(string.split(" ")[9])
+            if (stats.KeyGhostData) stats.KeyGhostData = undefined
             return stats
         } catch (error) {
             log.error("Impossible to parse character datas and stats", string.split(" ")[9], error)
