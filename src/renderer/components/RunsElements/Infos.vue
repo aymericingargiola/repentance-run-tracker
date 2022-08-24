@@ -68,8 +68,8 @@
           class="after"
           :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
         />
-        <div class="content">
-          {{ characters[0].id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${characters[0].id}.name`, characters[0].name)}` }}
+        <div v-if="firstCharacter" class="content">
+          {{ firstCharacter.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${firstCharacter.id}.name`, firstCharacter.name)}` }}
         </div>
       </li>
       <li
@@ -246,7 +246,10 @@ export default {
     computed: {
         ...mapRepos({
             configRepo: Config
-        })
+        }),
+        firstCharacter() {
+          return this.characters[0]
+        }
     },
     mounted() {
     },

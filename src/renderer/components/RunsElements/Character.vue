@@ -17,7 +17,7 @@
       class="characters-selection"
     >
       <template v-for="(character, cidx) in validCharacters">
-        <div
+        <div v-if="character"
           :key="`${character.id} ${cidx} select`"
           :class="['character', cidx === selected ? 'selected' : '']"
           @click="selected = cidx"
@@ -29,7 +29,7 @@
       </template>
     </div>
     <template v-for="(character, cidx) in validCharacters">
-      <div
+      <div v-if="character"
         :key="`${character.id} ${cidx}`"
         :class="['character-infos', cidx === selected ? 'selected' : '']"
       >
@@ -283,6 +283,13 @@
                     </template> -->
         </div>
       </div>
+      <div v-else
+      :key="`corrupted ${cidx}`">
+        <div
+          class="image"
+          :style="{backgroundImage:`url('img/characters/Unknow.png')`}"
+        ></div>
+      </div>
     </template>
   </div>
 </template>
@@ -306,7 +313,7 @@ export default {
     },
     computed: {
         validCharacters() {
-            return this.characters ? this.characters.filter(character => character.bypass !== true) : []
+            return this.characters ? this.characters.filter(character => character?.bypass !== true) : []
         }
     },
     mounted() {
