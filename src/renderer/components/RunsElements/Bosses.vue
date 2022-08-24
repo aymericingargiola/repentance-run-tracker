@@ -32,7 +32,9 @@
         :key="`${boss.id} ${bidx}`"
         :class="['character-infos', bidx === selected ? 'selected' : '']"
       >
-        <div class="name">{{boss.name}}</div>
+        <div class="name">
+          {{ boss.name }}
+        </div>
         <div
           class="image"
           :style="{backgroundImage:`url('img/entities/${boss.id} Draw.png')`}"

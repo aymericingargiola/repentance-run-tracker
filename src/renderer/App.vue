@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Taskbar :app-version="appVersion" :watch-status="watchStatus" />
+    <Taskbar
+      :app-version="appVersion"
+      :watch-status="watchStatus"
+    />
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">

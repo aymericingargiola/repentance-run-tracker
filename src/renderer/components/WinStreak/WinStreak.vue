@@ -1,11 +1,18 @@
 <template>
-  <div v-if="allRuns && entities && charactersRep && entities.all().length > 0 && charactersRep.all().length > 0 && allRuns.length > 0" class="section win-streaks">
+  <div
+    v-if="allRuns && entities && charactersRep && entities.all().length > 0 && charactersRep.all().length > 0 && allRuns.length > 0"
+    class="section win-streaks"
+  >
     <div
       class="win-streaks-container"
     >
       <ul>
         <template v-for="winStreak in currentWinStreak">
-          <WinStreakItem v-if="allWinStreak && allWinStreak.length > 0" :winStreak="winStreak" :key="winStreak.id"/>
+          <WinStreakItem
+            v-if="allWinStreak && allWinStreak.length > 0"
+            :key="winStreak.id"
+            :win-streak="winStreak"
+          />
         </template>
         <WinStreakAdd v-if="currentWinStreak && currentWinStreak.length < 3" />
       </ul>

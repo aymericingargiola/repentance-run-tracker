@@ -7,7 +7,10 @@
       <div class="app-version">
         {{ appVersion }}
       </div>
-      <div v-if="watchStatus" class="watch-status">
+      <div
+        v-if="watchStatus"
+        class="watch-status"
+      >
         [watching game]
       </div>
     </div>

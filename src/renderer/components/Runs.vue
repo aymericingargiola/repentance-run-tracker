@@ -35,8 +35,10 @@
             class="after"
             :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"
           /> -->
-          <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '',
-          run.runEnd && run.floors ? 'has-bosses' : '']">
+          <div
+            :class="['run-content', run.customName != '' ? 'has-custom-name' : '',
+                     run.runEnd && run.floors ? 'has-bosses' : '']"
+          >
             <RunInfos
               :id="run.id"
               :game-state="run.gameState"

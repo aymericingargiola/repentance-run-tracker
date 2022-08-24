@@ -57,11 +57,11 @@ import RunFloorsCollection from "../RunsDetails/RunFloorsCollection.vue"
 import i18nMixin from "../../mixins/i18n"
 export default {
   name: "RunDetails",
-  mixins: [i18nMixin],
   components: {
     RunFloorsChart,
     RunFloorsCollection
   },
+  mixins: [i18nMixin],
   data() {
     return {
       isOpen: false,

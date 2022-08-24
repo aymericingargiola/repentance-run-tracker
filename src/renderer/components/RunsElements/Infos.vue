@@ -68,7 +68,10 @@
           class="after"
           :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
         />
-        <div v-if="firstCharacter" class="content">
+        <div
+          v-if="firstCharacter"
+          class="content"
+        >
           {{ firstCharacter.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${firstCharacter.id}.name`, firstCharacter.name)}` }}
         </div>
       </li>

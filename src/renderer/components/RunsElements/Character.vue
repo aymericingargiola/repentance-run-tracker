@@ -17,7 +17,8 @@
       class="characters-selection"
     >
       <template v-for="(character, cidx) in validCharacters">
-        <div v-if="character"
+        <div
+          v-if="character"
           :key="`${character.id} ${cidx} select`"
           :class="['character', cidx === selected ? 'selected' : '']"
           @click="selected = cidx"
@@ -29,7 +30,8 @@
       </template>
     </div>
     <template v-for="(character, cidx) in validCharacters">
-      <div v-if="character"
+      <div
+        v-if="character"
         :key="`${character.id} ${cidx}`"
         :class="['character-infos', cidx === selected ? 'selected' : '']"
       >
@@ -283,12 +285,14 @@
                     </template> -->
         </div>
       </div>
-      <div v-else
-      :key="`corrupted ${cidx}`">
+      <div
+        v-else
+        :key="`corrupted ${cidx}`"
+      >
         <div
           class="image"
           :style="{backgroundImage:`url('img/characters/Unknow.png')`}"
-        ></div>
+        />
       </div>
     </template>
   </div>
@@ -298,9 +302,9 @@
 import itemsMixin from '../../mixins/items';
 export default {
     name: "RunCharacter",
-    mixins: [itemsMixin],
     components: {
     },
+    mixins: [itemsMixin],
     props: {
         characters: Array,
         floors: Array,
