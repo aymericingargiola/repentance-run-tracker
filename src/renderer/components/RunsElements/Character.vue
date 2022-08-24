@@ -23,7 +23,7 @@
           @click="selected = cidx"
         >
           <div class="icon">
-            <img :src="`img/characters/small portraits/${character.id}.png`">
+            <img :src="`img/characters/small portraits/${character.name}.png`">
           </div>
         </div>
       </template>

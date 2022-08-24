@@ -71,7 +71,7 @@
                       v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
                       class="player-icon"
                     >
-                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? 'Esau' : characters[parseInt(item.player)].name}.png`">
                     </div>
                     <img
                       v-if="item.custom"
@@ -116,7 +116,7 @@
                       v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
                       class="player-icon"
                     >
-                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? 'Esau' : characters[parseInt(item.player)].name}.png`">
                     </div>
                     <div class="glitched-image">
                       <template v-for="glitdx in 3">
