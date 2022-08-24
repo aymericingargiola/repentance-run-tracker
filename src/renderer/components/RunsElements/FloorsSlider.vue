@@ -1,14 +1,15 @@
 <template>
   <swiper
-  v-if="floors"
-  slides-per-view="auto"
-  :space-between="24"
-  :loop="false"
-  :freeMode="true"
-  :mousewheel="{
-    releaseOnEdges: false,
-  }"
-  :ref="index === 0 ? 'firstRunFloorsScroller' : ''">
+    v-if="floors"
+    :ref="index === 0 ? 'firstRunFloorsScroller' : ''"
+    slides-per-view="auto"
+    :space-between="24"
+    :loop="false"
+    :free-mode="true"
+    :mousewheel="{
+      releaseOnEdges: false,
+    }"
+  >
     <template v-for="(floor, fidx) in floors">
       <swiper-slide
         v-if="floor"
@@ -71,7 +72,7 @@
                       v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
                       class="player-icon"
                     >
-                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? 'Esau' : characters[parseInt(item.player)].name}.png`">
                     </div>
                     <img
                       v-if="item.custom"
@@ -116,7 +117,7 @@
                       v-if="validCharacters && (validCharacters.length > 1 || validCharacters[0].id === '19')"
                       class="player-icon"
                     >
-                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? '20' : characters[parseInt(item.player)].id}.png`">
+                      <img :src="`img/characters/small portraits/${characters[0].id === '19' && item.player === '1' ? 'Esau' : characters[parseInt(item.player)].name}.png`">
                     </div>
                     <div class="glitched-image">
                       <template v-for="glitdx in 3">
@@ -186,6 +187,15 @@ export default {
             return this.characters ? this.characters.filter(character => character.bypass !== true) : []
         }
     },
+    watch: {
+    floors() {
+      if(this.canUpdateRun && this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
+        this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update()
+        const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
+        this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slideTo(slides.length - 1, 1000)
+      }
+    }
+  },
     mounted() {
         if (this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
             window.ipc.on('SYNC_CREATE_RUN', () => {
@@ -217,15 +227,6 @@ export default {
             }, [])
         }
       },
-    watch: {
-    floors() {
-      if(this.canUpdateRun && this.index === 0 && this.$refs["firstRunFloorsScroller"]) {
-        this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.update()
-        const slides = this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slides
-        this.$refs["firstRunFloorsScroller"].$refs.swiperElRef.swiper.slideTo(slides.length - 1, 1000)
-      }
-    }
-  },
 };
 </script>
 

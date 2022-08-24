@@ -1,11 +1,18 @@
 <template>
-  <div v-if="allRuns && entities && charactersRep && entities.all().length > 0 && charactersRep.all().length > 0 && allRuns.length > 0" class="section win-streaks">
+  <div
+    v-if="allRuns && entities && charactersRep && entities.all().length > 0 && charactersRep.all().length > 0 && allRuns.length > 0"
+    class="section win-streaks"
+  >
     <div
       class="win-streaks-container"
     >
       <ul>
         <template v-for="winStreak in currentWinStreak">
-          <WinStreakItem v-if="allWinStreak && allWinStreak.length > 0" :winStreak="winStreak" :key="winStreak.id"/>
+          <WinStreakItem
+            v-if="allWinStreak && allWinStreak.length > 0"
+            :key="winStreak.id"
+            :win-streak="winStreak"
+          />
         </template>
         <WinStreakAdd v-if="currentWinStreak && currentWinStreak.length < 3" />
       </ul>
@@ -53,26 +60,6 @@ export default {
         }
     },
     mounted() {
-        window.ipc.send('ASK_WINSTREAKS')
-        window.ipc.send('ASK_ENTITIES')
-        window.ipc.send('ASK_FLOORS')
-        window.ipc.send('ASK_CHARACTERS')
-        window.ipc.on('SYNC_SEND_WINSTREAKS', (response) => {
-            console.log(response)
-            this.winStreakRepo.fresh(response.winStreaks)
-        })
-        window.ipc.on('SYNC_SEND_ENTITIES', (response) => {
-            console.log(response)
-            this.entityRepo.fresh(response.entities)
-        })
-        window.ipc.on('SYNC_SEND_FLOORS', (response) => {
-            console.log(response)
-            this.floorRepo.fresh(response.floors)
-        })
-        window.ipc.on('SYNC_SEND_CHARACTERS', (response) => {
-            console.log(response)
-            this.characterRepo.fresh(response.characters)
-        })
     },
     methods: {
     }

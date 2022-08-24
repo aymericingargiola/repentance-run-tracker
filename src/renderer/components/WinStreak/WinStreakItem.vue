@@ -1,217 +1,239 @@
 <template>
-    <li
+  <li
     v-if="winStreak"
     class="win-streak-item"
-    >
-        <div class="content">
-            <div v-if="usedGameStates && editing">
-                <CustomSelect
-                type="single"
-                hide-at="0"
-                :items="availableGameStatesSelectOptions"
-                :label="$tc('dictionary.save')"
-                :empty-message="$t('select.noSavesSelected')"
-                :selectedValue="this.winStreak.gameState.toString()"
-                @updateSelect="onUpdateSaveSelect"
-                />
-            </div>
-            <div v-if="editing" class="adjust-number">
-                {{ $t('strings.adjustNumber') }} :
-                <input
-                id="adjustNumber"
-                v-model="adjustNumber"
-                type="number"
-                name="adjust number"
-                class="size-auto"
-                >
-            </div>
-            <div v-if="!editing" class="title editable" :class="editing ? 'editing-item' : ''">
-                <div
-                    class="before"
-                    :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
-                />
-                <div
-                    class="mid"
-                    :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
-                />
-                <div
-                    class="after"
-                    :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
-                />
-                <span>{{ $t('strings.winStreakSave') }} {{ winStreak.gameState }}</span>
-            </div>
-            <div class="characters">
-            <span class="title">
-                <div
-                class="before"
-                :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
-                />
-                <div
-                class="mid"
-                :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
-                />
-                <div
-                class="after"
-                :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
-                />
-                <span>{{ $tc('dictionary.character', winStreak.characters_ids.length) }}</span>
-            </span>
-            <ul v-if="editing">
-                <li
-                    :class="['character', randomNormal ? 'selected' : '']"
-                    @click="randomSelected('normal')"
-                >
-                    <span
-                    class="small-portrait character image"
-                    :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
-                    />
-                    <span class="name">{{ $t('strings.randomNormal') }}</span>
-                </li>
-                <li
-                    :class="['character', randomAlternate ? 'selected' : '']"
-                    @click="randomSelected('alternate')"
-                >
-                    <span
-                    class="small-portrait character image"
-                    :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
-                    />
-                    <span class="name">{{ $t('strings.randomTainted') }}</span>
-                </li>
-                <template v-for="character in allCharacters">
-                    <li
-                    :key="character.id"
-                    :class="['character', characters.includes(character.id) ? 'selected' : '']"
-                    @click="characterSelected(character.id)"
-                    >
-                    <span
-                        class="small-portrait character image"
-                        :style="{backgroundImage:`url('img/characters/small portraits/${character.version === 'Alternate' ? `${character.name} Alt` : character.name}.png')`}"
-                    />
-                    <span class="name">{{ character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${character.id}.name`, character.name)}` }} {{ character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }} {{ characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : '' }}</span>
-                    </li>
-                </template>
-                </ul>
-            <div v-if="!winStreak.randomNormal && !winStreak.randomAlt && !editing">
-                <template
-                v-for="(character, index) in winStreak.characters_ids"
-                tag="ul"
-                >
-                <li
-                    :key="winStreak.id+character"
-                    :class="['character', streak % winStreak.characters_ids.length === index ? 'current' : 'not-current']"
-                >
-                    <span
-                    class="small-portrait character image"
-                    :style="{backgroundImage:`url('img/characters/small portraits/${getCharacter(character).version === 'Alternate' ? `${getCharacter(character).name} Alt` : getCharacter(character).name}.png')`}"
-                    />
-                    <span class="name">{{ getCharacter(character).id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${getCharacter(character).id}.name`), getCharacter(character).name}` }} {{ getCharacter(character).version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }}</span>
-                </li>
-                </template>
-            </div>
-            <div v-if="winStreak.randomNormal || winStreak.randomAlt">
-                <span
+  >
+    <div class="content">
+      <div v-if="usedGameStates && editing">
+        <CustomSelect
+          type="single"
+          hide-at="0"
+          :items="availableGameStatesSelectOptions"
+          :label="$tc('dictionary.save')"
+          :empty-message="$t('select.noSavesSelected')"
+          :selected-value="winStreak.gameState.toString()"
+          @updateSelect="onUpdateSaveSelect"
+        />
+      </div>
+      <div
+        v-if="editing"
+        class="adjust-number"
+      >
+        {{ $t('strings.adjustNumber') }} :
+        <input
+          id="adjustNumber"
+          v-model="adjustNumber"
+          type="number"
+          name="adjust number"
+          class="size-auto"
+        >
+      </div>
+      <div
+        v-if="!editing"
+        class="title editable"
+        :class="editing ? 'editing-item' : ''"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+        />
+        <span>{{ $t('strings.winStreakSave') }} {{ winStreak.gameState }}</span>
+      </div>
+      <div class="characters">
+        <span class="title">
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <span>{{ $tc('dictionary.character', winStreak.characters_ids.length) }}</span>
+        </span>
+        <ul v-if="editing">
+          <li
+            :class="['character', randomNormal ? 'selected' : '']"
+            @click="randomSelected('normal')"
+          >
+            <span
+              class="small-portrait character image"
+              :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
+            />
+            <span class="name">{{ $t('strings.randomNormal') }}</span>
+          </li>
+          <li
+            :class="['character', randomAlternate ? 'selected' : '']"
+            @click="randomSelected('alternate')"
+          >
+            <span
+              class="small-portrait character image"
+              :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
+            />
+            <span class="name">{{ $t('strings.randomTainted') }}</span>
+          </li>
+          <template v-for="character in allCharacters">
+            <li
+              :key="character.id"
+              :class="['character', characters.includes(character.id) ? 'selected' : '']"
+              @click="characterSelected(character.id)"
+            >
+              <span
                 class="small-portrait character image"
-                :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
-                />
-                <span class="name">{{ winStreak.randomNormal ? `${$t('strings.randomNormal')}` : `${$t('strings.randomTainted')}` }}</span>
-            </div>
-            </div>
-            <div class="bosses">
-            <span class="title">
-                <div
-                class="before"
-                :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
-                />
-                <div
-                class="mid"
-                :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
-                />
-                <div
-                class="after"
-                :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
-                />
-                <span>{{ $tc('dictionary.boss', winStreak.characters_ids.length) }}</span>
-            </span>
-            <div v-if="editing" >
-                <template v-for="boss in lastBosses">
-                    <li
-                        :key="boss.id"
-                        :class="['boss', bosses.includes(boss.id) ? 'selected' : '']"
-                        @click="bossSelected(boss.id)"
-                    >
-                        <span
-                        class="small-portrait boss image"
-                        :style="{backgroundImage:`url('img/entities/small portraits/${boss.portrait}.png')`}"
-                        />
-                        <span class="name">{{ $t(`entities.${boss.id.replaceAll('.', '-')}.name`) }} {{ bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : '' }}</span>
-                    </li>
-                </template>
-            </div>
-            <div v-if="!editing" >
-                <template
-                v-for="(boss, index) in winStreak.bosses_ids"
-                tag="ul"
-                >
-                <li
-                    :key="winStreak.id+boss"
-                    :class="['boss', streak % winStreak.bosses_ids.length === index ? 'current' : 'not-current']"
-                >
-                    <span
-                    class="small-portrait boss image"
-                    :style="{backgroundImage:`url('img/entities/small portraits/${getBoss(boss).portrait}.png')`}"
-                    />
-                    <span class="name">{{ $t(`entities.${getBoss(boss).id.replaceAll('.', '-')}.name`) }}</span>
-                </li>
-                </template>
-            </div>
-            </div>
-            <div v-if="!editing" class="number">
-                <div
-                    class="before"
-                    :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
-                />
-                <div
-                    class="mid"
-                    :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
-                />
-                <div
-                    class="after"
-                    :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
-                />
-                <div
-                    class="pin"
-                    :style="{backgroundImage:`url('img/icons/pin.png')`}"
-                />
-                <span
-                    class="icon small"
-                    :style="{backgroundImage:`url('img/icons/hud/crown.png')`}"
-                />
-                <span class="wins">{{ streak }}</span>
-            </div>
-            <div class="buttons">
-            <div v-if="!editing" class="edit">
-                <button @click="edit()">
-                {{ $t('dictionary.edit') }}
-                </button>
-            </div>
-            <div v-if="!editing" class="remove">
-                <button @click="remove()">
-                {{ $t('dictionary.remove') }}
-                </button>
-            </div>
-            <div v-if="editing" class="save">
-                <button @click="save()">
-                {{ $tc('dictionary.save') }}
-                </button>
-            </div>
-            <div v-if="editing" class="cancel">
-                <button @click="cancel()">
-                {{ $t('dictionary.cancel') }}
-                </button>
-            </div>
-            </div>
+                :style="{backgroundImage:`url('img/characters/small portraits/${character.version === 'Alternate' ? `${character.name} Alt` : character.name}.png')`}"
+              />
+              <span class="name">{{ character.id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${character.id}.name`, character.name)}` }} {{ character.version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }} {{ characters.includes(character.id) ? `(${characters.findIndex(char => char === character.id) + 1})` : '' }}</span>
+            </li>
+          </template>
+        </ul>
+        <div v-if="!winStreak.randomNormal && !winStreak.randomAlt && !editing">
+          <template
+            v-for="(character, index) in winStreak.characters_ids"
+            tag="ul"
+          >
+            <li
+              :key="winStreak.id+character"
+              :class="['character', streak % winStreak.characters_ids.length === index ? 'current' : 'not-current']"
+            >
+              <span
+                class="small-portrait character image"
+                :style="{backgroundImage:`url('img/characters/small portraits/${getCharacter(character).version === 'Alternate' ? `${getCharacter(character).name} Alt` : getCharacter(character).name}.png')`}"
+              />
+              <span class="name">{{ getCharacter(character).id === '19' ? `${$t(`players.19.name`)} & ${$t(`players.20.name`)}` : `${t(`players.${getCharacter(character).id}.name`), getCharacter(character).name}` }} {{ getCharacter(character).version === "Alternate" ? `(${$t('dictionary.tainted')})` : "" }}</span>
+            </li>
+          </template>
         </div>
-    </li>
+        <div v-if="winStreak.randomNormal || winStreak.randomAlt">
+          <span
+            class="small-portrait character image"
+            :style="{backgroundImage:`url('img/characters/small portraits/undefined.png')`}"
+          />
+          <span class="name">{{ winStreak.randomNormal ? `${$t('strings.randomNormal')}` : `${$t('strings.randomTainted')}` }}</span>
+        </div>
+      </div>
+      <div class="bosses">
+        <span class="title">
+          <div
+            class="before"
+            :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+          />
+          <div
+            class="mid"
+            :style="{backgroundImage:`url('img/cards/bar-small-mid_01_noshadow.png')`}"
+          />
+          <div
+            class="after"
+            :style="{backgroundImage:`url('img/cards/bar-small-right_01_noshadow.png')`}"
+          />
+          <span>{{ $tc('dictionary.boss', winStreak.characters_ids.length) }}</span>
+        </span>
+        <div v-if="editing">
+          <template v-for="boss in lastBosses">
+            <li
+              :key="boss.id"
+              :class="['boss', bosses.includes(boss.id) ? 'selected' : '']"
+              @click="bossSelected(boss.id)"
+            >
+              <span
+                class="small-portrait boss image"
+                :style="{backgroundImage:`url('img/entities/small portraits/${boss.portrait}.png')`}"
+              />
+              <span class="name">{{ $t(`entities.${boss.id.replaceAll('.', '-')}.name`) }} {{ bosses.includes(boss.id) ? `(${bosses.findIndex(bo => bo === boss.id) + 1})` : '' }}</span>
+            </li>
+          </template>
+        </div>
+        <div v-if="!editing">
+          <template
+            v-for="(boss, index) in winStreak.bosses_ids"
+            tag="ul"
+          >
+            <li
+              :key="winStreak.id+boss"
+              :class="['boss', streak % winStreak.bosses_ids.length === index ? 'current' : 'not-current']"
+            >
+              <span
+                class="small-portrait boss image"
+                :style="{backgroundImage:`url('img/entities/small portraits/${getBoss(boss).portrait}.png')`}"
+              />
+              <span class="name">{{ $t(`entities.${getBoss(boss).id.replaceAll('.', '-')}.name`) }}</span>
+            </li>
+          </template>
+        </div>
+      </div>
+      <div
+        v-if="!editing"
+        class="number"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+        />
+        <div
+          class="pin"
+          :style="{backgroundImage:`url('img/icons/pin.png')`}"
+        />
+        <span
+          class="icon small"
+          :style="{backgroundImage:`url('img/icons/hud/crown.png')`}"
+        />
+        <span class="wins">{{ streak }}</span>
+      </div>
+      <div class="buttons">
+        <div
+          v-if="!editing"
+          class="edit"
+        >
+          <button @click="edit()">
+            {{ $t('dictionary.edit') }}
+          </button>
+        </div>
+        <div
+          v-if="!editing"
+          class="remove"
+        >
+          <button @click="remove()">
+            {{ $t('dictionary.remove') }}
+          </button>
+        </div>
+        <div
+          v-if="editing"
+          class="save"
+        >
+          <button @click="save()">
+            {{ $tc('dictionary.save') }}
+          </button>
+        </div>
+        <div
+          v-if="editing"
+          class="cancel"
+        >
+          <button @click="cancel()">
+            {{ $t('dictionary.cancel') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </li>
 </template>
 
 <script>
@@ -226,13 +248,13 @@ import winstreakMixin from '../../mixins/winstreak'
 import i18nMixin from '../../mixins/i18n'
 export default {
     name: "WinStreakItem",
-      props: {
-      winStreak: Object,
-    },
     components: {
         CustomSelect
     },
     mixins: [winstreakMixin, i18nMixin],
+      props: {
+      winStreak: Object,
+    },
     data() {
         return {
           gameStateOptions: [1, 2, 3],
@@ -244,20 +266,6 @@ export default {
           bosses: this.winStreak.bosses_ids.slice(),
           editing: false
         }
-    },
-    mounted() {
-        if (this.actualWinStreak?.first().init === false) {
-            this.getRuns()
-        }
-        window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-            if (this.actualWinStreak?.first()?.archived === false && response.channel === "run end" && parseInt(response.run.gameState) === this.actualWinStreak?.first()?.gameState) {
-                let newRuns = []
-                if (this.winStreakWithRuns?.runs.length > 0) newRuns = [...this.winStreakWithRuns?.runs]
-                newRuns.push(response.run)
-                newRuns.reverse()
-                this.getRuns(newRuns)
-            }
-        })
     },
     computed: {
         ...mapRepos({
@@ -285,6 +293,20 @@ export default {
         streak() {
             return (this.winStreakWithRuns?.runs?.length > 0 ? this.winStreakWithRuns.runs.filter((run) => run.runEnd.win !== false).length : 0) + this.actualWinStreak?.first()?.adjustNumber
         }
+    },
+    mounted() {
+        if (this.actualWinStreak?.first().init === false) {
+            this.getRuns()
+        }
+        window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+            if (this.actualWinStreak?.first()?.archived === false && response.channel === "run end" && parseInt(response.run.gameState) === this.actualWinStreak?.first()?.gameState) {
+                let newRuns = []
+                if (this.winStreakWithRuns?.runs.length > 0) newRuns = [...this.winStreakWithRuns?.runs]
+                newRuns.push(response.run)
+                newRuns.reverse()
+                this.getRuns(newRuns)
+            }
+        })
     },
     methods: {
         remove() {

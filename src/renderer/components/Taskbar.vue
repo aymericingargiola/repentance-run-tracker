@@ -3,8 +3,15 @@
     <div class="background" />
     <div class="drag" />
     <div class="logo">
-      repentance run tracker <div class="app-version">
+      repentance run tracker 
+      <div class="app-version">
         {{ appVersion }}
+      </div>
+      <div
+        v-if="watchStatus"
+        class="watch-status"
+      >
+        [watching game]
       </div>
     </div>
     <div class="menu center-menu" />
@@ -41,7 +48,8 @@
 export default {
     name: "Taskbar",
     props: {
-        appVersion: String
+        appVersion: String,
+        watchStatus: Boolean
     },
     data() {
         return {
@@ -139,6 +147,15 @@ export default {
             opacity: 0.5;
             z-index: 0;
             display: inline-block;
+            height: 0px;
+        }
+        .watch-status {
+            display: inline-block;
+            font-size: 10px;
+            margin-left: 8px;
+            opacity: 0.5;
+            letter-spacing: 2px;
+            pointer-events: none;
             height: 0px;
         }
     }

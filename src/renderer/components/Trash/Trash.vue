@@ -68,9 +68,6 @@
               :data-id="run.id + ridx"
               @click="runSelected(run.id)"
             >
-              <!-- <div class="before" :style="{backgroundImage:`url('img/cards/bar-big-left_01.png')`}"></div>
-                                <div class="mid" :style="{backgroundImage:`url('img/cards/bar-big-mid_01.png')`}"></div>
-                                <div class="after" :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"></div> -->
               <div class="run-content">
                 <RunCharacter
                   :characters="run.characters"
@@ -136,11 +133,6 @@ export default {
     mounted() {
         this.$root.$on('OPEN_TRASH', () => {
             this.isOpen = !this.isOpen
-        })
-        window.ipc.send('ASK_TRASH')
-        window.ipc.on('SYNC_SEND_TRASH', (response) => {
-            console.log(response)
-            this.trashRunRepo.fresh(response.trash)
         })
         window.ipc.on('SYNC_ADD_RUN_TO_TRASH', (response) => {
             console.log(response)
@@ -266,6 +258,7 @@ export default {
                 margin-top: 0px;
                 margin-bottom: 0px;
                 transition: 1s $transitionBounce;
+                border: none;
                 &:not(:first-child) {
                     margin-top: 0px;
                     margin-bottom: 0px;
@@ -293,6 +286,8 @@ export default {
                     flex-direction: column;
                     padding-bottom: 24px;
                     padding-top: 24px;
+                    padding-left: 12px;
+                    padding-right: 12px;
                     overflow: visible;
                     &::before, &::after {
                         display: none;

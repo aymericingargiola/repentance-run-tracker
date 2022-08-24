@@ -18,9 +18,15 @@
             />
             <span class="title">{{ t(`entities.${formatLocaleId(ennemy.id)}.name`, ennemy.name) }}{{ $isDev ? ` [id : ${ennemy.id}]` : '' }}</span>
           </div>
-          <div class="image" :class="ennemy.category" :category="ennemy.category">
-            <img :src="`img/entities/${ennemy.category ? `${ennemy.category}/${ennemy.name.replaceAll(' ', '').replaceAll('\'', '')}`: ennemy.id}.png`"
-            @error="onImageLoadError($event, ennemy.category)">
+          <div
+            class="image"
+            :class="ennemy.category"
+            :category="ennemy.category"
+          >
+            <img
+              :src="`img/entities/${ennemy.category ? `${ennemy.category}/${ennemy.name.replaceAll(' ', '').replaceAll('\'', '')}`: ennemy.id}.png`"
+              @error="onImageLoadError($event, ennemy.category)"
+            >
             <span
               v-if="ennemy.number > 1"
               class="number"

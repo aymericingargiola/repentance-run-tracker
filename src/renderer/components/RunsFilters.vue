@@ -38,7 +38,7 @@
       :label="$t('select.sort')"
       :empty-message="$t('select.sortByDate')"
       order="desc"
-      :selectableOrder="order"
+      :selectable-order="order"
       @updateSelect="onUpdateSortMultiSelect"
       @updateOrder="onUpdateOrder"
     />
@@ -90,11 +90,11 @@ import format from '../helpers/format'
 import i18nMixin from '../mixins/i18n'
 export default {
     name: "RunsFilters",
-    mixins: [i18nMixin],
     components: {
         CustomSelect,
         DateRangePicker
     },
+    mixins: [i18nMixin],
     props: {
         filterOffset: Number,
         filterLimitPerPage: Number
@@ -178,11 +178,6 @@ export default {
         }
     },
     mounted() {
-        window.ipc.send('ASK_TAGS')
-        window.ipc.on('SYNC_SEND_TAGS', (response) => {
-            if (this.$isDev) console.log(response)
-            this.tagRepo.fresh(response.tags)
-        })
     },
     methods: {
         onUpdateOrder(selected) {

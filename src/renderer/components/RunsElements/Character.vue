@@ -18,18 +18,20 @@
     >
       <template v-for="(character, cidx) in validCharacters">
         <div
+          v-if="character"
           :key="`${character.id} ${cidx} select`"
           :class="['character', cidx === selected ? 'selected' : '']"
           @click="selected = cidx"
         >
           <div class="icon">
-            <img :src="`img/characters/small portraits/${character.id}.png`">
+            <img :src="`img/characters/small portraits/${character.name}.png`">
           </div>
         </div>
       </template>
     </div>
     <template v-for="(character, cidx) in validCharacters">
       <div
+        v-if="character"
         :key="`${character.id} ${cidx}`"
         :class="['character-infos', cidx === selected ? 'selected' : '']"
       >
@@ -283,6 +285,15 @@
                     </template> -->
         </div>
       </div>
+      <div
+        v-else
+        :key="`corrupted ${cidx}`"
+      >
+        <div
+          class="image"
+          :style="{backgroundImage:`url('img/characters/Unknow.png')`}"
+        />
+      </div>
     </template>
   </div>
 </template>
@@ -291,9 +302,9 @@
 import itemsMixin from '../../mixins/items';
 export default {
     name: "RunCharacter",
-    mixins: [itemsMixin],
     components: {
     },
+    mixins: [itemsMixin],
     props: {
         characters: Array,
         floors: Array,
@@ -306,7 +317,7 @@ export default {
     },
     computed: {
         validCharacters() {
-            return this.characters ? this.characters.filter(character => character.bypass !== true) : []
+            return this.characters ? this.characters.filter(character => character?.bypass !== true) : []
         }
     },
     mounted() {

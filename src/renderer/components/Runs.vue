@@ -35,8 +35,10 @@
             class="after"
             :style="{backgroundImage:`url('img/cards/bar-big-right_01.png')`}"
           /> -->
-          <div :class="['run-content', run.customName != '' ? 'has-custom-name' : '',
-          run.runEnd && run.floors ? 'has-bosses' : '']">
+          <div
+            :class="['run-content', run.customName != '' ? 'has-custom-name' : '',
+                     run.runEnd && run.floors ? 'has-bosses' : '']"
+          >
             <RunInfos
               :id="run.id"
               :game-state="run.gameState"
@@ -169,11 +171,6 @@ export default {
         }
     },
     mounted() {
-        window.ipc.send('ASK_RUNS')
-        window.ipc.on('SYNC_SEND_RUNS', (response) => {
-            console.log(response)
-            this.runRepo.fresh(response.runs)
-        })
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
             console.log(response)
             this.runRepo.insert(response.run)
