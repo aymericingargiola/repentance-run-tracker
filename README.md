@@ -80,7 +80,7 @@ exemple, search runs with Pentagram found at second floor : `:item:51:2`
 # Contribute
 ## Project setup
 Environment : Windows 10 x64\
-Backend : [NodeJS](https://nodejs.org/en/download/) v16.14.2, [Electron](https://www.electronjs.org/) v19.0.4\
+Backend : [NodeJS](https://nodejs.org/en/download/) v16.15.0, [Electron](https://www.electronjs.org/) v20.0.3\
 Frontend : [VueJS](https://vuejs.org/) v2.6.11, [Vue Router](https://router.vuejs.org/), [Vuex ORM Next](https://next.vuex-orm.org/)
 ```
 npm install -g node-gyp
