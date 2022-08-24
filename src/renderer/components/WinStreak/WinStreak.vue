@@ -53,26 +53,6 @@ export default {
         }
     },
     mounted() {
-        window.ipc.send('ASK_WINSTREAKS')
-        window.ipc.send('ASK_ENTITIES')
-        window.ipc.send('ASK_FLOORS')
-        window.ipc.send('ASK_CHARACTERS')
-        window.ipc.on('SYNC_SEND_WINSTREAKS', (response) => {
-            console.log(response)
-            this.winStreakRepo.fresh(response.winStreaks)
-        })
-        window.ipc.on('SYNC_SEND_ENTITIES', (response) => {
-            console.log(response)
-            this.entityRepo.fresh(response.entities)
-        })
-        window.ipc.on('SYNC_SEND_FLOORS', (response) => {
-            console.log(response)
-            this.floorRepo.fresh(response.floors)
-        })
-        window.ipc.on('SYNC_SEND_CHARACTERS', (response) => {
-            console.log(response)
-            this.characterRepo.fresh(response.characters)
-        })
     },
     methods: {
     }

@@ -178,11 +178,6 @@ export default {
         }
     },
     mounted() {
-        window.ipc.send('ASK_TAGS')
-        window.ipc.on('SYNC_SEND_TAGS', (response) => {
-            if (this.$isDev) console.log(response)
-            this.tagRepo.fresh(response.tags)
-        })
     },
     methods: {
         onUpdateOrder(selected) {

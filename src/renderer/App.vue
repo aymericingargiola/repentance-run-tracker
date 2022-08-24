@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Taskbar :app-version="appVersion" />
+    <Taskbar :app-version="appVersion" :watch-status="watchStatus" />
     <!-- <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link> -->
     <div class="main">
       <transition name="fade">
         <div
-          v-if="!watchStatus || loading"
+          v-if="repoToLoad > repoLoaded"
           class="overlay-watch-status"
         >
           <div
@@ -28,6 +28,13 @@
 import Taskbar from './components/Taskbar.vue'
 import { mapRepos } from '@vuex-orm/core'
 import Config from './store/classes/Config'
+import Run from './store/classes/Run'
+import TrashRun from './store/classes/TrashRun'
+import Tag from './store/classes/Tag'
+import WinStreak from './store/classes/WinStreak'
+import Entity from './store/classes/Entity'
+import Floor from './store/classes/Floor'
+import Character from './store/classes/Character'
 const loadingImagesStringTemplate = "url('img/loadimages/loadimages-#.png')"
 export default {
   name: 'App',
@@ -38,7 +45,8 @@ export default {
     return {
       appVersion: null,
       watchStatus: false,
-      loading: false,
+      repoToLoad: 8,
+      repoLoaded: 0,
       loadingSignature: null,
       loadingImage1: "url('img/loadimages/loadimages-001.png')",
       loadingImage2: "url('img/loadimages/loadimages-002_2.png')"
@@ -46,23 +54,79 @@ export default {
   },
   computed: {
     ...mapRepos({
-        configRepo: Config
+        configRepo: Config,
+        runRepo: Run,
+        trashRunRepo: TrashRun,
+        tagRepo: Tag,
+        winStreakRepo: WinStreak,
+        entityRepo: Entity,
+        floorRepo: Floor,
+        characterRepo: Character
     })
   },
   mounted() {
     this.randomLoadingImages()
 
-    if (!this.watchStatus) window.ipc.send('IS_APP_READY')
+    window.ipc.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
-        console.log(response)
-        if(response.watching === false) this.randomLoadingImages()
-        this.watchStatus = response.watching
+      console.log(response)
+      this.watchStatus = response.watching
     })
 
-    if (!this.appVersion) window.ipc.send('APP_VERSION');
+    window.ipc.send('APP_VERSION');
     window.ipc.on('APP_VERSION', (response) => {
-      console.log(response)
       this.appVersion = response.appVersion
+    })
+
+    window.ipc.send('ASK_RUNS')
+    window.ipc.on('SYNC_SEND_RUNS', (response) => {
+        this.runRepo.fresh(response.runs)
+        this.repoLoaded += 1
+    })
+
+    window.ipc.send('ASK_TRASH')
+    window.ipc.on('SYNC_SEND_TRASH', (response) => {
+        this.trashRunRepo.fresh(response.trash)
+        this.repoLoaded += 1
+    })
+
+    window.ipc.send('ASK_CONFIG')
+    window.ipc.on('SYNC_SEND_CONFIG', (response) => {
+        this.configRepo.fresh(response.config.sort((a, b) => a.order - b.order))
+        const currentLang = response.config.filter(cfg => cfg.id === 'languages')[0].value
+        this.$i18n.locale = currentLang
+        document.documentElement.setAttribute('lang', currentLang)
+        this.repoLoaded += 1
+    })
+
+    window.ipc.send('ASK_TAGS')
+    window.ipc.on('SYNC_SEND_TAGS', (response) => {
+        this.tagRepo.fresh(response.tags)
+        this.repoLoaded += 1
+    })
+
+    window.ipc.send('ASK_WINSTREAKS')
+    window.ipc.on('SYNC_SEND_WINSTREAKS', (response) => {
+        this.winStreakRepo.fresh(response.winStreaks)
+        this.repoLoaded += 1
+    })
+
+    window.ipc.send('ASK_ENTITIES')
+    window.ipc.on('SYNC_SEND_ENTITIES', (response) => {
+        this.entityRepo.fresh(response.entities)
+        this.repoLoaded += 1
+    })
+
+    window.ipc.send('ASK_FLOORS')
+    window.ipc.on('SYNC_SEND_FLOORS', (response) => {
+        this.floorRepo.fresh(response.floors)
+        this.repoLoaded += 1
+    })
+    
+    window.ipc.send('ASK_CHARACTERS')
+    window.ipc.on('SYNC_SEND_CHARACTERS', (response) => {
+        this.characterRepo.fresh(response.characters)
+        this.repoLoaded += 1
     })
   },
   methods: {
@@ -147,7 +211,7 @@ export default {
 
   //Overlay watch status
   .overlay-watch-status {
-    display: none;
+    // display: none;
     background: black;
     position: fixed;
     width: 100%;

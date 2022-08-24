@@ -137,11 +137,6 @@ export default {
         this.$root.$on('OPEN_TRASH', () => {
             this.isOpen = !this.isOpen
         })
-        window.ipc.send('ASK_TRASH')
-        window.ipc.on('SYNC_SEND_TRASH', (response) => {
-            console.log(response)
-            this.trashRunRepo.fresh(response.trash)
-        })
         window.ipc.on('SYNC_ADD_RUN_TO_TRASH', (response) => {
             console.log(response)
             this.trashRunRepo.save(response.run)
