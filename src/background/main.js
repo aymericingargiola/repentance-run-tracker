@@ -173,6 +173,7 @@ async function createWindow() {
     }
   })
   readyToSync(win, false)
+  startLogsWatch(win, config, runs, trash)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -196,7 +197,6 @@ async function createWindow() {
     require('electron').shell.openExternal(url)
   })
   
-  startLogsWatch(win, config, runs, trash)
   startModWatch(win, isDevelopment, modFile.default, modMetadata.default, config)
 }
 
