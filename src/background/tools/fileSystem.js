@@ -5,8 +5,7 @@ const path = require('path')
 
 module.exports = {
   dirExist: function(dir) {
-    if (!fs.existsSync(dir)) return false
-    else return true
+    return fs.existsSync(dir)
   },
   dirResolve: function(dir) {
     if (!fs.existsSync(dir)) {
