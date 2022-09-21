@@ -1,32 +1,27 @@
-const fs = require('fs')
-const { app } = require('electron')
-const { watch, unlinkSync } = require('fs')
-const path = require('path')
+const { watch } = require('fs')
 const log = require('electron-log')
 const compareVersions = require('compare-versions')
 const convert = require('xml-js')
 const { dirExist, fileResolve, writeFileAsync, readFileAsync } = require('../tools/fileSystem')
-const dataFolder = app.getPath("userData")
+const path = require('path')
 const modName = 'Repentance_Run_Tracker_Extended'
-//const isaacModFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Afterbirth+ Mods`
-//const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
-//const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
 let modFile, modMetadata, modDevFolder, modDevFile, modDevMetadataFile, config, isaacModFolderPath
 
 async function watchMod() {
-    await fileResolve(`${isaacModFolderPath}\\${modName}`, 'main.lua', '')
-    await fileResolve(`${isaacModFolderPath}\\${modName}`, 'metadata.xml', '')
+    const ourModFolder = path.join(isaacModFolderPath, modName)
+    await fileResolve(ourModFolder, 'main.lua', '')
+    await fileResolve(ourModFolder, 'metadata.xml', '')
     watch(modDevFile, async (eventType, filename) => {
         if (eventType === 'change') {
             let newContent = await readFileAsync(modDevFolder, 'main.lua', false)
-            await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'main.lua', newContent, false)
+            await writeFileAsync(ourModFolder, 'main.lua', newContent, false)
             console.log("Mod file updated")
         }
     })
     watch(modDevMetadataFile, async (eventType, filename) => {
         if (eventType === 'change') {
             let newContent = await readFileAsync(modDevFolder, 'metadata.xml', false)
-            await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'metadata.xml', newContent, false)
+            await writeFileAsync(ourModFolder, 'metadata.xml', newContent, false)
             console.log("Mod metadata file updated")
         }
     })
@@ -34,25 +29,26 @@ async function watchMod() {
 
 async function checkMod() {
     console.log("Checking mod...")
-    if(!dirExist(`${isaacModFolderPath}\\${modName}`)) {
+    const ourModFolder = path.join(isaacModFolderPath, modName)
+    if(!dirExist(ourModFolder)) {
         console.log("Mod does not exist, create files...")
         console.log(modMetadata)
-        await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'main.lua', modFile)
-        await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'metadata.xml', modMetadata)
-        await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'disable.it', '')
+        await writeFileAsync(ourModFolder, 'main.lua', modFile)
+        await writeFileAsync(ourModFolder, 'metadata.xml', modMetadata)
+        await writeFileAsync(ourModFolder, 'disable.it', '')
         console.log("Mod files created")
-        log.info(`Extended logs mod's files was missing, created in ${isaacModFolderPath}\\${modName}`)
+        log.info(`Extended logs mod's files was missing, created in ${ourModFolder}`)
         return
     }
-    const currentModMetadataFile = await readFileAsync(`${isaacModFolderPath}\\${modName}`, `metadata.xml`)
+    const currentModMetadataFile = await readFileAsync(ourModFolder, `metadata.xml`)
     const currentModVersion = JSON.parse(convert.xml2json(currentModMetadataFile, {compact: true, spaces: 4})).metadata.version._text
     const appModVersion = JSON.parse(convert.xml2json(modMetadata, {compact: true, spaces: 4})).metadata.version._text
     if(compareVersions(currentModVersion, appModVersion) === -1) {
         console.log("Current mod version is older, update...")
-        await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'main.lua', modFile)
-        await writeFileAsync(`${isaacModFolderPath}\\${modName}`, 'metadata.xml', modMetadata)
+        await writeFileAsync(ourModFolder, 'main.lua', modFile)
+        await writeFileAsync(ourModFolder, 'metadata.xml', modMetadata)
         console.log("Mod updated")
-        log.info(`Extended logs mod version is different ! [current = ${currentModVersion} | new = ${appModVersion}], updated in ${isaacModFolderPath}\\${modName}`)
+        log.info(`Extended logs mod version is different ! [current = ${currentModVersion} | new = ${appModVersion}], updated in ${ourModFolder}`)
     }
 }
 

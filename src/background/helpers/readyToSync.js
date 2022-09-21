@@ -157,8 +157,8 @@ module.exports = {
 		const filesToRestore = ["runs.json", "tags.json", "trash.json", "winStreaks.json", "config.json"]
 		if (dirExist(oldFolderPath)) {
 			await asyncForEach(filesToRestore, async (file) => {
-				const sourceFilePath = path.normalize(`${oldFolderPath}\\${file}`)
-				const destFilePath = path.normalize(`${dataFolder}\\${file}`)
+				const sourceFilePath = path.join(oldFolderPath, file)
+				const destFilePath = path.join(dataFolder, file)
 				try {
 					await fsPromises.copyFile(sourceFilePath, destFilePath)
 				} catch (err) {

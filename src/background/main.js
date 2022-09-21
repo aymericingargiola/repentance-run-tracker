@@ -18,7 +18,7 @@ const path = require('path')
 const fs = require('fs')
 const appDataFolder = process.env.APPDATA
 const oldFolderName = "repentance-run-tracker"
-const oldFolderPath = path.normalize(`${appDataFolder}\\${oldFolderName}`)
+const oldFolderPath = path.join(appDataFolder, oldFolderName)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
