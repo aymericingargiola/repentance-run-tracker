@@ -622,10 +622,11 @@ function unWatchRepentanceLogs() {
 }
 
 async function checkLinuxPaths() {
+    elog.info(`Resolving linux paths...`)
     const loadConfig = await fileResolve(dataFolder, 'config.json', '[]')
     cf = JSON.parse(fs.readFileSync(loadConfig))
     const isaacLinuxDatasPath = cf.filter(field => field.id === "isaacLinuxDatasPath")[0]
-    if (!isaacLinuxDatasPath || isaacLinuxDatasPath === "") {
+    if (!isaacLinuxDatasPath || isaacLinuxDatasPath.value === "") {
         elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
         const message = "Game data's name is missing (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
         const stack = `Actual data path (#ISAAC# should be replaced with the folder name you enter in the settings) : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
@@ -636,7 +637,13 @@ async function checkLinuxPaths() {
         repentanceLogsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'log.txt')
         repentanceOptionsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'options.ini')
         if (fs.existsSync(repentanceLogsFile) && fs.existsSync(repentanceOptionsFile)) {
-            elog.info(`Linux Path Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
+            elog.info(`Linux Paths Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
+        } else {
+            elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
+            const message = "Game data's name is wrong (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
+            const stack = `Actual data path : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
+            syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
+            return false 
         }
       } catch(err) {
         elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
