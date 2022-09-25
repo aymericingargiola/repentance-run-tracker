@@ -6,9 +6,9 @@ const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSee
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex, findLastIndexObj, asyncForEach } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
-const { initRuns } = require('../helpers/readyToSync')
+const { initRuns, checkLinuxPaths } = require('../helpers/readyToSync')
 const { backupDatas } = require('../helpers/backupDatas')
-const isLinux = process.platform === "linux" ? true : false
+const isLinux = process.platform === "linux"
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
 const runsJsonPath = path.join(dataFolder, 'runs.json')
@@ -621,40 +621,6 @@ function unWatchRepentanceLogs() {
     fs.unwatchFile(repentanceLogsFile)
 }
 
-async function checkLinuxPaths() {
-    elog.info(`Resolving linux paths...`)
-    const loadConfig = await fileResolve(dataFolder, 'config.json', '[]')
-    cf = JSON.parse(fs.readFileSync(loadConfig))
-    const isaacLinuxDatasPath = cf.filter(field => field.id === "isaacLinuxDatasPath")[0]
-    if (!isaacLinuxDatasPath || isaacLinuxDatasPath.value === "") {
-        elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
-        const message = "Game data's name is missing (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
-        const stack = `Actual data path (#ISAAC# should be replaced with the folder name you enter in the settings) : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
-        syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
-        return false
-    }
-    try {
-        repentanceLogsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'log.txt')
-        repentanceOptionsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'options.ini')
-        if (fs.existsSync(repentanceLogsFile) && fs.existsSync(repentanceOptionsFile)) {
-            elog.info(`Linux Paths Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
-        } else {
-            elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
-            const message = "Game data's name is wrong (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
-            const stack = `Actual data path : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
-            syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
-            return false 
-        }
-      } catch(err) {
-        elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
-        const message = "Game data's name is wrong (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
-        const stack = `Actual data path : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
-        syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
-        return false
-    }
-    return true
-}
-
 async function init() {
     if (!runs) {
         runs = await initRuns()
@@ -793,6 +759,8 @@ module.exports = {
         } else {
             const linuxPathsResolved = await checkLinuxPaths()
             if (linuxPathsResolved) {
+                repentanceLogsFile = linuxPathsResolved.repentanceLogsFile
+                repentanceOptionsFile = linuxPathsResolved.repentanceOptionsFile
                 setTimeout(() => {
                     console.log("Watching logs")
                     watchingLogs = true

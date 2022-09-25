@@ -76,6 +76,9 @@ export default {
             this.$refs.saveZip.download = response.fileName
             this.$refs.saveZip.click()
         })
+        if (this.$isLinux) {
+          window.ipc.send('CHECK_LINUX_PATHS')
+        }
     },
     methods: {
         generateZipDump() {
@@ -95,7 +98,7 @@ export default {
 @import "../../assets/styles/scss/vars/_colors";
 .pop-up.app-error {
     position: fixed;
-    z-index: 999;
+    z-index: 800;
     left: 0;
     top: 0;
     background: rgba(0, 0, 0, 0.2);

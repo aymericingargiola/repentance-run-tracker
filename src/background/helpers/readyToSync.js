@@ -1,6 +1,7 @@
 const fs = require('fs')
 const fsPromises = fs.promises
 const path = require('path')
+const isLinux = process.platform === "linux"
 const { ipcMain } = require('electron')
 const { syncApp } = require('./sync')
 const { app } = require('electron')
@@ -16,6 +17,10 @@ const entities = require('../jsons/entitiesFiltered.json')
 const floors = require('../jsons/floors.json')
 const configTemplate = require('../jsons/configTemplate.json')
 const log = require('electron-log')
+const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
+: path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
+let repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
+let repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
 let win, trackerWin, config, winStreaks, tags, runs, trash
 
 ipcMain.on('ASK_CONFIG', async (event, payload) => {
@@ -116,6 +121,13 @@ ipcMain.on('ASK_TRASH', async (event, payload) => {
 	syncApp(window, { trigger: 'send trash', trash: trash })
 });
 
+ipcMain.on('CHECK_LINUX_PATHS', async (event, payload) => {
+	const window = payload && payload.window === 'itemTracker' ? trackerWin : win
+	await module.exports.checkLinuxPaths()
+});
+
+
+
 module.exports = {
 	checkRuns: async function() {
 		console.time('Checking runs done in')
@@ -151,32 +163,40 @@ module.exports = {
 			}
 		}
 	},
-	checkOldFolder: async function(oldFolderPath, dataFolder) {
-		console.log(`Old folder check...`)
-		console.time('Old folder check')
-		const filesToRestore = ["runs.json", "tags.json", "trash.json", "winStreaks.json", "config.json"]
-		if (dirExist(oldFolderPath)) {
-			await asyncForEach(filesToRestore, async (file) => {
-				const sourceFilePath = path.join(oldFolderPath, file)
-				const destFilePath = path.join(dataFolder, file)
-				try {
-					await fsPromises.copyFile(sourceFilePath, destFilePath)
-				} catch (err) {
-					log.warn(`Issue to restore ${oldFolderPath}! Empty file will be created : ${err}`)
-					return
-				}
-				log.info(`${file} was restored from ${oldFolderPath}`)
-				return
-			})
-			try {
-				await fsPromises.rename(oldFolderPath, `${oldFolderPath}-backup`)
-			} catch (err) {
-				log.error(`Issue to rename ${oldFolderPath}! ${err}`)
-				return console.timeEnd('Old folder check')
-			}
-			log.info(`${oldFolderPath} was renamed ${oldFolderPath}-backup`)
+	checkLinuxPaths: async function() {
+		log.info(`Resolving linux paths...`)
+		const loadConfig = await fileResolve(dataFolder, 'config.json', '[]')
+		cf = JSON.parse(fs.readFileSync(loadConfig))
+		const isaacLinuxDatasPath = cf.filter(field => field.id === "isaacLinuxDatasPath")[0]
+		if (!isaacLinuxDatasPath || isaacLinuxDatasPath.value === "") {
+			log.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
+			const message = "Game data's name is missing (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
+			const stack = `${message} \nActual data path (#ISAAC# should be replaced with the folder name you enter in the settings) : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
+			syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
+			return false
 		}
-		return console.timeEnd('Old folder check')
+		try {
+			repentanceLogsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'log.txt')
+			repentanceOptionsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'options.ini')
+			if (fs.existsSync(repentanceLogsFile) && fs.existsSync(repentanceOptionsFile)) {
+				log.info(`Linux Paths Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
+			} else {
+				log.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
+				const message = "Game data's name is wrong (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
+				const stack = `${message} \nActual data path : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
+				syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
+				return false 
+			}
+		} catch(err) {
+			log.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
+			const message = "Game data's name is wrong (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
+			const stack = `${message} \nActual data path : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
+			syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
+			return false
+		}
+		return {repentanceLogsFile:repentanceLogsFile,repentanceOptionsFile:repentanceOptionsFile}
+	},
+	checkOldFolder: async function(oldFolderPath, dataFolder) {
 	},
 	readyToSync: function(window, trackerWindow) {
 		win = window ? window : win

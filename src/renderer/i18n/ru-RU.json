@@ -116,6 +116,10 @@
         "isaacModFolderPath": {
             "title": "Isaac mods folder",
             "hint": ""
+        },
+        "isaacLinuxDatasPath": {
+            "title": "Isaac data path folder (linux)",
+            "hint": "You can find the data path at '/home/deck/.steam/steam/steamapps/compatdata/' then enter the folder name here (numbers)"
         }
     },
     "players": {

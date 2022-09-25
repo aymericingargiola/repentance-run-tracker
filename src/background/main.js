@@ -10,7 +10,7 @@ import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 import { checkForUpdate } from './helpers/updater'
 import { cleanBackups, backupDatas } from './helpers/backupDatas'
-const isLinux = process.platform === "linux" ? true : false
+const isLinux = process.platform === "linux"
 const { syncApp } = require('./helpers/sync')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
