@@ -11,16 +11,16 @@ const { backupDatas } = require('../helpers/backupDatas')
 const isLinux = process.platform === "linux" ? true : false
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
+const runsJsonPath = path.join(dataFolder, 'runs.json')
+const trashJsonPath = path.join(dataFolder, 'trash.json')
+const configJsonPath = path.join(dataFolder, 'config.json')
 const { DateTime } = require('luxon')
 const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
 const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
-: path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/250900/pfx/drive_c/users/steamuser/Documents/My Games/Binding Of Isaac Repentance")
-const repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
-const repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
-const runsJsonPath = path.join(dataFolder, 'runs.json')
-const trashJsonPath = path.join(dataFolder, 'trash.json')
-const configJsonPath = path.join(dataFolder, 'config.json')
+: path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
+let repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
+let repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
 let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
@@ -621,6 +621,33 @@ function unWatchRepentanceLogs() {
     fs.unwatchFile(repentanceLogsFile)
 }
 
+async function checkLinuxPaths() {
+    const loadConfig = await fileResolve(dataFolder, 'config.json', '[]')
+    cf = JSON.parse(fs.readFileSync(loadConfig))
+    const isaacLinuxDatasPath = cf.filter(field => field.id === "isaacLinuxDatasPath")[0]
+    if (!isaacLinuxDatasPath || isaacLinuxDatasPath === "") {
+        elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
+        const message = "Game data's name is missing (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
+        const stack = `Actual data path (#ISAAC# should be replaced with the folder name you enter in the settings) : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
+        syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
+        return false
+    }
+    try {
+        repentanceLogsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'log.txt')
+        repentanceOptionsFile = path.join(repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value), 'options.ini')
+        if (fs.existsSync(repentanceLogsFile) && fs.existsSync(repentanceOptionsFile)) {
+            elog.info(`Linux Path Exist : ${repentanceLogsFile, repentanceOptionsFile}`)
+        }
+      } catch(err) {
+        elog.error(`Linux Path Doesn't Exist : ${repentanceLogsFile, repentanceOptionsFile}`, err)
+        const message = "Game data's name is wrong (linux), please open the settings and add the game folder name (numbers), you can find it at '/home/deck/.steam/steam/steamapps/compatdata/' then restart the app"
+        const stack = `Actual data path : ${repentanceFolderPath.replace("#ISAAC#", isaacLinuxDatasPath.value)}`
+        syncApp(win, { trigger: 'send app error', error: {message:message,stack:stack,chan:"isaacLinuxDatasPath"} })
+        return false
+    }
+    return true
+}
+
 async function init() {
     if (!runs) {
         runs = await initRuns()
@@ -630,6 +657,7 @@ async function init() {
         const loadTrash = await fileResolve(dataFolder, 'trash.json', '[]')
         trash = JSON.parse(fs.readFileSync(loadTrash))
     }
+
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
@@ -717,7 +745,7 @@ ipcMain.on('DEBUG_LOGS', (event, payload) => {
 })
 
 module.exports = {
-    startLogsWatch: function(window, conf, rns, trsh) {
+    startLogsWatch: async function(window, conf, rns, trsh) {
         win = window
         config = conf
         runs = rns
@@ -756,16 +784,19 @@ module.exports = {
                 }
             }, 1000)
         } else {
-            setTimeout(() => {
-                console.log("Watching logs")
-                watchingLogs = true
-                watchRepentanceLogs()
-                init()
-                repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
-                console.log(repentanceOptions)
-                syncApp(win,{trigger: "logs watch status", watching: true})
-                wait = false
-            }, 10000)
+            const linuxPathsResolved = await checkLinuxPaths()
+            if (linuxPathsResolved) {
+                setTimeout(() => {
+                    console.log("Watching logs")
+                    watchingLogs = true
+                    watchRepentanceLogs()
+                    init()
+                    repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+                    console.log(repentanceOptions)
+                    syncApp(win,{trigger: "logs watch status", watching: true})
+                    wait = false
+                }, 10000)
+            }
         }
     },
     itemTrackerWindowState: function (window) {

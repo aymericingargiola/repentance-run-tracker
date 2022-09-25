@@ -48,12 +48,22 @@
         "disabled":false
     },
     {
+        "id":"isaacLinuxDatasPath",
+        "value":"",
+        "name":"Isaac data path folder (linux)",
+        "hint":"You can found the data path at '/home/deck/.steam/steam/steamapps/compatdata/' and enter the folder name here (numbers)",
+        "type":"text",
+        "order": 6,
+        "disabled":false,
+        "linux": true
+    },
+    {
         "id":"streakingWebsiteToken",
         "value":"",
         "name":"Streaking Website Token",
         "hint":"",
         "type":"text",
-        "order": 6,
+        "order": 7,
         "disabled":true
     },
     {
@@ -62,7 +72,7 @@
         "name":"Store existing tags",
         "hint":"",
         "type":"array",
-        "order": 7,
+        "order": 8,
         "disabled":true
     },
     {
@@ -71,7 +81,7 @@
         "name":"Change Live Tracker Background",
         "hint":"",
         "type":"object",
-        "order": 8,
+        "order": 9,
         "disabled":true
     }
 ]
