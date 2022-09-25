@@ -8,12 +8,14 @@ const { isRunning, findLastIndex, findLastIndexObj, asyncForEach } = require('..
 const { syncApp } = require('../helpers/sync')
 const { initRuns } = require('../helpers/readyToSync')
 const { backupDatas } = require('../helpers/backupDatas')
+const isLinux = process.platform === "linux" ? true : false
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
 const { DateTime } = require('luxon')
 const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
-const repentanceFolderPath = path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
+const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
+: path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/250900/pfx/drive_c/users/steamuser/Documents/My Games/Binding Of Isaac Repentance")
 const repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
 const repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
 const runsJsonPath = path.join(dataFolder, 'runs.json')
@@ -721,37 +723,50 @@ module.exports = {
         runs = rns
         trash = trsh
         let wait = false
-        setInterval(() => {
-            if(!wait) {
-                wait = true
-                isRunning('isaac-ng.exe', (status) => {
-                    if (!status && repentanceIsLaunched) {
-                        console.log("unwatch logs")
-                        watchingLogs = false
-                        repentanceIsLaunched = false
-                        unWatchRepentanceLogs()
-                        saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-                        syncApp(win,{trigger: "logs watch status", watching: false})
-                        wait = false
-                    } else if (status && !repentanceIsLaunched) {
-                        console.log("Waiting for logs...")
-                        repentanceIsLaunched = true
-                        setTimeout(() => {
-                            console.log("Watching logs")
-                            watchingLogs = true
-                            watchRepentanceLogs()
-                            init()
-                            repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
-                            console.log(repentanceOptions)
-                            syncApp(win,{trigger: "logs watch status", watching: true})
+        if (!isLinux) {
+            setInterval(() => {
+                if(!wait) {
+                    wait = true
+                    isRunning('isaac-ng.exe', (status) => {
+                        if (!status && repentanceIsLaunched) {
+                            console.log("unwatch logs")
+                            watchingLogs = false
+                            repentanceIsLaunched = false
+                            unWatchRepentanceLogs()
+                            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+                            syncApp(win,{trigger: "logs watch status", watching: false})
                             wait = false
-                        }, 10000)
-                    } else {
-                        wait = false
-                    }
-                })
-            }
-        }, 1000)
+                        } else if (status && !repentanceIsLaunched) {
+                            console.log("Waiting for logs...")
+                            repentanceIsLaunched = true
+                            setTimeout(() => {
+                                console.log("Watching logs")
+                                watchingLogs = true
+                                watchRepentanceLogs()
+                                init()
+                                repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+                                console.log(repentanceOptions)
+                                syncApp(win,{trigger: "logs watch status", watching: true})
+                                wait = false
+                            }, 10000)
+                        } else {
+                            wait = false
+                        }
+                    })
+                }
+            }, 1000)
+        } else {
+            setTimeout(() => {
+                console.log("Watching logs")
+                watchingLogs = true
+                watchRepentanceLogs()
+                init()
+                repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+                console.log(repentanceOptions)
+                syncApp(win,{trigger: "logs watch status", watching: true})
+                wait = false
+            }, 10000)
+        }
     },
     itemTrackerWindowState: function (window) {
         winTracker = window

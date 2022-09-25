@@ -26,6 +26,11 @@ module.exports = {
                         "nsis"
                     ]
                 },
+                linux: {
+                    target: [
+                        "AppImage"
+                    ]
+                },
                 publish: [
                   {
                     provider: "github",

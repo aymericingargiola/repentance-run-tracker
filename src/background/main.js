@@ -10,6 +10,7 @@ import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 import { checkForUpdate } from './helpers/updater'
 import { cleanBackups, backupDatas } from './helpers/backupDatas'
+const isLinux = process.platform === "linux" ? true : false
 const { syncApp } = require('./helpers/sync')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
@@ -187,7 +188,7 @@ async function createWindow() {
 
   //Check for app updates
   win.once('ready-to-show', () => {
-    if(!isDevelopment && !process.env.IS_TEST) {
+    if(!isDevelopment && !process.env.IS_TEST && !isLinux) {
       checkForUpdate(win)
     }
   })

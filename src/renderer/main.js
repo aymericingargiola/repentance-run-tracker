@@ -10,7 +10,7 @@ import { ColorPicker } from 'vue-color-gradient-picker'
 import 'vue-color-gradient-picker/dist/index.css'
 import VueI18n from 'vue-i18n'
 import { languages, customModifiers, defaultLocale } from './i18n/index'
-import 'swiper/css';
+import 'swiper/swiper-bundle.css';
 import VueApexCharts from 'vue-apexcharts'
 import helpers from './helpers/format'
 
