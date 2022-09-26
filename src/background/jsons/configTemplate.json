@@ -49,12 +49,12 @@
     },
     {
         "id":"isaacLinuxDatasPath",
-        "value":"",
+        "value":"250900",
         "name":"Isaac data path folder (linux)",
         "hint":"You can found the data path at '/home/deck/.steam/steam/steamapps/compatdata/' and enter the folder name here (numbers)",
         "type":"text",
         "order": 6,
-        "disabled":false,
+        "disabled":true,
         "linux": true
     },
     {

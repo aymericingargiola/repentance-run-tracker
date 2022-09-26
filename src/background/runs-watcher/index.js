@@ -724,7 +724,7 @@ module.exports = {
         runs = rns
         trash = trsh
         let wait = false
-        if (!isLinux) {
+        //if (!isLinux) {
             setInterval(() => {
                 if(!wait) {
                     wait = true
@@ -756,23 +756,24 @@ module.exports = {
                     })
                 }
             }, 1000)
-        } else {
-            const linuxPathsResolved = await checkLinuxPaths()
-            if (linuxPathsResolved) {
-                repentanceLogsFile = linuxPathsResolved.repentanceLogsFile
-                repentanceOptionsFile = linuxPathsResolved.repentanceOptionsFile
-                setTimeout(() => {
-                    console.log("Watching logs")
-                    watchingLogs = true
-                    watchRepentanceLogs()
-                    init()
-                    repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
-                    console.log(repentanceOptions)
-                    syncApp(win,{trigger: "logs watch status", watching: true})
-                    wait = false
-                }, 10000)
-            }
-        }
+        //} 
+        // else {
+        //     const linuxPathsResolved = await checkLinuxPaths()
+        //     if (linuxPathsResolved) {
+        //         repentanceLogsFile = linuxPathsResolved.repentanceLogsFile
+        //         repentanceOptionsFile = linuxPathsResolved.repentanceOptionsFile
+        //         setTimeout(() => {
+        //             console.log("Watching logs")
+        //             watchingLogs = true
+        //             watchRepentanceLogs()
+        //             init()
+        //             repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+        //             console.log(repentanceOptions)
+        //             syncApp(win,{trigger: "logs watch status", watching: true})
+        //             wait = false
+        //         }, 10000)
+        //     }
+        // }
     },
     itemTrackerWindowState: function (window) {
         winTracker = window
