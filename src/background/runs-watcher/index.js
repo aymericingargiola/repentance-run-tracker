@@ -724,11 +724,22 @@ module.exports = {
         runs = rns
         trash = trsh
         let wait = false
+        let linuxChecked = false
         //if (!isLinux) {
             setInterval(() => {
                 if(!wait) {
                     wait = true
-                    isRunning('isaac-ng.exe', (status) => {
+                    isRunning('isaac-ng.exe', async (status) => {
+                        if (isLinux && !linuxChecked) {
+                            const linuxPathsResolved = await checkLinuxPaths()
+                            if (linuxPathsResolved) {
+                                repentanceLogsFile = linuxPathsResolved.repentanceLogsFile
+                                repentanceOptionsFile = linuxPathsResolved.repentanceOptionsFile
+                                linuxChecked = true
+                            } else {
+                                return
+                            }
+                        }
                         if (!status && repentanceIsLaunched) {
                             console.log("unwatch logs")
                             watchingLogs = false

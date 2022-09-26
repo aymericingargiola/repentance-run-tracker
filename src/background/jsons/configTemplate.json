@@ -54,7 +54,7 @@
         "hint":"You can found the data path at '/home/deck/.steam/steam/steamapps/compatdata/' and enter the folder name here (numbers)",
         "type":"text",
         "order": 6,
-        "disabled":true,
+        "disabled":false,
         "linux": true
     },
     {
