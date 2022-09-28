@@ -24,7 +24,7 @@ module.exports = {
     getModPath: (string) => {
         const modPath = string.replace("[INFO] - Running Lua Script: ", "")
         const modPathIndex = modPath.indexOf("/mods/")
-        return path.normalize(`${modPath.slice(0,modPathIndex)}\\mods`)
+        return path.join(modPath.slice(0, modPathIndex), 'mods')
     },
     getCharater: (string, otherModsLoaded) => {
         //Return matching character from logs

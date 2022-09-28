@@ -8,7 +8,7 @@ const { DateTime, Duration } = require('luxon')
 const AdmZip = require("adm-zip")
 const elog = require('electron-log')
 const dataFolder = app.getPath("userData")
-const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
+const repentanceFolderPath = path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
 
 ipcMain.on('ASK_ERROR_ZIP', async (event) => {
   const zipBuffer = await module.exports.generateErrorZip()

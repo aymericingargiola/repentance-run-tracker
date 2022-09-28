@@ -10,7 +10,7 @@ import { ColorPicker } from 'vue-color-gradient-picker'
 import 'vue-color-gradient-picker/dist/index.css'
 import VueI18n from 'vue-i18n'
 import { languages, customModifiers, defaultLocale } from './i18n/index'
-import 'swiper/swiper-bundle.css'
+import 'swiper/swiper-bundle.css';
 import VueApexCharts from 'vue-apexcharts'
 import helpers from './helpers/format'
 
@@ -45,6 +45,7 @@ const i18n = new VueI18n({
 
 Vue.prototype.$DateTime = DateTime
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
+Vue.prototype.$isLinux = navigator.userAgent.toLowerCase().indexOf("linux") > -1
 Vue.prototype.$isDev = process.env.NODE_ENV === "development"
 
 Vue.config.productionTip = false

@@ -6,19 +6,21 @@ const { getOptions, getModPath, getCharater, getEntity, getCharaterStats, getSee
 const { fileResolve } = require('../tools/fileSystem')
 const { isRunning, findLastIndex, findLastIndexObj, asyncForEach } = require('../tools/methods')
 const { syncApp } = require('../helpers/sync')
-const { initRuns } = require('../helpers/readyToSync')
+const { initRuns, checkLinuxPaths } = require('../helpers/readyToSync')
 const { backupDatas } = require('../helpers/backupDatas')
+const isLinux = process.platform === "linux"
 const configTemplate = require('../jsons/configTemplate.json')
 const dataFolder = app.getPath("userData")
+const runsJsonPath = path.join(dataFolder, 'runs.json')
+const trashJsonPath = path.join(dataFolder, 'trash.json')
+const configJsonPath = path.join(dataFolder, 'config.json')
 const { DateTime } = require('luxon')
 const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
-const repentanceFolderPath = `${process.env.USERPROFILE}\\Documents\\My Games\\Binding of Isaac Repentance`
-const repentanceLogsFile = `${repentanceFolderPath}\\log.txt`
-const repentanceOptionsFile = `${repentanceFolderPath}\\options.ini`
-const runsJsonPath = `${dataFolder}\\runs.json`
-const trashJsonPath = `${dataFolder}\\trash.json`
-const configJsonPath = `${dataFolder}\\config.json`
+const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
+: path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
+let repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
+let repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
 let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
@@ -628,6 +630,7 @@ async function init() {
         const loadTrash = await fileResolve(dataFolder, 'trash.json', '[]')
         trash = JSON.parse(fs.readFileSync(loadTrash))
     }
+
     currentRunInit = false //Lock update possibilities until a run is launched
     repentanceLogs = fs.readFileSync(repentanceLogsFile, "utf8") //Set "repentanceLogs" variable filled with current Repentance logs
     repentanceLogsArray = repentanceLogs.split(splitFormat) //Split line by line
@@ -715,43 +718,73 @@ ipcMain.on('DEBUG_LOGS', (event, payload) => {
 })
 
 module.exports = {
-    startLogsWatch: function(window, conf, rns, trsh) {
+    startLogsWatch: async function(window, conf, rns, trsh) {
         win = window
         config = conf
         runs = rns
         trash = trsh
         let wait = false
-        setInterval(() => {
-            if(!wait) {
-                wait = true
-                isRunning('isaac-ng.exe', (status) => {
-                    if (!status && repentanceIsLaunched) {
-                        console.log("unwatch logs")
-                        watchingLogs = false
-                        repentanceIsLaunched = false
-                        unWatchRepentanceLogs()
-                        saveFileToDisk(runsJsonPath, JSON.stringify(runs))
-                        syncApp(win,{trigger: "logs watch status", watching: false})
-                        wait = false
-                    } else if (status && !repentanceIsLaunched) {
-                        console.log("Waiting for logs...")
-                        repentanceIsLaunched = true
-                        setTimeout(() => {
-                            console.log("Watching logs")
-                            watchingLogs = true
-                            watchRepentanceLogs()
-                            init()
-                            repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
-                            console.log(repentanceOptions)
-                            syncApp(win,{trigger: "logs watch status", watching: true})
+        let linuxChecked = false
+        //if (!isLinux) {
+            setInterval(() => {
+                if(!wait) {
+                    wait = true
+                    isRunning('isaac-ng.exe', async (status) => {
+                        if (isLinux && !linuxChecked) {
+                            const linuxPathsResolved = await checkLinuxPaths()
+                            if (linuxPathsResolved) {
+                                repentanceLogsFile = linuxPathsResolved.repentanceLogsFile
+                                repentanceOptionsFile = linuxPathsResolved.repentanceOptionsFile
+                                linuxChecked = true
+                            } else {
+                                return
+                            }
+                        }
+                        if (!status && repentanceIsLaunched) {
+                            console.log("unwatch logs")
+                            watchingLogs = false
+                            repentanceIsLaunched = false
+                            unWatchRepentanceLogs()
+                            saveFileToDisk(runsJsonPath, JSON.stringify(runs))
+                            syncApp(win,{trigger: "logs watch status", watching: false})
                             wait = false
-                        }, 10000)
-                    } else {
-                        wait = false
-                    }
-                })
-            }
-        }, 1000)
+                        } else if (status && !repentanceIsLaunched) {
+                            console.log("Waiting for logs...")
+                            repentanceIsLaunched = true
+                            setTimeout(() => {
+                                console.log("Watching logs")
+                                watchingLogs = true
+                                watchRepentanceLogs()
+                                init()
+                                repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+                                console.log(repentanceOptions)
+                                syncApp(win,{trigger: "logs watch status", watching: true})
+                                wait = false
+                            }, 10000)
+                        } else {
+                            wait = false
+                        }
+                    })
+                }
+            }, 1000)
+        //} 
+        // else {
+        //     const linuxPathsResolved = await checkLinuxPaths()
+        //     if (linuxPathsResolved) {
+        //         repentanceLogsFile = linuxPathsResolved.repentanceLogsFile
+        //         repentanceOptionsFile = linuxPathsResolved.repentanceOptionsFile
+        //         setTimeout(() => {
+        //             console.log("Watching logs")
+        //             watchingLogs = true
+        //             watchRepentanceLogs()
+        //             init()
+        //             repentanceOptions = getOptions(repentanceOptionsFile, splitFormat)
+        //             console.log(repentanceOptions)
+        //             syncApp(win,{trigger: "logs watch status", watching: true})
+        //             wait = false
+        //         }, 10000)
+        //     }
+        // }
     },
     itemTrackerWindowState: function (window) {
         winTracker = window

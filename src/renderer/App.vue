@@ -52,7 +52,8 @@ export default {
       repoLoaded: 0,
       loadingSignature: null,
       loadingImage1: "url('img/loadimages/loadimages-001.png')",
-      loadingImage2: "url('img/loadimages/loadimages-002_2.png')"
+      loadingImage2: "url('img/loadimages/loadimages-002_2.png')",
+      errors: []
     }
   },
   computed: {
@@ -130,6 +131,11 @@ export default {
     window.ipc.on('SYNC_SEND_CHARACTERS', (response) => {
         this.characterRepo.fresh(response.characters)
         this.repoLoaded += 1
+    })
+
+    window.ipc.on('SYNC_SEND_APP_ERROR', (response) => {
+        console.log("new error", response)
+        if(!this.errors.includes(response.error.stack)) this.errors.push(response.error.stack)
     })
   },
   methods: {

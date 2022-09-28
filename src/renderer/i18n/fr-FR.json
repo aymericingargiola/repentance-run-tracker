@@ -116,6 +116,10 @@
         "isaacModFolderPath": {
             "title": "Dossier des mods",
             "hint": ""
+        },
+        "isaacLinuxDatasPath": {
+            "title": "Dossier des données du jeu (linux)",
+            "hint": "Vous pouvez trouver le nom du dossier dans '/home/deck/.steam/steam/steamapps/compatdata/' (ce sont des numéros)"
         }
     },
     "players": {

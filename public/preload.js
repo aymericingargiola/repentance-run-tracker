@@ -55,7 +55,8 @@ const validChannels = [
   'USER_RESTORE_RUNS_FROM_TRASH',
   'USER_REMOVE_RUNS_FROM_TRASH',
   'USER_EMPTY_TRASH',
-  'DEBUG_LOGS'
+  'DEBUG_LOGS',
+  'CHECK_LINUX_PATHS'
 ];
 contextBridge.exposeInMainWorld(
   'ipc', {

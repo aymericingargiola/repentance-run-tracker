@@ -10,15 +10,16 @@ import * as modFile from '!raw-loader!./mod-watcher/mod/main.lua'
 import * as modMetadata from '!raw-loader!./mod-watcher/mod/metadata.xml'
 import { checkForUpdate } from './helpers/updater'
 import { cleanBackups, backupDatas } from './helpers/backupDatas'
+const isLinux = process.platform === "linux"
 const { syncApp } = require('./helpers/sync')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const { ipcMain } = require('electron')
 const elog = require('electron-log')
 const path = require('path')
 const fs = require('fs')
-const appDataFolder = process.env.APPDATA
+const appDataFolder = app.getAppPath('appData')
 const oldFolderName = "repentance-run-tracker"
-const oldFolderPath = path.normalize(`${appDataFolder}\\${oldFolderName}`)
+const oldFolderPath = path.join(appDataFolder, oldFolderName)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
@@ -173,6 +174,7 @@ async function createWindow() {
     }
   })
   readyToSync(win, false)
+  startLogsWatch(win, config, runs, trash)
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -186,7 +188,7 @@ async function createWindow() {
 
   //Check for app updates
   win.once('ready-to-show', () => {
-    if(!isDevelopment && !process.env.IS_TEST) {
+    if(!isDevelopment && !process.env.IS_TEST && !isLinux) {
       checkForUpdate(win)
     }
   })
@@ -196,7 +198,6 @@ async function createWindow() {
     require('electron').shell.openExternal(url)
   })
   
-  startLogsWatch(win, config, runs, trash)
   startModWatch(win, isDevelopment, modFile.default, modMetadata.default, config)
 }
 

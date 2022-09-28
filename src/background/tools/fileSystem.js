@@ -1,10 +1,11 @@
 const fs = require('fs')
 const fsPromises = fs.promises
 const elog = require('electron-log')
+const path = require('path')
+
 module.exports = {
   dirExist: function(dir) {
-    if (!fs.existsSync(dir)) return false
-    else return true
+    return fs.existsSync(dir)
   },
   dirResolve: function(dir) {
     if (!fs.existsSync(dir)) {
@@ -15,49 +16,55 @@ module.exports = {
     return dir
   },
   writeFileAsync: async function(dir, fileName, datas, logs = true) {
-    if (logs) console.time(`Write "${dir}\\${fileName}" in `)
+    const fullFilePath = path.join(dir, fileName)
+    if (logs) console.time(`Write "${fullFilePath}" in `)
     module.exports.dirResolve(dir)
     try {
-      await fsPromises.writeFile(`${dir}\\${fileName}`, datas);
+      await fsPromises.writeFile(fullFilePath, datas);
     } catch (error) {
       console.log(error)
       elog.error(error)
       return false
     }
-    if (logs) console.timeEnd(`Write "${dir}\\${fileName}" in `)
-    return `${dir}\\${fileName}`
+    if (logs) console.timeEnd(`Write "${fullFilePath}" in `)
+    return fullFilePath
   },
-  fileResolve: async function(path, file, defaultDatas) {
-    if(!module.exports.dirExist(`${path}\\${file}`)) await module.exports.writeFileAsync(path, file, defaultDatas)
-    return `${path}\\${file}`
+  fileResolve: async function(dir, file, defaultDatas) {
+    const fullPath = path.join(dir, file)
+    if(!module.exports.dirExist(fullPath)) {
+      await module.exports.writeFileAsync(dir, file, defaultDatas)
+    }
+    return fullPath
   },
   readFileAsync: async function(dir, fileName, logs = true) {
-    if (logs) console.time(`Read "${dir}\\${fileName}" in `)
+    const fullFilePath = path.join(dir, fileName)
+    if (logs) console.time(`Read "${fullFilePath}" in `)
     let file
     if (module.exports.dirExist(dir)) {
       try {
-        file = await fsPromises.readFile(`${dir}\\${fileName}`)
+        file = await fsPromises.readFile(fullFilePath)
       } catch (error) {
         console.log(error)
         elog.error(error)
         return false
       }
     }
-    if (logs) console.timeEnd(`Read "${dir}\\${fileName}" in `)
+    if (logs) console.timeEnd(`Read "${fullFilePath}" in `)
     return file;
   },
   removeFileAsync: async function(dir, fileName, logs = true) {
-    if (logs) console.time(`Remove "${dir}\\${fileName}" in `)
+    const fullFilePath = path.join(dir, fileName)
+    if (logs) console.time(`Remove "${fullFilePath}" in `)
     if (module.exports.dirExist(dir)) {
       try {
-        await fsPromises.unlink(`${dir}\\${fileName}`)
+        await fsPromises.unlink(fullFilePath)
       } catch (error) {
         console.log(error)
         elog.error(error)
         return false
       }
     }
-    if (logs) console.timeEnd(`Remove "${dir}\\${fileName}" in `)
+    if (logs) console.timeEnd(`Remove "${fullFilePath}" in `)
     return true
   }
 }
