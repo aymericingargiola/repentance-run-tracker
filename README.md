@@ -32,6 +32,8 @@ Change the hour format to :
 - 12 hours
 ### Hide active items
 It hides active items from floors.
+### Ignore saves
+If saves are checked, the app don't track your runs on selected saves.
 ### Isaac mods folder
 This is important for extra runs informations, like all the character infos (life, bombs, keys, coins, stats) not available in logs. It adds a mod in your game then write extra lines in logs.
 The mod folder is in the game folder (since repentance update), from steam right click on the game then click on "Manage" then "Browse local files", open "mods" folder and copy the full path.
@@ -55,6 +57,11 @@ You can add any video link here.
 If something exciting happens during your run you can add a timecode, if the video link is from YouTube or Twitch it automatically opens the link with the right timecode on click.
 ### Tags
 You can add tags used for filtering (tags filter available later).
+
+## Trashbin
+
+![Edit runs](/doc/img/trash.jpg)
+Every runs you remove are stored in an other place, "trash.json", you can restore or definitely remove runs by opening it by clicking on the icon at the top right in the taskbar.
 
 ## Filters
 
