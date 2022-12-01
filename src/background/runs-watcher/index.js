@@ -546,7 +546,7 @@ function parseLogs(newLogs, logArray) {
                     isaacModFolderPathTemplate.value = modPath
                     config.push(isaacModFolderPathTemplate)
                 }
-                else if (field.value != modPath) field.value = modPath
+                else if (field.value != modPath && !isLinux) field.value = modPath
                 saveFileToDisk(configJsonPath, JSON.stringify(config))
             }
             if (log.includes("/mods/repentance_run_tracker_extended")) {
