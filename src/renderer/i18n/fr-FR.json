@@ -113,6 +113,15 @@
             "title": "Cacher les items actifs",
             "hint": "Cacher les items actifs de la liste des etages"
         },
+        "ignoreSaves": {
+            "title": "Sauvegarde à ignorer",
+            "hint": "Choisissez les sauvegardes à ignorer",
+            "choices": {
+                "1": "Sauvegarde 1",
+                "2": "Sauvegarde 2",
+                "3": "Sauvegarde 3"
+            }
+        },
         "isaacModFolderPath": {
             "title": "Dossier des mods",
             "hint": ""

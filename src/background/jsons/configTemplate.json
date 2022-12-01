@@ -39,12 +39,22 @@
         "disabled":false
     },
     {
+        "id":"ignoreSaves",
+        "value":[],
+        "choices":[{"name":"Save 1","value":1},{"name":"Save 2","value":2},{"name":"Save 3","value":3}],
+        "name":"Saves to ignore",
+        "hint":"Select the saves you don't want to record",
+        "type":"multiselect",
+        "order": 5,
+        "disabled":false
+    },
+    {
         "id":"isaacModFolderPath",
         "value":"",
         "name":"Isaac mods folder",
         "hint":"",
         "type":"text",
-        "order": 5,
+        "order": 6,
         "disabled":false
     },
     {
@@ -53,7 +63,7 @@
         "name":"Isaac data path folder (linux)",
         "hint":"You can found the data path at '/home/deck/.steam/steam/steamapps/compatdata/' and enter the folder name here (numbers)",
         "type":"text",
-        "order": 6,
+        "order": 7,
         "disabled":false,
         "linux": true
     },
@@ -63,7 +73,7 @@
         "name":"Streaking Website Token",
         "hint":"",
         "type":"text",
-        "order": 7,
+        "order": 8,
         "disabled":true
     },
     {
@@ -72,7 +82,7 @@
         "name":"Store existing tags",
         "hint":"",
         "type":"array",
-        "order": 8,
+        "order": 9,
         "disabled":true
     },
     {
@@ -81,7 +91,7 @@
         "name":"Change Live Tracker Background",
         "hint":"",
         "type":"object",
-        "order": 9,
+        "order": 10,
         "disabled":true
     }
 ]

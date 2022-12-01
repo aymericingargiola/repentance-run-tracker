@@ -113,6 +113,15 @@
             "title": "Hide active items",
             "hint": "Hide active items from floor's items list"
         },
+        "ignoreSaves": {
+            "title": "Saves to ignore",
+            "hint": "Select the saves you don't want to record",
+            "choices": {
+                "1": "Save 1",
+                "2": "Save 2",
+                "3": "Save 3"
+            }
+        },
         "isaacModFolderPath": {
             "title": "Isaac mods folder",
             "hint": ""
