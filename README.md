@@ -60,7 +60,7 @@ You can add tags used for filtering (tags filter available later).
 
 ## Trashbin
 
-![Edit runs](/doc/img/trash.jpg)
+![Edit runs](/doc/img/trash.JPG)
 Every runs you remove are stored in an other place, "trash.json", you can restore or definitely remove runs by opening it by clicking on the icon at the top right in the taskbar.
 
 ## Filters
