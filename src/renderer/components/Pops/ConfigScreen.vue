@@ -64,6 +64,31 @@
                 </select>
               </div>
               <div
+                v-if="config.type === 'multiselect'"
+                class="checkbox-list"
+              >
+                <ul
+                >
+                  <template v-for="(select, sidx) in config.choices">
+                    <li
+                      :key="`option-${sidx}`"
+                    >
+                      <label
+                        :for="`${config.id}-${select.value}`">
+                        {{ $t(`config.${config.id}.choices.${select.value}`) }}
+                      </label>
+                      <input
+                        :id="`${config.id}-${select.value}`"
+                        type="checkbox"
+                        :name="select.name"
+                        :checked="config.value.includes(parseInt(select.value))"
+                        @change="onChange($event, config.id, config.type, config.value, select.value)"
+                      >
+                  </li>
+                  </template>
+                </ul>
+              </div>
+              <div
                 v-if="config.type === 'text'"
                 class="text"
               >
@@ -156,8 +181,12 @@ export default {
         updateConfig(config) {
             this.configRepo.where('id', config.id).update({value: config.value})
         },
-        onChange(e, id, type) {
-            const config = {id: id, value: type === "checkbox" ? e.target.checked : e.target.value}
+        onChange(e, id, type, cfgValue, itemValue) {
+            if (cfgValue) {
+              if (cfgValue.includes(parseInt(itemValue))) cfgValue.splice(cfgValue.indexOf(parseInt(itemValue)), 1)
+              else cfgValue.push(parseInt(itemValue))
+            }
+            const config = {id: id, value: cfgValue ? cfgValue : type === "checkbox" ? e.target.checked : e.target.value}
             if (e.target.id === "languages") document.documentElement.setAttribute('lang', e.target.value)
             this.updateConfig(config)
             this.saveConfig(config)

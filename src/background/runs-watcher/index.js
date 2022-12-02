@@ -21,7 +21,7 @@ const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Document
 : path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
 let repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
 let repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
-let watchingLogs, config, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
+let watchingLogs, config, gameStatesToIgnore, runs, trash, repentanceLogs, repentanceOptions, currentRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
 let repentanceIsLaunched = false
 let inRun = false
 let firstInit = false
@@ -432,6 +432,9 @@ function parseLogs(newLogs, logArray) {
             console.log("\x1b[35m", log, "\x1b[0m")
             currentGameState = getGameState(log)
         }
+        if (gameStatesToIgnore.includes(parseInt(currentGameState))) {
+            return;       
+        }
         if(log.includes("Initialized player")) {
             console.log("\x1b[35m", log, "\x1b[0m")
             if(!currentCharater || !inRun || !currentRunInit) currentCharater = getCharater(log, otherModsLoaded)
@@ -543,7 +546,7 @@ function parseLogs(newLogs, logArray) {
                     isaacModFolderPathTemplate.value = modPath
                     config.push(isaacModFolderPathTemplate)
                 }
-                else if (field.value != modPath) field.value = modPath
+                else if (field.value != modPath && !isLinux) field.value = modPath
                 saveFileToDisk(configJsonPath, JSON.stringify(config))
             }
             if (log.includes("/mods/repentance_run_tracker_extended")) {
@@ -711,6 +714,13 @@ ipcMain.on('USER_EMPTY_TRASH', (event) => {
     saveFileToDisk(trashJsonPath, JSON.stringify(trash))
 })
 
+ipcMain.on('USER_UPDATE_CONFIG', async (event, payload) => {
+    if (payload.id === "ignoreSaves") {
+        console.log("Ignore saves option updated", payload.value)
+        gameStatesToIgnore = payload.value
+    }
+});
+
 ipcMain.on('DEBUG_LOGS', (event, payload) => {
     console.log(`Debug logs...`)
     const logs = payload.split(splitFormat)
@@ -723,6 +733,7 @@ module.exports = {
         config = conf
         runs = rns
         trash = trsh
+        gameStatesToIgnore = config.filter(field => field.id === "ignoreSaves")[0].value
         let wait = false
         let linuxChecked = false
         //if (!isLinux) {

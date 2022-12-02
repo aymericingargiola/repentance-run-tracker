@@ -209,7 +209,10 @@ module.exports = {
             const tempConfigField = tempConfig.find((configItem) => configItem.id === field.id)
             if (!tempConfigField) tempConfig.push(field)
             if (tempConfigField && field.choices && tempConfigField.choices != field.choices) tempConfigField.choices = field.choices
-			if (tempConfigField && field.choices && (!tempConfigField.value || !field.choices.map(choice => choice.value).includes(tempConfigField.value))) tempConfigField.value = field.choices[0].value
+			if (tempConfigField && field.choices) {
+				if (tempConfigField.type === "multiselect" && !tempConfigField.value) tempConfigField.value = field.value
+				else if (tempConfigField.type !== "multiselect" && (!tempConfigField.value || !field.choices.map(choice => choice.value).includes(tempConfigField.value))) tempConfigField.value = field.choices[0].value
+			}
             if (tempConfigField && tempConfigField.name != field.name) tempConfigField.name = field.name
             if (tempConfigField && tempConfigField.hint != field.hint) tempConfigField.hint = field.hint
             if (tempConfigField && tempConfigField.type != field.type) tempConfigField.type = field.type
