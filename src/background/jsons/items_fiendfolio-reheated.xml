@@ -57,6 +57,7 @@
 		<trinket id="159" name="Shattered Cursed Urn" description="Residual fragility" gfx="trinket_cursed_vase_shattered.png" cache="firedelay tearcolor" />
 	<trinket name="Conjoined Card" description="Miniature emperor" gfx="trinket_conjoined_card.png" tags="noeden nogreed" />
 	<trinket name="Energy Searcher" description="Draw energy" gfx="trinket_energy_searcher.png" />
+	<trinket name="Broken Record" description="Stuck on repeat" gfx="trinket_brokenrecord.png" />
 
 <!-- Items -->
     <passive id="5" name="Pyromancy" description="Double tap fireballs" gfx="009_pyromancy.png" quality="3" tags="summonable offensive" />
@@ -75,7 +76,7 @@
     <passive id="12" name="GMO Corn" description="The devil's harvest" gfx="004_gmocorn.png" cache="damage" maxhearts="2" hearts="2" quality="2" tags="summonable offensive" />
     <passive id="13" name="Cool Sunglasses" description="Gold rush" gfx="005_cool_sunglasses.png" coins="6" quality="2" tags="summonable offensive" />
     <passive id="14" name="Fiend's Horn" description="There's a bit of him in all of us" gfx="007_fiends_horn.png" quality="2" tags="summonable offensive" />
-    <active id="15" name="Risk's Reward" description="Everything is crawling" gfx="010_risks_reward.png" quality="3" maxcharges="1" initcharge="0" chargetype="special" tags="nogreed" />
+    <active id="15" name="Risk's Reward" description="Psionic reroll. Quality up" gfx="010_risks_reward.png" quality="3" maxcharges="1" initcharge="0" chargetype="special" tags="nogreed" />
     <passive id="16" name="Spare Ribs" description="Return to sender" gfx="011_spare_ribs.png" cache="flying" quality="2" tags="nolostbr" />
 	<passive id="17" name="Bacon Grease" description="Empty calories" gfx="bacongrease.png" cache="shotspeed" maxhearts="2" quality="0" tags="nolostbr" />
 	<passive id="18" name="Devil's Umbrella" description="Hard to clean" gfx="foreskin_item.png" soulhearts="1" quality="3" tags="summonable offensive" />
@@ -108,7 +109,7 @@
 
 	<passive id="39" devilprice="2" name="Pinhead" description="Sewing shot" gfx="hp005_pinhead.png" quality="3" cache="tearcolor" tags="summonable offensive" />
 	<familiar id="4" devilprice="2" name="Lil Lamb" description="Pretends to like you"	gfx="hp003_lil_lamb.png" quality="3" tags="summonable baby offensive" />
-	<active id="0" name="Grappling Hook" description="Get away from danger" gfx="hp002_grappling_hook.png" maxcharges="0" quality="1" tags="offensive" />
+	<active id="168" name="Grappling Hook" description="Get away from danger" gfx="hp002_grappling_hook.png" maxcharges="0" quality="1" tags="offensive" />
 
     <familiar id="40" name="Grabber" description="Throws hands" gfx="collectible_grabber.png" quality="1" tags="summonable offensive" />
 	<passive id="25" name="Imp Soda" description="Critical spit" gfx="013_imp_soda.png" quality="3" cache="tearcolor" tags="summonable offensive" />
@@ -125,7 +126,7 @@
 	<active id="28" name="Golden Frog Head" description="Gas is good" gfx="collectbiles_golden_frog_head.png" quality="1" tags="dead offensive" />
 	<active id="38" name="Sanguine Hook" description="This doesn't belong to you" gfx="collectible_sanguinehook.png" quality="3" tags="offensive" />
 	<familiar id="47" name="Peach Creep" description="Creepy friend" gfx="peach_creep_item_1.png" quality="1" tags="summonable spider monstermanual offensive" />
-	<familiar id="48" name="Gorgoneion" description="They're shy" gfx="collectibles_gorgon.png" quality="2" tags="summonable monstermanual offensive" />
+	<familiar id="48" name="Gorgoneion" description="They're shy" gfx="collectibles_gorgon.png" quality="3" tags="summonable monstermanual offensive" />
 	<active id="49" name="Fiddle Cube" description="The devil finds work for idle hands" gfx="collectibles_fidget_cube_1.png" quality="3" tags="offensive" />
 	<active id="50" name="A.V.G.M." description="Get hooked" gfx="collectibles_avgm.png" quality="2" tags="offensive" />
 	<familiar id="51" name="Ophiuchus" description="Serpent bearer" gfx="collectible_ophiuchus.png" quality="3" tags="summonable stars monstermanual offensive" />
@@ -134,7 +135,7 @@
 	<active id="54" name="Malice" description="Concentrated hatred" gfx="collectible_malice.png" quality="3" maxcharges="150" chargetype="timed" tags="offensive" />
 	<!-- Malice alt sprite --><active id="54" name=" Malice " description="Concentrated hatred" gfx="collectible_malice_reform.png" quality="3" maxcharges="150" chargetype="timed" tags="offensive noeden" hidden="true" />
 	<familiar id="55" name="Pet Rock" description="Movable cover" gfx="collectible_petrock.png" quality="0" tags="summonable" />
-    <passive id="56" name="Birthday Gift" description="Careful what you wish for" gfx="collectibles_birthday_gift_evil.png" quality="3" tags="summonable offensive" />
+    <passive id="56" name="Birthday Gift" description="Careful what you wish for" gfx="collectibles_birthday_gift_evil.png" quality="4" tags="summonable offensive" />
 	<active id="57" name="Contraband" description="Payment rendered on delivery" gfx="contraband_large.png" quality="0" maxcharges="0" tags="offensive" />
     <passive id="58" name="Black Lantern" description="Silver-lined curses" gfx="hi_black_lantern.png" quality="2" blackhearts="2" cache="all" tags="summonable offensive" />
 	<active id="59" name="Clear Case" description="Pocket active room" gfx="collectible_clearcase.png" quality="1" maxcharges="0" tags="offensive" />
@@ -146,15 +147,15 @@
 		<active id="65" name=" Eternal D12 " description="???" gfx="collectibles_eternal_d12.png" quality="2" maxcharges="1" hidden="true" tags="offensive noeden" />
 	<active id="64" name="Eternal D12" description="???" gfx="collectibles_eternal_d12.png" quality="2" maxcharges="2" tags="offensive" />
 	<passive id="66" name="Rubber Bullets" description="Bruising tears" gfx="collectible_rubber_bullets.png" quality="3" cache="tearcolor" tags="summonable offensive" />
-	<passive id="67" name="The Deluxe" description="Every condiment" gfx="collectibles_the_deluxe.png" quality="2" cache="damage firedelay" tags="" />
-	<familiar id="68" name="Lil Minx" description="Double-tap possessor" gfx="collectibles_lil_minx.png" quality="3" devilprice="2" tags="summonable offensive monstermanual" />
+	<passive id="67" name="The Deluxe" description="Every condiment" gfx="collectibles_the_deluxe.png" quality="2" cache="damage firedelay" tags="nolostbr" />
+	<familiar id="68" name="Lil Minx" description="Double-tap possessor" gfx="collectibles_lil_minx.png" quality="3" devilprice="1" tags="summonable offensive monstermanual" />
 	<active id="69" name="Purple Putty" description="Reusable genetic modification" gfx="item_purpleputty.png" quality="4" devilprice="2" maxcharges="5" tags="" />
 	<passive id="70" name="Fetal Fiend" description="Bountiful" gfx="collectible_fetal_fiend.png" quality="3" devilprice="2" cache="damage" tags="summonable offensive" />
 	<active id="71" name="Fiend Mix" description="Making fiends" gfx="collectibles_fiendmix.png" quality="2" maxcharges="30" chargetype="timed" tags="" />
 	<passive id="72" name="Secret Stash" description="...That's right, they're not gone!" gfx="hi_secret_stash.png" quality="2" tags="offensive" />
 	<passive id="73" name="Glizzy" description="Hunger down" gfx="hi_glizzy.png" quality="2" cache="all" maxhearts="2" hearts="1" tags="summonable tearsup offensive" />
-	<passive id="74" name=">3" description="HP up?" gfx="collectibles_aehrt.png" quality="2" tags="nolostbr nocantrip" />
-	<passive id="75" name="Devilled Egg" description="Tears up + immorality" gfx="collectibles_devils_egg.png" quality="2" cache="firedelay" tags="summonable tearsup" />
+	<passive id="74" name=">3" description="HP up?" gfx="collectibles_aehrt.png" quality="2" soulhearts="2" tags="nolostbr nocantrip" />
+	<passive id="75" name="Devilled Egg" description="Tears up + immorality" gfx="collectibles_devils_egg.png" soulhearts="2" quality="2" cache="firedelay" tags="summonable tearsup" />
 	<passive id="76" name="Tea" description="HP up" gfx="collectibles_tea.png" hearts="4" maxhearts="2" quality="1" tags="nolostbr nocantrip food" />
 	<passive id="77" name="Fraudulent Fungus" description="Some stats up" gfx="collectibles_fraudulent_fungus.png" cache="all" quality="2" maxhearts="2" tags="summonable mushroom offensive" />
 	<passive id="78" name="The Small Pipe" description="Congratulations on the pipe!" gfx="collectibles_small_pipe.png" quality="2" soulhearts="2" cache="summonable speed shotspeed damage firedelay" tags="tearsup offensive" />
@@ -207,7 +208,7 @@
 	<active id="125" name="Azurite Spindown" description="-1" gfx="collectibles_azurite_spindown.png" quality="3" maxcharges="3" tags="offensive" />
 	<active id="126" name="King Worm" description="Temporary worm powers" gfx="collectible_kingworm.png" maxcharges="150" chargetype="timed" quality="1" tags="offensive" />
 	<passive id="127" name="Devil's Dagger" description="With haste comes power" gfx="015_devil_dagger.png" quality="3" tags="summonable offensive" />
-	<passive id="128" name="Strange Red Object" description="It emanates naivety" gfx="collectible_strange_red_object.png" cache="damage speed luck" maxhearts="2" hearts="2" quality="3" tags="noeden" />
+	<passive id="128" name="Strange Red Object" description="It emanates naivety" gfx="collectible_strange_red_object.png" cache="damage speed luck" maxhearts="2" hearts="2" quality="2" tags="noeden" />
 	<familiar id="129" name="D3" description="Reroll tears" gfx="collectibles_d3.png" quality="1" tags="summonable monstermanual offensive" />
 	<passive id="131" name="Emoji Glasses" description="It's lit" gfx="collectibles_emojiglasses.png" quality="1" tags="summonable offensive" />
 	<familiar id="132" name="Sack of Keys?" description="The sack feels hot..." gfx="collectibles_sackofspicy.png" quality="1" tags="summonable offensive" />
@@ -237,9 +238,9 @@
 	<passive id="154" name="Golden Popsicle" description="Luck up" gfx="collectibles_gold_popsicle.png" soulhearts="2" cache="luck" quality="2" tags="offensive"/>
 	<passive id="155" name="Time Itself" description="Multi-euclidean tears" gfx="collectible_timeitself.png" quality="3" tags="offensive summonable"/>
 		<active id="156" name="Empty Book" description="Write your own story!" gfx="collectible_empty_book.png" quality="1" maxcharges="0" tags="offensive book" />
-		<active id="157" name="My Story" description="My very own story!" gfx="collectible_my_story.png" quality="1" hidden="true" maxcharges="2" tags="noeden"/>
-		<active id="157" name=" My Story " description="My very own story!" gfx="collectible_my_story.png" quality="1" hidden="true" maxcharges="4" tags="noeden"/>
-		<active id="157" name="  My Story  " description="My very own story!" gfx="collectible_my_story.png" quality="1" hidden="true" maxcharges="6" tags="noeden"/>
+		<active id="157" name="My Story" description="My very own story!" gfx="collectible_my_story.png" quality="1" hidden="true" maxcharges="2" tags="noeden book"/>
+		<active id="157" name=" My Story " description="My very own story!" gfx="collectible_my_story.png" quality="1" hidden="true" maxcharges="4" tags="noeden book"/>
+		<active id="157" name="  My Story  " description="My very own story!" gfx="collectible_my_story.png" quality="1" hidden="true" maxcharges="6" tags="noeden book"/>
 		<active name="my story null tears" description="[FIENDFOLIO] REPORT IF FOUND" cache="firedelay" hidden="true" tags="noeden"/>
 	<!-- ids 158 & 159 reserved for Cursed Urn trinket -->
 	<passive id="160" name="Host on Toast" description="Damage + range up" gfx="collectibles_host_on_toast.png" cache="damage range" quality="2" tags="offensive summonable"/>
@@ -247,8 +248,16 @@
 	<passive id="162" name="Box Top" description="Luck up + redeemable prize" gfx="collectibles_box_top.png" cache="luck" soulhearts="2" quality="2" tags="offensive"/>
 	<passive id="163" name="Kinda Egg" description="HP up, don't swallow the prize!" gfx="collectibles_kinder_egg.png" hearts="4" maxhearts="2" quality="2" tags="offensive"/>
 	<passive id="164" name="Dad's Dip" description="HP up..." gfx="collectibles_dadsdip.png" quality="2" tags="nolostbr nocantrip" />
-	<active id="165" name="Yick Heart" description="Reusable malignancy" gfx="collectibles_yiikheart.png" quality="4" maxcharges="8" tags="" />
-	
+	<active id="165" name="Yick Heart" description="Reusable malignancy" gfx="collectibles_yiikheart.png" quality="4" maxcharges="8" tags="nolostbr" />
+	<passive id="166" name="Maria's Smash Trophy" description="She's the winner!" gfx="collectibles_marias_smash_trophy.png" hearts="4" maxhearts="2" cache="damage" quality="2" tags="offensive" />
+	<passive id="167" name="Bottle of Water" description="Gulp it down!" gfx="collectible_bottleofwater.png" soulhearts="4" quality="1" tags="offensive" />
+	<!--168 reserved for grappling-->
+	<active		id="169"	gfx="Collectibles_715_Hold.png" name=" Hold" description="Saved for later" maxcharges="0" hidden="true" tags="noeden" />
+	<!--170 reserved for future IBS reimplementation-->
+	<active	id="171" gfx="collectible_gammagloves.png" name="Gamma Gloves" description="Hulk out!" maxcharges="0" quality="1" hidden="true" tags="noeden offensive"/>
+	<active	id="172" gfx="collectible_shredder.png" name="Shredder" description="Item recycler" maxcharges="4" quality="2"/>
+	<passive id="173" gfx="fistful_of_ash.png" name="Fistful of Ash" description="Less than human" quality="3" bombs="3"/>
+
 	<!-- Achievement Trackers -->
 	<trinket achievement="618" name="ISAAC_SOUL_TRACKER" 		description="[FIENDFOLIO] REPORT IF FOUND" gfx="" />
 	<trinket achievement="619" name="MAGGY_SOUL_TRACKER" 		description="[FIENDFOLIO] REPORT IF FOUND" gfx="" />
@@ -409,6 +418,9 @@
 	<trinket name="Fool's Unobtainium" description="Now find the real one!" gfx="golem/trinket_fools_unobtainium.png"/>
 	<trinket name="Minichibisidian" description="Replacement bonies" gfx="golem/trinket_minichibisidian.png"/>
 	<trinket name="Friendly Rapid Fire Opal" description="Fully-automatic, locked and loaded!" gfx="golem/trinket_friendly_rapid_fire_opal.png" />
+	<trinket name="Hiddenite" description="Line of sight" gfx="golem/trinket_hiddenite.png" />
+	<trinket name="Lost Artifact" description="Mew mew fairies" gfx="golem/trinket_lost_artifact.png" />
+	<trinket name="Atlas' Burden" description="Pass it to others" gfx="golem/trinket_atlas_burden.png" />
 	
 	<!-- themed sets, still regular rocks -->
 	<trinket name="Knife Pebble" description="DMG up" gfx="golem/trinket_knife_pebble.png" cache="damage" />
@@ -494,6 +506,8 @@
 	<trinket name="Fractal Geode" description="Don't look too deep, geode bonus" gfx="golem/trinket_fractal_geode.png" />
 	<trinket name="GMO Geode" description="Potent pills, geode bonus" gfx="golem/trinket_gmo_geode.png" />
 	<trinket name="Swallowed Geode" description="Gulp, geode bonus" gfx="golem/trinket_swallowed_geode.png" />
+	<trinket name="Voodoo Geode" description="Curses are power, geode bonus" gfx="golem/trinket_voodoo_geode.png" />
+	<trinket name="Umbilical Geode" description="Fetal protection, geode bonus" gfx="golem/trinket_umbilical_geode.png" />
 
     <!-- geode fossil; the exception to the rules -->
     <trinket name="Geode Fossil" description="Best of both worlds, geode bonus + crush effect" gfx="golem/trinket_geode_fossil.png" cache="range" />
