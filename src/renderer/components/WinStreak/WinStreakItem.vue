@@ -175,6 +175,34 @@
       <div
         v-if="!editing"
         class="number"
+        title="Current winstreak count"
+      >
+        <div
+          class="before"
+          :style="{backgroundImage:`url('img/cards/bar-small-left_01.png')`}"
+        />
+        <div
+          class="mid"
+          :style="{backgroundImage:`url('img/cards/bar-small-mid_01.png')`}"
+        />
+        <div
+          class="after"
+          :style="{backgroundImage:`url('img/cards/bar-small-right_01.png')`}"
+        />
+        <div
+          class="pin"
+          :style="{backgroundImage:`url('img/icons/pin.png')`}"
+        />
+        <span
+          class="icon small"
+          :style="{backgroundImage:`url('img/icons/hud/race.png')`}"
+        />
+        <span class="wins">{{ streak }}</span>
+      </div>
+      <div
+        v-if="(!editing && personalBest)"
+        class="number personal-best"
+        title="Personal best count"
       >
         <div
           class="before"
@@ -196,7 +224,7 @@
           class="icon small"
           :style="{backgroundImage:`url('img/icons/hud/crown.png')`}"
         />
-        <span class="wins">{{ streak }}</span>
+        <span class="wins">{{ personalBest.runs_ids.length }}</span>
       </div>
       <div class="buttons">
         <div
@@ -246,6 +274,7 @@ import Character from '../../store/classes/Character'
 import CustomSelect from '../Tools/CustomSelect.vue'
 import winstreakMixin from '../../mixins/winstreak'
 import i18nMixin from '../../mixins/i18n'
+import checkers from '../../helpers/checkers'
 export default {
     name: "WinStreakItem",
     components: {
@@ -292,7 +321,14 @@ export default {
         },
         streak() {
             return (this.winStreakWithRuns?.runs?.length > 0 ? this.winStreakWithRuns.runs.filter((run) => run.runEnd.win !== false).length : 0) + this.actualWinStreak?.first()?.adjustNumber
-        }
+        },
+        personalBest() {
+          return this.winStreakRepo?.where((streak) =>
+          streak.archived
+          && streak.gameState === this.winStreakWithRuns?.gameState
+          && (checkers.equalArrays(streak.characters_ids, this.winStreakWithRuns?.characters_ids) || streak.randomNormal === this.winStreakWithRuns?.randomNormal || streak.randomAlt === this.winStreakWithRuns?.randomAlt)
+          && checkers.equalArrays(streak.bosses_ids, this.winStreakWithRuns?.bosses_ids))?.orderBy(streak => streak.runs_ids.length, 'desc')?.first()
+        },
     },
     mounted() {
         if (this.actualWinStreak?.first().init === false) {
@@ -528,6 +564,9 @@ export default {
         span {
             z-index: 1;
             position: relative;
+        }
+        &.personal-best {
+          margin-left: 25px;
         }
     }
     .content {
