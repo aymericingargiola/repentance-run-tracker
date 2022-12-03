@@ -273,7 +273,7 @@
             },
             "5": {
                 "name": "Mein Spiegelbild",
-                "description": "Bumerang-Tränen"
+                "description": "Bumerang-Tränen + Schaden hoch + Glück runter"
             },
             "6": {
                 "name": "Nummer Eins",
@@ -701,7 +701,7 @@
             },
             "115": {
                 "name": "Ouija-Brett",
-                "description": "Spektrale Tränen"
+                "description": "Spektrale Tränen + Tränen hoch"
             },
             "116": {
                 "name": "9 Volt",
@@ -1797,7 +1797,7 @@
             },
             "390": {
                 "name": "Seraphim",
-                "description": "Eingeschworener Freund"
+                "description": "Geschworener Freund"
             },
             "391": {
                 "name": "Verrat",

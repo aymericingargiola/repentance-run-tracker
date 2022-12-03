@@ -269,11 +269,11 @@
             },
             "4": {
                 "name": "Cabeza de Cricket",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "5": {
                 "name": "Mi reflejo",
-                "description": "Lágrimas búmeran"
+                "description": "Lágrimas búmeran, + Daño, - Suerte"
             },
             "6": {
                 "name": "Número 1",
@@ -281,7 +281,7 @@
             },
             "7": {
                 "name": "Sangre del mártir",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "8": {
                 "name": "Hermano Bobby",
@@ -313,11 +313,11 @@
             },
             "15": {
                 "name": "<3",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "16": {
                 "name": "Hígado crudo",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "17": {
                 "name": "Llave esquelética",
@@ -341,23 +341,23 @@
             },
             "22": {
                 "name": "Almuerzo",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "23": {
                 "name": "Cena",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "24": {
                 "name": "Postre",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "25": {
                 "name": "Desayuno",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "26": {
                 "name": "Carne podrida",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "27": {
                 "name": "Cuchara de madera",
@@ -389,7 +389,7 @@
             },
             "34": {
                 "name": "Libro de Belial",
-                "description": "+ DAÑO (temporal)"
+                "description": "+ Daño (temporal)"
             },
             "35": {
                 "name": "El Necronomicón",
@@ -449,11 +449,11 @@
             },
             "50": {
                 "name": "Steven",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "51": {
                 "name": "Pentáculo",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "52": {
                 "name": "Dr. Fetus",
@@ -521,7 +521,7 @@
             },
             "70": {
                 "name": "Hormonas de crecimiento",
-                "description": "+ Velocidad, + DAÑO"
+                "description": "+ Velocidad, + Daño"
             },
             "71": {
                 "name": "Honguito",
@@ -557,15 +557,15 @@
             },
             "79": {
                 "name": "La marca",
-                "description": "+ DAÑO, + Velocidad"
+                "description": "+ Daño, + Velocidad"
             },
             "80": {
                 "name": "El pacto",
-                "description": "+ DAÑO, + Lágrimas"
+                "description": "+ Daño, + Lágrimas"
             },
             "81": {
                 "name": "Gato muerto",
-                "description": "9 vidas"
+                "description": "9 vidas extra"
             },
             "82": {
                 "name": "Señor del Abismo",
@@ -601,7 +601,7 @@
             },
             "90": {
                 "name": "La Roca pequeña",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "91": {
                 "name": "Sombrero de espeleólogo",
@@ -701,7 +701,7 @@
             },
             "115": {
                 "name": "Tabla Ouija",
-                "description": "Lágrimas espectrales"
+                "description": "Lágrimas espectrales, + Lágrimas"
             },
             "116": {
                 "name": "9 Voltios",
@@ -717,15 +717,15 @@
             },
             "119": {
                 "name": "Bolsa de Sangre",
-                "description": "+ PV, + Velocidad"
+                "description": "+ Vida, + Velocidad"
             },
             "120": {
                 "name": "Hongo Raro",
-                "description": "+ Lágrimas, - DAÑO"
+                "description": "+ Lágrimas, - Daño"
             },
             "121": {
                 "name": "Hongo Raro",
-                "description": "+ PV, + DAÑO, - Velocidad"
+                "description": "+ Vida, + Daño, - Velocidad"
             },
             "122": {
                 "name": "Ramera de Babilonia",
@@ -757,7 +757,7 @@
             },
             "129": {
                 "name": "Cubo de manteca",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "130": {
                 "name": "Un poni",
@@ -793,7 +793,7 @@
             },
             "138": {
                 "name": "Estigma",
-                "description": "+ DAÑO, + PV"
+                "description": "+ Daño, + Vida"
             },
             "139": {
                 "name": "Bolso de Mamá",
@@ -857,7 +857,7 @@
             },
             "154": {
                 "name": "Exfoliación química",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "155": {
                 "name": "El fisgón",
@@ -901,7 +901,7 @@
             },
             "165": {
                 "name": "Gato de nueve colas",
-                "description": "+ Velocidad de lágrimas, + DAÑO"
+                "description": "+ Velocidad de lágrimas, + Daño"
             },
             "166": {
                 "name": "D20",
@@ -925,7 +925,7 @@
             },
             "171": {
                 "name": "Trasero Aracnido",
-                "description": "Lentitud masiva de enemigo, + daño"
+                "description": "Lentitud masiva de enemigo, + Daño"
             },
             "172": {
                 "name": "Daga de Sacrificio",
@@ -945,7 +945,7 @@
             },
             "176": {
                 "name": "Células madre",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "177": {
                 "name": "Tragamonedas portátil",
@@ -969,7 +969,7 @@
             },
             "182": {
                 "name": "Sagrado corazón",
-                "description": "+ Lágrimas dirigidas, + DAÑO"
+                "description": "+ Lágrimas dirigidas, + Daño"
             },
             "183": {
                 "name": "Mondadientes",
@@ -977,7 +977,7 @@
             },
             "184": {
                 "name": "Santo Grial",
-                "description": "+ Vuelo, + PV"
+                "description": "+ Vuelo, + Vida"
             },
             "185": {
                 "name": "Paloma muerta",
@@ -1013,7 +1013,7 @@
             },
             "193": {
                 "name": "¡CARNE!",
-                "description": "+ DAÑO, + PV"
+                "description": "+ Daño, + Vida"
             },
             "194": {
                 "name": "Bola 8 mágica",
@@ -1029,7 +1029,7 @@
             },
             "197": {
                 "name": "Jugo de Jesús",
-                "description": "+ DAÑO, + Alcance"
+                "description": "+ Daño, + Alcance"
             },
             "198": {
                 "name": "Caja",
@@ -1045,7 +1045,7 @@
             },
             "201": {
                 "name": "Barra de hierro",
-                "description": "+ DAÑO, Lágrimas de conmoción"
+                "description": "+ Daño, Lágrimas de conmoción"
             },
             "202": {
                 "name": "Toque de Midas",
@@ -1065,7 +1065,7 @@
             },
             "206": {
                 "name": "Guillotina",
-                "description": "+ DAÑO, + Lágrimas ¡Una experiencia extracorporal!"
+                "description": "+ Daño, + Lágrimas ¡Una experiencia extracorporal!"
             },
             "207": {
                 "name": "Bola de vendas",
@@ -1073,7 +1073,7 @@
             },
             "208": {
                 "name": "Cinturón de campeón",
-                "description": "+ DAÑO, + Desafío"
+                "description": "+ Daño, + Desafío"
             },
             "209": {
                 "name": "Bombas de Trasero",
@@ -1105,7 +1105,7 @@
             },
             "216": {
                 "name": "Manto Ceremonial",
-                "description": "+ DAÑO, + Maldad"
+                "description": "+ Daño, + Maldad"
             },
             "217": {
                 "name": "Peluca de Mamá",
@@ -1113,11 +1113,11 @@
             },
             "218": {
                 "name": "Placenta",
-                "description": "+ Regeneración, + PV"
+                "description": "+ Regeneración, + Vida"
             },
             "219": {
                 "name": "Vendaje Viejo",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "220": {
                 "name": "Bombas Tristes",
@@ -1145,7 +1145,7 @@
             },
             "226": {
                 "name": "Loto Negra",
-                "description": "+ PV x3"
+                "description": "+ Vida x3"
             },
             "227": {
                 "name": "El Cochinito",
@@ -1161,7 +1161,7 @@
             },
             "230": {
                 "name": "Abaddón",
-                "description": "+ Maldad, + DAÑO, + Lágrima terrorífica"
+                "description": "+ Maldad, + Daño, + Lágrima terrorífica"
             },
             "231": {
                 "name": "Bola de alquitrán",
@@ -1185,7 +1185,7 @@
             },
             "237": {
                 "name": "Toque de la Muerte",
-                "description": "+ Lágrimas perforantes, + DAÑO"
+                "description": "+ Lágrimas perforantes, + Daño"
             },
             "238": {
                 "name": "Trozo de Llave 1",
@@ -1249,11 +1249,11 @@
             },
             "253": {
                 "name": "Costra mágica",
-                "description": "+ PV, + Suerte"
+                "description": "+ Vida, + Suerte"
             },
             "254": {
                 "name": "Coágulo",
-                "description": "+ DAÑO, + Alcance"
+                "description": "+ Daño, + Alcance"
             },
             "255": {
                 "name": "Tornillo",
@@ -1273,7 +1273,7 @@
             },
             "259": {
                 "name": "Materia oscura",
-                "description": "+ DAÑO, + Lágrima terrorífica"
+                "description": "+ Daño, + Lágrima terrorífica"
             },
             "260": {
                 "name": "Vela negra",
@@ -1441,7 +1441,7 @@
             },
             "301": {
                 "name": "Cáncer",
-                "description": "+ PV; te sientes protegido"
+                "description": "+ Vida; te sientes protegido"
             },
             "302": {
                 "name": "Leo",
@@ -1477,7 +1477,7 @@
             },
             "310": {
                 "name": "Rímel de Eva",
-                "description": "+ DAÑO, - Lágrimas, - Velocidad de lágrimas"
+                "description": "+ Daño, - Lágrimas, - Velocidad de lágrimas"
             },
             "311": {
                 "name": "Sombra de Judas",
@@ -1485,7 +1485,7 @@
             },
             "312": {
                 "name": "Moño de Maggy",
-                "description": "+ PV; te sientes en plena forma"
+                "description": "+ Vida; te sientes en plena forma"
             },
             "313": {
                 "name": "Manto sagrado",
@@ -1493,7 +1493,7 @@
             },
             "314": {
                 "name": "Curvas Gruesas",
-                "description": "+ PV, - Velocidad; pisas fuerte"
+                "description": "+ Vida, - Velocidad; pisas fuerte"
             },
             "315": {
                 "name": "Atractor extraño",
@@ -1605,7 +1605,7 @@
             },
             "342": {
                 "name": "Hongo Azul",
-                "description": "+ PV, + Lágrimas, - Velocidad de lágrimas"
+                "description": "+ Vida, + Lágrimas, - Velocidad de lágrimas"
             },
             "343": {
                 "name": "Llave de casa",
@@ -1617,11 +1617,11 @@
             },
             "345": {
                 "name": "Synthol",
-                "description": "+ DAÑO, + Alcance"
+                "description": "+ Daño, + Alcance"
             },
             "346": {
                 "name": "Un Bocadillo",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "347": {
                 "name": "Diplopia",
@@ -1653,7 +1653,7 @@
             },
             "354": {
                 "name": "Crack Jacks",
-                "description": "+ PV. ¡No te tragues el premio!"
+                "description": "+ Vida. ¡No te tragues el premio!"
             },
             "355": {
                 "name": "Perlas de Mamá",
@@ -2061,7 +2061,7 @@
             },
             "456": {
                 "name": "Bocadillo nocturno",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "457": {
                 "name": "Cabeza de Cono",
@@ -2401,7 +2401,7 @@
             },
             "541": {
                 "name": "Médula",
-                "description": "¿+ PV?"
+                "description": "¿+ Vida?"
             },
             "542": {
                 "name": "Costilla deslizante",
@@ -2481,7 +2481,7 @@
             },
             "561": {
                 "name": "Leche de almendras",
-                "description": "- DAÑO, + Lágrimas; se desata la locura"
+                "description": "- Daño, + Lágrimas; se desata la locura"
             },
             "562": {
                 "name": "Fondo rocoso",
@@ -2525,7 +2525,7 @@
             },
             "572": {
                 "name": "Ojo de lo Oculto",
-                "description": "+ DAÑO, + Alcance, Lágrimas teledirigidas"
+                "description": "+ Daño, + Alcance, Lágrimas teledirigidas"
             },
             "573": {
                 "name": "Corazón inmaculado",
@@ -2597,7 +2597,7 @@
             },
             "591": {
                 "name": "Venus",
-                "description": "+ PV; te sientes hermoso"
+                "description": "+ Vida; te sientes hermoso"
             },
             "592": {
                 "name": "Terra",
@@ -2685,7 +2685,7 @@
             },
             "614": {
                 "name": "Bombas de sangre",
-                "description": "+ Explosión sangrienta, + PV"
+                "description": "+ Explosión sangrienta, + Vida"
             },
             "615": {
                 "name": "Mini-Dumpy",
@@ -2709,7 +2709,7 @@
             },
             "621": {
                 "name": "Guisado rojo",
-                "description": "PV al máximo; + DAÑO (temporal)"
+                "description": "Salud completa; + Daño (temporal)"
             },
             "622": {
                 "name": "Génesis",
@@ -3033,11 +3033,11 @@
             },
             "707": {
                 "name": "Banquete",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "708": {
                 "name": "Engrapadora",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "709": {
                 "name": "¡Suplex!",
@@ -3049,7 +3049,7 @@
             },
             "711": {
                 "name": "Cambio",
-                "description": "Vida y muerte"
+                "description": "Un cambio en el destino"
             },
             "712": {
                 "name": "Lemegeton",
@@ -3113,15 +3113,15 @@
             },
             "730": {
                 "name": "Ojo de vidrio",
-                "description": "+ DAÑO, + Suerte"
+                "description": "+ Daño, + Suerte"
             },
             "731": {
                 "name": "Orzuelo",
-                "description": "+ DAÑO, + Alcance"
+                "description": "+ Daño, + Alcance"
             },
             "732": {
                 "name": "Anillo de Mamá",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             }
         },
         "trinkets": {
@@ -3263,7 +3263,7 @@
             },
             "35": {
                 "name": "Cuerno Curvo",
-                "description": "+ DAÑO"
+                "description": "+ Daño"
             },
             "36": {
                 "name": "Llave oxidada",
@@ -3495,7 +3495,7 @@
             },
             "94": {
                 "name": "Cola de pescado",
-                "description": "¡Ademas apesta!"
+                "description": "¡Además apesta!"
             },
             "95": {
                 "name": "Diente negro",
@@ -3551,7 +3551,7 @@
             },
             "108": {
                 "name": "Nuez",
-                "description": "¡Es dificil romperlo!"
+                "description": "¡Es difícil romperlo!"
             },
             "109": {
                 "name": "Cinta adhesiva",
@@ -3587,7 +3587,7 @@
             },
             "117": {
                 "name": "Langosta de Conquista",
-                "description": "Ttraigo conquista"
+                "description": "Traigo conquista"
             },
             "118": {
                 "name": "Ala de murciélago",
@@ -3627,7 +3627,7 @@
             },
             "127": {
                 "name": "Bebé Doblador",
-                "description": "¡Alimetalos con mágia!"
+                "description": "¡Alimetalos con magia!"
             },
             "128": {
                 "name": "Hueso del Dedo",
@@ -3743,7 +3743,7 @@
             },
             "156": {
                 "name": "Beso de mamá",
-                "description": "+ PV"
+                "description": "+ Vida"
             },
             "157": {
                 "name": "Carta rota",
@@ -5300,7 +5300,7 @@
             "name": "Cornudos y cachondos"
         },
         "921-0-0": {
-            "name": "El desposeedor"
+            "name": "El Poseedor"
         },
         "950-0-0": {
             "name": "Dogma"

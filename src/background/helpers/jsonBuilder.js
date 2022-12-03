@@ -7,7 +7,7 @@ const convert = require('xml-js')
 //const entitiesXml = require('!raw-loader!../jsons/entities2.xml')
 const i18nFolder = './src/renderer/i18n'
 const xmlsFolders = './src/background/jsons/languages'
-const stringTable = [{index: 0, language: "en-US"}, {index: 1, language: "ja-JP"}, {index: 2, language: "ko-KR"}, {index: 3, language: "zh-ZH"}, {index: 4, language: "ru-RU"}, {index: 5, language: "de-DE"}, {index: 6, language: "es-ES"}]
+const stringTable = [{index: 0, language: "en-US"}, {index: 1, language: "ja-JP"}, {index: 2, language: "ko-KR"}, {index: 3, language: "zh-ZH"}, {index: 4, language: "ru-RU"}, {index: 5, language: "de-DE"}, {index: 6, language: "es-ES"}, {index: 7, language: "fr-FR"}]
 const stringTablePath = './src/background/jsons/languages/stringtable.sta'
 let stringTableFile
 

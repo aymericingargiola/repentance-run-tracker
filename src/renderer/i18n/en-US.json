@@ -273,7 +273,7 @@
             },
             "5": {
                 "name": "My Reflection",
-                "description": "Boomerang tears"
+                "description": "Boomerang tears + DMG up + luck down"
             },
             "6": {
                 "name": "Number One",
@@ -701,7 +701,7 @@
             },
             "115": {
                 "name": "Ouija Board",
-                "description": "Spectral tears"
+                "description": "Spectral tears + tears up"
             },
             "116": {
                 "name": "9 Volt",
@@ -1924,7 +1924,7 @@
                 "description": "Love toots"
             },
             "422": {
-                "name": "Glowing Hour Glass",
+                "name": "Glowing Hourglass",
                 "description": "Turn back time"
             },
             "423": {

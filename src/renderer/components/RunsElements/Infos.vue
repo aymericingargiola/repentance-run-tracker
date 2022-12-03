@@ -164,7 +164,7 @@
         <div class="content">
           <div
             class="icon"
-            :style="{backgroundImage:`url('img/icons/hud/race.png')`}"
+            :style="{backgroundImage:`url('img/icons/hud/crown.png')`}"
           />
           <div class="text-icon">
             {{ runKiller }}
