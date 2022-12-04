@@ -3,6 +3,8 @@ Repentance Run Tracker is an [Electron](https://www.electronjs.org/) app to reco
 
 The project is still in early state but it's more and more stable, you can ask for features or open a bug ticket on this github from the issue tab
 
+Steam deck support : [Wiki](https://github.com/aymericingargiola/repentance-run-tracker/wiki/Steam-Deck-support-(Linux))
+
 # Usage
 
 ## Settings
@@ -75,6 +77,12 @@ In the search box you can type :
 Or a custom query :
 - Search an item : `:item:[item id]:[floor number, default = 1]`
 exemple, search runs with Pentagram found at second floor : `:item:51:2`
+
+## Known issues
+
+### Challenges and daily runs
+
+Since there is no trigger to know if the run is over, when you start another run those runs will be identified as broken runs, you can force the status of the run but you will have to manually enter the run time.
 
 ## Screenshots
 
