@@ -1,0 +1,37 @@
+module.exports = {
+    itemPoolNameMap: () => {
+        return new Map([
+            ["treasure", "Treasure Room"],
+            ["shop", "Shop"],
+            ["boss", "Boss Room"],
+            ["devil", "Devil Room"],
+            ["angel", "Angel Room"],
+            ["secret", "Secret Room"],
+            ["library", "Library"],
+            ["shellGame", "Shell Game"],
+            ["goldenChest", "Golden Chest"],
+            ["redChest", "Red Chest"],
+            ["beggar", "Beggar"],
+            ["demonBeggar", "Demon Beggar"],
+            ["curse", "Curse Room"],
+            ["keyMaster", "Key Master"],
+            ["batteryBum", "Battery Bum"],
+            ["momsChest", "Mom's Chest (In Home)"],
+            ["greedTreasure", "Treasure Room (Greed Mode)"],
+            ["greedBoss", "Boss Room (Greed Mode)"],
+            ["greedShop", "Shop (Greed Mode)"],
+            ["greedCurse", "Curse Room (Greed Mode)"],
+            ["greedDevil", "Devil Room (Greed Mode)"],
+            ["greedAngel", "Angel Room (Greed Mode)"],
+            ["greedSecret", "Secret Room (Greed Mode)"],
+            ["craneGame", "Crane Game"],
+            ["ultraSecret", "Ultra Secret Room"],
+            ["bombBum", "Bomb Bum"],
+            ["planetarium", "Planetarium"],
+            ["oldChest", "Old Chest"],
+            ["babyShop", "Shop (with Adoption Papers)"],
+            ["woodenChest", "Wooden Chest"],
+            ["rottenBeggar", "Rotten Beggar"],
+        ]);
+    }
+}

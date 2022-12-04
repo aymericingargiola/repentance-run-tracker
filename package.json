@@ -39,6 +39,7 @@
     "electron-log": "^4.4.8",
     "electron-updater": "^5.3.0",
     "jsonfile": "^6.1.0",
+    "kaitai-struct": "^0.10.0",
     "lowdb": "1.0.0",
     "luxon": "^2.4.0",
     "swiper-vue2": "1.0.9",

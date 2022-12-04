@@ -1,0 +1,342 @@
+{
+    "1": {
+      "seed": "SL0W4ME2",
+      "inGameDescription": "Movement tempo",
+      "effectsDescription": "Music speed is affected by Isaac's walking speed."
+    },
+    "2": {
+      "seed": "HARTBEAT",
+      "inGameDescription": "Health tempo",
+      "effectsDescription": "The lower Isaac's health is, the slower the music is."
+    },
+    "3": {
+      "seed": "CAM0K1DD",
+      "inGameDescription": "Camouflage player",
+      "effectsDescription": "Isaac blends into the ground."
+    },
+    "4": {
+      "seed": "CAM0F0ES",
+      "inGameDescription": "Camouflage enemies",
+      "effectsDescription": "All enemies blend into the ground."
+    },
+    "5": {
+      "seed": "CAM0DR0P",
+      "inGameDescription": "Camouflage stuff",
+      "effectsDescription": "Pickups and items blend into the ground."
+    },
+    "6": {
+      "seed": "WH0AWHAT",
+      "inGameDescription": "Camouflage EVERYTHING!",
+      "effectsDescription": "Isaac, enemies, pickups, and items all blend into the ground."
+    },
+    "7": {
+      "seed": "FARTSNDS",
+      "inGameDescription": "Farty sounds",
+      "effectsDescription": "All sound effects are replaced with farts."
+    },
+    "8": {
+      "seed": "B00BT00B",
+      "inGameDescription": "Cathode rays!",
+      "effectsDescription": "Applies a filter that makes the game look like it's being played through a cathode ray tube."
+    },
+    "9": {
+      "seed": "DYSLEX1A",
+      "inGameDescription": "Dyslexia",
+      "effectsDescription": "All in-game text is rearranged."
+    },
+    "10": {
+      "seed": "KEEPTRAK",
+      "inGameDescription": "No HUD",
+      "effectsDescription": "Removes the HUD entirely. This affects the map, health, consumables, held items, pickup text, floor names, and more."
+    },
+    "11": {
+      "seed": "KEEPAWAY",
+      "inGameDescription": "Tricky pickups",
+      "effectsDescription": "Pickups mimic Isaac's movements."
+    },
+    "12": {
+      "seed": "DRAWKCAB",
+      "inGameDescription": "Reversed controls",
+      "effectsDescription": "All movement and firing keys are reversed."
+    },
+    "13": {
+      "seed": "CHAMP10N",
+      "inGameDescription": "Champion enemies",
+      "effectsDescription": "All enemies turn into champions if possible."
+    },
+    "14": {
+      "seed": "1MN0B0DY",
+      "inGameDescription": "Invisible player",
+      "effectsDescription": "Isaac becomes completely invisible."
+    },
+    "15": {
+      "seed": "BL1NDEYE",
+      "inGameDescription": "Invisible enemies",
+      "effectsDescription": "All enemies become completely invisible."
+    },
+    "16": {
+      "seed": "BASEMENT",
+      "inGameDescription": "Infinite basements",
+      "effectsDescription": "The Basement repeats infinitely."
+    },
+    "17": {
+      "seed": "C0CKFGHT",
+      "inGameDescription": "Charmed enemies",
+      "effectsDescription": "All enemies are permanently charmed."
+    },
+    "18": {
+      "seed": "C0NFETT1",
+      "inGameDescription": "Confused enemies",
+      "effectsDescription": "All enemies are permanently confused."
+    },
+    "19": {
+      "seed": "FEARM1NT",
+      "inGameDescription": "Scaredy enemies",
+      "effectsDescription": "All enemies are permanently scared."
+    },
+    "20": {
+      "seed": "FRA1DN0T",
+      "inGameDescription": "Skittish enemies",
+      "effectsDescription": "Every few seconds, all enemies become scared."
+    },
+    "21": {
+      "seed": "CLSTRPH0",
+      "inGameDescription": "Asocial enemies",
+      "effectsDescription": "All enemies are permanently charmed and scared."
+    },
+    "23": {
+      "seed": "BL0000DY",
+      "inGameDescription": "Extra gore",
+      "effectsDescription": "Makes a lot more blood appear after enemies die."
+    },
+    "24": {
+      "seed": "BRWNSNKE",
+      "inGameDescription": "Poopy trail",
+      "effectsDescription": "Isaac leaves a trail of poop behind him as he walks."
+    },
+    "25": {
+      "seed": "PAC1F1SM",
+      "inGameDescription": "Pacifism",
+      "effectsDescription": "Enemies do not take damage. All rooms are considered cleared upon entering them; doors stay open, room rewards spawn, Stonies instantly die. When in a boss room, the boss's health bar is used as a timer and slowly ticks down. At the end of the countdown, the trapdoor to the next floor appears."
+    },
+    "26": {
+      "seed": "D0NTST0P",
+      "inGameDescription": "Don't stop moving",
+      "effectsDescription": "Isaac takes damage if he stops moving."
+    },
+    "27": {
+      "seed": "THEGH0ST",
+      "inGameDescription": "Damage on a timer",
+      "effectsDescription": "Every 45 seconds, a ticking will begin, and after 5 seconds, Isaac will take 1/2 heart of damage. Damage increases to 1 heart in Chapter 4 and beyond. Having invincibility during the time when damage should be inflicted blocks the damage."
+    },
+    "28": {
+      "seed": "30M1N1TS",
+      "inGameDescription": "30 minute limit",
+      "effectsDescription": "Gives a time limit of 30 minutes to beat the game. When the timer hits 29:45, a timer starts ticking, and after 30:00, Isaac takes damage every second."
+    },
+    "29": {
+      "seed": "MED1C1NE",
+      "inGameDescription": "Mystery pills",
+      "effectsDescription": "All pill names and descriptions show&#160;???."
+    },
+    "30": {
+      "seed": "FACED0WN",
+      "inGameDescription": "Mystery cards",
+      "effectsDescription": "All card names and descriptions show&#160;???."
+    },
+    "32": {
+      "seed": "C0MEBACK",
+      "inGameDescription": "Enemies respawn",
+      "effectsDescription": "Enemies, including bosses, respawn once Isaac leaves the room. Completing a room multiple times does not yield additional pickups."
+    },
+    "33": {
+      "seed": "FREE2PAY",
+      "inGameDescription": "F2P version",
+      "effectsDescription": "Isaac starts with 69 coins, but all items and consumables must be bought."
+    },
+    "35": {
+      "seed": "T0PHEAVY",
+      "inGameDescription": "Big head mode",
+      "effectsDescription": "Isaac's head is large."
+    },
+    "36": {
+      "seed": "T1NYD0ME",
+      "inGameDescription": "Tiny head mode",
+      "effectsDescription": "Isaac's head is small."
+    },
+    "37": {
+      "seed": "PTCHBLCK",
+      "inGameDescription": "Black body",
+      "effectsDescription": "Isaac and his tears turn completely black."
+    },
+    "38": {
+      "seed": "TEARGL0W",
+      "inGameDescription": "Glowing tears",
+      "effectsDescription": "Isaac's tears glow."
+    },
+    "41": {
+      "seed": "ANDANTE",
+      "inGameDescription": "Downtempo",
+      "effectsDescription": "Music is slowed down."
+    },
+    "42": {
+      "seed": "LARGHET0",
+      "inGameDescription": "Downtempo--",
+      "effectsDescription": "Music is significantly slowed down."
+    },
+    "43": {
+      "seed": "ALLEGR0",
+      "inGameDescription": "Uptempo",
+      "effectsDescription": "Music is sped up."
+    },
+    "44": {
+      "seed": "PREST0",
+      "inGameDescription": "Uptempo++",
+      "effectsDescription": "Music is significantly sped up."
+    },
+    "46": {
+      "seed": "THEBLANK",
+      "inGameDescription": "The blank",
+      "effectsDescription": "Isaac has no face."
+    },
+    "47": {
+      "seed": "HARDHARD",
+      "inGameDescription": "Full heart damage",
+      "effectsDescription": "Isaac takes a full heart of damage from all sources."
+    },
+    "48": {
+      "seed": "BRTLB0NS",
+      "inGameDescription": "Twelve heart damage",
+      "effectsDescription": "Isaac takes twelve hearts of damage from all sources."
+    },
+    "52": {
+      "seed": "1CESKATE",
+      "inGameDescription": "Ice physics",
+      "effectsDescription": "Makes the ground slippery."
+    },
+    "53": {
+      "seed": "KAPPA",
+      "inGameDescription": "Grayscale",
+      "effectsDescription": "Isaac turns gray."
+    },
+    "54": {
+      "seed": "H0H0H0H0",
+      "inGameDescription": "Christmas",
+      "effectsDescription": "Isaac wears a Christmas hat."
+    },
+    "55": {
+      "seed": "K1DSM0DE",
+      "inGameDescription": "Kids' co-op mode",
+      "effectsDescription": "Makes co-op babies invincible."
+    },
+    "56": {
+      "seed": "DARKNESS",
+      "inGameDescription": "Permanent darkness",
+      "effectsDescription": "Permanent Curse of Darkness."
+    },
+    "57": {
+      "seed": "LABYRNTH",
+      "inGameDescription": "Inescapable labyrinth",
+      "effectsDescription": "Permanent Curse of the Labyrinth."
+    },
+    "58": {
+      "seed": "L0ST",
+      "inGameDescription": "Hopelessly lost",
+      "effectsDescription": "Permanent Curse of the Lost."
+    },
+    "59": {
+      "seed": "VNKN0WN",
+      "inGameDescription": "Forever unknown",
+      "effectsDescription": "Permanent Curse of the Unknown."
+    },
+    "60": {
+      "seed": "MAZE",
+      "inGameDescription": "Unending maze",
+      "effectsDescription": "Permanent Curse of the Maze."
+    },
+    "61": {
+      "seed": "BL1ND",
+      "inGameDescription": "Incurable blindness",
+      "effectsDescription": "Permanent Curse of the Blind."
+    },
+    "62": {
+      "seed": "CVRSED",
+      "inGameDescription": "Horrible curse",
+      "effectsDescription": "Permanent Curse of the Cursed."
+    },
+    "63": {
+      "seed": "N1TEL1TE",
+      "inGameDescription": "Illuminate darkness",
+      "effectsDescription": "Provides immunity to Curse of Darkness."
+    },
+    "64": {
+      "seed": "THREAD",
+      "inGameDescription": "Escape the labyrinth",
+      "effectsDescription": "Provides immunity to Curse of the Labyrinth."
+    },
+    "65": {
+      "seed": "F0VND",
+      "inGameDescription": "I once was lost",
+      "effectsDescription": "Provides immunity to Curse of the Lost."
+    },
+    "66": {
+      "seed": "N0W1KN0W",
+      "inGameDescription": "Know the unknown",
+      "effectsDescription": "Provides immunity to Curse of the Unknown."
+    },
+    "67": {
+      "seed": "PATHF1ND",
+      "inGameDescription": "Stay out of the maze",
+      "effectsDescription": "Provides immunity to Curse of the Maze."
+    },
+    "68": {
+      "seed": "BRA1LLE",
+      "inGameDescription": "Heal the blind",
+      "effectsDescription": "Provides immunity to Curse of the Blind."
+    },
+    "70": {
+      "seed": "BLCKCNDL",
+      "inGameDescription": "Total curse immunity",
+      "effectsDescription": "Provides immunity to all curses."
+    },
+    "71": {
+      "seed": "N0RETVRN",
+      "inGameDescription": "Point of no return",
+      "effectsDescription": "Boss rooms lock Isaac in, similar to the Mom fight."
+    },
+    "72": {
+      "seed": "G0NES00N",
+      "inGameDescription": "Pickups time out",
+      "effectsDescription": "Pickups quickly fade. This includes pedestal items, shop purchases, devil deals, and the Cathedral/Sheol boss chest."
+    },
+    "73": {
+      "seed": "ALM1GHTY",
+      "inGameDescription": "Dog mode",
+      "effectsDescription": "Isaac is invincible."
+    },
+    "74": {
+      "seed": "BRAVERY",
+      "inGameDescription": "Bravery",
+      "effectsDescription": "Isaac automatically fires tears in the same direction that he moves. Removes the ability to fire tears manually."
+    },
+    "75": {
+      "seed": "C0WRD1CE",
+      "inGameDescription": "Cowardice",
+      "effectsDescription": "Isaac automatically fires tears in the opposite direction that he moves. Removes the ability to fire tears manually."
+    },
+    "76": {
+      "seed": "AX1SALGN",
+      "inGameDescription": "Axis aligned controls",
+      "effectsDescription": "Isaac cannot move diagonally."
+    },
+    "77": {
+      "seed": "SVPERH0T",
+      "inGameDescription": "SuperHot",
+      "effectsDescription": "While Isaac is not moving, time runs extremely slowly. Isaac's speed and fire rate remain normal at all times."
+    },
+    "78": {
+      "seed": "M0DESEVN",
+      "inGameDescription": "Retro vision",
+      "effectsDescription": "Screen has a permanent Retro-Vision effect."
+    }
+  }
