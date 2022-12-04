@@ -346,8 +346,8 @@ export default {
     },
     methods: {
         remove() {
-            this.winStreakRepo.where("id", this.actualWinStreak?.first()?.id).delete()
             window?.ipc?.send('USER_REMOVE_WINSTREAK', this.actualWinStreak?.first()?.id)
+            this.winStreakRepo.where("id", this.actualWinStreak?.first()?.id).delete()
         },
         edit() {
           this.editing = true
@@ -426,7 +426,6 @@ export default {
 
             // reorganize valid runs from oldest to most recent to match characters/bosses pattern
             checkRuns.sort((a, b) => a.runUpdate < b.runUpdate ? -1 : a.runUpdate < b.runUpdate ? 1 : 0)
-            
             // check if streak has to follow a specific characters/bosses order
             if (!this.actualWinStreak?.first()?.randomAlt && !this.actualWinStreak?.first()?.randomNormal) {
                 const checkCharactersAndBosses = checkRuns.reduce((arr, run) => {
