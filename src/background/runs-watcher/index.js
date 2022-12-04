@@ -696,6 +696,15 @@ ipcMain.on('USER_REMOVE_RUN', async (event, payload) => {
     await removeRun(payload, runs, runsJsonPath, win, winTracker, true, trash, trashJsonPath)
 })
 
+ipcMain.on('USER_FORCE_END_RUN', async (event, payload) => {
+    console.log(`User wants to force run end : ${JSON.stringify(payload)}`)
+    const runsItems = await runs
+    const runItem = runsItems.find({ id: payload.runId })
+    await runItem.get('toRemove').assign({status: false, checkedByUser: true}).write()
+    await runItem.get('runEnd').assign({win: payload.win}).write()
+    await runsItems.write()
+})
+
 ipcMain.on('USER_REMOVE_RUNS_FROM_TRASH', (event, payload) => {
     console.log(`User wants to remove runs from trash : ${payload}`)
     removeRunsFromTrash(payload, win, winTracker, trash, trashJsonPath)

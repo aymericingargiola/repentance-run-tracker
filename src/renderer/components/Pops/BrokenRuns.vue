@@ -18,14 +18,30 @@
             class="broken-run-group-transition-item"
             :data-run-id="run.id"
           >
-            {{ run.id }}
-            <div
+            <div class="run-id">
+              {{ run.id }}
+            </div>
+            <button
               :data-run-id="run.id"
-              class="remove"
+              class="warning"
               @click="onRemoveRunClick"
             >
-              Remove
-            </div>
+              Delete run
+            </button>
+            <button
+              :data-run-id="run.id"
+              data-win="true"
+              @click="onForceEndRunClick"
+            >
+              Run is win
+            </button>
+            <button
+              :data-run-id="run.id"
+              data-win="false"
+              @click="onForceEndRunClick"
+            >
+              Run is lost
+            </button>
           </li>
         </template>
       </transition-group>
@@ -78,6 +94,14 @@ export default {
             const run = this.runRepo.find(runId)
             window?.ipc?.send('USER_REMOVE_RUN', run.id)
         },
+        onForceEndRunClick(e) {
+            const win = e.currentTarget.getAttribute('data-win') === "true"
+            const runId = e.currentTarget.getAttribute('data-run-id')
+            const run = this.runRepo.where('id', runId)
+            run.update({ toRemove: {status: false, checkedByUser: true} })
+            run.update({ runEnd: {win: win} })
+            window?.ipc?.send('USER_FORCE_END_RUN', {runId: runId, win: win})
+        }
     },
 };
 </script>
@@ -86,9 +110,40 @@ export default {
 @import "../../assets/styles/scss/vars/_colors";
 .pop-up.ask-remove-run {
     position: fixed;
-    bottom: 0px;
-    right: 0px;
+    bottom: 20px;
+    right: 20px;
     z-index: 10;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+    .broken-runs-container {
+      max-height: 400px;
+      overflow: auto;
+      > li {
+        max-width: 300px;
+        padding: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        &:not(:first-child) {
+          margin-top: 10px;
+        }
+        .run-id {
+          width: 100%;
+          margin-bottom: 4px;
+        }
+        button {
+          margin: 0px 4px;
+        }
+      }
+    }
     &.fade-enter-active, &.fade-leave-active {
         transition: opacity .5s;
     }
