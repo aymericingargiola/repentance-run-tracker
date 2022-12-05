@@ -16,6 +16,7 @@ module.exports = {
     },
     pluginOptions: {
         electronBuilder: {
+            customFileProtocol: "./",
             mainProcessFile: 'src/background/main.js',
             rendererProcessFile: 'src/renderer/main.js',
             builderOptions: {
