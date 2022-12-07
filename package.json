@@ -50,7 +50,8 @@
     "vue-router": "^3.5.1",
     "vue2-timepicker": "^1.1.6",
     "vuex": "^3.6.2",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "minimatch": ">=3.0.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -72,7 +73,9 @@
   },
   "resolutions": {
     "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
-    "glob-parent": "^6.0.1"
+    "glob-parent": "6.0.2",
+    "minimatch": ">=3.0.5",
+    "got": ">=11.8.5"
   },
   "eslintConfig": {
     "root": true,
