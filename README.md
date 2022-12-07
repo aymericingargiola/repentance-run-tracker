@@ -95,7 +95,7 @@ Since there is no trigger to know if the run is over, when you start another run
 # Contribute
 ## Project setup
 Environment : Windows 10 x64\
-Backend : [NodeJS](https://nodejs.org/en/download/) v16.15.0, [Electron](https://www.electronjs.org/) v20.0.3\
+Backend : [NodeJS](https://nodejs.org/en/download/) v16.17.1, [Electron](https://www.electronjs.org/) v22.0.0\
 Frontend : [VueJS](https://vuejs.org/) v2.6.11, [Vue Router](https://router.vuejs.org/), [Vuex ORM Next](https://next.vuex-orm.org/)
 ```
 npm install -g node-gyp
