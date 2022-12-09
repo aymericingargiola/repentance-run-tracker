@@ -56,6 +56,7 @@
         "sortByRunDuration": "Run time"
     },
     "editRun": {
+        "runEndStatus": "Run status",
         "title": "Edit run",
         "runTitle": "Run title",
         "runDuration": "Run duration",

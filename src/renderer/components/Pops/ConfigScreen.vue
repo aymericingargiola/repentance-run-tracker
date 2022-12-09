@@ -277,6 +277,13 @@ export default {
                     content: " :";
                 }
             }
+            .buttons-list {
+              > button {
+                &:not(:first-child) {
+                  margin-left: 8px;
+                }
+              }
+            }
             .hint {
                 width: 100%;
                 font-size: 12px;

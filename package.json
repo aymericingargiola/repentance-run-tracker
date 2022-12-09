@@ -2,7 +2,7 @@
   "name": "repentanceruntracker",
   "author": "Aymeric Ingargiola",
   "description": "App to track The Binding of Isaac game's run",
-  "version": "0.7.18",
+  "version": "0.7.19",
   "private": true,
   "repository": {
     "type": "git",
@@ -36,8 +36,8 @@
     "cheerio": "^1.0.0-rc.10",
     "compare-versions": "^3.6.0",
     "core-js": "^3.6.5",
-    "electron-log": "^4.4.7",
-    "electron-updater": "^5.0.5",
+    "electron-log": "^4.4.8",
+    "electron-updater": "^5.3.0",
     "jsonfile": "^6.1.0",
     "lowdb": "1.0.0",
     "luxon": "^2.4.0",
@@ -50,7 +50,8 @@
     "vue-router": "^3.5.1",
     "vue2-timepicker": "^1.1.6",
     "vuex": "^3.6.2",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "minimatch": ">=3.0.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -59,8 +60,8 @@
     "@vue/cli-plugin-router": "^5.0.4",
     "@vue/cli-service": "^5.0.4",
     "babel-eslint": "^10.1.0",
-    "electron": "^20.0.0",
-    "electron-builder": "^23.1.0",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-vue": "^9.0.0",
@@ -72,7 +73,9 @@
   },
   "resolutions": {
     "ansi-html": "https://registry.npmjs.org/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
-    "glob-parent": "^6.0.1"
+    "glob-parent": "6.0.2",
+    "minimatch": ">=3.0.5",
+    "got": ">=11.8.5"
   },
   "eslintConfig": {
     "root": true,
