@@ -44,7 +44,7 @@
             </div>
             <input
               v-model="customName"
-              type="texte"
+              type="text"
               @change="updateCustomName"
             >
           </div>
@@ -53,6 +53,7 @@
               {{ $t('editRun.runDuration') }}
             </div>
             <vue-timepicker
+              lazy
               v-model="runDuration"
               format="HH:mm:ss"
               @change="updateRunDuration"
@@ -123,10 +124,16 @@ export default {
             runRepo: Run
         }),
         currentRunItem() {
-            return this.runRepo.query().where('id', this.id)
+            if (this.$isDev) console.time(`Get run to edit ${this.id}`)
+            const runToEditItem = this.runRepo.query().where('id', this.id)
+            if (this.$isDev) console.timeEnd(`Get run to edit ${this.id}`)
+            return runToEditItem
         },
         currentRun() {
-            return this.currentRunItem?.first()
+            if (this.$isDev) console.time(`Get run to edit currentRun ${this.id}`)
+            const runToEditCurrentRun = this.currentRunItem?.first()
+            if (this.$isDev) console.timeEnd(`Get run to edit currentRun ${this.id}`)
+            return runToEditCurrentRun
         },
         customName: {
             get: function() {
@@ -169,13 +176,16 @@ export default {
         updateCustomName(e) {
             if (this.timer) clearTimeout(this.timer);
             this.timer = setTimeout(()=>{
+              if (this.$isDev) console.log("updateCustomName")
               window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'customName', value: e.target.value })
             }, 1000);
         },
         updateRunDuration(e) {
+            if (this.$isDev) console.log("updateRunDuration")
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'runDuration', value: e.displayTime })
         },
         updateVideoLink(e) {
+            if (this.$isDev) console.log("updateVideoLink")
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoLink', value: e.target.value })
         },
         removeRun() {

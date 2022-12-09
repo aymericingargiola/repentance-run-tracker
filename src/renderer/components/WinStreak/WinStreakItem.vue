@@ -375,6 +375,7 @@ export default {
           this.editing = false
         },
         check(rns) {
+            if (this.$isDev) console.time(`calculate streak ${this.gameState}`)
             let checkRuns = rns
             let streakKiller
 
@@ -462,7 +463,7 @@ export default {
                 }, {})
                 checkRuns = !checkBosses.runs ? [] : checkBosses.runs
             }
-
+            if (this.$isDev) console.timeEnd(`calculate streak ${this.gameState}`)
             return  checkRuns?.length > 0 ? checkRuns.map(r => r.id) : checkRuns
         },
         filter(r) {
@@ -472,17 +473,16 @@ export default {
             // game end
             if(!r.runEnd.date) return
 
-            // death
-            if(r.runEnd.win === false) return r
-
             return r
         },
         getRuns(rns) {
+            if (this.$isDev) console.time(`get runs streak ${this.gameState}`)
             const runs = !rns ? this.check(this.runsRep.where((run) => { return this.filter(run) }).orderBy('runUpdate', 'desc').get()) : this.check(rns)
             this.winStreakRepo.where('id', this.actualWinStreak?.first()?.id).update({
                 runs_ids: runs
             })
             window?.ipc?.send('USER_UPDATE_WINSTREAK', { id: this.actualWinStreak?.first()?.id, value: this.winStreakRepo.where('id', this.actualWinStreak?.first()?.id).first()})
+            if (this.$isDev) console.timeEnd(`get runs streak ${this.gameState}`)
         },
         getCharacter(characterId) {
             return this.charactersRep.where('id', characterId).first()

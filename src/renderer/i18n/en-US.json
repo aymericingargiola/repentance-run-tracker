@@ -18,6 +18,7 @@
         "tainted": "Tainted",
         "win": "Win",
         "lose": "Lose",
+        "ongoing": "Ongoing",
         "room": "Room | Rooms",
         "enemy": "Enemy | Enemies",
         "item": "Item | Items",
