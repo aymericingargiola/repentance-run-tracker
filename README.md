@@ -49,6 +49,8 @@ You can build custom winstreaks rules for each saves (1, 2 and 3) and it analyze
 ## Customize runs
 
 ![Edit runs](/doc/img/edit-run.jpg)
+### Run status
+If end run trigger doesn't works, you can force the run end with this option.
 ### Title
 You can add title to your run, it will be used for search and (later) visible on the cards.
 ### Run Duration
