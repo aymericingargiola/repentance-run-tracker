@@ -17,6 +17,27 @@
           <div class="heading">
             {{ $t('editRun.title') }}
           </div>
+          <div class="config-item" v-if="currentRun.runEnd.win === null">
+            <div class="title">
+              {{ $t('editRun.runEndStatus') }}
+            </div>
+            <div class="buttons-list">
+              <button
+                :data-run-id="currentRun.id"
+                data-win="true"
+                @click="onForceEndRunClick"
+              >
+                {{$t('dictionary.win')}}
+              </button>
+              <button
+                :data-run-id="currentRun.id"
+                data-win="false"
+                @click="onForceEndRunClick"
+              >
+                {{$t('dictionary.lose')}}
+              </button>
+            </div>
+          </div>
           <div class="config-item">
             <div class="title">
               {{ $t('editRun.runTitle') }}
@@ -101,15 +122,21 @@ export default {
         ...mapRepos({
             runRepo: Run
         }),
+        currentRunItem() {
+            return this.runRepo.query().where('id', this.id)
+        },
         currentRun() {
-            return this.runRepo.query().where('id', this.id).first()
+            return this.currentRunItem?.first()
         },
         customName: {
             get: function() {
                 return this.currentRun.customName
             },
             set: function (value) {
-                this.runRepo.where('id', this.currentRun.id).update({ customName: value })
+                if (this.timer) clearTimeout(this.timer);
+                this.timer = setTimeout(()=>{
+                  this.currentRunItem.update({ customName: value })
+                }, 1000);
             }
         },
         runDuration: {
@@ -117,7 +144,7 @@ export default {
                 return this.currentRun.runDuration
             },
             set: function (value) {
-                this.runRepo.where('id', this.currentRun.id).update({ runDuration: value })
+              this.currentRunItem.update({ runDuration: value })
             }
         },
         videoLink: {
@@ -125,7 +152,7 @@ export default {
                 return this.currentRun.videoLink
             },
             set: function (value) {
-                this.runRepo.where('id', this.currentRun.id).update({ videoLink: value })
+                this.currentRunItem.update({ videoLink: value })
             }
         }
     },
@@ -142,7 +169,6 @@ export default {
         updateCustomName(e) {
             if (this.timer) clearTimeout(this.timer);
             this.timer = setTimeout(()=>{
-              console.log("update name")
               window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'customName', value: e.target.value })
             }, 1000);
         },
@@ -155,6 +181,14 @@ export default {
         removeRun() {
             window?.ipc?.send('USER_REMOVE_RUN', this.id)
             this.openOrCloseEditRun()
+        },
+        onForceEndRunClick(e) {
+            const win = e.currentTarget.getAttribute('data-win') === "true"
+            const runId = e.currentTarget.getAttribute('data-run-id')
+            const run = this.runRepo.where('id', runId)
+            run.update({ toRemove: {status: false, checkedByUser: true} })
+            run.update({ runEnd: {win: win} })
+            window?.ipc?.send('USER_FORCE_END_RUN', {runId: runId, win: win})
         }
     },
 }

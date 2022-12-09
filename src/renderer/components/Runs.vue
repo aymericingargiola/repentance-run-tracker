@@ -304,7 +304,7 @@ export default {
         .run-custom-name {
             display: block;
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             left: 15px;
             z-index: 3;
             padding: 5px 10px 10px 10px;
