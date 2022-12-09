@@ -159,20 +159,28 @@ export default {
             runRepo: Run
         }),
         allRuns() {
-            return this.runRepo.all()
+            if (this.$isDev) console.time(`get all runs`)
+            const allRuns = this.runRepo.all()
+            if (this.$isDev) console.timeEnd(`get all runs`)
+            return allRuns
         },
         updateRun: {
             get: function (run) {
-                return this.runRepo.query().where('id', run.id).first()
+                if (this.$isDev) console.time(`update run (get) ${run.id}`)
+                const getRun = this.runRepo.query().where('id', run.id).first()
+                if (this.$isDev) console.timeEnd(`update run (get) ${run.id}`)
+                return getRun
             },
             set: function (run) {
+                if (this.$isDev) console.time(`update run (set) ${run.id}`)
                 this.runRepo.where('id', run.id).update(run)
+                if (this.$isDev) console.timeEnd(`update run (set) ${run.id}`)
             }
         }
     },
     mounted() {
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
-            console.log(response)
+            if (this.$isDev) console.log(response)
             this.runRepo.insert(response.run)
             this.canUpdateRun = false
             setTimeout(() => {
@@ -184,17 +192,17 @@ export default {
             }, 1500);
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
+            if (this.$isDev) console.log(response)
             if(!this.canUpdateRun) {
                 this.tempUpdateRun = response.run
             } else {
                 if (this.validRunUpdate(response)) {
-                    console.log(response)
                     this.updateRun = response.run
                 }
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
-            console.log(response)
+            if (this.$isDev) console.log(response)
             this.runRepo.destroy(response.run)
         })
     },

@@ -44,32 +44,32 @@
     />
     <DateRangePicker @updateDateRange="onUpdateDateRange" />
     <CustomSelect
-      v-if="allTags && tagsWithRuns.length > 0"
+      v-if="allTags && tmpTagsWithRuns.length > 0"
       type="multi"
-      :items="tagsWithRuns"
+      :items="tmpTagsWithRuns"
       :label="$tc('dictionary.tag', 2)"
       :empty-message="$t('select.allTags')"
       @updateSelect="onUpdateTagsMultiSelect"
     />
     <CustomSelect
-      v-if="allCharacters && charactersWithRuns.length > 0"
+      v-if="allCharacters && tmpCharactersWithRuns.length > 0"
       type="multi"
       custom-value="name"
-      :items="charactersWithRuns"
+      :items="tmpCharactersWithRuns"
       :label="$tc('dictionary.character', 2)"
       :empty-message="$t('select.allCharacters')"
       @updateSelect="onUpdateCharactersMultiSelect"
     />
     <CustomSelect
       type="multi"
-      :items="gameStateWithRuns"
+      :items="tmpGameStateWithRuns"
       :label="$tc('dictionary.save', 2)"
       :empty-message="$t('select.allSaves')"
       @updateSelect="onUpdateGameStateMultiSelect"
     />
     <CustomSelect
       type="single"
-      :items="winConditionWithRuns"
+      :items="tmpWinConditionWithRuns"
       :label="$t('select.winCondition')"
       :empty-message="$t('select.allCondition')"
       order="desc"
@@ -109,18 +109,23 @@ export default {
             winConditionOptions: [
                 {id: 0, value: "Win", name: this.$t('dictionary.win')},
                 {id: 1, value: "Lose", name: this.$t('dictionary.lose')},
-                {id: 2, value: "CurrentWinStreak", name: this.$t('strings.currentWinStreak', 1)},
-                {id: 3, value: "BestWinStreak", name: this.$t('strings.bestWinStreak', 1)}
+                {id: 2, value: "Ongoing", name: this.$t('dictionary.ongoing')},
+                {id: 3, value: "CurrentWinStreak", name: this.$t('strings.currentWinStreak', 1)},
+                {id: 4, value: "BestWinStreak", name: this.$t('strings.bestWinStreak', 1)}
             ],
             sortOptions: [
                 {id: 0, value: "Date", name: this.$t('select.sortByDate')},
                 {id: 1, value: "RunDuration", name: this.$t('select.sortByRunDuration')}
             ],
             order: "desc",
-            filterWinCondition: null,
+            filterWinCondition: undefined,
             filterSort: null,
             filterDateStart: null,
-            filterDateEnd: null
+            filterDateEnd: null,
+            tmpCharactersWithRuns: [],
+            tmpWinConditionWithRuns: [],
+            tmpGameStateWithRuns: [],
+            tmpTagsWithRuns: []
         }
     },
     computed: {
@@ -130,56 +135,97 @@ export default {
             runRepo: Run,
             winStreakRepo: Winstreak
         }),
-        winConditionWithRuns() {
-            const conditions = this.winConditionOptions.filter(condition => this.checkWinCondition(condition))
-            this.resetFilters(conditions, "winCondition")
-            return conditions
-        },
-        gameStateWithRuns() {
-            const gameStates = this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
-            this.resetFilters(gameStates, "gameStates")
-            return gameStates
-        },
         allTags() {
             return this.tagRepo.all()
-        },
-        tagsWithRuns() {
-            const tags = this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
-            this.resetFilters(tags, "tags")
-            return tags
         },
         allCharacters() {
             return this.characterRepo.where().all()
         },
-        charactersWithRuns() {
-            const characters = this.characterRepo.where((character) => { return this.checkCharacters(character) }).orderBy('trueName', 'asc').get()
-            this.resetFilters(characters, "characters")
-            return characters
-        },
         allRuns() {
-            return this.runRepo.all()
+            if (this.$isDev) console.time(`filtered get all runs`)
+            const allRunsRepo = this.runRepo.all()
+            if (this.$isDev) console.timeEnd(`filtered get all runs`)
+            return allRunsRepo
         },
         filteredRunsTotal() {
+            if (this.$isDev) console.time(`filtered runs total`)
             let filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy((run) => {
                 if (this.filterSort === "RunDuration") return format.formatDuration(run.runDuration)
                 return run.runUpdate
             }, this.order).get()
             if (typeof this.filterWinCondition === "string") filteredRunsTotal = this.filterStreak(filteredRunsTotal)
             this.$emit('filteredRunsTotal', filteredRunsTotal)
+            if (this.$isDev) console.timeEnd(`filtered runs total`)
             return filteredRunsTotal
         },
         filteredRuns() {
+            if (this.$isDev) console.time(`filtered runs`)
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
             this.$emit('filteredRuns', filteredRuns)
+            if (this.$isDev) console.timeEnd(`filtered runs`)
             return filteredRuns
         },
         bestWinStreak() {
             return this.winStreakRepo?.orderBy(winStreak => winStreak.runs_ids.length, 'desc')?.first()
         }
     },
+    watch: {
+        allRuns(newVal, oldVal) {
+            const canUpdate = this.filtersCanUpdate(newVal, oldVal)
+            if (canUpdate || this.tmpCharactersWithRuns.length === 0) this.charactersWithRuns()
+            if (canUpdate || this.tmpWinConditionWithRuns.length === 0) this.winConditionWithRuns()
+            if (canUpdate || this.tmpGameStateWithRuns.length === 0) this.gameStateWithRuns()
+            if (canUpdate || this.tmpTagsWithRuns.length === 0) this.tagsWithRuns()
+        },
+        allCharacters(newVal, oldVal) {
+            if (newVal.length !== oldVal.length || this.tmpCharactersWithRuns.length === 0) this.charactersWithRuns()
+        },
+        allTags(newVal, oldVal) {
+            if (newVal.length !== oldVal.length || this.tmpTagsWithRuns.length === 0) this.tagsWithRuns()
+        }
+    },
     mounted() {
+        this.charactersWithRuns()
+        this.winConditionWithRuns()
+        this.gameStateWithRuns()
+        this.tagsWithRuns()
     },
     methods: {
+        filtersCanUpdate(newVal, oldVal) {
+            if(newVal.length === 0) return false
+            if(newVal.length !== oldVal.length) return true
+            if(newVal[newVal.length - 1]?.runEnd?.win !== oldVal[oldVal.length - 1]?.runEnd?.win || newVal[newVal.length - 1]?.runEnd?.date !== oldVal[oldVal.length - 1]?.runEnd?.date) return true
+            return false
+        },
+        charactersWithRuns() {
+            if (this.$isDev) console.time(`filtered characters with runs`)
+            const characters = this.characterRepo.where((character) => { return this.checkCharacters(character) }).orderBy('trueName', 'asc').get()
+            this.tmpCharactersWithRuns = characters
+            this.resetFilters(characters, "characters")
+            if (this.$isDev) console.timeEnd(`filtered characters with runs`)
+        },
+        winConditionWithRuns() {
+            if (this.$isDev) console.time(`filtered win condition with runs`)
+            const conditions = this.winConditionOptions.filter(condition => this.checkWinCondition(condition))
+            this.tmpWinConditionWithRuns = conditions
+            this.resetFilters(conditions, "winCondition")
+            if (this.$isDev) console.timeEnd(`filtered win condition with runs`)
+        },
+        gameStateWithRuns() {
+            if (this.$isDev) console.time(`filtered gamestate with runs`)
+            const gameStates = this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
+            this.tmpGameStateWithRuns = gameStates
+            this.resetFilters(gameStates, "gameStates")
+            if (this.$isDev) console.timeEnd(`filtered gamestate with runs`)
+        },
+        tagsWithRuns() {
+            if (this.$isDev) console.time(`filtered tags with runs`)
+            const tags = this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
+            console.log("tags", tags)
+            this.tmpTagsWithRuns = tags
+            this.resetFilters(tags, "tags")
+            if (this.$isDev) console.timeEnd(`filtered tags with runs`)
+        },
         onUpdateOrder(selected) {
             this.order = selected
             this.$emit('resetPagination')
@@ -190,9 +236,10 @@ export default {
             this.$emit('resetPagination')
         },
         onUpdateWinConditionMultiSelect(selected) {
-            this.filterWinCondition = selected.length === 0 ? null
+            this.filterWinCondition = selected.length === 0 ? undefined
             : selected[0].value === 'Win' ? true
             : selected[0].value === 'Lose' ? false
+            : selected[0].value === 'Ongoing' ? null
             : selected[0].value
             this.$emit('resetPagination')
         },
@@ -242,7 +289,7 @@ export default {
             }
 
             // Check if runs are selected win condition
-            if (this.filterWinCondition === true || this.filterWinCondition === false && from !== "winCondition") {
+            if ((this.filterWinCondition === true || this.filterWinCondition === false || this.filterWinCondition === null) && from !== "winCondition") {
                 runs = runs.where((run) => run.runEnd.win === this.filterWinCondition)
                 if (runs.get().length < 1) return runs.get()
             }
@@ -269,10 +316,10 @@ export default {
         },
         checkWinCondition(condition) {
             let runs
-            const thisCondition = condition.value === "Win" ? true : condition.value === "Lose" ? false : null 
+            const thisCondition = condition.value === "Win" ? true : condition.value === "Lose" ? false : condition.value === "Ongoing" ? null : undefined 
 
             // Init Check if runs has save
-            if (thisCondition === null) return condition
+            if (thisCondition === undefined) return condition
 
             runs = this.runRepo.where((run) => run.runEnd.win === thisCondition)
             if (runs.get().length < 1) return
@@ -323,7 +370,7 @@ export default {
             if (this.filterDateEnd && run.runStart > this.filterDateEnd) return
 
             // Win condition filter
-            if ((this.filterWinCondition === true || this.filterWinCondition === false) && run.runEnd.win !== this.filterWinCondition) return
+            if ((this.filterWinCondition === true || this.filterWinCondition === false || this.filterWinCondition === null) && run.runEnd.win !== this.filterWinCondition) return
 
             // Save filter
             if (this.filterGameStates.length > 0 && !this.filterGameStates.includes(run.gameState)) return
