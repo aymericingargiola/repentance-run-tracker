@@ -58,12 +58,21 @@
         "disabled":false
     },
     {
+        "id":"noneIntrusiveErrors",
+        "value":true,
+        "name":"Non-intrusive errors",
+        "hint":"In case of app crash don't pause the game and don't show the app on top",
+        "type":"checkbox",
+        "order": 7,
+        "disabled":false
+    },
+    {
         "id":"isaacLinuxDatasPath",
         "value":"250900",
         "name":"Isaac data path folder (linux)",
         "hint":"You can found the data path at '/home/deck/.steam/steam/steamapps/compatdata/' and enter the folder name here (numbers)",
         "type":"text",
-        "order": 7,
+        "order": 8,
         "disabled":false,
         "linux": true
     },
@@ -73,7 +82,7 @@
         "name":"Streaking Website Token",
         "hint":"",
         "type":"text",
-        "order": 8,
+        "order": 9,
         "disabled":true
     },
     {
@@ -82,7 +91,7 @@
         "name":"Store existing tags",
         "hint":"",
         "type":"array",
-        "order": 9,
+        "order": 10,
         "disabled":true
     },
     {
@@ -91,7 +100,7 @@
         "name":"Change Live Tracker Background",
         "hint":"",
         "type":"object",
-        "order": 10,
+        "order": 11,
         "disabled":true
     }
 ]

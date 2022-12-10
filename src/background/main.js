@@ -30,9 +30,14 @@ process.on('unhandledRejection', (error, p) => {
   elog.error(error)
   if (win) {
     syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack} })
-    win.setAlwaysOnTop(true)
-    win.show()
-    win.focus()
+    if (config) {
+      const field = config.filter(field => field.id === "noneIntrusiveError")[0]
+      if (field && field.value === false) {
+        win.setAlwaysOnTop(true)
+        win.show()
+        win.focus()
+      }
+    }
   }
 })
 
@@ -42,9 +47,14 @@ process.on('uncaughtException', (error) => {
   if (win) {
     try {
       syncApp(win, { trigger: 'send app error', error: {message:error.message,stack:error.stack}})
-      win.setAlwaysOnTop(true)
-      win.show()
-      win.focus() 
+      if (config) {
+        const field = config.filter(field => field.id === "noneIntrusiveErrors")[0]
+        if (field && field.value === false) {
+          win.setAlwaysOnTop(true)
+          win.show()
+          win.focus()
+        }
+      }
     } catch (error) {
       console.log("Can't handle exception from frontend, win seems destroyed")
     }
