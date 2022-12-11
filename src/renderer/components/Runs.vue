@@ -182,6 +182,7 @@ export default {
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
             if (this.$isDev) console.log(response)
+            if (!this.$inRun.status && response.channel === 'run end') this.runRepo.where('id', response.run.id).update(response.run)
             if (!this.$inRun.status) return
             const runIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run.id)
             if (runIndex === -1) this.tempCurrentRun.unshift(response.run)

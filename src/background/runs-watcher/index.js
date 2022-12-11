@@ -84,9 +84,9 @@ async function checkPreviousRuns() {
     console.timeEnd("Check previous runs")
 }
 
-async function isSameRun(seed) {
+async function isSameRun(seed, notRunEnd) {
     console.time("Is same run")
-    if (!inRun) setInRun(true)
+    if (!inRun && notRunEnd) setInRun(true)
     const runsItems = await runs
     const check = runsItems.filter(run => (run.runEnd.date === null || run.runEnd.win === null) && run.gameState === currentGameState).find(function(run, i) {
         if (currentRun.id) {
@@ -260,15 +260,16 @@ function roomsManager(sameRun, room, updateType) {
 }
 
 async function updateOrCreateRun(params = {}) {
-    if (!inRun) return console.warn("Not in run yet !")
+    if (!inRun && params.trigger !== 'run end') return console.warn("Not in run yet !")
     if (currentRun === null) return console.warn("Current seed empty !")
     if (!currentRunInit) return console.warn("Current seed is not init !")
-    const sameRun = await isSameRun(currentRun.seed)
+    const sameRun = await isSameRun(currentRun.seed, params.trigger !== 'run end')
     if (sameRun) {
         console.log('Seed exists, check...')
         if(sameRun.runEnd.date === null || sameRun.runEnd.win === null) {
             console.log('Update current run...')
             if(currentRun.id === undefined) currentRun.id = sameRun.id
+            const runsItems = await runs
             switch (params.trigger) {
                 case 'other mods loaded':
                     sameRun.otherModsLoaded = otherModsLoaded
@@ -353,12 +354,15 @@ async function updateOrCreateRun(params = {}) {
                     elog.info(`Run ${sameRun.id} is over. [win : ${runEndInfo.win}]`)
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    await runsItems.find({ id: sameRun.id }).assign(sameRun).write()
+                    await backupDatas()
                     break
                 case 'run end ext':
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
                     sameRun.runEnd.date = DateTime.now().toSeconds()
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
+                    await runsItems.find({ id: sameRun.id }).assign(sameRun).write()
                 break
                 case 'player updated':
                     const playerStats = params.stats
@@ -541,11 +545,6 @@ function parseLogs(newLogs, logArray) {
         if(log.includes("Game Over") || (log.includes("playing cutscene") && !log.includes("Intro") && !log.includes("Credits") && !log.includes("Dogma"))) {
             console.log("\x1b[35m", log, "\x1b[0m")
             await updateOrCreateRun({trigger: "run end", log: log})
-            if (currentSameRun && !extendedSaveMode) {
-                const runsItems = await runs
-                await runsItems.find({ id: currentSameRun.id }).assign(currentSameRun).write()
-                await backupDatas()
-            }
         }
         if(log.includes("Menu Game Init")) {
             console.log("\x1b[35m", log, "\x1b[0m")
