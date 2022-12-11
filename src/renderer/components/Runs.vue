@@ -161,27 +161,27 @@ export default {
             runRepo: Run
         }),
         allRuns() {
-            if (this.$isDev) console.time(`get all runs`)
+            console.time(`get all runs`)
             const allRuns = this.runRepo?.all()
-            if (this.$isDev) console.timeEnd(`get all runs`)
+            console.timeEnd(`get all runs`)
             return allRuns
         },
         runsToShow() {
-          if (this.$isDev) console.time(`get runs to show`)
+          console.time(`get runs to show`)
           const runs = this.$inRun.status ? this.tempCurrentRun : this.filteredRuns
-          if (this.$isDev) console.timeEnd(`get runs to show`)
+          console.timeEnd(`get runs to show`)
           return runs
         }
     },
     mounted() {
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
-            if (this.$isDev) console.log(response)
+            console.log(response)
             if (!this.$inRun.status) return
             const runIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run.id)
             if (runIndex === -1) this.tempCurrentRun.unshift(response.run)
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
-            if (this.$isDev) console.log(response)
+            console.log(response)
             if (!this.$inRun.status && response.channel === 'run end') this.runRepo.where('id', response.run.id).update(response.run)
             if (!this.$inRun.status) return
             const runIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run.id)
@@ -191,7 +191,7 @@ export default {
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
-            if (this.$isDev) console.log(response)
+            console.log(response)
             if (this.$inRun.status) {
               const removeIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run)
               console.log(this.tempCurrentRun, response.run.id, removeIndex)

@@ -23,7 +23,7 @@ const oldFolderPath = path.join(appDataFolder, oldFolderName)
 const dataFolder = app.getPath("userData")
 let win, winTracker, config, runs, trash
 
-elog.info(`App is starting... | App Version : ${app.getVersion()} | Node version : ${process.version} | Electron version : ${process.versions.electron}`)
+elog.info(`App is starting... | App Version : ${app.getVersion()} | Node version : ${process.version} | Electron version : ${process.versions.electron} | DataFolder : ${dataFolder}`)
 
 process.on('unhandledRejection', (error, p) => {
   console.log(error)

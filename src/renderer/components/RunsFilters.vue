@@ -142,27 +142,27 @@ export default {
             return this.characterRepo.where().all()
         },
         allRuns() {
-            if (this.$isDev) console.time(`filtered get all runs`)
+            console.time(`filtered get all runs`)
             const allRunsRepo = this.runRepo.all()
-            if (this.$isDev) console.timeEnd(`filtered get all runs`)
+            console.timeEnd(`filtered get all runs`)
             return allRunsRepo
         },
         filteredRunsTotal() {
-            if (this.$isDev) console.time(`filtered runs total`)
+            console.time(`filtered runs total`)
             let filteredRunsTotal = this.runRepo.where((run) => { return this.filterRuns(run) }).orderBy((run) => {
                 if (this.filterSort === "RunDuration") return format.formatDuration(run.runDuration)
                 return run.runUpdate
             }, this.order).get()
             if (typeof this.filterWinCondition === "string") filteredRunsTotal = this.filterStreak(filteredRunsTotal)
             this.$emit('filteredRunsTotal', filteredRunsTotal)
-            if (this.$isDev) console.timeEnd(`filtered runs total`)
+            console.timeEnd(`filtered runs total`)
             return filteredRunsTotal
         },
         filteredRuns() {
-            if (this.$isDev) console.time(`filtered runs`)
+            console.time(`filtered runs`)
             const filteredRuns = this.filteredRunsTotal.slice(this.filterOffset, this.filterLimitPerPage + this.filterOffset)
             this.$emit('filteredRuns', filteredRuns)
-            if (this.$isDev) console.timeEnd(`filtered runs`)
+            console.timeEnd(`filtered runs`)
             return filteredRuns
         },
         bestWinStreak() {
@@ -198,32 +198,32 @@ export default {
             return false
         },
         charactersWithRuns() {
-            if (this.$isDev) console.time(`filtered characters with runs`)
+            console.time(`filtered characters with runs`)
             const characters = this.characterRepo.where((character) => { return this.checkCharacters(character) }).orderBy('trueName', 'asc').get()
             this.tmpCharactersWithRuns = characters
             this.resetFilters(characters, "characters")
-            if (this.$isDev) console.timeEnd(`filtered characters with runs`)
+            console.timeEnd(`filtered characters with runs`)
         },
         winConditionWithRuns() {
-            if (this.$isDev) console.time(`filtered win condition with runs`)
+            console.time(`filtered win condition with runs`)
             const conditions = this.winConditionOptions.filter(condition => this.checkWinCondition(condition))
             this.tmpWinConditionWithRuns = conditions
             this.resetFilters(conditions, "winCondition")
-            if (this.$isDev) console.timeEnd(`filtered win condition with runs`)
+            console.timeEnd(`filtered win condition with runs`)
         },
         gameStateWithRuns() {
-            if (this.$isDev) console.time(`filtered gamestate with runs`)
+            console.time(`filtered gamestate with runs`)
             const gameStates = this.gameStateOptions.filter(gameState => this.checkGameState(gameState))
             this.tmpGameStateWithRuns = gameStates
             this.resetFilters(gameStates, "gameStates")
-            if (this.$isDev) console.timeEnd(`filtered gamestate with runs`)
+            console.timeEnd(`filtered gamestate with runs`)
         },
         tagsWithRuns() {
-            if (this.$isDev) console.time(`filtered tags with runs`)
+            console.time(`filtered tags with runs`)
             const tags = this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
             this.tmpTagsWithRuns = tags
             this.resetFilters(tags, "tags")
-            if (this.$isDev) console.timeEnd(`filtered tags with runs`)
+            console.timeEnd(`filtered tags with runs`)
         },
         onUpdateOrder(selected) {
             this.order = selected
@@ -418,7 +418,7 @@ export default {
             }
             if (this.filterWinCondition === "BestWinStreak") {
                 if (this.bestWinStreak) {
-                    if (this.$isDev) console.log(this.bestWinStreak);
+                    console.log(this.bestWinStreak);
                     return checkRuns.filter(run => this.bestWinStreak.runs_ids.includes(run.id))
                 }
             }

@@ -124,15 +124,15 @@ export default {
             runRepo: Run
         }),
         currentRunItem() {
-            if (this.$isDev) console.time(`Get run to edit ${this.id}`)
+            console.time(`Get run to edit ${this.id}`)
             const runToEditItem = this.runRepo.query().where('id', this.id)
-            if (this.$isDev) console.timeEnd(`Get run to edit ${this.id}`)
+            console.timeEnd(`Get run to edit ${this.id}`)
             return runToEditItem
         },
         currentRun() {
-            if (this.$isDev) console.time(`Get run to edit currentRun ${this.id}`)
+            console.time(`Get run to edit currentRun ${this.id}`)
             const runToEditCurrentRun = this.currentRunItem?.first()
-            if (this.$isDev) console.timeEnd(`Get run to edit currentRun ${this.id}`)
+            console.timeEnd(`Get run to edit currentRun ${this.id}`)
             return runToEditCurrentRun
         },
         customName: {
@@ -176,16 +176,16 @@ export default {
         updateCustomName(e) {
             if (this.timer) clearTimeout(this.timer);
             this.timer = setTimeout(()=>{
-              if (this.$isDev) console.log("updateCustomName")
+              console.log("updateCustomName")
               window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'customName', value: e.target.value })
             }, 1000);
         },
         updateRunDuration(e) {
-            if (this.$isDev) console.log("updateRunDuration")
+            console.log("updateRunDuration")
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'runDuration', value: e.displayTime })
         },
         updateVideoLink(e) {
-            if (this.$isDev) console.log("updateVideoLink")
+            console.log("updateVideoLink")
             window?.ipc?.send('USER_UPDATE_RUN', { id: this.id, property: 'videoLink', value: e.target.value })
         },
         removeRun() {
