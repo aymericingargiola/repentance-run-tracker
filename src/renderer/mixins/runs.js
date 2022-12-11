@@ -1,8 +1,8 @@
 export default {
     methods: {
-        validRunUpdate(update) {
+        validRunUpdate(update, current) {
             const channelsToCheck = ["interval updates", "change room"]
-            const run = this.runRepo.query().where('id', update.run.id).first()
+            const run = !current ? this.runRepo.query().where('id', update.run.id).first() : current
             if (!channelsToCheck.includes(update.channel)) return true
             if (!run) return false
             if (JSON.stringify(run.characters) !== JSON.stringify(update.run.characters)) return true

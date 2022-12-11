@@ -9,6 +9,9 @@ module.exports = {
                 case 'logs watch status':
                     win.webContents.send('SYNC_WATCH_STATUS', params)
                     break
+                case 'in run status':
+                    win.webContents.send('SYNC_INRUN_STATUS', params)
+                    break
                 case 'send config':
                     win.webContents.send('SYNC_SEND_CONFIG', params)
                     break

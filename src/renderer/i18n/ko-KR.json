@@ -128,6 +128,10 @@
             "title": "Isaac mods folder",
             "hint": ""
         },
+        "noneIntrusiveErrors": {
+            "title": "Non-intrusive errors",
+            "hint": "In case of app crash don't pause the game and don't show the app on top"
+        },
         "isaacLinuxDatasPath": {
             "title": "Isaac data path folder (linux)",
             "hint": "You can find the data path at '/home/deck/.steam/steam/steamapps/compatdata/' then enter the folder name here (numbers)"

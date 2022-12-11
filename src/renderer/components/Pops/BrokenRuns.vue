@@ -91,8 +91,8 @@ export default {
         // },
         onRemoveRunClick(e) {
             const runId = e.currentTarget.getAttribute('data-run-id')
-            const run = this.runRepo.find(runId)
-            window?.ipc?.send('USER_REMOVE_RUN', run.id)
+            this.runRepo.destroy(runId)
+            window?.ipc?.send('USER_REMOVE_RUN', runId)
         },
         onForceEndRunClick(e) {
             const win = e.currentTarget.getAttribute('data-win') === "true"

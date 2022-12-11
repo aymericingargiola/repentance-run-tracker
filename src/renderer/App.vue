@@ -73,8 +73,14 @@ export default {
 
     window.ipc.send('IS_APP_READY')
     window.ipc.on('SYNC_WATCH_STATUS', (response) => {
-      console.log(response)
+      if (this.$isDev) console.log(response)
       this.watchStatus = response.watching
+    })
+
+    window.ipc.on('SYNC_INRUN_STATUS', (response) => {
+      if (this.$isDev) console.log(response)
+      this.$inRun.status = response.inRun
+      this.$inRun.runId = response.runId
     })
 
     window.ipc.send('APP_VERSION');
@@ -84,7 +90,7 @@ export default {
 
     window.ipc.send('ASK_RUNS')
     window.ipc.on('SYNC_SEND_RUNS', (response) => {
-        this.runRepo.fresh(response.runs)
+        if (this.$isDev) this.runRepo.fresh(response.runs)
         this.repoLoaded += 1
     })
 
@@ -134,7 +140,7 @@ export default {
     })
 
     window.ipc.on('SYNC_SEND_APP_ERROR', (response) => {
-        console.log("new error", response)
+        if (this.$isDev) console.log("new error", response)
         if(!this.errors.includes(response.error.stack)) this.errors.push(response.error.stack)
     })
   },

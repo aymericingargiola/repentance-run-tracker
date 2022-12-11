@@ -128,6 +128,10 @@
             "title": "Dossier des mods",
             "hint": ""
         },
+        "noneIntrusiveErrors": {
+            "title": "Erreurs non intrusives",
+            "hint": "En cas de crash de l'app, ne pas mettre le jeu en pause et ne pas faire le focus sur l'app"
+        },
         "isaacLinuxDatasPath": {
             "title": "Dossier des données du jeu (linux)",
             "hint": "Vous pouvez trouver le nom du dossier dans '/home/deck/.steam/steam/steamapps/compatdata/' (ce sont des numéros)"

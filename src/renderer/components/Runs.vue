@@ -12,7 +12,7 @@
       tag="ul"
       class="runs-container"
     >
-      <template v-for="(run, ridx) in filteredRuns">
+      <template v-for="(run, ridx) in runsToShow">
         <li
           :key="run.id"
           :class="
@@ -41,7 +41,7 @@
           >
             <RunInfos
               :id="run.id"
-              :game-state="run.gameState"
+              :game-state="parseInt(run.gameState)"
               :seed="run.seed"
               :characters="run.characters"
               :floors="run.floors"
@@ -94,6 +94,7 @@
       </template>
     </transition-group>
     <Pagination
+      v-if="!$inRun.status"
       :current-page="currentPage"
       :items-total="filteredRunsTotal"
       :items-per-page="filterLimitPerPage"
@@ -146,12 +147,13 @@ export default {
     data() {
         return {
             canUpdateRun: true,
-            tempUpdateRun: null,
+            tempCurrentRunToRemove: [],
+            tempCurrentRun: [],
             filteredRunsTotal: 0,
             filteredRuns: [],
             currentPage: 1,
             filterLimitPerPage: 6,
-            filterOffset: 0
+            filterOffset: 0,
         }
     },
     computed: {
@@ -160,50 +162,48 @@ export default {
         }),
         allRuns() {
             if (this.$isDev) console.time(`get all runs`)
-            const allRuns = this.runRepo.all()
+            const allRuns = this.runRepo?.all()
             if (this.$isDev) console.timeEnd(`get all runs`)
             return allRuns
         },
-        updateRun: {
-            get: function (run) {
-                if (this.$isDev) console.time(`update run (get) ${run.id}`)
-                const getRun = this.runRepo.query().where('id', run.id).first()
-                if (this.$isDev) console.timeEnd(`update run (get) ${run.id}`)
-                return getRun
-            },
-            set: function (run) {
-                if (this.$isDev) console.time(`update run (set) ${run.id}`)
-                this.runRepo.where('id', run.id).update(run)
-                if (this.$isDev) console.timeEnd(`update run (set) ${run.id}`)
-            }
+        runsToShow() {
+          if (this.$isDev) console.time(`get runs to show`)
+          const runs = this.$inRun.status ? this.tempCurrentRun : this.filteredRuns
+          if (this.$isDev) console.timeEnd(`get runs to show`)
+          return runs
         }
     },
     mounted() {
         window.ipc.on('SYNC_CREATE_RUN', (response) => {
             if (this.$isDev) console.log(response)
-            this.runRepo.insert(response.run)
-            this.canUpdateRun = false
-            setTimeout(() => {
-                if(this.tempUpdateRun != null) {
-                    this.updateRun = this.tempUpdateRun
-                    this.tempUpdateRun = null
-                }
-                this.canUpdateRun = true
-            }, 1500);
+            if (!this.$inRun.status) return
+            const runIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run.id)
+            if (runIndex === -1) this.tempCurrentRun.unshift(response.run)
         })
         window.ipc.on('SYNC_UPDATE_RUN', (response) => {
             if (this.$isDev) console.log(response)
-            if(!this.canUpdateRun) {
-                this.tempUpdateRun = response.run
-            } else {
-                if (this.validRunUpdate(response)) {
-                    this.updateRun = response.run
-                }
+            if (!this.$inRun.status && response.channel === 'run end') this.runRepo.where('id', response.run.id).update(response.run)
+            if (!this.$inRun.status) return
+            const runIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run.id)
+            if (runIndex === -1) this.tempCurrentRun.unshift(response.run)
+            if (this.validRunUpdate(response, this.tempCurrentRun[runIndex])) {
+                this.tempCurrentRun.splice(runIndex, 1, response.run)
             }
         })
         window.ipc.on('SYNC_REMOVE_RUN', (response) => {
             if (this.$isDev) console.log(response)
-            this.runRepo.destroy(response.run)
+            if (this.$inRun.status) {
+              const removeIndex = this.tempCurrentRun.findIndex((run) => run.id === response.run)
+              console.log(this.tempCurrentRun, response.run.id, removeIndex)
+              if (removeIndex > -1) this.tempCurrentRun.splice(removeIndex, 1)
+            }
+            else if (!this.$inRun.status) this.runRepo.destroy(response.run)
+        })
+        window.ipc.on('SYNC_INRUN_STATUS', (response) => {
+          if (!response.inRun && this.tempCurrentRun.length > 0) {
+            this.runRepo.insert(this.tempCurrentRun)
+            this.tempCurrentRun = []
+          }
         })
     },
     methods: {
