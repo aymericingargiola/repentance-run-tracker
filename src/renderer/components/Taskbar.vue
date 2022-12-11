@@ -13,6 +13,12 @@
       >
         [watching game]
       </div>
+      <div
+        v-if="$inRun.status"
+        class="inrun-status"
+      >
+        [in run]
+      </div>
     </div>
     <div class="menu center-menu" />
     <div
@@ -149,7 +155,7 @@ export default {
             display: inline-block;
             height: 0px;
         }
-        .watch-status {
+        .watch-status, .inrun-status {
             display: inline-block;
             font-size: 10px;
             margin-left: 8px;

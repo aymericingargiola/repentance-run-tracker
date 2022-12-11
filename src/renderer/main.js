@@ -47,6 +47,7 @@ Vue.prototype.$DateTime = DateTime
 Vue.prototype.$isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1
 Vue.prototype.$isLinux = navigator.userAgent.toLowerCase().indexOf("linux") > -1
 Vue.prototype.$isDev = process.env.NODE_ENV === "development"
+Vue.prototype.$inRun = Vue.observable({ status: false });
 
 Vue.config.productionTip = false
 

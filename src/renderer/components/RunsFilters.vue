@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="allRuns && allRuns.length > 0 && filteredRuns"
-    class="filters"
+    :class="['filters', $inRun.status ? 'disabled' : null]"
   >
     <div
       v-if="filteredRunsTotal"
@@ -221,7 +221,6 @@ export default {
         tagsWithRuns() {
             if (this.$isDev) console.time(`filtered tags with runs`)
             const tags = this.tagRepo.where((tag) => { return this.checkTags(tag) }).orderBy('value', 'asc').get()
-            console.log("tags", tags)
             this.tmpTagsWithRuns = tags
             this.resetFilters(tags, "tags")
             if (this.$isDev) console.timeEnd(`filtered tags with runs`)
@@ -438,8 +437,15 @@ export default {
     flex-wrap: wrap;
     margin-left: -8px;
     margin-right: -8px;
+    transition: 0.5s ease;
     > div, > span {
         margin: 8px;
+    }
+    &.disabled {
+        cursor:not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
+        transform: scale(0.9);
     }
     .total {
         width: 100%;

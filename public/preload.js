@@ -39,6 +39,7 @@ const validChannels = [
   'USER_CREATE_TAGS',
   'USER_REMOVE_TAGS',
   'SYNC_WATCH_STATUS',
+  'SYNC_INRUN_STATUS',
   'ASK_RUNS',
   'SYNC_SEND_RUNS',
   'SYNC_CREATE_RUN',
