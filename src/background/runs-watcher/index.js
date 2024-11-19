@@ -21,10 +21,13 @@ let repentanceFolderPath
 let repentanceLogsFile
 let repentanceOptionsFile
 let repentancePlus
-let watchingLogs, config, gameStatesToIgnore, runs, trash, repentanceLogs, repentanceOptions, currentRun, previousRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
+let tempCharacters = []
+let watchingLogs, config, gameStatesToIgnore, runs, trash, repentanceLogs, repentanceOptions, currentRun, previousRun, continueRun, newRun, currentRunInit, currentCharater, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
 let runsToRemove = []
 let repentanceIsLaunched = false
 let inRun = false
+let isOnline = false
+let inDeathMatch = false
 let firstInit = false
 // let backToMenu = false
 let extendedSaveMode = false //This variable can be used later to save more informations (Stats, bombs, coins, time...), with the help of a mod or game memory reading
@@ -133,6 +136,9 @@ function collectiblesManager(sameRun, collectible, status, isTrinket) {
     const playerContextActiveItem = currentCharater && currentCharater.id === "19" && collectible.player === "1"  ? 0 : collectible.player
     const currentRoomId = currentRoom ? currentRoom.id : null
     const currentFloorIndex = sameRun.floors.length - 1
+
+
+    console.log("debug", currentCharater, currentCharater.id, collectible, collectible.player, sameRun.characters, sameRun.characters[playerContextActiveItem], playerContextActiveItem)
 
     // add itemsCollected key on last floor if doesn't exist
     if (!sameRun.floors[sameRun.floors.length - 1].itemsCollected) sameRun.floors[sameRun.floors.length - 1].itemsCollected = []
@@ -343,6 +349,8 @@ async function updateOrCreateRun(params = {}) {
                     if(winTracker) syncApp(winTracker,{trigger: "update run", channel: params.trigger, run: sameRun})
                 break
                 case 'run end':
+                    isOnline = false
+                    tempCharacters = []
                     const runEndInfo = getRunEnd(params.log)
                     sameRun.runEnd.date = sameRun.extendedSaveMode ? sameRun.runEnd.date : runEndInfo.date
                     sameRun.runEnd.win = runEndInfo.win
@@ -358,6 +366,8 @@ async function updateOrCreateRun(params = {}) {
                     await backupDatas()
                     break
                 case 'run end ext':
+                    isOnline = false
+                    tempCharacters = []
                     sameRun.runDuration = params.runDuration ? params.runDuration : sameRun.runDuration
                     sameRun.runEnd.date = DateTime.now().toSeconds()
                     syncApp(win,{trigger: "update run", channel: params.trigger, run: sameRun})
@@ -394,6 +404,7 @@ async function updateOrCreateRun(params = {}) {
     }
     else if (!["run end","run end ext"].includes(params.trigger)) {
         console.log('Create a run...')
+        console.log(tempCharacters)
         if(!currentFloor) {
             const errorMessage = "Can't generate a run if the run is not new and was not started with the app launched ! Please start a new run."
             elog.error(errorMessage)
@@ -422,7 +433,7 @@ async function updateOrCreateRun(params = {}) {
                 damageFlags: null
             },
             runDuration: '',
-            characters: [currentCharater],
+            characters: [currentCharater, ...tempCharacters],
             floors: [currentFloor],
             extendedSaveMode: extendedSaveMode,
             otherModsLoaded: otherModsLoaded,
@@ -463,8 +474,12 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.includes("Initialized player")) {
             console.log("\x1b[35m", log, "\x1b[0m")
-            if(!currentCharater || !inRun || !currentRunInit) currentCharater = getCharater(log, otherModsLoaded)
-            else if (currentRunInit) {
+            console.log(inRun, currentRunInit, isOnline)
+            if (isOnline && currentCharater && !inDeathMatch) {
+                tempCharacters = [...tempCharacters, getCharater(log, otherModsLoaded)]
+            }
+            else if(!currentCharater || !inRun || !currentRunInit) currentCharater = getCharater(log, otherModsLoaded)
+            else if (currentRunInit && !isOnline) {
                 updateOrCreateRun({trigger: "init other player", character: getCharater(log, otherModsLoaded)})
             }
         }
@@ -507,6 +522,8 @@ function parseLogs(newLogs, logArray) {
         }
         if(log.split(' ')[2] === "Room") {
             console.log("\x1b[35m", log, "\x1b[0m")
+            inDeathMatch = false
+            if (log.includes("Deathmatch Bomberboy")) inDeathMatch = true
             updateOrCreateRun({trigger: "change room", log: log})
         }
         if(log.includes("Adding collectible")) {
@@ -582,6 +599,17 @@ function parseLogs(newLogs, logArray) {
                 if (currentRun) currentRun.otherModsLoaded = otherModsLoaded
                 updateOrCreateRun({trigger: "other mods loaded"})
             }
+        }
+        if(log.includes("NetManager::NotifyGameStart()")) {
+            console.log("\x1b[35m", log, "\x1b[0m")
+            isOnline = true
+        }
+        if(log.includes("Adding remote player")) {
+            console.log("\x1b[35m", log, "\x1b[0m")
+            const splitLog = log.split(", ")
+            const userId = splitLog[1].split(" ")[2]
+            const deviceId = splitLog[1].split(" ")[3]
+            console.log(userId, deviceId)
         }
         if(log.includes("[RRTEEXTENDLOGS] Room")) {
             console.log("\x1b[35m", log, "\x1b[0m")

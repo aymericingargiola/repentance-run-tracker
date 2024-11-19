@@ -40,8 +40,12 @@ module.exports = {
     },
     getEntity: (string, otherModsLoaded) => {
         //Return matching entity from logs
-        const entityId = string.split(" ")[5].match(/(\d+)/)[0]
-        const entityVariant = string.split(" ")[6].match(/(\d+)/)[0]
+        console.log(string, otherModsLoaded)
+        const splitString = string.split(" ")
+        const entityIdIdx = splitString.findIndex(str => str.includes("Type"))
+        const entityId = splitString[entityIdIdx].match(/(\d+)/)[0]
+        const entityVariantIdIdx = splitString.findIndex(str => str.includes("Variant"))
+        const entityVariant = splitString[entityVariantIdIdx].match(/(\d+)/)[0]
         let entity = null
         if (otherModsLoaded.length > 0) { // Supported custom items
             entity = otherModsLoaded.includes("fiendfolio-reheated") ? entitiesFiendFolio.find(entity => entity.id.startsWith(`${entityId}.${entityVariant}`)) : null
