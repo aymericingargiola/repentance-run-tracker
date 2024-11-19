@@ -1,3 +1,4 @@
+const { app } = require('electron')
 const { watch } = require('fs')
 const log = require('electron-log')
 const compareVersions = require('compare-versions')
@@ -5,6 +6,8 @@ const convert = require('xml-js')
 const { dirExist, fileResolve, writeFileAsync, readFileAsync } = require('../tools/fileSystem')
 const path = require('path')
 const modName = 'Repentance_Run_Tracker_Extended'
+const isLinux = process.platform === "linux"
+const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance') : path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
 let modFile, modMetadata, modDevFolder, modDevFile, modDevMetadataFile, config, isaacModFolderPath
 
 async function watchMod() {
@@ -56,14 +59,17 @@ module.exports = {
     startModWatch: async function(window, isDevelopment, modFileContent, modeMetadataContent, conf) {
         config = conf
         const isaacModFolderPathField = config.filter(field => field.id === "isaacModFolderPath")[0]
+        const repentancePlusField = config.filter(field => field.id === "repentance+")[0]
+        isaacModFolderPath = isaacModFolderPathField.value
+        if (repentancePlusField.value) {
+            isaacModFolderPath = path.join(repentanceFolderPath.replace("Repentance", "Repentance+"), "/mods")
+        }
         if(isDevelopment && isaacModFolderPathField && isaacModFolderPathField.value != "") {
-            isaacModFolderPath = isaacModFolderPathField.value
             modDevFolder = `${__dirname}/../src/background/mod-watcher/mod`
             modDevFile = `${__dirname}/../src/background/mod-watcher/mod/main.lua`
             modDevMetadataFile = `${__dirname}/../src/background/mod-watcher/mod/metadata.xml`
             watchMod()
         } else if (modFileContent && modeMetadataContent && isaacModFolderPathField && isaacModFolderPathField.value != "") {
-            isaacModFolderPath = isaacModFolderPathField.value
             modFile = modFileContent
             modMetadata = modeMetadataContent
             checkMod()

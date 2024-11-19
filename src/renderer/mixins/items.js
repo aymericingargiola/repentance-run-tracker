@@ -2,7 +2,7 @@ export default {
     methods: {
         getWikiUrl(item) {
             const wikiUrls = {
-                "default": "https://bindingofisaacrebirth.fandom.com/wiki/",
+                "default": "https://bindingofisaacrebirth.wiki.gg/wiki/",
                 "fiendfolio-reheated": "https://fiendfolio.wiki.gg/wiki/"
             }
             switch (item.category) {

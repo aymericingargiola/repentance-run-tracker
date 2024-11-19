@@ -49,12 +49,21 @@
         "disabled":false
     },
     {
+        "id":"repentance+",
+        "value":false,
+        "name":"Repentance+ (need restart)",
+        "hint":"Enable Repentance+ support",
+        "type":"checkbox",
+        "order": 6,
+        "disabled":false
+    },
+    {
         "id":"isaacModFolderPath",
         "value":"",
         "name":"Isaac mods folder",
         "hint":"",
         "type":"text",
-        "order": 6,
+        "order": 7,
         "disabled":false
     },
     {
@@ -63,7 +72,7 @@
         "name":"Non-intrusive errors",
         "hint":"In case of app crash don't pause the game and don't show the app on top",
         "type":"checkbox",
-        "order": 7,
+        "order": 8,
         "disabled":false
     },
     {
@@ -72,7 +81,7 @@
         "name":"Isaac data path folder (linux)",
         "hint":"You can found the data path at '/home/deck/.steam/steam/steamapps/compatdata/' and enter the folder name here (numbers)",
         "type":"text",
-        "order": 8,
+        "order": 9,
         "disabled":false,
         "linux": true
     },
@@ -82,7 +91,7 @@
         "name":"Streaking Website Token",
         "hint":"",
         "type":"text",
-        "order": 9,
+        "order": 10,
         "disabled":true
     },
     {
@@ -91,7 +100,7 @@
         "name":"Store existing tags",
         "hint":"",
         "type":"array",
-        "order": 10,
+        "order": 11,
         "disabled":true
     },
     {
@@ -100,7 +109,7 @@
         "name":"Change Live Tracker Background",
         "hint":"",
         "type":"object",
-        "order": 11,
+        "order": 12,
         "disabled":true
     }
 ]

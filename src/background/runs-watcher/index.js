@@ -17,10 +17,10 @@ const configJsonPath = path.join(dataFolder, 'config.json')
 const { DateTime } = require('luxon')
 const elog = require('electron-log')
 const splitFormat = /[\r\n]+/g
-const repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
-: path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
-let repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
-let repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
+let repentanceFolderPath
+let repentanceLogsFile
+let repentanceOptionsFile
+let repentancePlus
 let watchingLogs, config, gameStatesToIgnore, runs, trash, repentanceLogs, repentanceOptions, currentRun, previousRun, continueRun, newRun, currentRunInit, currentCharater, currentCharater2, currentFloor, currentRoom, previousRoom, currentCurse, currentGameState, currentGameMode, currentSameRun, logsLastReadLines, win, winTracker
 let runsToRemove = []
 let repentanceIsLaunched = false
@@ -402,6 +402,7 @@ async function updateOrCreateRun(params = {}) {
         currentRun.id = `${currentRun.seed} ${DateTime.now().toSeconds()}`
         const run = {
             id: currentRun.id,
+            repentancePlus,
             runBuilderVersion: 2,
             customName: '',
             videoLink: '',
@@ -767,8 +768,16 @@ module.exports = {
         runs = rns
         trash = trsh
         gameStatesToIgnore = config.filter(field => field.id === "ignoreSaves")[0].value
+        repentancePlus = config.filter(field => field.id === "repentance+")[0].value
         let wait = false
         let linuxChecked = false
+        repentanceFolderPath = !isLinux ? path.join(app.getPath('home'), 'Documents', 'My Games', 'Binding of Isaac Repentance')
+        : path.join(app.getPath('home') + "/.steam/steam/steamapps/compatdata/#ISAAC#/pfx/drive_c/users/steamuser/Documents/My Games/Binding of Isaac Repentance")
+        if (repentancePlus) {
+            repentanceFolderPath = repentanceFolderPath.replace("Repentance", "Repentance+")
+        }
+        repentanceLogsFile = path.join(repentanceFolderPath, 'log.txt')
+        repentanceOptionsFile = path.join(repentanceFolderPath, 'options.ini')
         //if (!isLinux) {
             setInterval(() => {
                 if(!wait) {

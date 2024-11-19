@@ -124,6 +124,10 @@
                 "3": "Save 3"
             }
         },
+        "repentance+": {
+            "title": "Repentance+ support (needs restart)",
+            "hint": "Enable full Repentance+ support"
+        },
         "isaacModFolderPath": {
             "title": "Isaac mods folder",
             "hint": ""
