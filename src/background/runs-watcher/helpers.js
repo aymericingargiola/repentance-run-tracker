@@ -28,14 +28,14 @@ module.exports = {
     },
     getCharater: (string, otherModsLoaded) => {
         //Return matching character from logs
-        const splitValue = string.includes("Pool") ? 19 : 9
+        const splitValue = string.includes("Pool") ? 19 : string.includes("[Frame: 0]") ? 11 : 9
         let character = null
         if (otherModsLoaded.length > 0) { // Supported custom items
             character = charactersFiendFolio.find(character => character.id === string.split(" ")[splitValue])
         }
         if (!character) character = characters.find(character => character.id === string.split(" ")[splitValue])
         if (character) return cloneFrom(character)
-        log.error(`Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}]`)
+        log.error(`Character was not found, undefined character returned. [log string : ${string} | split value : ${splitValue}] | extracted value : ${string.split(" ")[splitValue]}`)
         return cloneFrom(characters.find(character => character.id === "999999999999"))
     },
     getEntity: (string, otherModsLoaded) => {
